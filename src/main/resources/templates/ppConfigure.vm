@@ -4,8 +4,8 @@
 	</head>
 
 	<body>
-	<h1>Planning Poker für Issue "$issueSummary" gestartet</h1>
-
+	
+	<h1>Planning Poker Konfiguration</h1>
 
 	<form class="aui long-label" action="configurePlanningPoker.jspa" method="post">
 		<fieldset>
@@ -19,8 +19,9 @@
             <div class="buttons">
               <input id="project-config-save-button" class="button submit" type="submit" value="Speichern"/>
             </div>
-          </div>
-		 
+          </div>		 
 	</form>	
+	
+	<h3>developed for congstar during the congstar h4ck4thon by Stefan Glase, Stefan Höhn and Elmar Jobs</h3>
 	<body>
 </html>

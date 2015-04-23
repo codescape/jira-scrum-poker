@@ -60,8 +60,6 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
     @HtmlSafe
     public String getIssueDescription() {
-    	FieldLayoutManager fieldLayoutManager = ComponentAccessor.getComponent(FieldLayoutManager.class);
-    	RendererManager rendererManager = ComponentAccessor.getComponent(RendererManager.class);
     	MutableIssue issue = issueManager.getIssueObject(issueKey);
     	FieldLayout fieldLayout = fieldLayoutManager.getFieldLayout(issue);
     	FieldLayoutItem fieldLayoutItem = fieldLayout.getFieldLayoutItem(IssueFieldConstants.DESCRIPTION);
@@ -117,6 +115,10 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
     private String chosenCard;
 
+	private FieldLayoutManager fieldLayoutManager;
+
+	private RendererManager rendererManager;
+
     public String getChosenCard() {
         return chosenCard;
     }
@@ -136,7 +138,8 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         this.settingsFactory = settingsFactory;
         this.planningPokerStorage = planningPokerStorage;
         
-
+        fieldLayoutManager = ComponentAccessor.getComponent(FieldLayoutManager.class);
+    	rendererManager = ComponentAccessor.getComponent(RendererManager.class);
         for (PokerCard card : cards) {
             cardDeck.put(card.getName(), card);
         }

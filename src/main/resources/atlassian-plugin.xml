@@ -1,4 +1,6 @@
 <atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+
+	<!--  Developed by Stefan Glase, Stefan Höhn and Elmar Jobs -->
     <plugin-info>
         <description>${project.description}</description>
         <version>${project.version}</version>
@@ -58,6 +60,13 @@
             <action name="net.congstar.jira.plugins.planningpoker.action.RevealDeckAction" alias="revealDeckAction" />
         </actions>
     </webwork1>
+    
+    <webwork1 key="refreshDeckAction" name="refreshDeckAction" class="java.lang.Object">
+        <actions>
+            <action name="net.congstar.jira.plugins.planningpoker.action.RefreshDeckAction" alias="refreshDeckAction" />
+        </actions>
+    </webwork1>
+
 
     <component key="planningPokerStorage" class="net.congstar.jira.plugins.planningpoker.data.DefaultPlanningPokerStorage">
         <description>Provides the Storage for Planning Poker sessions.</description>
