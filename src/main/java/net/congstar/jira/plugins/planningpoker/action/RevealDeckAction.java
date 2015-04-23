@@ -4,7 +4,7 @@ import com.atlassian.jira.web.action.JiraWebActionSupport;
 import net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage;
 
 /**
- * Reveal a given card.
+ * Reveal all cards that are currently hidden for a specific issue.
  */
 public class RevealDeckAction extends JiraWebActionSupport {
 
