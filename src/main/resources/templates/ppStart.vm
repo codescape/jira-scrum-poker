@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<title>Planning Poker</title>
+	</head>
+
+	<body>
+	<div class="issue-container " style="background-color: #fff">
+		<div id="issue-content" class="issue-edit-form">
+			<header id="stalker" class="issue-header js-stalker">
+				<div class="issue-header-content">
+					<header class="aui-page-header">
+						<div class="aui-page-header-inner">
+							<div class="aui-page-header-image">
+								<span class="aui-avatar aui-avatar-large aui-avatar-project jira-system-avatar" id="10001">
+									<span class="aui-avatar-inner"><img src="http://stefan_hoehn:2990/jira/secure/projectavatar?avatarId=10011" alt="Bild für Projekt hochgeladen: 'Beispiel-Scrumprojekt'" id="project-avatar"></span>
+								</span>
+                            </div>
+								<!-- .aui-page-header-image -->
+							<div class="aui-page-header-main">
+									<ol class="aui-nav aui-nav-breadcrumbs __skate">
+										<li><a href="/jira/browse/$issueProjectKey" id="project-name-val">$issueProjectName</a></li>
+										<li><a rel="10006" id="key-val" href="/jira/browse/$issueKey" data-issue-key="$issueKey" class="issue-link">$issueKey</a></li>
+									</ol>
+									<h1 id="summary-val" class="editable-field inactive">$issueSummary<span class="overlay-icon aui-icon aui-icon-small"></span></h1>
+								</div>
+								<!-- .aui-page-header-main -->
+							<div class="aui-page-header-actions">
+                                <div id="issue-header-pager"></div>
+							</div>
+							<!-- .aui-page-header-actions -->
+						</div><!-- .aui-page-header-inner -->
+					</header>
+				</div>
+				
+			</header>			
+			<div class="issue-body-content">
+			    <div class="aui-group issue-body">
+					<div class="aui-item issue-main-column">
+						<div class="module toggle-wrap" id="descriptionmodule">
+							<div class="mod-header" id="descriptionmodule_heading">
+								<ul class="ops"></ul>
+								<h2 class="toggle-title">Beschreibung</h2>
+							</div>
+							<div class="mod-content">
+								<div class="field-ignore-highlight" id="description-val">
+                                    <div class="user-content-block">
+                                        <p><b>About Scrum</b></p>
+                                        <p>Scrum is an iterative approach to Agile software development. The methodology has been around since the 1980s but was popularised by Jeff Sutherland and Ken Schwaber. </p>
+
+                                        <p>Scrum breaks the development of a product down in to discrete iterations (termed Sprints) that each deliver functionality that could potentially be shipped to users.</p>
+
+                                        <p>The Scrum Alliance offers an excellent <a rel="nofollow" class="external-link" href="http://www.scrumalliance.org/resources/47" title="Verknüpfung folgen">introduction to Scrum</a> that provides an overview of key Scrum concepts, stakeholders, processes and artefacts.</p>
+                                    </div>
+
+    							</div>
+	    					</div>
+		    			</div>
+			    	</div>
+    				<div class="aui-item issue-side-column" id="viewissuesidebar">
+                        <br>
+                        <h1>Planning Poker für Story "$issueKey" gestartet</h1>
+                        <h2>Story Points are $issueStoryPoints</h2>
+
+
+                        <a href="/jira/browse/$issueKey" style="margin-top: 3em; display: block">zurück</a>
+                    </div>
+                </div>
+			</div>
+		</div>
+    </div>
+
+	
+	<body>
+</html>

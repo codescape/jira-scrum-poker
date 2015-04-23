@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<title>Planning Poker</title>
+	</head>
+
+	<body>
+	<h1>Planning Poker für Issue "$issueSummary" gestartet</h1>
+
+
+	<form class="aui long-label" action="configurePlanningPoker.jspa" method="post">
+		<fieldset>
+			<div class="field-group">
+				<label for="fieldName">Name of Story Point field:</label> 
+				<input id="fieldName" name="storyPointFieldName" length="20" value="$!storyPointFieldName">
+			</div>
+		</fieldset>
+		
+		<div class="buttons-container">
+            <div class="buttons">
+              <input id="project-config-save-button" class="button submit" type="submit" value="Speichern"/>
+            </div>
+          </div>
+		 
+	</form>	
+	<body>
+</html>

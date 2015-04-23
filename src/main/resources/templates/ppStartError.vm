@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>Planning Poker</title>
+	</head>
+
+	<body>
+	<h1>Planning Poker NOT started....</h1>
+	
+	#if($action.hasAnyErrors())
+      <div class="aui-message closeable error">
+        <p class="title">
+          <span class="aui-icon icon-error"></span>
+          <strong>Error!</strong>
+        </p>
+        <ul>
+          #foreach($error in $action.errorMessages)
+            <li>$error</li>
+          #end
+          #foreach($error in $action.errors)
+            <li>$error</li>
+          #end
+        </ul>
+      </div>
+    #end
+	
+	
+	<a href="" >zurück</a>
+	
+	<body>
+</html>

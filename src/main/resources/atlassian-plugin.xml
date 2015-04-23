@@ -1,0 +1,54 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+        <param name="configure.url">/secure/admin/configurePlanningPoker.jspa</param>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="planningpoker"/>
+    
+    <!-- add our web resources -->
+    <web-resource key="planningpoker-resources" name="planningpoker Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        
+        <resource type="download" name="planningpoker.css" location="/css/planningpoker.css"/>
+        <resource type="download" name="planningpoker.js" location="/js/planningpoker.js"/>
+        <resource type="download" name="images/" location="/images"/>
+
+        <context>planningpoker</context>
+    </web-resource>
+    
+    <component-import key="pluginSettingsFactory" interface="com.atlassian.sal.api.pluginsettings.PluginSettingsFactory"></component-import>
+    
+    <web-item key="pp_start" name="PP-Start" section="jira.issue.tools" weight="10">
+        <label key="planningpoker.ppStart" />
+        <link linkId="callPP">/secure/startPlanningPoker.jspa?issueKey=$issue.key</link>
+    </web-item>
+       
+       
+   <webwork1 key="pp_startPP" name="Start PP Action" class="java.lang.Object">
+	    <actions>
+	        <action name="net.congstar.jira.plugins.planningpoker.action.StartPlanningPoker" alias="startPlanningPoker">
+	            <view name="start">/templates/ppStart.vm</view>
+	            <view name="error">/templates/ppStartError.vm</view>
+	        </action>
+	    </actions>
+	</webwork1>
+
+   <webwork1 key="pp_configure" name="Configure PP Action" class="java.lang.Object">
+	    <actions>
+	        <action name="net.congstar.jira.plugins.planningpoker.action.ConfigurePlanningPoker" alias="configurePlanningPoker">
+	            <view name="success">/templates/ppConfigure.vm</view>
+	        </action>
+	    </actions>
+	</webwork1>
+
+
+    <!-- import from the product container -->
+    <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties" />
+    
+</atlassian-plugin>
