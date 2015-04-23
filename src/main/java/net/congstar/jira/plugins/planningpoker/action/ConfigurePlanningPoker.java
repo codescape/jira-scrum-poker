@@ -4,16 +4,15 @@ import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 
-
 public class ConfigurePlanningPoker extends JiraWebActionSupport {
 
     private static final long serialVersionUID = 1L;
 
     public static final String STORY_POINT_FIELD_NAME = "storyPointFieldName";
 
-    private String storyPointFieldName = "points";
+    private final PluginSettingsFactory settingsFactory;
 
-    private PluginSettingsFactory settingsFactory;
+    private String storyPointFieldName = "points";
 
     public ConfigurePlanningPoker(PluginSettingsFactory settingsFactory) {
         this.settingsFactory = settingsFactory;
@@ -31,7 +30,8 @@ public class ConfigurePlanningPoker extends JiraWebActionSupport {
     protected String doExecute() throws Exception {
         PluginSettings settings = settingsFactory.createGlobalSettings();
         settings.put(STORY_POINT_FIELD_NAME, storyPointFieldName);
-        System.out.println(getStoryPointFieldName());
+
         return "success";
     }
+
 }
