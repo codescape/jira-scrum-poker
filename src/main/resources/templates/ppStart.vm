@@ -85,7 +85,7 @@
 						#end
 
 						<hr>
-						<h2>Ausgewählte Karten <a href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">Aufdecken</a></h2>
+						<h2>Ausgewählte Karten <a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">Aufdecken</a> <a id="buttonRefresh" href="$req.contextPath/secure/refreshDeckAction.jspa?issueKey=$issueKey" class="aui-button">Aktualisieren</a></h2>
 
 						<div class="mod-content">
 							<ul id="chosencards">
