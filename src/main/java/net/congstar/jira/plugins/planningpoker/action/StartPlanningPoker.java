@@ -59,19 +59,17 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     }
 
 	private PokerCard[] cards = {
-			new PokerCard("Q", "q.jpg"),
-			new PokerCard("0", "0.jpg"),
-			new PokerCard("1", "1.jpg"),
-			new PokerCard("2", "2.jpg"),
-			new PokerCard("3", "3.jpg"),
-			new PokerCard("5", "5.jpg"),
-			new PokerCard("8", "8.jpg"),
-			new PokerCard("13", "13.jpg"),
-			new PokerCard("20", "20.jpg"),
-			new PokerCard("40", "40.jpg"),
-			new PokerCard("100", "100.jpg")
-			
-			
+			new PokerCard("Q", "q.jpg", "q_.jpg"),
+			new PokerCard("0", "0.jpg", "0_.jpg"),
+			new PokerCard("1", "1.jpg", "1_.jpg"),
+			new PokerCard("2", "2.jpg", "2_.jpg"),
+			new PokerCard("3", "3.jpg", "3_.jpg"),
+			new PokerCard("5", "5.jpg", "5_.jpg"),
+			new PokerCard("8", "8.jpg", "8_.jpg"),
+			new PokerCard("13", "13.jpg", "13_.jpg"),
+			new PokerCard("20", "20.jpg", "20_.jpg"),
+			new PokerCard("40", "40.jpg", "40_.jpg"),
+			new PokerCard("100", "100.jpg", "100_.jpg")
 	};
 
 	private String chosenCard;
@@ -82,7 +80,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 	}
 
 	public PokerCard[] getCards() {
-	return cards;
+		return cards;
 	}
 
     public StartPlanningPoker(IssueManager issueManager, CustomFieldManager customFieldManager, JiraAuthenticationContext context, PluginSettingsFactory settingsFactory) {
