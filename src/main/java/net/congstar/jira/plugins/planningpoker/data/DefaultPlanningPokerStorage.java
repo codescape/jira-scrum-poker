@@ -32,7 +32,7 @@ public class DefaultPlanningPokerStorage implements PlanningPokerStorage {
 
     @Override
     public boolean isVisible(String issueKey) {
-        return true;
+        return false;
     }
 
     private void debugOutput() {

@@ -11,11 +11,13 @@ import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
+
 import net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage;
 import net.congstar.jira.plugins.planningpoker.model.PokerCard;
 import webwork.action.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.util.*;
 
 public final class StartPlanningPoker extends JiraWebActionSupport {
@@ -41,8 +43,14 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     private String issueProjectName;
 
     private String issueProjectKey;
+    
+    private String issueDescription;
 
-    private Map<String, String> cardsForIssue;
+    public String getIssueDescription() {
+		return issueDescription;
+	}
+
+	private Map<String, String> cardsForIssue;
 
     public Double getIssueStoryPoints() {
         return issueStoryPoints;
@@ -62,6 +70,10 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
     public String getIssueSummary() {
         return issueSummary;
+    }
+    
+    public boolean isDeckVisible() {
+    	return planningPokerStorage.isVisible(issueKey);
     }
 
     private PokerCard[] cards = {
@@ -85,6 +97,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     }
 
     private String chosenCard;
+
 
     public String getChosenCard() {
         return chosenCard;
@@ -127,6 +140,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         issueProjectName = issue.getProjectObject().getName();
         issueProjectKey = issue.getProjectObject().getKey();
         issueStoryPoints = (Double) issue.getCustomFieldValue(storyPointsField);
+        issueDescription = issue.getDescription();
 
         String finalVote = request.getParameter("finalVote");
         if (finalVote != null) {
