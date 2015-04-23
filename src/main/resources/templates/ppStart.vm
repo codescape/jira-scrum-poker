@@ -81,7 +81,7 @@
 	                                <li><a href="$req.contextPath/secure/startPlanningPoker.jspa?issueKey=$issueKey&finalVote=$vote"><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$cardDeck.get($vote).chosenImage"></a></li>
 								#end
 							</ul>
-                            <p>Zur Überahme in die Story bitte die entsprechende Karte wählen.</p>
+                            <p>Zur Übernahme in die Story bitte die entsprechende Karte wählen.</p>
 						</div>
 						#end
 
