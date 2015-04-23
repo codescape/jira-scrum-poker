@@ -12,6 +12,7 @@ import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 
+import net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage;
 import webwork.action.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +33,8 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     private final CustomFieldManager customFieldManager;
 
     private final PluginSettingsFactory settingsFactory;
+
+    private final PlanningPokerStorage planningPokerStorage;
 
     private String issueSummary;
 
@@ -95,11 +98,12 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 		return cards;
 	}
 
-    public StartPlanningPoker(IssueManager issueManager, CustomFieldManager customFieldManager, JiraAuthenticationContext context, PluginSettingsFactory settingsFactory) {
+    public StartPlanningPoker(IssueManager issueManager, CustomFieldManager customFieldManager, JiraAuthenticationContext context, PluginSettingsFactory settingsFactory, PlanningPokerStorage planningPokerStorage) {
         this.issueManager = issueManager;
         this.customFieldManager = customFieldManager;
         this.context = context;
         this.settingsFactory = settingsFactory;
+        this.planningPokerStorage = planningPokerStorage;
         
         for (PokerCard card : cards) {
 			cardDeck.put(card.getName(), card);
@@ -122,9 +126,9 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
         chosenCard = request.getParameter("choose");
         if (chosenCard != null) {
-            PlanningPokerCardStorage.update(issueKey, user.getKey(), chosenCard);
+            planningPokerStorage.update(issueKey, user.getKey(), chosenCard);
         }
-        cardsForIssue = PlanningPokerCardStorage.chosenCardsForIssue(issueKey);
+        cardsForIssue = planningPokerStorage.chosenCardsForIssue(issueKey);
 
         issueSummary = issue.getSummary();
         issueProjectName = issue.getProjectObject().getName();

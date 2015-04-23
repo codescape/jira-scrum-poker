@@ -47,6 +47,16 @@
 	    </actions>
 	</webwork1>
 
+    <webwork1 key="chooseCardAction" name="chooseCardAction" class="java.lang.Object">
+        <actions>
+            <action name="net.congstar.jira.plugins.planningpoker.action.ChooseCardAction" alias="chooseCardAction" />
+        </actions>
+    </webwork1>
+
+    <component key="planningPokerStorage" class="net.congstar.jira.plugins.planningpoker.data.DefaultPlanningPokerStorage">
+        <description>Provides the Storage for Planning Poker sessions.</description>
+        <interface>net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage</interface>
+    </component>
 
     <!-- import from the product container -->
     <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties" />
