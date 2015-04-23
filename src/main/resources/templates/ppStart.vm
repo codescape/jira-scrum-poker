@@ -83,8 +83,8 @@
 						#end
 
 						<hr>
-						<h2>Abgegebene Schätzungen <a href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">Aufdecken</a></h2>
-                        <br>
+						<h2>Abgegebene Schätzungen <a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">Aufdecken</a> <a id="buttonRefresh" href="$req.contextPath/secure/refreshDeckAction.jspa?issueKey=$issueKey" class="aui-button">Aktualisieren</a></h2>
+
 						<div class="mod-content">
 							<ul id="chosencards">
 								#foreach ($cardsForIssueEntry in $cardsForIssue.entrySet())
