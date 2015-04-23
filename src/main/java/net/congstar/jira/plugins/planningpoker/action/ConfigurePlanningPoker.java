@@ -30,7 +30,7 @@ public class ConfigurePlanningPoker extends JiraWebActionSupport{
 	protected String doExecute() throws Exception {
 
 		PluginSettings settings = settingsFactory.createGlobalSettings();
-		settings.put(STORY_POINT_FIELD_NAME, storyPointFieldName);
+		settings.put(STORY_POINT_FIELD_NAME, storyPointFieldName.toLowerCase());
 		System.out.println(getStoryPointFieldName());
 		return "success";
 	}

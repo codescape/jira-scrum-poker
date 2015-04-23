@@ -22,7 +22,8 @@ import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 public final class StartPlanningPoker extends JiraWebActionSupport {
 
 	/**
-	 * 
+	 * Planning Poker für Jira
+	 * (c) congstar und AOE
 	 */
 	private static final long serialVersionUID = 1L;
 	
@@ -61,6 +62,26 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 		return issueSummary;
 	}
 
+	private PokerCard[] cards = {
+							new PokerCard("Q", "q.jpg"),
+							new PokerCard("0", "0.jpg"),
+							new PokerCard("1", "1.jpg"),
+							new PokerCard("2", "2.jpg"),
+							new PokerCard("3", "3.jpg"),
+							new PokerCard("5", "5.jpg"),
+							new PokerCard("8", "8.jpg"),
+							new PokerCard("13", "13.jpg"),
+							new PokerCard("20", "20.jpg"),
+							new PokerCard("40", "40.jpg"),
+							new PokerCard("100", "100.jpg")
+							
+							
+	};
+
+	public PokerCard[] getCards() {
+		return cards;
+	}
+	
 	public StartPlanningPoker(IssueManager issueManager, CustomFieldManager customFieldManager, JiraAuthenticationContext context, PluginSettingsFactory settingsFactory) {
 		this.issueManager = issueManager;
 		this.customFieldManager = customFieldManager;
@@ -72,7 +93,9 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 	protected String doExecute() throws Exception {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		issueKey = request.getParameter("issueKey");
+		String chosenCard = request.getParameter("choose");
 		
+		System.out.println("------------------------------------>"+chosenCard);
 		
 		// ApplicationUser user = context.getUser();
 		

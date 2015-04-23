@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<title>Planning Poker</title>
+		<?xml-stylesheet type="text/css" href="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/planningpoker.css" ?>
 	</head>
 
 	<body>
@@ -12,14 +13,14 @@
 						<div class="aui-page-header-inner">
 							<div class="aui-page-header-image">
 								<span class="aui-avatar aui-avatar-large aui-avatar-project jira-system-avatar" id="10001">
-									<span class="aui-avatar-inner"><img src="http://stefan_hoehn:2990/jira/secure/projectavatar?avatarId=10011" alt="Bild für Projekt hochgeladen: 'Beispiel-Scrumprojekt'" id="project-avatar"></span>
+									<span class="aui-avatar-inner"><img src="$req.contextPath/secure/projectavatar?avatarId=10011" alt="Bild für Projekt hochgeladen: 'Beispiel-Scrumprojekt'" id="project-avatar"></span>
 								</span>
                             </div>
 								<!-- .aui-page-header-image -->
 							<div class="aui-page-header-main">
 									<ol class="aui-nav aui-nav-breadcrumbs __skate">
-										<li><a href="/jira/browse/$issueProjectKey" id="project-name-val">$issueProjectName</a></li>
-										<li><a rel="10006" id="key-val" href="/jira/browse/$issueKey" data-issue-key="$issueKey" class="issue-link">$issueKey</a></li>
+										<li><a href="$req.contextPath/browse/$issueProjectKey" id="project-name-val">$issueProjectName</a></li>
+										<li><a rel="10006" id="key-val" href="$req.contextPath/browse/$issueKey" data-issue-key="$issueKey" class="issue-link">$issueKey</a></li>
 									</ol>
 									<h1 id="summary-val" class="editable-field inactive">$issueSummary<span class="overlay-icon aui-icon aui-icon-small"></span></h1>
 								</div>
@@ -59,10 +60,20 @@
     				<div class="aui-item issue-side-column" id="viewissuesidebar">
                         <br>
                         <h1>Planning Poker für Story "$issueKey" gestartet</h1>
+                        <br>
+                        <div class="mod-content">
+                        	<ul id="pokerset">
+							  #foreach( $card in $cards)
+							    <li><a href="$req.contextPath/secure/startPlanningPoker.jspa?issueKey=$issueKey&choose=$card.name"> <img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$card.image"></a></li>
+							  #end
+							</ul>
+                        </div>
+                        
+                        
                         <h2>Story Points are $issueStoryPoints</h2>
 
 
-                        <a href="/jira/browse/$issueKey" style="margin-top: 3em; display: block">zurück</a>
+                        <a href="$req.contextPath/browse/$issueKey" style="margin-top: 3em; display: block">zurück</a>
                     </div>
                 </div>
 			</div>
