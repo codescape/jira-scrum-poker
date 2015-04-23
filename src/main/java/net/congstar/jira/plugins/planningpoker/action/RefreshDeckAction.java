@@ -3,12 +3,11 @@ package net.congstar.jira.plugins.planningpoker.action;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 
 /**
- * Reveal a given card.
+ * Refresh the deck for a given issue.
  */
 public class RefreshDeckAction extends JiraWebActionSupport {
 
     private static final long serialVersionUID = 1L;
-
 
     public RefreshDeckAction() {
     }
