@@ -20,13 +20,15 @@ import java.util.List;
 
 public final class StartPlanningPoker extends JiraWebActionSupport {
 
-
     private static final long serialVersionUID = 1L;
 
-    private IssueManager issueManager;
-    private JiraAuthenticationContext context;
-    private CustomFieldManager customFieldManager;
-    private PluginSettingsFactory settingsFactory;
+    private final IssueManager issueManager;
+
+    private final JiraAuthenticationContext context;
+
+    private final CustomFieldManager customFieldManager;
+
+    private final PluginSettingsFactory settingsFactory;
 
     private String issueSummary;
 
@@ -70,13 +72,10 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 			new PokerCard("20", "20.jpg"),
 			new PokerCard("40", "40.jpg"),
 			new PokerCard("100", "100.jpg")
-			
-			
 	};
 
 	private String chosenCard;
-	
-	
+
 	public String getChosenCard() {
 		return chosenCard;
 	}
