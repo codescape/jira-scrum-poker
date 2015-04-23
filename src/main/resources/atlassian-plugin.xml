@@ -32,7 +32,7 @@
        
    <webwork1 key="pp_startPP" name="Start PP Action" class="java.lang.Object">
 	    <actions>
-	        <action name="net.congstar.jira.plugins.planningpoker.action.StartPlanningPoker" alias="startPlanningPoker">
+	        <action name="net.congstar.jira.plugins.planningpoker.action.StartPlanningPoker" alias="startPlanningPoker" >
 	            <view name="start">/templates/ppStart.vm</view>
 	            <view name="error">/templates/ppStartError.vm</view>
 	        </action>
