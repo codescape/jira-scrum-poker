@@ -39,7 +39,8 @@
 					<div class="aui-item issue-main-column">
 						<div class="module toggle-wrap" id="descriptionmodule">
 							<div class="mod-header" id="descriptionmodule_heading">
-								<h2>Beschreibung</h2>
+								<ul class="ops"></ul>
+								<h2 class="toggle-title">Beschreibung</h2>
 							</div>
 							<div class="mod-content">
 								<div class="field-ignore-highlight" id="description-val">
@@ -47,11 +48,13 @@
                                     	#set($issueDescriptionWithHtml = $issueDescription)
                                     	$issueDescriptionWithHtml
                                     </div>
+
     							</div>
 	    					</div>
 		    			</div>
 			    	</div>
     				<div class="aui-item issue-side-column" id="viewissuesidebar">
+                        <br>
                         <h2>Planning Poker für Story "$issueKey" gestartet</h2>
                         <br>
                         <div class="mod-content">
@@ -83,15 +86,15 @@
 						#end
 
 						<hr>
-						<h2>Abgegebene Schätzungen <a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">Aufdecken</a> <a id="buttonRefresh" href="$req.contextPath/secure/refreshDeckAction.jspa?issueKey=$issueKey" class="aui-button">Aktualisieren</a></h2>
+						<h2>Ausgewählte Karten <a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">Aufdecken</a> <a id="buttonRefresh" href="$req.contextPath/secure/refreshDeckAction.jspa?issueKey=$issueKey" class="aui-button">Aktualisieren</a></h2>
 
 						<div class="mod-content">
 							<ul id="chosencards">
 								#foreach ($cardsForIssueEntry in $cardsForIssue.entrySet())
 									#if ($deckVisible)
-		                                <li><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$cardDeck.get($cardsForIssueEntry.value).image">&nbsp;&nbsp;&nbsp;$cardsForIssueEntry.key</li>
+		                                <li><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$cardDeck.get($cardsForIssueEntry.value).image">&nbsp;&nbsp;&nbsp;$action.getUsername($cardsForIssueEntry.key)</li>
 	                                #else
-		                                <li><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/back.jpg">&nbsp;&nbsp;&nbsp;$cardsForIssueEntry.key</li>
+		                                <li><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/back.jpg">&nbsp;&nbsp;&nbsp;$action.getUsername($cardsForIssueEntry.key)</li>
 	                                #end
 								#end
 							</ul>
