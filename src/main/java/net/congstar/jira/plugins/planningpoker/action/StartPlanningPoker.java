@@ -1,8 +1,8 @@
 package net.congstar.jira.plugins.planningpoker.action;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -156,8 +156,8 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     	return uniqueValues;
 	}
     
-    public Set<String> getBoundedVotes() {
-    	Set<String> boundedVotes = new HashSet<String>();
+    public Collection<String> getBoundedVotes() {
+    	Collection<String> boundedVotes = new ArrayList<String>();
     	for (Integer value : getSortedBoundedList(cardsForIssue)) {
 			boundedVotes.add(value.toString());
 		}
