@@ -93,6 +93,7 @@
 						</pluginArtifact>
 					</pluginArtifacts>
 					-->
+                    <allowGoogleTracking>false</allowGoogleTracking>
                 </configuration>
             </plugin>
             <plugin>
