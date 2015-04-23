@@ -64,7 +64,7 @@
                         <div class="mod-content">
                         	<ul id="pokerset">
 							  #foreach( $card in $cards)
-							    <li><a href="$req.contextPath/secure/startPlanningPoker.jspa?issueKey=$issueKey&choose=$card.name"> 
+							    <li><a href="$req.contextPath/secure/chooseCardAction.jspa?issueKey=$issueKey&chosenCard=$card.name">
 							     	#if ($chosenCard == $card.name)
 							       		<img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$card.chosenImage"></a></li>
 							       	#else
