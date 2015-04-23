@@ -181,14 +181,11 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
     public Collection<String> getBoundedVotes() {
     	ArrayList<String> votes = new ArrayList<String>();
-    	System.out.println("----------------sortedVotes:");
     	for (Integer value : getSortedVotes(cardsForIssue)) {
 			votes.add(value.toString());
-			System.out.println(value);
 		}
     	ArrayList<String> boundedVotes = new ArrayList<String>();
     	
-    	System.out.println("----------------votes.size:"+votes.size());
     	String first = votes.get(0);
     	String last = votes.get(votes.size()-1);
     	
@@ -208,10 +205,6 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 	    		boundedVotes.add(cards[index].getName());
     		}
     	}
-    	System.out.println("----------------boundedVotes:");
-    	for (String string : boundedVotes) {
-			System.out.println(string);
-		}
     	return boundedVotes;
     }
 
