@@ -39,8 +39,7 @@
 					<div class="aui-item issue-main-column">
 						<div class="module toggle-wrap" id="descriptionmodule">
 							<div class="mod-header" id="descriptionmodule_heading">
-								<ul class="ops"></ul>
-								<h2 class="toggle-title">Beschreibung</h2>
+								<h2>Beschreibung</h2>
 							</div>
 							<div class="mod-content">
 								<div class="field-ignore-highlight" id="description-val">
@@ -48,13 +47,11 @@
                                     	#set($issueDescriptionWithHtml = $issueDescription)
                                     	$issueDescriptionWithHtml
                                     </div>
-
     							</div>
 	    					</div>
 		    			</div>
 			    	</div>
     				<div class="aui-item issue-side-column" id="viewissuesidebar">
-                        <br>
                         <h2>Planning Poker für Story "$issueKey" gestartet</h2>
                         <br>
                         <div class="mod-content">
@@ -86,8 +83,8 @@
 						#end
 
 						<hr>
-						<h2>Ausgewählte Karten <a href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">Aufdecken</a></h2>
-
+						<h2>Abgegebene Schätzungen <a href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">Aufdecken</a></h2>
+                        <br>
 						<div class="mod-content">
 							<ul id="chosencards">
 								#foreach ($cardsForIssueEntry in $cardsForIssue.entrySet())
