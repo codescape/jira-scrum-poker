@@ -4,34 +4,34 @@ import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 
-public class ConfigurePlanningPoker extends JiraWebActionSupport{
+public class ConfigurePlanningPoker extends JiraWebActionSupport {
 
-	public static final String STORY_POINT_FIELD_NAME = "storyPointFieldName";
+    private static final long serialVersionUID = 1L;
 
-	private static final long serialVersionUID = 1L;
-	
-	private String storyPointFieldName ="points";
+    public static final String STORY_POINT_FIELD_NAME = "storyPointFieldName";
 
-	private PluginSettingsFactory settingsFactory;
-	
-	public ConfigurePlanningPoker (PluginSettingsFactory settingsFactory) {
-		this.settingsFactory = settingsFactory;
-		
-	}
-	public String getStoryPointFieldName() {
-		return storyPointFieldName;
-	}
-	
-	public void setStoryPointFieldName(String storyPointFieldName) {
-		this.storyPointFieldName = storyPointFieldName;
-	}
+    private String storyPointFieldName = "points";
 
-	@Override
-	protected String doExecute() throws Exception {
+    private PluginSettingsFactory settingsFactory;
 
-		PluginSettings settings = settingsFactory.createGlobalSettings();
-		settings.put(STORY_POINT_FIELD_NAME, storyPointFieldName);
-		System.out.println(getStoryPointFieldName());
-		return "success";
-	}
+    public ConfigurePlanningPoker(PluginSettingsFactory settingsFactory) {
+        this.settingsFactory = settingsFactory;
+    }
+
+    public String getStoryPointFieldName() {
+        return storyPointFieldName;
+    }
+
+    public void setStoryPointFieldName(String storyPointFieldName) {
+        this.storyPointFieldName = storyPointFieldName;
+    }
+
+    @Override
+    protected String doExecute() throws Exception {
+        PluginSettings settings = settingsFactory.createGlobalSettings();
+        settings.put(STORY_POINT_FIELD_NAME, storyPointFieldName);
+        System.out.println(getStoryPointFieldName());
+        return "success";
+    }
+
 }
