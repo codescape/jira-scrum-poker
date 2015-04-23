@@ -1,5 +1,17 @@
 package net.congstar.jira.plugins.planningpoker.action;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
+import javax.servlet.http.HttpServletRequest;
+
+import webwork.action.ServletActionContext;
+
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.ModifiedValue;
@@ -11,14 +23,6 @@ import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
-
-import webwork.action.ServletActionContext;
-
-import javax.servlet.http.HttpServletRequest;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 public final class StartPlanningPoker extends JiraWebActionSupport {
@@ -125,17 +129,42 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
             PlanningPokerCardStorage.update(issueKey, user.getKey(), chosenCard);
         }
         cardsForIssue = PlanningPokerCardStorage.chosenCardsForIssue(issueKey);
-
+        
         issueSummary = issue.getSummary();
         issueProjectName = issue.getProjectObject().getName();
         issueProjectKey = issue.getProjectObject().getKey();
         issueStoryPoints = (Double) issue.getCustomFieldValue(storyPointsField);
-        storyPointsField.updateValue(null, issue, new ModifiedValue(issueStoryPoints, new Double(8)), new DefaultIssueChangeHolder());
+        
+        String finalVote = request.getParameter("finalVote");
+        if (finalVote!=null) {
+        	storyPointsField.updateValue(null, issue, new ModifiedValue(issueStoryPoints, new Double(finalVote)), new DefaultIssueChangeHolder());
+        	getRedirect("/browse/"+issueKey);
+        }
 
         return "start";
     }
 
-    private CustomField findStoryPointField() {
+    
+    private Set<Integer> getSortedBoundedList(Map<String, String> votes) {
+    	Collection<String> votedValues = votes.values();
+    	Set<Integer> uniqueValues = new TreeSet<Integer>();
+    	for (String value : votedValues) {
+    		if (value!="Q") {
+    			uniqueValues.add(new Integer(value));
+    		}
+		}    	
+    	return uniqueValues;
+	}
+    
+    public Set<String> getBoundedVotes() {
+    	Set<String> boundedVotes = new HashSet<String>();
+    	for (Integer value : getSortedBoundedList(cardsForIssue)) {
+			boundedVotes.add(value.toString());
+		}
+    	return boundedVotes;
+    }
+
+	private CustomField findStoryPointField() {
         PluginSettings settings = settingsFactory.createGlobalSettings();
         String storyPointFieldName = settings.get(ConfigurePlanningPoker.STORY_POINT_FIELD_NAME) != null ? (String) settings.get(ConfigurePlanningPoker.STORY_POINT_FIELD_NAME) : "points";
         List<CustomField> field = customFieldManager.getCustomFieldObjects();
