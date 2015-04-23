@@ -179,30 +179,39 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     }
 
     public Collection<String> getBoundedVotes() {
-        ArrayList<String> votes = new ArrayList<String>();
-        for (Integer value : getSortedVotes(cardsForIssue)) {
-            votes.add(value.toString());
-        }
-        ArrayList<String> boundedVotes = new ArrayList<String>();
-
-        if (votes.size() > 1) {
-            String first = votes.get(0);
-            String last = votes.get(votes.size() - 1);
-
-            int index = 0;
-            while (!cards[index].getName().equals(first)) {
-                index++;
-            }
-            boundedVotes.add(cards[index].getName());
-            index++;
-            while (!cards[index].getName().equals(last)) {
-                boundedVotes.add(cards[index].getName());
-                index++;
-            }
-            boundedVotes.add(cards[index].getName());
-        }
-
-        return boundedVotes;
+    	ArrayList<String> votes = new ArrayList<String>();
+    	System.out.println("----------------sortedVotes:");
+    	for (Integer value : getSortedVotes(cardsForIssue)) {
+			votes.add(value.toString());
+			System.out.println(value);
+		}
+    	ArrayList<String> boundedVotes = new ArrayList<String>();
+    	
+    	System.out.println("----------------votes.size:"+votes.size());
+    	String first = votes.get(0);
+    	String last = votes.get(votes.size()-1);
+    	
+    	if (votes.size()>0) {
+    		
+    		int index = 0;
+    		while (!cards[index].getName().equals(first)) {
+    			index++;
+    		}
+    		boundedVotes.add(cards[index].getName());
+    		if (votes.size()>1) {
+	    		index++;
+	    		while (!cards[index].getName().equals(last)) {
+	    			boundedVotes.add(cards[index].getName());	
+	    			index++;
+	    		}
+	    		boundedVotes.add(cards[index].getName());
+    		}
+    	}
+    	System.out.println("----------------boundedVotes:");
+    	for (String string : boundedVotes) {
+			System.out.println(string);
+		}
+    	return boundedVotes;
     }
 
     private CustomField findStoryPointField() {
@@ -210,7 +219,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         String storyPointFieldName = settings.get(ConfigurePlanningPoker.STORY_POINT_FIELD_NAME) != null ? (String) settings.get(ConfigurePlanningPoker.STORY_POINT_FIELD_NAME) : "points";
         List<CustomField> field = customFieldManager.getCustomFieldObjects();
         for (CustomField customField : field) {
-            if (customField.getNameKey().toLowerCase().contains(storyPointFieldName)) {
+            if (customField.getNameKey().toLowerCase().contains(storyPointFieldName.toLowerCase())) {
                 return customField;
             }
         }
