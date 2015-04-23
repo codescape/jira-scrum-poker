@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<title>Planning Poker</title>
-		<?xml-stylesheet type="text/css" href="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/planningpoker.css" ?>
+		<link rel="stylesheet" type="text/css" src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/planningpoker.css" media="all" />
 	</head>
 
 	<body>
@@ -64,7 +64,7 @@
                         <div class="mod-content">
                         	<ul id="pokerset">
 							  #foreach( $card in $cards)
-							    <li><a href="$req.contextPath/secure/startPlanningPoker.jspa?issueKey=$issueKey&choose=$card.name"> <img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$card.image"></a></li>
+							    <li><a href="$req.contextPath/secure/startPlanningPoker.jspa?issueKey=$issueKey&choose=$card.name"><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$card.image"></a></li>
 							  #end
 							</ul>
                         </div>
