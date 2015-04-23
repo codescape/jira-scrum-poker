@@ -8,4 +8,6 @@ public interface PlanningPokerStorage {
 
     Map<String, String> chosenCardsForIssue(String issueKey);
 
+    boolean isVisible(String issueKey);
+
 }

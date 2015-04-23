@@ -30,6 +30,11 @@ public class DefaultPlanningPokerStorage implements PlanningPokerStorage {
         return chosenCardsForIssue;
     }
 
+    @Override
+    public boolean isVisible(String issueKey) {
+        return true;
+    }
+
     private void debugOutput() {
         for (String issue : storage.keySet()) {
             System.out.println("########## Issue " + issue);
