@@ -29,6 +29,7 @@
     <web-item key="pp_start" name="PP-Start" section="jira.issue.tools" weight="10">
         <label key="planningpoker.ppStart" />
         <link linkId="callPP">/secure/startPlanningPoker.jspa?issueKey=$issue.key</link>
+        <condition class="net.congstar.jira.plugins.planningpoker.StoryTypeCondition" />
     </web-item>
        
        
