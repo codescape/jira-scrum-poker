@@ -8,6 +8,21 @@
    width: 10%;
 }
 
+
+#chosencards li {
+	list-style-type: none;
+}
+
 #chosencards li img {
    width: 5%;
+}
+
+#selectVote li img {
+   width: 5%;
+}
+
+#selectVote li {
+	display: inline;
+	list-style-type: none;
+	padding-right: 10px;
 }

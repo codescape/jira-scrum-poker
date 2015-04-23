@@ -75,17 +75,29 @@
 							</ul>
                         </div>
 
-						<h2>Chosen Cards</h2>
-
+						<hr>
+						<h2>Bereich</h2>
+						<br>
 						<div class="mod-content">
-							<ul id="chosencards">
-								#foreach ($cardsForIssueEntry in $cardsForIssue.entrySet())
-	                                <li>$cardsForIssueEntry.key : <img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$cardDeck.get($cardsForIssueEntry.value).image"></a></li></li>
+							<ul id="selectVote">
+								#foreach ($vote in $boundedVotes)
+	                                <li><a href="$req.contextPath/secure/startPlanningPoker.jspa?issueKey=$issueKey&finalVote=$vote"><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$cardDeck.get($vote).chosenImage"></a></li></li>
 								#end
 							</ul>
 						</div>
 
-                        <h2>Story Points are $issueStoryPoints</h2>
+						<hr>
+						<h2>Ausgewählte Karten</h2>
+
+						<div class="mod-content">
+							<ul id="chosencards">
+								#foreach ($cardsForIssueEntry in $cardsForIssue.entrySet())
+	                                <li>$cardsForIssueEntry.key : <img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$cardDeck.get($cardsForIssueEntry.value).image"></li></li>
+								#end
+							</ul>
+						</div>
+
+                        
 
                         <a href="$req.contextPath/browse/$issueKey" style="margin-top: 3em; display: block">zurück</a>
                     </div>
