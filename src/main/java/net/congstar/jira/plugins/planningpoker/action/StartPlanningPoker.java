@@ -10,9 +10,11 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
+
 import webwork.action.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.util.List;
 
 
@@ -71,7 +73,14 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 			
 			
 	};
+
+	private String chosenCard;
 	
+	
+	public String getChosenCard() {
+		return chosenCard;
+	}
+
 	public PokerCard[] getCards() {
 	return cards;
 	}
@@ -92,9 +101,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         CustomField storyPointsField = findStoryPointField();
         MutableIssue issue = issueManager.getIssueObject(issueKey);
 
-        String chosenCard = request.getParameter("choose");
-		
-		System.out.println("------------------------------------>"+chosenCard);
+        chosenCard = request.getParameter("choose");
 
         if (issue == null) {
             addErrorMessage("Issue Key" + issueKey + " not found.");
