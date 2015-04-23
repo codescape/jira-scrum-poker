@@ -1,22 +1,37 @@
 package net.congstar.jira.plugins.planningpoker.action;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
+import javax.servlet.http.HttpServletRequest;
+
+import net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage;
+import net.congstar.jira.plugins.planningpoker.model.PokerCard;
+import webwork.action.ServletActionContext;
+
+import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.CustomFieldManager;
+import com.atlassian.jira.issue.IssueFieldConstants;
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.ModifiedValue;
 import com.atlassian.jira.issue.MutableIssue;
+import com.atlassian.jira.issue.RendererManager;
 import com.atlassian.jira.issue.fields.CustomField;
+import com.atlassian.jira.issue.fields.layout.field.FieldLayout;
+import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
+import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
 import com.atlassian.jira.issue.util.DefaultIssueChangeHolder;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
-import net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage;
-import net.congstar.jira.plugins.planningpoker.model.PokerCard;
-import webwork.action.ServletActionContext;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import com.atlassian.velocity.htmlsafe.HtmlSafe;
 
 public final class StartPlanningPoker extends JiraWebActionSupport {
 
@@ -41,8 +56,22 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     private String issueProjectName;
 
     private String issueProjectKey;
+    
 
-    private Map<String, String> cardsForIssue;
+    @HtmlSafe
+    public String getIssueDescription() {
+    	FieldLayoutManager fieldLayoutManager = ComponentAccessor.getComponent(FieldLayoutManager.class);
+    	RendererManager rendererManager = ComponentAccessor.getComponent(RendererManager.class);
+    	MutableIssue issue = issueManager.getIssueObject(issueKey);
+    	FieldLayout fieldLayout = fieldLayoutManager.getFieldLayout(issue);
+    	FieldLayoutItem fieldLayoutItem = fieldLayout.getFieldLayoutItem(IssueFieldConstants.DESCRIPTION);
+    	String rendererType = (fieldLayoutItem != null) ? fieldLayoutItem.getRendererType() : null;
+    	String renderedContent = rendererManager.getRenderedContent(rendererType, issue.getDescription(), issue.getIssueRenderContext());
+    	
+		return renderedContent;
+	}
+
+	private Map<String, String> cardsForIssue;
 
     public Double getIssueStoryPoints() {
         return issueStoryPoints;
@@ -62,6 +91,10 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
     public String getIssueSummary() {
         return issueSummary;
+    }
+    
+    public boolean isDeckVisible() {
+    	return planningPokerStorage.isVisible(issueKey);
     }
 
     private PokerCard[] cards = {
@@ -86,6 +119,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
     private String chosenCard;
 
+
     public String getChosenCard() {
         return chosenCard;
     }
@@ -94,12 +128,17 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         return cards;
     }
 
-    public StartPlanningPoker(IssueManager issueManager, CustomFieldManager customFieldManager, JiraAuthenticationContext context, PluginSettingsFactory settingsFactory, PlanningPokerStorage planningPokerStorage) {
+    public StartPlanningPoker(	IssueManager issueManager, 
+    							CustomFieldManager customFieldManager, 
+    							JiraAuthenticationContext context, 
+    							PluginSettingsFactory settingsFactory, 
+    							PlanningPokerStorage planningPokerStorage) {
         this.issueManager = issueManager;
         this.customFieldManager = customFieldManager;
         this.context = context;
         this.settingsFactory = settingsFactory;
         this.planningPokerStorage = planningPokerStorage;
+        
 
         for (PokerCard card : cards) {
             cardDeck.put(card.getName(), card);

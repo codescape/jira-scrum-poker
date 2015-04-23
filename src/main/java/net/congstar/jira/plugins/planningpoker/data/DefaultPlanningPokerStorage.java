@@ -8,40 +8,65 @@ import java.util.Map;
  */
 public class DefaultPlanningPokerStorage implements PlanningPokerStorage {
 
-    private static Map<String, Map<String, String>> storage = new HashMap<String, Map<String, String>>();
+    private Map<String, IssuePlanningPokerData> storage = new HashMap<String, IssuePlanningPokerData>();
 
     public DefaultPlanningPokerStorage() {
     }
 
     @Override
     public void update(String issueKey, String userKey, String chosenCard) {
-        Map<String, String> chosenCardsForIssue = chosenCardsForIssue(issueKey);
-        chosenCardsForIssue.put(userKey, chosenCard);
-        debugOutput();
+        IssuePlanningPokerData issuePlanningPokerData = issueByIssueKey(issueKey);
+        issuePlanningPokerData.updateCard(userKey, chosenCard);
+        issuePlanningPokerData.hideDeck();
     }
 
     @Override
     public Map<String, String> chosenCardsForIssue(String issueKey) {
-        Map<String, String> chosenCardsForIssue = storage.get(issueKey);
-        if (chosenCardsForIssue == null) {
-            chosenCardsForIssue = new HashMap<String, String>();
-            storage.put(issueKey, chosenCardsForIssue);
-        }
-        return chosenCardsForIssue;
+        return issueByIssueKey(issueKey).getCards();
     }
 
     @Override
     public boolean isVisible(String issueKey) {
-        return true;
+        return issueByIssueKey(issueKey).isVisible();
     }
 
-    private void debugOutput() {
-        for (String issue : storage.keySet()) {
-            System.out.println("########## Issue " + issue);
-            Map<String, String> issueCards = storage.get(issue);
-            for (String user : issueCards.keySet()) {
-                System.out.println(" >> User " + user + " chose card " + issueCards.get(user));
-            }
+    @Override
+    public void showDeck(String issueKey) {
+        issueByIssueKey(issueKey).revealDeck();
+    }
+
+    private IssuePlanningPokerData issueByIssueKey(String issueKey) {
+        IssuePlanningPokerData issuePlanningPokerData = storage.get(issueKey);
+        if (issuePlanningPokerData == null) {
+            issuePlanningPokerData = new IssuePlanningPokerData();
+            storage.put(issueKey, issuePlanningPokerData);
+        }
+        return issuePlanningPokerData;
+    }
+
+    private static class IssuePlanningPokerData {
+
+        private Map<String, String> cards = new HashMap<String, String>();
+        private boolean visible;
+
+        public Map<String, String> getCards() {
+            return cards;
+        }
+
+        public boolean isVisible() {
+            return visible;
+        }
+
+        public void hideDeck() {
+            visible = false;
+        }
+
+        public void revealDeck() {
+            visible = true;
+        }
+
+        public void updateCard(String userKey, String chosenCard) {
+            cards.put(userKey, chosenCard);
         }
     }
 
