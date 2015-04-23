@@ -45,7 +45,8 @@
 							<div class="mod-content">
 								<div class="field-ignore-highlight" id="description-val">
                                     <div class="user-content-block">
-                                    	$issueDescription
+                                    	#set($issueDescriptionWithHtml = $issueDescription)
+                                    	$issueDescriptionWithHtml
                                     </div>
 
     							</div>
