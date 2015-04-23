@@ -98,7 +98,6 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
     private String chosenCard;
 
-
     public String getChosenCard() {
         return chosenCard;
     }

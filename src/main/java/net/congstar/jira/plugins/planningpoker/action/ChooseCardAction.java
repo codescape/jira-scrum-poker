@@ -12,7 +12,7 @@ public class ChooseCardAction extends JiraWebActionSupport {
 
 	private static final long serialVersionUID = 1L;
 
-	private final PlanningPokerStorage planningPokerStorage;
+    private final PlanningPokerStorage planningPokerStorage;
 
     private final JiraAuthenticationContext jiraAuthenticationContext;
 

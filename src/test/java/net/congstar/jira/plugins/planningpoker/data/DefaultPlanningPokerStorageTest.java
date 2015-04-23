@@ -34,10 +34,10 @@ public class DefaultPlanningPokerStorageTest {
     }
 
     @Test
-    public void cards_for_issue_are_not_visible_after_new_card() {
+    public void cards_for_issue_are_not_visible_after_choosing_new_card() {
         // given
         defaultPlanningPokerStorage.update(ISSUE_ONE, USER_ONE, "8");
-        defaultPlanningPokerStorage.showDeck(ISSUE_ONE);
+        defaultPlanningPokerStorage.revealDeck(ISSUE_ONE);
         assertThat(defaultPlanningPokerStorage.isVisible(ISSUE_ONE), is(true));
 
         // when
