@@ -28,6 +28,8 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
 import com.atlassian.jira.issue.util.DefaultIssueChangeHolder;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.user.ApplicationUser;
+import com.atlassian.jira.user.preferences.JiraUserPreferences;
+import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
@@ -96,7 +98,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     }
 
     private PokerCard[] cards = {
-            new PokerCard("Q", "q.jpg", "q_.jpg"),
+            new PokerCard("q", "q.jpg", "q_.jpg"),
             new PokerCard("0", "0.jpg", "0_.jpg"),
             new PokerCard("1", "1.jpg", "1_.jpg"),
             new PokerCard("2", "2.jpg", "2_.jpg"),
@@ -121,6 +123,8 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
 	private RendererManager rendererManager;
 
+	private UserManager userManager;
+
     public String getChosenCard() {
         return chosenCard;
     }
@@ -133,12 +137,14 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     							CustomFieldManager customFieldManager, 
     							JiraAuthenticationContext context, 
     							PluginSettingsFactory settingsFactory, 
-    							PlanningPokerStorage planningPokerStorage) {
+    							PlanningPokerStorage planningPokerStorage,
+    							UserManager userManager) {
         this.issueManager = issueManager;
         this.customFieldManager = customFieldManager;
         this.context = context;
         this.settingsFactory = settingsFactory;
         this.planningPokerStorage = planningPokerStorage;
+        this.userManager = userManager;
         
         fieldLayoutManager = ComponentAccessor.getComponent(FieldLayoutManager.class);
     	rendererManager = ComponentAccessor.getComponent(RendererManager.class);
@@ -230,5 +236,9 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
     public Map<String, String> getCardsForIssue() {
         return cardsForIssue;
+    }
+    
+    public String getUsername(String key) {
+    	return userManager.getUserByKey(key).getDisplayName();
     }
 }
