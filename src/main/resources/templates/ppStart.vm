@@ -77,11 +77,13 @@
 
 						<h2>Chosen Cards</h2>
 
-						<ul>
-							#foreach ($cardsForIssueEntry in $cardsForIssue.entrySet())
-                                <li>$cardsForIssueEntry.key : $cardsForIssueEntry.value</li>
-							#end
-						</ul>
+						<div class="mod-content">
+							<ul id="chosencards">
+								#foreach ($cardsForIssueEntry in $cardsForIssue.entrySet())
+	                                <li>$cardsForIssueEntry.key : <img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$cardDeck.get($cardsForIssueEntry.value).image"></a></li></li>
+								#end
+							</ul>
+						</div>
 
                         <h2>Story Points are $issueStoryPoints</h2>
 

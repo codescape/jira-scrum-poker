@@ -16,6 +16,7 @@ import webwork.action.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -77,6 +78,12 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 			new PokerCard("40", "40.jpg", "40_.jpg"),
 			new PokerCard("100", "100.jpg", "100_.jpg")
 	};
+	
+	private Map<String, PokerCard> cardDeck=  new HashMap<String, PokerCard>();
+
+	public Map<String, PokerCard> getCardDeck() {
+		return cardDeck;
+	}
 
 	private String chosenCard;
 
@@ -93,6 +100,10 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         this.customFieldManager = customFieldManager;
         this.context = context;
         this.settingsFactory = settingsFactory;
+        
+        for (PokerCard card : cards) {
+			cardDeck.put(card.getName(), card);
+		}
     }
 
     @Override
