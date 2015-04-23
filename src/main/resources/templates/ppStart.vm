@@ -73,7 +73,7 @@
 
 						#if ($deckVisible)
 						<hr>
-						<h2>Bereich</h2>
+						<h2>Bandbreite der abgegebenen Schätzungen</h2>
 						<br>
 						<div class="mod-content">
 							<ul id="selectVote">
@@ -81,6 +81,7 @@
 	                                <li><a href="$req.contextPath/secure/startPlanningPoker.jspa?issueKey=$issueKey&finalVote=$vote"><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$cardDeck.get($vote).chosenImage"></a></li>
 								#end
 							</ul>
+                            <p>Zur Überahme in die Story bitte die entsprechende Karte wählen.</p>
 						</div>
 						#end
 
@@ -91,9 +92,9 @@
 							<ul id="chosencards">
 								#foreach ($cardsForIssueEntry in $cardsForIssue.entrySet())
 									#if ($deckVisible)
-		                                <li>$cardsForIssueEntry.key : <img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$cardDeck.get($cardsForIssueEntry.value).image"></li>
+		                                <li><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$cardDeck.get($cardsForIssueEntry.value).image">&nbsp;&nbsp;&nbsp;$cardsForIssueEntry.key</li>
 	                                #else
-		                                <li>$cardsForIssueEntry.key : <img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/back.jpg"></li>
+		                                <li><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/back.jpg">&nbsp;&nbsp;&nbsp;$cardsForIssueEntry.key</li>
 	                                #end
 								#end
 							</ul>
