@@ -1,26 +1,7 @@
 package net.congstar.jira.plugins.planningpoker.action;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-
-import javax.servlet.http.HttpServletRequest;
-
-import net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage;
-import net.congstar.jira.plugins.planningpoker.model.PokerCard;
-import webwork.action.ServletActionContext;
-
 import com.atlassian.jira.component.ComponentAccessor;
-import com.atlassian.jira.issue.CustomFieldManager;
-import com.atlassian.jira.issue.IssueFieldConstants;
-import com.atlassian.jira.issue.IssueManager;
-import com.atlassian.jira.issue.ModifiedValue;
-import com.atlassian.jira.issue.MutableIssue;
-import com.atlassian.jira.issue.RendererManager;
+import com.atlassian.jira.issue.*;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayout;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
@@ -28,12 +9,17 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
 import com.atlassian.jira.issue.util.DefaultIssueChangeHolder;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.user.ApplicationUser;
-import com.atlassian.jira.user.preferences.JiraUserPreferences;
 import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
+import net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage;
+import net.congstar.jira.plugins.planningpoker.model.PokerCard;
+import webwork.action.ServletActionContext;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 public final class StartPlanningPoker extends JiraWebActionSupport {
 
@@ -58,18 +44,18 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     private String issueProjectName;
 
     private String issueProjectKey;
-    
+
 
     @HtmlSafe
     public String getIssueDescription() {
-    	MutableIssue issue = issueManager.getIssueObject(issueKey);
-    	FieldLayout fieldLayout = fieldLayoutManager.getFieldLayout(issue);
-    	FieldLayoutItem fieldLayoutItem = fieldLayout.getFieldLayoutItem(IssueFieldConstants.DESCRIPTION);
-    	String rendererType = (fieldLayoutItem != null) ? fieldLayoutItem.getRendererType() : null;
+        MutableIssue issue = issueManager.getIssueObject(issueKey);
+        FieldLayout fieldLayout = fieldLayoutManager.getFieldLayout(issue);
+        FieldLayoutItem fieldLayoutItem = fieldLayout.getFieldLayoutItem(IssueFieldConstants.DESCRIPTION);
+        String rendererType = (fieldLayoutItem != null) ? fieldLayoutItem.getRendererType() : null;
         return rendererManager.getRenderedContent(rendererType, issue.getDescription(), issue.getIssueRenderContext());
-	}
+    }
 
-	private Map<String, String> cardsForIssue;
+    private Map<String, String> cardsForIssue;
 
     public Double getIssueStoryPoints() {
         return issueStoryPoints;
@@ -90,9 +76,9 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     public String getIssueSummary() {
         return issueSummary;
     }
-    
+
     public boolean isDeckVisible() {
-    	return planningPokerStorage.isVisible(issueKey);
+        return planningPokerStorage.isVisible(issueKey);
     }
 
     private PokerCard[] cards = {
@@ -117,11 +103,11 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
     private String chosenCard;
 
-	private FieldLayoutManager fieldLayoutManager;
+    private FieldLayoutManager fieldLayoutManager;
 
-	private RendererManager rendererManager;
+    private RendererManager rendererManager;
 
-	private UserManager userManager;
+    private UserManager userManager;
 
     public String getChosenCard() {
         return chosenCard;
@@ -131,21 +117,21 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         return cards;
     }
 
-    public StartPlanningPoker(	IssueManager issueManager, 
-    							CustomFieldManager customFieldManager, 
-    							JiraAuthenticationContext context, 
-    							PluginSettingsFactory settingsFactory, 
-    							PlanningPokerStorage planningPokerStorage,
-    							UserManager userManager) {
+    public StartPlanningPoker(IssueManager issueManager,
+                              CustomFieldManager customFieldManager,
+                              JiraAuthenticationContext context,
+                              PluginSettingsFactory settingsFactory,
+                              PlanningPokerStorage planningPokerStorage,
+                              UserManager userManager) {
         this.issueManager = issueManager;
         this.customFieldManager = customFieldManager;
         this.context = context;
         this.settingsFactory = settingsFactory;
         this.planningPokerStorage = planningPokerStorage;
         this.userManager = userManager;
-        
+
         fieldLayoutManager = ComponentAccessor.getComponent(FieldLayoutManager.class);
-    	rendererManager = ComponentAccessor.getComponent(RendererManager.class);
+        rendererManager = ComponentAccessor.getComponent(RendererManager.class);
         for (PokerCard card : cards) {
             cardDeck.put(card.getName(), card);
         }
@@ -194,30 +180,30 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     }
 
     public Collection<String> getBoundedVotes() {
-    	ArrayList<String> votes = new ArrayList<String>();
-    	for (Integer value : getSortedVotes(cardsForIssue)) {
-			votes.add(value.toString());
-		}
-    	ArrayList<String> boundedVotes = new ArrayList<String>();
-    	
-    	if (votes.size()>1) {
-    		String first = votes.get(0);
-    		String last = votes.get(votes.size()-1);
-    		
-    		int index = 0;
-    		while (!cards[index].getName().equals(first)) {
-    			index++;
-    		}
-    		boundedVotes.add(cards[index].getName());
-    		index++;
-    		while (!cards[index].getName().equals(last)) {
-    			boundedVotes.add(cards[index].getName());	
-    			index++;
-    		}
-    		boundedVotes.add(cards[index].getName());
-    	}
-    	
-    	return boundedVotes;
+        ArrayList<String> votes = new ArrayList<String>();
+        for (Integer value : getSortedVotes(cardsForIssue)) {
+            votes.add(value.toString());
+        }
+        ArrayList<String> boundedVotes = new ArrayList<String>();
+
+        if (votes.size() > 1) {
+            String first = votes.get(0);
+            String last = votes.get(votes.size() - 1);
+
+            int index = 0;
+            while (!cards[index].getName().equals(first)) {
+                index++;
+            }
+            boundedVotes.add(cards[index].getName());
+            index++;
+            while (!cards[index].getName().equals(last)) {
+                boundedVotes.add(cards[index].getName());
+                index++;
+            }
+            boundedVotes.add(cards[index].getName());
+        }
+
+        return boundedVotes;
     }
 
     private CustomField findStoryPointField() {
@@ -235,8 +221,8 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     public Map<String, String> getCardsForIssue() {
         return cardsForIssue;
     }
-    
+
     public String getUsername(String key) {
-    	return userManager.getUserByKey(key).getDisplayName();
+        return userManager.getUserByKey(key).getDisplayName();
     }
 }
