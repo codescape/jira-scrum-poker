@@ -34,3 +34,12 @@
 #buttonReveal {
    margin-left: 20px;
 }
+
+.issue-main-column {
+    padding-left: 30px;
+    padding-top: 30px;
+}
+
+.issue-side-column {
+    padding-top: 30px;
+}
