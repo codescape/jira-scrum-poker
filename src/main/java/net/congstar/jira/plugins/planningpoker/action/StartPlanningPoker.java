@@ -7,6 +7,7 @@ import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.util.DefaultIssueChangeHolder;
 import com.atlassian.jira.security.JiraAuthenticationContext;
+import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
@@ -16,6 +17,7 @@ import webwork.action.ServletActionContext;
 import javax.servlet.http.HttpServletRequest;
 
 import java.util.List;
+import java.util.Map;
 
 
 public final class StartPlanningPoker extends JiraWebActionSupport {
@@ -39,6 +41,8 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     private String issueProjectName;
 
     private String issueProjectKey;
+
+    private Map<String, String> cardsForIssue;
 
     public Double getIssueStoryPoints() {
         return issueStoryPoints;
@@ -96,16 +100,20 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         HttpServletRequest request = ServletActionContext.getRequest();
         issueKey = request.getParameter("issueKey");
 
-        // ApplicationUser user = context.getUser();
+        ApplicationUser user = context.getUser();
         CustomField storyPointsField = findStoryPointField();
         MutableIssue issue = issueManager.getIssueObject(issueKey);
-
-        chosenCard = request.getParameter("choose");
 
         if (issue == null) {
             addErrorMessage("Issue Key" + issueKey + " not found.");
             return "error";
         }
+
+        chosenCard = request.getParameter("choose");
+        if (chosenCard != null) {
+            PlanningPokerCardStorage.update(issueKey, user.getKey(), chosenCard);
+        }
+        cardsForIssue = PlanningPokerCardStorage.chosenCardsForIssue(issueKey);
 
         issueSummary = issue.getSummary();
         issueProjectName = issue.getProjectObject().getName();
@@ -128,4 +136,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         return null;
     }
 
+    public Map<String, String> getCardsForIssue() {
+        return cardsForIssue;
+    }
 }

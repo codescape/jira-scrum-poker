@@ -59,7 +59,7 @@
 			    	</div>
     				<div class="aui-item issue-side-column" id="viewissuesidebar">
                         <br>
-                        <h1>Planning Poker für Story "$issueKey" gestartet</h1>
+                        <h2>Planning Poker für Story "$issueKey" gestartet</h2>
                         <br>
                         <div class="mod-content">
                         	<ul id="pokerset">
@@ -74,10 +74,16 @@
 							  #end
 							</ul>
                         </div>
-                        
-                        
-                        <h2>Story Points are $issueStoryPoints</h2>
 
+						<h2>Chosen Cards</h2>
+
+						<ul>
+							#foreach ($cardsForIssueEntry in $cardsForIssue.entrySet())
+                                <li>$cardsForIssueEntry.key : $cardsForIssueEntry.value</li>
+							#end
+						</ul>
+
+                        <h2>Story Points are $issueStoryPoints</h2>
 
                         <a href="$req.contextPath/browse/$issueKey" style="margin-top: 3em; display: block">zurück</a>
                     </div>
