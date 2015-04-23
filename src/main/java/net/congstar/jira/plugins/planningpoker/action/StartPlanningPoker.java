@@ -45,7 +45,6 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
     private String issueProjectKey;
 
-
     @HtmlSafe
     public String getIssueDescription() {
         MutableIssue issue = issueManager.getIssueObject(issueKey);
