@@ -4,34 +4,34 @@ import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 
-public class ConfigurePlanningPoker extends JiraWebActionSupport{
 
-	public static final String STORY_POINT_FIELD_NAME = "storyPointFieldName";
+public class ConfigurePlanningPoker extends JiraWebActionSupport {
 
-	private static final long serialVersionUID = 1L;
-	
-	private String storyPointFieldName ="points";
+    private static final long serialVersionUID = 1L;
 
-	private PluginSettingsFactory settingsFactory;
-	
-	public ConfigurePlanningPoker (PluginSettingsFactory settingsFactory) {
-		this.settingsFactory = settingsFactory;
-		
-	}
-	public String getStoryPointFieldName() {
-		return storyPointFieldName;
-	}
-	
-	public void setStoryPointFieldName(String storyPointFieldName) {
-		this.storyPointFieldName = storyPointFieldName;
-	}
+    public static final String STORY_POINT_FIELD_NAME = "storyPointFieldName";
 
-	@Override
-	protected String doExecute() throws Exception {
+    private String storyPointFieldName = "points";
 
-		PluginSettings settings = settingsFactory.createGlobalSettings();
-		settings.put(STORY_POINT_FIELD_NAME, storyPointFieldName.toLowerCase());
-		System.out.println(getStoryPointFieldName());
-		return "success";
-	}
+    private PluginSettingsFactory settingsFactory;
+
+    public ConfigurePlanningPoker(PluginSettingsFactory settingsFactory) {
+        this.settingsFactory = settingsFactory;
+    }
+
+    public String getStoryPointFieldName() {
+        return storyPointFieldName;
+    }
+
+    public void setStoryPointFieldName(String storyPointFieldName) {
+        this.storyPointFieldName = storyPointFieldName;
+    }
+
+    @Override
+    protected String doExecute() throws Exception {
+        PluginSettings settings = settingsFactory.createGlobalSettings();
+        settings.put(STORY_POINT_FIELD_NAME, storyPointFieldName);
+        System.out.println(getStoryPointFieldName());
+        return "success";
+    }
 }
