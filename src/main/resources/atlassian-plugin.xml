@@ -22,7 +22,7 @@
         <context>planningpoker</context>
     </web-resource>
     
-    <component-import key="pluginSettingsFactory" interface="com.atlassian.sal.api.pluginsettings.PluginSettingsFactory"></component-import>
+    <component-import key="pluginSettingsFactory" interface="com.atlassian.sal.api.pluginsettings.PluginSettingsFactory" />
     
     <web-item key="pp_start" name="PP-Start" section="jira.issue.tools" weight="10">
         <label key="planningpoker.ppStart" />

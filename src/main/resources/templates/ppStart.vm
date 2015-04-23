@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<title>Planning Poker</title>
-		<?xml-stylesheet type="text/css" href="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/planningpoker.css" ?>
+		<link rel="stylesheet" type="text/css" href="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/planningpoker.css" media="all" />
 	</head>
 
 	<body>
@@ -66,10 +66,11 @@
 							  #foreach( $card in $cards)
 							    <li><a href="$req.contextPath/secure/startPlanningPoker.jspa?issueKey=$issueKey&choose=$card.name"> 
 							     	#if ($chosenCard == $card.name)
-							       		<img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$card.imageChosen"></a></li>
+							       		<img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$card.chosenImage"></a></li>
 							       	#else
 							       		<img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$card.image"></a></li>
 							       	#end
+							    <li>
 							  #end
 							</ul>
                         </div>

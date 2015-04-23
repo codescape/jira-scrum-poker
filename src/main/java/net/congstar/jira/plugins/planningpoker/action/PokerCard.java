@@ -7,18 +7,19 @@ public class PokerCard {
 	}
 
 	String image;
-	String imageChosen;
+	String chosenImage;
 	
-	public String getImageChosen() {
-		return imageChosen;
+	public String getChosenImage() {
+		return chosenImage;
 	}
 
 	public String getImage() {
 		return image;
 	}
 
-	public PokerCard (String name, String image, String imageChosen) {
+	public PokerCard (String name, String image, String chosenImage) {
 		this.name = name;
 		this.image = image;
+		this.chosenImage = chosenImage;
 	}
 }
