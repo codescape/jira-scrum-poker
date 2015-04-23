@@ -191,21 +191,22 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     	System.out.println("----------------votes.size:"+votes.size());
     	String first = votes.get(0);
     	String last = votes.get(votes.size()-1);
-    	if (votes.size()==1) {
-    	   boundedVotes.add(cards[0].getName());
-    	} else if (votes.size()>0) {
+    	
+    	if (votes.size()>0) {
     		
     		int index = 0;
     		while (!cards[index].getName().equals(first)) {
     			index++;
     		}
     		boundedVotes.add(cards[index].getName());
-    		index++;
-    		while (!cards[index].getName().equals(last)) {
-    			boundedVotes.add(cards[index].getName());	
-    			index++;
+    		if (votes.size()>1) {
+	    		index++;
+	    		while (!cards[index].getName().equals(last)) {
+	    			boundedVotes.add(cards[index].getName());	
+	    			index++;
+	    		}
+	    		boundedVotes.add(cards[index].getName());
     		}
-    		boundedVotes.add(cards[index].getName());
     	}
     	System.out.println("----------------boundedVotes:");
     	for (String string : boundedVotes) {
