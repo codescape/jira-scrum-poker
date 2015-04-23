@@ -10,6 +10,6 @@ public interface PlanningPokerStorage {
 
     boolean isVisible(String issueKey);
 
-    void showDeck(String issueKey);
+    void revealDeck(String issueKey);
 
 }
