@@ -10,7 +10,9 @@ import net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage;
  */
 public class ChooseCardAction extends JiraWebActionSupport {
 
-    private final PlanningPokerStorage planningPokerStorage;
+	private static final long serialVersionUID = 1L;
+
+	private final PlanningPokerStorage planningPokerStorage;
 
     private final JiraAuthenticationContext jiraAuthenticationContext;
 
