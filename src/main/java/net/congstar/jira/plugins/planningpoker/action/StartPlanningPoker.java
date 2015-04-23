@@ -66,9 +66,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     	FieldLayout fieldLayout = fieldLayoutManager.getFieldLayout(issue);
     	FieldLayoutItem fieldLayoutItem = fieldLayout.getFieldLayoutItem(IssueFieldConstants.DESCRIPTION);
     	String rendererType = (fieldLayoutItem != null) ? fieldLayoutItem.getRendererType() : null;
-    	String renderedContent = rendererManager.getRenderedContent(rendererType, issue.getDescription(), issue.getIssueRenderContext());
-    	
-		return renderedContent;
+        return rendererManager.getRenderedContent(rendererType, issue.getDescription(), issue.getIssueRenderContext());
 	}
 
 	private Map<String, String> cardsForIssue;
