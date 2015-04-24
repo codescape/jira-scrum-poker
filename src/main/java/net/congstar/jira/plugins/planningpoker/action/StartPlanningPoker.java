@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -12,6 +11,7 @@ import java.util.TreeSet;
 import javax.servlet.http.HttpServletRequest;
 
 import net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage;
+import net.congstar.jira.plugins.planningpoker.data.StoryPointFieldSupport;
 import net.congstar.jira.plugins.planningpoker.model.PokerCard;
 import webwork.action.ServletActionContext;
 
@@ -19,10 +19,8 @@ import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.IssueFieldConstants;
 import com.atlassian.jira.issue.IssueManager;
-import com.atlassian.jira.issue.ModifiedValue;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.RendererManager;
-import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayout;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
@@ -30,7 +28,6 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
-import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
 
@@ -42,11 +39,10 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
     private final JiraAuthenticationContext context;
 
-    private final CustomFieldManager customFieldManager;
-
-    private final PluginSettingsFactory settingsFactory;
 
     private final PlanningPokerStorage planningPokerStorage;
+
+    private final StoryPointFieldSupport storyPointFieldSupport;
 
     private String issueSummary;
 
@@ -135,12 +131,12 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
                               CustomFieldManager customFieldManager,
                               JiraAuthenticationContext context,
                               PluginSettingsFactory settingsFactory,
-                              PlanningPokerStorage planningPokerStorage, UserManager userManager) {
+                              PlanningPokerStorage planningPokerStorage, StoryPointFieldSupport storyPointFieldSupport, UserManager userManager) {
         this.issueManager = issueManager;
-        this.customFieldManager = customFieldManager;
+;
         this.context = context;
-        this.settingsFactory = settingsFactory;
         this.planningPokerStorage = planningPokerStorage;
+        this.storyPointFieldSupport = storyPointFieldSupport;
         this.userManager = userManager;
 
         fieldLayoutManager = ComponentAccessor
@@ -159,7 +155,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         ApplicationUser user = context.getUser();
         if (user == null)
             return "error";
-        CustomField storyPointsField = findStoryPointField();
+
         MutableIssue issue = issueManager.getIssueObject(issueKey);
 
         if (issue == null) {
@@ -173,7 +169,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         issueSummary = issue.getSummary();
         issueProjectName = issue.getProjectObject().getName();
         issueProjectKey = issue.getProjectObject().getKey();
-        issueStoryPoints = (Double) issue.getCustomFieldValue(storyPointsField);
+        issueStoryPoints = storyPointFieldSupport.getValue(issueKey);
 
         return "start";
     }
@@ -235,19 +231,6 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 		System.out.println(String.valueOf(max).replaceAll(".0", ""));
 		return String.valueOf(max).replace(".0", "");
 	}
-
-    private CustomField findStoryPointField() {
-        PluginSettings settings = settingsFactory.createGlobalSettings();
-        String field = (String) settings.get(ConfigurePlanningPokerAction.STORY_POINT_FIELD_NAME);
-        String storyPointFieldName = field != null ? field : ConfigurePlanningPokerAction.DEFAULT_FIELD_FOR_STORY_POINTS;
-
-        for (CustomField customField : customFieldManager.getCustomFieldObjects()) {
-            if (customField.getNameKey().equalsIgnoreCase(storyPointFieldName)) {
-                return customField;
-            }
-        }
-        return null;
-    }
 
     public Map<String, String> getCardsForIssue() {
         return cardsForIssue;
