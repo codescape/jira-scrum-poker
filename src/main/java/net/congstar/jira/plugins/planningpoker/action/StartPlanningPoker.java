@@ -213,8 +213,8 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 	private CustomField findStoryPointField() {
 		PluginSettings settings = settingsFactory.createGlobalSettings();
 		String storyPointFieldName = settings
-				.get(ConfigurePlanningPoker.STORY_POINT_FIELD_NAME) != null ? (String) settings
-				.get(ConfigurePlanningPoker.STORY_POINT_FIELD_NAME) : "points";
+				.get(ConfigurePlanningPokerAction.STORY_POINT_FIELD_NAME) != null ? (String) settings
+				.get(ConfigurePlanningPokerAction.STORY_POINT_FIELD_NAME) : "points";
 		List<CustomField> field = customFieldManager.getCustomFieldObjects();
 		for (CustomField customField : field) {
 			if (customField.getNameKey().toLowerCase()
