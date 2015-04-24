@@ -44,7 +44,7 @@ public class ConfirmEstimationAction extends JiraWebActionSupport {
     private CustomField findStoryPointField() {
         PluginSettings settings = settingsFactory.createGlobalSettings();
         String field = (String) settings.get(ConfigurePlanningPokerAction.STORY_POINT_FIELD_NAME);
-        String storyPointFieldName = field == null ? "points" : field;
+        String storyPointFieldName = field != null ? field : ConfigurePlanningPokerAction.DEFAULT_FIELD_FOR_STORY_POINTS;
 
         for (CustomField customField : customFieldManager.getCustomFieldObjects()) {
             if (customField.getNameKey().equalsIgnoreCase(storyPointFieldName)) {
