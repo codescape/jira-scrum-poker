@@ -79,6 +79,11 @@
         <interface>net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage</interface>
     </component>
 
+    <component key="storyPointSupport" class="net.congstar.jira.plugins.planningpoker.data.DefaultStoryPointSupport">
+        <description>Provides access to the custom field.</description>
+        <interface>net.congstar.jira.plugins.planningpoker.data.StoryPointFieldSupport</interface>
+    </component>
+
     <!-- import from the product container -->
     <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties" />
     

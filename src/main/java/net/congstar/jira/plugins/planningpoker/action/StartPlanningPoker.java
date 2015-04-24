@@ -2,7 +2,6 @@ package net.congstar.jira.plugins.planningpoker.action;
 
 import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.*;
-import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayout;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
@@ -10,10 +9,10 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
-import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
 import net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage;
+import net.congstar.jira.plugins.planningpoker.data.StoryPointFieldSupport;
 import net.congstar.jira.plugins.planningpoker.model.PokerCard;
 import webwork.action.ServletActionContext;
 
@@ -33,6 +32,8 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     private final PluginSettingsFactory settingsFactory;
 
     private final PlanningPokerStorage planningPokerStorage;
+
+    private final StoryPointFieldSupport storyPointFieldSupport;
 
     private String issueSummary;
 
@@ -120,12 +121,13 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
                               CustomFieldManager customFieldManager,
                               JiraAuthenticationContext context,
                               PluginSettingsFactory settingsFactory,
-                              PlanningPokerStorage planningPokerStorage, UserManager userManager) {
+                              PlanningPokerStorage planningPokerStorage, StoryPointFieldSupport storyPointFieldSupport, UserManager userManager) {
         this.issueManager = issueManager;
         this.customFieldManager = customFieldManager;
         this.context = context;
         this.settingsFactory = settingsFactory;
         this.planningPokerStorage = planningPokerStorage;
+        this.storyPointFieldSupport = storyPointFieldSupport;
         this.userManager = userManager;
 
         fieldLayoutManager = ComponentAccessor
@@ -144,7 +146,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         ApplicationUser user = context.getUser();
         if (user == null)
             return "error";
-        CustomField storyPointsField = findStoryPointField();
+
         MutableIssue issue = issueManager.getIssueObject(issueKey);
 
         if (issue == null) {
@@ -158,7 +160,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         issueSummary = issue.getSummary();
         issueProjectName = issue.getProjectObject().getName();
         issueProjectKey = issue.getProjectObject().getKey();
-        issueStoryPoints = (Double) issue.getCustomFieldValue(storyPointsField);
+        issueStoryPoints = storyPointFieldSupport.getValue(issueKey);
 
         return "start";
     }
@@ -203,19 +205,6 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         return boundedVotes;
     }
 
-    private CustomField findStoryPointField() {
-        PluginSettings settings = settingsFactory.createGlobalSettings();
-        String field = (String) settings.get(ConfigurePlanningPokerAction.STORY_POINT_FIELD_NAME);
-        String storyPointFieldName = field != null ? field : ConfigurePlanningPokerAction.DEFAULT_FIELD_FOR_STORY_POINTS;
-
-        for (CustomField customField : customFieldManager.getCustomFieldObjects()) {
-            if (customField.getNameKey().equalsIgnoreCase(storyPointFieldName)) {
-                return customField;
-            }
-        }
-        return null;
-    }
-
     public Map<String, String> getCardsForIssue() {
         return cardsForIssue;
     }
@@ -223,4 +212,5 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     public String getUsername(String key) {
         return userManager.getUserByKey(key).getDisplayName();
     }
+
 }
