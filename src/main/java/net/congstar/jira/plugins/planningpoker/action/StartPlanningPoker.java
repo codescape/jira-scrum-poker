@@ -1,7 +1,27 @@
 package net.congstar.jira.plugins.planningpoker.action;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
+import javax.servlet.http.HttpServletRequest;
+
+import net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage;
+import net.congstar.jira.plugins.planningpoker.model.PokerCard;
+import webwork.action.ServletActionContext;
+
 import com.atlassian.jira.component.ComponentAccessor;
-import com.atlassian.jira.issue.*;
+import com.atlassian.jira.issue.CustomFieldManager;
+import com.atlassian.jira.issue.IssueFieldConstants;
+import com.atlassian.jira.issue.IssueManager;
+import com.atlassian.jira.issue.ModifiedValue;
+import com.atlassian.jira.issue.MutableIssue;
+import com.atlassian.jira.issue.RendererManager;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayout;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
@@ -14,12 +34,6 @@ import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
-import net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage;
-import net.congstar.jira.plugins.planningpoker.model.PokerCard;
-import webwork.action.ServletActionContext;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.*;
 
 public final class StartPlanningPoker extends JiraWebActionSupport {
 
@@ -85,6 +99,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
 	private PokerCard[] cards = { new PokerCard("q", "q.jpg", "q_.jpg"),
 			new PokerCard("0", "0.jpg", "0_.jpg"),
+			new PokerCard("0.5", "05.jpg", "05_.jpg"),
 			new PokerCard("1", "1.jpg", "1_.jpg"),
 			new PokerCard("2", "2.jpg", "2_.jpg"),
 			new PokerCard("3", "3.jpg", "3_.jpg"),
@@ -172,12 +187,12 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 		return "start";
 	}
 
-	private Set<Integer> getSortedVotes(Map<String, String> votes) {
+	private Set<BigDecimal> getSortedVotes(Map<String, String> votes) {
 		Collection<String> votedValues = votes.values();
-		Set<Integer> uniqueValues = new TreeSet<Integer>();
+		Set<BigDecimal> uniqueValues = new TreeSet<BigDecimal>();
 		for (String value : votedValues) {
 			if (!value.equals("q")) {
-				uniqueValues.add(new Integer(value));
+				uniqueValues.add(new BigDecimal(value));
 			}
 		}
 		return uniqueValues;
@@ -185,7 +200,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
 	public Collection<String> getBoundedVotes() {
 		ArrayList<String> votes = new ArrayList<String>();
-		for (Integer value : getSortedVotes(cardsForIssue)) {
+		for (BigDecimal value : getSortedVotes(cardsForIssue)) {
 			votes.add(value.toString());
 		}
 		ArrayList<String> boundedVotes = new ArrayList<String>();
@@ -230,7 +245,23 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 	public Map<String, String> getCardsForIssue() {
 		return cardsForIssue;
 	}
+	
+	public String getMinVoted() {
+		double min = 1000.0;
+		for (String voted : getCardsForIssue().values()) {
+			min = Math.min(new Double(min), new BigDecimal(voted).doubleValue());
+		}
+		return String.valueOf(min);
+	}
 
+	public String getMaxVoted() {
+		double max = 1000.0;
+		for (String voted : getCardsForIssue().values()) {
+			max = Math.max(new Double(max), new BigDecimal(voted).doubleValue());
+		}
+		return String.valueOf(max);
+	}
+	
 	public String getUsername(String key) {
 		return userManager.getUserByKey(key).getDisplayName();
 	}
