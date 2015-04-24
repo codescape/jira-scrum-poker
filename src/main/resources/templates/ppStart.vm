@@ -97,10 +97,14 @@
 						<div class="mod-content">
 							<ul id="chosencards">
 								#foreach ($cardsForIssueEntry in $cardsForIssue.entrySet())
+								#if ($deckVisible && ($cardsForIssueEntry.value == $minVoted || $cardsForIssueEntry.value == $maxVoted))
+									#set($classTalk = "icon aui-icon aui-icon-small aui-iconfont-comment icon-comment ppTalkMargin")
+								#end	
+								
 									#if ($deckVisible)
-		                                <li><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$cardDeck.get($cardsForIssueEntry.value).image">&nbsp;&nbsp;&nbsp;$action.getUsername($cardsForIssueEntry.key)</li>
+		                                <li><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$cardDeck.get($cardsForIssueEntry.value).image">&nbsp;&nbsp;&nbsp;<span  style="padding-right: 5px">$action.getUsername($cardsForIssueEntry.key)</span><span class="$classTalk">&nbsp;</span></li>
 	                                #else
-		                                <li><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/back.jpg">&nbsp;&nbsp;&nbsp;$action.getUsername($cardsForIssueEntry.key)</li>
+		                                <li><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/back.jpg">&nbsp;&nbsp;&nbsp;<span style="padding-right: 5px">$action.getUsername($cardsForIssueEntry.key)</span><span class="$classTalk" >&nbsp;</span></li>
 	                                #end
 								#end
 							</ul>

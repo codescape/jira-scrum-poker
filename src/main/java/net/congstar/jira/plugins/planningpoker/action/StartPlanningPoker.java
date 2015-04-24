@@ -98,6 +98,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
     private PokerCard[] cards = {new PokerCard("q", "q.jpg", "q_.jpg"),
             new PokerCard("0", "0.jpg", "0_.jpg"),
+            new PokerCard("0.5", "05.jpg", "05_.jpg"),
             new PokerCard("1", "1.jpg", "1_.jpg"),
             new PokerCard("2", "2.jpg", "2_.jpg"),
             new PokerCard("3", "3.jpg", "3_.jpg"),
@@ -222,15 +223,17 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 		for (String voted : getCardsForIssue().values()) {
 			min = Math.min(new Double(min), new BigDecimal(voted).doubleValue());
 		}
-		return String.valueOf(min);
+		return String.valueOf(min).replace(".0", "");
 	}
 
 	public String getMaxVoted() {
-		double max = 1000.0;
+		double max = 0;
 		for (String voted : getCardsForIssue().values()) {
 			max = Math.max(new Double(max), new BigDecimal(voted).doubleValue());
+			System.out.println(max);
 		}
-		return String.valueOf(max);
+		System.out.println(String.valueOf(max).replaceAll(".0", ""));
+		return String.valueOf(max).replace(".0", "");
 	}
 
     private CustomField findStoryPointField() {
