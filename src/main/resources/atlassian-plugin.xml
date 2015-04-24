@@ -68,6 +68,12 @@
         </actions>
     </webwork1>
 
+    <webwork1 key="confirmEstimationAction" name="confirmEstimationAction" class="java.lang.Object">
+        <actions>
+            <action name="net.congstar.jira.plugins.planningpoker.action.ConfirmEstimationAction" alias="confirmEstimationAction" />
+        </actions>
+    </webwork1>
+
     <component key="planningPokerStorage" class="net.congstar.jira.plugins.planningpoker.data.DefaultPlanningPokerStorage">
         <description>Provides the Storage for Planning Poker sessions.</description>
         <interface>net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage</interface>
