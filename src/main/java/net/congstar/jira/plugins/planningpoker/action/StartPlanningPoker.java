@@ -143,6 +143,8 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 		issueKey = request.getParameter("issueKey");
 
 		ApplicationUser user = context.getUser();
+		if (user==null) 
+			return "error";
 		CustomField storyPointsField = findStoryPointField();
 		MutableIssue issue = issueManager.getIssueObject(issueKey);
 

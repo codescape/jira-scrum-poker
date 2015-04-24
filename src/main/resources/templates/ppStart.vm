@@ -13,7 +13,7 @@
 						<div class="aui-page-header-inner">
 							<div class="aui-page-header-image">
 								<span class="aui-avatar aui-avatar-large aui-avatar-project jira-system-avatar" id="10001">
-									<span class="aui-avatar-inner"><img src="$req.contextPath/secure/projectavatar?avatarId=10011" alt="Bild für Projekt hochgeladen: 'Beispiel-Scrumprojekt'" id="project-avatar"></span>
+									<span class="aui-avatar-inner"><img src="$req.contextPath/secure/projectavatar?avatarId=10011"  id="project-avatar"></span>
 								</span>
                             </div>
 								<!-- .aui-page-header-image -->
@@ -39,13 +39,14 @@
 					<div class="aui-item issue-main-column">
 						<div class="module toggle-wrap" id="descriptionmodule">
 							<div class="poker-header">
-								<h2>Beschreibung der Story</h2>
+								<h2>$i18n.getText("pp.storyDescription")</h2>
+								
 							</div>
 							<div class="mod-content">
 								<div class="field-ignore-highlight" id="description-val">
                                     <div class="user-content-block">
                                     	#set($issueDescriptionWithHtml = $issueDescription)
-                                    	$issueDescriptionWithHtml
+                                    	<p>$issueDescriptionWithHtml</p>
                                     </div>
 
     							</div>
@@ -54,7 +55,7 @@
 			    	</div>
     				<div class="aui-item issue-side-column" id="viewissuesidebar">
                         <div class="poker-header">
-                            <h2>Planning Poker für Story "$issueKey"</h2>
+                            <h2>$i18n.getText("pp.storyfor") "$issueKey"</h2>
                         </div>
                         <br>
                         <div class="mod-content">
@@ -74,7 +75,7 @@
 						#if ($deckVisible)
                         <br>
                         <div class="poker-header">
-    						<h2>Bandbreite der abgegebenen Schätzungen</h2>
+    						<h2>$i18n.getText("pp.bandwidth")</h2>
                         </div>
 						<br>
 						<div class="mod-content">
@@ -83,13 +84,13 @@
 	                                <li><a href="$req.contextPath/secure/startPlanningPoker.jspa?issueKey=$issueKey&finalVote=$vote"><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$cardDeck.get($vote).chosenImage"></a></li>
 								#end
 							</ul>
-                            <p class="poker-comment">Zur Übernahme in die Story bitte die entsprechende Karte wählen.</p>
+                            <p class="poker-comment">$i18n.getText("pp.confirmVote")</p>
 						</div>
 						#end
 
 						<br>
                         <div class="poker-header">
-    						<h2>Ausgewählte Karten <a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">Aufdecken</a> <a id="buttonRefresh" href="$req.contextPath/secure/refreshDeckAction.jspa?issueKey=$issueKey" class="aui-button">Aktualisieren</a></h2>
+    						<h2>$i18n.getText("pp.chosenCards") <a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("pp.reveal")</a> <a id="buttonRefresh" href="$req.contextPath/secure/refreshDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("pp.refresh")</a></h2>
                         </div>
 
                         <br>
@@ -105,9 +106,7 @@
 							</ul>
 						</div>
 
-                        
-
-                        <a href="$req.contextPath/browse/$issueKey" style="margin-top: 3em; display: block">zurück</a>
+                        <a href="$req.contextPath/browse/$issueKey" style="margin-top: 3em; display: block">$i18n.getText("pp.back")</a>
                     </div>
                 </div>
 			</div>
