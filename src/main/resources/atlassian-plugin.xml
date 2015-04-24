@@ -31,7 +31,12 @@
         <link linkId="callPP">/secure/startPlanningPoker.jspa?issueKey=$issue.key</link>
         <condition class="net.congstar.jira.plugins.planningpoker.StoryTypeCondition" />
     </web-item>
-       
+
+    <web-item key="pp_start_agile" name="PP-Start" section="operations-top-level" weight="10">
+        <label key="planningpoker.ppStart" />
+        <link linkId="callPP">/secure/startPlanningPoker.jspa?issueKey=$issue.key</link>
+        <condition class="net.congstar.jira.plugins.planningpoker.StoryTypeCondition" />
+    </web-item>     
        
    <webwork1 key="pp_startPP" name="Start PP Action" class="java.lang.Object">
 	    <actions>
