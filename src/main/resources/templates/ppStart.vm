@@ -97,7 +97,7 @@
 						<div class="mod-content">
 							<ul id="chosencards">
 								#foreach ($cardsForIssueEntry in $cardsForIssue.entrySet())
-								#if ($deckVisible && ($cardsForIssueEntry.value == $minVoted || $cardsForIssueEntry.value == $maxVoted))
+								#if ($deckVisible && !($minVoted==$maxVoted) && ($cardsForIssueEntry.value == $minVoted || $cardsForIssueEntry.value == $maxVoted))
 									#set($classTalk = "icon aui-icon aui-icon-small aui-iconfont-comment icon-comment ppTalkMargin")
 								#end	
 								
