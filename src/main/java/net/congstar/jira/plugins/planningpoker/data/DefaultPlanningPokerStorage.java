@@ -36,6 +36,11 @@ public class DefaultPlanningPokerStorage implements PlanningPokerStorage {
         issueByIssueKey(issueKey).revealDeck();
     }
 
+    @Override
+    public void resetDeck(String issueKey) {
+        issueByIssueKey(issueKey).resetDeck();
+    }
+
     private IssuePlanningPokerData issueByIssueKey(String issueKey) {
         IssuePlanningPokerData issuePlanningPokerData = storage.get(issueKey);
         if (issuePlanningPokerData == null) {
@@ -69,6 +74,10 @@ public class DefaultPlanningPokerStorage implements PlanningPokerStorage {
 
         public void updateCard(String userKey, String chosenCard) {
             cards.put(userKey, chosenCard);
+        }
+
+        public void resetDeck() {
+            cards = new HashMap<String, String>();
         }
 
     }

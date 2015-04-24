@@ -12,4 +12,6 @@ public interface PlanningPokerStorage {
 
     void revealDeck(String issueKey);
 
+    void resetDeck(String issueKey);
+
 }

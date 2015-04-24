@@ -108,6 +108,7 @@
 	                                #end
 								#end
 							</ul>
+                            <a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("pp.reset")</a>
 						</div>
 
                         <a href="$req.contextPath/browse/$issueKey" style="margin-top: 3em; display: block">$i18n.getText("pp.back")</a>
