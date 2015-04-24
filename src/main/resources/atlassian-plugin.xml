@@ -7,7 +7,7 @@
         <vendor name="${project.organization.name}" url="${project.organization.url}" />
         <param name="plugin-icon">images/pluginIcon.png</param>
         <param name="plugin-logo">images/pluginLogo.png</param>
-        <param name="configure.url">/secure/admin/configurePlanningPoker.jspa</param>
+        <param name="configure.url">/secure/admin/configurePlanningPokerAction.jspa</param>
     </plugin-info>
 
     <!-- add our i18n resource -->
@@ -42,9 +42,9 @@
 	    </actions>
 	</webwork1>
 
-   <webwork1 key="pp_configure" name="Configure PP Action" class="java.lang.Object">
+   <webwork1 key="configurePlanningPokerAction" name="configurePlanningPokerAction" class="java.lang.Object">
 	    <actions>
-	        <action name="net.congstar.jira.plugins.planningpoker.action.ConfigurePlanningPoker" alias="configurePlanningPoker">
+	        <action name="net.congstar.jira.plugins.planningpoker.action.ConfigurePlanningPokerAction" alias="configurePlanningPokerAction">
 	            <view name="success">/templates/ppConfigure.vm</view>
 	        </action>
 	    </actions>
@@ -67,7 +67,6 @@
             <action name="net.congstar.jira.plugins.planningpoker.action.RefreshDeckAction" alias="refreshDeckAction" />
         </actions>
     </webwork1>
-
 
     <component key="planningPokerStorage" class="net.congstar.jira.plugins.planningpoker.data.DefaultPlanningPokerStorage">
         <description>Provides the Storage for Planning Poker sessions.</description>
