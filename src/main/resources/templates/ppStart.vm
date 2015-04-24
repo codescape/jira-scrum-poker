@@ -38,9 +38,8 @@
 			    <div class="aui-group issue-body">
 					<div class="aui-item issue-main-column">
 						<div class="module toggle-wrap" id="descriptionmodule">
-							<div class="mod-header" id="descriptionmodule_heading">
-								<ul class="ops"></ul>
-								<h2 class="toggle-title">Beschreibung</h2>
+							<div class="poker-header">
+								<h2>Beschreibung der Story</h2>
 							</div>
 							<div class="mod-content">
 								<div class="field-ignore-highlight" id="description-val">
@@ -54,8 +53,9 @@
 		    			</div>
 			    	</div>
     				<div class="aui-item issue-side-column" id="viewissuesidebar">
-                        <br>
-                        <h2>Planning Poker für Story "$issueKey" gestartet</h2>
+                        <div class="poker-header">
+                            <h2>Planning Poker für Story "$issueKey"</h2>
+                        </div>
                         <br>
                         <div class="mod-content">
                         	<ul id="pokerset">
@@ -72,8 +72,10 @@
                         </div>
 
 						#if ($deckVisible)
-						<hr>
-						<h2>Bandbreite der abgegebenen Schätzungen</h2>
+                        <br>
+                        <div class="poker-header">
+    						<h2>Bandbreite der abgegebenen Schätzungen</h2>
+                        </div>
 						<br>
 						<div class="mod-content">
 							<ul id="selectVote">
@@ -81,13 +83,16 @@
 	                                <li><a href="$req.contextPath/secure/startPlanningPoker.jspa?issueKey=$issueKey&finalVote=$vote"><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$cardDeck.get($vote).chosenImage"></a></li>
 								#end
 							</ul>
-                            <p>Zur Übernahme in die Story bitte die entsprechende Karte wählen.</p>
+                            <p class="poker-comment">Zur Übernahme in die Story bitte die entsprechende Karte wählen.</p>
 						</div>
 						#end
 
-						<hr>
-						<h2>Ausgewählte Karten <a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">Aufdecken</a> <a id="buttonRefresh" href="$req.contextPath/secure/refreshDeckAction.jspa?issueKey=$issueKey" class="aui-button">Aktualisieren</a></h2>
+						<br>
+                        <div class="poker-header">
+    						<h2>Ausgewählte Karten <a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">Aufdecken</a> <a id="buttonRefresh" href="$req.contextPath/secure/refreshDeckAction.jspa?issueKey=$issueKey" class="aui-button">Aktualisieren</a></h2>
+                        </div>
 
+                        <br>
 						<div class="mod-content">
 							<ul id="chosencards">
 								#foreach ($cardsForIssueEntry in $cardsForIssue.entrySet())
