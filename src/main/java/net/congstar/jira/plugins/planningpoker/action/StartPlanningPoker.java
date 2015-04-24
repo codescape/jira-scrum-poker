@@ -1,22 +1,6 @@
 package net.congstar.jira.plugins.planningpoker.action;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-
-import javax.servlet.http.HttpServletRequest;
-
-import net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage;
-import net.congstar.jira.plugins.planningpoker.data.StoryPointFieldSupport;
-import net.congstar.jira.plugins.planningpoker.model.PokerCard;
-import webwork.action.ServletActionContext;
-
 import com.atlassian.jira.component.ComponentAccessor;
-import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.IssueFieldConstants;
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
@@ -28,8 +12,15 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
-import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
+import net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage;
+import net.congstar.jira.plugins.planningpoker.data.StoryPointFieldSupport;
+import net.congstar.jira.plugins.planningpoker.model.PokerCard;
+import webwork.action.ServletActionContext;
+
+import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
+import java.util.*;
 
 public final class StartPlanningPoker extends JiraWebActionSupport {
 
@@ -128,20 +119,17 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     }
 
     public StartPlanningPoker(IssueManager issueManager,
-                              CustomFieldManager customFieldManager,
                               JiraAuthenticationContext context,
-                              PluginSettingsFactory settingsFactory,
                               PlanningPokerStorage planningPokerStorage, StoryPointFieldSupport storyPointFieldSupport, UserManager userManager) {
         this.issueManager = issueManager;
-;
         this.context = context;
         this.planningPokerStorage = planningPokerStorage;
         this.storyPointFieldSupport = storyPointFieldSupport;
         this.userManager = userManager;
 
-        fieldLayoutManager = ComponentAccessor
-                .getComponent(FieldLayoutManager.class);
+        fieldLayoutManager = ComponentAccessor.getComponent(FieldLayoutManager.class);
         rendererManager = ComponentAccessor.getComponent(RendererManager.class);
+
         for (PokerCard card : cards) {
             cardDeck.put(card.getName(), card);
         }
@@ -214,23 +202,23 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         return boundedVotes;
     }
 
-	public String getMinVoted() {
-		double min = 1000.0;
-		for (String voted : getCardsForIssue().values()) {
-			min = Math.min(new Double(min), new BigDecimal(voted).doubleValue());
-		}
-		return String.valueOf(min).replace(".0", "");
-	}
+    public String getMinVoted() {
+        double min = 1000.0;
+        for (String voted : getCardsForIssue().values()) {
+            min = Math.min(new Double(min), new BigDecimal(voted).doubleValue());
+        }
+        return String.valueOf(min).replace(".0", "");
+    }
 
-	public String getMaxVoted() {
-		double max = 0;
-		for (String voted : getCardsForIssue().values()) {
-			max = Math.max(new Double(max), new BigDecimal(voted).doubleValue());
-			System.out.println(max);
-		}
-		System.out.println(String.valueOf(max).replaceAll(".0", ""));
-		return String.valueOf(max).replace(".0", "");
-	}
+    public String getMaxVoted() {
+        double max = 0;
+        for (String voted : getCardsForIssue().values()) {
+            max = Math.max(new Double(max), new BigDecimal(voted).doubleValue());
+            System.out.println(max);
+        }
+        System.out.println(String.valueOf(max).replaceAll(".0", ""));
+        return String.valueOf(max).replace(".0", "");
+    }
 
     public Map<String, String> getCardsForIssue() {
         return cardsForIssue;
