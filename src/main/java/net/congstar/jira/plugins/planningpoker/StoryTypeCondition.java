@@ -13,7 +13,7 @@ public class StoryTypeCondition extends AbstractWebCondition {
     @Override
     public boolean shouldDisplay(ApplicationUser applicationUser, JiraHelper jiraHelper) {
         Issue currentIssue = (Issue) jiraHelper.getContextParams().get("issue");
-        return currentIssue.getIssueTypeObject().getName().equals("Story");
+        return currentIssue != null && currentIssue.getIssueTypeObject().getName().equals("Story");
     }
 
 }
