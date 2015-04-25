@@ -213,9 +213,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         double max = 0;
         for (String voted : getCardsForIssue().values()) {
             max = Math.max(new Double(max), new BigDecimal(voted).doubleValue());
-            System.out.println(max);
         }
-        System.out.println(String.valueOf(max).replaceAll(".0", ""));
         return String.valueOf(max).replace(".0", "");
     }
 
