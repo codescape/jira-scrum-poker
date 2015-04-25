@@ -63,5 +63,15 @@
 }
 
 .ppTalkMargin {
-	margin-top: -17px;
+    margin-top: -17px;
+}
+
+.poker-buttons {
+    margin-top: 15px;
+}
+
+.aui-button.poker-buttons-inactive {
+    pointer-events: none;
+    cursor: default;
+    color: #999;
 }

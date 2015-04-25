@@ -33,7 +33,11 @@ public class DefaultPlanningPokerStorage implements PlanningPokerStorage {
 
     @Override
     public void revealDeck(String issueKey) {
-        issueByIssueKey(issueKey).revealDeck();
+        /* check if anybody voted to avoid race conditions when revealing
+           (one person resets, another one reveals shortly after) */
+        if (issueByIssueKey(issueKey).getCards().size() > 0) {
+            issueByIssueKey(issueKey).revealDeck();
+        }
     }
 
     @Override
@@ -78,6 +82,7 @@ public class DefaultPlanningPokerStorage implements PlanningPokerStorage {
 
         public void resetDeck() {
             cards = new HashMap<String, String>();
+            visible = false;
         }
 
     }

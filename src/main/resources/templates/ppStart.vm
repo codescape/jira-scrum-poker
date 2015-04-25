@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Planning Poker</title>
+		<title>Scrum Poker</title>
 		<link rel="stylesheet" type="text/css" href="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/planningpoker.css" media="all" />
 	</head>
 
@@ -55,7 +55,7 @@
 			    	</div>
     				<div class="aui-item issue-side-column" id="viewissuesidebar">
                         <div class="poker-header">
-                            <h2>$i18n.getText("pp.storyfor") "$issueKey"</h2>
+                            <h2>$i18n.getText("pp.scrumPoker")</h2>
                         </div>
                         <br>
                         <div class="mod-content">
@@ -86,11 +86,11 @@
 							</ul>
                             <p class="poker-comment">$i18n.getText("pp.confirmVote")</p>
 						</div>
-						#end
+						#end <!-- deckVisible -->
 
 						<br>
                         <div class="poker-header">
-    						<h2>$i18n.getText("pp.chosenCards") <a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("pp.reveal")</a> <a id="buttonRefresh" href="$req.contextPath/secure/refreshDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("pp.refresh")</a></h2>
+    						<h2>$i18n.getText("pp.chosenCards")</h2>
                         </div>
 
                         <br>
@@ -110,8 +110,26 @@
 	                                #end
 								#end
 							</ul>
-                            <a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("pp.reset")</a>
-						</div>
+                            #if ($deckVisible && ($minVoted == $maxVoted))
+                                <p class="poker-comment">$i18n.getText("pp.agreementReached")</p>
+                            #end
+                            <div class="poker-buttons">
+                                #set($numberOfCards = $cardsForIssue.entrySet().size())
+                                #if ($numberOfCards > 0)
+                                    #set($classButton="aui-button")
+                                #else
+                                    #set($classButton="aui-button poker-buttons-inactive")
+                                #end
+                                <a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="$classButton">$i18n.getText("pp.reset")</a>
+                                #if (!$deckVisible && ($numberOfCards >0))
+                                    #set($classButton="aui-button")
+                                #else
+                                    #set($classButton="aui-button poker-buttons-inactive")
+                                #end                                
+                                <a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="$classButton">$i18n.getText("pp.reveal")</a>
+                                <a id="buttonRefresh" href="$req.contextPath/secure/refreshDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("pp.refresh")</a>
+                            </div>
+    					</div>
 
                         <a href="$req.contextPath/browse/$issueKey" style="margin-top: 3em; display: block">$i18n.getText("pp.back")</a>
                     </div>
