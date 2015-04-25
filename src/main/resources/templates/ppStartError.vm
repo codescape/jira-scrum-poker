@@ -1,10 +1,10 @@
 <html>
 	<head>
-		<title>Planning Poker</title>
+		<title>Scrum Poker</title>
 	</head>
 
 	<body>
-	<h1>Planning Poker NOT started....</h1>
+	<h1>Scrum Poker NOT started....</h1>
 	
 	#if($action.hasAnyErrors())
       <div class="aui-message closeable error">

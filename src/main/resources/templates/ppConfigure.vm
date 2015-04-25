@@ -1,11 +1,11 @@
 <html>
 	<head>
-		<title>Planning Poker</title>
+		<title>Scrum Poker</title>
 	</head>
 
 	<body>
 	
-	<h1>Planning Poker Konfiguration</h1>
+	<h1>Scrum Poker Konfiguration</h1>
 
 	<form class="aui long-label" action="configurePlanningPoker.jspa" method="post">
 		<fieldset>
@@ -22,6 +22,6 @@
           </div>		 
 	</form>	
 	
-	<h3>developed for congstar during the congstar h4ck4thon by Stefan Glase, Stefan Höhn and Elmar Jobs</h3>
+	<p>developed for congstar during the congstar h4ck4thon by Stefan Glase, Stefan Höhn and Elmar Jobs</p>
 	<body>
 </html>
