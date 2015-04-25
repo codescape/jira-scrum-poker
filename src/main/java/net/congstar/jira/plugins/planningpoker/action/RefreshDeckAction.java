@@ -14,7 +14,7 @@ public class RefreshDeckAction extends JiraWebActionSupport {
 
     @Override
     protected String doExecute() throws Exception {
-        String issueKey = request.getParameter("issueKey");
+        String issueKey = getHttpRequest().getParameter("issueKey");
 
         return getRedirect("/secure/startPlanningPoker.jspa?issueKey=" + issueKey);
     }

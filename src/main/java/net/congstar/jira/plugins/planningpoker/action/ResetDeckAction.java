@@ -13,7 +13,7 @@ public class ResetDeckAction extends JiraWebActionSupport {
 
     @Override
     protected String doExecute() throws Exception {
-        String issueKey = request.getParameter("issueKey");
+        String issueKey = getHttpRequest().getParameter("issueKey");
 
         planningPokerStorage.resetDeck(issueKey);
 

@@ -13,8 +13,8 @@ public class ConfirmEstimationAction extends JiraWebActionSupport {
 
     @Override
     protected String doExecute() throws Exception {
-        String issueKey = request.getParameter("issueKey");
-        String finalVote = request.getParameter("finalVote");
+        String issueKey = getHttpRequest().getParameter("issueKey");
+        String finalVote = getHttpRequest().getParameter("finalVote");
 
         storyPointFieldSupport.save(issueKey, new Double(finalVote));
 

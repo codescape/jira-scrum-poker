@@ -137,8 +137,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
     @Override
     protected String doExecute() throws Exception {
-        HttpServletRequest request = ServletActionContext.getRequest();
-        issueKey = request.getParameter("issueKey");
+        issueKey = getHttpRequest().getParameter("issueKey");
 
         ApplicationUser user = context.getUser();
         if (user == null)

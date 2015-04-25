@@ -23,8 +23,8 @@ public class ChooseCardAction extends JiraWebActionSupport {
 
     @Override
     protected String doExecute() throws Exception {
-        String chosenCard = request.getParameter("chosenCard");
-        String issueKey = request.getParameter("issueKey");
+        String chosenCard = getHttpRequest().getParameter("chosenCard");
+        String issueKey = getHttpRequest().getParameter("issueKey");
         ApplicationUser user = jiraAuthenticationContext.getUser();
 
         planningPokerStorage.update(issueKey, user.getKey(), chosenCard);
