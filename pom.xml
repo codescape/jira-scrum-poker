@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.congstar.jira.plugins</groupId>
     <artifactId>planningpoker</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
 
     <organization>
         <name>congstar gmbh / AOE Gmbh</name>
