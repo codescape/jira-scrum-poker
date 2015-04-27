@@ -12,6 +12,7 @@ import net.congstar.jira.plugins.planningpoker.action.ConfigurePlanningPokerActi
 
 import com.atlassian.jira.bc.issue.IssueService;
 import com.atlassian.jira.user.ApplicationUser;
+import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.issue.IssueInputParameters;
 import com.atlassian.jira.util.ErrorCollection;
@@ -41,17 +42,30 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
 
     @Override
     public void save(String issueKey, Double newValue) {
-        ApplicationUser user = context.getUser();
-        IssueService.IssueResult issueResult = issueService.getIssue(user, issueKey);
+        ApplicationUser appuser = context.getUser();
+        // to be used with 6.4.x
+//        IssueService.IssueResult issueResult = issueService.getIssue(appuser, issueKey);
+        // --- Will become obsolete with 6.4.x
+        User diruser = appuser.getDirectoryUser();
+        IssueService.IssueResult issueResult = issueService.getIssue(diruser, issueKey);
+        // ---
         MutableIssue issue = issueResult.getIssue();
 
         IssueInputParameters issueInputParameters = issueService.newIssueInputParameters();
         CustomField customField = findStoryPointField();
         issueInputParameters.addCustomFieldValue(customField.getId(), NumberFormat.getInstance().format(newValue));
-        IssueService.UpdateValidationResult updateValidationResult = issueService.validateUpdate(user, issue.getId(), issueInputParameters);
+        // to be used with 6.4.x
+//        IssueService.UpdateValidationResult updateValidationResult = issueService.validateUpdate(appuser, issue.getId(), issueInputParameters);
+        // --- Will become obsolete with 6.4.x
+        IssueService.UpdateValidationResult updateValidationResult = issueService.validateUpdate(diruser, issue.getId(), issueInputParameters);
+        // ---
 
         if (updateValidationResult.isValid()) {
-            IssueService.IssueResult updateResult = issueService.update(user, updateValidationResult);
+            // to be used with 6.4.x
+//            IssueService.IssueResult updateResult = issueService.update(appuser, updateValidationResult);
+            // --- Will become obsolete with 6.4.x
+            IssueService.IssueResult updateResult = issueService.update(diruser, updateValidationResult);
+            // ---
             if (!updateResult.isValid()) {
                 System.out.println("**** Issue update FAILED!");
                 ErrorCollection errors = updateResult.getErrorCollection();
@@ -76,8 +90,18 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
 
     @Override
     public Double getValue(String issueKey) {
-        ApplicationUser user = context.getUser();
-        IssueService.IssueResult issueResult = issueService.getIssue(user, issueKey);
+        ApplicationUser appuser = context.getUser();
+        // to be used with 6.4.x
+//        IssueService.IssueResult issueResult = issueService.getIssue(appuser, issueKey);
+        // --- Will become obsolete with 6.4.x
+        User diruser = appuser.getDirectoryUser();
+        IssueService.IssueResult issueResult = issueService.getIssue(diruser, issueKey);
+        // ---
+        if (!issueResult.isValid()) {
+            System.out.println("**** Problem finding issue");
+            return null;
+        }
+
         MutableIssue issue = issueResult.getIssue();
 
         return (Double) issue.getCustomFieldValue(findStoryPointField());
