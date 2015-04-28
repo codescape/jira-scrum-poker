@@ -80,7 +80,7 @@
 						<div class="mod-content">
 							<ul id="selectVote">
 								#foreach ($vote in $boundedVotes)
-	                                <li><a href="$req.contextPath/secure/confirmEstimationAction.jspa?issueKey=$issueKey&finalVote=$vote"><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$cardDeck.get($vote).chosenImage"></a></li>
+	                                <li><a href="$req.contextPath/secure/confirmEstimationAction.jspa?issueKey=$issueKey&finalVote=$vote"><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/$cardDeck.get($vote).chosenImage"></a></li>
 								#end
 							</ul>
                             <p class="poker-comment">$i18n.getText("pp.confirmVote")</p>
