@@ -5,7 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.congstar.jira.plugins</groupId>
-    <artifactId>planningpoker</artifactId>
+    <artifactId>scrum-poker</artifactId>
     <version>1.2.0</version>
 
     <organization>
@@ -13,8 +13,8 @@
         <url>http://www.congstar.net/</url>
     </organization>
 
-    <name>planningpoker</name>
-    <description>This is the planningpoker plugin for Atlassian JIRA.</description>
+    <name>JIRA Scrum Poker</name>
+    <description>Scrum Poker plugin enabling teams to collaboratively estimate their stories.</description>
     <packaging>atlassian-plugin</packaging>
 
     <properties>
