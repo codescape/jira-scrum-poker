@@ -1,4 +1,4 @@
-package net.congstar.jira.plugins.planningpoker.model;
+package net.congstar.jira.plugins.scrumpoker.model;
 
 public class PokerCard {
 

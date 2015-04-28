@@ -1,7 +1,7 @@
-package net.congstar.jira.plugins.planningpoker.action;
+package net.congstar.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.web.action.JiraWebActionSupport;
-import net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage;
+import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
 
 /**
  * Reveal all cards that are currently hidden for a specific issue.

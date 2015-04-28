@@ -1,4 +1,4 @@
-package net.congstar.jira.plugins.planningpoker;
+package net.congstar.jira.plugins.scrumpoker;
 
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.plugin.webfragment.conditions.AbstractWebCondition;

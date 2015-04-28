@@ -1,4 +1,4 @@
-package net.congstar.jira.plugins.planningpoker.action;
+package net.congstar.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.IssueFieldConstants;
@@ -13,12 +13,10 @@ import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
-import net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage;
-import net.congstar.jira.plugins.planningpoker.data.StoryPointFieldSupport;
-import net.congstar.jira.plugins.planningpoker.model.PokerCard;
-import webwork.action.ServletActionContext;
+import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
+import net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
+import net.congstar.jira.plugins.scrumpoker.model.PokerCard;
 
-import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.*;
 

@@ -29,18 +29,18 @@
     <web-item key="pp_start" name="PP-Start" section="jira.issue.tools" weight="10">
         <label key="planningpoker.ppStart" />
         <link linkId="callPP">/secure/startPlanningPoker.jspa?issueKey=$issue.key</link>
-        <condition class="net.congstar.jira.plugins.planningpoker.StoryTypeCondition" />
+        <condition class="net.congstar.jira.plugins.scrumpoker.StoryTypeCondition" />
     </web-item>
 
     <web-item key="pp_start_agile" name="PP-Start" section="operations-top-level" weight="10">
         <label key="planningpoker.ppStart" />
         <link linkId="callPP">/secure/startPlanningPoker.jspa?issueKey=$issue.key</link>
-        <condition class="net.congstar.jira.plugins.planningpoker.StoryTypeCondition" />
+        <condition class="net.congstar.jira.plugins.scrumpoker.StoryTypeCondition" />
     </web-item>     
        
    <webwork1 key="pp_startPP" name="Start PP Action" class="java.lang.Object">
 	    <actions>
-	        <action name="net.congstar.jira.plugins.planningpoker.action.StartPlanningPoker" alias="startPlanningPoker" >
+	        <action name="net.congstar.jira.plugins.scrumpoker.action.StartPlanningPoker" alias="startPlanningPoker" >
 	            <view name="start">/templates/ppStart.vm</view>
 	            <view name="error">/templates/ppStartError.vm</view>
 	        </action>
@@ -49,7 +49,7 @@
 
    <webwork1 key="configurePlanningPokerAction" name="configurePlanningPokerAction" class="java.lang.Object">
 	    <actions>
-	        <action name="net.congstar.jira.plugins.planningpoker.action.ConfigurePlanningPokerAction" alias="configurePlanningPokerAction">
+	        <action name="net.congstar.jira.plugins.scrumpoker.action.ConfigurePlanningPokerAction" alias="configurePlanningPokerAction">
 	            <view name="success">/templates/ppConfigure.vm</view>
 	        </action>
 	    </actions>
@@ -57,42 +57,42 @@
 
     <webwork1 key="chooseCardAction" name="chooseCardAction" class="java.lang.Object">
         <actions>
-            <action name="net.congstar.jira.plugins.planningpoker.action.ChooseCardAction" alias="chooseCardAction" />
+            <action name="net.congstar.jira.plugins.scrumpoker.action.ChooseCardAction" alias="chooseCardAction" />
         </actions>
     </webwork1>
 
     <webwork1 key="revealDeckAction" name="revealDeckAction" class="java.lang.Object">
         <actions>
-            <action name="net.congstar.jira.plugins.planningpoker.action.RevealDeckAction" alias="revealDeckAction" />
+            <action name="net.congstar.jira.plugins.scrumpoker.action.RevealDeckAction" alias="revealDeckAction" />
         </actions>
     </webwork1>
     
     <webwork1 key="refreshDeckAction" name="refreshDeckAction" class="java.lang.Object">
         <actions>
-            <action name="net.congstar.jira.plugins.planningpoker.action.RefreshDeckAction" alias="refreshDeckAction" />
+            <action name="net.congstar.jira.plugins.scrumpoker.action.RefreshDeckAction" alias="refreshDeckAction" />
         </actions>
     </webwork1>
 
     <webwork1 key="confirmEstimationAction" name="confirmEstimationAction" class="java.lang.Object">
         <actions>
-            <action name="net.congstar.jira.plugins.planningpoker.action.ConfirmEstimationAction" alias="confirmEstimationAction" />
+            <action name="net.congstar.jira.plugins.scrumpoker.action.ConfirmEstimationAction" alias="confirmEstimationAction" />
         </actions>
     </webwork1>
 
     <webwork1 key="resetDeckAction" name="resetDeckAction" class="java.lang.Object">
         <actions>
-            <action name="net.congstar.jira.plugins.planningpoker.action.ResetDeckAction" alias="resetDeckAction" />
+            <action name="net.congstar.jira.plugins.scrumpoker.action.ResetDeckAction" alias="resetDeckAction" />
         </actions>
     </webwork1>
 
-    <component key="planningPokerStorage" class="net.congstar.jira.plugins.planningpoker.data.DefaultPlanningPokerStorage">
+    <component key="planningPokerStorage" class="net.congstar.jira.plugins.scrumpoker.data.DefaultPlanningPokerStorage">
         <description>Provides the Storage for Planning Poker sessions.</description>
-        <interface>net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage</interface>
+        <interface>net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage</interface>
     </component>
 
-    <component key="storyPointSupport" class="net.congstar.jira.plugins.planningpoker.data.DefaultStoryPointSupport">
+    <component key="storyPointSupport" class="net.congstar.jira.plugins.scrumpoker.data.DefaultStoryPointSupport">
         <description>Provides access to the custom field.</description>
-        <interface>net.congstar.jira.plugins.planningpoker.data.StoryPointFieldSupport</interface>
+        <interface>net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport</interface>
     </component>
 
     <!-- import from the product container -->

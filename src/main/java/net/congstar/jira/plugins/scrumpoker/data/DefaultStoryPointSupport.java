@@ -1,14 +1,12 @@
-package net.congstar.jira.plugins.planningpoker.data;
+package net.congstar.jira.plugins.scrumpoker.data;
 
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.IssueManager;
-import com.atlassian.jira.issue.ModifiedValue;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.fields.CustomField;
-import com.atlassian.jira.issue.util.DefaultIssueChangeHolder;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
-import net.congstar.jira.plugins.planningpoker.action.ConfigurePlanningPokerAction;
+import net.congstar.jira.plugins.scrumpoker.action.ConfigurePlanningPokerAction;
 
 import com.atlassian.jira.bc.issue.IssueService;
 import com.atlassian.jira.user.ApplicationUser;

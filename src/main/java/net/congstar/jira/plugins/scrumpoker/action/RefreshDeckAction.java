@@ -1,4 +1,4 @@
-package net.congstar.jira.plugins.planningpoker.action;
+package net.congstar.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 

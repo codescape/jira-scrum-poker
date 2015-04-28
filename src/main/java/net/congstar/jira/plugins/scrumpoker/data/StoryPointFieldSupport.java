@@ -1,4 +1,4 @@
-package net.congstar.jira.plugins.planningpoker.data;
+package net.congstar.jira.plugins.scrumpoker.data;
 
 public interface StoryPointFieldSupport {
 

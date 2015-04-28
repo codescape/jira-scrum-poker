@@ -1,9 +1,9 @@
-package net.congstar.jira.plugins.planningpoker.action;
+package net.congstar.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
-import net.congstar.jira.plugins.planningpoker.data.PlanningPokerStorage;
+import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
 
 /**
  * Persist a chosen card of a user for a given issue into the plugin storage and redirect to the planning poker page.
