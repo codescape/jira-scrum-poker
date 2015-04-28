@@ -30,7 +30,6 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
     private final JiraAuthenticationContext context;
 
-
     private final PlanningPokerStorage planningPokerStorage;
 
     private final StoryPointFieldSupport storyPointFieldSupport;
