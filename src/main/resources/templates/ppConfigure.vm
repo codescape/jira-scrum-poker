@@ -4,7 +4,6 @@
 	</head>
 
 	<body>
-	
 	<h1>Scrum Poker Konfiguration</h1>
 
 	<form class="aui long-label" action="configurePlanningPoker.jspa" method="post">
@@ -23,5 +22,5 @@
 	</form>	
 	
 	<p>developed for congstar during the congstar h4ck4thon by Stefan Glase, Stefan Höhn and Elmar Jobs</p>
-	<body>
+	</body>
 </html>

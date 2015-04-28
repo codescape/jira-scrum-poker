@@ -1,9 +1,8 @@
 <html>
 	<head>
 		<title>Scrum Poker</title>
-		<link rel="stylesheet" type="text/css" href="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/planningpoker.css" media="all" />
+		<link rel="stylesheet" type="text/css" href="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.css" media="all" />
 	</head>
-
 	<body>
 	<div class="issue-container " style="background-color: #fff">
 		<div id="issue-content" class="issue-edit-form">
@@ -63,9 +62,9 @@
 							  #foreach( $card in $cards)
 							    <li><a href="$req.contextPath/secure/chooseCardAction.jspa?issueKey=$issueKey&chosenCard=$card.name">
 							     	#if ($chosenCard == $card.name)
-							       		<img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$card.chosenImage"></a>
+							       		<img src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/$card.chosenImage"></a>
 							       	#else
-							       		<img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$card.image"></a>
+							       		<img src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/$card.image"></a>
 							       	#end
 							    </li>
 							  #end
@@ -104,9 +103,9 @@
 								    #end
 								
 									#if ($deckVisible)
-		                                <li><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/$cardDeck.get($cardsForIssueEntry.value).image">&nbsp;&nbsp;&nbsp;<span  style="padding-right: 5px">$action.getUsername($cardsForIssueEntry.key)</span><span class="$classTalk">&nbsp;</span></li>
+		                                <li><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/$cardDeck.get($cardsForIssueEntry.value).image">&nbsp;&nbsp;&nbsp;<span  style="padding-right: 5px">$action.getUsername($cardsForIssueEntry.key)</span><span class="$classTalk">&nbsp;</span></li>
 	                                #else
-		                                <li><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.planningpoker:planningpoker-resources/images/back.jpg">&nbsp;&nbsp;&nbsp;<span style="padding-right: 5px">$action.getUsername($cardsForIssueEntry.key)</span></li>
+		                                <li><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/back.jpg">&nbsp;&nbsp;&nbsp;<span style="padding-right: 5px">$action.getUsername($cardsForIssueEntry.key)</span></li>
 	                                #end
 								#end
 							</ul>
@@ -139,5 +138,5 @@
     </div>
 
 	
-	<body>
+	</body>
 </html>

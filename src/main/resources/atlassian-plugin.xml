@@ -11,17 +11,17 @@
     </plugin-info>
 
     <!-- add our i18n resource -->
-    <resource type="i18n" name="i18n" location="planningpoker"/>
+    <resource type="i18n" name="i18n" location="scrum-poker"/>
     
     <!-- add our web resources -->
-    <web-resource key="planningpoker-resources" name="planningpoker Web Resources">
+    <web-resource key="scrum-poker-resources" name="Scrum Poker Web Resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
         
-        <resource type="download" name="planningpoker.css" location="/css/planningpoker.css"/>
-        <resource type="download" name="planningpoker.js" location="/js/planningpoker.js"/>
+        <resource type="download" name="scrum-poker.css" location="/css/scrum-poker.css"/>
+        <resource type="download" name="scrum-poker.js" location="/js/scrum-poker.js"/>
         <resource type="download" name="images/" location="/images"/>
 
-        <context>planningpoker</context>
+        <context>scrum-poker</context>
     </web-resource>
     
     <component-import key="pluginSettingsFactory" interface="com.atlassian.sal.api.pluginsettings.PluginSettingsFactory" />
