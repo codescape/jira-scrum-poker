@@ -41,29 +41,16 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
     @Override
     public void save(String issueKey, Double newValue) {
         ApplicationUser appuser = context.getUser();
-        // to be used with 6.4.x
-//        IssueService.IssueResult issueResult = issueService.getIssue(appuser, issueKey);
-        // --- Will become obsolete with 6.4.x
-        User diruser = appuser.getDirectoryUser();
-        IssueService.IssueResult issueResult = issueService.getIssue(diruser, issueKey);
-        // ---
+        IssueService.IssueResult issueResult = issueService.getIssue(appuser, issueKey);
         MutableIssue issue = issueResult.getIssue();
 
         IssueInputParameters issueInputParameters = issueService.newIssueInputParameters();
         CustomField customField = findStoryPointField();
         issueInputParameters.addCustomFieldValue(customField.getId(), NumberFormat.getInstance().format(newValue));
-        // to be used with 6.4.x
-//        IssueService.UpdateValidationResult updateValidationResult = issueService.validateUpdate(appuser, issue.getId(), issueInputParameters);
-        // --- Will become obsolete with 6.4.x
-        IssueService.UpdateValidationResult updateValidationResult = issueService.validateUpdate(diruser, issue.getId(), issueInputParameters);
-        // ---
+        IssueService.UpdateValidationResult updateValidationResult = issueService.validateUpdate(appuser, issue.getId(), issueInputParameters);
 
         if (updateValidationResult.isValid()) {
-            // to be used with 6.4.x
-//            IssueService.IssueResult updateResult = issueService.update(appuser, updateValidationResult);
-            // --- Will become obsolete with 6.4.x
-            IssueService.IssueResult updateResult = issueService.update(diruser, updateValidationResult);
-            // ---
+            IssueService.IssueResult updateResult = issueService.update(appuser, updateValidationResult);
             if (!updateResult.isValid()) {
                 System.out.println("**** Issue update FAILED!");
                 ErrorCollection errors = updateResult.getErrorCollection();
@@ -89,12 +76,7 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
     @Override
     public Double getValue(String issueKey) {
         ApplicationUser appuser = context.getUser();
-        // to be used with 6.4.x
-//        IssueService.IssueResult issueResult = issueService.getIssue(appuser, issueKey);
-        // --- Will become obsolete with 6.4.x
-        User diruser = appuser.getDirectoryUser();
-        IssueService.IssueResult issueResult = issueService.getIssue(diruser, issueKey);
-        // ---
+        IssueService.IssueResult issueResult = issueService.getIssue(appuser, issueKey);
         if (!issueResult.isValid()) {
             System.out.println("**** Problem finding issue");
             return null;

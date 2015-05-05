@@ -3,6 +3,8 @@ package net.congstar.jira.plugins.scrumpoker.action;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
 
+import javax.servlet.http.HttpSession;
+
 public class ConfirmEstimationAction extends JiraWebActionSupport {
 
     private final StoryPointFieldSupport storyPointFieldSupport;
@@ -18,7 +20,11 @@ public class ConfirmEstimationAction extends JiraWebActionSupport {
 
         storyPointFieldSupport.save(issueKey, new Double(finalVote));
 
-        return getRedirect("/browse/" + issueKey);
+        HttpSession session = getHttpSession();
+        String returnUrl = (String)session.getAttribute("returnUrl");
+        session.removeAttribute("returnUrl");
+
+        return getRedirect(returnUrl);
     }
 
 }

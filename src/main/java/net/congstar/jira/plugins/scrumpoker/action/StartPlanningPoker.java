@@ -13,12 +13,14 @@ import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
+
 import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
 import net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
 import net.congstar.jira.plugins.scrumpoker.model.PokerCard;
 
 import java.math.BigDecimal;
 import java.util.*;
+import javax.servlet.http.HttpSession;
 
 public final class StartPlanningPoker extends JiraWebActionSupport {
 
@@ -117,7 +119,9 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
     public StartPlanningPoker(IssueManager issueManager,
                               JiraAuthenticationContext context,
-                              PlanningPokerStorage planningPokerStorage, StoryPointFieldSupport storyPointFieldSupport, UserManager userManager) {
+                              PlanningPokerStorage planningPokerStorage,
+                              StoryPointFieldSupport storyPointFieldSupport,
+                              UserManager userManager) {
         this.issueManager = issueManager;
         this.context = context;
         this.planningPokerStorage = planningPokerStorage;
@@ -145,6 +149,18 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         if (issue == null) {
             addErrorMessage("Issue Key" + issueKey + " not found.");
             return "error";
+        }
+
+        HttpSession session = getHttpSession();
+        String sessionUrl = (String)session.getAttribute("returnUrl");
+        String returnUrl = getHttpRequest().getParameter("returnUrl");
+        if (sessionUrl == null) {
+            if (returnUrl == null) {
+                returnUrl = "/browse/" + issueKey;
+            }
+            session.setAttribute("returnUrl", returnUrl);
+        } else {
+            returnUrl = sessionUrl;
         }
 
         cardsForIssue = planningPokerStorage.chosenCardsForIssue(issueKey);

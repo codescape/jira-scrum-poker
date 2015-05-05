@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.congstar.jira.plugins</groupId>
     <artifactId>scrum-poker</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
 
     <organization>
         <name>congstar gmbh / AOE Gmbh</name>
@@ -22,7 +22,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
-        <jira.version>6.3.5</jira.version>
+        <jira.version>6.4.3</jira.version>
         <amps.version>5.0.13</amps.version>
         <plugin.testrunner.version>1.2.3</plugin.testrunner.version>
         <!-- TestKit version 5.x for JIRA 5.x, 6.x for JIRA 6.x -->
