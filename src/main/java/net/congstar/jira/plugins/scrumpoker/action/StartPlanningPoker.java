@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+
 import javax.servlet.http.HttpSession;
 
 import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
@@ -22,10 +23,9 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayout;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
 import com.atlassian.jira.user.util.UserManager;
-import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
 
-public final class StartPlanningPoker extends JiraWebActionSupport {
+public final class StartPlanningPoker extends ScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
 
@@ -131,7 +131,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
     @Override
     protected String doExecute() throws Exception {
-        issueKey = getHttpRequest().getParameter("issueKey");
+        issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
 
         if (getLoggedInApplicationUser() == null) {
             return "error";
@@ -144,13 +144,13 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         }
 
         HttpSession session = getHttpSession();
-        String sessionUrl = (String)session.getAttribute("returnUrl");
-        String returnUrl = getHttpRequest().getParameter("returnUrl");
+        String sessionUrl = (String)session.getAttribute(PARAM_RETURN_URL);
+        String returnUrl = getHttpRequest().getParameter(PARAM_RETURN_URL);
         if (sessionUrl == null) {
             if (returnUrl == null) {
                 returnUrl = "/browse/" + issueKey;
             }
-            session.setAttribute("returnUrl", returnUrl);
+            session.setAttribute(PARAM_RETURN_URL, returnUrl);
         } else {
             returnUrl = sessionUrl;
         }

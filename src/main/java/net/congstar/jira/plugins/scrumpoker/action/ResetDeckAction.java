@@ -1,12 +1,11 @@
 package net.congstar.jira.plugins.scrumpoker.action;
 
-import com.atlassian.jira.web.action.JiraWebActionSupport;
 import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
 
-public class ResetDeckAction extends JiraWebActionSupport {
+public class ResetDeckAction extends ScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
-    
+
     private final PlanningPokerStorage planningPokerStorage;
 
     public ResetDeckAction(PlanningPokerStorage planningPokerStorage) {
@@ -15,7 +14,7 @@ public class ResetDeckAction extends JiraWebActionSupport {
 
     @Override
     protected String doExecute() throws Exception {
-        String issueKey = getHttpRequest().getParameter("issueKey");
+        String issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
 
         planningPokerStorage.resetDeck(issueKey);
 

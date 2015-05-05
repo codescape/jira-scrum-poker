@@ -1,11 +1,10 @@
 package net.congstar.jira.plugins.scrumpoker.action;
 
-import com.atlassian.jira.web.action.JiraWebActionSupport;
 import net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
 
-import javax.servlet.http.HttpSession;
+public class ConfirmEstimationAction extends ScrumPokerAction {
 
-public class ConfirmEstimationAction extends JiraWebActionSupport {
+    private static final long serialVersionUID = 1L;
 
     private final StoryPointFieldSupport storyPointFieldSupport;
 
@@ -15,14 +14,13 @@ public class ConfirmEstimationAction extends JiraWebActionSupport {
 
     @Override
     protected String doExecute() throws Exception {
-        String issueKey = getHttpRequest().getParameter("issueKey");
+        String issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
         String finalVote = getHttpRequest().getParameter("finalVote");
 
         storyPointFieldSupport.save(issueKey, new Double(finalVote));
 
-        HttpSession session = getHttpSession();
-        String returnUrl = (String)session.getAttribute("returnUrl");
-        session.removeAttribute("returnUrl");
+        String returnUrl = (String) getHttpSession().getAttribute(PARAM_RETURN_URL);
+        getHttpSession().removeAttribute(PARAM_RETURN_URL);
 
         return getRedirect(returnUrl);
     }

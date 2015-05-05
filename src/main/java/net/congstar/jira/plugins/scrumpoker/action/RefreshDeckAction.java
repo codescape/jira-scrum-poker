@@ -1,11 +1,9 @@
 package net.congstar.jira.plugins.scrumpoker.action;
 
-import com.atlassian.jira.web.action.JiraWebActionSupport;
-
 /**
  * Refresh the deck for a given issue.
  */
-public class RefreshDeckAction extends JiraWebActionSupport {
+public class RefreshDeckAction extends ScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
 
@@ -14,7 +12,7 @@ public class RefreshDeckAction extends JiraWebActionSupport {
 
     @Override
     protected String doExecute() throws Exception {
-        String issueKey = getHttpRequest().getParameter("issueKey");
+        String issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
 
         return getRedirect("/secure/startPlanningPoker.jspa?issueKey=" + issueKey);
     }

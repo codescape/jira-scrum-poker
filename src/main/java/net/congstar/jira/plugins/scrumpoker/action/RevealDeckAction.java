@@ -1,12 +1,11 @@
 package net.congstar.jira.plugins.scrumpoker.action;
 
-import com.atlassian.jira.web.action.JiraWebActionSupport;
 import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
 
 /**
  * Reveal all cards that are currently hidden for a specific issue.
  */
-public class RevealDeckAction extends JiraWebActionSupport {
+public class RevealDeckAction extends ScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
 
@@ -18,7 +17,7 @@ public class RevealDeckAction extends JiraWebActionSupport {
 
     @Override
     protected String doExecute() throws Exception {
-        String issueKey = getHttpRequest().getParameter("issueKey");
+        String issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
 
         planningPokerStorage.revealDeck(issueKey);
 
