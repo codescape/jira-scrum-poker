@@ -3,7 +3,7 @@ package net.congstar.jira.plugins.scrumpoker.data;
 import java.text.NumberFormat;
 import java.util.Map;
 
-import net.congstar.jira.plugins.scrumpoker.action.ConfigurePlanningPokerAction;
+import net.congstar.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction;
 
 import com.atlassian.jira.bc.issue.IssueService;
 import com.atlassian.jira.issue.CustomFieldManager;
@@ -85,8 +85,8 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
 
     private CustomField findStoryPointField() {
         PluginSettings settings = pluginSettingsFactory.createGlobalSettings();
-        String field = (String) settings.get(ConfigurePlanningPokerAction.STORY_POINT_FIELD_NAME);
-        String storyPointFieldName = field != null ? field : ConfigurePlanningPokerAction.DEFAULT_FIELD_FOR_STORY_POINTS;
+        String field = (String) settings.get(ConfigureScrumPokerAction.STORY_POINT_FIELD_NAME);
+        String storyPointFieldName = field != null ? field : ConfigureScrumPokerAction.DEFAULT_FIELD_FOR_STORY_POINTS;
 
         for (CustomField customField : customFieldManager.getCustomFieldObjects()) {
             if (customField.getNameKey().equalsIgnoreCase(storyPointFieldName)) {

@@ -7,7 +7,7 @@
         <vendor name="${project.organization.name}" url="${project.organization.url}" />
         <param name="plugin-icon">images/pluginIcon.png</param>
         <param name="plugin-logo">images/pluginLogo.png</param>
-        <param name="configure.url">/secure/admin/configurePlanningPokerAction.jspa</param>
+        <param name="configure.url">/secure/admin/configureScrumPokerAction.jspa</param>
     </plugin-info>
 
     <!-- add our i18n resource -->
@@ -47,9 +47,9 @@
 	    </actions>
 	</webwork1>
 
-   <webwork1 key="configurePlanningPokerAction" name="configurePlanningPokerAction" class="java.lang.Object">
+   <webwork1 key="configureScrumPokerAction" name="configureScrumPokerAction" class="java.lang.Object">
 	    <actions>
-	        <action name="net.congstar.jira.plugins.scrumpoker.action.ConfigurePlanningPokerAction" alias="configurePlanningPokerAction">
+	        <action name="net.congstar.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction" alias="configureScrumPokerAction">
 	            <view name="success">/templates/ppConfigure.vm</view>
 	        </action>
 	    </actions>
