@@ -1,40 +1,36 @@
 package net.congstar.jira.plugins.scrumpoker.data;
 
-import com.atlassian.jira.issue.CustomFieldManager;
-import com.atlassian.jira.issue.IssueManager;
-import com.atlassian.jira.issue.MutableIssue;
-import com.atlassian.jira.issue.fields.CustomField;
-import com.atlassian.sal.api.pluginsettings.PluginSettings;
-import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
+import java.text.NumberFormat;
+import java.util.Map;
+
 import net.congstar.jira.plugins.scrumpoker.action.ConfigurePlanningPokerAction;
 
 import com.atlassian.jira.bc.issue.IssueService;
-import com.atlassian.jira.user.ApplicationUser;
-import com.atlassian.crowd.embedded.api.User;
-import com.atlassian.jira.security.JiraAuthenticationContext;
+import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.IssueInputParameters;
+import com.atlassian.jira.issue.IssueManager;
+import com.atlassian.jira.issue.MutableIssue;
+import com.atlassian.jira.issue.fields.CustomField;
+import com.atlassian.jira.security.JiraAuthenticationContext;
+import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.util.ErrorCollection;
-import java.util.Map;
-import java.text.NumberFormat;
+import com.atlassian.sal.api.pluginsettings.PluginSettings;
+import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 
 public class DefaultStoryPointSupport implements StoryPointFieldSupport {
-
-    private final IssueManager issueManager;
 
     private final PluginSettingsFactory pluginSettingsFactory;
 
     private final CustomFieldManager customFieldManager;
 
+    private final JiraAuthenticationContext context;
+    
     private final IssueService issueService;
 
-    private final JiraAuthenticationContext context;
-
     public DefaultStoryPointSupport(JiraAuthenticationContext context, IssueService issueService, IssueManager issueManager, PluginSettingsFactory pluginSettingsFactory, CustomFieldManager customFieldManager) {
-        this.issueManager = issueManager;
         this.pluginSettingsFactory = pluginSettingsFactory;
         this.customFieldManager = customFieldManager;
         this.context = context;
-
         this.issueService = issueService;
     }
 
