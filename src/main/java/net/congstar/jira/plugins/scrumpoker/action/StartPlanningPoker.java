@@ -1,5 +1,18 @@
 package net.congstar.jira.plugins.scrumpoker.action;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+import javax.servlet.http.HttpSession;
+
+import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
+import net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
+import net.congstar.jira.plugins.scrumpoker.model.PokerCard;
+
 import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.IssueFieldConstants;
 import com.atlassian.jira.issue.IssueManager;
@@ -8,27 +21,15 @@ import com.atlassian.jira.issue.RendererManager;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayout;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
-import com.atlassian.jira.security.JiraAuthenticationContext;
-import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
-
-import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
-import net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
-import net.congstar.jira.plugins.scrumpoker.model.PokerCard;
-
-import java.math.BigDecimal;
-import java.util.*;
-import javax.servlet.http.HttpSession;
 
 public final class StartPlanningPoker extends JiraWebActionSupport {
 
     private static final long serialVersionUID = 1L;
 
     private final IssueManager issueManager;
-
-    private final JiraAuthenticationContext context;
 
     private final PlanningPokerStorage planningPokerStorage;
 
@@ -44,19 +45,26 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
 
     private String issueProjectKey;
 
+    private Map<String, String> cardsForIssue;
+
+    private Map<String, PokerCard> cardDeck = new HashMap<String, PokerCard>();
+    
+    private String chosenCard;
+
+    private FieldLayoutManager fieldLayoutManager;
+
+    private RendererManager rendererManager;
+
+    private UserManager userManager;
+    
     @HtmlSafe
     public String getIssueDescription() {
         MutableIssue issue = issueManager.getIssueObject(issueKey);
         FieldLayout fieldLayout = fieldLayoutManager.getFieldLayout(issue);
-        FieldLayoutItem fieldLayoutItem = fieldLayout
-                .getFieldLayoutItem(IssueFieldConstants.DESCRIPTION);
-        String rendererType = (fieldLayoutItem != null) ? fieldLayoutItem
-                .getRendererType() : null;
-        return rendererManager.getRenderedContent(rendererType,
-                issue.getDescription(), issue.getIssueRenderContext());
+        FieldLayoutItem fieldLayoutItem = fieldLayout.getFieldLayoutItem(IssueFieldConstants.DESCRIPTION);
+        String rendererType = (fieldLayoutItem != null) ? fieldLayoutItem.getRendererType() : null;
+        return rendererManager.getRenderedContent(rendererType, issue.getDescription(), issue.getIssueRenderContext());
     }
-
-    private Map<String, String> cardsForIssue;
 
     public Double getIssueStoryPoints() {
         return issueStoryPoints;
@@ -82,32 +90,22 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         return planningPokerStorage.isVisible(issueKey);
     }
 
-    private PokerCard[] cards = {new PokerCard("q", "q.jpg", "q_.jpg"),
-            new PokerCard("0", "0.jpg", "0_.jpg"),
-            new PokerCard("0.5", "05.jpg", "05_.jpg"),
-            new PokerCard("1", "1.jpg", "1_.jpg"),
-            new PokerCard("2", "2.jpg", "2_.jpg"),
-            new PokerCard("3", "3.jpg", "3_.jpg"),
-            new PokerCard("5", "5.jpg", "5_.jpg"),
-            new PokerCard("8", "8.jpg", "8_.jpg"),
-            new PokerCard("13", "13.jpg", "13_.jpg"),
-            new PokerCard("20", "20.jpg", "20_.jpg"),
-            new PokerCard("40", "40.jpg", "40_.jpg"),
-            new PokerCard("100", "100.jpg", "100_.jpg")};
-
-    private Map<String, PokerCard> cardDeck = new HashMap<String, PokerCard>();
+    private PokerCard[] cards = {new PokerCard("q", "q.jpg"),
+            new PokerCard("0", "0.jpg"),
+            new PokerCard("0.5", "05.jpg"),
+            new PokerCard("1", "1.jpg"),
+            new PokerCard("2", "2.jpg"),
+            new PokerCard("3", "3.jpg"),
+            new PokerCard("5", "5.jpg"),
+            new PokerCard("8", "8.jpg"),
+            new PokerCard("13", "13.jpg"),
+            new PokerCard("20", "20.jpg"),
+            new PokerCard("40", "40.jpg"),
+            new PokerCard("100", "100.jpg")};
 
     public Map<String, PokerCard> getCardDeck() {
         return cardDeck;
     }
-
-    private String chosenCard;
-
-    private FieldLayoutManager fieldLayoutManager;
-
-    private RendererManager rendererManager;
-
-    private UserManager userManager;
 
     public String getChosenCard() {
         return chosenCard;
@@ -117,13 +115,8 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         return cards;
     }
 
-    public StartPlanningPoker(IssueManager issueManager,
-                              JiraAuthenticationContext context,
-                              PlanningPokerStorage planningPokerStorage,
-                              StoryPointFieldSupport storyPointFieldSupport,
-                              UserManager userManager) {
+    public StartPlanningPoker(IssueManager issueManager, PlanningPokerStorage planningPokerStorage, StoryPointFieldSupport storyPointFieldSupport, UserManager userManager) {
         this.issueManager = issueManager;
-        this.context = context;
         this.planningPokerStorage = planningPokerStorage;
         this.storyPointFieldSupport = storyPointFieldSupport;
         this.userManager = userManager;
@@ -140,12 +133,11 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
     protected String doExecute() throws Exception {
         issueKey = getHttpRequest().getParameter("issueKey");
 
-        ApplicationUser user = context.getUser();
-        if (user == null)
+        if (getLoggedInApplicationUser() == null) {
             return "error";
+        }
 
         MutableIssue issue = issueManager.getIssueObject(issueKey);
-
         if (issue == null) {
             addErrorMessage("Issue Key" + issueKey + " not found.");
             return "error";
@@ -164,7 +156,7 @@ public final class StartPlanningPoker extends JiraWebActionSupport {
         }
 
         cardsForIssue = planningPokerStorage.chosenCardsForIssue(issueKey);
-        chosenCard = cardsForIssue.get(user.getKey());
+        chosenCard = cardsForIssue.get(getLoggedInApplicationUser().getKey());
 
         issueSummary = issue.getSummary();
         issueProjectName = issue.getProjectObject().getName();

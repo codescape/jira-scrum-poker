@@ -5,6 +5,8 @@ import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
 
 public class ResetDeckAction extends JiraWebActionSupport {
 
+    private static final long serialVersionUID = 1L;
+    
     private final PlanningPokerStorage planningPokerStorage;
 
     public ResetDeckAction(PlanningPokerStorage planningPokerStorage) {
