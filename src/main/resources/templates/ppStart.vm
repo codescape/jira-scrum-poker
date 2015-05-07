@@ -130,7 +130,7 @@
                             </div>
     					</div>
 
-                        <a href="$req.contextPath/browse/$issueKey" style="margin-top: 3em; display: block">$i18n.getText("pp.back")</a>
+                        <a href="$req.contextPath$issueReturnUrl" style="margin-top: 3em; display: block">$i18n.getText("pp.back")</a>
                     </div>
                 </div>
 			</div>

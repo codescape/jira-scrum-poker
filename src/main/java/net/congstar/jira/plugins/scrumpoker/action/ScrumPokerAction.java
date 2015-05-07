@@ -16,4 +16,8 @@ public abstract class ScrumPokerAction extends JiraWebActionSupport {
      */
     protected static final String PARAM_ISSUE_KEY = "issueKey";
 
+    /**
+     * http header containing the referrer
+     */
+    protected static final String PARAM_REFERRER_HEADER = "referer";
 }

@@ -7,8 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-
-import javax.servlet.http.HttpSession;
+import java.net.URL;
 
 import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
 import net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
@@ -45,6 +44,8 @@ public final class StartPlanningPoker extends ScrumPokerAction {
 
     private String issueProjectKey;
 
+    private String issueReturnUrl;
+
     private Map<String, String> cardsForIssue;
 
     private Map<String, PokerCard> cardDeck = new HashMap<String, PokerCard>();
@@ -72,6 +73,10 @@ public final class StartPlanningPoker extends ScrumPokerAction {
 
     public String getIssueProjectKey() {
         return issueProjectKey;
+    }
+
+    public String getIssueReturnUrl() {
+        return issueReturnUrl;
     }
 
     public String getIssueKey() {
@@ -143,16 +148,26 @@ public final class StartPlanningPoker extends ScrumPokerAction {
             return "error";
         }
 
-        HttpSession session = getHttpSession();
-        String sessionUrl = (String)session.getAttribute(PARAM_RETURN_URL);
-        String returnUrl = getHttpRequest().getParameter(PARAM_RETURN_URL);
-        if (sessionUrl == null) {
-            if (returnUrl == null) {
-                returnUrl = "/browse/" + issueKey;
+        // weird hack to check whether we have been called from "outside"
+        Boolean outsideCall = true;
+        URL referrerURL = new URL(getHttpRequest().getHeader(PARAM_REFERRER_HEADER));
+        String selfAction = getActionName().toLowerCase();
+        String referrerPath = referrerURL.getPath().toLowerCase();
+        String regex = ".*/" + selfAction + "\\.?\\w*";
+        if (referrerPath.matches(regex)) {
+            outsideCall = false;
+        }
+
+        // remember the page we have to return to after finishing the poker round
+        String sessionUrl = (String)getHttpSession().getAttribute(PARAM_RETURN_URL);
+        issueReturnUrl = getReturnUrl();
+        if (sessionUrl == null || outsideCall) {
+            if (issueReturnUrl == null) {
+                issueReturnUrl = "/browse/" + issueKey;
             }
-            session.setAttribute(PARAM_RETURN_URL, returnUrl);
+            getHttpSession().setAttribute(PARAM_RETURN_URL, issueReturnUrl);
         } else {
-            returnUrl = sessionUrl;
+            issueReturnUrl = sessionUrl;
         }
 
         cardsForIssue = planningPokerStorage.chosenCardsForIssue(issueKey);
