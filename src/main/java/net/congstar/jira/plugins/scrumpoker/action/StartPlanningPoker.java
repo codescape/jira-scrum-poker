@@ -1,12 +1,8 @@
 package net.congstar.jira.plugins.scrumpoker.action;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.servlet.http.HttpSession;
 
@@ -90,19 +86,6 @@ public final class StartPlanningPoker extends ScrumPokerAction {
         return planningPokerStorage.isVisible(issueKey);
     }
 
-    private PokerCard[] cards = {new PokerCard("q", "q.jpg"),
-            new PokerCard("0", "0.jpg"),
-            new PokerCard("0.5", "05.jpg"),
-            new PokerCard("1", "1.jpg"),
-            new PokerCard("2", "2.jpg"),
-            new PokerCard("3", "3.jpg"),
-            new PokerCard("5", "5.jpg"),
-            new PokerCard("8", "8.jpg"),
-            new PokerCard("13", "13.jpg"),
-            new PokerCard("20", "20.jpg"),
-            new PokerCard("40", "40.jpg"),
-            new PokerCard("100", "100.jpg")};
-
     public Map<String, PokerCard> getCardDeck() {
         return cardDeck;
     }
@@ -112,7 +95,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
     }
 
     public PokerCard[] getCards() {
-        return cards;
+        return PokerUtil.pokerDeck;
     }
 
     public StartPlanningPoker(IssueManager issueManager, PlanningPokerStorage planningPokerStorage, StoryPointFieldSupport storyPointFieldSupport, UserManager userManager) {
@@ -124,7 +107,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
         fieldLayoutManager = ComponentAccessor.getComponent(FieldLayoutManager.class);
         rendererManager = ComponentAccessor.getComponent(RendererManager.class);
 
-        for (PokerCard card : cards) {
+        for (PokerCard card : PokerUtil.pokerDeck) {
             cardDeck.put(card.getName(), card);
         }
     }
@@ -166,60 +149,17 @@ public final class StartPlanningPoker extends ScrumPokerAction {
         return "start";
     }
 
-    private Set<Integer> getSortedVotes(Map<String, String> votes) {
-        Collection<String> votedValues = votes.values();
-        Set<Integer> uniqueValues = new TreeSet<Integer>();
-        for (String value : votedValues) {
-            if (!value.equals("q")) {
-                uniqueValues.add(new Integer(value));
-            }
-        }
-        return uniqueValues;
-    }
-
     public Collection<String> getBoundedVotes() {
-        ArrayList<String> votes = new ArrayList<String>();
-        for (Integer value : getSortedVotes(cardsForIssue)) {
-            votes.add(value.toString());
-        }
-        ArrayList<String> boundedVotes = new ArrayList<String>();
-
-        String first = votes.get(0);
-        String last = votes.get(votes.size() - 1);
-
-        if (votes.size() > 0) {
-
-            int index = 0;
-            while (!cards[index].getName().equals(first)) {
-                index++;
-            }
-            boundedVotes.add(cards[index].getName());
-            if (votes.size() > 1) {
-                index++;
-                while (!cards[index].getName().equals(last)) {
-                    boundedVotes.add(cards[index].getName());
-                    index++;
-                }
-                boundedVotes.add(cards[index].getName());
-            }
-        }
-        return boundedVotes;
+    	return PokerUtil.getBoundedVotes(cardsForIssue);
     }
+    
 
     public String getMinVoted() {
-        double min = 1000.0;
-        for (String voted : getCardsForIssue().values()) {
-            min = Math.min(new Double(min), new BigDecimal(voted).doubleValue());
-        }
-        return String.valueOf(min).replace(".0", "");
+        return PokerUtil.getMinVoted(getCardsForIssue());
     }
 
     public String getMaxVoted() {
-        double max = 0;
-        for (String voted : getCardsForIssue().values()) {
-            max = Math.max(new Double(max), new BigDecimal(voted).doubleValue());
-        }
-        return String.valueOf(max).replace(".0", "");
+        return PokerUtil.getMaxVoted(getCardsForIssue());
     }
 
     public Map<String, String> getCardsForIssue() {
