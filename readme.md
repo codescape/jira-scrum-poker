@@ -13,3 +13,7 @@ The Atlassian Plugin SDK provides several useful commands:
 * `atlas-help` prints description for all commands in the SDK
 
 For further documentation see: [Set up the Atlassian SDK and build a project](https://developer.atlassian.com/docs/getting-started/set-up-the-atlassian-plugin-sdk-and-build-a-project)
+
+## Compatibility
+
+Due to deprecated classes in older versions of the Atlassian SDK, starting with version 1.2.1 Scrum Poker is only compatible to Atlassian JIRA 6.4+.
