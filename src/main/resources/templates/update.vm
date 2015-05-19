@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>Title element in header</title>
+    <meta name="decorator" content="none" />
+</head>
+<body>
+    #if ($deckVisible)
+    <br>
+    <div class="poker-header">
+        <h2>$i18n.getText("pp.bandwidth")</h2>
+    </div>
+    <br>
+    <div class="mod-content">
+        <ul id="selectVote">
+            #foreach ($vote in $boundedVotes)
+                <li><a href="$req.contextPath/secure/confirmEstimationAction.jspa?issueKey=$issueKey&finalVote=$vote"><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/cards_active/$cardDeck.get($vote).image"></a></li>
+            #end
+        </ul>
+        <p class="poker-comment">$i18n.getText("pp.confirmVote")</p>
+    </div>
+    #end <!-- deckVisible -->
+
+<br>
+<div class="poker-header">
+    <h2>$i18n.getText("pp.chosenCards")</h2>
+</div>
+
+<br>
+<div class="mod-content">
+    <ul id="chosencards">
+        #foreach ($cardsForIssueEntry in $cardsForIssue.entrySet())
+            #if ($deckVisible && !($minVoted==$maxVoted) && ($cardsForIssueEntry.value == $minVoted || $cardsForIssueEntry.value == $maxVoted))
+                #set($classTalk = "icon aui-icon aui-icon-small aui-iconfont-comment icon-comment ppTalkMargin")
+            #else
+                #set($classTalk = "")
+            #end
+
+            #if ($deckVisible)
+                <li><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/cards/$cardDeck.get($cardsForIssueEntry.value).image">&nbsp;&nbsp;&nbsp;<span  style="padding-right: 5px">$action.getUsername($cardsForIssueEntry.key)</span><span class="$classTalk">&nbsp;</span></li>
+            #else
+                <li><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/back.jpg">&nbsp;&nbsp;&nbsp;<span style="padding-right: 5px">$action.getUsername($cardsForIssueEntry.key)</span></li>
+            #end
+        #end
+    </ul>
+</div>
+
+</body>
+</html>

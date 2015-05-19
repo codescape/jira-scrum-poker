@@ -119,6 +119,8 @@ public final class StartPlanningPoker extends ScrumPokerAction {
 
     @Override
     protected String doExecute() throws Exception {
+        String action = getHttpRequest().getParameter("action");
+
         issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
 
         if (getLoggedInApplicationUser() == null) {
@@ -131,26 +133,28 @@ public final class StartPlanningPoker extends ScrumPokerAction {
             return "error";
         }
 
-        // weird hack to check whether we have been called from "outside"
-        Boolean outsideCall = true;
-        URL referrerURL = new URL(getHttpRequest().getHeader(PARAM_REFERRER_HEADER));
-        String selfAction = getActionName().toLowerCase();
-        String referrerPath = referrerURL.getPath().toLowerCase();
-        String regex = ".*/" + selfAction + "\\.?\\w*";
-        if (referrerPath.matches(regex)) {
-            outsideCall = false;
-        }
-
-        // remember the page we have to return to after finishing the poker round
-        String sessionUrl = (String)getHttpSession().getAttribute(PARAM_RETURN_URL);
-        issueReturnUrl = getReturnUrl();
-        if (sessionUrl == null || outsideCall) {
-            if (issueReturnUrl == null) {
-                issueReturnUrl = "/browse/" + issueKey;
+        if (action!=null && !action.equals("update")) {
+            // weird hack to check whether we have been called from "outside"
+            Boolean outsideCall = true;
+            URL referrerURL = new URL(getHttpRequest().getHeader(PARAM_REFERRER_HEADER));
+            String selfAction = getActionName().toLowerCase();
+            String referrerPath = referrerURL.getPath().toLowerCase();
+            String regex = ".*/" + selfAction + "\\.?\\w*";
+            if (referrerPath.matches(regex)) {
+                outsideCall = false;
             }
-            getHttpSession().setAttribute(PARAM_RETURN_URL, issueReturnUrl);
-        } else {
-            issueReturnUrl = sessionUrl;
+
+            // remember the page we have to return to after finishing the poker round
+            String sessionUrl = (String)getHttpSession().getAttribute(PARAM_RETURN_URL);
+            issueReturnUrl = getReturnUrl();
+            if (sessionUrl == null || outsideCall) {
+                if (issueReturnUrl == null) {
+                    issueReturnUrl = "/browse/" + issueKey;
+                }
+                getHttpSession().setAttribute(PARAM_RETURN_URL, issueReturnUrl);
+            } else {
+                issueReturnUrl = sessionUrl;
+            }
         }
 
         cardsForIssue = planningPokerStorage.chosenCardsForIssue(issueKey);
@@ -161,11 +165,14 @@ public final class StartPlanningPoker extends ScrumPokerAction {
         issueProjectKey = issue.getProjectObject().getKey();
         issueStoryPoints = storyPointFieldSupport.getValue(issueKey);
 
-        return "start";
+        if (action!=null && action.equals("update")) {
+            return "update";
+        } else
+            return "start";
     }
 
-    public Collection<String> getBoundedVotes() {
-    	return PokerUtil.getBoundedVotes(cardsForIssue);
+    public Collection<String> getBoundedVotes () {
+            return PokerUtil.getBoundedVotes(cardsForIssue);
     }
     
 
