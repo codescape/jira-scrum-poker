@@ -40,7 +40,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
 
     private String issueProjectKey;
 
-    private String issueReturnUrl;
+    private String issueReturnUrl="test";
 
     private Map<String, String> cardsForIssue;
 
@@ -133,7 +133,8 @@ public final class StartPlanningPoker extends ScrumPokerAction {
             return "error";
         }
 
-        if (action!=null && !action.equals("update")) {
+
+        if (action==null || (action!=null && !action.equals("update"))) {
             // weird hack to check whether we have been called from "outside"
             Boolean outsideCall = true;
             URL referrerURL = new URL(getHttpRequest().getHeader(PARAM_REFERRER_HEADER));
