@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import net.congstar.jira.plugins.scrumpoker.model.PokerCard;
+import org.apache.commons.lang3.math.NumberUtils;
 
 public class PokerUtil {
 	
@@ -33,7 +34,9 @@ public class PokerUtil {
     public static String getMinVoted(Map<String, String> cards) {
         double min = 1000.0;
         for (String voted : cards.values()) {
-            min = Math.min(new Double(min), new BigDecimal(voted).doubleValue());
+            if (NumberUtils.isNumber(voted)) {
+                min = Math.min(new BigDecimal(min).doubleValue(), new BigDecimal(voted).doubleValue());
+            }
         }
         return String.valueOf(min).replace(".0", "");
     }
@@ -46,7 +49,9 @@ public class PokerUtil {
     public static String getMaxVoted(Map<String, String> cards) {
         double max = 0;
         for (String voted : cards.values()) {
-            max = Math.max(new Double(max), new BigDecimal(voted).doubleValue());
+            if (NumberUtils.isNumber(voted)) {
+                max = Math.max(new BigDecimal(max).doubleValue(), new BigDecimal(voted).doubleValue());
+            }
         }
         return String.valueOf(max).replace(".0", "");
     }

@@ -19,6 +19,7 @@
         
         <resource type="download" name="scrum-poker.css" location="/css/scrum-poker.css"/>
         <resource type="download" name="scrum-poker.js" location="/js/scrum-poker.js"/>
+        <resource type="download" name="jquery.flip.min.js" location="/js/jquery.flip.min.js"/>
         <resource type="download" name="images/" location="/images"/>
 
         <context>scrum-poker</context>
