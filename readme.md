@@ -17,3 +17,8 @@ For further documentation see: [Set up the Atlassian SDK and build a project](ht
 ## Compatibility
 
 Due to deprecated classes in older versions of the Atlassian SDK, starting with version 1.2.1 Scrum Poker is only compatible to Atlassian JIRA 6.4+.
+
+
+## Further documentation
+
+* Finding the right Web Item https://marketplace.atlassian.com/plugins/com.wittified.webfragment-finder
