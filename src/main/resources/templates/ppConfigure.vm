@@ -6,7 +6,7 @@
 	<body>
 	<h1>Scrum Poker Konfiguration</h1>
 
-	<form class="aui long-label" action="configurePlanningPoker.jspa" method="post">
+	<form class="aui long-label" action="configureScrumPokerAction.jspa" method="post">
 		<fieldset>
 			<div class="field-group">
 				<label for="fieldName">Name of Story Point field:</label> 
