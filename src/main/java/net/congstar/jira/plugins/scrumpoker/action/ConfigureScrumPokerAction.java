@@ -51,7 +51,6 @@ public class ConfigureScrumPokerAction extends JiraWebActionSupport {
             PluginSettings settings = settingsFactory.createGlobalSettings();
             settings.put(STORY_POINT_FIELD_NAME, newStoryPointFieldName);
         }
-
         return "success";
     }
 
