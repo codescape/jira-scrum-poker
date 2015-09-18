@@ -8,8 +8,8 @@
     <version>1.2.3</version>
 
     <organization>
-		<name>congstar gmbh / AOE Gmbh</name>
-		<url>http://www.congstar.net/</url>
+        <name>congstar gmbh / AOE Gmbh</name>
+        <url>http://www.congstar.net/</url>
     </organization>
 
     <name>JIRA Scrum Poker</name>
