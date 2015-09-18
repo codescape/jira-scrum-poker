@@ -14,6 +14,7 @@ public class ConfigureScrumPokerAction extends JiraWebActionSupport {
     private static final long serialVersionUID = 1L;
 
     public static final String STORY_POINT_FIELD_NAME = "storyPointFieldName";
+
     public static final String DEFAULT_FIELD_FOR_STORY_POINTS = "Story-Punkte";
 
     private final PluginSettingsFactory settingsFactory;
@@ -37,7 +38,7 @@ public class ConfigureScrumPokerAction extends JiraWebActionSupport {
     }
 
     /**
-     * Current configured name of the story point field in this JIRA instance. 
+     * Current configured name of the story point field in this JIRA instance.
      */
     public String getStoryPointFieldName() {
         PluginSettings settings = settingsFactory.createGlobalSettings();

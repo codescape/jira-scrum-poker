@@ -19,9 +19,7 @@ public class ChooseCardAction extends ScrumPokerAction {
     protected String doExecute() throws Exception {
         String chosenCard = getHttpRequest().getParameter("chosenCard");
         String issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
-
         planningPokerStorage.update(issueKey, getLoggedInApplicationUser().getKey(), chosenCard);
-
         return getRedirect("/secure/startPlanningPoker.jspa?issueKey=" + issueKey);
     }
 
