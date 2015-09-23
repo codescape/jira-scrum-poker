@@ -89,21 +89,18 @@
         <p class="poker-comment">$i18n.getText("pp.agreementReached")</p>
         #end
     <div class="poker-buttons">
-        #set($numberOfCards = $cardsForIssue.entrySet().size())
-        #if ($numberOfCards > 0)
-            #set($classButton="aui-button")
+        #if($cardsForIssue.entrySet().size() > 0)
+            <a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("pp.reset")</a>
         #else
-            #set($classButton="aui-button poker-buttons-inactive")
-        #end
-        <a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="$classButton">$i18n.getText("pp.reset")</a>
-        #if (!$deckVisible && ($numberOfCards >0))
-            #set($classButton="aui-button")
-        #else
-            #set($classButton="aui-button poker-buttons-inactive")
-        #end
-        <a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="$classButton">$i18n.getText("pp.reveal")</a>
-    </div>
+        	<a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button poker-buttons-inactive">$i18n.getText("pp.reset")</a>
+		#end
 
+        #if (!$deckVisible && ($cardsForIssue.entrySet().size() > 0))
+        	<a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("pp.reveal")</a>
+        #else
+            <a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button poker-buttons-inactive">$i18n.getText("pp.reveal")</a>
+        #end
+    </div>
 
 </body>
 </html>
