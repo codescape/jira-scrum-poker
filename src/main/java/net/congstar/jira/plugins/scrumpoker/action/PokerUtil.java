@@ -25,7 +25,6 @@ public class PokerUtil {
             new PokerCard("40", "40.jpg"),
             new PokerCard("100", "100.jpg")};
 
-
     /**
      * Returns the minimum vote
      * @param cards all voted cards

@@ -1,9 +1,9 @@
 package net.congstar.jira.plugins.scrumpoker.action;
 
+import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.net.URL;
 
 import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
 import net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
@@ -40,12 +40,12 @@ public final class StartPlanningPoker extends ScrumPokerAction {
 
     private String issueProjectKey;
 
-    private String issueReturnUrl="test";
+    private String issueReturnUrl = "test";
 
     private Map<String, String> cardsForIssue;
 
     private Map<String, PokerCard> cardDeck = new HashMap<String, PokerCard>();
-    
+
     private String chosenCard;
 
     private FieldLayoutManager fieldLayoutManager;
@@ -53,7 +53,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
     private RendererManager rendererManager;
 
     private UserManager userManager;
-    
+
     @HtmlSafe
     public String getIssueDescription() {
         MutableIssue issue = issueManager.getIssueObject(issueKey);
@@ -88,7 +88,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
     }
 
     public boolean isDeckVisible() {
-        return planningPokerStorage.isVisible(issueKey);
+        return planningPokerStorage.sessionForIssue(issueKey).isVisible();
     }
 
     public Map<String, PokerCard> getCardDeck() {
@@ -103,7 +103,8 @@ public final class StartPlanningPoker extends ScrumPokerAction {
         return PokerUtil.pokerDeck;
     }
 
-    public StartPlanningPoker(IssueManager issueManager, PlanningPokerStorage planningPokerStorage, StoryPointFieldSupport storyPointFieldSupport, UserManager userManager) {
+    public StartPlanningPoker(IssueManager issueManager, PlanningPokerStorage planningPokerStorage,
+            StoryPointFieldSupport storyPointFieldSupport, UserManager userManager) {
         this.issueManager = issueManager;
         this.planningPokerStorage = planningPokerStorage;
         this.storyPointFieldSupport = storyPointFieldSupport;
@@ -133,8 +134,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
             return "error";
         }
 
-
-        if (action==null || (action!=null && !action.equals("update"))) {
+        if (action == null || (action != null && !action.equals("update"))) {
             // weird hack to check whether we have been called from "outside"
             Boolean outsideCall = true;
             URL referrerURL = new URL(getHttpRequest().getHeader(PARAM_REFERRER_HEADER));
@@ -146,7 +146,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
             }
 
             // remember the page we have to return to after finishing the poker round
-            String sessionUrl = (String)getHttpSession().getAttribute(PARAM_RETURN_URL);
+            String sessionUrl = (String) getHttpSession().getAttribute(PARAM_RETURN_URL);
             issueReturnUrl = getReturnUrl();
             if (sessionUrl == null || outsideCall) {
                 if (issueReturnUrl == null) {
@@ -158,7 +158,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
             }
         }
 
-        cardsForIssue = planningPokerStorage.chosenCardsForIssue(issueKey);
+        cardsForIssue = planningPokerStorage.sessionForIssue(issueProjectKey).getCards();
         chosenCard = cardsForIssue.get(getLoggedInApplicationUser().getKey());
 
         issueSummary = issue.getSummary();
@@ -166,16 +166,15 @@ public final class StartPlanningPoker extends ScrumPokerAction {
         issueProjectKey = issue.getProjectObject().getKey();
         issueStoryPoints = storyPointFieldSupport.getValue(issueKey);
 
-        if (action!=null && action.equals("update")) {
+        if (action != null && action.equals("update")) {
             return "update";
         } else
             return "start";
     }
 
-    public Collection<String> getBoundedVotes () {
-            return PokerUtil.getBoundedVotes(cardsForIssue);
+    public Collection<String> getBoundedVotes() {
+        return PokerUtil.getBoundedVotes(cardsForIssue);
     }
-    
 
     public String getMinVoted() {
         return PokerUtil.getMinVoted(getCardsForIssue());

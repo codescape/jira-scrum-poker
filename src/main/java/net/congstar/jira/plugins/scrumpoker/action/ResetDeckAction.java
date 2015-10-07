@@ -16,7 +16,7 @@ public class ResetDeckAction extends ScrumPokerAction {
     protected String doExecute() throws Exception {
         String issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
 
-        planningPokerStorage.resetDeck(issueKey);
+        planningPokerStorage.sessionForIssue(issueKey).resetDeck();
 
         return getRedirect("/secure/startPlanningPoker.jspa?issueKey=" + issueKey);
     }

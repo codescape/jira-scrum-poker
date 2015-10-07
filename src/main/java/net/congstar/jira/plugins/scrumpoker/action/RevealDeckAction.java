@@ -19,7 +19,7 @@ public class RevealDeckAction extends ScrumPokerAction {
     protected String doExecute() throws Exception {
         String issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
 
-        planningPokerStorage.revealDeck(issueKey);
+        planningPokerStorage.sessionForIssue(issueKey).revealDeck();
 
         return getRedirect("/secure/startPlanningPoker.jspa?issueKey=" + issueKey);
     }

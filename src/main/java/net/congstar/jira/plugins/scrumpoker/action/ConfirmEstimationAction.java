@@ -22,7 +22,7 @@ public class ConfirmEstimationAction extends ScrumPokerAction {
         String finalVote = getHttpRequest().getParameter("finalVote");
 
         storyPointFieldSupport.save(issueKey, new Double(finalVote));
-        planningPokerStorage.resetDeck(issueKey);
+        planningPokerStorage.sessionForIssue(issueKey).resetDeck();
 
         String returnUrl = (String) getHttpSession().getAttribute(PARAM_RETURN_URL);
         getHttpSession().removeAttribute(PARAM_RETURN_URL);

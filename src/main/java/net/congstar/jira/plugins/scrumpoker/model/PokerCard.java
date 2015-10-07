@@ -2,9 +2,9 @@ package net.congstar.jira.plugins.scrumpoker.model;
 
 public class PokerCard {
 
-    String name;
+    private String name;
 
-    String image;
+    private String image;
 
     public PokerCard(String name, String image) {
         this.name = name;
