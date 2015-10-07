@@ -2,49 +2,29 @@ package net.congstar.jira.plugins.scrumpoker.data;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
+import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class DefaultPlanningPokerStorageTest {
 
-    private static final String ISSUE_ONE = "ISSUE-1";
-    private static final String USER_ONE = "USER-ONE";
-    private static final String USER_TWO = "USER-TWO";
-
-    private DefaultPlanningPokerStorage defaultPlanningPokerStorage;
-
-    @Before
-    public void before() {
-        defaultPlanningPokerStorage = new DefaultPlanningPokerStorage();
-    }
-
     @Test
-    public void cards_for_issue_hold_one_entry_per_user() {
-        // given
-        defaultPlanningPokerStorage.update(ISSUE_ONE, USER_ONE, "8");
-        defaultPlanningPokerStorage.update(ISSUE_ONE, USER_TWO, "5");
+    public void shouldProduceNewSessionIfNonExists() {
+        DefaultPlanningPokerStorage storage = new DefaultPlanningPokerStorage();
 
-        // when
-        defaultPlanningPokerStorage.update(ISSUE_ONE, USER_TWO, "8");
-
-        // then
-        assertThat(defaultPlanningPokerStorage.chosenCardsForIssue(ISSUE_ONE).size(), is(equalTo(2)));
+        assertThat(storage.sessionForIssue("Issue-1"), is(not(nullValue())));
     }
-
+    
     @Test
-    public void cards_for_issue_are_not_visible_after_choosing_new_card() {
-        // given
-        defaultPlanningPokerStorage.update(ISSUE_ONE, USER_ONE, "8");
-        defaultPlanningPokerStorage.revealDeck(ISSUE_ONE);
-        assertThat(defaultPlanningPokerStorage.isVisible(ISSUE_ONE), is(true));
+    public void shouldReturnExistingSessionIfExists() {
+        DefaultPlanningPokerStorage storage = new DefaultPlanningPokerStorage();
 
-        // when
-        defaultPlanningPokerStorage.update(ISSUE_ONE, USER_ONE, "5");
+        ScrumPokerSession sessionForIssue = storage.sessionForIssue("Issue-1");
 
-        // then
-        assertThat(defaultPlanningPokerStorage.isVisible(ISSUE_ONE), is(false));
+        assertThat(storage.sessionForIssue("Issue-1"), is(equalTo(sessionForIssue)));
     }
 
 }
