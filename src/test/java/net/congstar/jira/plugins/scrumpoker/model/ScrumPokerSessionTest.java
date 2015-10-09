@@ -83,7 +83,7 @@ public class ScrumPokerSessionTest {
     }
 
     @Test
-    public void shouldCalculatingMinimumAndMaximumWithDuplicateCards() {
+    public void shouldCalculateMinimumAndMaximumWithDuplicateCards() {
         ScrumPokerSession session = new ScrumPokerSession();
 
         session.updateCard("user1", "3");
