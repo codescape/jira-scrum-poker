@@ -177,11 +177,11 @@ public final class StartPlanningPoker extends ScrumPokerAction {
     }
 
     public String getMinVoted() {
-        return PokerUtil.getMinVoted(getCardsForIssue());
+        return planningPokerStorage.sessionForIssue(issueKey).getMinimumVote();
     }
 
     public String getMaxVoted() {
-        return PokerUtil.getMaxVoted(getCardsForIssue());
+        return planningPokerStorage.sessionForIssue(issueKey).getMaximumVote();
     }
 
     public Map<String, String> getCardsForIssue() {
