@@ -26,7 +26,7 @@
 <!-- Bandwidth of cards shown when deck is revealed -->
 <!---------------------------------------------------->
 
-    #if ($deckVisible)
+    #if ($pokerSession.visible)
     <div class="poker-header">
         <h2>$i18n.getText("pp.bandwidth")</h2>
     </div>
@@ -49,37 +49,27 @@
 	</div>
 	<div class="mod-content">
 	    <ul id="chosencards">
-    	    #foreach ($cardsForIssueEntry in $cardsForIssue.entrySet())
-        	    #if ($deckVisible && !($minVoted==$maxVoted) && ($cardsForIssueEntry.value == $minVoted || $cardsForIssueEntry.value == $maxVoted))
+    	    #foreach ($chosenCardInstance in $pokerSession.cards.entrySet())
+        	    #if ($pokerSession.visible && !($pokerSession.minimumVote == $pokerSession.maximumVote) && ($chosenCardInstance.value == $pokerSession.minimumVote || $chosenCardInstance.value == $pokerSession.maximumVote))
             	    #set($classTalk = "icon aui-icon aui-icon-small aui-iconfont-comment icon-comment ppTalkMargin")
             	#else
                 	#set($classTalk = "")
             	#end
-
                 <div>
-					<div class="deckDynamic" style="position: relative; display: none">
-                    	<li>
-                        	<img class="front" class="front" src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/cards/$cardDeck.get($cardsForIssueEntry.value).image">
-                            <img style="position: absolute; left: 0; right: 0" class="back" src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/back.jpg">
-                            &nbsp;&nbsp;&nbsp;<span style="padding-right: 5px">$action.getUsername($cardsForIssueEntry.key)</span><span class="$classTalk">&nbsp;</span>
-                        </li>
-                   	</div>
-                    <div class="deckStatic" style="position: relative; visibility: visible">
-                    	<li>
-                        	#if ($deckVisible)
-                            	<img src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/cards/$cardDeck.get($cardsForIssueEntry.value).image">
-                            #else
-                                <img src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/back.jpg">
-                            #end
-                            &nbsp;&nbsp;&nbsp;<span style="padding-right: 5px">$action.getUsername($cardsForIssueEntry.key)</span><span class="$classTalk">&nbsp;</span>
-                        </li>
-                    </div>
+                	<li>
+                    	#if ($pokerSession.visible)
+                        	<img src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/cards/$cardDeck.get($chosenCardInstance.value).image">
+                        #else
+                            <img src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/back.jpg">
+                        #end
+                        &nbsp;&nbsp;&nbsp;<span style="padding-right: 5px">$action.getUsername($chosenCardInstance.key)</span><span class="$classTalk">&nbsp;</span>
+                    </li>
                 </div>
 	        #end
     	</ul>
 	</div>
 
-	#if ($deckVisible && ($minVoted == $maxVoted))
+	#if ($pokerSession.visible && ($pokerSession.minimumVote == $pokerSession.maximumVote))
     	<p class="poker-comment">$i18n.getText("pp.agreementReached")</p>
     #end
 
@@ -88,13 +78,13 @@
 <!---------------------------------------------------------->
 
     <div class="poker-buttons">
-        #if($cardsForIssue.entrySet().size() > 0)
+        #if($pokerSession.cards.entrySet().size() > 0)
             <a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("pp.reset")</a>
         #else
         	<a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button poker-buttons-inactive">$i18n.getText("pp.reset")</a>
 		#end
 
-        #if (!$deckVisible && ($cardsForIssue.entrySet().size() > 0))
+        #if (!$pokerSession.visible && ($pokerSession.cards.entrySet().size() > 0))
         	<a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("pp.reveal")</a>
         #else
             <a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button poker-buttons-inactive">$i18n.getText("pp.reveal")</a>

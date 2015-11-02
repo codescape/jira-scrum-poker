@@ -8,6 +8,7 @@ import java.util.Map;
 import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
 import net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
 import net.congstar.jira.plugins.scrumpoker.model.PokerCard;
+import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
 
 import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.IssueFieldConstants;
@@ -42,17 +43,15 @@ public final class StartPlanningPoker extends ScrumPokerAction {
 
     private String issueReturnUrl = "test";
 
-    private Map<String, String> cardsForIssue;
-
     private Map<String, PokerCard> cardDeck = new HashMap<String, PokerCard>();
-
-    private String chosenCard;
 
     private FieldLayoutManager fieldLayoutManager;
 
     private RendererManager rendererManager;
 
     private UserManager userManager;
+
+    private ScrumPokerSession pokerSession;
 
     @HtmlSafe
     public String getIssueDescription() {
@@ -87,20 +86,20 @@ public final class StartPlanningPoker extends ScrumPokerAction {
         return issueSummary;
     }
 
-    public boolean isDeckVisible() {
-        return planningPokerStorage.sessionForIssue(issueKey).isVisible();
-    }
-
     public Map<String, PokerCard> getCardDeck() {
         return cardDeck;
     }
 
     public String getChosenCard() {
-        return chosenCard;
+        return pokerSession.getCards().get(getLoggedInApplicationUser().getKey());
     }
 
     public PokerCard[] getCards() {
         return PokerUtil.pokerDeck;
+    }
+    
+    public ScrumPokerSession getPokerSession() {
+        return pokerSession;
     }
 
     public StartPlanningPoker(IssueManager issueManager, PlanningPokerStorage planningPokerStorage,
@@ -158,8 +157,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
             }
         }
 
-        cardsForIssue = planningPokerStorage.sessionForIssue(issueProjectKey).getCards();
-        chosenCard = cardsForIssue.get(getLoggedInApplicationUser().getKey());
+        pokerSession = planningPokerStorage.sessionForIssue(issueKey);
 
         issueSummary = issue.getSummary();
         issueProjectName = issue.getProjectObject().getName();
@@ -173,19 +171,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
     }
 
     public Collection<String> getBoundedVotes() {
-        return PokerUtil.getBoundedVotes(cardsForIssue);
-    }
-
-    public String getMinVoted() {
-        return planningPokerStorage.sessionForIssue(issueKey).getMinimumVote();
-    }
-
-    public String getMaxVoted() {
-        return planningPokerStorage.sessionForIssue(issueKey).getMaximumVote();
-    }
-
-    public Map<String, String> getCardsForIssue() {
-        return cardsForIssue;
+        return PokerUtil.getBoundedVotes(pokerSession.getCards());
     }
 
     public String getUsername(String key) {
