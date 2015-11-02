@@ -1,6 +1,6 @@
 <atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
 
-	<!--  Developed by Stefan Glase, Stefan Höhn and Elmar Jobs -->
+	<!-- plugin coordinates -->
     <plugin-info>
         <description>${project.description}</description>
         <version>${project.version}</version>
