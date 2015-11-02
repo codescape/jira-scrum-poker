@@ -1,7 +1,10 @@
 package net.congstar.jira.plugins.scrumpoker.model;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
+
+import java.util.Arrays;
 
 import org.junit.Test;
 
@@ -104,6 +107,17 @@ public class ScrumPokerSessionTest {
 
         assertThat(session.getMinimumVote(), is("3"));
         assertThat(session.getMaximumVote(), is("8"));
+    }
+
+    @Test
+    public void shouldCalculateBoundedVotes() {
+        ScrumPokerSession session = new ScrumPokerSession();
+
+        session.updateCard("user1", "8");
+        session.updateCard("user2", "?");
+        session.updateCard("user3", "3");
+
+        assertThat(session.getBoundedVotes(), is(equalTo(Arrays.asList("3", "5", "8"))));
     }
 
 }

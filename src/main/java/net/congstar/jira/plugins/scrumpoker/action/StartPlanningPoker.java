@@ -97,13 +97,12 @@ public final class StartPlanningPoker extends ScrumPokerAction {
     public PokerCard[] getCards() {
         return PokerUtil.pokerDeck;
     }
-    
+
     public ScrumPokerSession getPokerSession() {
         return pokerSession;
     }
 
-    public StartPlanningPoker(IssueManager issueManager, PlanningPokerStorage planningPokerStorage,
-            StoryPointFieldSupport storyPointFieldSupport, UserManager userManager) {
+    public StartPlanningPoker(IssueManager issueManager, PlanningPokerStorage planningPokerStorage, StoryPointFieldSupport storyPointFieldSupport, UserManager userManager) {
         this.issueManager = issueManager;
         this.planningPokerStorage = planningPokerStorage;
         this.storyPointFieldSupport = storyPointFieldSupport;
@@ -171,7 +170,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
     }
 
     public Collection<String> getBoundedVotes() {
-        return PokerUtil.getBoundedVotes(pokerSession.getCards());
+        return pokerSession.getBoundedVotes();
     }
 
     public String getUsername(String key) {

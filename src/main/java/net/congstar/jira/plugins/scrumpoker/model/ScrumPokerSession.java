@@ -1,8 +1,12 @@
 package net.congstar.jira.plugins.scrumpoker.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import net.congstar.jira.plugins.scrumpoker.action.PokerUtil;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -80,6 +84,32 @@ public class ScrumPokerSession {
             }
         }
         return String.valueOf(max).replace(".0", "");
+    }
+
+    public List<String> getBoundedVotes() {
+        List<String> result = new ArrayList<String>();
+
+        String maximum = getMaximumVote();
+        String minimum = getMinimumVote();
+
+        boolean minimumReached = false;
+        boolean maximumReached = false;
+
+        for (PokerCard card : PokerUtil.pokerDeck) {
+            if (card.getName().equals(minimum)) {
+                minimumReached = true;
+            }
+
+            if (minimumReached && !maximumReached) {
+                result.add(card.getName());
+            }
+
+            if (card.getName().equals(maximum)) {
+                maximumReached = true;
+            }
+        }
+
+        return result;
     }
 
 }
