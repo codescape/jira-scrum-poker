@@ -108,17 +108,6 @@ public class ScrumPokerSessionTest {
         assertThat(session.getMinimumVote(), is("3"));
         assertThat(session.getMaximumVote(), is("8"));
     }
-    
-    @Test
-    public void shouldCalculateMinimumForDottedValue() {
-        ScrumPokerSession session = new ScrumPokerSession();
-
-        session.updateCard("user1", "8");
-        session.updateCard("user2", "100");
-        session.updateCard("user3", "0.5");
-
-        assertThat(session.getMinimumVote(), is("0.5"));
-    }
 
     @Test
     public void shouldCalculateBoundedVotes() {
