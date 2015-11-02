@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.congstar.jira.plugins.scrumpoker.action.PokerUtil;
-
 import org.apache.commons.lang3.math.NumberUtils;
 
 /**
@@ -66,6 +64,11 @@ public class ScrumPokerSession {
         visible = false;
     }
 
+    /**
+     * Returns the lowest vote.
+     * 
+     * @return
+     */
     public String getMinimumVote() {
         double min = 1000.0;
         for (String voted : cards.values()) {
@@ -76,6 +79,11 @@ public class ScrumPokerSession {
         return String.valueOf(min).replace(".0", "");
     }
 
+    /**
+     * Returns the highest vote.
+     * 
+     * @return
+     */
     public String getMaximumVote() {
         double max = 0;
         for (String voted : cards.values()) {
@@ -86,6 +94,11 @@ public class ScrumPokerSession {
         return String.valueOf(max).replace(".0", "");
     }
 
+    /**
+     * Returns all cards between the lowest and the highest vote.
+     * 
+     * @return
+     */
     public List<String> getBoundedVotes() {
         List<String> result = new ArrayList<String>();
 
@@ -95,7 +108,7 @@ public class ScrumPokerSession {
         boolean minimumReached = false;
         boolean maximumReached = false;
 
-        for (PokerCard card : PokerUtil.pokerDeck) {
+        for (PokerCard card : ScrumPokerCards.pokerDeck) {
             if (card.getName().equals(minimum)) {
                 minimumReached = true;
             }

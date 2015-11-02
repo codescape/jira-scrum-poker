@@ -8,6 +8,7 @@ import java.util.Map;
 import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
 import net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
 import net.congstar.jira.plugins.scrumpoker.model.PokerCard;
+import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerCards;
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
 
 import com.atlassian.jira.component.ComponentAccessor;
@@ -95,7 +96,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
     }
 
     public PokerCard[] getCards() {
-        return PokerUtil.pokerDeck;
+        return ScrumPokerCards.pokerDeck;
     }
 
     public ScrumPokerSession getPokerSession() {
@@ -111,7 +112,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
         fieldLayoutManager = ComponentAccessor.getComponent(FieldLayoutManager.class);
         rendererManager = ComponentAccessor.getComponent(RendererManager.class);
 
-        for (PokerCard card : PokerUtil.pokerDeck) {
+        for (PokerCard card : ScrumPokerCards.pokerDeck) {
             cardDeck.put(card.getName(), card);
         }
     }

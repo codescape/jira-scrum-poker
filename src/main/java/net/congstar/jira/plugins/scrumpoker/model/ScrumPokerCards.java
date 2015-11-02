@@ -1,8 +1,6 @@
-package net.congstar.jira.plugins.scrumpoker.action;
+package net.congstar.jira.plugins.scrumpoker.model;
 
-import net.congstar.jira.plugins.scrumpoker.model.PokerCard;
-
-public class PokerUtil {
+public class ScrumPokerCards {
 
     public static PokerCard[] pokerDeck = { new PokerCard("q", "q.jpg"), new PokerCard("0", "0.jpg"), new PokerCard("0.5", "05.jpg"), new PokerCard("1", "1.jpg"),
             new PokerCard("2", "2.jpg"), new PokerCard("3", "3.jpg"), new PokerCard("5", "5.jpg"), new PokerCard("8", "8.jpg"), new PokerCard("13", "13.jpg"),
