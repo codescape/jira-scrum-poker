@@ -20,6 +20,10 @@ Due to deprecated classes in older versions of the Atlassian SDK, starting with 
 
 ## Changelog
 
+### 1.3.2
+
+* Planning Poker session can be opened directly via link URL
+
 ### 1.3.1
 
 * Poker card with value 0.5 removed from the Scrum Poker deck
