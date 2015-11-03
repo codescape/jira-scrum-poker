@@ -7,7 +7,7 @@ import java.util.Map;
 
 import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
 import net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
-import net.congstar.jira.plugins.scrumpoker.model.PokerCard;
+import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerCard;
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerCards;
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
 
@@ -44,7 +44,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
 
     private String issueReturnUrl = "test";
 
-    private Map<String, PokerCard> cardDeck = new HashMap<String, PokerCard>();
+    private Map<String, ScrumPokerCard> cardDeck = new HashMap<String, ScrumPokerCard>();
 
     private FieldLayoutManager fieldLayoutManager;
 
@@ -87,7 +87,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
         return issueSummary;
     }
 
-    public Map<String, PokerCard> getCardDeck() {
+    public Map<String, ScrumPokerCard> getCardDeck() {
         return cardDeck;
     }
 
@@ -95,7 +95,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
         return pokerSession.getCards().get(getLoggedInApplicationUser().getKey());
     }
 
-    public PokerCard[] getCards() {
+    public ScrumPokerCard[] getCards() {
         return ScrumPokerCards.pokerDeck;
     }
 
@@ -112,7 +112,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
         fieldLayoutManager = ComponentAccessor.getComponent(FieldLayoutManager.class);
         rendererManager = ComponentAccessor.getComponent(RendererManager.class);
 
-        for (PokerCard card : ScrumPokerCards.pokerDeck) {
+        for (ScrumPokerCard card : ScrumPokerCards.pokerDeck) {
             cardDeck.put(card.getName(), card);
         }
     }

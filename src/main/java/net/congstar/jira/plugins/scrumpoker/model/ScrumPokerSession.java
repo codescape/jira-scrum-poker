@@ -108,7 +108,7 @@ public class ScrumPokerSession {
         boolean minimumReached = false;
         boolean maximumReached = false;
 
-        for (PokerCard card : ScrumPokerCards.pokerDeck) {
+        for (ScrumPokerCard card : ScrumPokerCards.pokerDeck) {
             if (card.getName().equals(minimum)) {
                 minimumReached = true;
             }
