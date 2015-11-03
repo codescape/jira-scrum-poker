@@ -20,6 +20,10 @@ Due to deprecated classes in older versions of the Atlassian SDK, starting with 
 
 ## Changelog
 
+### 1.3.3
+
+* Internationalization optimized for German and English users
+
 ### 1.3.2
 
 * Planning Poker session can be opened directly via link URL
