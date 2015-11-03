@@ -110,7 +110,7 @@ public class ScrumPokerSessionTest {
     }
 
     @Test
-    public void shouldCalculateBoundedVotes() {
+    public void shouldCalculateBoundedVotesForNormalRange() {
         ScrumPokerSession session = new ScrumPokerSession();
 
         session.updateCard("user1", "8");
@@ -118,6 +118,28 @@ public class ScrumPokerSessionTest {
         session.updateCard("user3", "3");
 
         assertThat(session.getBoundedVotes(), is(equalTo(Arrays.asList("3", "5", "8"))));
+    }
+
+    @Test
+    public void shouldCalculateBoundedVotesForWideRange() {
+        ScrumPokerSession session = new ScrumPokerSession();
+
+        session.updateCard("user1", "2");
+        session.updateCard("user2", "?");
+        session.updateCard("user3", "40");
+
+        assertThat(session.getBoundedVotes(), is(equalTo(Arrays.asList("2", "3", "5", "8", "13", "20", "40"))));
+    }
+
+    @Test
+    public void shouldCalculateBoundedVotesForExactMatch() {
+        ScrumPokerSession session = new ScrumPokerSession();
+
+        session.updateCard("user1", "2");
+        session.updateCard("user2", "2");
+        session.updateCard("user3", "2");
+
+        assertThat(session.getBoundedVotes(), is(equalTo(Arrays.asList("2"))));
     }
 
 }
