@@ -136,12 +136,15 @@ public final class StartPlanningPoker extends ScrumPokerAction {
         if (action == null || (action != null && !action.equals("update"))) {
             // weird hack to check whether we have been called from "outside"
             boolean outsideCall = true;
-            URL referrerURL = new URL(getHttpRequest().getHeader(PARAM_REFERRER_HEADER));
-            String selfAction = getActionName().toLowerCase();
-            String referrerPath = referrerURL.getPath().toLowerCase();
-            String regex = ".*/" + selfAction + "\\.?\\w*";
-            if (referrerPath.matches(regex)) {
-                outsideCall = false;
+            String headerParam = getHttpRequest().getHeader(PARAM_REFERRER_HEADER);
+            if (headerParam != null) {
+                URL referrerURL = new URL(headerParam);
+                String selfAction = getActionName().toLowerCase();
+                String referrerPath = referrerURL.getPath().toLowerCase();
+                String regex = ".*/" + selfAction + "\\.?\\w*";
+                if (referrerPath.matches(regex)) {
+                    outsideCall = false;
+                }
             }
 
             // remember the page we have to return to after finishing the poker round
