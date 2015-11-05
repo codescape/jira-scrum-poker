@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.math.NumberUtils;
+import org.joda.time.DateTime;
 
 /**
  * A {@link ScrumPokerSession} represents a Scrum poker session that is associated with exactly one issue. It holds all information required to run a poker session and support the
@@ -18,10 +19,33 @@ public class ScrumPokerSession {
 
     private boolean visible;
 
+    private final DateTime startedOn;
+
+    private String confirmedVote;
+
+    /**
+     * Creates a new {@link ScrumPokerSession} and saves the start date and time.
+     */
+    public ScrumPokerSession() {
+        startedOn = DateTime.now();
+    }
+
+    /**
+     * Returns the date and time this session is started.
+     */
+    public DateTime getStartedOn() {
+        return startedOn;
+    }
+
+    /**
+     * Returns the confirmed vote.
+     */
+    public String getConfirmedVote() {
+        return confirmedVote;
+    }
+
     /**
      * Returns the cards presented by users.
-     * 
-     * @return
      */
     public Map<String, String> getCards() {
         return cards;
@@ -29,8 +53,6 @@ public class ScrumPokerSession {
 
     /**
      * Returns whether the cards are shown or hidden.
-     * 
-     * @return
      */
     public boolean isVisible() {
         return visible;
@@ -47,9 +69,6 @@ public class ScrumPokerSession {
 
     /**
      * Updates the card for the given user and hides all cards.
-     * 
-     * @param userKey
-     * @param chosenCard
      */
     public void updateCard(String userKey, String chosenCard) {
         cards.put(userKey, chosenCard);
@@ -61,13 +80,12 @@ public class ScrumPokerSession {
      */
     public void resetDeck() {
         cards = new HashMap<String, String>();
+        confirmedVote = null;
         visible = false;
     }
 
     /**
      * Returns the lowest vote.
-     * 
-     * @return
      */
     public String getMinimumVote() {
         double min = 1000.0;
@@ -81,8 +99,6 @@ public class ScrumPokerSession {
 
     /**
      * Returns the highest vote.
-     * 
-     * @return
      */
     public String getMaximumVote() {
         double max = 0;
@@ -96,8 +112,6 @@ public class ScrumPokerSession {
 
     /**
      * Returns all cards between the lowest and the highest vote.
-     * 
-     * @return
      */
     public List<String> getBoundedVotes() {
         List<String> result = new ArrayList<String>();
@@ -123,6 +137,13 @@ public class ScrumPokerSession {
         }
 
         return result;
+    }
+
+    /**
+     * Saves the confirmed vote.
+     */
+    public void confirm(String finalVote) {
+        this.confirmedVote = finalVote;
     }
 
 }

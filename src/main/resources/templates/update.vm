@@ -5,6 +5,8 @@
 </head>
 <body>
 
+#if (!$pokerSession.confirmedVote)
+
 <!--------------------------------------------------------->
 <!-- List of available cards that a user can choose from -->
 <!--------------------------------------------------------->
@@ -90,6 +92,26 @@
             <a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button poker-buttons-inactive">$i18n.getText("pp.reveal")</a>
         #end
     </div>
+
+#else
+
+<!------------------------------------------------------------------------->
+<!-- Confirmed vote exists and we can only go back to the story or reset -->
+<!------------------------------------------------------------------------->
+
+	<div class="mod-content">
+	   	<p>$i18n.getText("pp.confirmedVote")</p>
+        #foreach($card in $cards)
+            #if ($pokerSession.confirmedVote == $card.name)
+            	<div style="text-align:center;"><img src="${req.contextPath}/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/cards/${card.image}"></div>
+            #end
+        #end
+	</div>
+    <div class="poker-buttons">
+		<a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("pp.reset")</a>
+	</div>
+
+#end
 
 </body>
 </html>
