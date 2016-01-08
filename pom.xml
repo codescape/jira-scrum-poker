@@ -35,7 +35,7 @@
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 
 		<!-- Jira version -->
-		<jira.version>6.4.3</jira.version>
+		<jira.version>6.4.11</jira.version>
 		<amps.version>5.0.13</amps.version>
 		<plugin.testrunner.version>1.2.3</plugin.testrunner.version>
 
