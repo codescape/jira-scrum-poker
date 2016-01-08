@@ -83,7 +83,8 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
         return (Double) issue.getCustomFieldValue(findStoryPointField());
     }
 
-    private CustomField findStoryPointField() {
+    @Override
+    public CustomField findStoryPointField() {
         PluginSettings settings = pluginSettingsFactory.createGlobalSettings();
         String field = (String) settings.get(ConfigureScrumPokerAction.STORY_POINT_FIELD_NAME);
         String storyPointFieldName = field != null ? field : ConfigureScrumPokerAction.DEFAULT_FIELD_FOR_STORY_POINTS;
@@ -94,7 +95,7 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
             }
         }
 
-        return null;
+        throw new IllegalStateException("Could not find custom field for story points.");
     }
 
 }
