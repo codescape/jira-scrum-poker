@@ -6,14 +6,20 @@ import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class ScrumPokerSessionTest {
 
+    private ScrumPokerSession session;
+
+    @Before
+    public void before() {
+        session = new ScrumPokerSession();
+    }
+
     @Test
     public void shouldShowTheDeckAfterRevealing() {
-        ScrumPokerSession session = new ScrumPokerSession();
-
         session.updateCard("user1", "8");
         session.revealDeck();
 
@@ -22,8 +28,6 @@ public class ScrumPokerSessionTest {
 
     @Test
     public void shouldHideTheDeckAfterUpdatingCard() {
-        ScrumPokerSession session = new ScrumPokerSession();
-
         session.updateCard("user1", "8");
         session.revealDeck();
         session.updateCard("user1", "5");
@@ -33,8 +37,6 @@ public class ScrumPokerSessionTest {
 
     @Test
     public void shouldNotRevealAnEmptyDeck() {
-        ScrumPokerSession session = new ScrumPokerSession();
-
         session.revealDeck();
 
         assertThat(session.isVisible(), is(false));
@@ -42,8 +44,6 @@ public class ScrumPokerSessionTest {
 
     @Test
     public void shouldAddCardIsUserHasNoCardYet() {
-        ScrumPokerSession session = new ScrumPokerSession();
-
         session.updateCard("user1", "8");
         session.updateCard("user2", "3");
 
@@ -54,8 +54,6 @@ public class ScrumPokerSessionTest {
 
     @Test
     public void shouldUpdateExistingCardForSameUser() {
-        ScrumPokerSession session = new ScrumPokerSession();
-
         session.updateCard("user1", "8");
         session.updateCard("user1", "3");
 
@@ -65,8 +63,6 @@ public class ScrumPokerSessionTest {
 
     @Test
     public void shouldClearAllCardsWhenResettingTheDeck() {
-        ScrumPokerSession session = new ScrumPokerSession();
-
         session.updateCard("user1", "8");
         session.resetDeck();
 
@@ -75,8 +71,6 @@ public class ScrumPokerSessionTest {
 
     @Test
     public void shouldCalculateMinimumAndMaximumWithSimpleListOfCards() {
-        ScrumPokerSession session = new ScrumPokerSession();
-
         session.updateCard("user1", "8");
         session.updateCard("user2", "2");
         session.updateCard("user3", "13");
@@ -87,8 +81,6 @@ public class ScrumPokerSessionTest {
 
     @Test
     public void shouldCalculateMinimumAndMaximumWithDuplicateCards() {
-        ScrumPokerSession session = new ScrumPokerSession();
-
         session.updateCard("user1", "3");
         session.updateCard("user2", "3");
         session.updateCard("user3", "100");
@@ -99,8 +91,6 @@ public class ScrumPokerSessionTest {
 
     @Test
     public void shouldCalculateMinimumAndMaximumIgnoringQuestionmark() {
-        ScrumPokerSession session = new ScrumPokerSession();
-
         session.updateCard("user1", "8");
         session.updateCard("user2", "?");
         session.updateCard("user3", "3");
@@ -111,8 +101,6 @@ public class ScrumPokerSessionTest {
 
     @Test
     public void shouldCalculateBoundedVotesForNormalRange() {
-        ScrumPokerSession session = new ScrumPokerSession();
-
         session.updateCard("user1", "8");
         session.updateCard("user2", "?");
         session.updateCard("user3", "3");
@@ -122,8 +110,6 @@ public class ScrumPokerSessionTest {
 
     @Test
     public void shouldCalculateBoundedVotesForWideRange() {
-        ScrumPokerSession session = new ScrumPokerSession();
-
         session.updateCard("user1", "2");
         session.updateCard("user2", "?");
         session.updateCard("user3", "40");
@@ -133,8 +119,6 @@ public class ScrumPokerSessionTest {
 
     @Test
     public void shouldCalculateBoundedVotesForExactMatch() {
-        ScrumPokerSession session = new ScrumPokerSession();
-
         session.updateCard("user1", "2");
         session.updateCard("user2", "2");
         session.updateCard("user3", "2");
