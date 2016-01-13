@@ -1,7 +1,9 @@
 package net.congstar.jira.plugins.scrumpoker.data;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.joda.time.DateTime;
 
@@ -20,7 +22,9 @@ public class DefaultPlanningPokerStorage implements PlanningPokerStorage {
 
     @Override
     public ScrumPokerSession sessionForIssue(String issueKey) {
-        removeOldScrumPokerSessions();
+        synchronized (scrumPokerSessions) {
+            removeOldScrumPokerSessions();
+        }
         ScrumPokerSession scrumPokerSession = scrumPokerSessions.get(issueKey);
         if (scrumPokerSession == null) {
             scrumPokerSession = new ScrumPokerSession();
@@ -33,9 +37,10 @@ public class DefaultPlanningPokerStorage implements PlanningPokerStorage {
      * Removes all sessions that are older than one day.
      */
     private void removeOldScrumPokerSessions() {
-        for (String issueKey : scrumPokerSessions.keySet()) {
-            if (scrumPokerSessions.get(issueKey).getStartedOn().isBefore(DateTime.now().minusDays(1))) {
-                scrumPokerSessions.remove(issueKey);
+        Iterator<Entry<String, ScrumPokerSession>> iterator = scrumPokerSessions.entrySet().iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().getValue().getStartedOn().isBefore(DateTime.now().minusDays(1))) {
+                iterator.remove();
             }
         }
     }

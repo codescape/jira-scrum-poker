@@ -20,6 +20,10 @@ Due to deprecated classes in older versions of the Atlassian SDK, starting with 
 
 ## Changelog
 
+### 1.3.6
+
+* Improve cleanup of old Scrum Poker sessions
+
 ### 1.3.5
 
 * Scrum Poker sessions can be started for all issue types with the configured custom field
