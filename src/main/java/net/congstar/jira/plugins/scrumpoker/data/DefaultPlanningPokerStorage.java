@@ -33,6 +33,11 @@ public class DefaultPlanningPokerStorage implements PlanningPokerStorage {
         return scrumPokerSession;
     }
 
+    @Override
+    public Map<String, ScrumPokerSession> getSessions() {
+        return scrumPokerSessions;
+    }
+
     /**
      * Removes all sessions that are older than one day.
      */

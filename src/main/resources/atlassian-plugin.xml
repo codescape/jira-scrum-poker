@@ -51,6 +51,25 @@
         <condition class="net.congstar.jira.plugins.scrumpoker.StoryTypeCondition" />
     </web-item>
 
+    <web-section key="pp_sessions" location="jira.agile.board.tools" weight="10">
+        <label>Scrum Poker</label>
+    </web-section>
+
+    <web-item section="pp_sessions" key="my-custom-web-item" weight="10">
+        <label>Aktuelle Sitzungen</label>
+        <link>/secure/planningPokerSessions.jspa?board=$board.id</link>
+        <param name="isPopupLink">true</param>
+    </web-item>
+
+    <webwork1 key="pp_showSessions" name="Start PP Action" class="java.lang.Object">
+        <actions>
+            <action name="net.congstar.jira.plugins.scrumpoker.action.ShowSessionsAction" alias="planningPokerSessions"
+                    roles-required="use">
+                <view name="start">/templates/planningPokerSessions.vm</view>
+            </action>
+        </actions>
+    </webwork1>
+
     <webwork1 key="pp_startPP" name="Start PP Action" class="java.lang.Object">
         <actions>
             <action name="net.congstar.jira.plugins.scrumpoker.action.StartPlanningPoker" alias="startPlanningPoker"

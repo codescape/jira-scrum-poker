@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title>${i18n.getText("pp.scrumPoker")}</title>
+    <link rel="stylesheet" type="text/css"
+          href="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.css"
+          media="all"/>
+    <script src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.js"/>
+</head>
+<body>
+<div class="issue-container " style="background-color: #fff">
+    <div id="issue-content" class="issue-edit-form">
+        <header id="stalker" class="issue-header js-stalker">
+            <div class="issue-header-content">
+                <header class="aui-page-header">
+                    <div class="aui-page-header-inner">
+                        <div class="aui-page-header-main">
+                            <ol class="aui-nav aui-nav-breadcrumbs __skate">
+                                <li>Scrum Poker</li>
+                            </ol>
+                            <h1 id="summary-val" class="editable-field inactive">Aktuelle Sitzungen<span
+                                class="overlay-icon aui-icon aui-icon-small"></span></h1>
+                        </div>
+                        <div class="aui-page-header-actions">
+                            <div id="issue-header-pager"></div>
+                        </div>
+                    </div>
+                </header>
+            </div>
+        </header>
+        <div class="issue-body-content">
+            <div class="aui-group issue-body">
+                <div class="aui-item issue-main-column">
+                    <div class="module toggle-wrap" id="descriptionmodule">
+                        <div class="mod-content">
+                            <div class="field-ignore-highlight" id="description-val">
+                                <div class="user-content-block">
+                                    <p>Aktuell sind die folgenden Sitzungen aktiv:</p>
+                                    <ul>
+                                        #foreach($planningPokerSession in $planningPokerStorage.sessions.entrySet())
+                                            <li>
+                                                <a href="${req.contextPath}/secure/startPlanningPoker.jspa?issueKey=$planningPokerSession.key">$planningPokerSession.key</a> ($planningPokerSession.value.startedOn))
+                                            </li>
+                                        #end
+                                    </ul>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
