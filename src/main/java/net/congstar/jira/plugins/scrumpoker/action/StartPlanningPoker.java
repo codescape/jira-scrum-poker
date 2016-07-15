@@ -32,8 +32,6 @@ public final class StartPlanningPoker extends ScrumPokerAction {
 
     private final StoryPointFieldSupport storyPointFieldSupport;
 
-    private String issueSummary;
-
     private Double issueStoryPoints;
 
     private String issueKey;
@@ -81,10 +79,6 @@ public final class StartPlanningPoker extends ScrumPokerAction {
 
     public String getIssueProjectName() {
         return issueProjectName;
-    }
-
-    public String getIssueSummary() {
-        return issueSummary;
     }
 
     public Map<String, ScrumPokerCard> getCardDeck() {
@@ -161,8 +155,8 @@ public final class StartPlanningPoker extends ScrumPokerAction {
         }
 
         pokerSession = planningPokerStorage.sessionForIssue(issueKey);
+        pokerSession.setIssueSummary(issue.getSummary());
 
-        issueSummary = issue.getSummary();
         issueProjectName = issue.getProjectObject().getName();
         issueProjectKey = issue.getProjectObject().getKey();
         issueStoryPoints = storyPointFieldSupport.getValue(issueKey);

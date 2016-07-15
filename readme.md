@@ -20,6 +20,10 @@ Due to deprecated classes in older versions of the Atlassian SDK, starting with 
 
 ## Changelog
 
+### 1.3.7
+
+* Overview page with all currently active Scrum Poker sessions
+
 ### 1.3.6
 
 * Improve cleanup of old Scrum Poker sessions

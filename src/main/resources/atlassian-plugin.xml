@@ -52,12 +52,12 @@
     </web-item>
 
     <web-section key="pp_sessions" location="jira.agile.board.tools" weight="10">
-        <label>Scrum Poker</label>
+        <label key="pp.scrumPoker">Scrum Poker</label>
     </web-section>
 
     <web-item section="pp_sessions" key="my-custom-web-item" weight="10">
-        <label>Aktuelle Sitzungen</label>
-        <link>/secure/planningPokerSessions.jspa?board=$board.id</link>
+        <label key="scrumpoker.sessions.active">Aktuelle Sitzungen</label>
+        <link>/secure/planningPokerSessions.jspa</link>
         <param name="isPopupLink">true</param>
     </web-item>
 

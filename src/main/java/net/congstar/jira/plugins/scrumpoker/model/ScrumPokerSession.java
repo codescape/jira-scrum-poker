@@ -22,7 +22,17 @@ public class ScrumPokerSession {
     private final DateTime startedOn;
 
     private String confirmedVote;
+    
+    private String issueSummary;
 
+    public String getIssueSummary() {
+        return issueSummary;
+    }
+    
+    public void setIssueSummary(String issueSummary) {
+        this.issueSummary = issueSummary;
+    }
+    
     /**
      * Creates a new {@link ScrumPokerSession} and saves the start date and time.
      */
