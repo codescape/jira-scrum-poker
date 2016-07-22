@@ -1,6 +1,6 @@
 # Scrum Poker
 
-This plugin provides a Scrum poker solution for JIRA that integrates well with the JIRA Agile estimation custom field which is used to calculate the velocity of a sprint.
+This plugin provides a Scrum Poker solution for JIRA that integrates well with the JIRA Agile estimation custom field which is used to calculate the velocity of a sprint.
 
 ## Getting Started
 
