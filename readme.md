@@ -20,6 +20,10 @@ Due to deprecated classes in older versions of the Atlassian SDK, starting with 
 
 ## Changelog
 
+### 1.3.9
+
+* fix for URL in session overview
+
 ### 1.3.8
 
 * navigate to issue for estimated Scrum Poker sessions in session overview

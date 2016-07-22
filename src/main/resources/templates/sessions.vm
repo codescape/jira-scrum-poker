@@ -41,7 +41,7 @@
                 	#if(!$planningPokerSession.value.confirmedVote)
                 		#set($found = true)
                     	<li>
-                        	<a href="${req.contextPath}/secure/startPlanningPoker.jspa?issueKey=$planningPokerSession.key">$planningPokerSession.key: $planningPokerSession.value.issueSummary</a>
+                        	<a href="${req.contextPath}/secure/scrumPokerStart.jspa?issueKey=$planningPokerSession.key">$planningPokerSession.key: $planningPokerSession.value.issueSummary</a>
                     	</li>
                     #end
                 #end
