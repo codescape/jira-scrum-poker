@@ -1,0 +1,74 @@
+<html>
+<head>
+    <title>${i18n.getText("pp.scrumPoker")}</title>
+    <link rel="stylesheet" type="text/css"
+          href="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.css"
+          media="all"/>
+    <script src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.js"/>
+</head>
+<body>
+
+<header class="aui-page-header">
+    <div class="aui-page-header-inner">
+        <div class="aui-page-header-image">
+            <span class="aui-avatar aui-avatar-large aui-avatar-project">
+                <span class="aui-avatar-inner">
+                    <img alt="Scrum Poker Logo" src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/pluginLogo.png">
+                </span>
+            </span>
+        </div>
+        <div class="aui-page-header-main">
+            <ol class="aui-nav aui-nav-breadcrumbs">
+                <li class="aui-nav-selected">Scrum Poker</li>
+            </ol>
+            <h1>Aktuelle Sitzungen</h1>
+        </div>
+        <div class="aui-page-header-actions">
+            <div class="aui-buttons">
+                <button class="aui-button aui-button-light" onclick="javascript:history.back()">Zurück</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="aui-page-panel">
+    <div class="aui-page-panel-inner">
+        <section class="aui-page-panel-content">
+            <p>Aktuell sind die folgenden Sitzungen aktiv:</p>
+            <ul>
+                #set($found = false)            
+                #foreach($planningPokerSession in $planningPokerStorage.sessions.entrySet())
+                	#if(!$planningPokerSession.value.confirmedVote)
+                		#set($found = true)
+                    	<li>
+                        	<a href="${req.contextPath}/secure/startPlanningPoker.jspa?issueKey=$planningPokerSession.key">$planningPokerSession.key: $planningPokerSession.value.issueSummary</a>
+                    	</li>
+                    #end
+                #end
+                #if (!$found)
+                	<li><i>Keine Sitzungen gefunden</i></li>
+                #end                
+            </ul>
+            <p>Abgelaufene Sitzungen mit bestätigter Schätzung:</p>
+            <ul>
+            	#set($found = false)
+                #foreach($planningPokerSession in $planningPokerStorage.sessions.entrySet())
+                	#if($planningPokerSession.value.confirmedVote)
+                		#set($found = true)
+                    	<li>
+                        	<a href="${req.contextPath}/secure/startPlanningPoker.jspa?issueKey=$planningPokerSession.key">$planningPokerSession.key: $planningPokerSession.value.issueSummary</a>
+                    	</li>
+                    #end
+                #end
+                #if(!$found)
+                	<li><i>Keine Sitzungen gefunden</i></li>
+                #end
+            </ul>            
+        </section>
+    </div>
+</div>
+
+</body>
+</html>
+
+

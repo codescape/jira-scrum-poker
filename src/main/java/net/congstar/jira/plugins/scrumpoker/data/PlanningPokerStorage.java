@@ -2,6 +2,8 @@ package net.congstar.jira.plugins.scrumpoker.data;
 
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
 
+import java.util.Map;
+
 public interface PlanningPokerStorage {
 
     /**
@@ -11,5 +13,7 @@ public interface PlanningPokerStorage {
      * @return
      */
     ScrumPokerSession sessionForIssue(String issueKey);
+
+    Map<String, ScrumPokerSession> getSessions();
 
 }

@@ -5,63 +5,57 @@
     <script src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.js"/>
   </head>
   <body>
-    <div class="issue-container " style="background-color: #fff">
-      <div id="issue-content" class="issue-edit-form">
-        <header id="stalker" class="issue-header js-stalker">
-          <div class="issue-header-content">
-            <header class="aui-page-header">
-              <div class="aui-page-header-inner">
-                <div class="aui-page-header-image">
-                  <span class="aui-avatar aui-avatar-large aui-avatar-project jira-system-avatar" id="10001">
-                    <span class="aui-avatar-inner"><img src="$req.contextPath/secure/projectavatar?avatarId=10011" id="project-avatar"></span>
-                  </span>
-                </div>
-                <div class="aui-page-header-main">
-                  <ol class="aui-nav aui-nav-breadcrumbs __skate">
-                    <li><a href="$req.contextPath/browse/$issueProjectKey" id="project-name-val">$issueProjectName</a></li>
-                    <li><a rel="10006" id="key-val" href="$req.contextPath/browse/$issueKey" data-issue-key="$issueKey" class="issue-link">$issueKey</a></li>
-                  </ol>
-                  <h1 id="summary-val" class="editable-field inactive">$issueSummary<span class="overlay-icon aui-icon aui-icon-small"></span></h1>
-                </div>
-                <div class="aui-page-header-actions">
-                  <div id="issue-header-pager"></div>
-                </div>
-              </div>
-            </header>
-          </div>
-        </header>			
-        <div class="issue-body-content">
-          <div class="aui-group issue-body">
-            <div class="aui-item issue-main-column">
-              <div class="module toggle-wrap" id="descriptionmodule">
-                <div class="poker-header">
-                  <h2>$i18n.getText("pp.storyDescription")</h2>
-                </div>
-                <div class="mod-content">
-                  <div class="field-ignore-highlight" id="description-val">
-                    <div class="user-content-block">
-                      #set($issueDescriptionWithHtml = $issueDescription)
-                      <p>$issueDescriptionWithHtml</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="aui-item issue-side-column" id="viewissuesidebar">
-              <div class="poker-header">
-                <h2>$i18n.getText("pp.scrumPoker")</h2>
-              </div>
-              <div id="card-section"></div>
-              <a href="$req.contextPath$issueReturnUrl" style="margin-top: 3em; display: block">$i18n.getText("pp.back")</a>
-            </div>
-          </div>
+<header class="aui-page-header">
+    <div class="aui-page-header-inner">
+        <div class="aui-page-header-image">
+            <span class="aui-avatar aui-avatar-large aui-avatar-project">
+                <span class="aui-avatar-inner">
+                    <img alt="Scrum Poker Logo" src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/pluginLogo.png">
+                </span>
+            </span>
         </div>
-      </div>
+        <div class="aui-page-header-main">
+            <ol class="aui-nav aui-nav-breadcrumbs">
+                <li><a href="$req.contextPath/browse/$issueProjectKey" id="project-name-val">$issueProjectName</a></li>
+                <li><a rel="10006" id="key-val" href="$req.contextPath/browse/$issueKey" data-issue-key="$issueKey" class="issue-link">$issueKey</a></li>
+            </ol>
+            <h1>$pokerSession.issueSummary</h1>
+        </div>
+        <div class="aui-page-header-actions">
+            <div class="aui-buttons">
+            	<a href="$req.contextPath$issueReturnUrl"><button class="aui-button aui-button-light">$i18n.getText("pp.back")</button></a>
+            </div>
+        </div>
     </div>
-    <script>
-      AJS.toInit(function(){
-        poll("$issueKey");
-      });
-    </script>
+</header>
+
+<section id="content" role="main">
+    <div class="aui-page-panel" style="margin: 0;">
+        <div class="aui-page-panel-inner">
+            <section class="aui-page-panel-content">
+				<div class="poker-header">
+        			<h2>$i18n.getText("pp.storyDescription")</h2>
+    			</div>
+   				<div class="mod-content">            	
+					#set($issueDescriptionWithHtml = $issueDescription)
+					<p>$issueDescriptionWithHtml</p>
+				</div>
+            </section>
+            <aside class="aui-page-panel-sidebar">
+            	<div class="poker-header">
+        			<h2>$i18n.getText("pp.scrumPoker")</h2>
+        		</div>               
+                <div id="card-section"></div>
+            </aside>
+        </div>
+    </div>
+</section>
+
+<script>
+  AJS.toInit(function(){
+    poll("$issueKey");
+  });
+</script>
+
   </body>
 </html>
