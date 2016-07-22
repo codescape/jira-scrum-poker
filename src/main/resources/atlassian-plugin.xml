@@ -2,6 +2,7 @@
     plugins-version="2">
 
     <!-- plugin coordinates -->
+
     <plugin-info>
         <description>${project.description}</description>
         <version>${project.version}</version>
@@ -11,10 +12,12 @@
         <param name="configure.url">/secure/admin/scrumPokerConfiguration.jspa</param>
     </plugin-info>
 
-    <!-- add our i18n resource -->
+    <!-- i18n message bundle -->
+
     <resource type="i18n" name="i18n" location="scrum-poker" />
 
-    <!-- add our web resources -->
+    <!-- static web resources -->
+
     <web-resource key="scrum-poker-resources" name="Scrum Poker Web Resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
         <resource type="download" name="scrum-poker.css" location="/css/scrum-poker.css" />
