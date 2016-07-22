@@ -22,7 +22,7 @@ public class ChooseCardAction extends ScrumPokerAction {
 
         planningPokerStorage.sessionForIssue(issueKey).updateCard(getLoggedInApplicationUser().getKey(), chosenCard);
 
-        return getRedirect("/secure/startPlanningPoker.jspa?issueKey=" + issueKey);
+        return getRedirect("/secure/scrumPokerStart.jspa?issueKey=" + issueKey);
     }
 
 }

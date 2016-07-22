@@ -2,7 +2,7 @@ function poll(issueKey) {
 
     jQuery.ajax({
         type: 'POST',
-        url: "/jira/secure/startPlanningPoker.jspa",
+        url: "/jira/secure/scrumPokerStart.jspa",
         data: "issueKey=" + issueKey + "&action=update",
         success: function(data) {
             jQuery('#card-section').html(data);

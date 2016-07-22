@@ -1,4 +1,5 @@
-<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}"
+    plugins-version="2">
 
     <!-- plugin coordinates -->
     <plugin-info>
@@ -7,7 +8,7 @@
         <vendor name="${project.organization.name}" url="${project.organization.url}" />
         <param name="plugin-icon">images/pluginIcon.png</param>
         <param name="plugin-logo">images/pluginLogo.png</param>
-        <param name="configure.url">/secure/admin/configureScrumPokerAction.jspa</param>
+        <param name="configure.url">/secure/admin/scrumPokerConfiguration.jspa</param>
     </plugin-info>
 
     <!-- add our i18n resource -->
@@ -39,17 +40,21 @@
         <interface>net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport</interface>
     </component>
 
+    <!-- buttons to start a new session -->
+
     <web-item key="pp_start" name="PP-Start" section="jira.issue.tools" weight="10">
         <label key="planningpoker.ppStart" />
-        <link linkId="callPP">/secure/startPlanningPoker.jspa?issueKey=$issue.key</link>
+        <link linkId="callPP">/secure/scrumPokerStart.jspa?issueKey=$issue.key</link>
         <condition class="net.congstar.jira.plugins.scrumpoker.StoryTypeCondition" />
     </web-item>
 
     <web-item key="pp_start_agile" name="PP-Start" section="operations-top-level" weight="10">
         <label key="planningpoker.ppStart" />
-        <link linkId="callPP">/secure/startPlanningPoker.jspa?issueKey=$issue.key</link>
+        <link linkId="callPP">/secure/scrumPokerStart.jspa?issueKey=$issue.key</link>
         <condition class="net.congstar.jira.plugins.scrumpoker.StoryTypeCondition" />
     </web-item>
+
+    <!-- dropdown on boards -->
 
     <web-section key="pp_sessions" location="jira.agile.board.tools" weight="10">
         <label key="pp.scrumPoker">Scrum Poker</label>
@@ -57,38 +62,46 @@
 
     <web-item section="pp_sessions" key="my-custom-web-item" weight="10">
         <label key="scrumpoker.sessions.active">Aktuelle Sitzungen</label>
-        <link>/secure/planningPokerSessions.jspa</link>
+        <link>/secure/scrumPokerSessions.jspa</link>
         <param name="isPopupLink">true</param>
     </web-item>
 
-    <webwork1 key="pp_showSessions" name="Start PP Action" class="java.lang.Object">
+    <!-- currently active sessions -->
+
+    <webwork1 key="scrumPokerSessions" name="Start PP Action" class="java.lang.Object">
         <actions>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.ShowSessionsAction" alias="planningPokerSessions"
-                    roles-required="use">
-                <view name="start">/templates/planningPokerSessions.vm</view>
+            <action name="net.congstar.jira.plugins.scrumpoker.action.ShowSessionsAction" alias="scrumPokerSessions"
+                roles-required="use">
+                <view name="start">/templates/sessions.vm</view>
             </action>
         </actions>
     </webwork1>
 
-    <webwork1 key="pp_startPP" name="Start PP Action" class="java.lang.Object">
+    <!-- starting a new session -->
+
+    <webwork1 key="scrumPokerStart" name="scrumPokerStart" class="java.lang.Object">
         <actions>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.StartPlanningPoker" alias="startPlanningPoker"
+            <action name="net.congstar.jira.plugins.scrumpoker.action.StartPlanningPoker" alias="scrumPokerStart"
                 roles-required="use">
-                <view name="start">/templates/ppStart.vm</view>
+                <view name="start">/templates/start.vm</view>
                 <view name="update">/templates/update.vm</view>
-                <view name="error">/templates/ppStartError.vm</view>
+                <view name="error">/templates/error.vm</view>
             </action>
         </actions>
     </webwork1>
 
-    <webwork1 key="configureScrumPokerAction" name="configureScrumPokerAction" class="java.lang.Object">
+    <!-- configure scrum poker -->
+
+    <webwork1 key="scrumPokerConfiguration" name="scrumPokerConfiguration" class="java.lang.Object">
         <actions>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction" alias="configureScrumPokerAction"
+            <action name="net.congstar.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction" alias="scrumPokerConfiguration"
                 roles-required="use">
-                <view name="success">/templates/ppConfigure.vm</view>
+                <view name="success">/templates/configuration.vm</view>
             </action>
         </actions>
     </webwork1>
+
+    <!-- choose a card -->
 
     <webwork1 key="chooseCardAction" name="chooseCardAction" class="java.lang.Object" roles-required="use">
         <actions>
@@ -96,11 +109,15 @@
         </actions>
     </webwork1>
 
+    <!-- reveal the deck -->
+
     <webwork1 key="revealDeckAction" name="revealDeckAction" class="java.lang.Object" roles-required="use">
         <actions>
             <action name="net.congstar.jira.plugins.scrumpoker.action.RevealDeckAction" alias="revealDeckAction" />
         </actions>
     </webwork1>
+
+    <!-- refresh the deck -->
 
     <webwork1 key="refreshDeckAction" name="refreshDeckAction" class="java.lang.Object" roles-required="use">
         <actions>
@@ -108,11 +125,16 @@
         </actions>
     </webwork1>
 
-    <webwork1 key="confirmEstimationAction" name="confirmEstimationAction" class="java.lang.Object" roles-required="use">
+    <!-- confirm an estimation -->
+
+    <webwork1 key="confirmEstimationAction" name="confirmEstimationAction" class="java.lang.Object"
+        roles-required="use">
         <actions>
             <action name="net.congstar.jira.plugins.scrumpoker.action.ConfirmEstimationAction" alias="confirmEstimationAction" />
         </actions>
     </webwork1>
+
+    <!-- reset the deck -->
 
     <webwork1 key="resetDeckAction" name="resetDeckAction" class="java.lang.Object" roles-required="use">
         <actions>

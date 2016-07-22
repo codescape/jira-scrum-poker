@@ -20,6 +20,11 @@ Due to deprecated classes in older versions of the Atlassian SDK, starting with 
 
 ## Changelog
 
+### 1.3.8
+
+* navigate to issue for estimated Scrum Poker sessions in session overview
+* new naming for Scrum Poker URLs reflecting the plugin name
+
 ### 1.3.7
 
 * Overview page with all currently active Scrum Poker sessions

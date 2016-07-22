@@ -21,7 +21,7 @@ public class ResetDeckAction extends ScrumPokerAction {
 
         planningPokerStorage.sessionForIssue(issueKey).resetDeck();
 
-        return getRedirect("/secure/startPlanningPoker.jspa?issueKey=" + issueKey);
+        return getRedirect("/secure/scrumPokerStart.jspa?issueKey=" + issueKey);
     }
 
 }

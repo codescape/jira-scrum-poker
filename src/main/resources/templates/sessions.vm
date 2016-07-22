@@ -56,7 +56,7 @@
                 	#if($planningPokerSession.value.confirmedVote)
                 		#set($found = true)
                     	<li>
-                        	<a href="${req.contextPath}/secure/startPlanningPoker.jspa?issueKey=$planningPokerSession.key">$planningPokerSession.key: $planningPokerSession.value.issueSummary</a>
+                        	<a href="$req.contextPath/browse/$planningPokerSession.key">$planningPokerSession.key: $planningPokerSession.value.issueSummary</a> (Schätzung: $planningPokerSession.value.confirmedVote)
                     	</li>
                     #end
                 #end

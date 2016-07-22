@@ -21,7 +21,7 @@ public class RevealDeckAction extends ScrumPokerAction {
 
         planningPokerStorage.sessionForIssue(issueKey).revealDeck();
 
-        return getRedirect("/secure/startPlanningPoker.jspa?issueKey=" + issueKey);
+        return getRedirect("/secure/scrumPokerStart.jspa?issueKey=" + issueKey);
     }
 
 }

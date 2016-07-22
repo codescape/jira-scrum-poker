@@ -14,7 +14,7 @@ public class RefreshDeckAction extends ScrumPokerAction {
     protected String doExecute() throws Exception {
         String issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
 
-        return getRedirect("/secure/startPlanningPoker.jspa?issueKey=" + issueKey);
+        return getRedirect("/secure/scrumPokerStart.jspa?issueKey=" + issueKey);
     }
 
 }
