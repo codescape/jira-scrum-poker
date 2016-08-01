@@ -20,6 +20,12 @@ Due to deprecated classes in older versions of the Atlassian SDK, starting with 
 
 ## Changelog
 
+### 1.3.10
+
+* inject components instead of programmatically getting them
+* bounded votes are only exposed through Scrum Poker session now
+* overall cleanup (formatting and imports)
+
 ### 1.3.9
 
 * fix for URL in session overview

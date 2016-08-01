@@ -1,13 +1,13 @@
 package net.congstar.jira.plugins.scrumpoker.action;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConfigureScrumPokerAction extends JiraWebActionSupport {
 

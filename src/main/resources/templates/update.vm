@@ -34,7 +34,7 @@
     </div>
     <div class="mod-content">
         <ul id="selectVote">
-            #foreach ($vote in $boundedVotes)
+            #foreach ($vote in $pokerSession.boundedVotes)
                 <li><a href="$req.contextPath/secure/confirmEstimationAction.jspa?issueKey=$issueKey&finalVote=$vote"><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/cards_active/$cardDeck.get($vote).image"></a></li>
             #end
         </ul>

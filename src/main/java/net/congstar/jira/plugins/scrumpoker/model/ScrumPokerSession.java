@@ -1,13 +1,13 @@
 package net.congstar.jira.plugins.scrumpoker.model;
 
+import org.apache.commons.lang3.math.NumberUtils;
+import org.joda.time.DateTime;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang3.math.NumberUtils;
-import org.joda.time.DateTime;
 
 /**
  * A {@link ScrumPokerSession} represents a Scrum poker session that is associated with exactly one issue. It holds all information required to run a poker session and support the

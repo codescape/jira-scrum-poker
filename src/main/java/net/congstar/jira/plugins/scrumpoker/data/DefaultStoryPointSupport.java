@@ -1,10 +1,5 @@
 package net.congstar.jira.plugins.scrumpoker.data;
 
-import java.text.NumberFormat;
-import java.util.Map;
-
-import net.congstar.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction;
-
 import com.atlassian.jira.bc.issue.IssueService;
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.IssueInputParameters;
@@ -16,6 +11,10 @@ import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.util.ErrorCollection;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
+import net.congstar.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction;
+
+import java.text.NumberFormat;
+import java.util.Map;
 
 public class DefaultStoryPointSupport implements StoryPointFieldSupport {
 

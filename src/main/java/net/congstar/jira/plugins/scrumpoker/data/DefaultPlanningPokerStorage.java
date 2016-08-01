@@ -1,13 +1,12 @@
 package net.congstar.jira.plugins.scrumpoker.data;
 
+import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
+import org.joda.time.DateTime;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import org.joda.time.DateTime;
-
-import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
 
 /**
  * Simple implementation using a Map to store the data.

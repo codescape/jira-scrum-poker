@@ -1,17 +1,5 @@
 package net.congstar.jira.plugins.scrumpoker.action;
 
-import java.net.URL;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
-import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
-import net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
-import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerCard;
-import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerCards;
-import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
-
-import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.IssueFieldConstants;
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
@@ -21,16 +9,35 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
 import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
+import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
+import net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
+import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerCard;
+import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerCards;
+import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
+
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public final class StartPlanningPoker extends ScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
+
+    /* components */
 
     private final IssueManager issueManager;
 
     private final PlanningPokerStorage planningPokerStorage;
 
     private final StoryPointFieldSupport storyPointFieldSupport;
+
+    private final UserManager userManager;
+
+    private final RendererManager rendererManager;
+
+    private final FieldLayoutManager fieldLayoutManager;
+
+    /* view model */
 
     private Double issueStoryPoints;
 
@@ -43,12 +50,6 @@ public final class StartPlanningPoker extends ScrumPokerAction {
     private String issueReturnUrl = "test";
 
     private Map<String, ScrumPokerCard> cardDeck = new HashMap<String, ScrumPokerCard>();
-
-    private FieldLayoutManager fieldLayoutManager;
-
-    private RendererManager rendererManager;
-
-    private UserManager userManager;
 
     private ScrumPokerSession pokerSession;
 
@@ -97,14 +98,13 @@ public final class StartPlanningPoker extends ScrumPokerAction {
         return pokerSession;
     }
 
-    public StartPlanningPoker(IssueManager issueManager, PlanningPokerStorage planningPokerStorage, StoryPointFieldSupport storyPointFieldSupport, UserManager userManager) {
+    public StartPlanningPoker(IssueManager issueManager, PlanningPokerStorage planningPokerStorage, StoryPointFieldSupport storyPointFieldSupport, UserManager userManager, FieldLayoutManager fieldLayoutManager, RendererManager rendererManager) {
         this.issueManager = issueManager;
         this.planningPokerStorage = planningPokerStorage;
         this.storyPointFieldSupport = storyPointFieldSupport;
         this.userManager = userManager;
-
-        fieldLayoutManager = ComponentAccessor.getComponent(FieldLayoutManager.class);
-        rendererManager = ComponentAccessor.getComponent(RendererManager.class);
+        this.fieldLayoutManager = fieldLayoutManager;
+        this.rendererManager = rendererManager;
 
         for (ScrumPokerCard card : ScrumPokerCards.pokerDeck) {
             cardDeck.put(card.getName(), card);
@@ -165,10 +165,6 @@ public final class StartPlanningPoker extends ScrumPokerAction {
             return "update";
         } else
             return "start";
-    }
-
-    public Collection<String> getBoundedVotes() {
-        return pokerSession.getBoundedVotes();
     }
 
     public String getUsername(String key) {

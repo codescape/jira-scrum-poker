@@ -1,15 +1,11 @@
 package net.congstar.jira.plugins.scrumpoker;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
+import com.atlassian.jira.issue.CustomFieldManager;
+import com.atlassian.jira.issue.Issue;
+import com.atlassian.jira.issue.fields.CustomField;
+import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
+import com.atlassian.jira.user.ApplicationUser;
 import net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -18,11 +14,13 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import com.atlassian.jira.issue.CustomFieldManager;
-import com.atlassian.jira.issue.Issue;
-import com.atlassian.jira.issue.fields.CustomField;
-import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
-import com.atlassian.jira.user.ApplicationUser;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.when;
 
 public class StoryTypeConditionTest {
 
