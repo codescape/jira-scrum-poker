@@ -20,6 +20,10 @@ Due to deprecated classes in older versions of the Atlassian SDK, starting with 
 
 ## Changelog
 
+### 1.3.11
+
+* add Travis CI build
+
 ### 1.3.10
 
 * inject components instead of programmatically getting them
