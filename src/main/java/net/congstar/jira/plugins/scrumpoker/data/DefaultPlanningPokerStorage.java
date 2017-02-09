@@ -13,7 +13,7 @@ import java.util.Map.Entry;
  */
 public class DefaultPlanningPokerStorage implements PlanningPokerStorage {
 
-    private Map<String, ScrumPokerSession> scrumPokerSessions;
+    private final Map<String, ScrumPokerSession> scrumPokerSessions;
 
     public DefaultPlanningPokerStorage() {
         scrumPokerSessions = new HashMap<String, ScrumPokerSession>();
