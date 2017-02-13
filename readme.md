@@ -22,6 +22,11 @@ Due to deprecated classes in older versions of the Atlassian SDK, starting with 
 
 ## Changelog
 
+### 1.3.12
+
+* Overview page with all Scrum Poker sessions is accessible from currently opened session
+* Overview page with all Scrum Poker sessions shows start date of every Scrum Poker session
+
 ### 1.3.11
 
 * add Travis CI build

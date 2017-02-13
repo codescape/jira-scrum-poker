@@ -23,7 +23,7 @@
         </div>
         <div class="aui-page-header-actions">
             <div class="aui-buttons">
-            	<a href="$req.contextPath$issueReturnUrl"><button class="aui-button aui-button-light">$i18n.getText("pp.back")</button></a>
+            	<a href="$req.contextPath/secure/scrumPokerSessions.jspa"><button class="aui-button aui-button-light">$i18n.getText("scrumpoker.sessions.active")</button></a>
             </div>
         </div>
     </div>

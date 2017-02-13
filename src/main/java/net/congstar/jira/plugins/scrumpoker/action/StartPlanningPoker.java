@@ -127,7 +127,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
             return "error";
         }
 
-        if (action == null || (action != null && !action.equals("update"))) {
+        if (action == null || !action.equals("update")) {
             // weird hack to check whether we have been called from "outside"
             boolean outsideCall = true;
             String headerParam = getHttpRequest().getHeader(PARAM_REFERRER_HEADER);
