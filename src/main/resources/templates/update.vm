@@ -87,9 +87,9 @@
 		#end
 
         #if (!$pokerSession.visible && ($pokerSession.cards.entrySet().size() > 0))
-        	<a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("pp.reveal")</a>
+        	<a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("scrumpoker.reveal")</a>
         #else
-            <a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button poker-buttons-inactive">$i18n.getText("pp.reveal")</a>
+            <a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button poker-buttons-inactive">$i18n.getText("scrumpoker.reveal")</a>
         #end
     </div>
 
