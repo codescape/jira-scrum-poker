@@ -25,7 +25,7 @@
         </div>
         <div class="aui-page-header-actions">
             <div class="aui-buttons">
-                <button class="aui-button aui-button-light" onclick="javascript:history.back()">Zurück</button>
+                    <a href="$req.contextPath/secure/scrumPokerSessions.jspa"><button class="aui-button aui-button-light">$i18n.getText("scrumpoker.refresh")</button></a>
             </div>
         </div>
     </div>
