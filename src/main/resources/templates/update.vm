@@ -81,9 +81,9 @@
 
     <div class="poker-buttons">
         #if($pokerSession.cards.entrySet().size() > 0)
-            <a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("pp.reset")</a>
+            <a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("scrumpoker.reset")</a>
         #else
-        	<a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button poker-buttons-inactive">$i18n.getText("pp.reset")</a>
+        	<a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button poker-buttons-inactive">$i18n.getText("scrumpoker.reset")</a>
 		#end
 
         #if (!$pokerSession.visible && ($pokerSession.cards.entrySet().size() > 0))
@@ -108,7 +108,7 @@
         #end
 	</div>
     <div class="poker-buttons">
-		<a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("pp.reset")</a>
+		<a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("scrumpoker.reset")</a>
 	</div>
 
 #end
