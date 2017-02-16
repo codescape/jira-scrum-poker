@@ -22,6 +22,10 @@ Due to deprecated classes in older versions of the Atlassian SDK, starting with 
 
 ## Changelog
 
+### 1.3.13
+
+* Overview page supports refreshing with button
+
 ### 1.3.12
 
 * Overview page with all Scrum Poker sessions is accessible from currently opened session
