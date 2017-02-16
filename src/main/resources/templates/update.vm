@@ -100,7 +100,7 @@
 <!------------------------------------------------------------------------->
 
 	<div class="mod-content">
-	   	<p>$i18n.getText("pp.confirmedVote")</p>
+	   	<p>$i18n.getText("scrumpoker.confirmedvote")</p>
         #foreach($card in $cards)
             #if ($pokerSession.confirmedVote == $card.name)
             	<div style="text-align:center;"><img src="${req.contextPath}/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/cards/${card.image}"></div>
