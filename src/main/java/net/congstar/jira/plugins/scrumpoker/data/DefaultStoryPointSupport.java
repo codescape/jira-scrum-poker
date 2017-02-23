@@ -20,6 +20,7 @@ import java.util.Map;
 
 public class DefaultStoryPointSupport implements StoryPointFieldSupport {
 
+    private static final Logger log = LoggerFactory.getLogger(DefaultStoryPointSupport.class);
 
     private final PluginSettingsFactory pluginSettingsFactory;
 
@@ -41,7 +42,6 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
         ApplicationUser applicationUser = context.getUser();
         MutableIssue issue = issueService.getIssue(applicationUser, issueKey).getIssue();
         IssueInputParameters issueInputParameters = issueService.newIssueInputParameters();
-        IssueService.UpdateValidationResult updateValidationResult = issueService.validateUpdate(appuser, issue.getId(), issueInputParameters);
         issueInputParameters.addCustomFieldValue(findStoryPointField().getId(), NumberFormat.getInstance().format(newValue));
 
         IssueService.UpdateValidationResult updateValidationResult = issueService.validateUpdate(applicationUser, issue.getId(), issueInputParameters);
@@ -56,6 +56,7 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
     }
 
     private void logErrors(String issueKey, ErrorCollection errorCollection) {
+        log.error("Failed to update issue {} with errors:", issueKey);
         if (errorCollection.hasAnyErrors()) {
             Map<String, String> errors = errorCollection.getErrors();
             for (Map.Entry<String, String> message : errors.entrySet()) {
