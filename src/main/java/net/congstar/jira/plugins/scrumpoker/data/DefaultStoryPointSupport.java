@@ -12,18 +12,21 @@ import com.atlassian.jira.util.ErrorCollection;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 import net.congstar.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.NumberFormat;
 import java.util.Map;
 
 public class DefaultStoryPointSupport implements StoryPointFieldSupport {
 
+
     private final PluginSettingsFactory pluginSettingsFactory;
 
     private final CustomFieldManager customFieldManager;
 
     private final JiraAuthenticationContext context;
-    
+
     private final IssueService issueService;
 
     public DefaultStoryPointSupport(JiraAuthenticationContext context, IssueService issueService, IssueManager issueManager, PluginSettingsFactory pluginSettingsFactory, CustomFieldManager customFieldManager) {
@@ -35,50 +38,42 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
 
     @Override
     public void save(String issueKey, Double newValue) {
-        ApplicationUser appuser = context.getUser();
-        IssueService.IssueResult issueResult = issueService.getIssue(appuser, issueKey);
-        MutableIssue issue = issueResult.getIssue();
-
+        ApplicationUser applicationUser = context.getUser();
+        MutableIssue issue = issueService.getIssue(applicationUser, issueKey).getIssue();
         IssueInputParameters issueInputParameters = issueService.newIssueInputParameters();
-        CustomField customField = findStoryPointField();
-        issueInputParameters.addCustomFieldValue(customField.getId(), NumberFormat.getInstance().format(newValue));
         IssueService.UpdateValidationResult updateValidationResult = issueService.validateUpdate(appuser, issue.getId(), issueInputParameters);
+        issueInputParameters.addCustomFieldValue(findStoryPointField().getId(), NumberFormat.getInstance().format(newValue));
 
-        if (updateValidationResult.isValid()) {
-            IssueService.IssueResult updateResult = issueService.update(appuser, updateValidationResult);
-            if (!updateResult.isValid()) {
-                System.out.println("**** Issue update FAILED!");
-                ErrorCollection errors = updateResult.getErrorCollection();
-                if (errors.hasAnyErrors()) {
-                    Map<String, String> messages = errors.getErrors();
-                    for (Map.Entry<String, String> message : messages.entrySet()) {
-                        System.out.println(message.getKey() + " : " + message.getValue());
-                    }
-                }
-            }
+        IssueService.UpdateValidationResult updateValidationResult = issueService.validateUpdate(applicationUser, issue.getId(), issueInputParameters);
+        if (updateValidationResult.getErrorCollection().hasAnyErrors()) {
+            logErrors(issue.getKey(), updateValidationResult.getErrorCollection());
         } else {
-            System.out.println("**** Update validation FAILED!");
-            ErrorCollection errors = updateValidationResult.getErrorCollection();
-            if (errors.hasAnyErrors()) {
-                Map<String, String> messages = errors.getErrors();
-                for (Map.Entry<String, String> message : messages.entrySet()) {
-                    System.out.println(message.getKey() + " : " + message.getValue());
-                }
+            IssueService.IssueResult updateResult = issueService.update(applicationUser, updateValidationResult);
+            if (updateResult.getErrorCollection().hasAnyErrors()) {
+                logErrors(issue.getKey(), updateResult.getErrorCollection());
+            }
+        }
+    }
+
+    private void logErrors(String issueKey, ErrorCollection errorCollection) {
+        if (errorCollection.hasAnyErrors()) {
+            Map<String, String> errors = errorCollection.getErrors();
+            for (Map.Entry<String, String> message : errors.entrySet()) {
+                log.error("{}: {}", message.getKey(), message.getValue());
             }
         }
     }
 
     @Override
     public Double getValue(String issueKey) {
-        ApplicationUser appuser = context.getUser();
-        IssueService.IssueResult issueResult = issueService.getIssue(appuser, issueKey);
-        if (!issueResult.isValid()) {
-            System.out.println("**** Problem finding issue");
+        ApplicationUser applicationUser = context.getUser();
+        IssueService.IssueResult issueResult = issueService.getIssue(applicationUser, issueKey);
+        if (issueResult.getErrorCollection().hasAnyErrors()) {
+            log.warn("Could not find value for issue {}.", issueKey);
             return null;
         }
 
         MutableIssue issue = issueResult.getIssue();
-
         return (Double) issue.getCustomFieldValue(findStoryPointField());
     }
 
@@ -87,13 +82,11 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
         PluginSettings settings = pluginSettingsFactory.createGlobalSettings();
         String field = (String) settings.get(ConfigureScrumPokerAction.STORY_POINT_FIELD_NAME);
         String storyPointFieldName = field != null ? field : ConfigureScrumPokerAction.DEFAULT_FIELD_FOR_STORY_POINTS;
-
         for (CustomField customField : customFieldManager.getCustomFieldObjects()) {
             if (customField.getNameKey().equalsIgnoreCase(storyPointFieldName)) {
                 return customField;
             }
         }
-
         throw new IllegalStateException("Could not find custom field for story points.");
     }
 
