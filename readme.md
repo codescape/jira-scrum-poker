@@ -22,6 +22,12 @@ Due to deprecated classes in older versions of the Atlassian SDK, starting with 
 
 ## Changelog
 
+### 1.3.14
+
+* configuration of story point field is saved by id and not by name anymore (required reconfiguration)
+* configuration page includes link to issue tracker on GitHub
+* configuration page has alert if no story point field ist configured
+
 ### 1.3.13
 
 * Overview page supports refreshing with button

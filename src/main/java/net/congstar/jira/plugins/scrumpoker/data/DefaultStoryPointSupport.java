@@ -39,10 +39,11 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
 
     @Override
     public void save(String issueKey, Double newValue) {
+        log.info("Saving estimation {} for issue {}...", newValue, issueKey);
         ApplicationUser applicationUser = context.getUser();
         MutableIssue issue = issueService.getIssue(applicationUser, issueKey).getIssue();
         IssueInputParameters issueInputParameters = issueService.newIssueInputParameters();
-        issueInputParameters.addCustomFieldValue(findStoryPointField().getId(), NumberFormat.getInstance().format(newValue));
+        issueInputParameters.addCustomFieldValue(findStoryPointField().getIdAsLong(), NumberFormat.getInstance().format(newValue));
 
         IssueService.UpdateValidationResult updateValidationResult = issueService.validateUpdate(applicationUser, issue.getId(), issueInputParameters);
         if (updateValidationResult.getErrorCollection().hasAnyErrors()) {
@@ -81,14 +82,8 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
     @Override
     public CustomField findStoryPointField() {
         PluginSettings settings = pluginSettingsFactory.createGlobalSettings();
-        String field = (String) settings.get(ConfigureScrumPokerAction.STORY_POINT_FIELD_NAME);
-        String storyPointFieldName = field != null ? field : ConfigureScrumPokerAction.DEFAULT_FIELD_FOR_STORY_POINTS;
-        for (CustomField customField : customFieldManager.getCustomFieldObjects()) {
-            if (customField.getNameKey().equalsIgnoreCase(storyPointFieldName)) {
-                return customField;
-            }
-        }
-        throw new IllegalStateException("Could not find custom field for story points.");
+        String storyPointFieldId = (String) settings.get(ConfigureScrumPokerAction.STORY_POINT_FIELD);
+        return customFieldManager.getCustomFieldObject(storyPointFieldId);
     }
 
 }

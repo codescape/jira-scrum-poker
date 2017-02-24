@@ -1,34 +1,65 @@
 <html>
   <head>
-    <title>$i18n.getText("scrumpoker.config.title")</title>
+    <title>$i18n.getText("scrumpoker.title") - $i18n.getText("scrumpoker.config.title")</title>
   </head>
   <body>
-	<h1>$i18n.getText("scrumpoker.config.title")</h1>
+	<h1>$i18n.getText("scrumpoker.title")</h1>
 
-    <form class="aui long-label" action="scrumPokerConfiguration.jspa" method="post">
+    <div class="aui-group">
+        <div class="aui-item">
+            <table class="aui">
+                <thead>
+                    <tr>
+                        <th>$i18n.getText("scrumpoker.config.title")</th>
+                    </tr>
+                </thead>
+            </table>
 
-      <fieldset>
-        <div class="field-group">
-          <label for="fieldName">$i18n.getText("scrumpoker.config.fieldname")</label> 
-          <select id="fieldName" name="storyPointFieldName">
-            <option value=""></option>
-            #foreach ($customfieldName in $customFieldNames)
-              #if ($customfieldName == $storyPointFieldName)
-                <option value="$customfieldName" selected="selected">$customfieldName</option>
-              #else
-                <option value="$customfieldName">$customfieldName</option>
-              #end
-            #end
-          </select>
+            <form class="aui long-label" action="scrumPokerConfiguration.jspa" method="post">
+                <fieldset>
+                    <div class="field-group">
+                        <label for="storyPointField">$i18n.getText("scrumpoker.config.field")</label>
+                        <select class="select" id="storyPointField" name="storyPointField">
+                            <option value=""></option>
+                            #foreach ($customField in $customFields)
+                                #if ($customField.id == $storyPointFieldId)
+                                    <option value="$customField.id" selected="selected">$customField.fieldName</option>
+                                #else
+                                    <option value="$customField.id">$customField.fieldName</option>
+                                #end
+                            #end
+                        </select>
+                        #if (!$storyPointFieldId)
+                            <div class="error">$i18n.getText("scrumpoker.config.field.required")</div>
+                        #end
+                    </div>
+                </fieldset>
+                <div class="buttons-container">
+                    <div class="buttons">
+                        <input id="project-config-save-button" class="button submit" type="submit" value="$i18n.getText("scrumpoker.config.save")"/>
+                    </div>
+                </div>
+            </form>
         </div>
-      </fieldset>
 
-      <div class="buttons-container">
-        <div class="buttons">
-          <input id="project-config-save-button" class="button submit" type="submit" value="$i18n.getText("scrumpoker.config.save")"/>
+        <div class="aui-item">
+            <table class="aui">
+                <thead>
+                    <tr>
+                        <th>$i18n.getText("scrumpoker.config.thankyou")</th>
+                     </tr>
+                </thead>
+            </table>
+
+            <p>$i18n.getText("scrumpoker.config.thankyou.text")</p>
+            <ul>
+                <li>
+                    <h6>$i18n.getText("scrumpoker.issuetracker")</h6>
+                    <a href="$i18n.getText("scrumpoker.issuetracker.url")">$i18n.getText("scrumpoker.issuetracker.url")</a>
+                </li>
+            </ul>
         </div>
-      </div>		 
+    </div>
 
-	</form>	
   </body>
 </html>

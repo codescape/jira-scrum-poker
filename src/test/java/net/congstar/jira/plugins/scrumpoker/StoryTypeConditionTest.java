@@ -48,6 +48,7 @@ public class StoryTypeConditionTest {
     @Mock
     private CustomField someOtherField;
 
+    @Mock
     private Issue issue;
 
     @Before

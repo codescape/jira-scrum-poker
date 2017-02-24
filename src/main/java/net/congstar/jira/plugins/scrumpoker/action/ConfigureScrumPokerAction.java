@@ -6,16 +6,13 @@ import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigureScrumPokerAction extends JiraWebActionSupport {
 
     private static final long serialVersionUID = 1L;
 
-    public static final String STORY_POINT_FIELD_NAME = "storyPointFieldName";
-
-    public static final String DEFAULT_FIELD_FOR_STORY_POINTS = "Story-Punkte";
+    public static final String STORY_POINT_FIELD = "storyPointField";
 
     private final PluginSettingsFactory settingsFactory;
 
@@ -27,30 +24,28 @@ public class ConfigureScrumPokerAction extends JiraWebActionSupport {
     }
 
     /**
-     * List of all custom field names currently available in this JIRA instance.
+     * List of all custom fields currently available in this JIRA instance.
      */
-    public List<String> getCustomFieldNames() {
-        List<String> customFieldNames = new ArrayList<String>();
-        for (CustomField customField : customFieldManager.getCustomFieldObjects()) {
-            customFieldNames.add(customField.getFieldName());
-        }
-        return customFieldNames;
+    public List<CustomField> getCustomFields() {
+        return customFieldManager.getCustomFieldObjects();
     }
 
     /**
-     * Current configured name of the story point field in this JIRA instance.
+     * Current configured id of the story point field in this JIRA instance.
      */
-    public String getStoryPointFieldName() {
+    public String getStoryPointFieldId() {
         PluginSettings settings = settingsFactory.createGlobalSettings();
-        return (String) settings.get(STORY_POINT_FIELD_NAME);
+        return (String) settings.get(STORY_POINT_FIELD);
     }
 
     @Override
     protected String doExecute() throws Exception {
-        String newStoryPointFieldName = getHttpRequest().getParameter(STORY_POINT_FIELD_NAME);
-        if (newStoryPointFieldName != null) {
-            PluginSettings settings = settingsFactory.createGlobalSettings();
-            settings.put(STORY_POINT_FIELD_NAME, newStoryPointFieldName);
+        String newStoryPointField = getHttpRequest().getParameter(STORY_POINT_FIELD);
+        PluginSettings settings = settingsFactory.createGlobalSettings();
+        if (newStoryPointField != null && !newStoryPointField.isEmpty()) {
+            settings.put(STORY_POINT_FIELD, newStoryPointField);
+        } else {
+            settings.remove(STORY_POINT_FIELD);
         }
         return "success";
     }
