@@ -98,7 +98,7 @@
     <webwork1 key="scrumPokerConfiguration" name="scrumPokerConfiguration" class="java.lang.Object">
         <actions>
             <action name="net.congstar.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction" alias="scrumPokerConfiguration"
-                roles-required="use">
+                roles-required="sysadmin">
                 <view name="success">/templates/configuration.vm</view>
             </action>
         </actions>
