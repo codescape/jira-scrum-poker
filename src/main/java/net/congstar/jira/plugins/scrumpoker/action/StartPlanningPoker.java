@@ -98,7 +98,9 @@ public final class StartPlanningPoker extends ScrumPokerAction {
         return pokerSession;
     }
 
-    public StartPlanningPoker(IssueManager issueManager, PlanningPokerStorage planningPokerStorage, StoryPointFieldSupport storyPointFieldSupport, UserManager userManager, FieldLayoutManager fieldLayoutManager, RendererManager rendererManager) {
+    public StartPlanningPoker(IssueManager issueManager, PlanningPokerStorage planningPokerStorage,
+                              StoryPointFieldSupport storyPointFieldSupport, UserManager userManager,
+                              FieldLayoutManager fieldLayoutManager, RendererManager rendererManager) {
         this.issueManager = issueManager;
         this.planningPokerStorage = planningPokerStorage;
         this.storyPointFieldSupport = storyPointFieldSupport;

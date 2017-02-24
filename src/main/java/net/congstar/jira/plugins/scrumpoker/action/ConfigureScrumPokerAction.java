@@ -13,6 +13,7 @@ public class ConfigureScrumPokerAction extends JiraWebActionSupport {
     private static final long serialVersionUID = 1L;
 
     public static final String STORY_POINT_FIELD = "storyPointField";
+
     private static final String SAVE_ACTION = "action";
 
     private final PluginSettingsFactory settingsFactory;

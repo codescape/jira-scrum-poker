@@ -11,7 +11,8 @@ public class ConfirmEstimationAction extends ScrumPokerAction {
 
     private final PlanningPokerStorage planningPokerStorage;
 
-    public ConfirmEstimationAction(StoryPointFieldSupport storyPointFieldSupport, PlanningPokerStorage planningPokerStorage) {
+    public ConfirmEstimationAction(StoryPointFieldSupport storyPointFieldSupport,
+                                   PlanningPokerStorage planningPokerStorage) {
         this.storyPointFieldSupport = storyPointFieldSupport;
         this.planningPokerStorage = planningPokerStorage;
     }

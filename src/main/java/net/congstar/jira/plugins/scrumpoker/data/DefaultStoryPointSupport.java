@@ -3,7 +3,6 @@ package net.congstar.jira.plugins.scrumpoker.data;
 import com.atlassian.jira.bc.issue.IssueService;
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.IssueInputParameters;
-import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.security.JiraAuthenticationContext;
@@ -30,7 +29,8 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
 
     private final IssueService issueService;
 
-    public DefaultStoryPointSupport(JiraAuthenticationContext context, IssueService issueService, IssueManager issueManager, PluginSettingsFactory pluginSettingsFactory, CustomFieldManager customFieldManager) {
+    public DefaultStoryPointSupport(JiraAuthenticationContext context, PluginSettingsFactory pluginSettingsFactory,
+                                    IssueService issueService, CustomFieldManager customFieldManager) {
         this.pluginSettingsFactory = pluginSettingsFactory;
         this.customFieldManager = customFieldManager;
         this.context = context;
@@ -43,17 +43,22 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
         ApplicationUser applicationUser = context.getUser();
         MutableIssue issue = issueService.getIssue(applicationUser, issueKey).getIssue();
         IssueInputParameters issueInputParameters = issueService.newIssueInputParameters();
-        issueInputParameters.addCustomFieldValue(findStoryPointField().getIdAsLong(), NumberFormat.getInstance().format(newValue));
+        issueInputParameters.addCustomFieldValue(findStoryPointField().getIdAsLong(), formatAsNumber(newValue));
 
-        IssueService.UpdateValidationResult updateValidationResult = issueService.validateUpdate(applicationUser, issue.getId(), issueInputParameters);
-        if (updateValidationResult.getErrorCollection().hasAnyErrors()) {
-            logErrors(issue.getKey(), updateValidationResult.getErrorCollection());
+        IssueService.UpdateValidationResult validationResult = issueService.validateUpdate(applicationUser,
+                issue.getId(), issueInputParameters);
+        if (validationResult.getErrorCollection().hasAnyErrors()) {
+            logErrors(issue.getKey(), validationResult.getErrorCollection());
         } else {
-            IssueService.IssueResult updateResult = issueService.update(applicationUser, updateValidationResult);
+            IssueService.IssueResult updateResult = issueService.update(applicationUser, validationResult);
             if (updateResult.getErrorCollection().hasAnyErrors()) {
                 logErrors(issue.getKey(), updateResult.getErrorCollection());
             }
         }
+    }
+
+    private String formatAsNumber(Double newValue) {
+        return NumberFormat.getInstance().format(newValue);
     }
 
     private void logErrors(String issueKey, ErrorCollection errorCollection) {
