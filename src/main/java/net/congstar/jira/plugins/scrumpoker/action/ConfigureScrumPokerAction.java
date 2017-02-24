@@ -13,6 +13,7 @@ public class ConfigureScrumPokerAction extends JiraWebActionSupport {
     private static final long serialVersionUID = 1L;
 
     public static final String STORY_POINT_FIELD = "storyPointField";
+    private static final String SAVE_ACTION = "action";
 
     private final PluginSettingsFactory settingsFactory;
 
@@ -41,11 +42,14 @@ public class ConfigureScrumPokerAction extends JiraWebActionSupport {
     @Override
     protected String doExecute() throws Exception {
         String newStoryPointField = getHttpRequest().getParameter(STORY_POINT_FIELD);
-        PluginSettings settings = settingsFactory.createGlobalSettings();
-        if (newStoryPointField != null && !newStoryPointField.isEmpty()) {
-            settings.put(STORY_POINT_FIELD, newStoryPointField);
-        } else {
-            settings.remove(STORY_POINT_FIELD);
+        String action = getHttpRequest().getParameter(SAVE_ACTION);
+        if (action != null && action.equals("save")) {
+            PluginSettings settings = settingsFactory.createGlobalSettings();
+            if (newStoryPointField != null && !newStoryPointField.isEmpty()) {
+                settings.put(STORY_POINT_FIELD, newStoryPointField);
+            } else {
+                settings.remove(STORY_POINT_FIELD);
+            }
         }
         return "success";
     }

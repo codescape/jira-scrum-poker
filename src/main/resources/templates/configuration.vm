@@ -16,6 +16,7 @@
             </table>
 
             <form class="aui long-label" action="scrumPokerConfiguration.jspa" method="post">
+                <input type="hidden" name="action" value="save">
                 <fieldset>
                     <div class="field-group">
                         <label for="storyPointField">$i18n.getText("scrumpoker.config.field")</label>
