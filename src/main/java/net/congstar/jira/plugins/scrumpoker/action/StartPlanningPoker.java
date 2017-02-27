@@ -151,6 +151,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
         issueProjectName = issue.getProjectObject().getName();
         issueProjectKey = issue.getProjectObject().getKey();
 
+        // TODO: move update code to RefeshDeckAction which is not used anymore
         if (action != null && action.equals("update")) {
             return "update";
         } else
