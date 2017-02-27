@@ -10,7 +10,6 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
 import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
 import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
-import net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerCard;
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerCards;
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
@@ -29,8 +28,6 @@ public final class StartPlanningPoker extends ScrumPokerAction {
 
     private final PlanningPokerStorage planningPokerStorage;
 
-    private final StoryPointFieldSupport storyPointFieldSupport;
-
     private final UserManager userManager;
 
     private final RendererManager rendererManager;
@@ -38,8 +35,6 @@ public final class StartPlanningPoker extends ScrumPokerAction {
     private final FieldLayoutManager fieldLayoutManager;
 
     /* view model */
-
-    private Double issueStoryPoints;
 
     private String issueKey;
 
@@ -60,10 +55,6 @@ public final class StartPlanningPoker extends ScrumPokerAction {
         FieldLayoutItem fieldLayoutItem = fieldLayout.getFieldLayoutItem(IssueFieldConstants.DESCRIPTION);
         String rendererType = (fieldLayoutItem != null) ? fieldLayoutItem.getRendererType() : null;
         return rendererManager.getRenderedContent(rendererType, issue.getDescription(), issue.getIssueRenderContext());
-    }
-
-    public Double getIssueStoryPoints() {
-        return issueStoryPoints;
     }
 
     public String getIssueProjectKey() {
@@ -98,12 +89,10 @@ public final class StartPlanningPoker extends ScrumPokerAction {
         return pokerSession;
     }
 
-    public StartPlanningPoker(IssueManager issueManager, PlanningPokerStorage planningPokerStorage,
-                              StoryPointFieldSupport storyPointFieldSupport, UserManager userManager,
-                              FieldLayoutManager fieldLayoutManager, RendererManager rendererManager) {
+    public StartPlanningPoker(IssueManager issueManager, UserManager userManager, RendererManager rendererManager,
+                              PlanningPokerStorage planningPokerStorage, FieldLayoutManager fieldLayoutManager) {
         this.issueManager = issueManager;
         this.planningPokerStorage = planningPokerStorage;
-        this.storyPointFieldSupport = storyPointFieldSupport;
         this.userManager = userManager;
         this.fieldLayoutManager = fieldLayoutManager;
         this.rendererManager = rendererManager;
@@ -161,7 +150,6 @@ public final class StartPlanningPoker extends ScrumPokerAction {
 
         issueProjectName = issue.getProjectObject().getName();
         issueProjectKey = issue.getProjectObject().getKey();
-        issueStoryPoints = storyPointFieldSupport.getValue(issueKey);
 
         if (action != null && action.equals("update")) {
             return "update";
