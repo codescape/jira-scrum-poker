@@ -22,6 +22,10 @@ Due to deprecated classes in older versions of the Atlassian SDK, starting with 
 
 ## Changelog
 
+### 1.3.16
+
+* cleanup Scrum Poker Sessions older than 12 hours
+
 ### 1.3.15
 
 * Security-Bug: restrict access to configuration to sysadmin role
