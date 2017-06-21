@@ -13,6 +13,8 @@ import java.util.Map.Entry;
  */
 public class DefaultPlanningPokerStorage implements PlanningPokerStorage {
 
+    private static final int POKER_SESSION_TIMEOUT_HOURS = 12;
+
     private final Map<String, ScrumPokerSession> scrumPokerSessions;
 
     public DefaultPlanningPokerStorage() {
@@ -43,7 +45,7 @@ public class DefaultPlanningPokerStorage implements PlanningPokerStorage {
     private void removeOldScrumPokerSessions() {
         Iterator<Entry<String, ScrumPokerSession>> iterator = scrumPokerSessions.entrySet().iterator();
         while (iterator.hasNext()) {
-            if (iterator.next().getValue().getStartedOn().isBefore(DateTime.now().minusDays(1))) {
+            if (iterator.next().getValue().getStartedOn().isBefore(DateTime.now().minusHours(POKER_SESSION_TIMEOUT_HOURS))) {
                 iterator.remove();
             }
         }
