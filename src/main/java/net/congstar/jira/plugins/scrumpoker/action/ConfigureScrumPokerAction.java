@@ -12,6 +12,7 @@ public class ConfigureScrumPokerAction extends JiraWebActionSupport {
 
     private static final long serialVersionUID = 1L;
 
+    // FIXME: Use fully qualified name as advised by com.atlassian.sal.api.pluginsettings.PluginSettingsFactory
     public static final String STORY_POINT_FIELD = "storyPointField";
 
     private static final String SAVE_ACTION = "action";
