@@ -1,12 +1,11 @@
-<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}"
-    plugins-version="2">
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
 
     <!-- plugin coordinates -->
 
     <plugin-info>
         <description>${project.description}</description>
         <version>${project.version}</version>
-        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
         <param name="plugin-icon">images/pluginIcon.png</param>
         <param name="plugin-logo">images/pluginLogo.png</param>
         <param name="configure.url">/secure/admin/scrumPokerConfiguration.jspa</param>
@@ -14,24 +13,25 @@
 
     <!-- i18n message bundle -->
 
-    <resource type="i18n" name="i18n" location="scrum-poker" />
+    <resource type="i18n" name="i18n" location="scrum-poker"/>
 
     <!-- static web resources -->
 
     <web-resource key="scrum-poker-resources" name="Scrum Poker Web Resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
-        <resource type="download" name="scrum-poker.css" location="/css/scrum-poker.css" />
-        <resource type="download" name="scrum-poker.js" location="/js/scrum-poker.js" />
-        <resource type="download" name="jquery.flip.min.js" location="/js/jquery.flip.min.js" />
-        <resource type="download" name="images/" location="/images" />
+        <resource type="download" name="scrum-poker.css" location="/css/scrum-poker.css"/>
+        <resource type="download" name="scrum-poker.js" location="/js/scrum-poker.js"/>
+        <resource type="download" name="jquery.flip.min.js" location="/js/jquery.flip.min.js"/>
+        <resource type="download" name="images/" location="/images"/>
         <context>scrum-poker</context>
     </web-resource>
 
     <!-- components -->
 
-    <component-import key="pluginSettingsFactory" interface="com.atlassian.sal.api.pluginsettings.PluginSettingsFactory" />
+    <component-import key="pluginSettingsFactory"
+                      interface="com.atlassian.sal.api.pluginsettings.PluginSettingsFactory"/>
 
-    <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties" />
+    <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties"/>
 
     <component key="planningPokerStorage" class="net.congstar.jira.plugins.scrumpoker.data.DefaultPlanningPokerStorage">
         <description>Provides the Storage for Planning Poker sessions.</description>
@@ -46,15 +46,15 @@
     <!-- buttons to start a new session -->
 
     <web-item key="pp_start" name="PP-Start" section="jira.issue.tools" weight="10">
-        <label key="scrumpoker.start" />
+        <label key="scrumpoker.start"/>
         <link linkId="callPP">/secure/scrumPokerStart.jspa?issueKey=$issue.key</link>
-        <condition class="net.congstar.jira.plugins.scrumpoker.StoryTypeCondition" />
+        <condition class="net.congstar.jira.plugins.scrumpoker.StoryTypeCondition"/>
     </web-item>
 
     <web-item key="pp_start_agile" name="PP-Start" section="operations-top-level" weight="10">
-        <label key="scrumpoker.start" />
+        <label key="scrumpoker.start"/>
         <link linkId="callPP">/secure/scrumPokerStart.jspa?issueKey=$issue.key</link>
-        <condition class="net.congstar.jira.plugins.scrumpoker.StoryTypeCondition" />
+        <condition class="net.congstar.jira.plugins.scrumpoker.StoryTypeCondition"/>
     </web-item>
 
     <!-- dropdown on boards -->
@@ -74,7 +74,7 @@
     <webwork1 key="scrumPokerSessions" name="Start PP Action" class="java.lang.Object">
         <actions>
             <action name="net.congstar.jira.plugins.scrumpoker.action.ShowSessionsAction" alias="scrumPokerSessions"
-                roles-required="use">
+                    roles-required="use">
                 <view name="start">/templates/sessions.vm</view>
             </action>
         </actions>
@@ -85,7 +85,7 @@
     <webwork1 key="scrumPokerStart" name="scrumPokerStart" class="java.lang.Object">
         <actions>
             <action name="net.congstar.jira.plugins.scrumpoker.action.StartPlanningPoker" alias="scrumPokerStart"
-                roles-required="use">
+                    roles-required="use">
                 <view name="start">/templates/start.vm</view>
                 <view name="update">/templates/update.vm</view>
                 <view name="error">/templates/error.vm</view>
@@ -97,8 +97,9 @@
 
     <webwork1 key="scrumPokerConfiguration" name="scrumPokerConfiguration" class="java.lang.Object">
         <actions>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction" alias="scrumPokerConfiguration"
-                roles-required="sysadmin">
+            <action name="net.congstar.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction"
+                    alias="scrumPokerConfiguration"
+                    roles-required="sysadmin">
                 <view name="success">/templates/configuration.vm</view>
             </action>
         </actions>
@@ -108,7 +109,7 @@
 
     <webwork1 key="chooseCardAction" name="chooseCardAction" class="java.lang.Object" roles-required="use">
         <actions>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.ChooseCardAction" alias="chooseCardAction" />
+            <action name="net.congstar.jira.plugins.scrumpoker.action.ChooseCardAction" alias="chooseCardAction"/>
         </actions>
     </webwork1>
 
@@ -116,7 +117,7 @@
 
     <webwork1 key="revealDeckAction" name="revealDeckAction" class="java.lang.Object" roles-required="use">
         <actions>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.RevealDeckAction" alias="revealDeckAction" />
+            <action name="net.congstar.jira.plugins.scrumpoker.action.RevealDeckAction" alias="revealDeckAction"/>
         </actions>
     </webwork1>
 
@@ -124,16 +125,17 @@
 
     <webwork1 key="refreshDeckAction" name="refreshDeckAction" class="java.lang.Object" roles-required="use">
         <actions>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.RefreshDeckAction" alias="refreshDeckAction" />
+            <action name="net.congstar.jira.plugins.scrumpoker.action.RefreshDeckAction" alias="refreshDeckAction"/>
         </actions>
     </webwork1>
 
     <!-- confirm an estimation -->
 
     <webwork1 key="confirmEstimationAction" name="confirmEstimationAction" class="java.lang.Object"
-        roles-required="use">
+              roles-required="use">
         <actions>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.ConfirmEstimationAction" alias="confirmEstimationAction" />
+            <action name="net.congstar.jira.plugins.scrumpoker.action.ConfirmEstimationAction"
+                    alias="confirmEstimationAction"/>
         </actions>
     </webwork1>
 
@@ -141,7 +143,7 @@
 
     <webwork1 key="resetDeckAction" name="resetDeckAction" class="java.lang.Object" roles-required="use">
         <actions>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.ResetDeckAction" alias="resetDeckAction" />
+            <action name="net.congstar.jira.plugins.scrumpoker.action.ResetDeckAction" alias="resetDeckAction"/>
         </actions>
     </webwork1>
 
