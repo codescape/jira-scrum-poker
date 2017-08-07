@@ -76,20 +76,20 @@ public class StoryTypeConditionTest {
     }
 
     private void expectThatIssueDoesNotContainTheStoryPointField() {
-        List<CustomField> emptyList = new ArrayList<CustomField>();
+        List<CustomField> emptyList = new ArrayList<>();
         emptyList.add(someOtherField);
         when(customFieldManager.getCustomFieldObjects(issue)).thenReturn(emptyList);
     }
 
     private void expectThatIssueContainsTheStoryPointField() {
-        ArrayList<CustomField> listOfCustomFields = new ArrayList<CustomField>();
+        ArrayList<CustomField> listOfCustomFields = new ArrayList<>();
         listOfCustomFields.add(storyPointField);
         listOfCustomFields.add(someOtherField);
         when(customFieldManager.getCustomFieldObjects(issue)).thenReturn(listOfCustomFields);
     }
 
     private HashMap<String, Object> mapThatContainsTheIssue() {
-        HashMap<String, Object> contextParams = new HashMap<String, Object>();
+        HashMap<String, Object> contextParams = new HashMap<>();
         contextParams.put("issue", issue);
         return contextParams;
     }

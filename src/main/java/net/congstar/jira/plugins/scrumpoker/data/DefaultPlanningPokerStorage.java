@@ -18,7 +18,7 @@ public class DefaultPlanningPokerStorage implements PlanningPokerStorage {
     private final Map<String, ScrumPokerSession> scrumPokerSessions;
 
     public DefaultPlanningPokerStorage() {
-        scrumPokerSessions = new HashMap<String, ScrumPokerSession>();
+        scrumPokerSessions = new HashMap<>();
     }
 
     @Override
@@ -43,12 +43,9 @@ public class DefaultPlanningPokerStorage implements PlanningPokerStorage {
      * Removes all sessions that are older than one day.
      */
     private void removeOldScrumPokerSessions() {
-        Iterator<Entry<String, ScrumPokerSession>> iterator = scrumPokerSessions.entrySet().iterator();
-        while (iterator.hasNext()) {
-            if (iterator.next().getValue().getStartedOn().isBefore(DateTime.now().minusHours(POKER_SESSION_TIMEOUT_HOURS))) {
-                iterator.remove();
-            }
-        }
+        scrumPokerSessions.entrySet().removeIf(sessionEntry ->
+                sessionEntry.getValue().getStartedOn().isBefore(DateTime.now().minusHours(POKER_SESSION_TIMEOUT_HOURS))
+        );
     }
 
 }

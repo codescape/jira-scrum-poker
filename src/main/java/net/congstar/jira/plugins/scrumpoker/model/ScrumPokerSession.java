@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class ScrumPokerSession {
 
-    private Map<String, String> cards = new HashMap<String, String>();
+    private Map<String, String> cards = new HashMap<>();
 
     private boolean visible;
 
@@ -89,7 +89,7 @@ public class ScrumPokerSession {
      * Resets the session and removes all cards previously presented by users.
      */
     public void resetDeck() {
-        cards = new HashMap<String, String>();
+        cards = new HashMap<>();
         confirmedVote = null;
         visible = false;
     }
@@ -124,7 +124,7 @@ public class ScrumPokerSession {
      * Returns all cards between the lowest and the highest vote.
      */
     public List<String> getBoundedVotes() {
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
 
         String maximum = getMaximumVote();
         String minimum = getMinimumVote();

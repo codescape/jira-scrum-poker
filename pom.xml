@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.congstar.jira.plugins</groupId>
@@ -8,7 +8,9 @@
     <version>1.3.16</version>
 
     <name>JIRA Scrum Poker</name>
-    <description>Scrum Poker is an open source plugin to enable teams to collaboratively estimate their work with the help of a dedicated GUI directly integrated into JIRA Software and JIRA Agile.</description>
+    <description>Scrum Poker is an open source plugin to enable teams to collaboratively estimate their work with the
+        help of a dedicated GUI directly integrated into JIRA Software and JIRA Agile.
+    </description>
     <packaging>atlassian-plugin</packaging>
 
     <organization>
@@ -30,16 +32,16 @@
 
     <properties>
         <!-- Java version -->
-        <java.version>1.6</java.version>
+        <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- Jira version -->
-        <jira.version>6.4.11</jira.version>
+        <jira.version>7.3.6</jira.version>
         <amps.version>5.0.13</amps.version>
         <plugin.testrunner.version>1.2.3</plugin.testrunner.version>
 
-        <!-- Encoding -->
+        <!-- Source encoding -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -91,6 +93,14 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.2.2-atlassian-1</version>
+        </dependency>
+
+        <!-- required for mockito to mock com.atlassian.jira.issue.fields.CustomField in StoryTypeConditionTest -->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
+            <version>6.6.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

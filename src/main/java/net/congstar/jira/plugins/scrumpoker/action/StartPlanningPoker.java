@@ -44,7 +44,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
 
     private String issueReturnUrl = "test";
 
-    private Map<String, ScrumPokerCard> cardDeck = new HashMap<String, ScrumPokerCard>();
+    private Map<String, ScrumPokerCard> cardDeck = new HashMap<>();
 
     private ScrumPokerSession pokerSession;
 
