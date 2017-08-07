@@ -4,9 +4,7 @@ import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
 import org.joda.time.DateTime;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * Simple implementation using a Map to store the data.
@@ -40,7 +38,7 @@ public class DefaultPlanningPokerStorage implements PlanningPokerStorage {
     }
 
     /**
-     * Removes all sessions that are older than one day.
+     * Removes all sessions that are older than the timeout.
      */
     private void removeOldScrumPokerSessions() {
         scrumPokerSessions.entrySet().removeIf(sessionEntry ->
