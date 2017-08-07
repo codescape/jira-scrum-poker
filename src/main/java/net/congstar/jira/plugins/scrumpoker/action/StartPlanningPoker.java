@@ -108,7 +108,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
 
         issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
 
-        if (getLoggedInApplicationUser() == null) {
+        if (getLoggedInUser() == null) {
             return "error";
         }
 
