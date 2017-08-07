@@ -40,7 +40,7 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
     @Override
     public void save(String issueKey, Double newValue) {
         log.info("Saving estimation {} for issue {}...", newValue, issueKey);
-        ApplicationUser applicationUser = context.getUser();
+        ApplicationUser applicationUser = context.getLoggedInUser();
         MutableIssue issue = issueService.getIssue(applicationUser, issueKey).getIssue();
         IssueInputParameters issueInputParameters = issueService.newIssueInputParameters();
         issueInputParameters.addCustomFieldValue(findStoryPointField().getIdAsLong(), formatAsNumber(newValue));
@@ -73,7 +73,7 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
 
     @Override
     public Double getValue(String issueKey) {
-        ApplicationUser applicationUser = context.getUser();
+        ApplicationUser applicationUser = context.getLoggedInUser();
         IssueService.IssueResult issueResult = issueService.getIssue(applicationUser, issueKey);
         if (issueResult.getErrorCollection().hasAnyErrors()) {
             log.warn("Could not find value for issue {}.", issueKey);

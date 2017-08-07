@@ -20,7 +20,7 @@ public class ChooseCardAction extends ScrumPokerAction {
         String chosenCard = getHttpRequest().getParameter("chosenCard");
         String issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
 
-        planningPokerStorage.sessionForIssue(issueKey).updateCard(getLoggedInApplicationUser().getKey(), chosenCard);
+        planningPokerStorage.sessionForIssue(issueKey).updateCard(getLoggedInUser().getKey(), chosenCard);
 
         return getRedirect("/secure/scrumPokerStart.jspa?issueKey=" + issueKey);
     }

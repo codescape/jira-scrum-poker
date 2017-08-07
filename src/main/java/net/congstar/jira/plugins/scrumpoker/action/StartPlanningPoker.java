@@ -78,7 +78,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
     }
 
     public String getChosenCard() {
-        return pokerSession.getCards().get(getLoggedInApplicationUser().getKey());
+        return pokerSession.getCards().get(getLoggedInUser().getKey());
     }
 
     public ScrumPokerCard[] getCards() {
