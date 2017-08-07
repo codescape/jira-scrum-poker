@@ -8,12 +8,17 @@ public interface PlanningPokerStorage {
 
     /**
      * Return the Scrum poker session for the given issue.
-     * 
-     * @param issueKey
-     * @return
+     *
+     * @param issueKey Key of the issue
+     * @return Scrum poker session
      */
     ScrumPokerSession sessionForIssue(String issueKey);
 
+    /**
+     * Return the list of all Scrum poker sessions.
+     *
+     * @return list of all Scrum poker sessions
+     */
     Map<String, ScrumPokerSession> getSessions();
 
 }
