@@ -121,14 +121,6 @@
         </actions>
     </webwork1>
 
-    <!-- refresh the deck -->
-
-    <webwork1 key="refreshDeckAction" name="refreshDeckAction" class="java.lang.Object" roles-required="use">
-        <actions>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.RefreshDeckAction" alias="refreshDeckAction"/>
-        </actions>
-    </webwork1>
-
     <!-- confirm an estimation -->
 
     <webwork1 key="confirmEstimationAction" name="confirmEstimationAction" class="java.lang.Object"
