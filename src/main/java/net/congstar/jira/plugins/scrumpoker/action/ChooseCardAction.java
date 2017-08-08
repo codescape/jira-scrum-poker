@@ -9,6 +9,8 @@ public class ChooseCardAction extends ScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
 
+    private static final String PARAM_CHOSEN_CARD = "chosenCard";
+
     private final PlanningPokerStorage planningPokerStorage;
 
     public ChooseCardAction(PlanningPokerStorage planningPokerStorage) {
@@ -17,12 +19,10 @@ public class ChooseCardAction extends ScrumPokerAction {
 
     @Override
     protected String doExecute() throws Exception {
-        String chosenCard = getHttpRequest().getParameter("chosenCard");
         String issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
-
+        String chosenCard = getHttpRequest().getParameter(PARAM_CHOSEN_CARD);
         planningPokerStorage.sessionForIssue(issueKey).updateCard(getLoggedInUser().getKey(), chosenCard);
-
-        return getRedirect("/secure/scrumPokerStart.jspa?issueKey=" + issueKey);
+        return openScrumPokerForIssue(issueKey);
     }
 
 }

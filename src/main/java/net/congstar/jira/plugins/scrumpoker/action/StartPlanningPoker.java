@@ -42,11 +42,45 @@ public final class StartPlanningPoker extends ScrumPokerAction {
 
     private String issueProjectKey;
 
-    private String issueReturnUrl = "test";
-
-    private Map<String, ScrumPokerCard> cardDeck = new HashMap<>();
+    private Map<String, ScrumPokerCard> cardDeck = ScrumPokerCards.asMap();
 
     private ScrumPokerSession pokerSession;
+
+    public StartPlanningPoker(IssueManager issueManager, UserManager userManager, RendererManager rendererManager,
+                              PlanningPokerStorage planningPokerStorage, FieldLayoutManager fieldLayoutManager) {
+        this.issueManager = issueManager;
+        this.planningPokerStorage = planningPokerStorage;
+        this.userManager = userManager;
+        this.fieldLayoutManager = fieldLayoutManager;
+        this.rendererManager = rendererManager;
+    }
+
+    @Override
+    protected String doExecute() throws Exception {
+        String action = getHttpRequest().getParameter("action");
+
+        if (getLoggedInUser() == null) {
+            return "error";
+        }
+
+        issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
+        MutableIssue issue = issueManager.getIssueObject(issueKey);
+        if (issue == null) {
+            addErrorMessage("Issue Key" + issueKey + " not found.");
+            return "error";
+        }
+
+        pokerSession = planningPokerStorage.sessionForIssue(issueKey);
+        pokerSession.setIssueSummary(issue.getSummary());
+
+        issueProjectName = issue.getProjectObject().getName();
+        issueProjectKey = issue.getProjectObject().getKey();
+
+        if (action != null && action.equals("update")) {
+            return "update";
+        } else
+            return "start";
+    }
 
     @HtmlSafe
     public String getIssueDescription() {
@@ -59,10 +93,6 @@ public final class StartPlanningPoker extends ScrumPokerAction {
 
     public String getIssueProjectKey() {
         return issueProjectKey;
-    }
-
-    public String getIssueReturnUrl() {
-        return issueReturnUrl;
     }
 
     public String getIssueKey() {
@@ -87,75 +117,6 @@ public final class StartPlanningPoker extends ScrumPokerAction {
 
     public ScrumPokerSession getPokerSession() {
         return pokerSession;
-    }
-
-    public StartPlanningPoker(IssueManager issueManager, UserManager userManager, RendererManager rendererManager,
-                              PlanningPokerStorage planningPokerStorage, FieldLayoutManager fieldLayoutManager) {
-        this.issueManager = issueManager;
-        this.planningPokerStorage = planningPokerStorage;
-        this.userManager = userManager;
-        this.fieldLayoutManager = fieldLayoutManager;
-        this.rendererManager = rendererManager;
-
-        for (ScrumPokerCard card : ScrumPokerCards.pokerDeck) {
-            cardDeck.put(card.getName(), card);
-        }
-    }
-
-    @Override
-    protected String doExecute() throws Exception {
-        String action = getHttpRequest().getParameter("action");
-
-        issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
-
-        if (getLoggedInUser() == null) {
-            return "error";
-        }
-
-        MutableIssue issue = issueManager.getIssueObject(issueKey);
-        if (issue == null) {
-            addErrorMessage("Issue Key" + issueKey + " not found.");
-            return "error";
-        }
-
-        if (action == null || !action.equals("update")) {
-            // weird hack to check whether we have been called from "outside"
-            boolean outsideCall = true;
-            String headerParam = getHttpRequest().getHeader(PARAM_REFERRER_HEADER);
-            if (headerParam != null) {
-                URL referrerURL = new URL(headerParam);
-                String selfAction = getActionName().toLowerCase();
-                String referrerPath = referrerURL.getPath().toLowerCase();
-                String regex = ".*/" + selfAction + "\\.?\\w*";
-                if (referrerPath.matches(regex)) {
-                    outsideCall = false;
-                }
-            }
-
-            // remember the page we have to return to after finishing the poker round
-            String sessionUrl = (String) getHttpSession().getAttribute(PARAM_RETURN_URL);
-            issueReturnUrl = getReturnUrl();
-            if (sessionUrl == null || outsideCall) {
-                if (issueReturnUrl == null) {
-                    issueReturnUrl = "/browse/" + issueKey;
-                }
-                getHttpSession().setAttribute(PARAM_RETURN_URL, issueReturnUrl);
-            } else {
-                issueReturnUrl = sessionUrl;
-            }
-        }
-
-        pokerSession = planningPokerStorage.sessionForIssue(issueKey);
-        pokerSession.setIssueSummary(issue.getSummary());
-
-        issueProjectName = issue.getProjectObject().getName();
-        issueProjectKey = issue.getProjectObject().getKey();
-
-        // TODO: move update code to RefeshDeckAction which is not used anymore
-        if (action != null && action.equals("update")) {
-            return "update";
-        } else
-            return "start";
     }
 
     public String getUsername(String key) {

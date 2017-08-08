@@ -28,6 +28,11 @@ As a rule of thumb:
 
 ## Changelog
 
+### 1.4.1
+
+* cleanup of unused actions and imports, css selectors and code formatting
+* improve internal structure of action based code and remove redundancy
+
 ### 1.4.0
 
 * implemented using Java 8 language level

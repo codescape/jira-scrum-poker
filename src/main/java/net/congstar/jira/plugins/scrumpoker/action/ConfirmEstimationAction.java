@@ -7,6 +7,8 @@ public class ConfirmEstimationAction extends ScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
 
+    private static final String PARAM_FINAL_VOTE = "finalVote";
+
     private final StoryPointFieldSupport storyPointFieldSupport;
 
     private final PlanningPokerStorage planningPokerStorage;
@@ -20,15 +22,10 @@ public class ConfirmEstimationAction extends ScrumPokerAction {
     @Override
     protected String doExecute() throws Exception {
         String issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
-        String finalVote = getHttpRequest().getParameter("finalVote");
-
+        String finalVote = getHttpRequest().getParameter(PARAM_FINAL_VOTE);
         storyPointFieldSupport.save(issueKey, new Double(finalVote));
         planningPokerStorage.sessionForIssue(issueKey).confirm(finalVote);
-
-        String returnUrl = (String) getHttpSession().getAttribute(PARAM_RETURN_URL);
-        getHttpSession().removeAttribute(PARAM_RETURN_URL);
-
-        return getRedirect(returnUrl);
+        return openIssue(issueKey);
     }
 
 }
