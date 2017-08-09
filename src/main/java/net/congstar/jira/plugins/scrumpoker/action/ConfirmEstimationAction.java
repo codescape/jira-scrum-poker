@@ -1,6 +1,6 @@
 package net.congstar.jira.plugins.scrumpoker.action;
 
-import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
+import net.congstar.jira.plugins.scrumpoker.data.ScrumPokerStorage;
 import net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
 
 public class ConfirmEstimationAction extends ScrumPokerAction {
@@ -11,12 +11,11 @@ public class ConfirmEstimationAction extends ScrumPokerAction {
 
     private final StoryPointFieldSupport storyPointFieldSupport;
 
-    private final PlanningPokerStorage planningPokerStorage;
+    private final ScrumPokerStorage scrumPokerStorage;
 
-    public ConfirmEstimationAction(StoryPointFieldSupport storyPointFieldSupport,
-                                   PlanningPokerStorage planningPokerStorage) {
+    public ConfirmEstimationAction(StoryPointFieldSupport storyPointFieldSupport, ScrumPokerStorage scrumPokerStorage) {
         this.storyPointFieldSupport = storyPointFieldSupport;
-        this.planningPokerStorage = planningPokerStorage;
+        this.scrumPokerStorage = scrumPokerStorage;
     }
 
     @Override
@@ -24,7 +23,7 @@ public class ConfirmEstimationAction extends ScrumPokerAction {
         String issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
         String finalVote = getHttpRequest().getParameter(PARAM_FINAL_VOTE);
         storyPointFieldSupport.save(issueKey, new Double(finalVote));
-        planningPokerStorage.sessionForIssue(issueKey).confirm(finalVote);
+        scrumPokerStorage.sessionForIssue(issueKey).confirm(finalVote);
         return openIssue(issueKey);
     }
 

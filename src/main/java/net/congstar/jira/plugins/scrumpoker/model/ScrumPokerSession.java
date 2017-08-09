@@ -15,6 +15,8 @@ import java.util.Map;
  */
 public class ScrumPokerSession {
 
+    private final String issueKey;
+
     private Map<String, String> cards = new HashMap<>();
 
     private boolean visible;
@@ -22,22 +24,20 @@ public class ScrumPokerSession {
     private final DateTime startedOn;
 
     private String confirmedVote;
-    
+
     private String issueSummary;
+
+    public ScrumPokerSession(String issueKey) {
+        this.issueKey = issueKey;
+        this.startedOn = DateTime.now();
+    }
 
     public String getIssueSummary() {
         return issueSummary;
     }
-    
+
     public void setIssueSummary(String issueSummary) {
         this.issueSummary = issueSummary;
-    }
-    
-    /**
-     * Creates a new {@link ScrumPokerSession} and saves the start date and time.
-     */
-    public ScrumPokerSession() {
-        startedOn = DateTime.now();
     }
 
     /**
@@ -156,4 +156,7 @@ public class ScrumPokerSession {
         this.confirmedVote = finalVote;
     }
 
+    public String getIssueKey() {
+        return issueKey;
+    }
 }

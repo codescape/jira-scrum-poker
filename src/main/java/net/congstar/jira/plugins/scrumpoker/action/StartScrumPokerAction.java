@@ -9,16 +9,14 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
 import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
-import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
+import net.congstar.jira.plugins.scrumpoker.data.ScrumPokerStorage;
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerCard;
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerCards;
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
 
-import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 
-public final class StartPlanningPoker extends ScrumPokerAction {
+public class StartScrumPokerAction extends ScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,7 +24,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
 
     private final IssueManager issueManager;
 
-    private final PlanningPokerStorage planningPokerStorage;
+    private final ScrumPokerStorage scrumPokerStorage;
 
     private final UserManager userManager;
 
@@ -46,10 +44,10 @@ public final class StartPlanningPoker extends ScrumPokerAction {
 
     private ScrumPokerSession pokerSession;
 
-    public StartPlanningPoker(IssueManager issueManager, UserManager userManager, RendererManager rendererManager,
-                              PlanningPokerStorage planningPokerStorage, FieldLayoutManager fieldLayoutManager) {
+    public StartScrumPokerAction(IssueManager issueManager, UserManager userManager, RendererManager rendererManager,
+                                 ScrumPokerStorage scrumPokerStorage, FieldLayoutManager fieldLayoutManager) {
         this.issueManager = issueManager;
-        this.planningPokerStorage = planningPokerStorage;
+        this.scrumPokerStorage = scrumPokerStorage;
         this.userManager = userManager;
         this.fieldLayoutManager = fieldLayoutManager;
         this.rendererManager = rendererManager;
@@ -70,7 +68,7 @@ public final class StartPlanningPoker extends ScrumPokerAction {
             return "error";
         }
 
-        pokerSession = planningPokerStorage.sessionForIssue(issueKey);
+        pokerSession = scrumPokerStorage.sessionForIssue(issueKey);
         pokerSession.setIssueSummary(issue.getSummary());
 
         issueProjectName = issue.getProjectObject().getName();

@@ -37,13 +37,11 @@
             <p>Aktuell sind die folgenden Sitzungen aktiv:</p>
             <ul>
                 #set($found = false)            
-                #foreach($planningPokerSession in $planningPokerStorage.sessions.entrySet())
-                	#if(!$planningPokerSession.value.confirmedVote)
-                		#set($found = true)
-                    	<li>
-                        	<a href="${req.contextPath}/secure/scrumPokerStart.jspa?issueKey=$planningPokerSession.key">$planningPokerSession.key: $planningPokerSession.value.issueSummary</a> (gestartet: $planningPokerSession.value.startedOn.toString('dd.MM.yyyy - HH:mm:ss'))
-                    	</li>
-                    #end
+                #foreach($scrumPokerSession in $openSessions)
+               		#set($found = true)
+                   	<li>
+                       	<a href="${req.contextPath}/secure/scrumPokerStart.jspa?issueKey=$scrumPokerSession.issueKey">$scrumPokerSession.issueKey: $scrumPokerSession.issueSummary</a> (gestartet: $scrumPokerSession.startedOn.toString('dd.MM.yyyy - HH:mm:ss'))
+                   	</li>
                 #end
                 #if (!$found)
                 	<li><i>Keine Sitzungen gefunden</i></li>
@@ -52,13 +50,11 @@
             <p>Abgelaufene Sitzungen mit bestätigter Schätzung:</p>
             <ul>
             	#set($found = false)
-                #foreach($planningPokerSession in $planningPokerStorage.sessions.entrySet())
-                	#if($planningPokerSession.value.confirmedVote)
-                		#set($found = true)
-                    	<li>
-                        	<a href="$req.contextPath/browse/$planningPokerSession.key">$planningPokerSession.key: $planningPokerSession.value.issueSummary</a> (Schätzung: $planningPokerSession.value.confirmedVote, gestartet: $planningPokerSession.value.startedOn.toString('dd.MM.yyyy - HH:mm:ss'))
-                    	</li>
-                    #end
+                #foreach($scrumPokerSession in $closedSessions)
+                    #set($found = true)
+                    <li>
+                        <a href="$req.contextPath/browse/$scrumPokerSession.issueKey">$scrumPokerSession.issueKey: $scrumPokerSession.issueSummary</a> (Schätzung: $scrumPokerSession.confirmedVote, gestartet: $scrumPokerSession.startedOn.toString('dd.MM.yyyy - HH:mm:ss'))
+                    </li>
                 #end
                 #if(!$found)
                 	<li><i>Keine Sitzungen gefunden</i></li>

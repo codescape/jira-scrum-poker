@@ -1,15 +1,18 @@
 package net.congstar.jira.plugins.scrumpoker.action;
 
-import net.congstar.jira.plugins.scrumpoker.data.PlanningPokerStorage;
+import net.congstar.jira.plugins.scrumpoker.data.ScrumPokerStorage;
+import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
+
+import java.util.List;
 
 public class ShowSessionsAction extends ScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
 
-    private final PlanningPokerStorage planningPokerStorage;
+    private final ScrumPokerStorage scrumPokerStorage;
 
-    public ShowSessionsAction(PlanningPokerStorage planningPokerStorage) {
-        this.planningPokerStorage = planningPokerStorage;
+    public ShowSessionsAction(ScrumPokerStorage scrumPokerStorage) {
+        this.scrumPokerStorage = scrumPokerStorage;
     }
 
     @Override
@@ -17,8 +20,12 @@ public class ShowSessionsAction extends ScrumPokerAction {
         return "start";
     }
 
-    public PlanningPokerStorage getPlanningPokerStorage() {
-        return planningPokerStorage;
+    public List<ScrumPokerSession> getOpenSessions() {
+        return scrumPokerStorage.getOpenSessions();
+    }
+
+    public List<ScrumPokerSession> getClosedSessions() {
+        return scrumPokerStorage.getClosedSessions();
     }
 
 }

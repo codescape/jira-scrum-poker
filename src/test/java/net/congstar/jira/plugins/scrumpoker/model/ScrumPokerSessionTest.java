@@ -15,7 +15,7 @@ public class ScrumPokerSessionTest {
 
     @Before
     public void before() {
-        session = new ScrumPokerSession();
+        session = new ScrumPokerSession("TEST-1");
     }
 
     @Test

@@ -32,6 +32,7 @@ As a rule of thumb:
 
 * cleanup of unused actions and imports, css selectors and code formatting
 * improve internal structure of action based code and remove redundancy
+* closed and open Scrum poker sessions are sorted by creation date 
 
 ### 1.4.0
 
