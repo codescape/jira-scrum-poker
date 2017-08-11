@@ -28,6 +28,11 @@ As a rule of thumb:
 
 ## Changelog
 
+### 1.4.2
+
+* extract settings handling into on component
+* implement against latest Atlassian Maven Jira Plugin
+
 ### 1.4.1
 
 * cleanup of unused actions and imports, css selectors and code formatting
