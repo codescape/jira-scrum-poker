@@ -3,8 +3,7 @@ package net.congstar.jira.plugins.scrumpoker.action;
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
-import com.atlassian.sal.api.pluginsettings.PluginSettings;
-import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
+import net.congstar.jira.plugins.scrumpoker.data.ScrumPokerSettings;
 
 import java.util.List;
 
@@ -12,17 +11,16 @@ public class ConfigureScrumPokerAction extends JiraWebActionSupport {
 
     private static final long serialVersionUID = 1L;
 
-    // FIXME: Use fully qualified name as advised by com.atlassian.sal.api.pluginsettings.PluginSettingsFactory
-    public static final String STORY_POINT_FIELD = "storyPointField";
+    private static final String PARAM_STORY_POINT_FIELD = "storyPointField";
 
-    private static final String SAVE_ACTION = "action";
-
-    private final PluginSettingsFactory settingsFactory;
+    private static final String PARAM_ACTION = "action";
 
     private final CustomFieldManager customFieldManager;
 
-    public ConfigureScrumPokerAction(PluginSettingsFactory settingsFactory, CustomFieldManager customFieldManager) {
-        this.settingsFactory = settingsFactory;
+    private final ScrumPokerSettings scrumPokerSettings;
+
+    public ConfigureScrumPokerAction(ScrumPokerSettings scrumPokerSettings, CustomFieldManager customFieldManager) {
+        this.scrumPokerSettings = scrumPokerSettings;
         this.customFieldManager = customFieldManager;
     }
 
@@ -37,21 +35,15 @@ public class ConfigureScrumPokerAction extends JiraWebActionSupport {
      * Current configured id of the story point field in this JIRA instance.
      */
     public String getStoryPointFieldId() {
-        PluginSettings settings = settingsFactory.createGlobalSettings();
-        return (String) settings.get(STORY_POINT_FIELD);
+        return scrumPokerSettings.loadStoryPointFieldId();
     }
 
     @Override
     protected String doExecute() throws Exception {
-        String newStoryPointField = getHttpRequest().getParameter(STORY_POINT_FIELD);
-        String action = getHttpRequest().getParameter(SAVE_ACTION);
+        String newStoryPointField = getHttpRequest().getParameter(PARAM_STORY_POINT_FIELD);
+        String action = getHttpRequest().getParameter(PARAM_ACTION);
         if (action != null && action.equals("save")) {
-            PluginSettings settings = settingsFactory.createGlobalSettings();
-            if (newStoryPointField != null && !newStoryPointField.isEmpty()) {
-                settings.put(STORY_POINT_FIELD, newStoryPointField);
-            } else {
-                settings.remove(STORY_POINT_FIELD);
-            }
+            scrumPokerSettings.persistStoryPointFieldId(newStoryPointField);
         }
         return "success";
     }

@@ -34,13 +34,18 @@
     <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties"/>
 
     <component key="scrumPokerStorage" class="net.congstar.jira.plugins.scrumpoker.data.DefaultScrumPokerStorage">
-        <description>Provides the Storage for Planning Poker sessions.</description>
+        <description>Provides the Storage for Scrum Poker sessions.</description>
         <interface>net.congstar.jira.plugins.scrumpoker.data.ScrumPokerStorage</interface>
     </component>
 
     <component key="storyPointSupport" class="net.congstar.jira.plugins.scrumpoker.data.DefaultStoryPointSupport">
         <description>Provides access to the custom field.</description>
         <interface>net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport</interface>
+    </component>
+
+    <component key="scrumPokerSettings" class="net.congstar.jira.plugins.scrumpoker.data.DefaultScrumPokerSettings">
+        <description>Provides the settings accessor for the Scrum Poker plugin.</description>
+        <interface>net.congstar.jira.plugins.scrumpoker.data.ScrumPokerSettings</interface>
     </component>
 
     <!-- buttons to start a new session -->

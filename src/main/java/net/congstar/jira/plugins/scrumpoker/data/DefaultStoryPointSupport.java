@@ -8,9 +8,6 @@ import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.util.ErrorCollection;
-import com.atlassian.sal.api.pluginsettings.PluginSettings;
-import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
-import net.congstar.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +18,7 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultStoryPointSupport.class);
 
-    private final PluginSettingsFactory pluginSettingsFactory;
+    private final ScrumPokerSettings scrumPokerSettings;
 
     private final CustomFieldManager customFieldManager;
 
@@ -29,9 +26,9 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
 
     private final IssueService issueService;
 
-    public DefaultStoryPointSupport(JiraAuthenticationContext context, PluginSettingsFactory pluginSettingsFactory,
+    public DefaultStoryPointSupport(JiraAuthenticationContext context, ScrumPokerSettings scrumPokerSettings,
                                     IssueService issueService, CustomFieldManager customFieldManager) {
-        this.pluginSettingsFactory = pluginSettingsFactory;
+        this.scrumPokerSettings = scrumPokerSettings;
         this.customFieldManager = customFieldManager;
         this.context = context;
         this.issueService = issueService;
@@ -86,9 +83,7 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
 
     @Override
     public CustomField findStoryPointField() {
-        PluginSettings settings = pluginSettingsFactory.createGlobalSettings();
-        String storyPointFieldId = (String) settings.get(ConfigureScrumPokerAction.STORY_POINT_FIELD);
-        return customFieldManager.getCustomFieldObject(storyPointFieldId);
+        return customFieldManager.getCustomFieldObject(scrumPokerSettings.loadStoryPointFieldId());
     }
 
 }
