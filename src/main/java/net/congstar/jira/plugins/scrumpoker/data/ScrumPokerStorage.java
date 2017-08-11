@@ -3,7 +3,6 @@ package net.congstar.jira.plugins.scrumpoker.data;
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
 
 import java.util.List;
-import java.util.Map;
 
 public interface ScrumPokerStorage {
 
