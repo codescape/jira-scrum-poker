@@ -9,7 +9,7 @@ import com.atlassian.jira.user.ApplicationUser;
 import net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
 
 /**
- * Only display the planning poker web element for issues that have the custom field to hold the story points.
+ * Only display the Scrum poker web element for issues that have the custom field to hold the story points.
  */
 public class StoryTypeCondition extends AbstractWebCondition {
 

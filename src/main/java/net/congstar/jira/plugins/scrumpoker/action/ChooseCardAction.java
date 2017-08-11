@@ -3,7 +3,7 @@ package net.congstar.jira.plugins.scrumpoker.action;
 import net.congstar.jira.plugins.scrumpoker.data.ScrumPokerStorage;
 
 /**
- * Persist a chosen card of a user for a given issue into the plugin storage and redirect to the planning poker page.
+ * Persist a chosen card of a user for a given issue into the plugin storage and redirect to the Scrum poker page.
  */
 public class ChooseCardAction extends ScrumPokerAction {
 
