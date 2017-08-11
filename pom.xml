@@ -38,7 +38,7 @@
 
         <!-- Jira version -->
         <jira.version>7.3.6</jira.version>
-        <amps.version>5.0.13</amps.version>
+        <amps.version>6.2.11</amps.version>
         <plugin.testrunner.version>1.2.3</plugin.testrunner.version>
 
         <!-- Source encoding -->
