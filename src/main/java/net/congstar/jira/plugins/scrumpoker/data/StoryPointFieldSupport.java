@@ -2,6 +2,9 @@ package net.congstar.jira.plugins.scrumpoker.data;
 
 import com.atlassian.jira.issue.fields.CustomField;
 
+/**
+ * Component to communicate with the Jira story point field.
+ */
 public interface StoryPointFieldSupport {
 
     /**

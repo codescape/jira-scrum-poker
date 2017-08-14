@@ -4,6 +4,9 @@ import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
 
 import java.util.List;
 
+/**
+ * Component to access Scrum poker sessions.
+ */
 public interface ScrumPokerStorage {
 
     /**

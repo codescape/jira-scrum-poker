@@ -1,5 +1,8 @@
 package net.congstar.jira.plugins.scrumpoker.data;
 
+/**
+ * Component to save and load settings for the Scrum poker plugin.
+ */
 public interface ScrumPokerSettings {
 
     /**
