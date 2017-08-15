@@ -56,12 +56,12 @@
                             #foreach($subTask in $subTasks)
                             <tr>
                                 <td class="stsequence">$counter.</td>
-                                <td class="stsummary"><a href="$req.contextPath/browse/$subTask.key">$subTask.key: $subTask.summary</a></td>
-                                <td class="issuetype"><img src="$req.contextPath/$subTask.issueType.iconUrl"></td>
+                                <td class="stsummary"><a href="$baseurl/browse/$subTask.key">$subTask.key: $subTask.summary</a></td>
+                                <td class="issuetype"><img src="$baseurl/$subTask.issueType.iconUrl"></td>
                                 <td class="status"><span class="aui-lozenge aui-lozenge-subtle">$subTask.status.nameTranslation</span></td>
                                 <td class="assignee">
                                     #if($subTask.assignee)
-                                        <a href="$req.contextPath/secure/ViewProfile.jspa?name=$subTask.assignee.key">$subTask.assignee.name</a>
+                                        <a href="$baseurl/secure/ViewProfile.jspa?name=$subTask.assignee.key">$subTask.assignee.name</a>
                                     #else
                                         <i>Nicht zugewiesen</i>
                                     #end
