@@ -28,6 +28,10 @@ As a rule of thumb:
 
 ## Changelog
 
+### 1.5.1
+
+* use base url to display images and links on estimation page
+
 ### 1.5.0
 
 * display sub tasks of the story currently being estimated
