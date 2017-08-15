@@ -16,10 +16,10 @@
         </div>
         <div class="aui-page-header-main">
             <ol class="aui-nav aui-nav-breadcrumbs">
-                <li><a href="$req.contextPath/browse/$issueProjectKey" id="project-name-val">$issueProjectName</a></li>
-                <li><a rel="10006" id="key-val" href="$req.contextPath/browse/$issueKey" data-issue-key="$issueKey" class="issue-link">$issueKey</a></li>
+                <li><a href="$req.contextPath/browse/$issue.projectObject.key" id="project-name-val">$issue.projectObject.name</a></li>
+                <li><a rel="10006" id="key-val" href="$req.contextPath/browse/$issue.key" data-issue-key="$issueKey" class="issue-link">$issue.key</a></li>
             </ol>
-            <h1>$pokerSession.issueSummary</h1>
+            <h1>$issue.summary</h1>
         </div>
         <div class="aui-page-header-actions">
             <div class="aui-buttons">
@@ -36,9 +36,44 @@
 				<div class="poker-header">
         			<h2>$i18n.getText("pp.storyDescription")</h2>
     			</div>
-   				<div class="mod-content">            	
-					#set($issueDescriptionWithHtml = $issueDescription)
-					<p>$issueDescriptionWithHtml</p>
+   				<div class="mod-content">
+   				    #set($issueDescriptionHtml = $issueDescription)
+					#if(!$issueDescriptionHtml.isEmpty())
+					<p>$issueDescriptionHtml</p>
+					#else
+					<p><i>Es wurden bisher keine Beschreibung formuliert.</i></p>
+					#end
+				</div>
+				<div class="poker-header">
+        			<h2>$i18n.getText("scrumpoker.taskList")</h2>
+    			</div>
+   				<div class="mod-content">
+   				    #set($subTasks = $issue.subTaskObjects)
+   				    #if(!$subTasks.isEmpty())
+   				    <table width="100%" class="aui" id="issuetable">
+                        <tbody>
+                            #set($counter = 1)
+                            #foreach($subTask in $subTasks)
+                            <tr>
+                                <td class="stsequence">$counter.</td>
+                                <td class="stsummary"><a href="$req.contextPath/browse/$subTask.key">$subTask.key: $subTask.summary</a></td>
+                                <td class="issuetype"><img src="$req.contextPath/$subTask.issueType.iconUrl"></td>
+                                <td class="status"><span class="aui-lozenge aui-lozenge-subtle">$subTask.status.nameTranslation</span></td>
+                                <td class="assignee">
+                                    #if($subTask.assignee)
+                                        <a href="$req.contextPath/secure/ViewProfile.jspa?name=$subTask.assignee.key">$subTask.assignee.name</a>
+                                    #else
+                                        <i>Nicht zugewiesen</i>
+                                    #end
+                                </td>
+                            </tr>
+                            #set($counter = $counter + 1)
+                            #end
+					    </tbody>
+					</table>
+					#else
+                        <p><i>Es wurden bisher keine Unteraufgaben definiert.</i></p>
+                    #end
 				</div>
             </section>
             <aside class="aui-page-panel-sidebar">

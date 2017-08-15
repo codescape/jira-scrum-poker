@@ -28,6 +28,10 @@ As a rule of thumb:
 
 ## Changelog
 
+### 1.5.0
+
+* display sub tasks of the story currently being estimated
+
 ### 1.4.2
 
 * extract settings handling into on component

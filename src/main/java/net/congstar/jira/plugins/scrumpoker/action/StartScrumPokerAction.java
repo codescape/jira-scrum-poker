@@ -20,6 +20,8 @@ public class StartScrumPokerAction extends ScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
 
+    private static final String PARAM_ACTION = "action";
+
     /* components */
 
     private final IssueManager issueManager;
@@ -36,10 +38,6 @@ public class StartScrumPokerAction extends ScrumPokerAction {
 
     private String issueKey;
 
-    private String issueProjectName;
-
-    private String issueProjectKey;
-
     private Map<String, ScrumPokerCard> cardDeck = ScrumPokerCards.asMap();
 
     private ScrumPokerSession pokerSession;
@@ -47,21 +45,17 @@ public class StartScrumPokerAction extends ScrumPokerAction {
     public StartScrumPokerAction(IssueManager issueManager, UserManager userManager, RendererManager rendererManager,
                                  ScrumPokerStorage scrumPokerStorage, FieldLayoutManager fieldLayoutManager) {
         this.issueManager = issueManager;
+        this.rendererManager = rendererManager;
         this.scrumPokerStorage = scrumPokerStorage;
         this.userManager = userManager;
         this.fieldLayoutManager = fieldLayoutManager;
-        this.rendererManager = rendererManager;
     }
 
     @Override
     protected String doExecute() throws Exception {
-        String action = getHttpRequest().getParameter("action");
-
-        if (getLoggedInUser() == null) {
-            return "error";
-        }
-
+        String action = getHttpRequest().getParameter(PARAM_ACTION);
         issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
+
         MutableIssue issue = issueManager.getIssueObject(issueKey);
         if (issue == null) {
             addErrorMessage("Issue Key" + issueKey + " not found.");
@@ -71,13 +65,15 @@ public class StartScrumPokerAction extends ScrumPokerAction {
         pokerSession = scrumPokerStorage.sessionForIssue(issueKey);
         pokerSession.setIssueSummary(issue.getSummary());
 
-        issueProjectName = issue.getProjectObject().getName();
-        issueProjectKey = issue.getProjectObject().getKey();
-
         if (action != null && action.equals("update")) {
             return "update";
-        } else
+        } else {
             return "start";
+        }
+    }
+
+    public MutableIssue getIssue() {
+        return issueManager.getIssueObject(issueKey);
     }
 
     @HtmlSafe
@@ -89,16 +85,8 @@ public class StartScrumPokerAction extends ScrumPokerAction {
         return rendererManager.getRenderedContent(rendererType, issue.getDescription(), issue.getIssueRenderContext());
     }
 
-    public String getIssueProjectKey() {
-        return issueProjectKey;
-    }
-
     public String getIssueKey() {
         return issueKey;
-    }
-
-    public String getIssueProjectName() {
-        return issueProjectName;
     }
 
     public Map<String, ScrumPokerCard> getCardDeck() {
