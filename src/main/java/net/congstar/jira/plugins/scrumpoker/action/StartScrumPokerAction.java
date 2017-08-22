@@ -62,7 +62,7 @@ public class StartScrumPokerAction extends ScrumPokerAction {
             return "error";
         }
 
-        pokerSession = scrumPokerStorage.sessionForIssue(issueKey);
+        pokerSession = scrumPokerStorage.sessionForIssue(issueKey, currentUserKey());
         pokerSession.setIssueSummary(issue.getSummary());
 
         if (action != null && action.equals("update")) {

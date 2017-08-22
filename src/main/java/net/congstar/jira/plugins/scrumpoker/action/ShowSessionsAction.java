@@ -1,5 +1,6 @@
 package net.congstar.jira.plugins.scrumpoker.action;
 
+import com.atlassian.jira.user.util.UserManager;
 import net.congstar.jira.plugins.scrumpoker.data.ScrumPokerStorage;
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
 
@@ -10,9 +11,11 @@ public class ShowSessionsAction extends ScrumPokerAction {
     private static final long serialVersionUID = 1L;
 
     private final ScrumPokerStorage scrumPokerStorage;
+    private final UserManager userManager;
 
-    public ShowSessionsAction(ScrumPokerStorage scrumPokerStorage) {
+    public ShowSessionsAction(ScrumPokerStorage scrumPokerStorage, UserManager userManager) {
         this.scrumPokerStorage = scrumPokerStorage;
+        this.userManager = userManager;
     }
 
     @Override
@@ -26,6 +29,10 @@ public class ShowSessionsAction extends ScrumPokerAction {
 
     public List<ScrumPokerSession> getClosedSessions() {
         return scrumPokerStorage.getClosedSessions();
+    }
+
+    public String getUsername(String key) {
+        return userManager.getUserByKey(key).getDisplayName();
     }
 
 }

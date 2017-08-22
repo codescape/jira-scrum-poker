@@ -21,7 +21,7 @@ public class ChooseCardAction extends ScrumPokerAction {
     protected String doExecute() throws Exception {
         String issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
         String chosenCard = getHttpRequest().getParameter(PARAM_CHOSEN_CARD);
-        scrumPokerStorage.sessionForIssue(issueKey).updateCard(getLoggedInUser().getKey(), chosenCard);
+        scrumPokerStorage.sessionForIssue(issueKey, currentUserKey()).updateCard(currentUserKey(), chosenCard);
         return openScrumPokerForIssue(issueKey);
     }
 

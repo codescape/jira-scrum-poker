@@ -23,13 +23,13 @@ public class DefaultScrumPokerStorage implements ScrumPokerStorage {
     }
 
     @Override
-    public ScrumPokerSession sessionForIssue(String issueKey) {
+    public ScrumPokerSession sessionForIssue(String issueKey, String userKey) {
         synchronized (scrumPokerSessions) {
             removeOldScrumPokerSessions();
         }
         ScrumPokerSession scrumPokerSession = scrumPokerSessions.get(issueKey);
         if (scrumPokerSession == null) {
-            scrumPokerSession = new ScrumPokerSession(issueKey);
+            scrumPokerSession = new ScrumPokerSession(issueKey, userKey);
             scrumPokerSessions.put(issueKey, scrumPokerSession);
         }
         return scrumPokerSession;

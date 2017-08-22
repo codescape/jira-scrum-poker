@@ -23,7 +23,7 @@ public class ConfirmEstimationAction extends ScrumPokerAction {
         String issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
         String finalVote = getHttpRequest().getParameter(PARAM_FINAL_VOTE);
         storyPointFieldSupport.save(issueKey, new Double(finalVote));
-        scrumPokerStorage.sessionForIssue(issueKey).confirm(finalVote);
+        scrumPokerStorage.sessionForIssue(issueKey, currentUserKey()).confirm(finalVote);
         return openIssue(issueKey);
     }
 

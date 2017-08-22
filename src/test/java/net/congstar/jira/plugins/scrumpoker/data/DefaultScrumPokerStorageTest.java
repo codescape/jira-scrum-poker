@@ -19,6 +19,8 @@ public class DefaultScrumPokerStorageTest {
     private static final DateTime FOURTEEN_HOURS_AGO = DateTime.now().minusHours(14);
     private static final DateTime EIGHT_HOURS_AGO = DateTime.now().minusHours(8);
 
+    private static final String USER_KEY = "SomeUserKey";
+
     private static final String SOME_ISSUE = "Issue-1";
     private static final String YOUNG_ISSUE = "Young Issue";
     private static final String OLD_ISSUE = "Old Issue";
@@ -37,25 +39,25 @@ public class DefaultScrumPokerStorageTest {
 
     @Test
     public void shouldProduceNewSessionIfNonExists() {
-        assertThat(storage.sessionForIssue(SOME_ISSUE), is(not(nullValue())));
+        assertThat(storage.sessionForIssue(SOME_ISSUE, USER_KEY), is(not(nullValue())));
     }
 
     @Test
     public void shouldReturnExistingSessionIfExists() {
-        ScrumPokerSession sessionForIssue = storage.sessionForIssue(SOME_ISSUE);
-        assertThat(storage.sessionForIssue(SOME_ISSUE), is(equalTo(sessionForIssue)));
+        ScrumPokerSession sessionForIssue = storage.sessionForIssue(SOME_ISSUE, USER_KEY);
+        assertThat(storage.sessionForIssue(SOME_ISSUE, USER_KEY), is(equalTo(sessionForIssue)));
     }
 
     @Test
     public void shouldRemoveSessionsOlderThanTwelveHours() {
         sessionWithoutConfirmedVoteAndCreationDate(OLD_ISSUE, FOURTEEN_HOURS_AGO.getMillis());
-        assertThat(storage.sessionForIssue(OLD_ISSUE).getStartedOn(), is(equalTo(DateTime.now())));
+        assertThat(storage.sessionForIssue(OLD_ISSUE, USER_KEY).getStartedOn(), is(equalTo(DateTime.now())));
     }
 
     @Test
     public void shouldKeepSessionsYoungerThanTwelveHours() {
         sessionWithoutConfirmedVoteAndCreationDate(YOUNG_ISSUE, EIGHT_HOURS_AGO.getMillis());
-        assertThat(storage.sessionForIssue(YOUNG_ISSUE).getStartedOn(), is(equalTo(EIGHT_HOURS_AGO)));
+        assertThat(storage.sessionForIssue(YOUNG_ISSUE, USER_KEY).getStartedOn(), is(equalTo(EIGHT_HOURS_AGO)));
     }
 
     @Test
@@ -107,7 +109,7 @@ public class DefaultScrumPokerStorageTest {
     }
 
     private void sessionWithConfirmedVote(String issueKey) {
-        storage.sessionForIssue(issueKey).confirm("5");
+        storage.sessionForIssue(issueKey, USER_KEY).confirm("5");
     }
 
     private void sessionWithoutConfirmedVoteAndCreationDate(String issueKey, long creationDate) {
@@ -117,7 +119,7 @@ public class DefaultScrumPokerStorageTest {
     }
 
     private void sessionWithoutConfirmedVote(String issueKey) {
-        storage.sessionForIssue(issueKey);
+        storage.sessionForIssue(issueKey, USER_KEY);
     }
 
 }

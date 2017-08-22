@@ -40,7 +40,7 @@
                 #foreach($scrumPokerSession in $openSessions)
                		#set($found = true)
                    	<li>
-                       	<a href="${req.contextPath}/secure/scrumPokerStart.jspa?issueKey=$scrumPokerSession.issueKey">$scrumPokerSession.issueKey: $scrumPokerSession.issueSummary</a> (gestartet: $scrumPokerSession.startedOn.toString('dd.MM.yyyy - HH:mm:ss'))
+                       	<a href="${req.contextPath}/secure/scrumPokerStart.jspa?issueKey=$scrumPokerSession.issueKey">$scrumPokerSession.issueKey: $scrumPokerSession.issueSummary</a> (gestartet: $scrumPokerSession.startedOn.toString('dd.MM.yyyy - HH:mm:ss'), von: $action.getUsername($scrumPokerSession.userKey))
                    	</li>
                 #end
                 #if (!$found)
@@ -53,7 +53,7 @@
                 #foreach($scrumPokerSession in $closedSessions)
                     #set($found = true)
                     <li>
-                        <a href="$req.contextPath/browse/$scrumPokerSession.issueKey">$scrumPokerSession.issueKey: $scrumPokerSession.issueSummary</a> (Schätzung: $scrumPokerSession.confirmedVote, gestartet: $scrumPokerSession.startedOn.toString('dd.MM.yyyy - HH:mm:ss'))
+                        <a href="$req.contextPath/browse/$scrumPokerSession.issueKey">$scrumPokerSession.issueKey: $scrumPokerSession.issueSummary</a> (Schätzung: $scrumPokerSession.confirmedVote, gestartet: $scrumPokerSession.startedOn.toString('dd.MM.yyyy - HH:mm:ss'), von: $action.getUsername($scrumPokerSession.userKey))
                     </li>
                 #end
                 #if(!$found)

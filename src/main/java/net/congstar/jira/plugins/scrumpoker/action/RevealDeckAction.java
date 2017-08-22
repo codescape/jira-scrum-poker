@@ -18,7 +18,7 @@ public class RevealDeckAction extends ScrumPokerAction {
     @Override
     protected String doExecute() throws Exception {
         String issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
-        scrumPokerStorage.sessionForIssue(issueKey).revealDeck();
+        scrumPokerStorage.sessionForIssue(issueKey, currentUserKey()).revealDeck();
         return openScrumPokerForIssue(issueKey);
     }
 

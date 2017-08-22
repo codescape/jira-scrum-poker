@@ -28,6 +28,10 @@ As a rule of thumb:
 
 ## Changelog
 
+### 1.6.0
+
+* show the name of the user who has started the session in the session list 
+
 ### 1.5.1
 
 * use base url to display images and links on estimation page

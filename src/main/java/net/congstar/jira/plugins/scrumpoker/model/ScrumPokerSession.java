@@ -17,6 +17,8 @@ public class ScrumPokerSession {
 
     private final String issueKey;
 
+    private final String userKey;
+
     private Map<String, String> cards = new HashMap<>();
 
     private boolean visible;
@@ -27,8 +29,9 @@ public class ScrumPokerSession {
 
     private String issueSummary;
 
-    public ScrumPokerSession(String issueKey) {
+    public ScrumPokerSession(String issueKey, String userKey) {
         this.issueKey = issueKey;
+        this.userKey = userKey;
         this.startedOn = DateTime.now();
     }
 
@@ -156,7 +159,22 @@ public class ScrumPokerSession {
         this.confirmedVote = finalVote;
     }
 
+    /**
+     * Returns the key of the associated Jira issue.
+     *
+     * @return issue key
+     */
     public String getIssueKey() {
         return issueKey;
     }
+
+    /**
+     * Returns the key of the creator of the Scrum poker session.
+     *
+     * @return user key
+     */
+    public String getUserKey() {
+        return userKey;
+    }
+    
 }

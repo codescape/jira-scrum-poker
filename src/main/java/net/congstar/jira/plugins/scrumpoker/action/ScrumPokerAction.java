@@ -31,4 +31,13 @@ abstract class ScrumPokerAction extends JiraWebActionSupport {
         return getRedirect("/browse/" + issueKey);
     }
 
+    /**
+     * Returns the key of the current user.
+     *
+     * @return key of current user
+     */
+    String currentUserKey() {
+        return getLoggedInUser().getKey();
+    }
+
 }
