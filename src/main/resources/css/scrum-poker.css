@@ -1,33 +1,33 @@
 #pokerset li {
-	display: inline;
-	list-style-type: none;
-	padding-right: 10px;
+    display: inline;
+    list-style-type: none;
+    padding-right: 10px;
 }
 
 #pokerset li img {
-   width: 10%;
+    width: 10%;
 }
 
 #chosencards li {
-	list-style-type: none;
+    list-style-type: none;
 }
 
 #chosencards li img {
-   width: 5%;
+    width: 5%;
 }
 
 #selectVote li img {
-   width: 5%;
+    width: 5%;
 }
 
 #selectVote li {
-	display: inline;
-	list-style-type: none;
-	padding-right: 10px;
+    display: inline;
+    list-style-type: none;
+    padding-right: 10px;
 }
 
 #buttonReveal {
-   margin-left: 20px;
+    margin-left: 20px;
 }
 
 .issue-main-column {
