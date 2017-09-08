@@ -28,6 +28,10 @@ As a rule of thumb:
 
 ## Changelog
 
+### 1.6.1 (08.09.2017)
+
+* provide translation for the active sessions list 
+
 ### 1.6.0 (22.08.2017)
 
 * show the name of the user who has started the session in the session list 

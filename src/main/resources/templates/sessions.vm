@@ -1,9 +1,7 @@
 <html>
 <head>
     <title>${i18n.getText("pp.scrumPoker")}</title>
-    <link rel="stylesheet" type="text/css"
-          href="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.css"
-          media="all"/>
+    <link rel="stylesheet" type="text/css" href="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.css" media="all"/>
     <script src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.js"/>
 </head>
 <body>
@@ -21,7 +19,7 @@
             <ol class="aui-nav aui-nav-breadcrumbs">
                 <li class="aui-nav-selected">Scrum Poker</li>
             </ol>
-            <h1>Aktuelle Sitzungen</h1>
+            <h1>$i18n.getText("scrumpoker.sessions.list")</h1>
         </div>
         <div class="aui-page-header-actions">
             <div class="aui-buttons">

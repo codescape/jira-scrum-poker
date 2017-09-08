@@ -1,10 +1,11 @@
 <html>
-  <head>
+<head>
     <title>${i18n.getText("pp.scrumPoker")}</title>
     <link rel="stylesheet" type="text/css" href="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.css" media="all" />
     <script src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.js"/>
-  </head>
-  <body>
+</head>
+<body>
+
 <header class="aui-page-header">
     <div class="aui-page-header-inner">
         <div class="aui-page-header-image">
@@ -23,7 +24,7 @@
         </div>
         <div class="aui-page-header-actions">
             <div class="aui-buttons">
-            	<a href="$req.contextPath/secure/scrumPokerSessions.jspa"><button class="aui-button aui-button-light">$i18n.getText("scrumpoker.sessions.active")</button></a>
+            	<a href="$req.contextPath/secure/scrumPokerSessions.jspa"><button class="aui-button aui-button-light">$i18n.getText("scrumpoker.sessions.list")</button></a>
             </div>
         </div>
     </div>
@@ -92,5 +93,5 @@
   });
 </script>
 
-  </body>
+</body>
 </html>
