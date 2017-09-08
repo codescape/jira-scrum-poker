@@ -1,9 +1,10 @@
 <html>
-  <head>
+<head>
     <title>$i18n.getText("scrumpoker.title") - $i18n.getText("scrumpoker.config.title")</title>
-  </head>
-  <body>
-	<h1>$i18n.getText("scrumpoker.title")</h1>
+</head>
+<body>
+
+    <h1>$i18n.getText("scrumpoker.title")</h1>
 
     <div class="aui-group">
         <div class="aui-item">
@@ -48,7 +49,7 @@
                 <thead>
                     <tr>
                         <th>$i18n.getText("scrumpoker.config.thankyou")</th>
-                     </tr>
+                    </tr>
                 </thead>
             </table>
 
@@ -62,5 +63,5 @@
         </div>
     </div>
 
-  </body>
+</body>
 </html>

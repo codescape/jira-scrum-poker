@@ -1,27 +1,29 @@
 <html>
-	<head>
-		<title>Scrum Poker</title>
-	</head>
-	<body>
+<head>
+    <title>Scrum Poker</title>
+</head>
+<body>
+
 	<h1>Scrum Poker NOT started....</h1>
 
 	#if($action.hasAnyErrors())
-      <div class="aui-message closeable error">
+    <div class="aui-message closeable error">
         <p class="title">
-          <span class="aui-icon icon-error"></span>
-          <strong>Error!</strong>
+            <span class="aui-icon icon-error"></span>
+            <strong>Error!</strong>
         </p>
         <ul>
-          #foreach($error in $action.errorMessages)
+        #foreach($error in $action.errorMessages)
             <li>$error</li>
-          #end
-          #foreach($error in $action.errors)
+        #end
+        #foreach($error in $action.errors)
             <li>$error</li>
-          #end
+        #end
         </ul>
-      </div>
-  #end
+    </div>
+    #end
 
-	<a href="#" onclick="javascript:history.back()">zurück</a>
-	</body>
+    <a href="#" onclick="javascript:history.back()">zurück</a>
+
+</body>
 </html>
