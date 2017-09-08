@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>${i18n.getText("pp.scrumPoker")}</title>
+    <title>${i18n.getText("scrumpoker.title")}</title>
     <link rel="stylesheet" type="text/css" href="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.css" media="all" />
     <script src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.js"/>
 </head>
@@ -79,7 +79,7 @@
             </section>
             <aside class="aui-page-panel-sidebar">
             	<div class="poker-header">
-        			<h2>$i18n.getText("pp.scrumPoker")</h2>
+        			<h2>$i18n.getText("scrumpoker.title")</h2>
         		</div>               
                 <div id="card-section"></div>
             </aside>

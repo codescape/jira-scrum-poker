@@ -65,7 +65,7 @@
     <!-- dropdown on boards -->
 
     <web-section key="scrumpoker_sessions" location="jira.agile.board.tools" weight="10">
-        <label key="pp.scrumPoker">Scrum Poker</label>
+        <label key="scrumpoker.title">Scrum Poker</label>
     </web-section>
 
     <web-item section="scrumpoker_sessions" key="my-custom-web-item" weight="10">

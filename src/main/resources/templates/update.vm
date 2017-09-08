@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>${i18n.getText("pp.scrumPoker")}</title>
+    <title>${i18n.getText("scrumpoker.title")}</title>
     <meta name="decorator" content="none" />
 </head>
 <body>
