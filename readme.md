@@ -30,7 +30,9 @@ As a rule of thumb:
 
 ### 1.6.1 (08.09.2017)
 
-* provide translation for the active sessions list 
+* provide translation for the active sessions list
+* cleanup of plugin configuration
+* removed link to missing and unused javascript library 
 
 ### 1.6.0 (22.08.2017)
 
