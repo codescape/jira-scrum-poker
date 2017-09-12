@@ -4,7 +4,7 @@ import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 
 public class DefaultScrumPokerSettings implements ScrumPokerSettings {
 
-    static final String SETTINGS_NAMESPACE = "net.congstar.jira.plugins.scrum-poker.";
+    static final String SETTINGS_NAMESPACE = "net.congstar.jira.plugins.scrum-poker";
 
     static final String STORY_POINT_FIELD = "storyPointField";
 
