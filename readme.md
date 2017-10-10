@@ -18,7 +18,7 @@ For further documentation see: [Set up the Atlassian SDK and build a project](ht
 
 ## Compatibility
 
-Starting with version 1.4.0 the Scrum Poker plugin requires you run Jira 7.3.6 or newer on a Java runtime with Java 8 or newer. 
+Starting with version 1.4.0 the Scrum Poker plugin requires you to run Jira 7.3.6 or newer on a Java runtime with Java 8 or newer. 
 
 As a rule of thumb:
 
