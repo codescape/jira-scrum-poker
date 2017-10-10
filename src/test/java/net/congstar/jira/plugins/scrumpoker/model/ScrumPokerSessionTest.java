@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.equalTo;
@@ -123,7 +124,7 @@ public class ScrumPokerSessionTest {
         session.updateCard("user2", "2");
         session.updateCard("user3", "2");
 
-        assertThat(session.getBoundedVotes(), is(equalTo(Arrays.asList("2"))));
+        assertThat(session.getBoundedVotes(), is(equalTo(Collections.singletonList("2"))));
     }
 
 }
