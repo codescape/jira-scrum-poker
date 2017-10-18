@@ -6,11 +6,19 @@ This plugin provides a Scrum Poker solution for JIRA that integrates well with t
 
 ## Screenshots
 
+The configuration page enables the administrator to define the global estimation field.
+
 ![Configuration](/etc/screenshots/scrum-poker-configuration.png)
+
+New Scrum Poker sessions can be started from the context menu of any issue with the estimation field or the issue detail page.
 
 ![Start Scrum Poker session](/etc/screenshots/scrum-poker-start.png)
 
+The Scrum Poker session page is separated into issue details like summary, description and sub tasks and the Scrum Poker session details like cards, selected estimations and participating users.   
+
 ![Running Scrum Poker session](/etc/screenshots/scrum-poker-session.png)
+
+The overview page helps users to find their Scrum Poker session within all currently active and recently closed sessions.
 
 ![Active sessions Overview](/etc/screenshots/scrum-poker-active-sessions.png)
 
