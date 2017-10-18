@@ -4,6 +4,16 @@ This plugin provides a Scrum Poker solution for JIRA that integrates well with t
 
 [![Build Status](https://travis-ci.org/h4ck4thon/jira-scrum-poker.svg?branch=master)](https://travis-ci.org/h4ck4thon/jira-scrum-poker)
 
+## Screenshots
+
+![Configuration](/etc/screenshots/scrum-poker-configuration.png)
+
+![Start Scrum Poker session](/etc/screenshots/scrum-poker-start.png)
+
+![Running Scrum Poker session](/etc/screenshots/scrum-poker-session.png)
+
+![Active sessions Overview](/etc/screenshots/scrum-poker-active-sessions.png)
+
 ## Compatibility
 
 Starting with version 1.4.0 the Scrum Poker plugin requires you to run Jira 7.3.6 or newer on a Java runtime with Java 8 or newer. 
