@@ -29,38 +29,48 @@
     </div>
 </header>
 
-<div class="aui-page-panel">
-    <div class="aui-page-panel-inner">
-        <section class="aui-page-panel-content">
-            <p>$i18n.getText("scrumpoker.sessions.active")</p>
-            <ul>
-                #set($found = false)            
-                #foreach($scrumPokerSession in $openSessions)
-               		#set($found = true)
-                   	<li>
-                       	<a href="${req.contextPath}/secure/scrumPokerStart.jspa?issueKey=$scrumPokerSession.issueKey">$scrumPokerSession.issueKey: $scrumPokerSession.issueSummary</a> (gestartet: $scrumPokerSession.startedOn.toString('dd.MM.yyyy - HH:mm:ss'), von: $action.getUsername($scrumPokerSession.userKey))
-                   	</li>
-                #end
-                #if (!$found)
-                	<li><i>$i18n.getText("scrumpoker.sessions.notfound")</i></li>
-                #end                
-            </ul>
-            <p>Abgelaufene Sitzungen mit bestätigter Schätzung:</p>
-            <ul>
-            	#set($found = false)
-                #foreach($scrumPokerSession in $closedSessions)
-                    #set($found = true)
-                    <li>
-                        <a href="$req.contextPath/browse/$scrumPokerSession.issueKey">$scrumPokerSession.issueKey: $scrumPokerSession.issueSummary</a> (Schätzung: $scrumPokerSession.confirmedVote, gestartet: $scrumPokerSession.startedOn.toString('dd.MM.yyyy - HH:mm:ss'), von: $action.getUsername($scrumPokerSession.userKey))
-                    </li>
-                #end
-                #if(!$found)
-                	<li><i>$i18n.getText("scrumpoker.sessions.notfound")</i></li>
-                #end
-            </ul>            
-        </section>
+<section id="content" role="main">
+    <div class="aui-page-panel" style="margin: 0;">
+        <div class="aui-page-panel-inner">
+            <section class="aui-page-panel-content">
+				<div class="poker-header">
+        			<h2>$i18n.getText("scrumpoker.sessions.active")</h2>
+    			</div>
+   				<div class="mod-content">
+                    <ul>
+                        #set($found = false)
+                        #foreach($scrumPokerSession in $openSessions)
+                            #set($found = true)
+                            <li>
+                                <a href="${req.contextPath}/secure/scrumPokerStart.jspa?issueKey=$scrumPokerSession.issueKey">$scrumPokerSession.issueKey: $scrumPokerSession.issueSummary</a> (gestartet: $scrumPokerSession.startedOn.toString('dd.MM.yyyy - HH:mm:ss'), von: $action.getUsername($scrumPokerSession.userKey))
+                            </li>
+                        #end
+                        #if (!$found)
+                            <li><i>$i18n.getText("scrumpoker.sessions.notfound")</i></li>
+                        #end
+                    </ul>
+				</div>
+				<div class="poker-header">
+        			<h2>$i18n.getText("scrumpoker.sessions.finished")</h2>
+    			</div>
+   				<div class="mod-content">
+                    <ul>
+                        #set($found = false)
+                        #foreach($scrumPokerSession in $closedSessions)
+                            #set($found = true)
+                            <li>
+                                <a href="$req.contextPath/browse/$scrumPokerSession.issueKey">$scrumPokerSession.issueKey: $scrumPokerSession.issueSummary</a> (Schätzung: $scrumPokerSession.confirmedVote, gestartet: $scrumPokerSession.startedOn.toString('dd.MM.yyyy - HH:mm:ss'), von: $action.getUsername($scrumPokerSession.userKey))
+                            </li>
+                        #end
+                        #if(!$found)
+                            <li><i>$i18n.getText("scrumpoker.sessions.notfound")</i></li>
+                        #end
+                    </ul>
+                </div>
+            </section>
+        </div>
     </div>
-</div>
+</section>
 
 </body>
 </html>
