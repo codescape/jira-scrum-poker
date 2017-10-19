@@ -47,7 +47,6 @@
    				                <th>$i18n.getText("scrumpoker.session.startdate")</th>
    				                <th>$i18n.getText("scrumpoker.session.startedby")</th>
    				                <th>$i18n.getText("scrumpoker.session.participants")</th>
-   				                <th>$i18n.getText("scrumpoker.session.result")</th>
    				            </tr>
    				        </thead>
                         <tbody>
