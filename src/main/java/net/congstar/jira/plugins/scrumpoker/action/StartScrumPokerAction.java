@@ -38,7 +38,7 @@ public class StartScrumPokerAction extends ScrumPokerAction {
 
     private String issueKey;
 
-    private Map<String, ScrumPokerCard> cardDeck = ScrumPokerCards.asMap();
+    private final Map<String, ScrumPokerCard> cardDeck = ScrumPokerCards.asMap();
 
     private ScrumPokerSession pokerSession;
 

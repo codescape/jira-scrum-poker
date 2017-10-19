@@ -2,9 +2,9 @@ package net.congstar.jira.plugins.scrumpoker.model;
 
 public class ScrumPokerCard {
 
-    private String name;
+    private final String name;
 
-    private String image;
+    private final String image;
 
     public ScrumPokerCard(String name, String image) {
         this.name = name;
