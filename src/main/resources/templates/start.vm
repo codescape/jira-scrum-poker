@@ -35,7 +35,7 @@
         <div class="aui-page-panel-inner">
             <section class="aui-page-panel-content">
 				<div class="poker-header">
-        			<h2>$i18n.getText("pp.storyDescription")</h2>
+        			<h2>$i18n.getText("scrumpoker.story.description")</h2>
     			</div>
    				<div class="mod-content">
    				    #set($issueDescriptionHtml = $issueDescription)
@@ -46,7 +46,7 @@
 					#end
 				</div>
 				<div class="poker-header">
-        			<h2>$i18n.getText("scrumpoker.taskList")</h2>
+        			<h2>$i18n.getText("scrumpoker.story.tasks")</h2>
     			</div>
    				<div class="mod-content">
    				    #set($subTasks = $issue.subTaskObjects)

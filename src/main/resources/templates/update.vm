@@ -30,7 +30,7 @@
 
     #if ($pokerSession.visible)
     <div class="poker-header">
-        <h2>$i18n.getText("pp.bandwidth")</h2>
+        <h2>$i18n.getText("scrumpoker.bandwidth")</h2>
     </div>
     <div class="mod-content">
         <ul id="selectVote">
@@ -38,7 +38,7 @@
                 <li><a href="$req.contextPath/secure/confirmEstimationAction.jspa?issueKey=$issueKey&finalVote=$vote"><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/cards_active/$cardDeck.get($vote).image"></a></li>
             #end
         </ul>
-        <p class="poker-comment">$i18n.getText("pp.confirmVote")</p>
+        <p class="poker-comment">$i18n.getText("scrumpoker.confirmvote")</p>
     </div>
     #end
 
@@ -47,7 +47,7 @@
 <!-------------------------------------->
 
 	<div class="poker-header">
-    	<h2>$i18n.getText("pp.chosenCards")</h2>
+    	<h2>$i18n.getText("scrumpoker.chosencards")</h2>
 	</div>
 	<div class="mod-content">
 	    <ul id="chosencards">
@@ -72,7 +72,7 @@
 	</div>
 
 	#if ($pokerSession.visible && ($pokerSession.minimumVote == $pokerSession.maximumVote))
-    	<p class="poker-comment">$i18n.getText("pp.agreementReached")</p>
+    	<p class="poker-comment">$i18n.getText("scrumpoker.agreementreached")</p>
     #end
 
 <!---------------------------------------------------------->

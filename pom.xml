@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.congstar.jira.plugins</groupId>
     <artifactId>scrum-poker</artifactId>
-    <version>1.6.1</version>
+    <version>1.7.0</version>
 
     <name>JIRA Scrum Poker</name>
     <description>Scrum Poker is an open source plugin to enable teams to collaboratively estimate their work with the
@@ -37,7 +37,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- Jira version -->
-        <jira.version>7.3.6</jira.version>
+        <jira.version>7.5.0</jira.version>
         <amps.version>6.2.11</amps.version>
         <plugin.testrunner.version>1.2.3</plugin.testrunner.version>
 

@@ -17,13 +17,13 @@
         </div>
         <div class="aui-page-header-main">
             <ol class="aui-nav aui-nav-breadcrumbs">
-                <li class="aui-nav-selected">Scrum Poker</li>
+                <li class="aui-nav-selected">$i18n.getText("scrumpoker.title")</li>
             </ol>
             <h1>$i18n.getText("scrumpoker.sessions.list")</h1>
         </div>
         <div class="aui-page-header-actions">
             <div class="aui-buttons">
-                    <a href="$req.contextPath/secure/scrumPokerSessions.jspa"><button class="aui-button aui-button-light">$i18n.getText("scrumpoker.refresh")</button></a>
+                    <a href="$req.contextPath/secure/scrumPokerSessions.jspa"><button class="aui-button aui-button-light">$i18n.getText("scrumpoker.sessions.refresh")</button></a>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
 <div class="aui-page-panel">
     <div class="aui-page-panel-inner">
         <section class="aui-page-panel-content">
-            <p>Aktuell sind die folgenden Sitzungen aktiv:</p>
+            <p>$i18n.getText("scrumpoker.sessions.active")</p>
             <ul>
                 #set($found = false)            
                 #foreach($scrumPokerSession in $openSessions)
@@ -42,7 +42,7 @@
                    	</li>
                 #end
                 #if (!$found)
-                	<li><i>Keine Sitzungen gefunden</i></li>
+                	<li><i>$i18n.getText("scrumpoker.sessions.notfound")</i></li>
                 #end                
             </ul>
             <p>Abgelaufene Sitzungen mit bestätigter Schätzung:</p>
@@ -55,7 +55,7 @@
                     </li>
                 #end
                 #if(!$found)
-                	<li><i>Keine Sitzungen gefunden</i></li>
+                	<li><i>$i18n.getText("scrumpoker.sessions.notfound")</i></li>
                 #end
             </ul>            
         </section>
