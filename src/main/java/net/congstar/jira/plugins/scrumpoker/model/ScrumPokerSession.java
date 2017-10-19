@@ -27,20 +27,10 @@ public class ScrumPokerSession {
 
     private String confirmedVote;
 
-    private String issueSummary;
-
     public ScrumPokerSession(String issueKey, String userKey) {
         this.issueKey = issueKey;
         this.userKey = userKey;
         this.startedOn = DateTime.now();
-    }
-
-    public String getIssueSummary() {
-        return issueSummary;
-    }
-
-    public void setIssueSummary(String issueSummary) {
-        this.issueSummary = issueSummary;
     }
 
     /**
@@ -176,5 +166,5 @@ public class ScrumPokerSession {
     public String getUserKey() {
         return userKey;
     }
-    
+
 }

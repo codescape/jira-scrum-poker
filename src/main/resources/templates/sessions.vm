@@ -37,35 +37,73 @@
         			<h2>$i18n.getText("scrumpoker.sessions.active")</h2>
     			</div>
    				<div class="mod-content">
-                    <ul>
-                        #set($found = false)
+                    #if(!$openSessions.isEmpty())
+   				    <table width="100%" class="aui" id="issuetable">
+   				        <thead>
+   				            <tr>
+   				                <th>$i18n.getText("scrumpoker.issue.type")</th>
+   				                <th>$i18n.getText("scrumpoker.issue.key")</th>
+   				                <th>$i18n.getText("scrumpoker.issue.summary")</th>
+   				                <th>$i18n.getText("scrumpoker.session.startdate")</th>
+   				                <th>$i18n.getText("scrumpoker.session.startedby")</th>
+   				                <th>$i18n.getText("scrumpoker.session.participants")</th>
+   				                <th>$i18n.getText("scrumpoker.session.result")</th>
+   				            </tr>
+   				        </thead>
+                        <tbody>
                         #foreach($scrumPokerSession in $openSessions)
-                            #set($found = true)
-                            <li>
-                                <a href="${req.contextPath}/secure/scrumPokerStart.jspa?issueKey=$scrumPokerSession.issueKey">$scrumPokerSession.issueKey: $scrumPokerSession.issueSummary</a> (gestartet: $scrumPokerSession.startedOn.toString('dd.MM.yyyy - HH:mm:ss'), von: $action.getUsername($scrumPokerSession.userKey))
-                            </li>
+                            #set($issue = $action.getIssue($scrumPokerSession.issueKey))
+                            <tr>
+                                <td class="issuetype"><img src="$issue.issueType.completeIconUrl"></td>
+                                <td class="issuekey"><a href="${req.contextPath}/secure/scrumPokerStart.jspa?issueKey=$issue.key">$issue.key</a></td>
+                                <td class="summary"><a href="${req.contextPath}/secure/scrumPokerStart.jspa?issueKey=$issue.key">$issue.summary</a></td>
+                                <td class="created">$scrumPokerSession.startedOn.toString('dd.MM.yyyy - HH:mm:ss')</td>
+                                <td class="assignee">$action.getUsername($scrumPokerSession.userKey)</td>
+                                <td>$scrumPokerSession.cards.size()</td>
+                            </tr>
                         #end
-                        #if (!$found)
-                            <li><i>$i18n.getText("scrumpoker.sessions.notfound")</i></li>
-                        #end
-                    </ul>
+                        </tbody>
+                    </table>
+                    #else
+                        <p><i>$i18n.getText("scrumpoker.sessions.notfound")</i></p>
+                    #end
 				</div>
+				<p>&nbsp;</p>
 				<div class="poker-header">
         			<h2>$i18n.getText("scrumpoker.sessions.finished")</h2>
     			</div>
    				<div class="mod-content">
-                    <ul>
-                        #set($found = false)
+                    #if(!$openSessions.isEmpty())
+   				    <table width="100%" class="aui" id="issuetable">
+   				        <thead>
+   				            <tr>
+   				                <th>$i18n.getText("scrumpoker.issue.type")</th>
+   				                <th>$i18n.getText("scrumpoker.issue.key")</th>
+   				                <th>$i18n.getText("scrumpoker.issue.summary")</th>
+   				                <th>$i18n.getText("scrumpoker.session.startdate")</th>
+   				                <th>$i18n.getText("scrumpoker.session.startedby")</th>
+   				                <th>$i18n.getText("scrumpoker.session.participants")</th>
+   				                <th>$i18n.getText("scrumpoker.session.result")</th>
+   				            </tr>
+   				        </thead>
+                        <tbody>
                         #foreach($scrumPokerSession in $closedSessions)
-                            #set($found = true)
-                            <li>
-                                <a href="$req.contextPath/browse/$scrumPokerSession.issueKey">$scrumPokerSession.issueKey: $scrumPokerSession.issueSummary</a> (Schätzung: $scrumPokerSession.confirmedVote, gestartet: $scrumPokerSession.startedOn.toString('dd.MM.yyyy - HH:mm:ss'), von: $action.getUsername($scrumPokerSession.userKey))
-                            </li>
+                            #set($issue = $action.getIssue($scrumPokerSession.issueKey))
+                            <tr>
+                                <td class="issuetype"><img src="$issue.issueType.completeIconUrl"></td>
+                                <td class="issuekey"><a href="${req.contextPath}/secure/scrumPokerStart.jspa?issueKey=$issue.key">$issue.key</a></td>
+                                <td class="summary"><a href="${req.contextPath}/secure/scrumPokerStart.jspa?issueKey=$issue.key">$issue.summary</a></td>
+                                <td class="created">$scrumPokerSession.startedOn.toString('dd.MM.yyyy - HH:mm:ss')</td>
+                                <td class="assignee">$action.getUsername($scrumPokerSession.userKey)</td>
+                                <td>$scrumPokerSession.cards.size()</td>
+                                <td><span class="aui-badge ghx-statistic-badge">$scrumPokerSession.confirmedVote</span></td>
+                            </tr>
                         #end
-                        #if(!$found)
-                            <li><i>$i18n.getText("scrumpoker.sessions.notfound")</i></li>
-                        #end
-                    </ul>
+                        </tbody>
+                    </table>
+                    #else
+                        <p><i>$i18n.getText("scrumpoker.sessions.notfound")</i></p>
+                    #end
                 </div>
             </section>
         </div>

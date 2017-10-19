@@ -2,10 +2,12 @@
 
 This changelog helps developers and users to keep track of new features, fixes and improvements for the Scrum Poker plugin for JIRA.
 
-## 1.7.0 ()
+## 1.7.0 (19.10.2017)
 
-* bump version of JIRA API to version 7.5.0
-* cleanup and improvements for translations in German and English
+* bump version of used JIRA API to version 7.5.0
+* improved translations in German and English
+* complete internationalization of the plugin in German and English
+* layout improvements for page to display active Scrum Poker sessions
 
 ## 1.6.1 (08.09.2017)
 

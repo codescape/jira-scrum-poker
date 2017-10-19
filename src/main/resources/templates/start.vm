@@ -35,18 +35,18 @@
         <div class="aui-page-panel-inner">
             <section class="aui-page-panel-content">
 				<div class="poker-header">
-        			<h2>$i18n.getText("scrumpoker.story.description")</h2>
+        			<h2>$i18n.getText("scrumpoker.issue.summary")</h2>
     			</div>
    				<div class="mod-content">
    				    #set($issueDescriptionHtml = $issueDescription)
 					#if(!$issueDescriptionHtml.isEmpty())
 					<p>$issueDescriptionHtml</p>
 					#else
-					<p><i>Es wurden bisher keine Beschreibung formuliert.</i></p>
+					<p><i>$i18n.getText("scrumpoker.issue.summary.empty")</i></p>
 					#end
 				</div>
 				<div class="poker-header">
-        			<h2>$i18n.getText("scrumpoker.story.tasks")</h2>
+        			<h2>$i18n.getText("scrumpoker.issue.tasks")</h2>
     			</div>
    				<div class="mod-content">
    				    #set($subTasks = $issue.subTaskObjects)
@@ -64,7 +64,7 @@
                                     #if($subTask.assignee)
                                         <a href="$baseurl/secure/ViewProfile.jspa?name=$subTask.assignee.key">$subTask.assignee.name</a>
                                     #else
-                                        <i>Nicht zugewiesen</i>
+                                        <i>$i18n.getText("scrumpoker.issue.assignee.empty")</i>
                                     #end
                                 </td>
                             </tr>
@@ -73,7 +73,7 @@
 					    </tbody>
 					</table>
 					#else
-                        <p><i>Es wurden bisher keine Unteraufgaben definiert.</i></p>
+                        <p><i>$i18n.getText("scrumpoker.issue.tasks.empty")</i></p>
                     #end
 				</div>
             </section>

@@ -1,5 +1,7 @@
 package net.congstar.jira.plugins.scrumpoker.action;
 
+import com.atlassian.jira.issue.IssueManager;
+import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.user.util.UserManager;
 import net.congstar.jira.plugins.scrumpoker.data.ScrumPokerStorage;
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
@@ -12,10 +14,12 @@ public class ShowSessionsAction extends ScrumPokerAction {
 
     private final ScrumPokerStorage scrumPokerStorage;
     private final UserManager userManager;
+    private final IssueManager issueManager;
 
-    public ShowSessionsAction(ScrumPokerStorage scrumPokerStorage, UserManager userManager) {
+    public ShowSessionsAction(ScrumPokerStorage scrumPokerStorage, UserManager userManager, IssueManager issueManager) {
         this.scrumPokerStorage = scrumPokerStorage;
         this.userManager = userManager;
+        this.issueManager = issueManager;
     }
 
     @Override
@@ -33,6 +37,10 @@ public class ShowSessionsAction extends ScrumPokerAction {
 
     public String getUsername(String key) {
         return userManager.getUserByKey(key).getDisplayName();
+    }
+
+    public MutableIssue getIssue(String issueKey) {
+        return issueManager.getIssueObject(issueKey);
     }
 
 }
