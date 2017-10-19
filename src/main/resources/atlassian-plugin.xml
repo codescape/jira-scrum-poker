@@ -51,13 +51,13 @@
     <!-- buttons to start a new session -->
 
     <web-item key="pp_start" name="PP-Start" section="jira.issue.tools" weight="10">
-        <label key="scrumpoker.start"/>
+        <label key="scrumpoker.session.start"/>
         <link linkId="callPP">/secure/scrumPokerStart.jspa?issueKey=$issue.key</link>
         <condition class="net.congstar.jira.plugins.scrumpoker.StoryTypeCondition"/>
     </web-item>
 
     <web-item key="pp_start_agile" name="PP-Start" section="operations-top-level" weight="10">
-        <label key="scrumpoker.start"/>
+        <label key="scrumpoker.session.start"/>
         <link linkId="callPP">/secure/scrumPokerStart.jspa?issueKey=$issue.key</link>
         <condition class="net.congstar.jira.plugins.scrumpoker.StoryTypeCondition"/>
     </web-item>
