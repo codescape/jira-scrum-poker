@@ -72,7 +72,7 @@
         			<h2>$i18n.getText("scrumpoker.sessions.finished")</h2>
     			</div>
    				<div class="mod-content">
-                    #if(!$openSessions.isEmpty())
+                    #if(!$closedSessions.isEmpty())
    				    <table width="100%" class="aui" id="issuetable">
    				        <thead>
    				            <tr>
