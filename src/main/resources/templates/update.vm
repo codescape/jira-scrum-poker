@@ -30,7 +30,7 @@
 
     #if ($pokerSession.visible)
     <div class="poker-header">
-        <h2>$i18n.getText("scrumpoker.bandwidth")</h2>
+        <h2>$i18n.getText("scrumpoker.session.bandwidth")</h2>
     </div>
     <div class="mod-content">
         <ul id="selectVote">
@@ -38,7 +38,7 @@
                 <li><a href="$req.contextPath/secure/confirmEstimationAction.jspa?issueKey=$issueKey&finalVote=$vote"><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/cards_active/$cardDeck.get($vote).image"></a></li>
             #end
         </ul>
-        <p class="poker-comment">$i18n.getText("scrumpoker.confirmvote")</p>
+        <p class="poker-comment">$i18n.getText("scrumpoker.session.confirmestimation")</p>
     </div>
     #end
 
@@ -47,7 +47,7 @@
 <!-------------------------------------->
 
 	<div class="poker-header">
-    	<h2>$i18n.getText("scrumpoker.chosencards")</h2>
+    	<h2>$i18n.getText("scrumpoker.session.chosencards")</h2>
 	</div>
 	<div class="mod-content">
 	    <ul id="chosencards">
@@ -72,7 +72,7 @@
 	</div>
 
 	#if ($pokerSession.visible && ($pokerSession.minimumVote == $pokerSession.maximumVote))
-    	<p class="poker-comment">$i18n.getText("scrumpoker.agreementreached")</p>
+    	<p class="poker-comment">$i18n.getText("scrumpoker.session.agreementreached")</p>
     #end
 
 <!---------------------------------------------------------->
@@ -81,15 +81,15 @@
 
     <div class="poker-buttons">
         #if($pokerSession.cards.entrySet().size() > 0)
-            <a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("scrumpoker.reset")</a>
+            <a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("scrumpoker.session.reset")</a>
         #else
-        	<a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button poker-buttons-inactive">$i18n.getText("scrumpoker.reset")</a>
+        	<a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button poker-buttons-inactive">$i18n.getText("scrumpoker.session.reset")</a>
 		#end
 
         #if (!$pokerSession.visible && ($pokerSession.cards.entrySet().size() > 0))
-        	<a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("scrumpoker.reveal")</a>
+        	<a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("scrumpoker.session.revealcards")</a>
         #else
-            <a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button poker-buttons-inactive">$i18n.getText("scrumpoker.reveal")</a>
+            <a id="buttonReveal" href="$req.contextPath/secure/revealDeckAction.jspa?issueKey=$issueKey" class="aui-button poker-buttons-inactive">$i18n.getText("scrumpoker.session.revealcards")</a>
         #end
     </div>
 
@@ -108,7 +108,7 @@
         #end
 	</div>
     <div class="poker-buttons">
-		<a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("scrumpoker.reset")</a>
+		<a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issueKey" class="aui-button">$i18n.getText("scrumpoker.session.reset")</a>
 	</div>
 
 #end
