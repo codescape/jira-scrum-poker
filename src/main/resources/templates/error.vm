@@ -1,16 +1,16 @@
 <html>
 <head>
-    <title>Scrum Poker</title>
+    <title>$i18n.getText("scrumpoker.title") - $i18n.getText("scrumpoker.error.title")</title>
 </head>
 <body>
 
-	<h1>Scrum Poker NOT started....</h1>
+	<h1>$i18n.getText("scrumpoker.error.title")</h1>
 
 	#if($action.hasAnyErrors())
     <div class="aui-message closeable error">
         <p class="title">
             <span class="aui-icon icon-error"></span>
-            <strong>Error!</strong>
+            <strong>$i18n.getText("scrumpoker.error.details")</strong>
         </p>
         <ul>
         #foreach($error in $action.errorMessages)
@@ -23,7 +23,7 @@
     </div>
     #end
 
-    <a href="#" onclick="javascript:history.back()">zurück</a>
+    <a href="#" onclick="javascript:history.back()">$i18n.getText("scrumpoker.error.return")</a>
 
 </body>
 </html>

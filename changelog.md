@@ -2,6 +2,10 @@
 
 This changelog helps developers and users to keep track of new features, fixes and improvements for the Scrum Poker plugin for JIRA.
 
+## Unreleased
+
+* added internationalization for error page
+
 ## 1.7.2 - 2017-10-19
 
 * show closed sessions when no active sessions exist
