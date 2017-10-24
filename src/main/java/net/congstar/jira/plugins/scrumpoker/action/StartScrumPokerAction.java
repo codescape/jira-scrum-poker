@@ -84,10 +84,6 @@ public class StartScrumPokerAction extends ScrumPokerAction {
         return rendererManager.getRenderedContent(rendererType, issue.getDescription(), issue.getIssueRenderContext());
     }
 
-    public String getIssueKey() {
-        return issueKey;
-    }
-
     public Map<String, ScrumPokerCard> getCardDeck() {
         return cardDeck;
     }
