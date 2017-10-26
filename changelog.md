@@ -5,6 +5,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 ## Unreleased
 
 * added internationalization for error page
+* closed sessions link to issue instead of Scrum Poker session 
 
 ## 1.7.2 - 2017-10-19
 
