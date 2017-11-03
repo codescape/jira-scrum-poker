@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.congstar.jira.plugins</groupId>
     <artifactId>scrum-poker</artifactId>
-    <version>1.7.2</version>
+    <version>1.8.0</version>
 
     <name>JIRA Scrum Poker</name>
     <description>Scrum Poker is an open source plugin to enable teams to collaboratively estimate their work with the
@@ -95,11 +95,19 @@
             <version>2.2.2-atlassian-1</version>
         </dependency>
 
-        <!-- required for mockito to mock com.atlassian.jira.issue.fields.CustomField in StoryTypeConditionTest -->
+        <!-- required for mockito to mock field initializations for tests -->
+
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-core</artifactId>
             <version>6.6.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

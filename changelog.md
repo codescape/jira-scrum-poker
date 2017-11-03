@@ -4,8 +4,13 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
+* ...
+
+## 1.8.0 - 2017-11-03
+
 * added internationalization for error page
-* closed sessions link to issue instead of Scrum Poker session 
+* closed sessions link to issue instead of Scrum Poker session
+* sessions overview only shows sessions the user is allowed to see
 
 ## 1.7.2 - 2017-10-19
 
