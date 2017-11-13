@@ -130,7 +130,7 @@ public class ScrumPokerSessionTest {
     }
 
     @Test
-    public void shouldReturnTheUserWhoStartedTheSessionIndependelyFromNewVotes() {
+    public void shouldReturnTheUserWhoStartedTheSessionIndependetlyFromNewVotes() {
         assertThat(session.getUserKey(), is(equalTo(CREATOR_KEY)));
         session.updateCard("someOtherUser", "5");
         assertThat(session.getUserKey(), is(equalTo(CREATOR_KEY)));
