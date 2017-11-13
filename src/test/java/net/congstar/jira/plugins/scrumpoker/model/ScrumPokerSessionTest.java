@@ -12,11 +12,13 @@ import static org.junit.Assert.assertThat;
 
 public class ScrumPokerSessionTest {
 
+    private static final String CREATOR_KEY = "someUserKey";
+
     private ScrumPokerSession session;
 
     @Before
     public void before() {
-        session = new ScrumPokerSession("TEST-1", "someUserKey");
+        session = new ScrumPokerSession("TEST-1", CREATOR_KEY);
     }
 
     @Test
@@ -125,6 +127,13 @@ public class ScrumPokerSessionTest {
         session.updateCard("user3", "2");
 
         assertThat(session.getBoundedVotes(), is(equalTo(Collections.singletonList("2"))));
+    }
+
+    @Test
+    public void shouldReturnTheUserWhoStartedTheSessionIndependelyFromNewVotes() {
+        assertThat(session.getUserKey(), is(equalTo(CREATOR_KEY)));
+        session.updateCard("someOtherUser", "5");
+        assertThat(session.getUserKey(), is(equalTo(CREATOR_KEY)));
     }
 
 }
