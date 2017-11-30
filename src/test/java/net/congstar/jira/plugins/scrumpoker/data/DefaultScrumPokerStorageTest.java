@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 
@@ -50,7 +51,7 @@ public class DefaultScrumPokerStorageTest {
     @Test
     public void shouldRemoveSessionsOlderThanTwelveHours() {
         sessionWithoutConfirmedVoteAndCreationDate(OLD_ISSUE, FOURTEEN_HOURS_AGO.getMillis());
-        assertThat(storage.sessionForIssue(OLD_ISSUE, USER_KEY).getStartedOn(), is(equalTo(DateTime.now())));
+        assertThat(storage.sessionForIssue(OLD_ISSUE, USER_KEY).getStartedOn(), is(greaterThan(DateTime.now().minusMinutes(1))));
     }
 
     @Test
