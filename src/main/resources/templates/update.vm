@@ -15,11 +15,11 @@
         <ul id="pokerset">
             #foreach($card in $cards)
                 #if ($chosenCard == $card.name)
-                	#set($image = "cards_active/${card.image}")
+                	#set($styling = "card active")
                 #else
-                	#set($image = "cards/${card.image}")
+                	#set($styling = "card")
                 #end
-                <li><a href="${req.contextPath}/secure/chooseCardAction.jspa?issueKey=$issue.key&chosenCard=$card.name"><img src="${req.contextPath}/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/${image}"></a></li>
+                <li><a href="${req.contextPath}/secure/chooseCardAction.jspa?issueKey=$issue.key&chosenCard=$card.name" class="$styling">$card.name</a></li>
             #end
         </ul>
     </div>
@@ -35,7 +35,7 @@
     <div class="mod-content">
         <ul id="selectVote">
             #foreach ($vote in $pokerSession.boundedVotes)
-                <li><a href="$req.contextPath/secure/confirmEstimationAction.jspa?issueKey=$issue.key&finalVote=$vote"><img src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/cards_active/$cardDeck.get($vote).image"></a></li>
+                <li><a href="$req.contextPath/secure/confirmEstimationAction.jspa?issueKey=$issue.key&finalVote=$vote" class="card small">$vote</a></li>
             #end
         </ul>
         <p class="poker-comment">$i18n.getText("scrumpoker.session.confirmestimation")</p>
@@ -60,9 +60,9 @@
                 <div>
                 	<li>
                     	#if ($pokerSession.visible)
-                        	<img src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/cards/$cardDeck.get($chosenCardInstance.value).image">
+                          <span class="card small">$chosenCardInstance.value</span>
                         #else
-                            <img src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/back.jpg">
+                          <span class="card small backside">&#8362;</span>
                         #end
                         &nbsp;&nbsp;&nbsp;<span style="padding-right: 5px">$action.getUsername($chosenCardInstance.key)</span><span class="$classTalk">&nbsp;</span>
                     </li>
@@ -103,7 +103,7 @@
 	   	<p>$i18n.getText("scrumpoker.session.result")</p>
         #foreach($card in $cards)
             #if ($pokerSession.confirmedVote == $card.name)
-            	<div style="text-align:center;"><img src="${req.contextPath}/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/cards/${card.image}"></div>
+            	<div style="text-align:center;"><span class="card">${card.name}</span></div>
             #end
         #end
 	</div>

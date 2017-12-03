@@ -4,7 +4,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
-* ...
+* Scrum Poker cards are rendered by CSS and replace previously used images
 
 ## 1.8.0 - 2017-11-03
 
@@ -33,11 +33,11 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * provide translation for the active sessions list
 * cleanup of plugin configuration
-* removed link to missing and unused javascript library 
+* removed link to missing and unused javascript library
 
 ## 1.6.0 - 2017-08-22
 
-* show the name of the user who has started the session in the session list 
+* show the name of the user who has started the session in the session list
 
 ## 1.5.1 - 2017-08-15
 
@@ -56,7 +56,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * cleanup of unused actions and imports, css selectors and code formatting
 * improve internal structure of action based code and remove redundancy
-* closed and open Scrum poker sessions are sorted by creation date 
+* closed and open Scrum poker sessions are sorted by creation date
 
 ## 1.4.0 - 2017-08-07
 
