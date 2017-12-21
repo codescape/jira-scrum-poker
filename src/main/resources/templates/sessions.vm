@@ -67,7 +67,6 @@
                         <p><i>$i18n.getText("scrumpoker.sessions.notfound")</i></p>
                     #end
 				</div>
-				<p>&nbsp;</p>
 				<div class="poker-header">
         			<h2>$i18n.getText("scrumpoker.sessions.finished")</h2>
     			</div>
