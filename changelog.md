@@ -4,8 +4,15 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
+* ...
+
+## 1.9.0 - 2017-12-21
+
 * feat: cards are rendered by CSS and replace previously used images
 * docs: add contibution guidelines
+* fix: show questionmark on backside of cards
+* fix: preserve styling for link after click on card
+* fix: remove gap between active and closed sessions 
 
 ## 1.8.0 - 2017-11-03
 
