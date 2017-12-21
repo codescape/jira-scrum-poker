@@ -52,4 +52,4 @@ or in case of multiple issues:
 
 ## Credits
 
-Created with inspiration from http://karma-runner.github.io/0.10/dev/git-commit-msg.html.
+This document is created with inspiration from http://karma-runner.github.io/0.10/dev/git-commit-msg.html.
