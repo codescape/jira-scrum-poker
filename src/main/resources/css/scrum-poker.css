@@ -89,7 +89,7 @@
   background-color: rgba(23,43,77,0.25);
 }
 
-.card:hover {
+.card:hover, .card:focus {
   background-color: rgba(23,43,77,0.125);
   text-decoration: none;
 }
