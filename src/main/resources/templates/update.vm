@@ -62,7 +62,7 @@
                     	#if ($pokerSession.visible)
                           <span class="card small">$chosenCardInstance.value</span>
                         #else
-                          <span class="card small backside">&#8362;</span>
+                          <span class="card small backside">?</span>
                         #end
                         &nbsp;&nbsp;&nbsp;<span style="padding-right: 5px">$action.getUsername($chosenCardInstance.key)</span><span class="$classTalk">&nbsp;</span>
                     </li>
