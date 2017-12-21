@@ -87,4 +87,9 @@ public class ShowSessionsActionTest {
         verify(scrumPokerStorage).getClosedSessions();
     }
 
+    @Test
+    public void shouldAlwaysShowSessionsPage() throws Exception {
+        assertThat(showSessionsAction.doExecute(), is(equalTo("start")));
+    }
+
 }
