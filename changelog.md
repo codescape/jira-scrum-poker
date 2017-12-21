@@ -4,7 +4,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
-* Scrum Poker cards are rendered by CSS and replace previously used images
+* feat: cards are rendered by CSS and replace previously used images
+* docs: add contibution guidelines
 
 ## 1.8.0 - 2017-11-03
 
