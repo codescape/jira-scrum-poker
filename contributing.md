@@ -42,7 +42,7 @@ or in case of multiple issues:
 
 ### Sample
 
-    (feat) Users cannot see sessions for issues without permission
+    feat: users cannot see sessions for issues without permission
     
     Adds a check to prevent users to see issues they are not allowed to see. Prior
     to this commit users were able to open sessions and see details for issues 
