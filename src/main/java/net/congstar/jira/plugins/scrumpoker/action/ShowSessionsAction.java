@@ -12,6 +12,9 @@ import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Show a list of all running and recently finished Scrum poker sessions.
+ */
 public class ShowSessionsAction extends ScrumPokerAction {
 
     private static final long serialVersionUID = 1L;

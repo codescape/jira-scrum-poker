@@ -2,6 +2,9 @@ package net.congstar.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 
+/**
+ * Base class providing convenience methods and variables for action implementations.
+ */
 abstract class ScrumPokerAction extends JiraWebActionSupport {
 
     private static final long serialVersionUID = 1L;

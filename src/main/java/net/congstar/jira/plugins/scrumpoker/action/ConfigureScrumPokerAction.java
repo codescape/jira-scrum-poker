@@ -7,6 +7,9 @@ import net.congstar.jira.plugins.scrumpoker.data.ScrumPokerSettings;
 
 import java.util.List;
 
+/**
+ * Configuration of the Scrum poker plugin.
+ */
 public class ConfigureScrumPokerAction extends JiraWebActionSupport {
 
     private static final long serialVersionUID = 1L;

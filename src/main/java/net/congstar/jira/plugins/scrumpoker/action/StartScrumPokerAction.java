@@ -16,6 +16,9 @@ import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
 
 import java.util.Map;
 
+/**
+ * Start a new Scrum poker session or refresh a currently displayed Scrum poker session.
+ */
 public class StartScrumPokerAction extends ScrumPokerAction {
 
     private static final long serialVersionUID = 1L;

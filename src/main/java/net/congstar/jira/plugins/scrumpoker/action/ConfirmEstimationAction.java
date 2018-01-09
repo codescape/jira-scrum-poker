@@ -3,6 +3,9 @@ package net.congstar.jira.plugins.scrumpoker.action;
 import net.congstar.jira.plugins.scrumpoker.data.ScrumPokerStorage;
 import net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
 
+/**
+ * Confirm the chosen estimation and return to the associated issue.
+ */
 public class ConfirmEstimationAction extends ScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
