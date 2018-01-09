@@ -109,6 +109,8 @@ public class DefaultStoryPointSupportTest {
         when(updateErrorCollection.hasAnyErrors()).thenReturn(false);
 
         defaultStoryPointSupport.save(ISSUE_KEY, ESTIMATION);
+
+        verify(issueService, times(1)).update(applicationUser, updateValidationResult);
     }
 
 }
