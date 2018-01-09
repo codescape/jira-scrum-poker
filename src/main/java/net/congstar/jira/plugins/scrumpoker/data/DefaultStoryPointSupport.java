@@ -61,10 +61,7 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
     private void logErrors(String issueKey, ErrorCollection errorCollection) {
         log.error("Failed to update issue {} with errors:", issueKey);
         if (errorCollection.hasAnyErrors()) {
-            Map<String, String> errors = errorCollection.getErrors();
-            for (Map.Entry<String, String> message : errors.entrySet()) {
-                log.error("{}: {}", message.getKey(), message.getValue());
-            }
+            errorCollection.getErrors().forEach((key, value) -> log.error("{}: {}", key, value));
         }
     }
 

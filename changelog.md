@@ -4,7 +4,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
-* ...
+* refactor: log errors when updating issues in Java 8 style
 
 ## 1.9.0 - 2017-12-21
 
