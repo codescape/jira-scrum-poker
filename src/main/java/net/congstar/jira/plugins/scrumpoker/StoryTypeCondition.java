@@ -30,11 +30,7 @@ public class StoryTypeCondition extends AbstractWebCondition {
 
     private boolean hasStoryPointField(Issue currentIssue) {
         CustomField storyPointField = storyPointFieldSupport.findStoryPointField();
-        for (CustomField customField : customFieldManager.getCustomFieldObjects(currentIssue)) {
-            if (customField.equals(storyPointField))
-                return true;
-        }
-        return false;
+        return customFieldManager.getCustomFieldObjects(currentIssue).contains(storyPointField);
     }
 
 }
