@@ -4,7 +4,13 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
-* refactor: log errors when updating issues in Java 8 style
+* docs: improve documentation for scrum poker session
+* docs: fix credits to original author
+* docs: fix sample for commit messages 
+* refactor: simplify verification custom field exists
+* refactor: remove unused import
+* refactor: log errors when updating issues
+* test: verify issue update called after validation
 
 ## 1.9.0 - 2017-12-21
 
