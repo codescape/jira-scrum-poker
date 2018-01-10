@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.text.NumberFormat;
-import java.util.Map;
 
 public class DefaultStoryPointSupport implements StoryPointFieldSupport {
 
