@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A {@link ScrumPokerSession} represents a Scrum poker session that is associated with exactly one issue. It holds all information required to run a poker session and support the
- * visual representation in the graphical user interface.
+ * A Scrum poker session is associated with exactly one issue. It holds all information required to run a poker session
+ * and support the visual representation of the session in the graphical user interface.
  */
 public class ScrumPokerSession {
 
