@@ -22,7 +22,7 @@ The overview page helps users to find their Scrum Poker session within all curre
 
 ![Active sessions Overview](/etc/screenshots/scrum-poker-active-sessions.png)
 
-## Compatibility
+## Supported Jira versions
 
 Starting with version 1.4.0 the Scrum Poker plugin requires you to run Jira 7.3.6 or newer on a Java runtime with Java 8 or newer. 
 
@@ -31,6 +31,13 @@ As a rule of thumb:
 * If your Jira is running on Java 7 or older you should use the latest 1.3.16 version.
 * If your Jira version is older than Jira 6.4 you should consider updating your Jira instance ;)
 * If neither of those two rules applies you can use the latest and greatest version of Scrum Poker!  
+
+## Supported Languages
+
+The Scrum Poker plugin supports the following languages and defaults to English translation if the user has another language configured in his Jira profile:
+
+* English
+* German
 
 ## Development
 
