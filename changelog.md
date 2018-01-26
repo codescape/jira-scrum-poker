@@ -4,9 +4,15 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
+* ...
+
+## 1.9.1 - 2018-01-26
+
 * docs: improve documentation for scrum poker session
 * docs: fix credits to original author
-* docs: fix sample for commit messages 
+* docs: fix sample for commit messages
+* docs: add section about supported languages
+* docs: add section with contribution ideas 
 * refactor: simplify verification custom field exists
 * refactor: remove unused import
 * refactor: log errors when updating issues
