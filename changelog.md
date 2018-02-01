@@ -164,6 +164,9 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## 1.2.3 - 2015-05-19
 
+* feat: automatic refresh of poker cards in session every two seconds 
+* docs: added section with compatibility matrix in readme
+
 ## 1.2.2 - 2015-05-07
 
 ## 1.2.1 - 2015-05-05
