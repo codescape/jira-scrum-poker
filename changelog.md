@@ -4,7 +4,10 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
-* ...
+* feat: remove reset button from confirmed estimation page
+* feat: add active sessions link on confirmed estimation page
+* feat: add return to issue link on confirmed estimation page
+* feat: improve wording for confirmed estimation page
 
 ## 1.9.1 - 2018-01-26
 

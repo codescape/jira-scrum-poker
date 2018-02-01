@@ -100,7 +100,7 @@
 <!------------------------------------------------------------------------->
 
 	<div class="mod-content">
-	   	<p>$i18n.getText("scrumpoker.session.result")</p>
+	   	<p>$i18n.getText("scrumpoker.session.estimationsaved")</p>
         #foreach($card in $cards)
             #if ($pokerSession.confirmedVote == $card.name)
             	<div style="text-align:center;"><span class="card">${card.name}</span></div>
@@ -108,7 +108,8 @@
         #end
 	</div>
     <div class="poker-buttons">
-		<a id="buttonReset" href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issue.key" class="aui-button">$i18n.getText("scrumpoker.session.reset")</a>
+        <a href="$req.contextPath/secure/scrumPokerSessions.jspa" class="aui-button">$i18n.getText("scrumpoker.sessions.list")</a>
+		<a href="$req.contextPath/browse/$issue.key" class="aui-button">$i18n.getText("scrumpoker.issue.navigateback")</a>
 	</div>
 
 #end
