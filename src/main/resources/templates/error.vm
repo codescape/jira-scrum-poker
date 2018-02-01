@@ -4,9 +4,9 @@
 </head>
 <body>
 
-	<h1>$i18n.getText("scrumpoker.error.title")</h1>
+    <h1>$i18n.getText("scrumpoker.error.title")</h1>
 
-	#if($action.hasAnyErrors())
+    #if($action.hasAnyErrors())
     <div class="aui-message closeable error">
         <p class="title">
             <span class="aui-icon icon-error"></span>

@@ -24,7 +24,7 @@
         </div>
         <div class="aui-page-header-actions">
             <div class="aui-buttons">
-            	<a href="$req.contextPath/secure/scrumPokerSessions.jspa"><button class="aui-button aui-button-light">$i18n.getText("scrumpoker.sessions.list")</button></a>
+                <a href="$req.contextPath/secure/scrumPokerSessions.jspa"><button class="aui-button aui-button-light">$i18n.getText("scrumpoker.sessions.list")</button></a>
             </div>
         </div>
     </div>
@@ -34,24 +34,24 @@
     <div class="aui-page-panel" style="margin: 0;">
         <div class="aui-page-panel-inner">
             <section class="aui-page-panel-content">
-				<div class="poker-header">
-        			<h2>$i18n.getText("scrumpoker.issue.summary")</h2>
-    			</div>
-   				<div class="mod-content">
-   				    #set($issueDescriptionHtml = $issueDescription)
-					#if(!$issueDescriptionHtml.isEmpty())
-					<p>$issueDescriptionHtml</p>
-					#else
-					<p><i>$i18n.getText("scrumpoker.issue.summary.empty")</i></p>
-					#end
-				</div>
-				<div class="poker-header">
-        			<h2>$i18n.getText("scrumpoker.issue.tasks")</h2>
-    			</div>
-   				<div class="mod-content">
-   				    #set($subTasks = $issue.subTaskObjects)
-   				    #if(!$subTasks.isEmpty())
-   				    <table width="100%" class="aui" id="issuetable">
+                <div class="poker-header">
+                    <h2>$i18n.getText("scrumpoker.issue.summary")</h2>
+                </div>
+                   <div class="mod-content">
+                       #set($issueDescriptionHtml = $issueDescription)
+                    #if(!$issueDescriptionHtml.isEmpty())
+                    <p>$issueDescriptionHtml</p>
+                    #else
+                    <p><i>$i18n.getText("scrumpoker.issue.summary.empty")</i></p>
+                    #end
+                </div>
+                <div class="poker-header">
+                    <h2>$i18n.getText("scrumpoker.issue.tasks")</h2>
+                </div>
+                   <div class="mod-content">
+                       #set($subTasks = $issue.subTaskObjects)
+                       #if(!$subTasks.isEmpty())
+                       <table width="100%" class="aui" id="issuetable">
                         <tbody>
                             #set($counter = 1)
                             #foreach($subTask in $subTasks)
@@ -70,17 +70,17 @@
                             </tr>
                             #set($counter = $counter + 1)
                             #end
-					    </tbody>
-					</table>
-					#else
+                        </tbody>
+                    </table>
+                    #else
                         <p><i>$i18n.getText("scrumpoker.issue.tasks.empty")</i></p>
                     #end
-				</div>
+                </div>
             </section>
             <aside class="aui-page-panel-sidebar">
-            	<div class="poker-header">
-        			<h2>$i18n.getText("scrumpoker.title")</h2>
-        		</div>               
+                <div class="poker-header">
+                    <h2>$i18n.getText("scrumpoker.title")</h2>
+                </div>               
                 <div id="card-section"></div>
             </aside>
         </div>

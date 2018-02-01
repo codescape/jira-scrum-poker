@@ -8,6 +8,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: add active sessions link on confirmed estimation page
 * feat: add return to issue link on confirmed estimation page
 * feat: improve wording for confirmed estimation page
+* style: use white space instead of tabs
 
 ## 1.9.1 - 2018-01-26
 

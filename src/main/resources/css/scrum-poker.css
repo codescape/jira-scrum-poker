@@ -64,38 +64,38 @@
 }
 
 .card {
-  display: inline-block;
-  text-align: center;
-  line-height: 3.25em;
-  min-width: 2.25em;
-  font-size: 15px;
-  margin: 5px;
-  padding: 2px;
-  border-radius: 5px;
-  color: #172B4D;
-  background-color: #fff;
-  border: #172B4D 1px solid;
-  -webkit-box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25);
-  -moz-box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25);
-  box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25);
-  cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    line-height: 3.25em;
+    min-width: 2.25em;
+    font-size: 15px;
+    margin: 5px;
+    padding: 2px;
+    border-radius: 5px;
+    color: #172B4D;
+    background-color: #fff;
+    border: #172B4D 1px solid;
+    -webkit-box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25);
+    -moz-box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25);
+    box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25);
+    cursor: pointer;
 }
 
 .card.small {
-  font-size: 12px;
+    font-size: 12px;
 }
 
 .card.active {
-  background-color: rgba(23,43,77,0.25);
+    background-color: rgba(23,43,77,0.25);
 }
 
 .card:hover, .card:focus {
-  background-color: rgba(23,43,77,0.125);
-  text-decoration: none;
+    background-color: rgba(23,43,77,0.125);
+    text-decoration: none;
 }
 
 .card.backside {
-  background-color: #172B4D;
-  color: #fff;
-  cursor: default;
+    background-color: #172B4D;
+    color: #fff;
+    cursor: default;
 }
