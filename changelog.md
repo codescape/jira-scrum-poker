@@ -4,11 +4,15 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
+* ...
+
+## 1.10.0 - 2018-02-02
+
 * feat: remove reset button from confirmed estimation page
 * feat: add active sessions link on confirmed estimation page
 * feat: add return to issue link on confirmed estimation page
 * feat: improve wording for confirmed estimation page
-* style: use white space instead of tabs
+* style: use white space instead of tabs for templates
 
 ## 1.9.1 - 2018-01-26
 
