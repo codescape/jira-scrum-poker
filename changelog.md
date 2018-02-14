@@ -54,67 +54,68 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## 1.7.0 - 2017-10-19
 
-* bump version of used JIRA API to version 7.5.0
-* improved translations in German and English
-* complete internationalization of the plugin in German and English
-* layout improvements for page to display active Scrum Poker sessions
+* feat: bump version of used JIRA API to version 7.5.0
+* feat: improve translations in German and English
+* feat: complete internationalization of the plugin in German and English
+* feat: layout improvements for page to display active Scrum Poker sessions
 
 ## 1.6.1 - 2017-09-08
 
-* provide translation for the active sessions list
-* cleanup of plugin configuration
-* removed link to missing and unused javascript library
+* feat: provide translation for the active sessions list
+* chore: cleanup of plugin configuration
+* chore: removed link to missing and unused javascript library
 
 ## 1.6.0 - 2017-08-22
 
-* show the name of the user who has started the session in the session list
+* feat: show the name of the user who has started the session in the session list
 
 ## 1.5.1 - 2017-08-15
 
-* use base url to display images and links on estimation page
+* fix: use base url to display images and links on estimation page
 
 ## 1.5.0 - 2017-08-15
 
-* display sub tasks of the story currently being estimated
+* feat: display sub tasks of the story currently being estimated
 
 ## 1.4.2 - 2017-08-11
 
-* extract settings handling into on component
-* implement against latest Atlassian Maven JIRA Plugin
+* refactor: extract settings handling into one component
+* feat: implement against latest Atlassian Maven JIRA Plugin
 
 ## 1.4.1 - 2017-08-08
 
-* cleanup of unused actions and imports, css selectors and code formatting
-* improve internal structure of action based code and remove redundancy
-* closed and open Scrum poker sessions are sorted by creation date
+* chore: cleanup of unused actions and imports, css selectors 
+* style: improve code formatting
+* refactor: improve internal structure of action based code and remove redundancy
+* feat: closed and open Scrum poker sessions are sorted by creation date
 
 ## 1.4.0 - 2017-08-07
 
-* implemented using Java 8 language level
-* implemented and tested against JIRA version 7.3.6
+* refactor: use Java 8 language level
+* feat: implement and test against JIRA version 7.3.6
 
 ## 1.3.16 - 2017-06-21
 
-* cleanup Scrum Poker Sessions older than 12 hours
+* feat: cleanup Scrum Poker Sessions older than 12 hours
 
 ## 1.3.15 - 2017-02-24
 
-* Security-Bug: restrict access to configuration to sysadmin role
+* fix: restrict access to configuration to sysadmin role
 
 ## 1.3.14 - 2017-02-24
 
-* configuration of story point field is saved by id and not by name anymore (required reconfiguration)
-* configuration page includes link to issue tracker on GitHub
-* configuration page has alert if no story point field ist configured
+* feat: configuration of story point field is saved by id and not by name anymore (requires reconfiguration)
+* feat: configuration page includes link to issue tracker on GitHub
+* feat: configuration page has alert if no story point field ist configured
 
 ## 1.3.13 - 2017-02-16
 
-* Overview page supports refreshing with button
+* feat: overview page supports refreshing with button
 
 ## 1.3.12 - 2017-02-13
 
-* Overview page with all Scrum Poker sessions is accessible from currently opened session
-* Overview page with all Scrum Poker sessions shows start date of every Scrum Poker session
+* feat: overview page with all Scrum Poker sessions is accessible from currently opened session
+* feat: overview page with all Scrum Poker sessions shows start date of every Scrum Poker session
 
 ## 1.3.11 - 2016-08-02
 
