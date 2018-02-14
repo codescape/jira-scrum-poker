@@ -4,7 +4,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
-* ...
+* docs: fix typo and remove trailing whitespace
+* style: add initial version of EditorConfig file
 
 ## 1.10.0 - 2018-02-02
 
