@@ -42,7 +42,7 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
         issueInputParameters.addCustomFieldValue(findStoryPointField().getIdAsLong(), formatAsNumber(newValue));
 
         IssueService.UpdateValidationResult validationResult = issueService.validateUpdate(applicationUser,
-                issue.getId(), issueInputParameters);
+            issue.getId(), issueInputParameters);
         if (validationResult.getErrorCollection().hasAnyErrors()) {
             logErrors(issue.getKey(), validationResult.getErrorCollection());
         } else {

@@ -6,6 +6,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * docs: fix typo and remove trailing whitespace
 * style: add initial version of EditorConfig file
+* style: add indent and charset to EditorConfig and apply
 
 ## 1.10.0 - 2018-02-02
 

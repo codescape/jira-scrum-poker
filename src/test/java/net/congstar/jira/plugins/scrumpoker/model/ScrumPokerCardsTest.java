@@ -14,7 +14,7 @@ import static org.junit.Assume.assumeThat;
 public class ScrumPokerCardsTest {
 
     private static final List<String> CARD_KEYS = Arrays.stream(ScrumPokerCards.pokerDeck)
-            .map(ScrumPokerCard::getName).collect(Collectors.toList());
+        .map(ScrumPokerCard::getName).collect(Collectors.toList());
 
     @Test
     public void asMapShouldReturnMapOfAllCards() {

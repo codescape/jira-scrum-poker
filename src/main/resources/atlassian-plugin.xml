@@ -28,7 +28,8 @@
 
     <!-- imported components -->
 
-    <component-import key="pluginSettingsFactory" interface="com.atlassian.sal.api.pluginsettings.PluginSettingsFactory"/>
+    <component-import key="pluginSettingsFactory"
+                      interface="com.atlassian.sal.api.pluginsettings.PluginSettingsFactory"/>
     <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties"/>
 
     <!-- components -->
@@ -77,21 +78,28 @@
 
     <webwork1 key="scrum-poker-webwork" name="Scrum Poker">
         <actions>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction" alias="scrumPokerConfiguration" roles-required="sysadmin">
+            <action name="net.congstar.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction"
+                    alias="scrumPokerConfiguration" roles-required="sysadmin">
                 <view name="success">/templates/configuration.vm</view>
             </action>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.ShowSessionsAction" alias="scrumPokerSessions" roles-required="use">
+            <action name="net.congstar.jira.plugins.scrumpoker.action.ShowSessionsAction" alias="scrumPokerSessions"
+                    roles-required="use">
                 <view name="start">/templates/sessions.vm</view>
             </action>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.StartScrumPokerAction" alias="scrumPokerStart" roles-required="use">
+            <action name="net.congstar.jira.plugins.scrumpoker.action.StartScrumPokerAction" alias="scrumPokerStart"
+                    roles-required="use">
                 <view name="start">/templates/start.vm</view>
                 <view name="update">/templates/update.vm</view>
                 <view name="error">/templates/error.vm</view>
             </action>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.ChooseCardAction" alias="chooseCardAction" roles-required="use"/>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.RevealDeckAction" alias="revealDeckAction" roles-required="use"/>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.ConfirmEstimationAction" alias="confirmEstimationAction" roles-required="use"/>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.ResetDeckAction" alias="resetDeckAction" roles-required="use"/>
+            <action name="net.congstar.jira.plugins.scrumpoker.action.ChooseCardAction" alias="chooseCardAction"
+                    roles-required="use"/>
+            <action name="net.congstar.jira.plugins.scrumpoker.action.RevealDeckAction" alias="revealDeckAction"
+                    roles-required="use"/>
+            <action name="net.congstar.jira.plugins.scrumpoker.action.ConfirmEstimationAction"
+                    alias="confirmEstimationAction" roles-required="use"/>
+            <action name="net.congstar.jira.plugins.scrumpoker.action.ResetDeckAction" alias="resetDeckAction"
+                    roles-required="use"/>
         </actions>
     </webwork1>
 

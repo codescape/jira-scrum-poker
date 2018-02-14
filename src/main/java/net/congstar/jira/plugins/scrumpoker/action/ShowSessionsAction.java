@@ -41,16 +41,16 @@ public class ShowSessionsAction extends ScrumPokerAction {
 
     public List<ScrumPokerSession> getOpenSessions() {
         return scrumPokerStorage.getOpenSessions().stream()
-                .filter(session -> permissionManager.hasPermission(ProjectPermissions.BROWSE_PROJECTS,
-                        issueManager.getIssueObject(session.getIssueKey()), jiraAuthenticationContext.getLoggedInUser()))
-                .collect(Collectors.toList());
+            .filter(session -> permissionManager.hasPermission(ProjectPermissions.BROWSE_PROJECTS,
+                issueManager.getIssueObject(session.getIssueKey()), jiraAuthenticationContext.getLoggedInUser()))
+            .collect(Collectors.toList());
     }
 
     public List<ScrumPokerSession> getClosedSessions() {
         return scrumPokerStorage.getClosedSessions().stream()
-                .filter(session -> permissionManager.hasPermission(ProjectPermissions.BROWSE_PROJECTS,
-                        issueManager.getIssueObject(session.getIssueKey()), jiraAuthenticationContext.getLoggedInUser()))
-                .collect(Collectors.toList());
+            .filter(session -> permissionManager.hasPermission(ProjectPermissions.BROWSE_PROJECTS,
+                issueManager.getIssueObject(session.getIssueKey()), jiraAuthenticationContext.getLoggedInUser()))
+            .collect(Collectors.toList());
     }
 
     public String getUsername(String key) {

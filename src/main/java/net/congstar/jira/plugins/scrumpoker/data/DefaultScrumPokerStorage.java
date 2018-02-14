@@ -38,17 +38,17 @@ public class DefaultScrumPokerStorage implements ScrumPokerStorage {
     @Override
     public List<ScrumPokerSession> getOpenSessions() {
         return scrumPokerSessions.values().stream()
-                .filter(session -> session.getConfirmedVote() == null)
-                .sorted(Comparator.comparing(ScrumPokerSession::getStartedOn).reversed())
-                .collect(Collectors.toList());
+            .filter(session -> session.getConfirmedVote() == null)
+            .sorted(Comparator.comparing(ScrumPokerSession::getStartedOn).reversed())
+            .collect(Collectors.toList());
     }
 
     @Override
     public List<ScrumPokerSession> getClosedSessions() {
         return scrumPokerSessions.values().stream()
-                .filter(session -> session.getConfirmedVote() != null)
-                .sorted(Comparator.comparing(ScrumPokerSession::getStartedOn).reversed())
-                .collect(Collectors.toList());
+            .filter(session -> session.getConfirmedVote() != null)
+            .sorted(Comparator.comparing(ScrumPokerSession::getStartedOn).reversed())
+            .collect(Collectors.toList());
     }
 
     /**
@@ -56,7 +56,7 @@ public class DefaultScrumPokerStorage implements ScrumPokerStorage {
      */
     private void removeOldScrumPokerSessions() {
         scrumPokerSessions.entrySet().removeIf(sessionEntry ->
-                sessionEntry.getValue().getStartedOn().isBefore(DateTime.now().minusHours(POKER_SESSION_TIMEOUT_HOURS))
+            sessionEntry.getValue().getStartedOn().isBefore(DateTime.now().minusHours(POKER_SESSION_TIMEOUT_HOURS))
         );
     }
 
