@@ -13,13 +13,10 @@ import java.util.List;
 public class ConfigureScrumPokerAction extends JiraWebActionSupport {
 
     private static final long serialVersionUID = 1L;
-
     private static final String PARAM_STORY_POINT_FIELD = "storyPointField";
-
     private static final String PARAM_ACTION = "action";
 
     private final CustomFieldManager customFieldManager;
-
     private final ScrumPokerSettings scrumPokerSettings;
 
     public ConfigureScrumPokerAction(ScrumPokerSettings scrumPokerSettings, CustomFieldManager customFieldManager) {

@@ -8,7 +8,6 @@ import net.congstar.jira.plugins.scrumpoker.data.ScrumPokerStorage;
 public class ChooseCardAction extends ScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
-
     private static final String PARAM_CHOSEN_CARD = "chosenCard";
 
     private final ScrumPokerStorage scrumPokerStorage;

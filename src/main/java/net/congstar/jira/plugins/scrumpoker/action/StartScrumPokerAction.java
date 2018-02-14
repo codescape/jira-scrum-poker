@@ -22,27 +22,16 @@ import java.util.Map;
 public class StartScrumPokerAction extends ScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
-
     private static final String PARAM_ACTION = "action";
 
-    /* components */
-
     private final IssueManager issueManager;
-
     private final ScrumPokerStorage scrumPokerStorage;
-
     private final UserManager userManager;
-
     private final RendererManager rendererManager;
-
     private final FieldLayoutManager fieldLayoutManager;
 
-    /* view model */
-
     private String issueKey;
-
     private final Map<String, ScrumPokerCard> cardDeck = ScrumPokerCards.asMap();
-
     private ScrumPokerSession pokerSession;
 
     public StartScrumPokerAction(IssueManager issueManager, UserManager userManager, RendererManager rendererManager,

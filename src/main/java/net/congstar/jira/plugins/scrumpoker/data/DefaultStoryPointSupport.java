@@ -18,11 +18,8 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
     private static final Logger log = LoggerFactory.getLogger(DefaultStoryPointSupport.class);
 
     private final ScrumPokerSettings scrumPokerSettings;
-
     private final CustomFieldManager customFieldManager;
-
     private final JiraAuthenticationContext context;
-
     private final IssueService issueService;
 
     public DefaultStoryPointSupport(JiraAuthenticationContext context, ScrumPokerSettings scrumPokerSettings,
