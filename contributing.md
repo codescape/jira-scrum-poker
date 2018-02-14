@@ -18,7 +18,7 @@ There are many things you can do to help improving the Scrum Poker plugin.
 Commit messages should be written in this format:
 
     <type>: <subject>
-
+    
     <body>
     
     <footer>
@@ -42,7 +42,7 @@ The first line put together from the `type` and the `subject` should not be long
 
 ### Message footer
 
-The message footer is used to reference issue that are adressed and closed by this commit. Closed issues should be listed on a separate line in the footer prefixed with "Closes" keyword like this:
+The message footer is used to reference issue that are addressed and closed by this commit. Closed issues should be listed on a separate line in the footer prefixed with "Closes" keyword like this:
 
     Closes #17
 
@@ -55,7 +55,7 @@ or in case of multiple issues:
     feat: users cannot see sessions for issues without permission
     
     Adds a check to prevent users to see issues they are not allowed to see. Prior
-    to this commit users were able to open sessions and see details for issues 
+    to this commit users were able to open sessions and see details for issues
     that they are not allowed see in JIRA directly.
     
     Closes #17
