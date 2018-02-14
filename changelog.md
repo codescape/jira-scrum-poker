@@ -38,19 +38,19 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## 1.8.0 - 2017-11-03
 
-* added internationalization for error page
-* closed sessions link to issue instead of Scrum Poker session
-* sessions overview only shows sessions the user is allowed to see
+* feat: added internationalization for error page
+* feat: closed sessions link to issue instead of Scrum Poker session
+* feat: sessions overview only shows sessions the user is allowed to see
 
 ## 1.7.2 - 2017-10-19
 
-* show closed sessions when no active sessions exist
-* improved changelog for better readability
+* fix: show closed sessions when no active sessions exist
+* docs: improve changelog for better readability
 
 ## 1.7.1 - 2017-10-19
 
-* added missing translations for English translation
-* correct number of headings for active sessions in session overview
+* fix: add missing translations for English translation
+* fix: correct number of headings for active sessions in session overview
 
 ## 1.7.0 - 2017-10-19
 
@@ -118,55 +118,55 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## 1.3.11 - 2016-08-02
 
-* add Travis CI build
+* chore: add Travis CI build
 
 ## 1.3.10 - 2016-08-02
 
-* inject components instead of programmatically getting them
-* bounded votes are only exposed through Scrum Poker session now
-* overall cleanup (formatting and imports)
+* refactor: inject components instead of programmatically getting them
+* refactor: bounded votes are only exposed through Scrum Poker session now
+* style: overall cleanup (formatting and imports)
 
 ## 1.3.9 - 2016-07-22
 
-* fix for URL in session overview
+* fix: display correct URL in session overview
 
 ## 1.3.8 - 2016-07-22
 
-* navigate to issue for estimated Scrum Poker sessions in session overview
-* new naming for Scrum Poker URLs reflecting the plugin name
+* feat: navigate to issue for estimated Scrum Poker sessions in session overview
+* refactor: new naming for Scrum Poker URLs reflecting the plugin name
 
 ## 1.3.7 - 2016-07-13
 
-* Overview page with all currently active Scrum Poker sessions
+* feat: add overview page with all currently active Scrum Poker sessions
 
 ## 1.3.6 - 2016-01-13
 
-* Improve cleanup of old Scrum Poker sessions
+* refactor: improve cleanup of old Scrum Poker sessions
 
 ## 1.3.5 - 2016-01-08
 
-* Scrum Poker sessions can be started for all issue types with the configured custom field
+* feat: Scrum Poker sessions can be started for all issue types with the configured custom field
 
 ## 1.3.4 - 2015-11-05
 
-* Scrum Poker sessions get cleaned up when older than one day
-* Participants see confirmed estimation after estimation is confirmed by one participant
+* feat: Scrum Poker sessions get cleaned up when older than one day
+* feat: Participants see confirmed estimation when confirmed by one participant
 
 ## 1.3.3 - 2015-11-03
 
-* Internationalization optimized for German and English users
+* feat: optimize internationalization for German and English users
 
 ## 1.3.2 - 2015-11-03
 
-* Scrum Poker session can be opened directly via link URL
+* feat: open new Scrum Poker sessions via URL
 
 ## 1.3.1 - 2015-11-02
 
-* Poker card with value 0.5 removed from the Scrum Poker deck
+* feat: poker card with value 0.5 removed from the Scrum Poker deck
 
 ## 1.3.0 - 2015-11-02
 
-* Faster and more responsive interface during Scrum Poker session
+* feat: faster and more responsive interface during Scrum Poker session
 
 ## 1.2.3 - 2015-05-19
 
@@ -175,12 +175,32 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## 1.2.2 - 2015-05-07
 
+* refactor: extract votes logic into separate class and add tests
+* feat: better approach to recognize referrer and lead back after poker session
+
 ## 1.2.1 - 2015-05-05
+
+* feat: implement and test against Jira 6.4.3
+* feat: rename Planning Poker Plugin to Scrum Poker Plugin
+* refactor: simplify card image strategy using folders instead of file names
+* refactor: introduce ScrumPokerAction as base for all action classes
+* refactor: use IssueService instead of deprecated IssueManager
+* refactor: rename configuration action according to other action classes
+* style: use spaces instead of tabs and remove blank lines
+* docs: add Apache License Version 2.0
+* docs: improve readme and add description of the plugin
+* docs: add javadoc to PlanningPokerStorage interface
+* chore: add ignored file patterns for git version control 
+* chore: add Atlassian repository in POM to resolve Atlassian dependencies
 
 ## 1.2.0 - 2015-04-26
 
+* fix: save and refresh estimation to be displayed in product backlog
+
 ## 1.1.0 - 2015-04-24
+
+* _TODO: documentation of changes requires re-engineering from commits_ 
 
 ## 1.0.0 - 2015-04-23
 
-* Initial usable version of Scrum Poker
+* feat: initial usable version of Planning Poker Plugin
