@@ -14,8 +14,6 @@ import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerCard;
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerCards;
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
 
-import java.util.Map;
-
 /**
  * Start a new Scrum poker session or refresh a currently displayed Scrum poker session.
  */
@@ -31,7 +29,6 @@ public class StartScrumPokerAction extends ScrumPokerAction {
     private final FieldLayoutManager fieldLayoutManager;
 
     private String issueKey;
-    private final Map<String, ScrumPokerCard> cardDeck = ScrumPokerCards.asMap();
     private ScrumPokerSession pokerSession;
 
     public StartScrumPokerAction(IssueManager issueManager, UserManager userManager, RendererManager rendererManager,
@@ -47,20 +44,13 @@ public class StartScrumPokerAction extends ScrumPokerAction {
     protected String doExecute() throws Exception {
         String action = getHttpRequest().getParameter(PARAM_ACTION);
         issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
-
         MutableIssue issue = issueManager.getIssueObject(issueKey);
         if (issue == null) {
             addErrorMessage("Issue Key" + issueKey + " not found.");
             return "error";
         }
-
         pokerSession = scrumPokerStorage.sessionForIssue(issueKey, currentUserKey());
-
-        if (action != null && action.equals("update")) {
-            return "update";
-        } else {
-            return "start";
-        }
+        return "update".equals(action) ? "update" : "start";
     }
 
     public MutableIssue getIssue() {
@@ -74,10 +64,6 @@ public class StartScrumPokerAction extends ScrumPokerAction {
         FieldLayoutItem fieldLayoutItem = fieldLayout.getFieldLayoutItem(IssueFieldConstants.DESCRIPTION);
         String rendererType = (fieldLayoutItem != null) ? fieldLayoutItem.getRendererType() : null;
         return rendererManager.getRenderedContent(rendererType, issue.getDescription(), issue.getIssueRenderContext());
-    }
-
-    public Map<String, ScrumPokerCard> getCardDeck() {
-        return cardDeck;
     }
 
     public String getChosenCard() {
