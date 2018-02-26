@@ -203,7 +203,19 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## 1.1.0 - 2015-04-24
 
-* _TODO: documentation of changes requires re-engineering from commits_ 
+* feat: rename Planning Poker Plugin to Scrum Poker Plugin
+* feat: reveal deck only if there are no new votes coming in
+* feat: identify people with votes on the boundaries to engage talking to each other
+* feat: allow resetting a deck after a Scrum Poker session
+* feat: allow opening Scrum Poker from issue sidebar in Agile Board
+* feat: add localization for German language
+* feat: add filter to show and hide the Scrum Poker button based on issue types
+* fix: single logic for naming the Scrum Poker estimations field
+* fix: more robustness for filter to show and hide the Scrum Poker button based on issue types
+* fix: encoding of German umlauts in German message bundle
+* fix: invite to talk only when there are minimum two different estimations
+* style: cleanup and formatting of initially generated POM
+* style: global optimizations regarding formatting and code style
 
 ## 1.0.0 - 2015-04-23
 
