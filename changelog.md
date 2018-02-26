@@ -4,6 +4,9 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
+* feat: stop users from opening issues in Scrum Poker they may not see
+* feat: add robustness when a key cannot be resolved to a user
+* refactor: simplify refreshing session data and remove unused code
 * docs: fix typo and remove trailing whitespace
 * style: add initial version of EditorConfig file
 * style: add indent and charset to EditorConfig and apply
