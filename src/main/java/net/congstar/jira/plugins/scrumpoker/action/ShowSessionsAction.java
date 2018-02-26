@@ -5,6 +5,7 @@ import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.permission.ProjectPermissions;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
+import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import net.congstar.jira.plugins.scrumpoker.data.ScrumPokerStorage;
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
@@ -54,7 +55,8 @@ public class ShowSessionsAction extends ScrumPokerAction {
     }
 
     public String getUsername(String key) {
-        return userManager.getUserByKey(key).getDisplayName();
+        ApplicationUser user = userManager.getUserByKey(key);
+        return user != null ? user.getDisplayName() : key;
     }
 
     public MutableIssue getIssue(String issueKey) {

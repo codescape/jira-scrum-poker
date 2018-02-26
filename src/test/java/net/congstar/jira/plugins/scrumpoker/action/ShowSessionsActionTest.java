@@ -5,6 +5,7 @@ import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
+import com.atlassian.jira.user.util.UserManager;
 import net.congstar.jira.plugins.scrumpoker.data.ScrumPokerStorage;
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
 import org.junit.Before;
@@ -26,6 +27,8 @@ import static org.mockito.Mockito.when;
 
 public class ShowSessionsActionTest {
 
+    private static final String UNKNOWN_USER_KEY = "unknownUserKey";
+
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
@@ -37,6 +40,9 @@ public class ShowSessionsActionTest {
 
     @Mock
     private JiraAuthenticationContext jiraAuthenticationContext;
+
+    @Mock
+    private UserManager userManager;
 
     @Mock
     private IssueManager issueManager;
@@ -90,6 +96,12 @@ public class ShowSessionsActionTest {
     @Test
     public void shouldAlwaysShowSessionsPage() throws Exception {
         assertThat(showSessionsAction.doExecute(), is(equalTo("start")));
+    }
+
+    @Test
+    public void returnsUserKeyIfUserCannotBeFound() {
+        when(userManager.getUserByKey(UNKNOWN_USER_KEY)).thenReturn(null);
+        assertThat(showSessionsAction.getUsername(UNKNOWN_USER_KEY), is(equalTo(UNKNOWN_USER_KEY)));
     }
 
 }
