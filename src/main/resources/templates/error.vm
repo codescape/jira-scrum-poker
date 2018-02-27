@@ -4,10 +4,37 @@
 </head>
 <body>
 
-    <h1>$i18n.getText("scrumpoker.error.title")</h1>
+<header class="aui-page-header">
+    <div class="aui-page-header-inner">
+        <div class="aui-page-header-image">
+            <span class="aui-avatar aui-avatar-large aui-avatar-project">
+                <span class="aui-avatar-inner">
+                    <img alt="Scrum Poker Logo" src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/pluginLogo.png">
+                </span>
+            </span>
+        </div>
+        <div class="aui-page-header-main">
+            <ol class="aui-nav aui-nav-breadcrumbs">
+                <li>$i18n.getText("scrumpoker.title")</li>
+            </ol>
+            <h1>$i18n.getText("scrumpoker.error.title")</h1>
+        </div>
+        <div class="aui-page-header-actions">
+            <div class="aui-buttons">
+                <a href="$req.contextPath/secure/scrumPokerSessions.jspa"><button class="aui-button aui-button-light">$i18n.getText("scrumpoker.sessions.list")</button></a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="content" role="main">
+    <div class="aui-page-panel" style="margin: 0;">
+        <div class="aui-page-panel-inner">
+            <section class="aui-page-panel-content">
+                <div class="mod-content">
 
     #if($action.hasAnyErrors())
-    <div class="aui-message closeable error">
+    <div class="aui-message error">
         <p class="title">
             <span class="aui-icon icon-error"></span>
             <strong>$i18n.getText("scrumpoker.error.details")</strong>
@@ -23,7 +50,13 @@
     </div>
     #end
 
-    <a href="#" onclick="javascript:history.back()">$i18n.getText("scrumpoker.error.return")</a>
+    <a href="#" onclick="javascript:history.back(); return false;">$i18n.getText("scrumpoker.error.return")</a>
+
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
 
 </body>
 </html>

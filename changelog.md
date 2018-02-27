@@ -4,8 +4,13 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
+* ...
+
+## 1.11.0 - 2018-02-27
+
 * feat: stop users from opening issues in Scrum Poker they may not see
 * feat: add robustness when a key cannot be resolved to a user
+* feat: improve error page which will now also appear when user is not allowed to see issue
 * refactor: simplify refreshing session data and remove unused code
 * docs: fix typo and remove trailing whitespace
 * style: add initial version of EditorConfig file
