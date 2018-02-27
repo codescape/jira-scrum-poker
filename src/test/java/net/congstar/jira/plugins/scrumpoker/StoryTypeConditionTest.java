@@ -64,15 +64,31 @@ public class StoryTypeConditionTest {
     }
 
     @Test
-    public void shouldDisplayIfConfiguredStoryPointFieldExistsForIssue() {
+    public void shouldDisplayForEditableIssueWithStoryPointField() {
         expectThatIssueContainsTheStoryPointField();
+        expectThatIssueIsEditable();
         assertThat(storyTypeCondition.shouldDisplay(applicationUser, jiraHelper), is(true));
     }
 
     @Test
-    public void shouldNotDisplayIfConfiguredStoryPointFieldDoesNotExistForIssue() {
+    public void shouldNotDisplayForEditableIssueWithoutStoryPointField() {
         expectThatIssueDoesNotContainTheStoryPointField();
+        expectThatIssueIsEditable();
         assertThat(storyTypeCondition.shouldDisplay(applicationUser, jiraHelper), is(false));
+    }
+
+    @Test
+    public void shouldNotDisplayForNonEditableIssue() {
+        expectThatIssueIsNotEditable();
+        assertThat(storyTypeCondition.shouldDisplay(applicationUser, jiraHelper), is(false));
+    }
+
+    private void expectThatIssueIsNotEditable() {
+        when(issue.isEditable()).thenReturn(false);
+    }
+
+    private void expectThatIssueIsEditable() {
+        when(issue.isEditable()).thenReturn(true);
     }
 
     private void expectThatIssueDoesNotContainTheStoryPointField() {

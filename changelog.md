@@ -5,6 +5,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 ## Unreleased
 
 * refactor: implement choose card action with testability in mind
+* feat: non editable issues do not display Scrum Poker button
 
 ## 1.11.0 - 2018-02-27
 

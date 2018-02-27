@@ -25,7 +25,7 @@ public class StoryTypeCondition extends AbstractWebCondition {
     @Override
     public boolean shouldDisplay(ApplicationUser applicationUser, JiraHelper jiraHelper) {
         Issue currentIssue = (Issue) jiraHelper.getContextParams().get("issue");
-        return hasStoryPointField(currentIssue);
+        return currentIssue.isEditable() && hasStoryPointField(currentIssue);
     }
 
     private boolean hasStoryPointField(Issue currentIssue) {
