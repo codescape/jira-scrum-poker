@@ -25,14 +25,14 @@ public class ConfigureScrumPokerAction extends JiraWebActionSupport {
     }
 
     /**
-     * List of all custom fields currently available in this JIRA instance.
+     * List of all custom fields currently available in this Jira instance.
      */
     public List<CustomField> getCustomFields() {
         return customFieldManager.getCustomFieldObjects();
     }
 
     /**
-     * Current configured id of the story point field in this JIRA instance.
+     * Current configured id of the story point field in this Jira instance.
      */
     public String getStoryPointFieldId() {
         return scrumPokerSettings.loadStoryPointFieldId();

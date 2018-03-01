@@ -1,6 +1,6 @@
 # Scrum Poker
 
-This plugin provides a Scrum Poker solution for JIRA that integrates well with the JIRA Agile estimation custom field which is also used to calculate the velocity of a sprint.
+This plugin provides a Scrum Poker solution for Jira that integrates well with the Jira Agile estimation custom field which is also used to calculate the velocity of a sprint.
 
 [![Build Status](https://travis-ci.org/h4ck4thon/jira-scrum-poker.svg?branch=master)](https://travis-ci.org/h4ck4thon/jira-scrum-poker)
 
@@ -41,7 +41,7 @@ The Scrum Poker plugin supports the following languages and defaults to English 
 
 ## Development
 
-Development of Atlassian JIRA plugins is closely bound to the Atlassian Plugin SDK. Setting up your development environment is documented here: [Set up the Atlassian SDK and build a project](https://developer.atlassian.com/docs/getting-started/set-up-the-atlassian-plugin-sdk-and-build-a-project) 
+Development of Atlassian Jira plugins is closely bound to the Atlassian Plugin SDK. Setting up your development environment is documented here: [Set up the Atlassian SDK and build a project](https://developer.atlassian.com/docs/getting-started/set-up-the-atlassian-plugin-sdk-and-build-a-project) 
 
 During development you will find the following commands useful:
 

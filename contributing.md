@@ -56,7 +56,7 @@ or in case of multiple issues:
     
     Adds a check to prevent users to see issues they are not allowed to see. Prior
     to this commit users were able to open sessions and see details for issues
-    that they are not allowed see in JIRA directly.
+    that they are not allowed see in Jira directly.
     
     Closes #17
 
