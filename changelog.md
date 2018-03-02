@@ -6,6 +6,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * refactor: implement choose card action with testability in mind
 * feat: non editable issues do not display Scrum Poker button
+* docs: rename JIRA to Jira in all places in the code
+* chore: rename plugin to Jira Scrum Poker and add better description
 
 ## 1.11.0 - 2018-02-27
 
