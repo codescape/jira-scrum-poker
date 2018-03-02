@@ -8,7 +8,7 @@
     <version>1.11.0</version>
 
     <name>Jira Scrum Poker</name>
-    <description>Scrum Poker is an open source plugin to enable teams to collaboratively estimate their work with the
+    <description>Jira Scrum Poker is an open source plugin to enable teams to collaboratively estimate their work with the
         help of a dedicated GUI directly integrated into Jira Software.
     </description>
     <packaging>atlassian-plugin</packaging>

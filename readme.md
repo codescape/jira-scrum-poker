@@ -1,6 +1,6 @@
 # Jira Scrum Poker
 
-Scrum Poker is an open source plugin to enable teams to collaboratively estimate their work with the help of a dedicated GUI directly integrated into Jira Software.
+Jira Scrum Poker is an open source plugin to enable teams to collaboratively estimate their work with the help of a dedicated GUI directly integrated into Jira Software.
 
 This plugin integrates well with the estimation custom field introduced by Jira Software which is also used to calculate the velocity of a sprint.
 
