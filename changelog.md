@@ -1,6 +1,6 @@
 # Changelog
 
-This changelog helps developers and users to keep track of new features, fixes and improvements for the Scrum Poker plugin for Jira.
+This changelog helps developers and users to keep track of new features, fixes and improvements for the Jira Scrum Poker plugin.
 
 ## Unreleased
 
