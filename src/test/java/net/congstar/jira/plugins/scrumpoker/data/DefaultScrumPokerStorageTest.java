@@ -9,9 +9,12 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.startsWith;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 public class DefaultScrumPokerStorageTest {
@@ -100,6 +103,18 @@ public class DefaultScrumPokerStorageTest {
         assertThat(closedSessions.get(0).getIssueKey(), is(equalTo("YOUNGEST")));
         assertThat(closedSessions.get(1).getIssueKey(), is(equalTo("MIDDLE")));
         assertThat(closedSessions.get(2).getIssueKey(), is(equalTo("OLDEST")));
+    }
+
+    @Test
+    public void shouldNotReturnOpenSessionsThatAreAlreadyTimedOut() {
+        sessionWithoutConfirmedVoteAndCreationDate("TIMED_OUT_SESSION", FOURTEEN_HOURS_AGO.getMillis());
+        assertThat(storage.getOpenSessions(), is(empty()));
+    }
+
+    @Test
+    public void shouldNotReturnClosedSessionsThatAreAlreadyTimedOut() {
+        sessionWithConfirmedVoteAndCreationDate("TIMED_OUT_SESSION", FOURTEEN_HOURS_AGO.getMillis());
+        assertThat(storage.getClosedSessions(), is(empty()));
     }
 
     private void sessionWithConfirmedVoteAndCreationDate(String issueKey, long creationDate) {

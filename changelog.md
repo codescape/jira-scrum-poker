@@ -11,6 +11,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * chore: implement with latest amps and jira version
 * refactor: Java 8 way to create and return session
 * style: restructure Maven POM
+* feat: remove timed out sessions also in session overview
 
 ## 1.11.0 - 2018-02-27
 

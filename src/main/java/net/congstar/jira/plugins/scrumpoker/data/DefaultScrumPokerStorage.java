@@ -4,9 +4,9 @@ import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
 import org.joda.time.DateTime;
 
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 /**
@@ -19,20 +19,17 @@ public class DefaultScrumPokerStorage implements ScrumPokerStorage {
     private final Map<String, ScrumPokerSession> scrumPokerSessions;
 
     public DefaultScrumPokerStorage() {
-        scrumPokerSessions = new HashMap<>();
+        scrumPokerSessions = new ConcurrentHashMap<>();
     }
 
     @Override
     public ScrumPokerSession sessionForIssue(String issueKey, String userKey) {
-        synchronized (scrumPokerSessions) {
-            removeOldScrumPokerSessions();
-        }
-        return scrumPokerSessions.computeIfAbsent(issueKey, k -> new ScrumPokerSession(k, userKey));
+        return validSessions().computeIfAbsent(issueKey, k -> new ScrumPokerSession(k, userKey));
     }
 
     @Override
     public List<ScrumPokerSession> getOpenSessions() {
-        return scrumPokerSessions.values().stream()
+        return validSessions().values().stream()
             .filter(session -> session.getConfirmedVote() == null)
             .sorted(Comparator.comparing(ScrumPokerSession::getStartedOn).reversed())
             .collect(Collectors.toList());
@@ -40,7 +37,7 @@ public class DefaultScrumPokerStorage implements ScrumPokerStorage {
 
     @Override
     public List<ScrumPokerSession> getClosedSessions() {
-        return scrumPokerSessions.values().stream()
+        return validSessions().values().stream()
             .filter(session -> session.getConfirmedVote() != null)
             .sorted(Comparator.comparing(ScrumPokerSession::getStartedOn).reversed())
             .collect(Collectors.toList());
@@ -49,10 +46,11 @@ public class DefaultScrumPokerStorage implements ScrumPokerStorage {
     /**
      * Removes all sessions that are older than the timeout.
      */
-    private void removeOldScrumPokerSessions() {
+    private Map<String, ScrumPokerSession> validSessions() {
         scrumPokerSessions.entrySet().removeIf(sessionEntry ->
             sessionEntry.getValue().getStartedOn().isBefore(DateTime.now().minusHours(POKER_SESSION_TIMEOUT_HOURS))
         );
+        return scrumPokerSessions;
     }
 
 }
