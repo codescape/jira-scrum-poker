@@ -27,12 +27,7 @@ public class DefaultScrumPokerStorage implements ScrumPokerStorage {
         synchronized (scrumPokerSessions) {
             removeOldScrumPokerSessions();
         }
-        ScrumPokerSession scrumPokerSession = scrumPokerSessions.get(issueKey);
-        if (scrumPokerSession == null) {
-            scrumPokerSession = new ScrumPokerSession(issueKey, userKey);
-            scrumPokerSessions.put(issueKey, scrumPokerSession);
-        }
-        return scrumPokerSession;
+        return scrumPokerSessions.computeIfAbsent(issueKey, k -> new ScrumPokerSession(k, userKey));
     }
 
     @Override

@@ -8,6 +8,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: non editable issues do not display Scrum Poker button
 * docs: rename JIRA to Jira in all places in the code
 * chore: rename plugin to Jira Scrum Poker and add better description
+* chore: implement with latest amps and jira version
+* refactor: Java 8 way to create and return session
 
 ## 1.11.0 - 2018-02-27
 
