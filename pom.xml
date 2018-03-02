@@ -43,8 +43,8 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <!-- Jira version -->
-        <jira.version>7.5.0</jira.version>
-        <amps.version>6.2.11</amps.version>
+        <jira.version>7.8.0</jira.version>
+        <amps.version>6.3.13</amps.version>
         <plugin.testrunner.version>1.2.3</plugin.testrunner.version>
         <!-- Source encoding -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
