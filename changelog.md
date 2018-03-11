@@ -4,7 +4,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
-* ...
+* test: add test for ScrumPokerCard
 
 ## 1.12.0 - 2018-03-11
 
