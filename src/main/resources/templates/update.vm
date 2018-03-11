@@ -1,15 +1,14 @@
 <html>
 <head>
-    <title>${i18n.getText("scrumpoker.title")}</title>
     <meta name="decorator" content="none" />
 </head>
 <body>
 
 #if (!$pokerSession.confirmedVote)
 
-<!--------------------------------------------------------->
-<!-- List of available cards that a user can choose from -->
-<!--------------------------------------------------------->
+## ---------------------------------------------------
+## List of available cards that a user can choose from
+## ---------------------------------------------------
 
     <div class="mod-content">
         <ul id="pokerset">
@@ -24,32 +23,35 @@
         </ul>
     </div>
 
-<!---------------------------------------------------->
-<!-- Bandwidth of cards shown when deck is revealed -->
-<!---------------------------------------------------->
+## ----------------------------------------------
+## Bandwidth of cards shown when deck is revealed
+## ----------------------------------------------
 
     #if ($pokerSession.visible)
     <div class="poker-header">
         <h2>$i18n.getText("scrumpoker.session.bandwidth")</h2>
     </div>
     <div class="mod-content">
+        <p class="poker-comment">$i18n.getText("scrumpoker.session.confirmestimation")</p>
         <ul id="selectVote">
             #foreach ($vote in $pokerSession.boundedVotes)
                 <li><a href="$req.contextPath/secure/confirmEstimationAction.jspa?issueKey=$issue.key&finalVote=$vote" class="card small">$vote</a></li>
             #end
         </ul>
-        <p class="poker-comment">$i18n.getText("scrumpoker.session.confirmestimation")</p>
     </div>
     #end
 
-<!-------------------------------------->
-<!-- List of persons and chosen cards -->
-<!-------------------------------------->
+## --------------------------------
+## List of persons and chosen cards
+## --------------------------------
 
     <div class="poker-header">
         <h2>$i18n.getText("scrumpoker.session.chosencards")</h2>
     </div>
     <div class="mod-content">
+        #if ($pokerSession.visible && ($pokerSession.minimumVote == $pokerSession.maximumVote))
+        <p class="poker-comment">$i18n.getText("scrumpoker.session.agreementreached")</p>
+        #end
         <ul id="chosencards">
             #foreach ($chosenCardInstance in $pokerSession.cards.entrySet())
                 #if ($pokerSession.visible && !($pokerSession.minimumVote == $pokerSession.maximumVote) && ($chosenCardInstance.value == $pokerSession.minimumVote || $chosenCardInstance.value == $pokerSession.maximumVote))
@@ -71,13 +73,9 @@
         </ul>
     </div>
 
-    #if ($pokerSession.visible && ($pokerSession.minimumVote == $pokerSession.maximumVote))
-        <p class="poker-comment">$i18n.getText("scrumpoker.session.agreementreached")</p>
-    #end
-
-<!---------------------------------------------------------->
-<!-- Further actions available to users on the poker page -->
-<!---------------------------------------------------------->
+## ----------------------------------------------------
+## Further actions available to users on the poker page
+## ----------------------------------------------------
 
     <div class="poker-buttons">
         #if($pokerSession.cards.entrySet().size() > 0)
@@ -95,21 +93,22 @@
 
 #else
 
-<!------------------------------------------------------------------------->
-<!-- Confirmed vote exists and we can only go back to the story or reset -->
-<!------------------------------------------------------------------------->
+## -------------------------------------------------------------------
+## Confirmed vote exists and we can only go back to the story or reset
+## -------------------------------------------------------------------
 
     <div class="mod-content">
         <p>$i18n.getText("scrumpoker.session.estimationsaved")</p>
         #foreach($card in $cards)
             #if ($pokerSession.confirmedVote == $card.name)
-                <div style="text-align:center;"><span class="card">${card.name}</span></div>
+                <div style="text-align:center;"><span class="card active">${card.name}</span></div>
             #end
         #end
     </div>
     <div class="poker-buttons">
         <a href="$req.contextPath/secure/scrumPokerSessions.jspa" class="aui-button">$i18n.getText("scrumpoker.sessions.list")</a>
         <a href="$req.contextPath/browse/$issue.key" class="aui-button">$i18n.getText("scrumpoker.issue.navigateback")</a>
+        <a href="$req.contextPath/secure/resetDeckAction.jspa?issueKey=$issue.key" class="aui-button">$i18n.getText("scrumpoker.session.reset")</a>
     </div>
 
 #end
