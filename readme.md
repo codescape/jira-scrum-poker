@@ -38,7 +38,7 @@ As a rule of thumb:
 
 ## Supported Languages
 
-The Scrum Poker plugin supports the following languages and defaults to English translation if the user has another language configured in his Jira profile:
+The Scrum Poker plugin supports the following languages and defaults to English translation if the user has a not supported language configured in his Jira profile:
 
 * English
 * German
