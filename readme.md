@@ -26,13 +26,15 @@ The overview page helps users to find their Scrum Poker session within all curre
 
 ## Supported Jira versions
 
-Starting with version 1.4.0 the Scrum Poker plugin requires you to run Jira 7.3.6 or newer on a Java runtime with Java 8 or newer. 
+The Scrum Poker plugin requires you to run Jira 7.5 or newer on a Java runtime with Java language level 8.
+
+If your Jira does not meet those expectations you can grab an older version of the Scrum Poker plugin but you will miss all the new features and improvements. 
 
 As a rule of thumb:
 
-* If your Jira is running on Java 7 or older you should use the latest 1.3.16 version.
+* If your Jira is still running on Java 7 you can use Scrum Poker up to version 1.3.16.
 * If your Jira version is older than Jira 6.4 you should consider updating your Jira instance ;)
-* If neither of those two rules applies you can use the latest and greatest version of Scrum Poker!  
+* In all other cases you should use the latest and greatest version of Scrum Poker!
 
 ## Supported Languages
 
@@ -47,5 +49,9 @@ Development of Atlassian Jira plugins is closely bound to the Atlassian Plugin S
 
 During development you will find the following commands useful:
 
-* `atlas-run` installs this plugin into the product and starts it on localhost
+* `atlas-run` installs this plugin into Jira and starts it on localhost
 * `atlas-debug` same as atlas-run, but allows a debugger to attach at port 5005
+* `atlas-package` to generate a Jar file of the plugin which can be installed into your Jira instance
+* `atlas-clean` to clean up the `target` folder and so allow you to start with a clean Jira instance again
+
+Reloading the plugin during development can be triggered in your web browser when hitting `Shift + Reload` (for example `Shift + Cmd + R` on Mac OS X).

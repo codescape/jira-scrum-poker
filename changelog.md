@@ -4,6 +4,10 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
+* ...
+
+## 1.12.0 - 2018-03-11
+
 * refactor: implement choose card action with testability in mind
 * feat: non editable issues do not display Scrum Poker button
 * docs: rename JIRA to Jira in all places in the code
@@ -12,6 +16,9 @@ This changelog helps developers and users to keep track of new features, fixes a
 * refactor: Java 8 way to create and return session
 * style: restructure Maven POM
 * feat: remove timed out sessions also in session overview
+* feat: improve layout and wording for session view
+* refactor: use Integer for estimations everywhere
+* chore: update version of amps to 6.3.13
 
 ## 1.11.0 - 2018-02-27
 
