@@ -10,12 +10,12 @@ public interface StoryPointFieldSupport {
     /**
      * Save the estimation for a given issue.
      */
-    void save(String issueKey, Double newValue);
+    void save(String issueKey, Integer newValue);
 
     /**
      * Get the estimation for a given issue.
      */
-    Double getValue(String issueKey);
+    Integer getValue(String issueKey);
 
     /**
      * Return the story point custom field.

@@ -78,8 +78,8 @@ public class ScrumPokerSessionTest {
         session.updateCard("user2", "2");
         session.updateCard("user3", "13");
 
-        assertThat(session.getMinimumVote(), is("2"));
-        assertThat(session.getMaximumVote(), is("13"));
+        assertThat(session.getMinimumVote(), is(2));
+        assertThat(session.getMaximumVote(), is(13));
     }
 
     @Test
@@ -88,8 +88,8 @@ public class ScrumPokerSessionTest {
         session.updateCard("user2", "3");
         session.updateCard("user3", "100");
 
-        assertThat(session.getMinimumVote(), is("3"));
-        assertThat(session.getMaximumVote(), is("100"));
+        assertThat(session.getMinimumVote(), is(3));
+        assertThat(session.getMaximumVote(), is(100));
     }
 
     @Test
@@ -98,8 +98,8 @@ public class ScrumPokerSessionTest {
         session.updateCard("user2", "?");
         session.updateCard("user3", "3");
 
-        assertThat(session.getMinimumVote(), is("3"));
-        assertThat(session.getMaximumVote(), is("8"));
+        assertThat(session.getMinimumVote(), is(3));
+        assertThat(session.getMaximumVote(), is(8));
     }
 
     @Test
@@ -108,7 +108,7 @@ public class ScrumPokerSessionTest {
         session.updateCard("user2", "?");
         session.updateCard("user3", "3");
 
-        assertThat(session.getBoundedVotes(), is(equalTo(Arrays.asList("3", "5", "8"))));
+        assertThat(session.getBoundedVotes(), is(equalTo(Arrays.asList(3, 5, 8))));
     }
 
     @Test
@@ -117,7 +117,7 @@ public class ScrumPokerSessionTest {
         session.updateCard("user2", "?");
         session.updateCard("user3", "40");
 
-        assertThat(session.getBoundedVotes(), is(equalTo(Arrays.asList("2", "3", "5", "8", "13", "20", "40"))));
+        assertThat(session.getBoundedVotes(), is(equalTo(Arrays.asList(2, 3, 5, 8, 13, 20, 40))));
     }
 
     @Test
@@ -126,11 +126,11 @@ public class ScrumPokerSessionTest {
         session.updateCard("user2", "2");
         session.updateCard("user3", "2");
 
-        assertThat(session.getBoundedVotes(), is(equalTo(Collections.singletonList("2"))));
+        assertThat(session.getBoundedVotes(), is(equalTo(Collections.singletonList(2))));
     }
 
     @Test
-    public void shouldReturnTheUserWhoStartedTheSessionIndependetlyFromNewVotes() {
+    public void shouldReturnTheUserWhoStartedTheSessionIndependentlyFromNewVotes() {
         assertThat(session.getUserKey(), is(equalTo(CREATOR_KEY)));
         session.updateCard("someOtherUser", "5");
         assertThat(session.getUserKey(), is(equalTo(CREATOR_KEY)));

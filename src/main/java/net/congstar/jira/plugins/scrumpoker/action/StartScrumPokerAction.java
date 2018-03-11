@@ -15,8 +15,10 @@ import com.atlassian.jira.web.HttpServletVariables;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
 import net.congstar.jira.plugins.scrumpoker.data.ScrumPokerStorage;
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerCard;
-import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerCards;
+import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerDeck;
 import net.congstar.jira.plugins.scrumpoker.model.ScrumPokerSession;
+
+import java.util.List;
 
 import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
 
@@ -83,8 +85,8 @@ public class StartScrumPokerAction extends ScrumPokerAction {
         return pokerSession.getCards().get(jiraAuthenticationContext.getLoggedInUser().getKey());
     }
 
-    public ScrumPokerCard[] getCards() {
-        return ScrumPokerCards.pokerDeck;
+    public List<ScrumPokerCard> getCards() {
+        return ScrumPokerDeck.asList();
     }
 
     public ScrumPokerSession getPokerSession() {

@@ -124,7 +124,7 @@ public class DefaultScrumPokerStorageTest {
     }
 
     private void sessionWithConfirmedVote(String issueKey) {
-        storage.sessionForIssue(issueKey, USER_KEY).confirm("5");
+        storage.sessionForIssue(issueKey, USER_KEY).confirm(5);
     }
 
     private void sessionWithoutConfirmedVoteAndCreationDate(String issueKey, long creationDate) {

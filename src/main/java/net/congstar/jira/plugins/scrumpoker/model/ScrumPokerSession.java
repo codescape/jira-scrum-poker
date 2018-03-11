@@ -3,11 +3,10 @@ package net.congstar.jira.plugins.scrumpoker.model;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.joda.time.DateTime;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * A Scrum poker session is associated with exactly one issue. It holds all information required to run a poker session
@@ -25,7 +24,7 @@ public class ScrumPokerSession {
 
     private final DateTime startedOn;
 
-    private String confirmedVote;
+    private Integer confirmedVote;
 
     public ScrumPokerSession(String issueKey, String userKey) {
         this.issueKey = issueKey;
@@ -43,7 +42,7 @@ public class ScrumPokerSession {
     /**
      * Returns the confirmed vote.
      */
-    public String getConfirmedVote() {
+    public Integer getConfirmedVote() {
         return confirmedVote;
     }
 
@@ -90,62 +89,39 @@ public class ScrumPokerSession {
     /**
      * Returns the lowest vote.
      */
-    public String getMinimumVote() {
-        double min = 1000.0;
-        for (String voted : cards.values()) {
-            if (NumberUtils.isNumber(voted)) {
-                min = Math.min(min, new BigDecimal(voted).doubleValue());
-            }
-        }
-        return String.valueOf(min).replace(".0", "");
+    public Integer getMinimumVote() {
+        return numericValues().stream().reduce(Integer::min).orElse(0);
+    }
+
+    private List<Integer> numericValues() {
+        return cards.values().stream()
+            .filter(NumberUtils::isNumber)
+            .map(Integer::valueOf)
+            .collect(Collectors.toList());
     }
 
     /**
      * Returns the highest vote.
      */
-    public String getMaximumVote() {
-        double max = 0;
-        for (String voted : cards.values()) {
-            if (NumberUtils.isNumber(voted)) {
-                max = Math.max(max, new BigDecimal(voted).doubleValue());
-            }
-        }
-        return String.valueOf(max).replace(".0", "");
+    public Integer getMaximumVote() {
+        return numericValues().stream().reduce(Integer::max).orElse(100);
     }
 
     /**
      * Returns all cards between the lowest and the highest vote.
      */
-    public List<String> getBoundedVotes() {
-        List<String> result = new ArrayList<>();
-
-        String maximum = getMaximumVote();
-        String minimum = getMinimumVote();
-
-        boolean minimumReached = false;
-        boolean maximumReached = false;
-
-        for (ScrumPokerCard card : ScrumPokerCards.pokerDeck) {
-            if (card.getName().equals(minimum)) {
-                minimumReached = true;
-            }
-
-            if (minimumReached && !maximumReached) {
-                result.add(card.getName());
-            }
-
-            if (card.getName().equals(maximum)) {
-                maximumReached = true;
-            }
-        }
-
-        return result;
+    public List<Integer> getBoundedVotes() {
+        return ScrumPokerDeck.asList().stream()
+            .filter(scrumPokerCard -> NumberUtils.isNumber(scrumPokerCard.getName()))
+            .map(scrumPokerCard -> Integer.valueOf(scrumPokerCard.getName()))
+            .filter(value -> value >= getMinimumVote() && value <= getMaximumVote())
+            .collect(Collectors.toList());
     }
 
     /**
      * Saves the confirmed vote.
      */
-    public void confirm(String finalVote) {
+    public void confirm(Integer finalVote) {
         this.confirmedVote = finalVote;
     }
 

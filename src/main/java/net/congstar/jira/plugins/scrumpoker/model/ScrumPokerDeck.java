@@ -1,12 +1,12 @@
 package net.congstar.jira.plugins.scrumpoker.model;
 
 import java.util.Arrays;
-import java.util.Map;
+import java.util.List;
 import java.util.stream.Collectors;
 
-public class ScrumPokerCards {
+public class ScrumPokerDeck {
 
-    public final static ScrumPokerCard[] pokerDeck = {
+    private final static ScrumPokerCard[] POKER_DECK = {
         new ScrumPokerCard("?"),
         new ScrumPokerCard("0"),
         new ScrumPokerCard("1"),
@@ -20,8 +20,8 @@ public class ScrumPokerCards {
         new ScrumPokerCard("100")
     };
 
-    public static Map<String, ScrumPokerCard> asMap() {
-        return Arrays.stream(pokerDeck).collect(Collectors.toMap(ScrumPokerCard::getName, card -> card));
+    public static List<ScrumPokerCard> asList() {
+        return Arrays.stream(POKER_DECK).collect(Collectors.toList());
     }
 
 }

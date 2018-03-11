@@ -24,7 +24,7 @@ public class DefaultStoryPointSupportTest {
 
     private static final String ISSUE_KEY = "ISSUE-0815";
 
-    private static final double ESTIMATION = 5d;
+    private static final Integer ESTIMATION = 5;
 
     private static final String CUSTOM_FIELD_ID = "11045";
 
