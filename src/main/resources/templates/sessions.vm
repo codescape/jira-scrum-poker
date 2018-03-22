@@ -1,8 +1,8 @@
 <html>
 <head>
     <title>${i18n.getText("scrumpoker.title")}</title>
-    <link rel="stylesheet" type="text/css" href="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.css" media="all"/>
-    <script src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.js"/>
+    <link rel="stylesheet" type="text/css" href="$req.contextPath/download/resources/de.codescape.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.css" media="all"/>
+    <script src="$req.contextPath/download/resources/de.codescape.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.js"/>
 </head>
 <body>
 
@@ -11,7 +11,7 @@
         <div class="aui-page-header-image">
             <span class="aui-avatar aui-avatar-large aui-avatar-project">
                 <span class="aui-avatar-inner">
-                    <img alt="Scrum Poker Logo" src="$req.contextPath/download/resources/net.congstar.jira.plugins.scrum-poker:scrum-poker-resources/images/pluginLogo.png">
+                    <img alt="Scrum Poker Logo" src="$req.contextPath/download/resources/de.codescape.jira.plugins.scrum-poker:scrum-poker-resources/images/pluginLogo.png">
                 </span>
             </span>
         </div>
