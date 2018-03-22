@@ -70,7 +70,7 @@ public class StartScrumPokerActionTest {
     }
 
     @Test
-    public void shouldDisplayErrorPageWhenUserHasNoPermissionForIssue() throws Exception {
+    public void shouldDisplayErrorPageWhenUserHasNoPermissionForIssue() {
         when(httpServletRequest.getParameter("action")).thenReturn("start");
         whenRequestedIssueExists();
         whenUserIsNotAllowedToSeeIssue();
@@ -79,7 +79,7 @@ public class StartScrumPokerActionTest {
     }
 
     @Test
-    public void shouldDisplayStartPageWhenUserHasPermissionForIssue() throws Exception {
+    public void shouldDisplayStartPageWhenUserHasPermissionForIssue() {
         when(httpServletRequest.getParameter("action")).thenReturn("start");
         whenRequestedIssueExists();
         whenUserIsAllowedToSeeIssue();

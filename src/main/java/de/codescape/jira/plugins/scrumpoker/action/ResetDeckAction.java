@@ -16,7 +16,7 @@ public class ResetDeckAction extends ScrumPokerAction {
     }
 
     @Override
-    protected String doExecute() throws Exception {
+    protected String doExecute() {
         String issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
         scrumPokerStorage.sessionForIssue(issueKey, currentUserKey()).resetDeck();
         return openScrumPokerForIssue(issueKey);

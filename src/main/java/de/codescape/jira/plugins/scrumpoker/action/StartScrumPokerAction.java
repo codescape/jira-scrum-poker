@@ -56,7 +56,7 @@ public class StartScrumPokerAction extends ScrumPokerAction {
     }
 
     @Override
-    protected String doExecute() throws Exception {
+    protected String doExecute() {
         String action = httpServletVariables.getHttpRequest().getParameter(PARAM_ACTION);
         issueKey = httpServletVariables.getHttpRequest().getParameter(PARAM_ISSUE_KEY);
         MutableIssue issue = issueManager.getIssueObject(issueKey);

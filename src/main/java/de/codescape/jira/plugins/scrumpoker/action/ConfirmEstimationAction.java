@@ -20,7 +20,7 @@ public class ConfirmEstimationAction extends ScrumPokerAction {
     }
 
     @Override
-    protected String doExecute() throws Exception {
+    protected String doExecute() {
         String issueKey = getHttpRequest().getParameter(PARAM_ISSUE_KEY);
         String finalVoteString = getHttpRequest().getParameter(PARAM_FINAL_VOTE);
         Integer finalVote = Integer.valueOf(finalVoteString);

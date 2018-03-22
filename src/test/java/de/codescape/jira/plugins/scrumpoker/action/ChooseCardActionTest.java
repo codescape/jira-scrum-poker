@@ -58,7 +58,7 @@ public class ChooseCardActionTest {
     private ScrumPokerSession scrumPokerSession;
 
     @Test
-    public void shouldUpdateSessionWithChosenCardForUser() throws Exception {
+    public void shouldUpdateSessionWithChosenCardForUser() {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
         when(httpServletRequest.getParameter(PARAM_ISSUE_KEY)).thenReturn(ISSUE_KEY);
         when(httpServletRequest.getParameter(PARAM_CHOSEN_CARD)).thenReturn(CHOSEN_CARD);

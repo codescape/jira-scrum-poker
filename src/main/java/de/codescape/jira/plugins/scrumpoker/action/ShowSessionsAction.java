@@ -36,7 +36,7 @@ public class ShowSessionsAction extends ScrumPokerAction {
     }
 
     @Override
-    protected String doExecute() throws Exception {
+    protected String doExecute() {
         return "start";
     }
 

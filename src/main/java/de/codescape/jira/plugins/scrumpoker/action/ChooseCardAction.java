@@ -24,7 +24,7 @@ public class ChooseCardAction extends ScrumPokerAction {
     }
 
     @Override
-    protected String doExecute() throws Exception {
+    protected String doExecute() {
         String issueKey = httpServletVariables.getHttpRequest().getParameter(PARAM_ISSUE_KEY);
         String chosenCard = httpServletVariables.getHttpRequest().getParameter(PARAM_CHOSEN_CARD);
         String currentUserKey = jiraAuthenticationContext.getLoggedInUser().getKey();

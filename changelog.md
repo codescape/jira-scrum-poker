@@ -7,6 +7,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * test: add test for ScrumPokerCard
 * refactor: move to namespace de.codescape for packages
 * refactor: move to namespace de.codescape for maven groupId
+* refactor: remove unnecessary throws clauses in actions
 
 ## 1.12.0 - 2018-03-11
 
