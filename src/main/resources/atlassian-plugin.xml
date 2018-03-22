@@ -34,19 +34,19 @@
 
     <!-- components -->
 
-    <component key="scrumPokerStorage" class="net.congstar.jira.plugins.scrumpoker.data.DefaultScrumPokerStorage">
+    <component key="scrumPokerStorage" class="de.codescape.jira.plugins.scrumpoker.data.DefaultScrumPokerStorage">
         <description>Provides the Storage for Scrum Poker sessions.</description>
-        <interface>net.congstar.jira.plugins.scrumpoker.data.ScrumPokerStorage</interface>
+        <interface>de.codescape.jira.plugins.scrumpoker.data.ScrumPokerStorage</interface>
     </component>
 
-    <component key="storyPointSupport" class="net.congstar.jira.plugins.scrumpoker.data.DefaultStoryPointSupport">
+    <component key="storyPointSupport" class="de.codescape.jira.plugins.scrumpoker.data.DefaultStoryPointSupport">
         <description>Provides access to the custom field.</description>
-        <interface>net.congstar.jira.plugins.scrumpoker.data.StoryPointFieldSupport</interface>
+        <interface>de.codescape.jira.plugins.scrumpoker.data.StoryPointFieldSupport</interface>
     </component>
 
-    <component key="scrumPokerSettings" class="net.congstar.jira.plugins.scrumpoker.data.DefaultScrumPokerSettings">
+    <component key="scrumPokerSettings" class="de.codescape.jira.plugins.scrumpoker.data.DefaultScrumPokerSettings">
         <description>Provides the settings accessor for the Scrum Poker plugin.</description>
-        <interface>net.congstar.jira.plugins.scrumpoker.data.ScrumPokerSettings</interface>
+        <interface>de.codescape.jira.plugins.scrumpoker.data.ScrumPokerSettings</interface>
     </component>
 
     <!-- buttons to start a new session -->
@@ -54,13 +54,13 @@
     <web-item key="pp_start" name="PP-Start" section="jira.issue.tools" weight="10">
         <label key="scrumpoker.session.start"/>
         <link linkId="callPP">/secure/scrumPokerStart.jspa?issueKey=$issue.key</link>
-        <condition class="net.congstar.jira.plugins.scrumpoker.StoryTypeCondition"/>
+        <condition class="de.codescape.jira.plugins.scrumpoker.StoryTypeCondition"/>
     </web-item>
 
     <web-item key="pp_start_agile" name="PP-Start" section="operations-top-level" weight="10">
         <label key="scrumpoker.session.start"/>
         <link linkId="callPP">/secure/scrumPokerStart.jspa?issueKey=$issue.key</link>
-        <condition class="net.congstar.jira.plugins.scrumpoker.StoryTypeCondition"/>
+        <condition class="de.codescape.jira.plugins.scrumpoker.StoryTypeCondition"/>
     </web-item>
 
     <!-- dropdown on boards -->
@@ -78,27 +78,27 @@
 
     <webwork1 key="scrum-poker-webwork" name="Scrum Poker">
         <actions>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction"
+            <action name="de.codescape.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction"
                     alias="scrumPokerConfiguration" roles-required="sysadmin">
                 <view name="success">/templates/configuration.vm</view>
             </action>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.ShowSessionsAction" alias="scrumPokerSessions"
+            <action name="de.codescape.jira.plugins.scrumpoker.action.ShowSessionsAction" alias="scrumPokerSessions"
                     roles-required="use">
                 <view name="start">/templates/sessions.vm</view>
             </action>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.StartScrumPokerAction" alias="scrumPokerStart"
+            <action name="de.codescape.jira.plugins.scrumpoker.action.StartScrumPokerAction" alias="scrumPokerStart"
                     roles-required="use">
                 <view name="start">/templates/start.vm</view>
                 <view name="update">/templates/update.vm</view>
                 <view name="error">/templates/error.vm</view>
             </action>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.ChooseCardAction" alias="chooseCardAction"
+            <action name="de.codescape.jira.plugins.scrumpoker.action.ChooseCardAction" alias="chooseCardAction"
                     roles-required="use"/>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.RevealDeckAction" alias="revealDeckAction"
+            <action name="de.codescape.jira.plugins.scrumpoker.action.RevealDeckAction" alias="revealDeckAction"
                     roles-required="use"/>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.ConfirmEstimationAction"
+            <action name="de.codescape.jira.plugins.scrumpoker.action.ConfirmEstimationAction"
                     alias="confirmEstimationAction" roles-required="use"/>
-            <action name="net.congstar.jira.plugins.scrumpoker.action.ResetDeckAction" alias="resetDeckAction"
+            <action name="de.codescape.jira.plugins.scrumpoker.action.ResetDeckAction" alias="resetDeckAction"
                     roles-required="use"/>
         </actions>
     </webwork1>
