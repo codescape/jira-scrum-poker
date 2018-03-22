@@ -2,10 +2,11 @@
 
 This changelog helps developers and users to keep track of new features, fixes and improvements for the Jira Scrum Poker plugin.
 
-## Unreleased
+## 2.0.0 - Unreleased
 
 * test: add test for ScrumPokerCard
 * refactor: move to namespace de.codescape for packages
+* refactor: move to namespace de.codescape for maven groupId
 
 ## 1.12.0 - 2018-03-11
 
