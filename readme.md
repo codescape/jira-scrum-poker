@@ -4,7 +4,7 @@ Jira Scrum Poker is an open source plugin to enable teams to collaboratively est
 
 This plugin integrates well with the estimation custom field introduced by Jira Software which is also used to calculate the velocity of a sprint.
 
-[![Build Status](https://travis-ci.org/h4ck4thon/jira-scrum-poker.svg?branch=master)](https://travis-ci.org/h4ck4thon/jira-scrum-poker)
+[![Build Status](https://travis-ci.org/codescape/jira-scrum-poker.svg?branch=master)](https://travis-ci.org/codescape/jira-scrum-poker)
 
 ## Screenshots
 

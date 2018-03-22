@@ -9,6 +9,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * refactor: move to namespace de.codescape for maven groupId
 * refactor: remove unnecessary throws clauses in actions
 * docs: update link to issue creation
+* chore: update reference to TravisCI build
 
 ## 1.12.0 - 2018-03-11
 
