@@ -2,6 +2,10 @@
 
 This changelog helps developers and users to keep track of new features, fixes and improvements for the Jira Scrum Poker plugin.
 
+## Unreleased
+
+* refactor: move cards list to enum
+
 ## 2.0.1 - 2018-03-24
 
 * test: add tests for REST endpoint
