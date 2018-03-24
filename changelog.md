@@ -2,9 +2,10 @@
 
 This changelog helps developers and users to keep track of new features, fixes and improvements for the Jira Scrum Poker plugin.
 
-## Unreleased
+## 2.0.1 - 2018-03-24
 
 * test: add tests for REST endpoint
+* fix: agreement should not ignore question marks
 
 ## 2.0.0 - 2018-03-24
 
