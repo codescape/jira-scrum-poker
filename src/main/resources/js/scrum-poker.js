@@ -10,7 +10,6 @@ function refreshOnInterval(issueKey) {
 function refreshSession(issueKey) {
     jQuery.get('/jira/rest/scrumpoker/1.0/session/' + issueKey, function(data) {
         jQuery('#card-section').html(
-            // TODO Can we use caching capabilities of mustache here?
             Mustache.render(jQuery('#card-section-template').html(), data)
         );
     });
