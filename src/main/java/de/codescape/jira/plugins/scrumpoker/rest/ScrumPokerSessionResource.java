@@ -125,9 +125,9 @@ public class ScrumPokerSessionResource {
     }
 
     private boolean needToTalk(String vote, ScrumPokerSession scrumPokerSession) {
-        return scrumPokerSession.isVisible() && isNumber(vote) && (
-            Integer.valueOf(vote).equals(scrumPokerSession.getMinimumVote()) ||
-                Integer.valueOf(vote).equals(scrumPokerSession.getMaximumVote()));
+        return scrumPokerSession.isVisible() && !scrumPokerSession.isAgreementReached() && (!isNumber(vote) ||
+            (isNumber(vote) && (Integer.valueOf(vote).equals(scrumPokerSession.getMinimumVote()) ||
+                Integer.valueOf(vote).equals(scrumPokerSession.getMaximumVote()))));
     }
 
     private String userName(String entry) {
