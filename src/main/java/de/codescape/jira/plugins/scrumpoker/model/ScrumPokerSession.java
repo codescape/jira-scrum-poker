@@ -111,7 +111,7 @@ public class ScrumPokerSession {
      * Returns all cards between the lowest and the highest vote.
      */
     public List<Integer> getBoundedVotes() {
-        return ScrumPokerDeck.asList().stream()
+        return ScrumPokerCard.getDeck().stream()
             .filter(scrumPokerCard -> NumberUtils.isNumber(scrumPokerCard.getName()))
             .map(scrumPokerCard -> Integer.valueOf(scrumPokerCard.getName()))
             .filter(value -> value >= getMinimumVote() && value <= getMaximumVote())

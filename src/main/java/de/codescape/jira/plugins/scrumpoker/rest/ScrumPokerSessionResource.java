@@ -5,7 +5,7 @@ import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import de.codescape.jira.plugins.scrumpoker.data.ScrumPokerStorage;
 import de.codescape.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
-import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerDeck;
+import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerCard;
 import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerSession;
 
 import javax.ws.rs.*;
@@ -119,7 +119,7 @@ public class ScrumPokerSessionResource {
     }
 
     private List<CardRest> allCardsAndChosenCardMarkedAsSelected(String chosenValue) {
-        return ScrumPokerDeck.asList().stream()
+        return ScrumPokerCard.getDeck().stream()
             .map(card -> new CardRest(card.getName(), card.getName().equals(chosenValue)))
             .collect(Collectors.toList());
     }
