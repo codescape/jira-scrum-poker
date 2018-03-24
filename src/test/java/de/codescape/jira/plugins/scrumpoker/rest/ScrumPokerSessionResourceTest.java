@@ -3,6 +3,7 @@ package de.codescape.jira.plugins.scrumpoker.rest;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.data.ScrumPokerStorage;
+import de.codescape.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
 import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerSession;
 import org.junit.Rule;
 import org.junit.Test;
@@ -21,6 +22,7 @@ public class ScrumPokerSessionResourceTest {
     private static final String ISSUE_KEY = "ISSUE-1";
     private static final String USER_KEY = "userKey";
     private static final String CARD_VALUE = "5";
+    private static final int ESTIMATION = 5;
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -30,6 +32,9 @@ public class ScrumPokerSessionResourceTest {
 
     @Mock
     private ScrumPokerStorage scrumPokerStorage;
+
+    @Mock
+    private StoryPointFieldSupport storyPointFieldSupport;
 
     @InjectMocks
     private ScrumPokerSessionResource scrumPokerSessionResource;
@@ -78,6 +83,17 @@ public class ScrumPokerSessionResourceTest {
         scrumPokerSessionResource.resetSession(ISSUE_KEY);
 
         verify(scrumPokerSession, times(1)).resetDeck();
+    }
+
+    @Test
+    public void confirmingEstimationShouldConfirmEstimationInUnderlyingSessionAndPersistEstimation() {
+        expectCurrentUserIs(USER_KEY);
+        expectCurrentSessionForUser(ISSUE_KEY, USER_KEY);
+
+        scrumPokerSessionResource.confirmEstimation(ISSUE_KEY, ESTIMATION);
+
+        verify(scrumPokerSession, times(1)).confirm(ESTIMATION);
+        verify(storyPointFieldSupport, times(1)).save(ISSUE_KEY, ESTIMATION);
     }
 
     private void expectCurrentUserIs(String userKey) {
