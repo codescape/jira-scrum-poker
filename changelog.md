@@ -4,7 +4,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
-* ...
+* test: add tests for REST endpoint
 
 ## 2.0.0 - 2018-03-24
 
