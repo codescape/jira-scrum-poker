@@ -10,6 +10,7 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.web.HttpServletVariables;
+import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
 
 import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
@@ -20,9 +21,10 @@ import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
  * This page verifies that the current user is allowed to see the issue and displays an error page in case the user is
  * not allowed to see the issue in question.
  */
-public class ShowScrumPokerAction extends ScrumPokerAction {
+public class ShowScrumPokerAction extends JiraWebActionSupport {
 
     private static final long serialVersionUID = 1L;
+    private static final String PARAM_ISSUE_KEY = "issueKey";
 
     private final IssueManager issueManager;
     private final RendererManager rendererManager;

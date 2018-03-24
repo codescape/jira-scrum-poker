@@ -7,6 +7,7 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
+import com.atlassian.jira.web.action.JiraWebActionSupport;
 import de.codescape.jira.plugins.scrumpoker.data.ScrumPokerStorage;
 import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerSession;
 
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 /**
  * Show a list of all running and recently finished Scrum poker sessions.
  */
-public class ShowSessionsAction extends ScrumPokerAction {
+public class ShowSessionsAction extends JiraWebActionSupport {
 
     private static final long serialVersionUID = 1L;
 
