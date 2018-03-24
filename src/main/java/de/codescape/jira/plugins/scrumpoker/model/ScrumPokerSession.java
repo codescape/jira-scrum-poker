@@ -93,13 +93,6 @@ public class ScrumPokerSession {
         return numericValues().stream().reduce(Integer::min).orElse(0);
     }
 
-    private List<Integer> numericValues() {
-        return cards.values().stream()
-            .filter(NumberUtils::isNumber)
-            .map(Integer::valueOf)
-            .collect(Collectors.toList());
-    }
-
     /**
      * Returns the highest vote.
      */
@@ -111,7 +104,7 @@ public class ScrumPokerSession {
      * Returns whether all participants voted the same or not.
      */
     public boolean isAgreementReached() {
-        return getMaximumVote().equals(getMinimumVote());
+        return getMaximumVote().equals(getMinimumVote()) && !cards.containsValue("?");
     }
 
     /**
@@ -148,6 +141,13 @@ public class ScrumPokerSession {
      */
     public String getUserKey() {
         return userKey;
+    }
+
+    private List<Integer> numericValues() {
+        return cards.values().stream()
+            .filter(NumberUtils::isNumber)
+            .map(Integer::valueOf)
+            .collect(Collectors.toList());
     }
 
 }

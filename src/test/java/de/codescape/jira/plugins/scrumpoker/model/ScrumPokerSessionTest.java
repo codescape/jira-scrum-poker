@@ -136,4 +136,40 @@ public class ScrumPokerSessionTest {
         assertThat(session.getUserKey(), is(equalTo(CREATOR_KEY)));
     }
 
+    @Test
+    public void shouldReturnAgreementReachedForAllVotesTheSame() {
+        session.updateCard("user1", "2");
+        session.updateCard("user2", "2");
+        session.updateCard("user3", "2");
+
+        assertThat(session.isAgreementReached(), is(true));
+    }
+
+    @Test
+    public void shouldReturnAgreementNotReachedForDifferentVotes() {
+        session.updateCard("user1", "1");
+        session.updateCard("user2", "2");
+        session.updateCard("user3", "8");
+
+        assertThat(session.isAgreementReached(), is(false));
+    }
+
+    @Test
+    public void shouldReturnAgreementNotReachedForMinimumOneQuestionMark() {
+        session.updateCard("user1", "2");
+        session.updateCard("user2", "2");
+        session.updateCard("user3", "?");
+
+        assertThat(session.isAgreementReached(), is(false));
+    }
+
+    @Test
+    public void shouldReturnAgreementNotReachedForOnlyQuestionMarks() {
+        session.updateCard("user1", "?");
+        session.updateCard("user2", "?");
+        session.updateCard("user3", "?");
+
+        assertThat(session.isAgreementReached(), is(false));
+    }
+
 }
