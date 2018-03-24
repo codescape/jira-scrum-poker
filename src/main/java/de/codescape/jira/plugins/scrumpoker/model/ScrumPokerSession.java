@@ -108,6 +108,13 @@ public class ScrumPokerSession {
     }
 
     /**
+     * Returns whether all participants voted the same or not.
+     */
+    public boolean isAgreementReached() {
+        return getMaximumVote().equals(getMinimumVote());
+    }
+
+    /**
      * Returns all cards between the lowest and the highest vote.
      */
     public List<Integer> getBoundedVotes() {

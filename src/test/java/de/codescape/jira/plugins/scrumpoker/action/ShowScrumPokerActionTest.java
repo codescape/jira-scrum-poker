@@ -24,7 +24,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
-public class StartScrumPokerActionTest {
+public class ShowScrumPokerActionTest {
 
     private static final String ISSUE_KEY = "ISSUE-1";
 
@@ -47,7 +47,7 @@ public class StartScrumPokerActionTest {
     private JiraAuthenticationContext jiraAuthenticationContext;
 
     @InjectMocks
-    private StartScrumPokerAction startScrumPokerAction;
+    private ShowScrumPokerAction showScrumPokerAction;
 
     @Mock
     private HttpServletRequest httpServletRequest;
@@ -71,20 +71,18 @@ public class StartScrumPokerActionTest {
 
     @Test
     public void shouldDisplayErrorPageWhenUserHasNoPermissionForIssue() {
-        when(httpServletRequest.getParameter("action")).thenReturn("start");
         whenRequestedIssueExists();
         whenUserIsNotAllowedToSeeIssue();
 
-        assertThat(startScrumPokerAction.doExecute(), is(equalTo("error")));
+        assertThat(showScrumPokerAction.doExecute(), is(equalTo("error")));
     }
 
     @Test
     public void shouldDisplayStartPageWhenUserHasPermissionForIssue() {
-        when(httpServletRequest.getParameter("action")).thenReturn("start");
         whenRequestedIssueExists();
         whenUserIsAllowedToSeeIssue();
 
-        assertThat(startScrumPokerAction.doExecute(), is(equalTo("start")));
+        assertThat(showScrumPokerAction.doExecute(), is(equalTo("success")));
     }
 
     private void whenUserIsAllowedToSeeIssue() {

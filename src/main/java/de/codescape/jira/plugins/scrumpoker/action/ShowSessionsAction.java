@@ -37,7 +37,7 @@ public class ShowSessionsAction extends ScrumPokerAction {
 
     @Override
     protected String doExecute() {
-        return "start";
+        return "success";
     }
 
     public List<ScrumPokerSession> getOpenSessions() {

@@ -22,6 +22,7 @@
         <dependency>com.atlassian.auiplugin:ajs</dependency>
         <resource type="download" name="scrum-poker.css" location="/css/scrum-poker.css"/>
         <resource type="download" name="scrum-poker.js" location="/js/scrum-poker.js"/>
+        <resource type="download" name="mustache.min.js" location="/js/mustache.min.js"/>
         <resource type="download" name="images/" location="/images"/>
         <context>scrum-poker</context>
     </web-resource>
@@ -53,13 +54,13 @@
 
     <web-item key="pp_start" name="PP-Start" section="jira.issue.tools" weight="10">
         <label key="scrumpoker.session.start"/>
-        <link linkId="callPP">/secure/scrumPokerStart.jspa?issueKey=$issue.key</link>
+        <link linkId="callPP">/secure/scrumPoker.jspa?issueKey=$issue.key</link>
         <condition class="de.codescape.jira.plugins.scrumpoker.StoryTypeCondition"/>
     </web-item>
 
     <web-item key="pp_start_agile" name="PP-Start" section="operations-top-level" weight="10">
         <label key="scrumpoker.session.start"/>
-        <link linkId="callPP">/secure/scrumPokerStart.jspa?issueKey=$issue.key</link>
+        <link linkId="callPP">/secure/scrumPoker.jspa?issueKey=$issue.key</link>
         <condition class="de.codescape.jira.plugins.scrumpoker.StoryTypeCondition"/>
     </web-item>
 
@@ -84,23 +85,18 @@
             </action>
             <action name="de.codescape.jira.plugins.scrumpoker.action.ShowSessionsAction" alias="scrumPokerSessions"
                     roles-required="use">
-                <view name="start">/templates/sessions.vm</view>
+                <view name="success">/templates/sessions.vm</view>
             </action>
-            <action name="de.codescape.jira.plugins.scrumpoker.action.StartScrumPokerAction" alias="scrumPokerStart"
+            <action name="de.codescape.jira.plugins.scrumpoker.action.ShowScrumPokerAction" alias="scrumPoker"
                     roles-required="use">
-                <view name="start">/templates/start.vm</view>
-                <view name="update">/templates/update.vm</view>
+                <view name="success">/templates/show.vm</view>
                 <view name="error">/templates/error.vm</view>
             </action>
-            <action name="de.codescape.jira.plugins.scrumpoker.action.ChooseCardAction" alias="chooseCardAction"
-                    roles-required="use"/>
-            <action name="de.codescape.jira.plugins.scrumpoker.action.RevealDeckAction" alias="revealDeckAction"
-                    roles-required="use"/>
-            <action name="de.codescape.jira.plugins.scrumpoker.action.ConfirmEstimationAction"
-                    alias="confirmEstimationAction" roles-required="use"/>
-            <action name="de.codescape.jira.plugins.scrumpoker.action.ResetDeckAction" alias="resetDeckAction"
-                    roles-required="use"/>
         </actions>
     </webwork1>
+
+    <!-- rest endpoint -->
+
+    <rest name="Scrum Poker" i18n-name-key="scrumpoker.title" key="scrumpoker" path="/scrumpoker" version="1.0"/>
 
 </atlassian-plugin>

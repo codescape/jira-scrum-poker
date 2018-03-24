@@ -2,7 +2,11 @@
 
 This changelog helps developers and users to keep track of new features, fixes and improvements for the Jira Scrum Poker plugin.
 
-## 2.0.0 - Unreleased
+## Unreleased
+
+* ...
+
+## 2.0.0 - 2018-03-24
 
 * test: add test for ScrumPokerCard
 * refactor: move to namespace de.codescape for packages
@@ -11,6 +15,11 @@ This changelog helps developers and users to keep track of new features, fixes a
 * docs: update link to issue creation
 * chore: update reference to TravisCI build
 * fix: update namespace for web resources
+* feat: use Mustache template and REST endpoint for Scrum Poker session
+* feat: simplify URLs for starting a Scrum Poker session
+* chore: remove deprecated actions in favor of REST endpoints
+* style: adjust icon to invite people talking to each other
+* feat: improve polling mechanism on Scrum Poker session page
 
 ## 1.12.0 - 2018-03-11
 

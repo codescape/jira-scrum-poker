@@ -95,7 +95,7 @@ public class ShowSessionsActionTest {
 
     @Test
     public void shouldAlwaysShowSessionsPage() {
-        assertThat(showSessionsAction.doExecute(), is(equalTo("start")));
+        assertThat(showSessionsAction.doExecute(), is(equalTo("success")));
     }
 
     @Test

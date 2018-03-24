@@ -54,8 +54,8 @@
                             #set($issue = $action.getIssue($scrumPokerSession.issueKey))
                                 <tr>
                                     <td class="issuetype"><img src="$issue.issueType.completeIconUrl"></td>
-                                    <td class="issuekey"><a href="$req.contextPath/secure/scrumPokerStart.jspa?issueKey=$issue.key">$issue.key</a></td>
-                                    <td class="summary"><a href="$req.contextPath/secure/scrumPokerStart.jspa?issueKey=$issue.key">$issue.summary</a></td>
+                                    <td class="issuekey"><a href="$req.contextPath/secure/scrumPoker.jspa?issueKey=$issue.key">$issue.key</a></td>
+                                    <td class="summary"><a href="$req.contextPath/secure/scrumPoker.jspa?issueKey=$issue.key">$issue.summary</a></td>
                                     <td class="created">$scrumPokerSession.startedOn.toString('dd.MM.yyyy - HH:mm:ss')</td>
                                     <td class="assignee">$action.getUsername($scrumPokerSession.userKey)</td>
                                     <td>$scrumPokerSession.cards.size()</td>

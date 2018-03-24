@@ -2,7 +2,8 @@
 <head>
     <title>${i18n.getText("scrumpoker.title")}</title>
     <link rel="stylesheet" type="text/css" href="$req.contextPath/download/resources/de.codescape.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.css" media="all" />
-    <script src="$req.contextPath/download/resources/de.codescape.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.js"/>
+    <script src="$req.contextPath/download/resources/de.codescape.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.js"></script>
+    <script src="$req.contextPath/download/resources/de.codescape.jira.plugins.scrum-poker:scrum-poker-resources/mustache.min.js"></script>
 </head>
 <body>
 
@@ -89,8 +90,93 @@
 
 <script>
   AJS.toInit(function(){
-    poll("$issue.key");
+    refreshOnInterval('$issue.key');
   });
+</script>
+
+<script id="card-section-template" type="text/x-handlebars-template">
+
+    {{^confirmedVote}}
+
+        <div class="mod-content">
+            <ul id="pokerset">
+                {{#cards}}
+                    <li><a onclick="updateSession('{{issueKey}}','{{value}}');" class="card {{#selected}}active{{/selected}}">{{value}}</a></li>
+                {{/cards}}
+            </ul>
+        </div>
+
+        {{#visible}}
+
+        <div class="poker-header">
+            <h2>$i18n.getText("scrumpoker.session.bandwidth")</h2>
+        </div>
+        <div class="mod-content">
+            <p class="poker-comment">$i18n.getText("scrumpoker.session.confirmestimation")</p>
+            <ul id="selectVote">
+                {{#boundedVotes}}
+                    <li><a onclick="confirmSession('{{issueKey}}','{{.}}');" class="card small">{{.}}</a></li>
+                {{/boundedVotes}}
+            </ul>
+        </div>
+
+        {{/visible}}
+
+        <div class="poker-header">
+            <h2>$i18n.getText("scrumpoker.session.chosencards")</h2>
+        </div>
+        <div class="mod-content">
+
+            {{#agreementReached}}
+                <p class="poker-comment">$i18n.getText("scrumpoker.session.agreementreached")</p>
+            {{/agreementReached}}
+
+            <ul id="chosencards">
+
+                {{#votes}}
+                    <li>
+                        <span class="card small {{^visible}}backside{{/visible}}">{{vote}}</span>
+                        <span style="padding: 0 10px">{{user}}</span>
+                        {{#needToTalk}}
+                        <span class="icon aui-icon aui-icon-small aui-iconfont-comment icon-comment">&nbsp;</span>
+                        {{/needToTalk}}
+                    </li>
+                {{/votes}}
+
+            </ul>
+        </div>
+
+        <div class="poker-buttons">
+            {{#allowReset}}
+                <a id="buttonReset" onclick="resetSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.reset")</a>
+            {{/allowReset}}
+            {{^allowReset}}
+                <a id="buttonReset" class="aui-button poker-buttons-inactive">$i18n.getText("scrumpoker.session.reset")</a>
+            {{/allowReset}}
+
+            {{#allowReveal}}
+                <a id="buttonReveal" onclick="revealSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.revealcards")</a>
+            {{/allowReveal}}
+            {{^allowReveal}}
+                <a id="buttonReveal" class="aui-button poker-buttons-inactive">$i18n.getText("scrumpoker.session.revealcards")</a>
+            {{/allowReveal}}
+        </div>
+
+    {{/confirmedVote}}
+    {{#confirmedVote}}
+
+        <div class="mod-content">
+            <p>$i18n.getText("scrumpoker.session.estimationsaved")</p>
+            <div style="text-align:center;"><span class="card active">{{confirmedVote}}</span></div>
+        </div>
+        <div class="poker-buttons">
+            <a href="$req.contextPath/secure/scrumPokerSessions.jspa" class="aui-button">$i18n.getText("scrumpoker.sessions.list")</a>
+            <a href="$req.contextPath/browse/{{issueKey}}" class="aui-button">$i18n.getText("scrumpoker.issue.navigateback")</a>
+            <a onclick="resetSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.reset")</a>
+        </div>
+
+    {{/confirmedVote}}
+
 </script>
 
 </body>
