@@ -7,8 +7,8 @@
         <description>${project.description}</description>
         <version>${project.version}</version>
         <vendor name="${project.organization.name}" url="${project.organization.url}"/>
-        <param name="plugin-icon">images/pluginIcon.png</param>
-        <param name="plugin-logo">images/pluginLogo.png</param>
+        <param name="plugin-icon">images/scrum-poker-logo-16.png</param>
+        <param name="plugin-logo">images/scrum-poker-logo-144.png</param>
         <param name="configure.url">/secure/admin/scrumPokerConfiguration.jspa</param>
     </plugin-info>
 
