@@ -4,64 +4,64 @@
 </head>
 <body>
 
-    <h1>$i18n.getText("scrumpoker.title")</h1>
+<h2>$i18n.getText("scrumpoker.title")</h2>
 
-    <div class="aui-group">
-        <div class="aui-item">
-            <table class="aui">
-                <thead>
-                    <tr>
-                        <th>$i18n.getText("scrumpoker.config.title")</th>
-                    </tr>
-                </thead>
-            </table>
+<div class="aui-group">
+    <div class="aui-item">
+        <table class="aui">
+            <thead>
+                <tr>
+                    <th>$i18n.getText("scrumpoker.config.title")</th>
+                </tr>
+            </thead>
+        </table>
 
-            <form class="aui long-label" action="scrumPokerConfiguration.jspa" method="post">
-                <input type="hidden" name="action" value="save">
-                <fieldset>
-                    <div class="field-group">
-                        <label for="storyPointField">$i18n.getText("scrumpoker.config.field")</label>
-                        <select class="select" id="storyPointField" name="storyPointField">
-                            <option value=""></option>
-                            #foreach ($customField in $customFields)
-                                #if ($customField.id == $storyPointFieldId)
-                                    <option value="$customField.id" selected="selected">$customField.fieldName</option>
-                                #else
-                                    <option value="$customField.id">$customField.fieldName</option>
-                                #end
+        <form class="aui long-label" action="scrumPokerConfiguration.jspa" method="post">
+            <input type="hidden" name="action" value="save">
+            <fieldset>
+                <div class="field-group">
+                    <label for="storyPointField">$i18n.getText("scrumpoker.config.field")</label>
+                    <select class="select" id="storyPointField" name="storyPointField">
+                        <option value=""></option>
+                        #foreach ($customField in $customFields)
+                            #if ($customField.id == $storyPointFieldId)
+                                <option value="$customField.id" selected="selected">$customField.fieldName</option>
+                            #else
+                                <option value="$customField.id">$customField.fieldName</option>
                             #end
-                        </select>
-                        #if (!$storyPointFieldId)
-                            <div class="error">$i18n.getText("scrumpoker.config.field.required")</div>
                         #end
-                    </div>
-                </fieldset>
-                <div class="buttons-container">
-                    <div class="buttons">
-                        <input id="project-config-save-button" class="button submit" type="submit" value="$i18n.getText("scrumpoker.config.save")"/>
-                    </div>
+                    </select>
+                    #if (!$storyPointFieldId)
+                        <div class="error">$i18n.getText("scrumpoker.config.field.required")</div>
+                    #end
                 </div>
-            </form>
-        </div>
-
-        <div class="aui-item">
-            <table class="aui">
-                <thead>
-                    <tr>
-                        <th>$i18n.getText("scrumpoker.config.thankyou")</th>
-                    </tr>
-                </thead>
-            </table>
-
-            <p>$i18n.getText("scrumpoker.config.thankyou.text")</p>
-            <ul>
-                <li>
-                    <h6>$i18n.getText("scrumpoker.issuetracker")</h6>
-                    <a href="$i18n.getText("scrumpoker.issuetracker.url")">$i18n.getText("scrumpoker.issuetracker.url")</a>
-                </li>
-            </ul>
-        </div>
+            </fieldset>
+            <div class="buttons-container">
+                <div class="buttons">
+                    <input id="project-config-save-button" class="button submit" type="submit" value="$i18n.getText("scrumpoker.config.save")"/>
+                </div>
+            </div>
+        </form>
     </div>
+
+    <div class="aui-item">
+        <table class="aui">
+            <thead>
+                <tr>
+                    <th>$i18n.getText("scrumpoker.config.thankyou")</th>
+                </tr>
+            </thead>
+        </table>
+
+        <p>$i18n.getText("scrumpoker.config.thankyou.text")</p>
+        <ul>
+            <li>
+                <h6>$i18n.getText("scrumpoker.issuetracker")</h6>
+                <a href="$i18n.getText("scrumpoker.issuetracker.url")">$i18n.getText("scrumpoker.issuetracker.url")</a>
+            </li>
+        </ul>
+    </div>
+</div>
 
 </body>
 </html>

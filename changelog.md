@@ -7,6 +7,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 * refactor: move cards list to enum
 * refactor: remove obsolete base class
 * feat: question mark always has to talk
+* feat: add new logo for Scrum Poker plugin
+* fix: correct level for configuration heading
 
 ## 2.0.1 - 2018-03-24
 
