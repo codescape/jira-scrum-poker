@@ -2,6 +2,10 @@
 
 This changelog helps developers and users to keep track of new features, fixes and improvements for the Jira Scrum Poker plugin.
 
+## 2.2.0 - Unreleased
+
+* feat: after session is closed stop polling for updates
+
 ## 2.1.1 - 2018-03-26
 
 * fix: always use correct path for REST requests
