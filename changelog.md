@@ -2,6 +2,10 @@
 
 This changelog helps developers and users to keep track of new features, fixes and improvements for the Jira Scrum Poker plugin.
 
+## 2.1.1 - 2018-03-26
+
+* fix: always use correct path for REST requests
+
 ## 2.1.0 - 2018-03-26
 
 * refactor: move cards list to enum
