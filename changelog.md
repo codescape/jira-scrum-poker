@@ -2,7 +2,7 @@
 
 This changelog helps developers and users to keep track of new features, fixes and improvements for the Jira Scrum Poker plugin.
 
-## Unreleased
+## 2.1.0 - 2018-03-26
 
 * refactor: move cards list to enum
 * refactor: remove obsolete base class
