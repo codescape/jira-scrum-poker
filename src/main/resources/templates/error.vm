@@ -32,26 +32,23 @@
         <div class="aui-page-panel-inner">
             <section class="aui-page-panel-content">
                 <div class="mod-content">
-
-    #if($action.hasAnyErrors())
-    <div class="aui-message error">
-        <p class="title">
-            <span class="aui-icon icon-error"></span>
-            <strong>$i18n.getText("scrumpoker.error.details")</strong>
-        </p>
-        <ul>
-        #foreach($error in $action.errorMessages)
-            <li>$error</li>
-        #end
-        #foreach($error in $action.errors)
-            <li>$error</li>
-        #end
-        </ul>
-    </div>
-    #end
-
-    <a href="#" onclick="javascript:history.back(); return false;">$i18n.getText("scrumpoker.error.return")</a>
-
+                    #if($action.hasAnyErrors())
+                        <div class="aui-message error">
+                            <p class="title">
+                                <span class="aui-icon icon-error"></span>
+                                <strong>$i18n.getText("scrumpoker.error.details")</strong>
+                            </p>
+                            <ul>
+                                #foreach($error in $action.errorMessages)
+                                    <li>$error</li>
+                                #end
+                                #foreach($error in $action.errors)
+                                    <li>$error</li>
+                                #end
+                            </ul>
+                        </div>
+                    #end
+                    <a href="#" onclick="javascript:history.back(); return false;">$i18n.getText("scrumpoker.error.return")</a>
                 </div>
             </section>
         </div>
