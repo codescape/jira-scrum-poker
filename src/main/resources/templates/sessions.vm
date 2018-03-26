@@ -51,7 +51,7 @@
                             </thead>
                             <tbody>
                             #foreach($scrumPokerSession in $openSessions)
-                            #set($issue = $action.getIssue($scrumPokerSession.issueKey))
+                                #set($issue = $action.getIssue($scrumPokerSession.issueKey))
                                 <tr>
                                     <td class="issuetype"><img src="$issue.issueType.completeIconUrl"></td>
                                     <td class="issuekey"><a href="$req.contextPath/secure/scrumPoker.jspa?issueKey=$issue.key">$issue.key</a></td>
