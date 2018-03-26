@@ -5,6 +5,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 ## 2.2.0 - Unreleased
 
 * feat: after session is closed stop polling for updates
+* style: format error template
 
 ## 2.1.1 - 2018-03-26
 
