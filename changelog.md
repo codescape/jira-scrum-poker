@@ -5,6 +5,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 ## Unreleased
 
 * style: tabs and spaces for session template
+* docs: update screenshots and description in readme
 
 ## 2.2.0 - 2018-03-26
 
