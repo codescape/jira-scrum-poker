@@ -18,7 +18,7 @@
 
     <!-- static web resources -->
 
-    <web-resource key="scrum-poker-resources" name="Scrum Poker Web Resources">
+    <web-resource key="scrum-poker-resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
         <resource type="download" name="scrum-poker.css" location="/css/scrum-poker.css"/>
         <resource type="download" name="scrum-poker.js" location="/js/scrum-poker.js"/>
@@ -35,60 +35,60 @@
 
     <!-- components -->
 
-    <component key="scrumPokerStorage" class="de.codescape.jira.plugins.scrumpoker.data.DefaultScrumPokerStorage">
+    <component key="scrum-poker-storage" class="de.codescape.jira.plugins.scrumpoker.data.DefaultScrumPokerStorage">
         <description>Provides the Storage for Scrum Poker sessions.</description>
         <interface>de.codescape.jira.plugins.scrumpoker.data.ScrumPokerStorage</interface>
     </component>
 
-    <component key="storyPointSupport" class="de.codescape.jira.plugins.scrumpoker.data.DefaultStoryPointSupport">
+    <component key="scrum-poker-field" class="de.codescape.jira.plugins.scrumpoker.data.DefaultStoryPointSupport">
         <description>Provides access to the custom field.</description>
         <interface>de.codescape.jira.plugins.scrumpoker.data.StoryPointFieldSupport</interface>
     </component>
 
-    <component key="scrumPokerSettings" class="de.codescape.jira.plugins.scrumpoker.data.DefaultScrumPokerSettings">
+    <component key="scrum-poker-settings" class="de.codescape.jira.plugins.scrumpoker.data.DefaultScrumPokerSettings">
         <description>Provides the settings accessor for the Scrum Poker plugin.</description>
         <interface>de.codescape.jira.plugins.scrumpoker.data.ScrumPokerSettings</interface>
     </component>
 
     <!-- buttons to start a new session -->
 
-    <web-item key="pp_start" name="PP-Start" section="jira.issue.tools" weight="10">
+    <web-item key="scrum-poker-start-from-issue-details" section="jira.issue.tools" weight="10">
         <label key="scrumpoker.session.start"/>
-        <link linkId="openScrumPoker">/secure/scrumPoker.jspa?issueKey=$issue.key</link>
+        <link>/secure/scrumPoker.jspa?issueKey=$issue.key</link>
         <condition class="de.codescape.jira.plugins.scrumpoker.StoryTypeCondition"/>
     </web-item>
 
-    <web-item key="pp_start_agile" name="PP-Start" section="operations-top-level" weight="10">
+    <web-item key="scrum-poker-start-from-context-menu" section="operations-top-level" weight="10">
         <label key="scrumpoker.session.start"/>
-        <link linkId="openScrumPoker">/secure/scrumPoker.jspa?issueKey=$issue.key</link>
+        <link>/secure/scrumPoker.jspa?issueKey=$issue.key</link>
         <condition class="de.codescape.jira.plugins.scrumpoker.StoryTypeCondition"/>
     </web-item>
 
     <!-- dropdown on boards -->
 
-    <web-section key="scrumpoker_sessions" location="jira.agile.board.tools" weight="10">
-        <label key="scrumpoker.title">Scrum Poker</label>
+    <web-section key="scrum-poker-sessions" location="jira.agile.board.tools" weight="10">
+        <label key="scrumpoker.title"/>
     </web-section>
 
-    <web-item section="scrumpoker_sessions" key="my-custom-web-item" weight="10">
-        <label key="scrumpoker.sessions.list">Scrum Poker Sitzungen</label>
+    <web-item section="scrum-poker-sessions" key="scrum-poker-sessions-link" weight="10">
+        <label key="scrumpoker.sessions.list"/>
         <link>/secure/scrumPokerSessions.jspa</link>
     </web-item>
 
     <!-- configuration in plugin administration sidebar -->
 
-    <web-section key="scrumpoker_configuration" location="admin_plugins_menu">
+    <web-section key="scrum-poker-configuration" location="admin_plugins_menu">
         <label key="scrumpoker.title"/>
     </web-section>
 
-    <web-item key="scrumpoker_configuration_item" section="admin_plugins_menu/scrumpoker_configuration">
+    <web-item key="scrum-poker-configuration-item" section="admin_plugins_menu/scrum-poker-configuration">
         <label key="scrumpoker.config.title"/>
-        <link linkId="configureScrumPoker">/secure/admin/scrumPokerConfiguration.jspa</link>
+        <link>/secure/admin/scrumPokerConfiguration.jspa</link>
     </web-item>
 
     <!-- webworks -->
 
-    <webwork1 key="scrum-poker-webwork" name="Scrum Poker">
+    <webwork1 key="scrum-poker-webwork">
         <actions>
             <action name="de.codescape.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction"
                     alias="scrumPokerConfiguration" roles-required="sysadmin">
@@ -108,6 +108,6 @@
 
     <!-- rest endpoint -->
 
-    <rest name="Scrum Poker" i18n-name-key="scrumpoker.title" key="scrumpoker" path="/scrumpoker" version="1.0"/>
+    <rest key="scrum-poker-rest" path="/scrumpoker" version="1.0"/>
 
 </atlassian-plugin>
