@@ -38,21 +38,21 @@
                 <div class="poker-header">
                     <h2>$i18n.getText("scrumpoker.issue.summary")</h2>
                 </div>
-                   <div class="mod-content">
-                       #set($issueDescriptionHtml = $issueDescription)
+                <div class="mod-content">
+                    #set($issueDescriptionHtml = $issueDescription)
                     #if(!$issueDescriptionHtml.isEmpty())
-                    <p>$issueDescriptionHtml</p>
+                        <p>$issueDescriptionHtml</p>
                     #else
-                    <p><i>$i18n.getText("scrumpoker.issue.summary.empty")</i></p>
+                        <p><i>$i18n.getText("scrumpoker.issue.summary.empty")</i></p>
                     #end
                 </div>
                 <div class="poker-header">
                     <h2>$i18n.getText("scrumpoker.issue.tasks")</h2>
                 </div>
-                   <div class="mod-content">
-                       #set($subTasks = $issue.subTaskObjects)
-                       #if(!$subTasks.isEmpty())
-                       <table width="100%" class="aui" id="issuetable">
+                <div class="mod-content">
+                    #set($subTasks = $issue.subTaskObjects)
+                    #if(!$subTasks.isEmpty())
+                    <table width="100%" class="aui" id="issuetable">
                         <tbody>
                             #set($counter = 1)
                             #foreach($subTask in $subTasks)
@@ -89,9 +89,9 @@
 </section>
 
 <script>
-  AJS.toInit(function(){
-    refreshOnInterval('$issue.key');
-  });
+    AJS.toInit(function(){
+        refreshOnInterval('$issue.key');
+    });
 </script>
 
 <script id="card-section-template" type="text/x-handlebars-template">
