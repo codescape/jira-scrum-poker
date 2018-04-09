@@ -54,13 +54,13 @@
 
     <web-item key="pp_start" name="PP-Start" section="jira.issue.tools" weight="10">
         <label key="scrumpoker.session.start"/>
-        <link linkId="callPP">/secure/scrumPoker.jspa?issueKey=$issue.key</link>
+        <link linkId="openScrumPoker">/secure/scrumPoker.jspa?issueKey=$issue.key</link>
         <condition class="de.codescape.jira.plugins.scrumpoker.StoryTypeCondition"/>
     </web-item>
 
     <web-item key="pp_start_agile" name="PP-Start" section="operations-top-level" weight="10">
         <label key="scrumpoker.session.start"/>
-        <link linkId="callPP">/secure/scrumPoker.jspa?issueKey=$issue.key</link>
+        <link linkId="openScrumPoker">/secure/scrumPoker.jspa?issueKey=$issue.key</link>
         <condition class="de.codescape.jira.plugins.scrumpoker.StoryTypeCondition"/>
     </web-item>
 
@@ -73,6 +73,17 @@
     <web-item section="scrumpoker_sessions" key="my-custom-web-item" weight="10">
         <label key="scrumpoker.sessions.list">Scrum Poker Sitzungen</label>
         <link>/secure/scrumPokerSessions.jspa</link>
+    </web-item>
+
+    <!-- configuration in plugin administration sidebar -->
+
+    <web-section key="scrumpoker_configuration" location="admin_plugins_menu">
+        <label key="scrumpoker.title"/>
+    </web-section>
+
+    <web-item key="scrumpoker_configuration_item" section="admin_plugins_menu/scrumpoker_configuration">
+        <label key="scrumpoker.config.title"/>
+        <link linkId="configureScrumPoker">/secure/admin/scrumPokerConfiguration.jspa</link>
     </web-item>
 
     <!-- webworks -->

@@ -6,6 +6,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * style: tabs and spaces for session template
 * docs: update screenshots and description in readme
+* feat: configuration accessible from plugin administration sidebar
 
 ## 2.2.0 - 2018-03-26
 
