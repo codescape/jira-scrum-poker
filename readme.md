@@ -8,11 +8,11 @@ This plugin integrates well with the estimation custom field introduced by Jira 
 
 ## Screenshots
 
-The configuration page enables the administrator to define the global estimation field.
+The configuration page enables the Jira administrator to set up the estimation field used by Jira Software to integrate seamlessly.
 
 ![Configuration](/etc/screenshots/scrum-poker-configuration.png)
 
-New Scrum Poker sessions can be started from the context menu of any issue with the estimation field or the issue detail page.
+New Scrum Poker sessions can be started from the context menu or from the issue detail page of every issue that has the configured estimation field.
 
 ![Start Scrum Poker session](/etc/screenshots/scrum-poker-start.png)
 
