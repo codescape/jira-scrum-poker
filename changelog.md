@@ -7,6 +7,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * style: tabs and spaces for session template
 * docs: update screenshots and description in readme
 * feat: configuration accessible from plugin administration sidebar
+* feat: remove logging while accessing story point field
 * refactor: introduce better naming for plugin components
 
 ## 2.2.0 - 2018-03-26
