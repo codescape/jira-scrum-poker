@@ -4,10 +4,15 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
+* ...
+
+## 2.3.0 - 2018-04-11
+
 * style: tabs and spaces for session template
 * docs: update screenshots and description in readme
 * feat: configuration accessible from plugin administration sidebar
 * feat: remove logging while accessing story point field
+* feat: introduce licensing for the Scrum Poker plugin
 * refactor: introduce better naming for plugin components
 
 ## 2.2.0 - 2018-03-26
