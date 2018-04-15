@@ -8,7 +8,7 @@ This plugin integrates well with the estimation custom field introduced by Jira 
 
 ## Installation
 
-Installation of the Scrum Poker plugin from the Atlassian Marketplace is extremely easy: After installing the plugin from the Marketplace you just need to configure the estimation field used by Jira Software as shown in the first screenshot below. 
+Installation of the Scrum Poker plugin from the Atlassian Marketplace is extremely easy: After installing the plugin from the Marketplace you just need to configure the estimation field used by Jira Software or any other field to hold the confirmed estimation as shown in the first screenshot below. 
 
 Congratulations! After that you are ready to start your first Scrum Poker session!
 
