@@ -3,10 +3,10 @@ package de.codescape.jira.plugins.scrumpoker.rest;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
-import de.codescape.jira.plugins.scrumpoker.data.ScrumPokerStorage;
-import de.codescape.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
 import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerCard;
 import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerSession;
+import de.codescape.jira.plugins.scrumpoker.persistence.ScrumPokerStorage;
+import de.codescape.jira.plugins.scrumpoker.persistence.StoryPointFieldSupport;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -21,15 +21,15 @@ import static org.apache.commons.lang.math.NumberUtils.isNumber;
  * frontend.
  */
 @Path("/session")
-public class ScrumPokerSessionResource {
+public class SessionResource {
 
     private final ScrumPokerStorage scrumPokerStorage;
     private final StoryPointFieldSupport storyPointFieldSupport;
     private final JiraAuthenticationContext jiraAuthenticationContext;
     private final UserManager userManager;
 
-    public ScrumPokerSessionResource(ScrumPokerStorage scrumPokerStorage, StoryPointFieldSupport storyPointFieldSupport,
-                                     JiraAuthenticationContext jiraAuthenticationContext, UserManager userManager) {
+    public SessionResource(ScrumPokerStorage scrumPokerStorage, StoryPointFieldSupport storyPointFieldSupport,
+                           JiraAuthenticationContext jiraAuthenticationContext, UserManager userManager) {
         this.scrumPokerStorage = scrumPokerStorage;
         this.storyPointFieldSupport = storyPointFieldSupport;
         this.jiraAuthenticationContext = jiraAuthenticationContext;

@@ -6,7 +6,7 @@ import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.plugin.webfragment.conditions.AbstractWebCondition;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.user.ApplicationUser;
-import de.codescape.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
+import de.codescape.jira.plugins.scrumpoker.persistence.StoryPointFieldSupport;
 
 /**
  * Only display the Scrum poker web element for issues that are editable and have the custom field to hold the story

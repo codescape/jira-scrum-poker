@@ -38,19 +38,22 @@
 
     <!-- components -->
 
-    <component key="scrum-poker-storage" class="de.codescape.jira.plugins.scrumpoker.data.DefaultScrumPokerStorage">
+    <component key="scrum-poker-storage"
+               class="de.codescape.jira.plugins.scrumpoker.persistence.DefaultScrumPokerStorage">
         <description>Provides the Storage for Scrum Poker sessions.</description>
-        <interface>de.codescape.jira.plugins.scrumpoker.data.ScrumPokerStorage</interface>
+        <interface>de.codescape.jira.plugins.scrumpoker.persistence.ScrumPokerStorage</interface>
     </component>
 
-    <component key="scrum-poker-field" class="de.codescape.jira.plugins.scrumpoker.data.DefaultStoryPointSupport">
+    <component key="scrum-poker-field"
+               class="de.codescape.jira.plugins.scrumpoker.persistence.DefaultStoryPointSupport">
         <description>Provides access to the custom field.</description>
-        <interface>de.codescape.jira.plugins.scrumpoker.data.StoryPointFieldSupport</interface>
+        <interface>de.codescape.jira.plugins.scrumpoker.persistence.StoryPointFieldSupport</interface>
     </component>
 
-    <component key="scrum-poker-settings" class="de.codescape.jira.plugins.scrumpoker.data.DefaultScrumPokerSettings">
+    <component key="scrum-poker-settings"
+               class="de.codescape.jira.plugins.scrumpoker.persistence.DefaultScrumPokerSettings">
         <description>Provides the settings accessor for the Scrum Poker plugin.</description>
-        <interface>de.codescape.jira.plugins.scrumpoker.data.ScrumPokerSettings</interface>
+        <interface>de.codescape.jira.plugins.scrumpoker.persistence.ScrumPokerSettings</interface>
     </component>
 
     <!-- buttons to start a new session -->

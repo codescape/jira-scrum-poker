@@ -1,4 +1,4 @@
-package de.codescape.jira.plugins.scrumpoker.data;
+package de.codescape.jira.plugins.scrumpoker.persistence;
 
 import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerSession;
 import org.joda.time.DateTime;

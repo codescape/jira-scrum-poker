@@ -1,4 +1,4 @@
-package de.codescape.jira.plugins.scrumpoker.data;
+package de.codescape.jira.plugins.scrumpoker.persistence;
 
 import com.atlassian.jira.issue.fields.CustomField;
 

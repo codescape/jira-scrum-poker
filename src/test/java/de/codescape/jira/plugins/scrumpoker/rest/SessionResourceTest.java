@@ -2,9 +2,9 @@ package de.codescape.jira.plugins.scrumpoker.rest;
 
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.user.ApplicationUser;
-import de.codescape.jira.plugins.scrumpoker.data.ScrumPokerStorage;
-import de.codescape.jira.plugins.scrumpoker.data.StoryPointFieldSupport;
 import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerSession;
+import de.codescape.jira.plugins.scrumpoker.persistence.ScrumPokerStorage;
+import de.codescape.jira.plugins.scrumpoker.persistence.StoryPointFieldSupport;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
-public class ScrumPokerSessionResourceTest {
+public class SessionResourceTest {
 
     private static final String ISSUE_KEY = "ISSUE-1";
     private static final String USER_KEY = "userKey";
@@ -37,7 +37,7 @@ public class ScrumPokerSessionResourceTest {
     private StoryPointFieldSupport storyPointFieldSupport;
 
     @InjectMocks
-    private ScrumPokerSessionResource scrumPokerSessionResource;
+    private SessionResource sessionResource;
 
     @Mock
     private ApplicationUser applicationUser;
@@ -50,7 +50,7 @@ public class ScrumPokerSessionResourceTest {
         expectCurrentUserIs(USER_KEY);
         expectCurrentSessionForUser(ISSUE_KEY, USER_KEY);
 
-        ScrumPokerSessionRest scrumPokerSessionRest = (ScrumPokerSessionRest) scrumPokerSessionResource.getSession(ISSUE_KEY).getEntity();
+        ScrumPokerSessionRest scrumPokerSessionRest = (ScrumPokerSessionRest) sessionResource.getSession(ISSUE_KEY).getEntity();
 
         assertThat(scrumPokerSessionRest.getIssueKey(), is(equalTo(ISSUE_KEY)));
     }
@@ -60,7 +60,7 @@ public class ScrumPokerSessionResourceTest {
         expectCurrentUserIs(USER_KEY);
         expectCurrentSessionForUser(ISSUE_KEY, USER_KEY);
 
-        scrumPokerSessionResource.updateCard(ISSUE_KEY, CARD_VALUE);
+        sessionResource.updateCard(ISSUE_KEY, CARD_VALUE);
 
         verify(scrumPokerSession).updateCard(USER_KEY, CARD_VALUE);
     }
@@ -70,7 +70,7 @@ public class ScrumPokerSessionResourceTest {
         expectCurrentUserIs(USER_KEY);
         expectCurrentSessionForUser(ISSUE_KEY, USER_KEY);
 
-        scrumPokerSessionResource.revealCards(ISSUE_KEY);
+        sessionResource.revealCards(ISSUE_KEY);
 
         verify(scrumPokerSession, times(1)).revealDeck();
     }
@@ -80,7 +80,7 @@ public class ScrumPokerSessionResourceTest {
         expectCurrentUserIs(USER_KEY);
         expectCurrentSessionForUser(ISSUE_KEY, USER_KEY);
 
-        scrumPokerSessionResource.resetSession(ISSUE_KEY);
+        sessionResource.resetSession(ISSUE_KEY);
 
         verify(scrumPokerSession, times(1)).resetDeck();
     }
@@ -90,7 +90,7 @@ public class ScrumPokerSessionResourceTest {
         expectCurrentUserIs(USER_KEY);
         expectCurrentSessionForUser(ISSUE_KEY, USER_KEY);
 
-        scrumPokerSessionResource.confirmEstimation(ISSUE_KEY, ESTIMATION);
+        sessionResource.confirmEstimation(ISSUE_KEY, ESTIMATION);
 
         verify(scrumPokerSession, times(1)).confirm(ESTIMATION);
         verify(storyPointFieldSupport, times(1)).save(ISSUE_KEY, ESTIMATION);
