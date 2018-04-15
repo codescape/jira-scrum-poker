@@ -6,6 +6,12 @@ This plugin integrates well with the estimation custom field introduced by Jira 
 
 [![Build Status](https://travis-ci.org/codescape/jira-scrum-poker.svg?branch=master)](https://travis-ci.org/codescape/jira-scrum-poker)
 
+## Installation
+
+Installation of the Scrum Poker plugin from the Atlassian Marketplace is extremely easy: After installing the plugin from the Marketplace you just need to configure the estimation field used by Jira Software as shown in the first screenshot below. 
+
+Congratulations! After that you are ready to start your first Scrum Poker session!
+
 ## Screenshots
 
 The configuration page enables the Jira administrator to set up the estimation field used by Jira Software to integrate seamlessly.
@@ -38,7 +44,7 @@ As a rule of thumb:
 
 ## Supported Languages
 
-The Scrum Poker plugin supports the following languages and defaults to English translation if the user has a not supported language configured in his Jira profile:
+The Scrum Poker plugin supports the following languages and defaults to English translation if the user has no supported language configured in his Jira profile:
 
 * English
 * German
