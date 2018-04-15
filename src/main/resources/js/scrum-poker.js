@@ -79,4 +79,4 @@
         });
     }
 
-}( window.ScrumPoker = window.ScrumPoker || {}, jQuery ));
+}(window.ScrumPoker = window.ScrumPoker || {}, jQuery));

@@ -8,6 +8,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * refactor: move all persistence related classes into persistence package
 * feat: create own ScrumPoker namespace for JavaScript code
 * docs: improve readme and add installation instructions
+* style: formatting the JavaScript file
 
 ## 2.3.0 - 2018-04-11
 
