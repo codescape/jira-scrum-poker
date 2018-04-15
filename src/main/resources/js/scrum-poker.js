@@ -1,74 +1,82 @@
-var scrumPokerRefresh;
-var scrumPokerRedirect;
-var scrumPokerRedirectScheduled = false;
+/*!
+ * JavaScript implementation for the client side of the Jira Scrum Poker plugin.
+ */
+(function(ScrumPoker, $, undefined) {
 
-/* Calling the automatic refresh of the Scrum Poker session every 2 seconds. */
-function refreshOnInterval(issueKey) {
-    refreshSession(issueKey);
-    scrumPokerRefresh = setTimeout(function() {
-        refreshOnInterval(issueKey);
-    }, 2000);
-}
+    var uri = AJS.contextPath() + '/rest/scrumpoker/1.0';
+    var refreshTimeout;
+    var redirectTimeout;
+    var redirectTimeoutActive = false;
 
-/* Refresh the Scrum Poker session and display results using Mustache template */
-function refreshSession(issueKey) {
-    jQuery.get(AJS.contextPath() + '/rest/scrumpoker/1.0/session/' + issueKey, function(data) {
-        jQuery('#card-section').html(
-            Mustache.render(jQuery('#card-section-template').html(), data)
-        );
-        if(typeof data.confirmedVote !== 'undefined') {
+    /* Initialize the automatic refresh of the Scrum Poker session every 2 seconds. */
+    ScrumPoker.poll = function(issueKey) {
+        refreshSession(issueKey);
+        refreshTimeout = setTimeout(function() {
+            ScrumPoker.poll(issueKey);
+        }, 2000);
+    }
+
+    /* Refresh the Scrum Poker session and display results using Mustache template */
+    function refreshSession(issueKey) {
+        $.get(uri + '/session/' + issueKey, function(data) {
+            $('#card-section').html(
+                Mustache.render($('#card-section-template').html(), data)
+            );
+            if(typeof data.confirmedVote !== 'undefined') {
+                scheduleRedirectToIssue(issueKey);
+            } else {
+                cancelRedirectToIssue();
+            }
+        }).fail(function() {
             scheduleRedirectToIssue(issueKey);
-        } else {
-            cancelRedirectToIssue();
+        });
+    }
+
+    /* Schedule a redirect to the issue page after 60 seconds */
+    function scheduleRedirectToIssue(issueKey) {
+        if (!redirectTimeoutActive) {
+            redirectTimeout = setTimeout(function() {
+                clearTimeout(refreshTimeout);
+                window.location.href = AJS.contextPath() + '/browse/' + issueKey;
+            }, 60000);
+            redirectTimeoutActive = true;
         }
-    }).fail(function() {
-        scheduleRedirectToIssue(issueKey);
-    });
-}
-
-/* Schedule a redirect to the issue page after 60 seconds */
-function scheduleRedirectToIssue(issueKey) {
-    if (!scrumPokerRedirectScheduled) {
-        scrumPokerRedirect = setTimeout(function() {
-            clearTimeout(scrumPokerRefresh);
-            window.location.href = AJS.contextPath() + '/browse/' + issueKey;
-        }, 60000);
-        scrumPokerRedirectScheduled = true;
     }
-}
 
-/* Cancel the redirect to the issue page */
-function cancelRedirectToIssue() {
-    if (scrumPokerRedirectScheduled) {
-        clearTimeout(scrumPokerRedirect);
-        scrumPokerRedirectScheduled = false;
+    /* Cancel the redirect to the issue page */
+    function cancelRedirectToIssue() {
+        if (redirectTimeoutActive) {
+            clearTimeout(redirectTimeout);
+            redirectTimeoutActive = false;
+        }
     }
-}
 
-/* Update Scrum Poker session and add or change a vote for the current user */
-function updateSession(issueKey, chosenCard) {
-    jQuery.post(AJS.contextPath() + '/rest/scrumpoker/1.0/session/' + issueKey + '/card/' + encodeURIComponent(chosenCard), function(data, status) {
-        refreshSession(issueKey);
-    });
-}
+    /* Update Scrum Poker session and add or change a vote for the current user */
+    ScrumPoker.updateSession = function(issueKey, chosenCard) {
+        $.post(uri + '/session/' + issueKey + '/card/' + encodeURIComponent(chosenCard), function(data, status) {
+            refreshSession(issueKey);
+        });
+    }
 
-/* Reveal all votes giving by participants of this Scrum Poker session */
-function revealSession(issueKey) {
-    jQuery.post(AJS.contextPath() + '/rest/scrumpoker/1.0/session/' + issueKey + '/reveal', function(data, status) {
-        refreshSession(issueKey);
-    });
-}
+    /* Reveal all votes giving by participants of this Scrum Poker session */
+    ScrumPoker.revealSession = function(issueKey) {
+        $.post(uri + '/session/' + issueKey + '/reveal', function(data, status) {
+            refreshSession(issueKey);
+        });
+    }
 
-/* Reset the Scrum Poker session allowing for a new round for the current issue */
-function resetSession(issueKey) {
-    jQuery.post(AJS.contextPath() + '/rest/scrumpoker/1.0/session/' + issueKey + '/reset', function(data, status) {
-        refreshSession(issueKey);
-    });
-}
+    /* Reset the Scrum Poker session allowing for a new round for the current issue */
+    ScrumPoker.resetSession = function(issueKey) {
+        $.post(uri + '/session/' + issueKey + '/reset', function(data, status) {
+            refreshSession(issueKey);
+        });
+    }
 
-/* Confirm the estimation for a Scrum Poker session ending itself and persisting the estimation on the issue */
-function confirmSession(issueKey, estimation) {
-    jQuery.post(AJS.contextPath() + '/rest/scrumpoker/1.0/session/' + issueKey + '/confirm/' + encodeURIComponent(estimation), function(data, status) {
-        refreshSession(issueKey);
-    });
-}
+    /* Confirm the estimation for a Scrum Poker session ending itself and persisting the estimation on the issue */
+    ScrumPoker.confirmSession = function(issueKey, estimation) {
+        $.post(uri + '/session/' + issueKey + '/confirm/' + encodeURIComponent(estimation), function(data, status) {
+            refreshSession(issueKey);
+        });
+    }
+
+}( window.ScrumPoker = window.ScrumPoker || {}, jQuery ));

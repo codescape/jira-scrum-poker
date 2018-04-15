@@ -6,6 +6,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: add post update and post install urls to improve setup process
 * refactor: move all persistence related classes into persistence package
+* feat: create own ScrumPoker namespace for JavaScript code
 
 ## 2.3.0 - 2018-04-11
 
