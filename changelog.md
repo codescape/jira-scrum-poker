@@ -4,7 +4,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
-* ...
+* feat: add post update and post install urls to improve setup process
 
 ## 2.3.0 - 2018-04-11
 

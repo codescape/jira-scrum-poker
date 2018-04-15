@@ -10,6 +10,8 @@
         <param name="plugin-icon">images/scrum-poker-logo-16.png</param>
         <param name="plugin-logo">images/scrum-poker-logo-144.png</param>
         <param name="configure.url">/secure/admin/scrumPokerConfiguration.jspa</param>
+        <param name="post.install.url">/secure/admin/scrumPokerConfiguration.jspa</param>
+        <param name="post.update.url">/secure/admin/scrumPokerConfiguration.jspa</param>
         <param name="atlassian-licensing-enabled">true</param>
     </plugin-info>
 
