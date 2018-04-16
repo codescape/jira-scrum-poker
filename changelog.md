@@ -1,6 +1,6 @@
 # Changelog
 
-This changelog helps developers and users to keep track of new features, fixes and improvements for the Jira Scrum Poker plugin.
+This changelog helps developers and users to keep track of new features, fixes and improvements for the Scrum Poker plugin.
 
 ## Unreleased
 
@@ -9,6 +9,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: create own ScrumPoker namespace for JavaScript code
 * docs: improve readme and add installation instructions
 * style: formatting the JavaScript file
+* feat: rename to Scrum Poker to adhere to Atlassian brand guidelines 
 
 ## 2.3.0 - 2018-04-11
 
@@ -62,7 +63,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * refactor: implement choose card action with testability in mind
 * feat: non editable issues do not display Scrum Poker button
 * docs: rename JIRA to Jira in all places in the code
-* chore: rename plugin to Jira Scrum Poker and add better description
+* chore: rename plugin to Scrum Poker and add better description
 * chore: implement with latest amps and jira version
 * refactor: Java 8 way to create and return session
 * style: restructure Maven POM

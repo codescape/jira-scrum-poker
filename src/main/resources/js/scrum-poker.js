@@ -1,5 +1,5 @@
 /*!
- * JavaScript implementation for the client side of the Jira Scrum Poker plugin.
+ * JavaScript implementation for the client side of the Scrum Poker plugin.
  */
 (function(ScrumPoker, $, undefined) {
 

@@ -53,7 +53,7 @@ public class StoryTypeConditionTest {
 
     @Before
     public void before() {
-        // configured field for Jira Scrum Poker
+        // configured field for Scrum Poker
         when(storyPointFieldSupport.findStoryPointField()).thenReturn(storyPointField);
 
         // expected ids for fields
