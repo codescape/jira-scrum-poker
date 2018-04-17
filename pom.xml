@@ -43,6 +43,8 @@
         <!-- Source encoding -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Plugin Licensing -->
+        <atlassian.licensing.enabled>true</atlassian.licensing.enabled>
     </properties>
 
     <dependencies>
@@ -123,6 +125,13 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>disable-atlassian-licensing</id>
+            <!-- allows to create a plugin version for testing purposes without any licensing enabled -->
+            <properties>
+                <atlassian.licensing.enabled>false</atlassian.licensing.enabled>
+            </properties>
+        </profile>
         <profile>
             <id>atlassian-repositories</id>
             <activation>

@@ -12,7 +12,7 @@
         <param name="configure.url">/secure/admin/scrumPokerConfiguration.jspa</param>
         <param name="post.install.url">/secure/admin/scrumPokerConfiguration.jspa</param>
         <param name="post.update.url">/secure/admin/scrumPokerConfiguration.jspa</param>
-        <param name="atlassian-licensing-enabled">true</param>
+        <param name="atlassian-licensing-enabled">${atlassian.licensing.enabled}</param>
     </plugin-info>
 
     <!-- i18n message bundle -->
