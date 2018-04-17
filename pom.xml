@@ -43,7 +43,7 @@
         <!-- Source encoding -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- Plugin Licensing -->
+        <!-- Plugin licensing -->
         <atlassian.licensing.enabled>true</atlassian.licensing.enabled>
     </properties>
 
