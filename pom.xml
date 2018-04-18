@@ -9,8 +9,11 @@
     <packaging>atlassian-plugin</packaging>
 
     <name>Scrum Poker</name>
-    <description>Scrum Poker is an open source plugin to enable teams to collaboratively estimate their work with
-        the help of a dedicated GUI directly integrated into Jira Software.
+    <description>Scrum Poker is an open source plugin enabling teams to collaboratively estimate their work with the
+        help of an interactive user interface seamlessly integrated into Jira Software.
+
+        This plugin works best in combination with the Story Point field introduced by Jira Software which is also used
+        to calculate the sprint velocity.
     </description>
 
     <organization>
