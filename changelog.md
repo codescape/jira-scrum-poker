@@ -5,6 +5,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 ## Unreleased
 
 * docs: update and improve general description of the Scrum Poker plugin
+* docs: update and improve installation and compatibility description
 
 ## 2.4.0 - 2018-04-16
 

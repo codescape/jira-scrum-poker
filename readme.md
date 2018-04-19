@@ -16,7 +16,10 @@ This plugin works best in combination with the Story Point field introduced by J
 
 ## Installation
 
-Installation of the Scrum Poker plugin from the Atlassian Marketplace is extremely easy: After installing the plugin from the Marketplace you just need to configure the estimation field used by Jira Software or any other field to hold the confirmed estimation as shown in the first screenshot below. 
+Installation and setup of the Scrum Poker plugin from the Atlassian Marketplace is extremely easy: 
+
+1. Install the Scrum Poker plugin from the [Atlassian Marketplace](https://marketplace.atlassian.com/plugins/de.codescape.jira.plugins.scrum-poker). You can start a free trial before purchasing a license for Scrum Poker.  
+1. Configure the field to save the confirmed estimation after a Scrum Poker session. To do that go to the plugin configuration and choose the field from the list of possible fields.  
 
 Congratulations! After that you are ready to start your first Scrum Poker session!
 
@@ -38,17 +41,11 @@ The overview page helps users to find their Scrum Poker session within all curre
 
 ![Active sessions Overview](/etc/screenshots/scrum-poker-active-sessions.png)
 
-## Supported Jira versions
+## Compatibility with Jira
 
-The Scrum Poker plugin requires you to run Jira 7.5 or newer on a Java runtime with Java language level 8.
+The Scrum Poker plugin is compatible with Jira 7.5 and newer versions.
 
-If your Jira does not meet those expectations you can grab an older version of the Scrum Poker plugin but you will miss all the new features and improvements. 
-
-As a rule of thumb:
-
-* If your Jira is still running on Java 7 you can use Scrum Poker up to version 1.3.16.
-* If your Jira version is older than Jira 6.4 you should consider updating your Jira instance ;)
-* In all other cases you should use the latest and greatest version of Scrum Poker!
+* Scrum Poker 2.4.0 is tested and compatible with Jira 7.5.0 - 7.9.0 
 
 ## Supported Languages
 
