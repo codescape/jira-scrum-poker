@@ -4,7 +4,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
-* _nothing here yet_
+* chore: implement against latest amps and jira version
 
 ## 2.4.1 - 2018-04-20
 
