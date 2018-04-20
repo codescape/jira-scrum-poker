@@ -43,9 +43,10 @@ The overview page helps users to find their Scrum Poker session within all curre
 
 ## Compatibility with Jira
 
-The Scrum Poker plugin is compatible with Jira 7.5 and newer versions.
+The Scrum Poker plugin is compatible with Jira 7.5.0 and newer versions.
 
-* Scrum Poker 2.4.0 is tested and compatible with Jira 7.5.0 - 7.9.0 
+* Scrum Poker 2.4.x is implemented against Jira 7.8.0
+* Scrum Poker 2.5.x is implemented against Jira 7.9.0
 
 ## Supported Languages
 

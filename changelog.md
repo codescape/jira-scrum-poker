@@ -5,6 +5,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 ## Unreleased
 
 * chore: implement against latest amps and jira version
+* docs: update and improve compatibility description
 
 ## 2.4.1 - 2018-04-20
 
