@@ -4,6 +4,10 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
+* _nothing here yet_
+
+## 2.4.1 - 2018-04-20
+
 * fix: estimation of 0 can be confirmed correctly
 * refactor: improved naming convention for REST representations
 * docs: update and improve general description of the Scrum Poker plugin
