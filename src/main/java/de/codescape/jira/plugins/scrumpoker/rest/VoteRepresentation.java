@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * REST representation of a card chosen by a user.
  */
-@XmlRootElement(name = "ScrumPokerSession")
+@XmlRootElement(name = "vote")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class VotesRest {
+public class VoteRepresentation {
 
     private String user;
 
@@ -17,7 +17,7 @@ public class VotesRest {
 
     private boolean needToTalk;
 
-    public VotesRest(String user, String vote, boolean needToTalk) {
+    public VoteRepresentation(String user, String vote, boolean needToTalk) {
         this.user = user;
         this.vote = vote;
         this.needToTalk = needToTalk;

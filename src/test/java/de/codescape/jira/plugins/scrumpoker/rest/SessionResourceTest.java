@@ -50,9 +50,9 @@ public class SessionResourceTest {
         expectCurrentUserIs(USER_KEY);
         expectCurrentSessionForUser(ISSUE_KEY, USER_KEY);
 
-        ScrumPokerSessionRest scrumPokerSessionRest = (ScrumPokerSessionRest) sessionResource.getSession(ISSUE_KEY).getEntity();
+        SessionRepresentation sessionRepresentation = (SessionRepresentation) sessionResource.getSession(ISSUE_KEY).getEntity();
 
-        assertThat(scrumPokerSessionRest.getIssueKey(), is(equalTo(ISSUE_KEY)));
+        assertThat(sessionRepresentation.getIssueKey(), is(equalTo(ISSUE_KEY)));
     }
 
     @Test

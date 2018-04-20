@@ -96,7 +96,7 @@
 
 <script id="card-section-template" type="text/x-handlebars-template">
 
-    {{^confirmedVote}}
+    {{^confirmedVoteExists}}
 
         <div class="mod-content">
             <ul id="pokerset">
@@ -162,8 +162,8 @@
             {{/allowReveal}}
         </div>
 
-    {{/confirmedVote}}
-    {{#confirmedVote}}
+    {{/confirmedVoteExists}}
+    {{#confirmedVoteExists}}
 
         <div class="mod-content">
             <p>$i18n.getText("scrumpoker.session.estimationsaved")</p>
@@ -175,7 +175,7 @@
             <a onclick="ScrumPoker.resetSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.reset")</a>
         </div>
 
-    {{/confirmedVote}}
+    {{/confirmedVoteExists}}
 
 </script>
 

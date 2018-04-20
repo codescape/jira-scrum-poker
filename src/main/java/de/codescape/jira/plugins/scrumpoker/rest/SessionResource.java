@@ -46,7 +46,7 @@ public class SessionResource {
         String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
         ScrumPokerSession scrumPokerSession = scrumPokerStorage.sessionForIssue(issueKey, userKey);
         String chosenValue = scrumPokerSession.getCards().get(userKey);
-        ScrumPokerSessionRest response = createSession(scrumPokerSession, chosenValue);
+        SessionRepresentation response = createSession(scrumPokerSession, chosenValue);
         return Response.ok(response).build();
     }
 
@@ -95,8 +95,8 @@ public class SessionResource {
         return Response.ok().build();
     }
 
-    private ScrumPokerSessionRest createSession(ScrumPokerSession scrumPokerSession, String chosenValue) {
-        return new ScrumPokerSessionRest()
+    private SessionRepresentation createSession(ScrumPokerSession scrumPokerSession, String chosenValue) {
+        return new SessionRepresentation()
             .withIssueKey(scrumPokerSession.getIssueKey())
             .withCards(allCardsAndChosenCardMarkedAsSelected(chosenValue))
             .withConfirmedVote(scrumPokerSession.getConfirmedVote())
@@ -108,19 +108,19 @@ public class SessionResource {
             .withAllowReveal(!scrumPokerSession.isVisible() && !scrumPokerSession.getCards().isEmpty());
     }
 
-    private List<VotesRest> allVotesWithUsers(ScrumPokerSession scrumPokerSession) {
+    private List<VoteRepresentation> allVotesWithUsers(ScrumPokerSession scrumPokerSession) {
         return scrumPokerSession.getCards().entrySet().stream()
             .map(card ->
-                new VotesRest(
+                new VoteRepresentation(
                     userName(card.getKey()),
                     scrumPokerSession.isVisible() ? card.getValue() : "?",
                     needToTalk(card.getValue(), scrumPokerSession)))
             .collect(Collectors.toList());
     }
 
-    private List<CardRest> allCardsAndChosenCardMarkedAsSelected(String chosenValue) {
+    private List<CardRepresentation> allCardsAndChosenCardMarkedAsSelected(String chosenValue) {
         return ScrumPokerCard.getDeck().stream()
-            .map(card -> new CardRest(card.getName(), card.getName().equals(chosenValue)))
+            .map(card -> new CardRepresentation(card.getName(), card.getName().equals(chosenValue)))
             .collect(Collectors.toList());
     }
 

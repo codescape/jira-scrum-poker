@@ -8,13 +8,13 @@ import java.util.List;
 /**
  * REST representation of a Scrum Poker session.
  */
-@XmlRootElement(name = "ScrumPokerSession")
+@XmlRootElement(name = "session")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class ScrumPokerSessionRest {
+public class SessionRepresentation {
 
     private String issueKey;
 
-    private List<CardRest> cards;
+    private List<CardRepresentation> cards;
 
     private Integer confirmedVote;
 
@@ -24,13 +24,13 @@ public class ScrumPokerSessionRest {
 
     private boolean agreementReached;
 
-    private List<VotesRest> votes;
+    private List<VoteRepresentation> votes;
 
     private boolean allowReset;
 
     private boolean allowReveal;
 
-    public ScrumPokerSessionRest withIssueKey(String issueKey) {
+    public SessionRepresentation withIssueKey(String issueKey) {
         this.issueKey = issueKey;
         return this;
     }
@@ -39,16 +39,16 @@ public class ScrumPokerSessionRest {
         return issueKey;
     }
 
-    public ScrumPokerSessionRest withCards(List<CardRest> cards) {
+    public SessionRepresentation withCards(List<CardRepresentation> cards) {
         this.cards = cards;
         return this;
     }
 
-    public List<CardRest> getCards() {
+    public List<CardRepresentation> getCards() {
         return cards;
     }
 
-    public ScrumPokerSessionRest withConfirmedVote(Integer confirmedVote) {
+    public SessionRepresentation withConfirmedVote(Integer confirmedVote) {
         this.confirmedVote = confirmedVote;
         return this;
     }
@@ -57,7 +57,11 @@ public class ScrumPokerSessionRest {
         return confirmedVote;
     }
 
-    public ScrumPokerSessionRest withVisible(boolean visible) {
+    public boolean isConfirmedVoteExists() {
+        return confirmedVote != null;
+    }
+
+    public SessionRepresentation withVisible(boolean visible) {
         this.visible = visible;
         return this;
     }
@@ -66,7 +70,7 @@ public class ScrumPokerSessionRest {
         return visible;
     }
 
-    public ScrumPokerSessionRest withBoundedVotes(List<Integer> boundedVotes) {
+    public SessionRepresentation withBoundedVotes(List<Integer> boundedVotes) {
         this.boundedVotes = boundedVotes;
         return this;
     }
@@ -75,7 +79,7 @@ public class ScrumPokerSessionRest {
         return boundedVotes;
     }
 
-    public ScrumPokerSessionRest withAgreementReached(boolean agreementReached) {
+    public SessionRepresentation withAgreementReached(boolean agreementReached) {
         this.agreementReached = agreementReached;
         return this;
     }
@@ -84,16 +88,16 @@ public class ScrumPokerSessionRest {
         return agreementReached;
     }
 
-    public ScrumPokerSessionRest withVotes(List<VotesRest> votes) {
+    public SessionRepresentation withVotes(List<VoteRepresentation> votes) {
         this.votes = votes;
         return this;
     }
 
-    public List<VotesRest> getVotes() {
+    public List<VoteRepresentation> getVotes() {
         return votes;
     }
 
-    public ScrumPokerSessionRest withAllowReset(boolean allowReset) {
+    public SessionRepresentation withAllowReset(boolean allowReset) {
         this.allowReset = allowReset;
         return this;
     }
@@ -102,7 +106,7 @@ public class ScrumPokerSessionRest {
         return allowReset;
     }
 
-    public ScrumPokerSessionRest withAllowReveal(boolean allowReveal) {
+    public SessionRepresentation withAllowReveal(boolean allowReveal) {
         this.allowReveal = allowReveal;
         return this;
     }
