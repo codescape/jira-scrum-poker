@@ -4,7 +4,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
-* chore: implement against latest amps and jira version
+* chore: implement against latest amps and Jira version
 * docs: update and improve compatibility description
 
 ## 2.4.1 - 2018-04-20
@@ -76,7 +76,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: non editable issues do not display Scrum Poker button
 * docs: rename JIRA to Jira in all places in the code
 * chore: rename plugin to Scrum Poker and add better description
-* chore: implement with latest amps and jira version
+* chore: implement with latest amps and Jira version
 * refactor: Java 8 way to create and return session
 * style: restructure Maven POM
 * feat: remove timed out sessions also in session overview
