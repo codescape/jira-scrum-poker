@@ -60,25 +60,25 @@
         <dependency>
             <groupId>com.atlassian.plugins.rest</groupId>
             <artifactId>atlassian-rest-common</artifactId>
-            <version>1.0.2</version>
+            <version>5.0.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.atlassian.sal</groupId>
             <artifactId>sal-api</artifactId>
-            <version>2.6.0</version>
+            <version>3.1.2</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.atlassian.upm</groupId>
             <artifactId>licensing-api</artifactId>
-            <version>2.21.4</version>
+            <version>2.22.9</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.atlassian.upm</groupId>
             <artifactId>upm-api</artifactId>
-            <version>2.21</version>
+            <version>2.22.9</version>
             <scope>provided</scope>
         </dependency>
         <!-- test dependencies -->
@@ -98,7 +98,7 @@
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-core</artifactId>
-            <version>6.6.0</version>
+            <version>7.3.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
