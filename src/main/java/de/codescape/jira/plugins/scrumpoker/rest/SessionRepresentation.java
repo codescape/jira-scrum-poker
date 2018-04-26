@@ -13,21 +13,13 @@ import java.util.List;
 public class SessionRepresentation {
 
     private String issueKey;
-
     private List<CardRepresentation> cards;
-
     private Integer confirmedVote;
-
     private boolean visible;
-
     private List<Integer> boundedVotes;
-
     private boolean agreementReached;
-
     private List<VoteRepresentation> votes;
-
     private boolean allowReset;
-
     private boolean allowReveal;
 
     public SessionRepresentation withIssueKey(String issueKey) {

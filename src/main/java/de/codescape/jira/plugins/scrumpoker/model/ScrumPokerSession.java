@@ -15,15 +15,10 @@ import java.util.stream.Collectors;
 public class ScrumPokerSession {
 
     private final String issueKey;
-
     private final String userKey;
-
     private Map<String, String> cards = new HashMap<>();
-
     private boolean visible;
-
     private final DateTime startedOn;
-
     private Integer confirmedVote;
 
     public ScrumPokerSession(String issueKey, String userKey) {

@@ -7,6 +7,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * chore: implement against latest amps and Jira version
 * docs: update and improve compatibility description
 * chore: upgrade all dependencies to latest stable version
+* style: format members of all classes
 
 ## 2.4.1 - 2018-04-20
 

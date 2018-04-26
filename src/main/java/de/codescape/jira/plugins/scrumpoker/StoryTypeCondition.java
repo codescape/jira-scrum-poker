@@ -15,7 +15,6 @@ import de.codescape.jira.plugins.scrumpoker.persistence.StoryPointFieldSupport;
 public class StoryTypeCondition extends AbstractWebCondition {
 
     private final CustomFieldManager customFieldManager;
-
     private final StoryPointFieldSupport storyPointFieldSupport;
 
     public StoryTypeCondition(CustomFieldManager customFieldManager, StoryPointFieldSupport storyPointFieldSupport) {

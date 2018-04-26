@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class CardRepresentation {
 
     private String value;
-
     private boolean selected;
 
     public CardRepresentation(String value, boolean selected) {

@@ -12,9 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class VoteRepresentation {
 
     private String user;
-
     private String vote;
-
     private boolean needToTalk;
 
     public VoteRepresentation(String user, String vote, boolean needToTalk) {
