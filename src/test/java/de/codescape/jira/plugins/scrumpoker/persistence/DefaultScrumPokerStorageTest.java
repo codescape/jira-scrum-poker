@@ -21,9 +21,7 @@ public class DefaultScrumPokerStorageTest {
 
     private static final DateTime FOURTEEN_HOURS_AGO = DateTime.now().minusHours(14);
     private static final DateTime EIGHT_HOURS_AGO = DateTime.now().minusHours(8);
-
     private static final String USER_KEY = "SomeUserKey";
-
     private static final String SOME_ISSUE = "Issue-1";
     private static final String YOUNG_ISSUE = "Young Issue";
     private static final String OLD_ISSUE = "Old Issue";

@@ -23,11 +23,8 @@ import static org.mockito.Mockito.*;
 public class DefaultStoryPointSupportTest {
 
     private static final String ISSUE_KEY = "ISSUE-0815";
-
     private static final Integer ESTIMATION = 5;
-
     private static final String CUSTOM_FIELD_ID = "11045";
-
     private static final long ISSUE_ID = 67L;
 
     @Rule
