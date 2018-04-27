@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This enumeration represents all possible cards used in a Scrum Poker session.
+ */
 public enum ScrumPokerCard {
 
     QUESTION_MARK("?"),
