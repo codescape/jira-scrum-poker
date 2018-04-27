@@ -21,6 +21,7 @@ public class DefaultScrumPokerStorageTest {
 
     private static final DateTime FOURTEEN_HOURS_AGO = DateTime.now().minusHours(14);
     private static final DateTime EIGHT_HOURS_AGO = DateTime.now().minusHours(8);
+    private static final DateTime JUST_NOW = DateTime.now().minusMinutes(1);
     private static final String USER_KEY = "SomeUserKey";
     private static final String SOME_ISSUE = "Issue-1";
     private static final String YOUNG_ISSUE = "Young Issue";
@@ -52,7 +53,7 @@ public class DefaultScrumPokerStorageTest {
     @Test
     public void shouldRemoveSessionsOlderThanTwelveHours() {
         sessionWithoutConfirmedVoteAndCreationDate(OLD_ISSUE, FOURTEEN_HOURS_AGO.getMillis());
-        assertThat(storage.sessionForIssue(OLD_ISSUE, USER_KEY).getStartedOn(), is(greaterThan(DateTime.now().minusMinutes(1))));
+        assertThat(storage.sessionForIssue(OLD_ISSUE, USER_KEY).getStartedOn(), is(greaterThan(JUST_NOW)));
     }
 
     @Test

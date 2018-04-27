@@ -8,6 +8,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * docs: update and improve compatibility description
 * chore: upgrade all dependencies to latest stable version
 * style: format members of all classes
+* test: improve readability of tests
 
 ## 2.4.1 - 2018-04-20
 

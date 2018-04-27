@@ -81,7 +81,8 @@ public class DefaultStoryPointSupportTest {
         when(issueService.newIssueInputParameters()).thenReturn(issueInputParameters);
         when(scrumPokerSettings.loadStoryPointFieldId()).thenReturn(CUSTOM_FIELD_ID);
         when(customFieldManager.getCustomFieldObject(CUSTOM_FIELD_ID)).thenReturn(customField);
-        when(issueService.validateUpdate(applicationUser, ISSUE_ID, issueInputParameters)).thenReturn(updateValidationResult);
+        when(issueService.validateUpdate(applicationUser, ISSUE_ID, issueInputParameters))
+            .thenReturn(updateValidationResult);
         when(updateValidationResult.getErrorCollection()).thenReturn(validationErrorCollection);
     }
 
