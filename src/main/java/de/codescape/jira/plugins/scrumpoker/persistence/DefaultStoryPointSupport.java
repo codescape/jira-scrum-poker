@@ -10,6 +10,9 @@ import com.atlassian.jira.user.ApplicationUser;
 
 import java.text.NumberFormat;
 
+/**
+ * Implementation for Jira custom field access from the Scrum Poker plugin.
+ */
 public class DefaultStoryPointSupport implements StoryPointFieldSupport {
 
     private final ScrumPokerSettings scrumPokerSettings;

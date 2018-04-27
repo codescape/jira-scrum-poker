@@ -2,6 +2,9 @@ package de.codescape.jira.plugins.scrumpoker.persistence;
 
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 
+/**
+ * Scrum Poker settings implementation based on {@link PluginSettingsFactory} as data storage solution.
+ */
 public class DefaultScrumPokerSettings implements ScrumPokerSettings {
 
     static final String SETTINGS_NAMESPACE = "de.codescape.jira.plugins.scrum-poker";

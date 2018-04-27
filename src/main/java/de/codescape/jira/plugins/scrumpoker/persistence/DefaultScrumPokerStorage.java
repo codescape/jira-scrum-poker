@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 /**
- * Simple implementation using a Map to store the data.
+ * Scrum Poker session storage based on {@link ConcurrentHashMap} to temporarily hold sessions.
  */
 public class DefaultScrumPokerStorage implements ScrumPokerStorage {
 
