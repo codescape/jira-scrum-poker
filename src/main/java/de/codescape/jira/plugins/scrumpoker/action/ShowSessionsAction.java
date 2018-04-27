@@ -14,6 +14,8 @@ import de.codescape.jira.plugins.scrumpoker.persistence.ScrumPokerStorage;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
+
 /**
  * Show a list of all running and recently finished Scrum poker sessions.
  */
@@ -27,8 +29,8 @@ public class ShowSessionsAction extends JiraWebActionSupport {
     private final PermissionManager permissionManager;
     private final JiraAuthenticationContext jiraAuthenticationContext;
 
-    public ShowSessionsAction(ScrumPokerStorage scrumPokerStorage, UserManager userManager, IssueManager issueManager,
-                              PermissionManager permissionManager, JiraAuthenticationContext jiraAuthenticationContext) {
+    public ShowSessionsAction(ScrumPokerStorage scrumPokerStorage, JiraAuthenticationContext jiraAuthenticationContext,
+                              UserManager userManager, IssueManager issueManager, PermissionManager permissionManager) {
         this.scrumPokerStorage = scrumPokerStorage;
         this.userManager = userManager;
         this.issueManager = issueManager;
@@ -43,15 +45,13 @@ public class ShowSessionsAction extends JiraWebActionSupport {
 
     public List<ScrumPokerSession> getOpenSessions() {
         return scrumPokerStorage.getOpenSessions().stream()
-            .filter(session -> permissionManager.hasPermission(ProjectPermissions.BROWSE_PROJECTS,
-                issueManager.getIssueObject(session.getIssueKey()), jiraAuthenticationContext.getLoggedInUser()))
+            .filter(session -> currentUserIsAllowedToSeeIssue(getIssue(session.getIssueKey())))
             .collect(Collectors.toList());
     }
 
     public List<ScrumPokerSession> getClosedSessions() {
         return scrumPokerStorage.getClosedSessions().stream()
-            .filter(session -> permissionManager.hasPermission(ProjectPermissions.BROWSE_PROJECTS,
-                issueManager.getIssueObject(session.getIssueKey()), jiraAuthenticationContext.getLoggedInUser()))
+            .filter(session -> currentUserIsAllowedToSeeIssue(getIssue(session.getIssueKey())))
             .collect(Collectors.toList());
     }
 
@@ -62,6 +62,10 @@ public class ShowSessionsAction extends JiraWebActionSupport {
 
     public MutableIssue getIssue(String issueKey) {
         return issueManager.getIssueObject(issueKey);
+    }
+
+    private boolean currentUserIsAllowedToSeeIssue(MutableIssue issue) {
+        return permissionManager.hasPermission(BROWSE_PROJECTS, issue, jiraAuthenticationContext.getLoggedInUser());
     }
 
 }

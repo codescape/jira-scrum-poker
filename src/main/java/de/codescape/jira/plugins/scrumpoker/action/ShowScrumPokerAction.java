@@ -35,9 +35,9 @@ public class ShowScrumPokerAction extends JiraWebActionSupport {
 
     private String issueKey;
 
-    public ShowScrumPokerAction(IssueManager issueManager, RendererManager rendererManager, FieldLayoutManager fieldLayoutManager,
-                                PermissionManager permissionManager, JiraAuthenticationContext jiraAuthenticationContext,
-                                HttpServletVariables httpServletVariables) {
+    public ShowScrumPokerAction(FieldLayoutManager fieldLayoutManager, RendererManager rendererManager,
+                                IssueManager issueManager, JiraAuthenticationContext jiraAuthenticationContext,
+                                HttpServletVariables httpServletVariables, PermissionManager permissionManager) {
         this.issueManager = issueManager;
         this.rendererManager = rendererManager;
         this.fieldLayoutManager = fieldLayoutManager;
@@ -50,7 +50,7 @@ public class ShowScrumPokerAction extends JiraWebActionSupport {
     protected String doExecute() {
         issueKey = httpServletVariables.getHttpRequest().getParameter(PARAM_ISSUE_KEY);
         MutableIssue issue = issueManager.getIssueObject(issueKey);
-        if (issue == null || !permissionManager.hasPermission(BROWSE_PROJECTS, issue, jiraAuthenticationContext.getLoggedInUser())) {
+        if (issue == null || !currentUserIsAllowedToSeeIssue(issue)) {
             addErrorMessage("Issue Key" + issueKey + " not found.");
             return "error";
         }
@@ -68,6 +68,10 @@ public class ShowScrumPokerAction extends JiraWebActionSupport {
         FieldLayoutItem fieldLayoutItem = fieldLayout.getFieldLayoutItem(IssueFieldConstants.DESCRIPTION);
         String rendererType = fieldLayoutItem != null ? fieldLayoutItem.getRendererType() : null;
         return rendererManager.getRenderedContent(rendererType, issue.getDescription(), issue.getIssueRenderContext());
+    }
+
+    private boolean currentUserIsAllowedToSeeIssue(MutableIssue issue) {
+        return permissionManager.hasPermission(BROWSE_PROJECTS, issue, jiraAuthenticationContext.getLoggedInUser());
     }
 
 }
