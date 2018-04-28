@@ -1,15 +1,16 @@
-#pokerset li {
-    display: inline;
+.list-of-cards {
     list-style-type: none;
+    padding: 0;
 }
 
-#chosencards li {
-    list-style-type: none;
-}
-
-#selectVote li {
+.list-of-cards li {
     display: inline;
-    list-style-type: none;
+}
+.list-of-cards.with-users li {
+    display: block;
+}
+.centered {
+    text-align: center;
 }
 
 #buttonReveal {
@@ -29,10 +30,13 @@
     font-weight: bold;
 }
 
+.need-to-talk {
+    position: relative;
+    top: -10px;
+}
+
 .poker-comment {
-    font-size: 12px;
     font-style: italic;
-    padding-left: 30px;
 }
 
 .poker-buttons {
@@ -52,7 +56,7 @@
     line-height: 3.25em;
     min-width: 2.25em;
     font-size: 15px;
-    margin: 5px;
+    margin: 5px 9px 5px 0;
     padding: 2px;
     border-radius: 5px;
     color: #172B4D;

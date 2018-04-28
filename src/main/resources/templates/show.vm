@@ -99,7 +99,7 @@
     {{^confirmedVoteExists}}
 
         <div class="mod-content">
-            <ul id="pokerset">
+            <ul class="list-of-cards">
                 {{#cards}}
                     <li><a onclick="ScrumPoker.updateSession('{{issueKey}}','{{value}}');" class="card {{#selected}}active{{/selected}} clickable">{{value}}</a></li>
                 {{/cards}}
@@ -113,7 +113,7 @@
         </div>
         <div class="mod-content">
             <p class="poker-comment">$i18n.getText("scrumpoker.session.confirmestimation")</p>
-            <ul id="selectVote">
+            <ul class="list-of-cards centered">
                 {{#boundedVotes}}
                     <li><a onclick="ScrumPoker.confirmSession('{{issueKey}}','{{.}}');" class="card small clickable">{{.}}</a></li>
                 {{/boundedVotes}}
@@ -126,23 +126,19 @@
             <h2>$i18n.getText("scrumpoker.session.chosencards")</h2>
         </div>
         <div class="mod-content">
-
             {{#agreementReached}}
                 <p class="poker-comment">$i18n.getText("scrumpoker.session.agreementreached")</p>
             {{/agreementReached}}
-
-            <ul id="chosencards">
-
+            <ul class="list-of-cards with-users">
                 {{#votes}}
                     <li>
                         <span class="card small {{^visible}}backside{{/visible}}">{{vote}}</span>
-                        <span style="padding: 0 10px">{{user}}</span>
+                        <span>{{user}}</span>
                         {{#needToTalk}}
-                        <span class="icon aui-icon aui-icon-small aui-iconfont-comment icon-comment">&nbsp;</span>
+                        <span class="aui-icon aui-icon-small aui-iconfont-comment need-to-talk">$i18n.getText("scrumpoker.session.needtotalk")</span>
                         {{/needToTalk}}
                     </li>
                 {{/votes}}
-
             </ul>
         </div>
 
@@ -166,8 +162,10 @@
     {{#confirmedVoteExists}}
 
         <div class="mod-content">
-            <p>$i18n.getText("scrumpoker.session.estimationsaved")</p>
-            <div style="text-align:center;"><span class="card active">{{confirmedVote}}</span></div>
+            <p class="poker-comment">$i18n.getText("scrumpoker.session.estimationsaved")</p>
+            <ul class="list-of-cards centered">
+                <li><span class="card">{{confirmedVote}}</span></li>
+            </ul>
         </div>
         <div class="poker-buttons">
             <a href="$req.contextPath/secure/scrumPokerSessions.jspa" class="aui-button">$i18n.getText("scrumpoker.sessions.list")</a>
