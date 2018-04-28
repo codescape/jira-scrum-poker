@@ -61,7 +61,6 @@
     -webkit-box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25);
     -moz-box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25);
     box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25);
-    cursor: pointer;
 }
 
 .card.small {
@@ -72,9 +71,10 @@
     background-color: rgba(23,43,77,0.25);
 }
 
-.card:hover, .card:focus {
+.card.clickable:hover, .card.clickable:focus {
     background-color: rgba(23,43,77,0.125);
     text-decoration: none;
+    cursor: pointer;
 }
 
 .card.backside {

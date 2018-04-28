@@ -16,6 +16,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * fix: remove typo in configuration text
 * feat: agreement is not reached for only one vote
 * refactor: improve code for indicator that talking is required
+* feat: show clickable indicator only for clickable cards
 
 ## 2.4.1 - 2018-04-20
 

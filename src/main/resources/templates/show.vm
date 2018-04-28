@@ -101,7 +101,7 @@
         <div class="mod-content">
             <ul id="pokerset">
                 {{#cards}}
-                    <li><a onclick="ScrumPoker.updateSession('{{issueKey}}','{{value}}');" class="card {{#selected}}active{{/selected}}">{{value}}</a></li>
+                    <li><a onclick="ScrumPoker.updateSession('{{issueKey}}','{{value}}');" class="card {{#selected}}active{{/selected}} clickable">{{value}}</a></li>
                 {{/cards}}
             </ul>
         </div>
@@ -115,7 +115,7 @@
             <p class="poker-comment">$i18n.getText("scrumpoker.session.confirmestimation")</p>
             <ul id="selectVote">
                 {{#boundedVotes}}
-                    <li><a onclick="ScrumPoker.confirmSession('{{issueKey}}','{{.}}');" class="card small">{{.}}</a></li>
+                    <li><a onclick="ScrumPoker.confirmSession('{{issueKey}}','{{.}}');" class="card small clickable">{{.}}</a></li>
                 {{/boundedVotes}}
             </ul>
         </div>
