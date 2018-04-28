@@ -4,6 +4,10 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
+* ...
+
+## 2.5.0 - 2018-04-29
+
 * chore: implement against latest amps and Jira version
 * docs: update and improve compatibility description
 * chore: upgrade all dependencies to latest stable version
