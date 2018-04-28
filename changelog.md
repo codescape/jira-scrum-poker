@@ -15,6 +15,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * refactor: extract issue permission verification for current user
 * fix: remove typo in configuration text
 * feat: agreement is not reached for only one vote
+* refactor: improve code for indicator that talking is required
 
 ## 2.4.1 - 2018-04-20
 

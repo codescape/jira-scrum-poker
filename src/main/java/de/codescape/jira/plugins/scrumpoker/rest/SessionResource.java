@@ -45,8 +45,8 @@ public class SessionResource {
     public Response getSession(@PathParam("issueKey") String issueKey) {
         String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
         ScrumPokerSession scrumPokerSession = scrumPokerStorage.sessionForIssue(issueKey, userKey);
-        String chosenValue = scrumPokerSession.getCards().get(userKey);
-        SessionRepresentation response = createSession(scrumPokerSession, chosenValue);
+        String chosenCard = scrumPokerSession.getCards().get(userKey);
+        SessionRepresentation response = createSessionRepresentation(scrumPokerSession, chosenCard);
         return Response.ok(response).build();
     }
 
@@ -88,17 +88,18 @@ public class SessionResource {
      */
     @POST
     @Path("/{issueKey}/confirm/{estimation}")
-    public Response confirmEstimation(@PathParam("issueKey") String issueKey, @PathParam("estimation") Integer estimation) {
+    public Response confirmEstimation(@PathParam("issueKey") String issueKey,
+                                      @PathParam("estimation") Integer estimation) {
         String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
         scrumPokerStorage.sessionForIssue(issueKey, userKey).confirm(estimation);
         storyPointFieldSupport.save(issueKey, estimation);
         return Response.ok().build();
     }
 
-    private SessionRepresentation createSession(ScrumPokerSession scrumPokerSession, String chosenValue) {
+    private SessionRepresentation createSessionRepresentation(ScrumPokerSession scrumPokerSession, String chosenCard) {
         return new SessionRepresentation()
             .withIssueKey(scrumPokerSession.getIssueKey())
-            .withCards(allCardsAndChosenCardMarkedAsSelected(chosenValue))
+            .withCards(allCardsAndChosenCardMarkedAsSelected(chosenCard))
             .withConfirmedVote(scrumPokerSession.getConfirmedVote())
             .withVisible(scrumPokerSession.isVisible())
             .withBoundedVotes(scrumPokerSession.getBoundedVotes())
@@ -124,10 +125,17 @@ public class SessionResource {
             .collect(Collectors.toList());
     }
 
-    private boolean needToTalk(String vote, ScrumPokerSession scrumPokerSession) {
-        return scrumPokerSession.isVisible() && !scrumPokerSession.isAgreementReached() && (!isNumber(vote) ||
-            (isNumber(vote) && (Integer.valueOf(vote).equals(scrumPokerSession.getMinimumVote()) ||
-                Integer.valueOf(vote).equals(scrumPokerSession.getMaximumVote()))));
+    private boolean needToTalk(String card, ScrumPokerSession scrumPokerSession) {
+        if (!scrumPokerSession.isVisible())
+            return false;
+        if (scrumPokerSession.isAgreementReached())
+            return false;
+        if (scrumPokerSession.getCards().size() == 1)
+            return false;
+        if (!isNumber(card))
+            return true;
+        Integer current = Integer.valueOf(card);
+        return current.equals(scrumPokerSession.getMaximumVote()) || current.equals(scrumPokerSession.getMinimumVote());
     }
 
     private String userName(String entry) {
