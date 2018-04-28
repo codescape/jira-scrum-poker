@@ -139,6 +139,9 @@
                         {{/needToTalk}}
                     </li>
                 {{/votes}}
+                {{^votes}}
+                    <p class="poker-comment">$i18n.getText("scrumpoker.session.noestimations")</p>
+                {{/votes}}
             </ul>
         </div>
 
