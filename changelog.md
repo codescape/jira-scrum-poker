@@ -13,6 +13,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * docs: add Javadoc to all production classes
 * test: add tests for REST data representations
 * refactor: extract issue permission verification for current user
+* fix: remove typo in configuration text
 
 ## 2.4.1 - 2018-04-20
 
