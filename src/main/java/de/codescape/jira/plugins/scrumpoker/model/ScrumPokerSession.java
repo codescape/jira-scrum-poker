@@ -99,7 +99,7 @@ public class ScrumPokerSession {
      * Returns whether all participants voted the same or not.
      */
     public boolean isAgreementReached() {
-        return getMaximumVote().equals(getMinimumVote()) && !cards.containsValue("?");
+        return getMaximumVote().equals(getMinimumVote()) && !cards.containsValue("?") && cards.size() > 1;
     }
 
     /**

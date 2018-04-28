@@ -168,6 +168,12 @@ public class ScrumPokerSessionTest {
         session.updateCard("user1", "?");
         session.updateCard("user2", "?");
         session.updateCard("user3", "?");
+        assertThat(session.isAgreementReached(), is(false));
+    }
+
+    @Test
+    public void shouldReturnAgreementNotReachedForOnlyOneVote() {
+        session.updateCard("user1", "1");
 
         assertThat(session.isAgreementReached(), is(false));
     }
