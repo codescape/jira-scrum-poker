@@ -17,7 +17,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: agreement is not reached for only one vote
 * refactor: improve code for indicator that talking is required
 * feat: show clickable indicator only for clickable cards
-* feat: optimized session screen for better readability and usability
+* feat: optimize session screen for better readability and usability
+* feat: improve wording on session screen
 
 ## 2.4.1 - 2018-04-20
 
