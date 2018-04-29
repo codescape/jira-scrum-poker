@@ -54,16 +54,3 @@ The Scrum Poker plugin supports the following languages and defaults to English 
 
 * English
 * German
-
-## Development
-
-Development of Atlassian Jira plugins is closely bound to the Atlassian Plugin SDK. Setting up your development environment is documented here: [Set up the Atlassian SDK and build a project](https://developer.atlassian.com/docs/getting-started/set-up-the-atlassian-plugin-sdk-and-build-a-project) 
-
-During development you will find the following commands useful:
-
-* `atlas-run` installs this plugin into Jira and starts it on localhost
-* `atlas-debug` same as atlas-run, but allows a debugger to attach at port 5005
-* `atlas-package` to generate a Jar file of the plugin which can be installed into your Jira instance
-* `atlas-clean` to clean up the `target` folder and so allow you to start with a clean Jira instance again
-
-Reloading the plugin during development can be triggered in your web browser when hitting `Shift + Reload` (for example `Shift + Cmd + R` on Mac OS X).
