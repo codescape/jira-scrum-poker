@@ -62,4 +62,7 @@ or in case of multiple issues:
 
 ## Credits
 
-This document is created with inspiration from http://karma-runner.github.io/0.10/dev/git-commit-msg.html.
+* Contributing code by [Elmar Jobs](https://www.ejobs.de) and [Stefan Höhn](https://github.com/stefan-hoehn)
+* Inspiration for Contributing page by [Karma](http://karma-runner.github.io)
+* Inspiration for Changelog page by [Keep a Changelog](https://keepachangelog.com)
+* Intensive testing and feedback by [congstar GmbH](http://www.congstar.de)
