@@ -4,7 +4,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## Unreleased
 
-* ...
+* feat: use buttons and Jira default styling where appropriate
 
 ## 2.5.0 - 2018-04-29
 

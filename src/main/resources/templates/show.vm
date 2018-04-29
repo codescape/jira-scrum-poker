@@ -147,17 +147,17 @@
 
         <div class="poker-buttons">
             {{#allowReset}}
-                <a id="buttonReset" onclick="ScrumPoker.resetSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.reset")</a>
+                <button onclick="ScrumPoker.resetSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.reset")</button>
             {{/allowReset}}
             {{^allowReset}}
-                <a id="buttonReset" class="aui-button poker-buttons-inactive">$i18n.getText("scrumpoker.session.reset")</a>
+                <button class="aui-button" aria-disabled="true" disabled>$i18n.getText("scrumpoker.session.reset")</button>
             {{/allowReset}}
 
             {{#allowReveal}}
-                <a id="buttonReveal" onclick="ScrumPoker.revealSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.revealcards")</a>
+                <button onclick="ScrumPoker.revealSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.revealcards")</button>
             {{/allowReveal}}
             {{^allowReveal}}
-                <a id="buttonReveal" class="aui-button poker-buttons-inactive">$i18n.getText("scrumpoker.session.revealcards")</a>
+                <button class="aui-button" aria-disabled="true" disabled>$i18n.getText("scrumpoker.session.revealcards")</button>
             {{/allowReveal}}
         </div>
 
@@ -173,7 +173,7 @@
         <div class="poker-buttons">
             <a href="$req.contextPath/secure/scrumPokerSessions.jspa" class="aui-button">$i18n.getText("scrumpoker.sessions.list")</a>
             <a href="$req.contextPath/browse/{{issueKey}}" class="aui-button">$i18n.getText("scrumpoker.issue.navigateback")</a>
-            <a onclick="ScrumPoker.resetSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.reset")</a>
+            <button onclick="ScrumPoker.resetSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.reset")</button>
         </div>
 
     {{/confirmedVoteExists}}
