@@ -7,6 +7,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: use buttons and Jira default styling where appropriate
 * docs: changelog includes links to GitHub comparison between tags
 * docs: improve Credits section in Contributing document
+* docs: add Code of Conduct file
 
 ## [2.5.0] - 2018-04-29
 
