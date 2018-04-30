@@ -35,7 +35,11 @@ New Scrum Poker sessions can be started from the context menu or from the issue 
 
 The Scrum Poker session page is separated into issue details like summary, description and sub tasks and the Scrum Poker session details like cards, selected estimations and participating users.   
 
-![Running Scrum Poker session](/etc/screenshots/scrum-poker-session.png)
+![Providing estimates by all participants](/etc/screenshots/scrum-poker-session-hidden.png)
+
+When the Scrum Poker session is revealed all estimations will be shown and to help the team finding a common estimation participants with estimations on the boundaries are advised to talk to each other.
+
+![Discussion about the bandwidth of estimates](/etc/screenshots/scrum-poker-session-revealed.png)
 
 The overview page helps users to find their Scrum Poker session within all currently active and recently closed sessions.
 
