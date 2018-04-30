@@ -9,6 +9,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * docs: improve Credits section in Contributing document
 * docs: add Code of Conduct file
 * docs: add Releases section in Contributing documentation
+* feat: less text same meaning for session list headings
 
 ## [2.5.0] - 2018-04-29
 
