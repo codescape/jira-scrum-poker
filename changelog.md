@@ -11,6 +11,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * docs: add Releases section in Contributing documentation
 * feat: less text same meaning for session list headings
 * docs: provide better screenshots and show more situations
+* refactor: move REST entities into separate package
 
 ## [2.5.0] - 2018-04-29
 

@@ -7,6 +7,9 @@ import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerCard;
 import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.persistence.ScrumPokerStorage;
 import de.codescape.jira.plugins.scrumpoker.persistence.StoryPointFieldSupport;
+import de.codescape.jira.plugins.scrumpoker.rest.entities.CardRepresentation;
+import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionRepresentation;
+import de.codescape.jira.plugins.scrumpoker.rest.entities.VoteRepresentation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

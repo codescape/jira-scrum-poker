@@ -5,6 +5,7 @@ import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.persistence.ScrumPokerStorage;
 import de.codescape.jira.plugins.scrumpoker.persistence.StoryPointFieldSupport;
+import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionRepresentation;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;

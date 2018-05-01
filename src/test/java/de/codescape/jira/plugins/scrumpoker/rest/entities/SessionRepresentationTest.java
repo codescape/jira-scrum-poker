@@ -1,4 +1,4 @@
-package de.codescape.jira.plugins.scrumpoker.rest;
+package de.codescape.jira.plugins.scrumpoker.rest.entities;
 
 import org.junit.Test;
 
