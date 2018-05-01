@@ -7,9 +7,9 @@ import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerCard;
 import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.persistence.ScrumPokerStorage;
 import de.codescape.jira.plugins.scrumpoker.persistence.StoryPointFieldSupport;
-import de.codescape.jira.plugins.scrumpoker.rest.entities.CardRepresentation;
-import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionRepresentation;
-import de.codescape.jira.plugins.scrumpoker.rest.entities.VoteRepresentation;
+import de.codescape.jira.plugins.scrumpoker.rest.entities.CardEntity;
+import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
+import de.codescape.jira.plugins.scrumpoker.rest.entities.VoteEntity;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -49,7 +49,7 @@ public class SessionResource {
         String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
         ScrumPokerSession scrumPokerSession = scrumPokerStorage.sessionForIssue(issueKey, userKey);
         String chosenCard = scrumPokerSession.getCards().get(userKey);
-        SessionRepresentation response = createSessionRepresentation(scrumPokerSession, chosenCard);
+        SessionEntity response = createSessionEntity(scrumPokerSession, chosenCard);
         return Response.ok(response).build();
     }
 
@@ -99,8 +99,8 @@ public class SessionResource {
         return Response.ok().build();
     }
 
-    private SessionRepresentation createSessionRepresentation(ScrumPokerSession scrumPokerSession, String chosenCard) {
-        return new SessionRepresentation()
+    private SessionEntity createSessionEntity(ScrumPokerSession scrumPokerSession, String chosenCard) {
+        return new SessionEntity()
             .withIssueKey(scrumPokerSession.getIssueKey())
             .withCards(allCardsAndChosenCardMarkedAsSelected(chosenCard))
             .withConfirmedVote(scrumPokerSession.getConfirmedVote())
@@ -112,19 +112,19 @@ public class SessionResource {
             .withAllowReveal(!scrumPokerSession.isVisible() && !scrumPokerSession.getCards().isEmpty());
     }
 
-    private List<VoteRepresentation> allVotesWithUsers(ScrumPokerSession scrumPokerSession) {
+    private List<VoteEntity> allVotesWithUsers(ScrumPokerSession scrumPokerSession) {
         return scrumPokerSession.getCards().entrySet().stream()
             .map(card ->
-                new VoteRepresentation(
+                new VoteEntity(
                     userName(card.getKey()),
                     scrumPokerSession.isVisible() ? card.getValue() : "?",
                     needToTalk(card.getValue(), scrumPokerSession)))
             .collect(Collectors.toList());
     }
 
-    private List<CardRepresentation> allCardsAndChosenCardMarkedAsSelected(String chosenValue) {
+    private List<CardEntity> allCardsAndChosenCardMarkedAsSelected(String chosenValue) {
         return ScrumPokerCard.getDeck().stream()
-            .map(card -> new CardRepresentation(card.getName(), card.getName().equals(chosenValue)))
+            .map(card -> new CardEntity(card.getName(), card.getName().equals(chosenValue)))
             .collect(Collectors.toList());
     }
 

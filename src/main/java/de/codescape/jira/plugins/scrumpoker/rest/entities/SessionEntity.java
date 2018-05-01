@@ -10,19 +10,19 @@ import java.util.List;
  */
 @XmlRootElement(name = "session")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class SessionRepresentation {
+public class SessionEntity {
 
     private String issueKey;
-    private List<CardRepresentation> cards;
+    private List<CardEntity> cards;
     private Integer confirmedVote;
     private boolean visible;
     private List<Integer> boundedVotes;
     private boolean agreementReached;
-    private List<VoteRepresentation> votes;
+    private List<VoteEntity> votes;
     private boolean allowReset;
     private boolean allowReveal;
 
-    public SessionRepresentation withIssueKey(String issueKey) {
+    public SessionEntity withIssueKey(String issueKey) {
         this.issueKey = issueKey;
         return this;
     }
@@ -31,16 +31,16 @@ public class SessionRepresentation {
         return issueKey;
     }
 
-    public SessionRepresentation withCards(List<CardRepresentation> cards) {
+    public SessionEntity withCards(List<CardEntity> cards) {
         this.cards = cards;
         return this;
     }
 
-    public List<CardRepresentation> getCards() {
+    public List<CardEntity> getCards() {
         return cards;
     }
 
-    public SessionRepresentation withConfirmedVote(Integer confirmedVote) {
+    public SessionEntity withConfirmedVote(Integer confirmedVote) {
         this.confirmedVote = confirmedVote;
         return this;
     }
@@ -53,7 +53,7 @@ public class SessionRepresentation {
         return confirmedVote != null;
     }
 
-    public SessionRepresentation withVisible(boolean visible) {
+    public SessionEntity withVisible(boolean visible) {
         this.visible = visible;
         return this;
     }
@@ -62,7 +62,7 @@ public class SessionRepresentation {
         return visible;
     }
 
-    public SessionRepresentation withBoundedVotes(List<Integer> boundedVotes) {
+    public SessionEntity withBoundedVotes(List<Integer> boundedVotes) {
         this.boundedVotes = boundedVotes;
         return this;
     }
@@ -71,7 +71,7 @@ public class SessionRepresentation {
         return boundedVotes;
     }
 
-    public SessionRepresentation withAgreementReached(boolean agreementReached) {
+    public SessionEntity withAgreementReached(boolean agreementReached) {
         this.agreementReached = agreementReached;
         return this;
     }
@@ -80,16 +80,16 @@ public class SessionRepresentation {
         return agreementReached;
     }
 
-    public SessionRepresentation withVotes(List<VoteRepresentation> votes) {
+    public SessionEntity withVotes(List<VoteEntity> votes) {
         this.votes = votes;
         return this;
     }
 
-    public List<VoteRepresentation> getVotes() {
+    public List<VoteEntity> getVotes() {
         return votes;
     }
 
-    public SessionRepresentation withAllowReset(boolean allowReset) {
+    public SessionEntity withAllowReset(boolean allowReset) {
         this.allowReset = allowReset;
         return this;
     }
@@ -98,7 +98,7 @@ public class SessionRepresentation {
         return allowReset;
     }
 
-    public SessionRepresentation withAllowReveal(boolean allowReveal) {
+    public SessionEntity withAllowReveal(boolean allowReveal) {
         this.allowReveal = allowReveal;
         return this;
     }

@@ -9,13 +9,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name = "vote")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class VoteRepresentation {
+public class VoteEntity {
 
     private String user;
     private String vote;
     private boolean needToTalk;
 
-    public VoteRepresentation(String user, String vote, boolean needToTalk) {
+    public VoteEntity(String user, String vote, boolean needToTalk) {
         this.user = user;
         this.vote = vote;
         this.needToTalk = needToTalk;

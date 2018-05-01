@@ -12,6 +12,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: less text same meaning for session list headings
 * docs: provide better screenshots and show more situations
 * refactor: move REST entities into separate package
+* refactor: rename REST entities to *Entity
 
 ## [2.5.0] - 2018-04-29
 

@@ -9,12 +9,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name = "card")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class CardRepresentation {
+public class CardEntity {
 
     private String value;
     private boolean selected;
 
-    public CardRepresentation(String value, boolean selected) {
+    public CardEntity(String value, boolean selected) {
         this.value = value;
         this.selected = selected;
     }

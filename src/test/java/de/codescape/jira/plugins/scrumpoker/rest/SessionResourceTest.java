@@ -5,7 +5,7 @@ import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.persistence.ScrumPokerStorage;
 import de.codescape.jira.plugins.scrumpoker.persistence.StoryPointFieldSupport;
-import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionRepresentation;
+import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -51,9 +51,9 @@ public class SessionResourceTest {
         expectCurrentUserIs(USER_KEY);
         expectCurrentSessionForUser(ISSUE_KEY, USER_KEY);
 
-        SessionRepresentation sessionRepresentation = (SessionRepresentation) sessionResource.getSession(ISSUE_KEY).getEntity();
+        SessionEntity sessionEntity = (SessionEntity) sessionResource.getSession(ISSUE_KEY).getEntity();
 
-        assertThat(sessionRepresentation.getIssueKey(), is(equalTo(ISSUE_KEY)));
+        assertThat(sessionEntity.getIssueKey(), is(equalTo(ISSUE_KEY)));
     }
 
     @Test

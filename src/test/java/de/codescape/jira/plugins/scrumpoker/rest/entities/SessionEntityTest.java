@@ -5,16 +5,16 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class SessionRepresentationTest {
+public class SessionEntityTest {
 
     @Test
     public void shouldSignalExistenceOfConfirmedVoteIfConfirmedVoteIsSet() {
-        assertThat(new SessionRepresentation().withConfirmedVote(1).isConfirmedVoteExists(), is(true));
+        assertThat(new SessionEntity().withConfirmedVote(1).isConfirmedVoteExists(), is(true));
     }
 
     @Test
     public void shouldSignalNoExistenceOfConfirmedVoteIfNoConfirmedVoteIsSet() {
-        assertThat(new SessionRepresentation().withConfirmedVote(null).isConfirmedVoteExists(), is(false));
+        assertThat(new SessionEntity().withConfirmedVote(null).isConfirmedVoteExists(), is(false));
     }
 
 }
