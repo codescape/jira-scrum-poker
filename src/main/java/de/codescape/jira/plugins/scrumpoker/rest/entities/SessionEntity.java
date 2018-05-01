@@ -1,25 +1,40 @@
 package de.codescape.jira.plugins.scrumpoker.rest.entities;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.util.List;
 
 /**
  * REST representation of a Scrum Poker session.
  */
-@XmlRootElement(name = "session")
-@XmlAccessorType(XmlAccessType.PROPERTY)
+@JsonSerialize
 public class SessionEntity {
 
+    @JsonSerialize
     private String issueKey;
+
+    @JsonSerialize
     private List<CardEntity> cards;
+
+    @JsonSerialize
     private Integer confirmedVote;
+
+    @JsonSerialize
     private boolean visible;
+
+    @JsonSerialize
     private List<Integer> boundedVotes;
+
+    @JsonSerialize
     private boolean agreementReached;
+
+    @JsonSerialize
     private List<VoteEntity> votes;
+
+    @JsonSerialize
     private boolean allowReset;
+
+    @JsonSerialize
     private boolean allowReveal;
 
     public SessionEntity withIssueKey(String issueKey) {

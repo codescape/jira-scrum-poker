@@ -1,18 +1,20 @@
 package de.codescape.jira.plugins.scrumpoker.rest.entities;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 /**
  * REST representation of a card chosen by a user.
  */
-@XmlRootElement(name = "vote")
-@XmlAccessorType(XmlAccessType.PROPERTY)
+@JsonSerialize
 public class VoteEntity {
 
+    @JsonSerialize
     private String user;
+
+    @JsonSerialize
     private String vote;
+
+    @JsonSerialize
     private boolean needToTalk;
 
     public VoteEntity(String user, String vote, boolean needToTalk) {

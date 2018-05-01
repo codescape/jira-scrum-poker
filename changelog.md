@@ -13,6 +13,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * docs: provide better screenshots and show more situations
 * refactor: move REST entities into separate package
 * refactor: rename REST entities to *Entity
+* refactor: use Jackson annotations for JSON entity classes
 
 ## [2.5.0] - 2018-04-29
 

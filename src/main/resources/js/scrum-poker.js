@@ -22,7 +22,7 @@
             $('#card-section').html(
                 Mustache.render($('#card-section-template').html(), data)
             );
-            if(typeof data.confirmedVote !== 'undefined') {
+            if(data.confirmedVoteExists) {
                 scheduleRedirectToIssue(issueKey);
             } else {
                 cancelRedirectToIssue();
