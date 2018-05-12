@@ -1,20 +1,15 @@
 package de.codescape.jira.plugins.scrumpoker.rest.entities;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 /**
  * REST representation of a card chosen by a user.
  */
-@JsonSerialize
+@JsonAutoDetect
 public class VoteEntity {
 
-    @JsonSerialize
     private String user;
-
-    @JsonSerialize
     private String vote;
-
-    @JsonSerialize
     private boolean needToTalk;
 
     public VoteEntity(String user, String vote, boolean needToTalk) {

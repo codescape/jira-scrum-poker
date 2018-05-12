@@ -1,40 +1,23 @@
 package de.codescape.jira.plugins.scrumpoker.rest.entities;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 import java.util.List;
 
 /**
  * REST representation of a Scrum Poker session.
  */
-@JsonSerialize
+@JsonAutoDetect
 public class SessionEntity {
 
-    @JsonSerialize
     private String issueKey;
-
-    @JsonSerialize
     private List<CardEntity> cards;
-
-    @JsonSerialize
     private Integer confirmedVote;
-
-    @JsonSerialize
     private boolean visible;
-
-    @JsonSerialize
     private List<Integer> boundedVotes;
-
-    @JsonSerialize
     private boolean agreementReached;
-
-    @JsonSerialize
     private List<VoteEntity> votes;
-
-    @JsonSerialize
     private boolean allowReset;
-
-    @JsonSerialize
     private boolean allowReveal;
 
     public SessionEntity withIssueKey(String issueKey) {
