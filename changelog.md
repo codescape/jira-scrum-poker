@@ -2,7 +2,11 @@
 
 This changelog helps developers and users to keep track of new features, fixes and improvements for the Scrum Poker plugin.
 
-## Unreleased
+## [Unreleased]
+
+* ...
+
+## [2.6.0] - 2018-05-13
 
 * feat: use buttons and Jira default styling where appropriate
 * docs: changelog includes links to GitHub comparison between tags
@@ -331,7 +335,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/2.5.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/2.6.0...HEAD
+[2.6.0]: https://github.com/codescape/jira-scrum-poker/compare/2.5.0...2.6.0
 [2.5.0]: https://github.com/codescape/jira-scrum-poker/compare/2.4.1...2.5.0
 [2.4.1]: https://github.com/codescape/jira-scrum-poker/compare/2.4.0...2.4.1
 [2.4.0]: https://github.com/codescape/jira-scrum-poker/compare/2.3.0...2.4.0
