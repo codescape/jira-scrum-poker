@@ -14,6 +14,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * refactor: move REST entities into separate package
 * refactor: rename REST entities to *Entity
 * refactor: use Jackson annotations for JSON entity classes
+* docs: provide Privacy Statement for Scrum Poker
 
 ## [2.5.0] - 2018-04-29
 
