@@ -80,11 +80,10 @@ Releasing a new version helps to bring out new features and improvements to our 
 * update the [Changelog](changelog.md) with the release date
 * update the [POM](pom.xml) file with the new version number
 * create a tag for the new version with reference to the latest commit
-
-
+    ```
     git tag -a <version> -m "<version>" <commit hash>
     git push origin <version>
-
+    ```
 * upload and promote the new version at [Atlassian Marketplace](https://marketplace.atlassian.com/manage/plugins/de.codescape.jira.plugins.scrum-poker/versions)
 
 ## Credits
