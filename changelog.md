@@ -4,7 +4,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
-* ...
+* fix: remove small typo in privacy statement
 
 ## [2.6.0] - 2018-05-13
 

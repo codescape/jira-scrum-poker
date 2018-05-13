@@ -22,7 +22,7 @@ The session data is kept for 12 hours to allow recently completed sessions being
 
 ## Log files
 
-As we are continuously strive to provide you with improvements and fixes for bugs Scrum Poker writes log files in case of an error occurring inside Scrum Poker.
+As we continuously strive to provide you with improvements and fixes for bugs Scrum Poker writes log files in case of an error occurring inside Scrum Poker.
 
 The information collected helps us to fix bugs as soon as they appear so that their negative impact on our customers is smaller.
 
