@@ -7,6 +7,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * fix: remove small typo in privacy statement
 * feat: show display name of assignee in list of sub tasks
 * feat: display the list of sub tasks equally to the issue detail page
+* chore: use latest version von Jira and Lucene
 
 ## [2.6.0] - 2018-05-13
 
