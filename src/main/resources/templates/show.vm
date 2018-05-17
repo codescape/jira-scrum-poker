@@ -63,7 +63,7 @@
                                 <td class="status"><span class="aui-lozenge aui-lozenge-subtle">$subTask.status.nameTranslation</span></td>
                                 <td class="assignee">
                                     #if($subTask.assignee)
-                                        <a href="$baseurl/secure/ViewProfile.jspa?name=$subTask.assignee.key">$subTask.assignee.name</a>
+                                        <a href="$baseurl/secure/ViewProfile.jspa?name=$subTask.assignee.key">$subTask.assignee.displayName</a>
                                     #else
                                         <i>$i18n.getText("scrumpoker.issue.assignee.empty")</i>
                                     #end
