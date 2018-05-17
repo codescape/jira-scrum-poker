@@ -58,9 +58,9 @@
                             #foreach($subTask in $subTasks)
                             <tr>
                                 <td class="stsequence">$counter.</td>
-                                <td class="stsummary"><a href="$baseurl/browse/$subTask.key">$subTask.key: $subTask.summary</a></td>
+                                <td class="stsummary"><a href="$baseurl/browse/$subTask.key">$subTask.summary</a></td>
                                 <td class="issuetype"><img src="$subTask.issueType.completeIconUrl"></td>
-                                <td class="status"><span class="aui-lozenge aui-lozenge-subtle">$subTask.status.nameTranslation</span></td>
+                                <td class="status"><span class="aui-lozenge aui-lozenge-subtle jira-issue-status-lozenge-$subTask.status.statusCategory.colorName">$subTask.status.nameTranslation</span></td>
                                 <td class="assignee">
                                     #if($subTask.assignee)
                                         <a href="$baseurl/secure/ViewProfile.jspa?name=$subTask.assignee.key">$subTask.assignee.displayName</a>
