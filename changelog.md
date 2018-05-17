@@ -4,6 +4,10 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
+* ...
+
+## [2.7.0] - 2018-05-17
+
 * fix: remove small typo in privacy statement
 * feat: show display name of assignee in list of sub tasks
 * feat: display the list of sub tasks equally to the issue detail page
@@ -338,7 +342,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/2.6.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/2.7.0...HEAD
+[2.7.0]: https://github.com/codescape/jira-scrum-poker/compare/2.6.0...2.7.0
 [2.6.0]: https://github.com/codescape/jira-scrum-poker/compare/2.5.0...2.6.0
 [2.5.0]: https://github.com/codescape/jira-scrum-poker/compare/2.4.1...2.5.0
 [2.4.1]: https://github.com/codescape/jira-scrum-poker/compare/2.4.0...2.4.1
