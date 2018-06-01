@@ -47,7 +47,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Plugin licensing -->
-        <atlassian.licensing.enabled>true</atlassian.licensing.enabled>
+        <atlassian.licensing.enabled>false</atlassian.licensing.enabled>
     </properties>
 
     <dependencies>
@@ -118,7 +118,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <!-- wait for plugins to be loaded completely (required on slower machines) -->
-                    <!--<jvmArgs>-Datlassian.plugins.enable.wait=1000</jvmArgs> -->
+                    <!-- <jvmArgs>-Datlassian.plugins.enable.wait=1000</jvmArgs> -->
                     <productVersion>${jira.version}</productVersion>
                     <productDataVersion>${jira.version}</productDataVersion>
                     <allowGoogleTracking>false</allowGoogleTracking>
@@ -129,10 +129,13 @@
 
     <profiles>
         <profile>
-            <id>disable-atlassian-licensing</id>
-            <!-- allows to create a plugin version for testing purposes without any licensing enabled -->
+            <id>enable-atlassian-licensing</id>
+            <activation>
+                <!-- as long as the plugin is free this profile is not active by default -->
+                <activeByDefault>false</activeByDefault>
+            </activation>
             <properties>
-                <atlassian.licensing.enabled>false</atlassian.licensing.enabled>
+                <atlassian.licensing.enabled>true</atlassian.licensing.enabled>
             </properties>
         </profile>
         <profile>

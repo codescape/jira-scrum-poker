@@ -12,13 +12,12 @@ This plugin works best in combination with the Story Point field introduced by J
 * Interactive user interface fostering interaction and conversation
 * Simple and quick way of starting new Scrum Poker sessions
 * Security and privacy in mind showing only issues users may view
-* Free 30 day trial before you need to buy a license
 
 ## Installation
 
 Installation and setup of the Scrum Poker plugin from the Atlassian Marketplace is extremely easy: 
 
-1. Install the Scrum Poker plugin from the [Atlassian Marketplace](https://marketplace.atlassian.com/plugins/de.codescape.jira.plugins.scrum-poker). You can start a free trial before purchasing a license for Scrum Poker.  
+1. Install the Scrum Poker plugin from the [Atlassian Marketplace](https://marketplace.atlassian.com/plugins/de.codescape.jira.plugins.scrum-poker).
 1. Configure the field to save the confirmed estimation after a Scrum Poker session. To do that go to the plugin configuration and choose the field from the list of possible fields.  
 
 Congratulations! After that you are ready to start your first Scrum Poker session!

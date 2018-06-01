@@ -4,7 +4,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
-* ...
+* feat: Scrum Poker is now provided for free on Atlassian Marketplace
 
 ## [2.7.0] - 2018-05-17
 
