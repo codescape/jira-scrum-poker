@@ -4,6 +4,10 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
+* ...
+
+## [2.8.0] - 2018-06-01
+
 * feat: Scrum Poker is now provided for free on Atlassian Marketplace
 
 ## [2.7.0] - 2018-05-17
@@ -342,7 +346,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/2.7.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/2.8.0...HEAD
+[2.8.0]: https://github.com/codescape/jira-scrum-poker/compare/2.7.0...2.8.0
 [2.7.0]: https://github.com/codescape/jira-scrum-poker/compare/2.6.0...2.7.0
 [2.6.0]: https://github.com/codescape/jira-scrum-poker/compare/2.5.0...2.6.0
 [2.5.0]: https://github.com/codescape/jira-scrum-poker/compare/2.4.1...2.5.0
