@@ -5,6 +5,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 ## [Unreleased]
 
 * chore: implement against latest Jira version 7.10.0
+* test: add tests for Scrum Poker configuration action
 
 ## [2.8.0] - 2018-06-01
 
