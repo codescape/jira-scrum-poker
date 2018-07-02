@@ -61,13 +61,13 @@
     <web-item key="scrum-poker-start-from-issue-details" section="jira.issue.tools" weight="10">
         <label key="scrumpoker.session.start"/>
         <link>/secure/scrumPoker.jspa?issueKey=$issue.key</link>
-        <condition class="de.codescape.jira.plugins.scrumpoker.StoryTypeCondition"/>
+        <condition class="de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition"/>
     </web-item>
 
     <web-item key="scrum-poker-start-from-context-menu" section="operations-top-level" weight="10">
         <label key="scrumpoker.session.start"/>
         <link>/secure/scrumPoker.jspa?issueKey=$issue.key</link>
-        <condition class="de.codescape.jira.plugins.scrumpoker.StoryTypeCondition"/>
+        <condition class="de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition"/>
     </web-item>
 
     <!-- dropdown on boards -->

@@ -1,4 +1,4 @@
-package de.codescape.jira.plugins.scrumpoker;
+package de.codescape.jira.plugins.scrumpoker.condition;
 
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.Issue;
@@ -22,7 +22,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
-public class StoryTypeConditionTest {
+public class ScrumPokerForIssueConditionTest {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -40,7 +40,7 @@ public class StoryTypeConditionTest {
     private JiraHelper jiraHelper;
 
     @InjectMocks
-    private StoryTypeCondition storyTypeCondition;
+    private ScrumPokerForIssueCondition scrumPokerForIssueCondition;
 
     @Mock
     private CustomField storyPointField;
@@ -67,20 +67,20 @@ public class StoryTypeConditionTest {
     public void shouldDisplayForEditableIssueWithStoryPointField() {
         expectThatIssueContainsTheStoryPointField();
         expectThatIssueIsEditable();
-        assertThat(storyTypeCondition.shouldDisplay(applicationUser, jiraHelper), is(true));
+        assertThat(scrumPokerForIssueCondition.shouldDisplay(applicationUser, jiraHelper), is(true));
     }
 
     @Test
     public void shouldNotDisplayForEditableIssueWithoutStoryPointField() {
         expectThatIssueDoesNotContainTheStoryPointField();
         expectThatIssueIsEditable();
-        assertThat(storyTypeCondition.shouldDisplay(applicationUser, jiraHelper), is(false));
+        assertThat(scrumPokerForIssueCondition.shouldDisplay(applicationUser, jiraHelper), is(false));
     }
 
     @Test
     public void shouldNotDisplayForNonEditableIssue() {
         expectThatIssueIsNotEditable();
-        assertThat(storyTypeCondition.shouldDisplay(applicationUser, jiraHelper), is(false));
+        assertThat(scrumPokerForIssueCondition.shouldDisplay(applicationUser, jiraHelper), is(false));
     }
 
     private void expectThatIssueIsNotEditable() {

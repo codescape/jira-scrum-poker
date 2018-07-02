@@ -1,4 +1,4 @@
-package de.codescape.jira.plugins.scrumpoker;
+package de.codescape.jira.plugins.scrumpoker.condition;
 
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.Issue;
@@ -9,15 +9,16 @@ import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.persistence.StoryPointFieldSupport;
 
 /**
- * Only display the Scrum poker web element for issues that are editable and have the custom field to hold the story
- * points configured.
+ * This condition is used to decide whether a button to start a Scrum poker session should be displayed or not for the
+ * given issue. The issue must be editable and have the custom field that is configured for Scrum poker estimations.
  */
-public class StoryTypeCondition extends AbstractWebCondition {
+public class ScrumPokerForIssueCondition extends AbstractWebCondition {
 
     private final CustomFieldManager customFieldManager;
     private final StoryPointFieldSupport storyPointFieldSupport;
 
-    public StoryTypeCondition(CustomFieldManager customFieldManager, StoryPointFieldSupport storyPointFieldSupport) {
+    public ScrumPokerForIssueCondition(CustomFieldManager customFieldManager,
+                                       StoryPointFieldSupport storyPointFieldSupport) {
         this.customFieldManager = customFieldManager;
         this.storyPointFieldSupport = storyPointFieldSupport;
     }
