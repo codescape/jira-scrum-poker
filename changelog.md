@@ -7,6 +7,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * chore: implement against latest Jira version 7.10.0
 * test: add tests for Scrum Poker configuration action
 * refactor: rename and move condition to display Scrum poker for issue
+* refactor: use better base class for condition to render Scrum Poker button 
 
 ## [2.8.0] - 2018-06-01
 
