@@ -59,6 +59,10 @@
                 <h6>$i18n.getText("scrumpoker.issuetracker")</h6>
                 <a href="$i18n.getText("scrumpoker.issuetracker.url")">$i18n.getText("scrumpoker.issuetracker.url")</a>
             </li>
+            <li>
+                <h6>$i18n.getText("scrumpoker.marketplace")</h6>
+                <a href="$i18n.getText("scrumpoker.marketplace.url")">$i18n.getText("scrumpoker.marketplace.url")</a>
+            </li>
         </ul>
     </div>
 </div>
