@@ -2,14 +2,13 @@ package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
-import com.atlassian.jira.permission.ProjectPermissions;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
-import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
-import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerSession;
-import de.codescape.jira.plugins.scrumpoker.persistence.ScrumPokerStorage;
+import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
+import de.codescape.jira.plugins.scrumpoker.service.SessionEntityTransformer;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,19 +22,20 @@ public class ShowSessionsAction extends JiraWebActionSupport {
 
     private static final long serialVersionUID = 1L;
 
-    private final ScrumPokerStorage scrumPokerStorage;
-    private final UserManager userManager;
     private final IssueManager issueManager;
     private final PermissionManager permissionManager;
     private final JiraAuthenticationContext jiraAuthenticationContext;
+    private final ScrumPokerSessionService scrumPokerSessionService;
+    private final SessionEntityTransformer sessionEntityTransformer;
 
-    public ShowSessionsAction(ScrumPokerStorage scrumPokerStorage, JiraAuthenticationContext jiraAuthenticationContext,
-                              UserManager userManager, IssueManager issueManager, PermissionManager permissionManager) {
-        this.scrumPokerStorage = scrumPokerStorage;
-        this.userManager = userManager;
+    public ShowSessionsAction(JiraAuthenticationContext jiraAuthenticationContext, PermissionManager permissionManager,
+                              ScrumPokerSessionService scrumPokerSessionService, IssueManager issueManager,
+                              SessionEntityTransformer sessionEntityTransformer) {
         this.issueManager = issueManager;
         this.permissionManager = permissionManager;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
+        this.scrumPokerSessionService = scrumPokerSessionService;
+        this.sessionEntityTransformer = sessionEntityTransformer;
     }
 
     @Override
@@ -43,21 +43,20 @@ public class ShowSessionsAction extends JiraWebActionSupport {
         return "success";
     }
 
-    public List<ScrumPokerSession> getOpenSessions() {
-        return scrumPokerStorage.getOpenSessions().stream()
+    public List<SessionEntity> getOpenSessions() {
+        return scrumPokerSessionService.recent().stream()
+            .filter(session -> session.getConfirmedVote() == null)
             .filter(session -> currentUserIsAllowedToSeeIssue(getIssue(session.getIssueKey())))
+            .map(session -> sessionEntityTransformer.build(session, currentUser().getKey()))
             .collect(Collectors.toList());
     }
 
-    public List<ScrumPokerSession> getClosedSessions() {
-        return scrumPokerStorage.getClosedSessions().stream()
+    public List<SessionEntity> getClosedSessions() {
+        return scrumPokerSessionService.recent().stream()
+            .filter(session -> session.getConfirmedVote() != null)
             .filter(session -> currentUserIsAllowedToSeeIssue(getIssue(session.getIssueKey())))
+            .map(session -> sessionEntityTransformer.build(session, currentUser().getKey()))
             .collect(Collectors.toList());
-    }
-
-    public String getUsername(String key) {
-        ApplicationUser user = userManager.getUserByKey(key);
-        return user != null ? user.getDisplayName() : key;
     }
 
     public MutableIssue getIssue(String issueKey) {
@@ -65,7 +64,11 @@ public class ShowSessionsAction extends JiraWebActionSupport {
     }
 
     private boolean currentUserIsAllowedToSeeIssue(MutableIssue issue) {
-        return permissionManager.hasPermission(BROWSE_PROJECTS, issue, jiraAuthenticationContext.getLoggedInUser());
+        return permissionManager.hasPermission(BROWSE_PROJECTS, issue, currentUser());
+    }
+
+    private ApplicationUser currentUser() {
+        return jiraAuthenticationContext.getLoggedInUser();
     }
 
 }

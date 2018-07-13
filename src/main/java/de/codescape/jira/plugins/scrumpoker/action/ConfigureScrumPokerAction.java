@@ -3,7 +3,7 @@ package de.codescape.jira.plugins.scrumpoker.action;
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
-import de.codescape.jira.plugins.scrumpoker.persistence.ScrumPokerSettings;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettings;
 
 import java.util.List;
 

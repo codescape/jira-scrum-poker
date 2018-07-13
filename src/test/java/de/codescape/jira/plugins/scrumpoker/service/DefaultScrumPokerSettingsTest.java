@@ -1,4 +1,4 @@
-package de.codescape.jira.plugins.scrumpoker.persistence;
+package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
@@ -9,8 +9,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import static de.codescape.jira.plugins.scrumpoker.persistence.DefaultScrumPokerSettings.SETTINGS_NAMESPACE;
-import static de.codescape.jira.plugins.scrumpoker.persistence.DefaultScrumPokerSettings.STORY_POINT_FIELD;
+import static de.codescape.jira.plugins.scrumpoker.service.DefaultScrumPokerSettings.SETTINGS_NAMESPACE;
+import static de.codescape.jira.plugins.scrumpoker.service.DefaultScrumPokerSettings.STORY_POINT_FIELD;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 

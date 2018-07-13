@@ -38,22 +38,16 @@
 
     <!-- components -->
 
-    <component key="scrum-poker-storage"
-               class="de.codescape.jira.plugins.scrumpoker.persistence.DefaultScrumPokerStorage">
-        <description>Provides the Storage for Scrum Poker sessions.</description>
-        <interface>de.codescape.jira.plugins.scrumpoker.persistence.ScrumPokerStorage</interface>
-    </component>
-
     <component key="scrum-poker-field"
-               class="de.codescape.jira.plugins.scrumpoker.persistence.DefaultStoryPointSupport">
+               class="de.codescape.jira.plugins.scrumpoker.service.DefaultStoryPointSupport">
         <description>Provides access to the custom field.</description>
-        <interface>de.codescape.jira.plugins.scrumpoker.persistence.StoryPointFieldSupport</interface>
+        <interface>de.codescape.jira.plugins.scrumpoker.service.StoryPointFieldSupport</interface>
     </component>
 
     <component key="scrum-poker-settings"
-               class="de.codescape.jira.plugins.scrumpoker.persistence.DefaultScrumPokerSettings">
+               class="de.codescape.jira.plugins.scrumpoker.service.DefaultScrumPokerSettings">
         <description>Provides the settings accessor for the Scrum Poker plugin.</description>
-        <interface>de.codescape.jira.plugins.scrumpoker.persistence.ScrumPokerSettings</interface>
+        <interface>de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettings</interface>
     </component>
 
     <!-- buttons to start a new session -->
@@ -115,5 +109,12 @@
     <!-- rest endpoint -->
 
     <rest key="scrum-poker-rest" path="/scrumpoker" version="1.0"/>
+
+    <!-- persistence with active objects -->
+
+    <ao key="scrum-poker-active-objects">
+        <entity>de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession</entity>
+        <entity>de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote</entity>
+    </ao>
 
 </atlassian-plugin>

@@ -6,8 +6,7 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.HttpServletVariables;
-import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerSession;
-import de.codescape.jira.plugins.scrumpoker.persistence.ScrumPokerStorage;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -38,13 +37,13 @@ public class ShowScrumPokerActionTest {
     private HttpServletVariables httpServletVariables;
 
     @Mock
-    private ScrumPokerStorage scrumPokerStorage;
-
-    @Mock
     private PermissionManager permissionManager;
 
     @Mock
     private JiraAuthenticationContext jiraAuthenticationContext;
+
+    @Mock
+    private ScrumPokerSessionService scrumPokerSessionService;
 
     @InjectMocks
     private ShowScrumPokerAction showScrumPokerAction;
@@ -58,15 +57,11 @@ public class ShowScrumPokerActionTest {
     @Mock
     private ApplicationUser user;
 
-    @Mock
-    private ScrumPokerSession scrumPokerSession;
-
     @Before
     public void before() {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
         when(jiraAuthenticationContext.getLoggedInUser()).thenReturn(user);
         when(user.getKey()).thenReturn("someUserKey");
-        when(scrumPokerStorage.sessionForIssue(ISSUE_KEY, user.getKey())).thenReturn(scrumPokerSession);
     }
 
     @Test

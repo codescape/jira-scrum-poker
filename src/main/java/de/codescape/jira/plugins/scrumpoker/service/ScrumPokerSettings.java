@@ -1,4 +1,4 @@
-package de.codescape.jira.plugins.scrumpoker.persistence;
+package de.codescape.jira.plugins.scrumpoker.service;
 
 /**
  * Component to save and load settings for the Scrum poker plugin.

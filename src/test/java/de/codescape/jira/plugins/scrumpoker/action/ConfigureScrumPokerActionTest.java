@@ -2,7 +2,7 @@ package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.fields.CustomField;
-import de.codescape.jira.plugins.scrumpoker.persistence.ScrumPokerSettings;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettings;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;

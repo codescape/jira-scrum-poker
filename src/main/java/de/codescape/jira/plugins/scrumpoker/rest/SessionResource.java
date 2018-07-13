@@ -1,23 +1,15 @@
 package de.codescape.jira.plugins.scrumpoker.rest;
 
 import com.atlassian.jira.security.JiraAuthenticationContext;
-import com.atlassian.jira.user.ApplicationUser;
-import com.atlassian.jira.user.util.UserManager;
-import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerCard;
-import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerSession;
-import de.codescape.jira.plugins.scrumpoker.persistence.ScrumPokerStorage;
-import de.codescape.jira.plugins.scrumpoker.persistence.StoryPointFieldSupport;
-import de.codescape.jira.plugins.scrumpoker.rest.entities.CardEntity;
+import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
-import de.codescape.jira.plugins.scrumpoker.rest.entities.VoteEntity;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
+import de.codescape.jira.plugins.scrumpoker.service.SessionEntityTransformer;
+import de.codescape.jira.plugins.scrumpoker.service.StoryPointFieldSupport;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static org.apache.commons.lang.math.NumberUtils.isNumber;
 
 /**
  * Implementation of the REST endpoint allowing to retrieve and modify a Scrum Poker session as a logged in user in the
@@ -26,17 +18,19 @@ import static org.apache.commons.lang.math.NumberUtils.isNumber;
 @Path("/session")
 public class SessionResource {
 
-    private final ScrumPokerStorage scrumPokerStorage;
     private final StoryPointFieldSupport storyPointFieldSupport;
     private final JiraAuthenticationContext jiraAuthenticationContext;
-    private final UserManager userManager;
+    private final ScrumPokerSessionService scrumPokerSessionService;
+    private final SessionEntityTransformer sessionEntityTransformer;
 
-    public SessionResource(ScrumPokerStorage scrumPokerStorage, StoryPointFieldSupport storyPointFieldSupport,
-                           JiraAuthenticationContext jiraAuthenticationContext, UserManager userManager) {
-        this.scrumPokerStorage = scrumPokerStorage;
+    public SessionResource(StoryPointFieldSupport storyPointFieldSupport,
+                           JiraAuthenticationContext jiraAuthenticationContext,
+                           ScrumPokerSessionService scrumPokerSessionService,
+                           SessionEntityTransformer sessionEntityTransformer) {
         this.storyPointFieldSupport = storyPointFieldSupport;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
-        this.userManager = userManager;
+        this.sessionEntityTransformer = sessionEntityTransformer;
+        this.scrumPokerSessionService = scrumPokerSessionService;
     }
 
     /**
@@ -47,9 +41,8 @@ public class SessionResource {
     @Path("/{issueKey}")
     public Response getSession(@PathParam("issueKey") String issueKey) {
         String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
-        ScrumPokerSession scrumPokerSession = scrumPokerStorage.sessionForIssue(issueKey, userKey);
-        String chosenCard = scrumPokerSession.getCards().get(userKey);
-        SessionEntity response = createSessionEntity(scrumPokerSession, chosenCard);
+        ScrumPokerSession scrumPokerSession = scrumPokerSessionService.byIssueKey(issueKey, userKey);
+        SessionEntity response = sessionEntityTransformer.build(scrumPokerSession, userKey);
         return Response.ok(response).build();
     }
 
@@ -60,7 +53,7 @@ public class SessionResource {
     @Path("/{issueKey}/card/{card}")
     public Response updateCard(@PathParam("issueKey") String issueKey, @PathParam("card") String card) {
         String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
-        scrumPokerStorage.sessionForIssue(issueKey, userKey).updateCard(userKey, card);
+        scrumPokerSessionService.addVote(issueKey, userKey, card);
         return Response.ok().build();
     }
 
@@ -71,7 +64,7 @@ public class SessionResource {
     @Path("/{issueKey}/reveal")
     public Response revealCards(@PathParam("issueKey") String issueKey) {
         String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
-        scrumPokerStorage.sessionForIssue(issueKey, userKey).revealDeck();
+        scrumPokerSessionService.reveal(issueKey, userKey);
         return Response.ok().build();
     }
 
@@ -82,7 +75,7 @@ public class SessionResource {
     @Path("/{issueKey}/reset")
     public Response resetSession(@PathParam("issueKey") String issueKey) {
         String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
-        scrumPokerStorage.sessionForIssue(issueKey, userKey).resetDeck();
+        scrumPokerSessionService.reset(issueKey, userKey);
         return Response.ok().build();
     }
 
@@ -94,56 +87,9 @@ public class SessionResource {
     public Response confirmEstimation(@PathParam("issueKey") String issueKey,
                                       @PathParam("estimation") Integer estimation) {
         String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
-        scrumPokerStorage.sessionForIssue(issueKey, userKey).confirm(estimation);
+        scrumPokerSessionService.confirm(issueKey, userKey, estimation);
         storyPointFieldSupport.save(issueKey, estimation);
         return Response.ok().build();
-    }
-
-    private SessionEntity createSessionEntity(ScrumPokerSession scrumPokerSession, String chosenCard) {
-        return new SessionEntity()
-            .withIssueKey(scrumPokerSession.getIssueKey())
-            .withCards(allCardsAndChosenCardMarkedAsSelected(chosenCard))
-            .withConfirmedVote(scrumPokerSession.getConfirmedVote())
-            .withVisible(scrumPokerSession.isVisible())
-            .withBoundedVotes(scrumPokerSession.getBoundedVotes())
-            .withAgreementReached(scrumPokerSession.isAgreementReached() && scrumPokerSession.isVisible())
-            .withVotes(allVotesWithUsers(scrumPokerSession))
-            .withAllowReset(scrumPokerSession.isVisible() && !scrumPokerSession.getCards().isEmpty())
-            .withAllowReveal(!scrumPokerSession.isVisible() && !scrumPokerSession.getCards().isEmpty());
-    }
-
-    private List<VoteEntity> allVotesWithUsers(ScrumPokerSession scrumPokerSession) {
-        return scrumPokerSession.getCards().entrySet().stream()
-            .map(card ->
-                new VoteEntity(
-                    userName(card.getKey()),
-                    scrumPokerSession.isVisible() ? card.getValue() : "?",
-                    needToTalk(card.getValue(), scrumPokerSession)))
-            .collect(Collectors.toList());
-    }
-
-    private List<CardEntity> allCardsAndChosenCardMarkedAsSelected(String chosenValue) {
-        return ScrumPokerCard.getDeck().stream()
-            .map(card -> new CardEntity(card.getName(), card.getName().equals(chosenValue)))
-            .collect(Collectors.toList());
-    }
-
-    private boolean needToTalk(String card, ScrumPokerSession scrumPokerSession) {
-        if (!scrumPokerSession.isVisible())
-            return false;
-        if (scrumPokerSession.isAgreementReached())
-            return false;
-        if (scrumPokerSession.getCards().size() == 1)
-            return false;
-        if (!isNumber(card))
-            return true;
-        Integer current = Integer.valueOf(card);
-        return current.equals(scrumPokerSession.getMaximumVote()) || current.equals(scrumPokerSession.getMinimumVote());
-    }
-
-    private String userName(String entry) {
-        ApplicationUser user = userManager.getUserByKey(entry);
-        return user != null ? user.getDisplayName() : entry;
     }
 
 }

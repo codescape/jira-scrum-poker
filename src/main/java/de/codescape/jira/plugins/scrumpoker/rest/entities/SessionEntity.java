@@ -2,6 +2,8 @@ package de.codescape.jira.plugins.scrumpoker.rest.entities;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,6 +21,8 @@ public class SessionEntity {
     private List<VoteEntity> votes;
     private boolean allowReset;
     private boolean allowReveal;
+    private String creator;
+    private String createDate;
 
     public SessionEntity withIssueKey(String issueKey) {
         this.issueKey = issueKey;
@@ -103,6 +107,24 @@ public class SessionEntity {
 
     public boolean isAllowReveal() {
         return allowReveal;
+    }
+
+    public SessionEntity withCreator(String creator) {
+        this.creator = creator;
+        return this;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public SessionEntity withCreateDate(Date createDate) {
+        this.createDate = new SimpleDateFormat("dd.MM.yyyy - HH:mm:ss").format(createDate);
+        return this;
+    }
+
+    public String getCreateDate() {
+        return createDate;
     }
 
 }

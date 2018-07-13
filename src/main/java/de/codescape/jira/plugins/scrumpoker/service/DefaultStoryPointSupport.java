@@ -1,4 +1,4 @@
-package de.codescape.jira.plugins.scrumpoker.persistence;
+package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.jira.bc.issue.IssueService;
 import com.atlassian.jira.issue.CustomFieldManager;

@@ -4,11 +4,16 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
+* ...
+
+## [3.0.0] - 2018-07-13
+
 * chore: implement against latest Jira version 7.10.2
 * test: add tests for Scrum Poker configuration action
 * refactor: rename and move condition to display Scrum poker for issue
 * refactor: use better base class for condition to render Scrum Poker button
 * feat: add link to marketplace on plugin configuration page
+* refactor: introducing persistence to Scrum poker session with Active Objects
 
 ## [2.8.0] - 2018-06-01
 
@@ -350,7 +355,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/2.8.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.0.0...HEAD
+[3.0.0]: https://github.com/codescape/jira-scrum-poker/compare/2.8.0...3.0.0
 [2.8.0]: https://github.com/codescape/jira-scrum-poker/compare/2.7.0...2.8.0
 [2.7.0]: https://github.com/codescape/jira-scrum-poker/compare/2.6.0...2.7.0
 [2.6.0]: https://github.com/codescape/jira-scrum-poker/compare/2.5.0...2.6.0

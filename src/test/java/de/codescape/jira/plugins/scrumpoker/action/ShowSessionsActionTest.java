@@ -5,9 +5,10 @@ import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
-import com.atlassian.jira.user.util.UserManager;
-import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerSession;
-import de.codescape.jira.plugins.scrumpoker.persistence.ScrumPokerStorage;
+import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
+import de.codescape.jira.plugins.scrumpoker.service.SessionEntityTransformer;
+import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -27,8 +28,6 @@ import static org.mockito.Mockito.when;
 
 public class ShowSessionsActionTest {
 
-    private static final String UNKNOWN_USER_KEY = "unknownUserKey";
-
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
@@ -36,16 +35,16 @@ public class ShowSessionsActionTest {
     private PermissionManager permissionManager;
 
     @Mock
-    private ScrumPokerStorage scrumPokerStorage;
-
-    @Mock
     private JiraAuthenticationContext jiraAuthenticationContext;
 
     @Mock
-    private UserManager userManager;
+    private ScrumPokerSessionService scrumPokerSessionService;
 
     @Mock
     private IssueManager issueManager;
+
+    @Mock
+    private  SessionEntityTransformer sessionEntityTransformer;
 
     @InjectMocks
     private ShowSessionsAction showSessionsAction;
@@ -59,19 +58,40 @@ public class ShowSessionsActionTest {
     @Mock
     private ApplicationUser applicationUser;
 
+    @Mock
+    private ScrumPokerSession secretScrumPokerSession;
+
+    @Mock
+    private SessionEntity secretSessionEntity;
+
+    @Mock
+    private ScrumPokerSession publicScrumPokerSession;
+
+    @Mock
+    private SessionEntity publicSessionEntity;
+
     @Before
     public void before() {
-        ArrayList<ScrumPokerSession> scrumPokerSessions = new ArrayList<>();
-        scrumPokerSessions.add(new ScrumPokerSession("SECRET", "SomePerson"));
-        scrumPokerSessions.add(new ScrumPokerSession("PUBLIC", "SomePerson"));
+        when(secretScrumPokerSession.getIssueKey()).thenReturn("SECRET");
+        when(secretSessionEntity.getIssueKey()).thenReturn("SECRET");
 
-        when(showSessionsAction.getOpenSessions()).thenReturn(scrumPokerSessions);
-        when(showSessionsAction.getClosedSessions()).thenReturn(scrumPokerSessions);
+        when(publicScrumPokerSession.getIssueKey()).thenReturn("PUBLIC");
+        when(publicSessionEntity.getIssueKey()).thenReturn("PUBLIC");
+
+        ArrayList<ScrumPokerSession> scrumPokerSessions = new ArrayList<>();
+        scrumPokerSessions.add(secretScrumPokerSession);
+        scrumPokerSessions.add(publicScrumPokerSession);
+
+        when(scrumPokerSessionService.recent()).thenReturn(scrumPokerSessions);
+
+        when(jiraAuthenticationContext.getLoggedInUser()).thenReturn(applicationUser);
+        when(applicationUser.getKey()).thenReturn("USER-1");
+
+        when(sessionEntityTransformer.build(secretScrumPokerSession, "USER-1")).thenReturn(secretSessionEntity);
+        when(sessionEntityTransformer.build(publicScrumPokerSession, "USER-1")).thenReturn(publicSessionEntity);
 
         when(issueManager.getIssueObject("SECRET")).thenReturn(secretIssue);
         when(issueManager.getIssueObject("PUBLIC")).thenReturn(publicIssue);
-
-        when(jiraAuthenticationContext.getLoggedInUser()).thenReturn(applicationUser);
 
         when(permissionManager.hasPermission(BROWSE_PROJECTS, secretIssue, applicationUser)).thenReturn(false);
         when(permissionManager.hasPermission(BROWSE_PROJECTS, publicIssue, applicationUser)).thenReturn(true);
@@ -79,29 +99,29 @@ public class ShowSessionsActionTest {
 
     @Test
     public void openSessionsShouldOnlyReturnIssuesTheUserIsAllowedToSee() {
-        List<ScrumPokerSession> openSessions = showSessionsAction.getOpenSessions();
+        when(publicScrumPokerSession.getConfirmedVote()).thenReturn(null);
+        when(secretScrumPokerSession.getConfirmedVote()).thenReturn(null);
+
+        List<SessionEntity> openSessions = showSessionsAction.getOpenSessions();
         assertThat(openSessions, hasSize(1));
         assertThat(openSessions.get(0).getIssueKey(), is(equalTo("PUBLIC")));
-        verify(scrumPokerStorage).getOpenSessions();
+        verify(scrumPokerSessionService).recent();
     }
 
     @Test
     public void closedSessionsShouldOnlyReturnIssuesTheUserIsAllowedToSee() {
-        List<ScrumPokerSession> closedSessions = showSessionsAction.getClosedSessions();
+        when(publicScrumPokerSession.getConfirmedVote()).thenReturn(5);
+        when(secretScrumPokerSession.getConfirmedVote()).thenReturn(8);
+
+        List<SessionEntity> closedSessions = showSessionsAction.getClosedSessions();
         assertThat(closedSessions, hasSize(1));
         assertThat(closedSessions.get(0).getIssueKey(), is(equalTo("PUBLIC")));
-        verify(scrumPokerStorage).getClosedSessions();
+        verify(scrumPokerSessionService).recent();
     }
 
     @Test
     public void shouldAlwaysShowSessionsPage() {
         assertThat(showSessionsAction.doExecute(), is(equalTo("success")));
-    }
-
-    @Test
-    public void returnsUserKeyIfUserCannotBeFound() {
-        when(userManager.getUserByKey(UNKNOWN_USER_KEY)).thenReturn(null);
-        assertThat(showSessionsAction.getUsername(UNKNOWN_USER_KEY), is(equalTo(UNKNOWN_USER_KEY)));
     }
 
 }

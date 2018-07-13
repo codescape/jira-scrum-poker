@@ -4,10 +4,9 @@ import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.plugin.webfragment.conditions.AbstractIssueWebCondition;
-import com.atlassian.jira.plugin.webfragment.conditions.AbstractWebCondition;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.user.ApplicationUser;
-import de.codescape.jira.plugins.scrumpoker.persistence.StoryPointFieldSupport;
+import de.codescape.jira.plugins.scrumpoker.service.StoryPointFieldSupport;
 
 /**
  * This condition is used to decide whether a button to start a Scrum poker session should be displayed or not for the

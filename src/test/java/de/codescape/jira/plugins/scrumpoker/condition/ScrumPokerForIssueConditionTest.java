@@ -5,7 +5,7 @@ import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.user.ApplicationUser;
-import de.codescape.jira.plugins.scrumpoker.persistence.StoryPointFieldSupport;
+import de.codescape.jira.plugins.scrumpoker.service.StoryPointFieldSupport;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
