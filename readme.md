@@ -56,6 +56,7 @@ We always try to develop the Scrum Poker plugin against the latest version of Ji
 | 1.12.0              | 7.8.x        |
 | 2.5.0               | 7.9.x        |
 | 3.0.0               | 7.10.x       |
+| unreleased          | 7.11.x       |
 
 ## Supported Languages
 
