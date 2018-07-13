@@ -8,7 +8,7 @@ In this document we provide details on how we secure your data. If you find some
 
 We only store the minimal amount of data required to provide our service. We do not store issue details, task descriptions, comments nor other sensitive information. We never store users full names nor e-mails but we use user keys provided by Jira which can contain them.
 
-The following data is collected and hold in application memory during a Scrum Poker session:
+The following data is collected and persisted into the Jira database during a Scrum Poker session:
 
 * user keys - associate all votes and the session starter with a Jira user
 * issue key - associate the session with a Jira issue
@@ -18,7 +18,7 @@ The following data is collected and hold in application memory during a Scrum Po
 
 All data and information is solely used for the execution of Scrum Poker sessions.
 
-The session data is kept for 12 hours to allow recently completed sessions being displayed to users as a reference for currently running sessions. All sessions older than 12 hours will be purged and deleted permanently.
+The session data is kept visible for 12 hours to allow recently completed sessions being displayed to users as a reference for currently running sessions. 
 
 ## Log files
 
