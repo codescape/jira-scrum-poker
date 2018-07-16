@@ -4,6 +4,10 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
+* ...
+
+## [3.0.1] - 2018-07-16
+
 * chore: implement against Jira version 7.11.x
 * fix: do announce agreement only for revealed sessions
 * fix: hide the revealed session when new votes are added (#23)
@@ -357,7 +361,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.0.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.0.1...HEAD
+[3.0.1]: https://github.com/codescape/jira-scrum-poker/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/codescape/jira-scrum-poker/compare/2.8.0...3.0.0
 [2.8.0]: https://github.com/codescape/jira-scrum-poker/compare/2.7.0...2.8.0
 [2.7.0]: https://github.com/codescape/jira-scrum-poker/compare/2.6.0...2.7.0
