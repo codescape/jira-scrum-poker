@@ -3,9 +3,9 @@ package de.codescape.jira.plugins.scrumpoker.rest;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
+import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
 import de.codescape.jira.plugins.scrumpoker.service.SessionEntityTransformer;
-import de.codescape.jira.plugins.scrumpoker.service.StoryPointFieldSupport;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -18,16 +18,16 @@ import javax.ws.rs.core.Response;
 @Path("/session")
 public class SessionResource {
 
-    private final StoryPointFieldSupport storyPointFieldSupport;
+    private final EstimationFieldService estimationFieldService;
     private final JiraAuthenticationContext jiraAuthenticationContext;
     private final ScrumPokerSessionService scrumPokerSessionService;
     private final SessionEntityTransformer sessionEntityTransformer;
 
-    public SessionResource(StoryPointFieldSupport storyPointFieldSupport,
+    public SessionResource(EstimationFieldService estimationFieldService,
                            JiraAuthenticationContext jiraAuthenticationContext,
                            ScrumPokerSessionService scrumPokerSessionService,
                            SessionEntityTransformer sessionEntityTransformer) {
-        this.storyPointFieldSupport = storyPointFieldSupport;
+        this.estimationFieldService = estimationFieldService;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
         this.sessionEntityTransformer = sessionEntityTransformer;
         this.scrumPokerSessionService = scrumPokerSessionService;
@@ -88,7 +88,7 @@ public class SessionResource {
                                       @PathParam("estimation") Integer estimation) {
         String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
         scrumPokerSessionService.confirm(issueKey, userKey, estimation);
-        storyPointFieldSupport.save(issueKey, estimation);
+        estimationFieldService.save(issueKey, estimation);
         return Response.ok().build();
     }
 

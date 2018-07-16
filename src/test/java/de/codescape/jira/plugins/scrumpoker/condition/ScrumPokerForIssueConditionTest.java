@@ -5,7 +5,7 @@ import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.user.ApplicationUser;
-import de.codescape.jira.plugins.scrumpoker.service.StoryPointFieldSupport;
+import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,7 +31,7 @@ public class ScrumPokerForIssueConditionTest {
     private CustomFieldManager customFieldManager;
 
     @Mock
-    private StoryPointFieldSupport storyPointFieldSupport;
+    private EstimationFieldService estimationFieldService;
 
     @Mock
     private ApplicationUser applicationUser;
@@ -54,7 +54,7 @@ public class ScrumPokerForIssueConditionTest {
     @Before
     public void before() {
         // configured field for Scrum Poker
-        when(storyPointFieldSupport.findStoryPointField()).thenReturn(storyPointField);
+        when(estimationFieldService.findStoryPointField()).thenReturn(storyPointField);
 
         // expected ids for fields
         when(storyPointField.getId()).thenReturn("STORY_POINT_FIELD_ID");

@@ -6,7 +6,7 @@ import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.plugin.webfragment.conditions.AbstractIssueWebCondition;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.user.ApplicationUser;
-import de.codescape.jira.plugins.scrumpoker.service.StoryPointFieldSupport;
+import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
 
 /**
  * This condition is used to decide whether a button to start a Scrum poker session should be displayed or not for the
@@ -15,12 +15,12 @@ import de.codescape.jira.plugins.scrumpoker.service.StoryPointFieldSupport;
 public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition {
 
     private final CustomFieldManager customFieldManager;
-    private final StoryPointFieldSupport storyPointFieldSupport;
+    private final EstimationFieldService estimationFieldService;
 
     public ScrumPokerForIssueCondition(CustomFieldManager customFieldManager,
-                                       StoryPointFieldSupport storyPointFieldSupport) {
+                                       EstimationFieldService estimationFieldService) {
         this.customFieldManager = customFieldManager;
-        this.storyPointFieldSupport = storyPointFieldSupport;
+        this.estimationFieldService = estimationFieldService;
     }
 
     @Override
@@ -29,7 +29,7 @@ public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition {
     }
 
     private boolean hasStoryPointField(Issue currentIssue) {
-        CustomField storyPointField = storyPointFieldSupport.findStoryPointField();
+        CustomField storyPointField = estimationFieldService.findStoryPointField();
         return customFieldManager.getCustomFieldObjects(currentIssue).contains(storyPointField);
     }
 

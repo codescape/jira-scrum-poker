@@ -38,12 +38,6 @@
 
     <!-- components -->
 
-    <component key="scrum-poker-field"
-               class="de.codescape.jira.plugins.scrumpoker.service.DefaultStoryPointSupport">
-        <description>Provides access to the custom field.</description>
-        <interface>de.codescape.jira.plugins.scrumpoker.service.StoryPointFieldSupport</interface>
-    </component>
-
     <component key="scrum-poker-settings"
                class="de.codescape.jira.plugins.scrumpoker.service.DefaultScrumPokerSettings">
         <description>Provides the settings accessor for the Scrum Poker plugin.</description>

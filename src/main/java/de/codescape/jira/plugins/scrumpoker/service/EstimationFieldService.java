@@ -7,28 +7,41 @@ import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.user.ApplicationUser;
+import com.atlassian.plugin.spring.scanner.annotation.component.Scanned;
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.text.NumberFormat;
 
 /**
- * Implementation for Jira custom field access from the Scrum Poker plugin.
+ * Component to access and write the value of the configured custom field. This is typically the Story Point field
+ * provided by Jira Software.
  */
-public class DefaultStoryPointSupport implements StoryPointFieldSupport {
+@Named
+@Scanned
+public class EstimationFieldService {
 
     private final ScrumPokerSettings scrumPokerSettings;
+    @ComponentImport
     private final CustomFieldManager customFieldManager;
+    @ComponentImport
     private final JiraAuthenticationContext context;
+    @ComponentImport
     private final IssueService issueService;
 
-    public DefaultStoryPointSupport(JiraAuthenticationContext context, ScrumPokerSettings scrumPokerSettings,
-                                    IssueService issueService, CustomFieldManager customFieldManager) {
+    @Inject
+    public EstimationFieldService(JiraAuthenticationContext context, ScrumPokerSettings scrumPokerSettings,
+                                  IssueService issueService, CustomFieldManager customFieldManager) {
         this.scrumPokerSettings = scrumPokerSettings;
         this.customFieldManager = customFieldManager;
         this.context = context;
         this.issueService = issueService;
     }
 
-    @Override
+    /**
+     * Save the estimation for a given issue.
+     */
     public void save(String issueKey, Integer newValue) {
         ApplicationUser applicationUser = context.getLoggedInUser();
         MutableIssue issue = issueService.getIssue(applicationUser, issueKey).getIssue();
@@ -42,24 +55,15 @@ public class DefaultStoryPointSupport implements StoryPointFieldSupport {
         }
     }
 
-    private String formatAsNumber(Integer newValue) {
-        return NumberFormat.getInstance().format(newValue);
-    }
-
-    @Override
-    public Integer getValue(String issueKey) {
-        ApplicationUser applicationUser = context.getLoggedInUser();
-        IssueService.IssueResult issueResult = issueService.getIssue(applicationUser, issueKey);
-        if (issueResult.getErrorCollection().hasAnyErrors()) {
-            return null;
-        }
-        MutableIssue issue = issueResult.getIssue();
-        return (Integer) issue.getCustomFieldValue(findStoryPointField());
-    }
-
-    @Override
+    /**
+     * Return the story point custom field.
+     */
     public CustomField findStoryPointField() {
         return customFieldManager.getCustomFieldObject(scrumPokerSettings.loadStoryPointFieldId());
+    }
+
+    private String formatAsNumber(Integer newValue) {
+        return NumberFormat.getInstance().format(newValue);
     }
 
 }

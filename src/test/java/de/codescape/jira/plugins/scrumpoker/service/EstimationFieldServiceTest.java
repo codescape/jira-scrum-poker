@@ -20,7 +20,7 @@ import java.util.HashMap;
 
 import static org.mockito.Mockito.*;
 
-public class DefaultStoryPointSupportTest {
+public class EstimationFieldServiceTest {
 
     private static final String ISSUE_KEY = "ISSUE-0815";
     private static final Integer ESTIMATION = 5;
@@ -43,7 +43,7 @@ public class DefaultStoryPointSupportTest {
     private ScrumPokerSettings scrumPokerSettings;
 
     @InjectMocks
-    private DefaultStoryPointSupport defaultStoryPointSupport;
+    private EstimationFieldService estimationFieldService;
 
     @Mock
     private ApplicationUser applicationUser;
@@ -94,7 +94,7 @@ public class DefaultStoryPointSupportTest {
         errors.put("KEY-2", "Message 2");
         when(validationErrorCollection.getErrors()).thenReturn(errors);
 
-        defaultStoryPointSupport.save(ISSUE_KEY, ESTIMATION);
+        estimationFieldService.save(ISSUE_KEY, ESTIMATION);
 
         verify(issueService, never()).update(applicationUser, updateValidationResult);
     }
@@ -106,7 +106,7 @@ public class DefaultStoryPointSupportTest {
         when(updateIssueResult.getErrorCollection()).thenReturn(updateErrorCollection);
         when(updateErrorCollection.hasAnyErrors()).thenReturn(false);
 
-        defaultStoryPointSupport.save(ISSUE_KEY, ESTIMATION);
+        estimationFieldService.save(ISSUE_KEY, ESTIMATION);
 
         verify(issueService, times(1)).update(applicationUser, updateValidationResult);
     }
