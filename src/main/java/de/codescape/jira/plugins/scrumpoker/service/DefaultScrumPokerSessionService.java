@@ -49,6 +49,7 @@ public class DefaultScrumPokerSessionService implements ScrumPokerSessionService
     public ScrumPokerSession addVote(String issueKey, String userKey, String vote) {
         ScrumPokerSession scrumPokerSession = byIssueKey(issueKey, userKey);
         scrumPokerSession.setVisible(false);
+        scrumPokerSession.save();
 
         ScrumPokerVote[] scrumPokerVotes = ao.find(ScrumPokerVote.class,
             Query.select().where("session_id = ? and user_key = ?", issueKey, userKey));

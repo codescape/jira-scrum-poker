@@ -6,6 +6,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * chore: implement against Jira version 7.11.x
 * fix: do announce agreement only for revealed sessions
+* fix: hide the revealed session when new votes are added (#23)
 
 ## [3.0.0] - 2018-07-13
 

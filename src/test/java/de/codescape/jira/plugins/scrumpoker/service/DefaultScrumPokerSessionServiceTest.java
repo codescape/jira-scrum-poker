@@ -17,6 +17,7 @@ import org.junit.runner.RunWith;
 import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 @RunWith(ActiveObjectsJUnitRunner.class)
@@ -54,6 +55,15 @@ public class DefaultScrumPokerSessionServiceTest {
         scrumPokerSessionService.addVote("ISSUE-1", "USER-1", "8");
         assertThat(ao.get(ScrumPokerSession.class, "ISSUE-1").getVotes().length, equalTo(1));
         assertThat(ao.get(ScrumPokerSession.class, "ISSUE-1").getVotes()[0].getVote(), equalTo("8"));
+    }
+
+    @Test
+    public void shouldHideSessionWhenNewVoteIsAdded() {
+        scrumPokerSessionService.addVote("ISSUE-1", "USER-1", "5");
+        scrumPokerSessionService.reveal("ISSUE-1", "USER-1");
+        scrumPokerSessionService.addVote("ISSUE-1", "USER-2", "8");
+        ScrumPokerSession scrumPokerSession = scrumPokerSessionService.byIssueKey("ISSUE-1", "USER-1");
+        assertThat(scrumPokerSession.isVisible(), is(false));
     }
 
     @Test
