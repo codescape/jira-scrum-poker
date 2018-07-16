@@ -4,7 +4,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
-* ...
+* refactor: improve code to transform database model into the view model
 
 ## [3.0.1] - 2018-07-16
 
