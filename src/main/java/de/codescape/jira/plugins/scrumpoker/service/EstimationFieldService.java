@@ -22,18 +22,23 @@ import java.text.NumberFormat;
 @Scanned
 public class EstimationFieldService {
 
-    private final ScrumPokerSettings scrumPokerSettings;
+    private final ScrumPokerSettingsService scrumPokerSettingsService;
+
     @ComponentImport
     private final CustomFieldManager customFieldManager;
+
     @ComponentImport
     private final JiraAuthenticationContext context;
+
     @ComponentImport
     private final IssueService issueService;
 
     @Inject
-    public EstimationFieldService(JiraAuthenticationContext context, ScrumPokerSettings scrumPokerSettings,
-                                  IssueService issueService, CustomFieldManager customFieldManager) {
-        this.scrumPokerSettings = scrumPokerSettings;
+    public EstimationFieldService(JiraAuthenticationContext context,
+                                  ScrumPokerSettingsService scrumPokerSettingsService,
+                                  IssueService issueService,
+                                  CustomFieldManager customFieldManager) {
+        this.scrumPokerSettingsService = scrumPokerSettingsService;
         this.customFieldManager = customFieldManager;
         this.context = context;
         this.issueService = issueService;
@@ -59,7 +64,7 @@ public class EstimationFieldService {
      * Return the story point custom field.
      */
     public CustomField findStoryPointField() {
-        return customFieldManager.getCustomFieldObject(scrumPokerSettings.loadStoryPointFieldId());
+        return customFieldManager.getCustomFieldObject(scrumPokerSettingsService.loadStoryPointFieldId());
     }
 
     private String formatAsNumber(Integer newValue) {

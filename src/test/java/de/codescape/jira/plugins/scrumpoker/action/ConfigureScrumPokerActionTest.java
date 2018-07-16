@@ -2,7 +2,7 @@ package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.fields.CustomField;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettings;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingsService;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -26,7 +26,7 @@ public class ConfigureScrumPokerActionTest {
     private CustomFieldManager customFieldManager;
 
     @Mock
-    private ScrumPokerSettings scrumPokerSettings;
+    private ScrumPokerSettingsService scrumPokerSettingsService;
 
     @InjectMocks
     private ConfigureScrumPokerAction configureScrumPokerAction;
@@ -45,7 +45,7 @@ public class ConfigureScrumPokerActionTest {
 
     @Test
     public void returnTheStoryPointFieldConfigured() {
-        when(scrumPokerSettings.loadStoryPointFieldId()).thenReturn(CUSTOM_FIELD_ID);
+        when(scrumPokerSettingsService.loadStoryPointFieldId()).thenReturn(CUSTOM_FIELD_ID);
         assertThat(configureScrumPokerAction.getStoryPointFieldId(), is(equalTo(CUSTOM_FIELD_ID)));
     }
 

@@ -36,14 +36,6 @@
                       interface="com.atlassian.sal.api.pluginsettings.PluginSettingsFactory"/>
     <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties"/>
 
-    <!-- components -->
-
-    <component key="scrum-poker-settings"
-               class="de.codescape.jira.plugins.scrumpoker.service.DefaultScrumPokerSettings">
-        <description>Provides the settings accessor for the Scrum Poker plugin.</description>
-        <interface>de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettings</interface>
-    </component>
-
     <!-- buttons to start a new session -->
 
     <web-item key="scrum-poker-start-from-issue-details" section="jira.issue.tools" weight="10">
