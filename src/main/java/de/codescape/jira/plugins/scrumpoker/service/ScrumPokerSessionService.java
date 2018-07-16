@@ -6,7 +6,7 @@ import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import java.util.List;
 
 /**
- * Sctive Object persistence service to persist and retrieve Scrum poker sessions and votes from the database.
+ * Active Object persistence service to persist and retrieve Scrum poker sessions and votes from the database.
  */
 @Transactional
 public interface ScrumPokerSessionService {
