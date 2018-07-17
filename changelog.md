@@ -4,10 +4,12 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
+## [3.1.0] - 2018-07-17
+
+* feat: show reference issues during session to help find the estimation
 * refactor: improve code to transform database model into the view model
 * refactor: rename estimation field service and use dependency injection
 * refactor: rename settings service and use dependency injection
-* feat: show reference issues during session to help find the estimation
 
 ## [3.0.1] - 2018-07-16
 
@@ -364,7 +366,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.0.1...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.1.0...HEAD
+[3.1.0]: https://github.com/codescape/jira-scrum-poker/compare/3.0.1...3.1.0
 [3.0.1]: https://github.com/codescape/jira-scrum-poker/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/codescape/jira-scrum-poker/compare/2.8.0...3.0.0
 [2.8.0]: https://github.com/codescape/jira-scrum-poker/compare/2.7.0...2.8.0
