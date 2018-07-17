@@ -35,54 +35,50 @@
     <div class="aui-page-panel" style="margin: 0;">
         <div class="aui-page-panel-inner">
             <section class="aui-page-panel-content">
-                <div class="poker-header">
-                    <h2>$i18n.getText("scrumpoker.issue.summary")</h2>
-                </div>
-                <div class="mod-content">
-                    #set($issueDescriptionHtml = $issueDescription)
-                    #if(!$issueDescriptionHtml.isEmpty())
-                        <p>$issueDescriptionHtml</p>
-                    #else
-                        <p><i>$i18n.getText("scrumpoker.issue.summary.empty")</i></p>
-                    #end
-                </div>
-                <div class="poker-header">
-                    <h2>$i18n.getText("scrumpoker.issue.tasks")</h2>
-                </div>
-                <div class="mod-content">
-                    #set($subTasks = $issue.subTaskObjects)
-                    #if(!$subTasks.isEmpty())
-                    <table width="100%" class="aui" id="issuetable">
-                        <tbody>
-                            #set($counter = 1)
-                            #foreach($subTask in $subTasks)
-                            <tr>
-                                <td class="stsequence">$counter.</td>
-                                <td class="stsummary"><a href="$baseurl/browse/$subTask.key">$subTask.summary</a></td>
-                                <td class="issuetype"><img src="$subTask.issueType.completeIconUrl"></td>
-                                <td class="status"><span class="aui-lozenge aui-lozenge-subtle jira-issue-status-lozenge-$subTask.status.statusCategory.colorName">$subTask.status.nameTranslation</span></td>
-                                <td class="assignee">
-                                    #if($subTask.assignee)
-                                        <a href="$baseurl/secure/ViewProfile.jspa?name=$subTask.assignee.key">$subTask.assignee.displayName</a>
-                                    #else
-                                        <i>$i18n.getText("scrumpoker.issue.assignee.empty")</i>
-                                    #end
-                                </td>
-                            </tr>
-                            #set($counter = $counter + 1)
-                            #end
-                        </tbody>
-                    </table>
-                    #else
-                        <p><i>$i18n.getText("scrumpoker.issue.tasks.empty")</i></p>
-                    #end
-                </div>
+                <h4>$i18n.getText("scrumpoker.issue.summary")</h4>
+
+                #set($issueDescriptionHtml = $issueDescription)
+                #if(!$issueDescriptionHtml.isEmpty())
+                    <p>$issueDescriptionHtml</p>
+                #else
+                    <p><i>$i18n.getText("scrumpoker.issue.summary.empty")</i></p>
+                #end
+
+                <h4>$i18n.getText("scrumpoker.issue.tasks")</h4>
+
+                #set($subTasks = $issue.subTaskObjects)
+                #if(!$subTasks.isEmpty())
+                <table width="100%" class="aui" id="issuetable">
+                    <tbody>
+                        #set($counter = 1)
+                        #foreach($subTask in $subTasks)
+                        <tr>
+                            <td class="stsequence">$counter.</td>
+                            <td class="stsummary"><a href="$baseurl/browse/$subTask.key">$subTask.summary</a></td>
+                            <td class="issuetype"><img src="$subTask.issueType.completeIconUrl"></td>
+                            <td class="status"><span class="aui-lozenge aui-lozenge-subtle jira-issue-status-lozenge-$subTask.status.statusCategory.colorName">$subTask.status.nameTranslation</span></td>
+                            <td class="assignee">
+                                #if($subTask.assignee)
+                                    <a href="$baseurl/secure/ViewProfile.jspa?name=$subTask.assignee.key">$subTask.assignee.displayName</a>
+                                #else
+                                    <i>$i18n.getText("scrumpoker.issue.assignee.empty")</i>
+                                #end
+                            </td>
+                        </tr>
+                        #set($counter = $counter + 1)
+                        #end
+                    </tbody>
+                </table>
+                #else
+                    <p><i>$i18n.getText("scrumpoker.issue.tasks.empty")</i></p>
+                #end
             </section>
             <aside class="aui-page-panel-sidebar">
-                <div class="poker-header">
-                    <h2>$i18n.getText("scrumpoker.title")</h2>
-                </div>
-                <div id="card-section"></div>
+                <div id="scrum-poker-cards"></div>
+                <div id="scrum-poker-references"></div>
+                <div id="scrum-poker-participants"></div>
+                <div id="scrum-poker-buttons"></div>
+                <div id="scrum-poker-finished"></div>
             </aside>
         </div>
     </div>
@@ -94,56 +90,93 @@
     });
 </script>
 
-<script id="card-section-template" type="text/x-handlebars-template">
+<script id="scrum-poker-cards-template" type="text/x-handlebars-template">
 
     {{^confirmedVoteExists}}
 
-        <div class="mod-content">
-            <ul class="list-of-cards">
-                {{#cards}}
-                    <li><a onclick="ScrumPoker.updateSession('{{issueKey}}','{{value}}');" class="card {{#selected}}active{{/selected}} clickable">{{value}}</a></li>
-                {{/cards}}
-            </ul>
-        </div>
+        <h4>$i18n.getText("scrumpoker.title")</h4>
+
+        <ul class="list-of-cards">
+            {{#cards}}
+                <li><a onmouseover="ScrumPoker.showReferences('{{value}}');" onmouseout="ScrumPoker.showReferences()" onclick="ScrumPoker.updateSession('{{issueKey}}','{{value}}');" class="card {{#selected}}active{{/selected}} clickable">{{value}}</a></li>
+            {{/cards}}
+        </ul>
+
+    {{/confirmedVoteExists}}
+
+</script>
+
+<script id="scrum-poker-references-template" type="text/x-handlebars-template">
+
+    {{#results}}
+
+    <p>$i18n.getText("scrumpoker.session.references")</p>
+
+    <table width="100%" class="aui" id="issuetable">
+        <tbody>
+            {{#references}}
+            <tr>
+                <td class="issuetype"><img src="{{issueIcon}}"></td>
+                <td class="summary">{{issueSummary}}</td>
+            </tr>
+            {{/references}}
+        </tbody>
+    </table>
+
+    {{/results}}
+    {{^results}}
+
+    <p class="poker-comment">$i18n.getText("scrumpoker.session.references.empty")</p>
+    <p></p>
+
+    {{/results}}
+
+</script>
+
+<script id="scrum-poker-participants-template" type="text/x-handlebars-template">
+
+    {{^confirmedVoteExists}}
 
         {{#visible}}
 
-        <div class="poker-header">
-            <h2>$i18n.getText("scrumpoker.session.bandwidth")</h2>
-        </div>
-        <div class="mod-content">
+            <h4>$i18n.getText("scrumpoker.session.bandwidth")</h4>
+
             <p class="poker-comment">$i18n.getText("scrumpoker.session.confirmestimation")</p>
             <ul class="list-of-cards centered">
                 {{#boundedVotes}}
                     <li><a onclick="ScrumPoker.confirmSession('{{issueKey}}','{{.}}');" class="card small clickable">{{.}}</a></li>
                 {{/boundedVotes}}
             </ul>
-        </div>
 
         {{/visible}}
 
-        <div class="poker-header">
-            <h2>$i18n.getText("scrumpoker.session.participants")</h2>
-        </div>
-        <div class="mod-content">
-            {{#agreementReached}}
-                <p class="poker-comment">$i18n.getText("scrumpoker.session.agreementreached")</p>
-            {{/agreementReached}}
-            <ul class="list-of-cards with-users">
-                {{#votes}}
-                    <li>
-                        <span class="card small {{^visible}}backside{{/visible}}">{{vote}}</span>
-                        <span>{{user}}</span>
-                        {{#needToTalk}}
-                        <span class="aui-icon aui-icon-small aui-iconfont-comment need-to-talk">$i18n.getText("scrumpoker.session.needtotalk")</span>
-                        {{/needToTalk}}
-                    </li>
-                {{/votes}}
-                {{^votes}}
-                    <p class="poker-comment">$i18n.getText("scrumpoker.session.noestimations")</p>
-                {{/votes}}
-            </ul>
-        </div>
+        <h4>$i18n.getText("scrumpoker.session.participants")</h4>
+
+        {{#agreementReached}}
+            <p class="poker-comment">$i18n.getText("scrumpoker.session.agreementreached")</p>
+        {{/agreementReached}}
+        <ul class="list-of-cards with-users">
+            {{#votes}}
+                <li>
+                    <span class="card small {{^visible}}backside{{/visible}}">{{vote}}</span>
+                    <span>{{user}}</span>
+                    {{#needToTalk}}
+                    <span class="aui-icon aui-icon-small aui-iconfont-comment need-to-talk">$i18n.getText("scrumpoker.session.needtotalk")</span>
+                    {{/needToTalk}}
+                </li>
+            {{/votes}}
+            {{^votes}}
+                <p class="poker-comment">$i18n.getText("scrumpoker.session.noestimations")</p>
+            {{/votes}}
+        </ul>
+
+    {{/confirmedVoteExists}}
+
+</script>
+
+<script id="scrum-poker-buttons-template" type="text/x-handlebars-template">
+
+    {{^confirmedVoteExists}}
 
         <div class="poker-buttons">
             {{#allowReset}}
@@ -162,14 +195,20 @@
         </div>
 
     {{/confirmedVoteExists}}
+
+</script>
+
+<script id="scrum-poker-finished-template" type="text/x-handlebars-template">
+
     {{#confirmedVoteExists}}
 
-        <div class="mod-content">
-            <p class="poker-comment">$i18n.getText("scrumpoker.session.estimationsaved")</p>
-            <ul class="list-of-cards centered">
-                <li><span class="card">{{confirmedVote}}</span></li>
-            </ul>
-        </div>
+        <h4>$i18n.getText("scrumpoker.title")</h4>
+
+        <p class="poker-comment">$i18n.getText("scrumpoker.session.estimationsaved")</p>
+        <ul class="list-of-cards centered">
+            <li><span class="card">{{confirmedVote}}</span></li>
+        </ul>
+
         <div class="poker-buttons">
             <a href="$req.contextPath/secure/scrumPokerSessions.jspa" class="aui-button">$i18n.getText("scrumpoker.sessions.list")</a>
             <a href="$req.contextPath/browse/{{issueKey}}" class="aui-button">$i18n.getText("scrumpoker.issue.navigateback")</a>

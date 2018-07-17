@@ -6,10 +6,12 @@ import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
 import de.codescape.jira.plugins.scrumpoker.service.SessionEntityTransformer;
+import de.codescape.jira.plugins.scrumpoker.service.SessionReferenceTransformer;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 /**
  * Implementation of the REST endpoint allowing to retrieve and modify a Scrum Poker session as a logged in user in the
@@ -22,15 +24,18 @@ public class SessionResource {
     private final JiraAuthenticationContext jiraAuthenticationContext;
     private final ScrumPokerSessionService scrumPokerSessionService;
     private final SessionEntityTransformer sessionEntityTransformer;
+    private final SessionReferenceTransformer sessionReferenceTransformer;
 
     public SessionResource(EstimationFieldService estimationFieldService,
                            JiraAuthenticationContext jiraAuthenticationContext,
                            ScrumPokerSessionService scrumPokerSessionService,
-                           SessionEntityTransformer sessionEntityTransformer) {
+                           SessionEntityTransformer sessionEntityTransformer,
+                           SessionReferenceTransformer sessionReferenceTransformer) {
         this.estimationFieldService = estimationFieldService;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
         this.sessionEntityTransformer = sessionEntityTransformer;
         this.scrumPokerSessionService = scrumPokerSessionService;
+        this.sessionReferenceTransformer = sessionReferenceTransformer;
     }
 
     /**
@@ -90,6 +95,17 @@ public class SessionResource {
         scrumPokerSessionService.confirm(issueKey, userKey, estimation);
         estimationFieldService.save(issueKey, estimation);
         return Response.ok().build();
+    }
+
+    /**
+     * Retrieve reference issues for the given estimation.
+     */
+    @GET
+    @Path("/reference/{estimation}")
+    public Response getReferences(@PathParam("estimation") Integer estimation) {
+        String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
+        List<ScrumPokerSession> references = scrumPokerSessionService.references(userKey, estimation);
+        return Response.ok(sessionReferenceTransformer.build(references, estimation)).build();
     }
 
 }

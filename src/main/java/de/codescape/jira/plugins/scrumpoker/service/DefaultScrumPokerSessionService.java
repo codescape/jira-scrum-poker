@@ -34,7 +34,7 @@ public class DefaultScrumPokerSessionService implements ScrumPokerSessionService
     public List<ScrumPokerSession> recent() {
         Date date = new Date(System.currentTimeMillis() - 3600 * 1000 * POKER_SESSION_TIMEOUT_HOURS);
         return Arrays.asList(ao.find(ScrumPokerSession.class,
-            Query.select().where("create_date > ?", date).order("create_date DESC")));
+            Query.select().where("CREATE_DATE > ?", date).order("CREATE_DATE DESC")));
     }
 
     @Override
@@ -52,7 +52,7 @@ public class DefaultScrumPokerSessionService implements ScrumPokerSessionService
         scrumPokerSession.save();
 
         ScrumPokerVote[] scrumPokerVotes = ao.find(ScrumPokerVote.class,
-            Query.select().where("session_id = ? and user_key = ?", issueKey, userKey));
+            Query.select().where("SESSION_ID = ? and USER_KEY = ?", issueKey, userKey));
         ScrumPokerVote scrumPokerVote;
         if (scrumPokerVotes.length == 0) {
             scrumPokerVote = ao.create(ScrumPokerVote.class);
@@ -85,10 +85,21 @@ public class DefaultScrumPokerSessionService implements ScrumPokerSessionService
 
     @Override
     public ScrumPokerSession reset(String issueKey, String userKey) {
-        ScrumPokerVote[] votes = ao.find(ScrumPokerVote.class, Query.select().where("session_id = ?", issueKey));
+        ScrumPokerVote[] votes = ao.find(ScrumPokerVote.class, Query.select().where("SESSION_ID = ?", issueKey));
         Arrays.stream(votes).forEach(ao::delete);
         ao.delete(byIssueKey(issueKey, userKey));
         return byIssueKey(issueKey, userKey);
+    }
+
+    @Override
+    public List<ScrumPokerSession> references(String userKey, Integer estimation) {
+        return Arrays.asList(ao.find(ScrumPokerSession.class, Query.select()
+            .alias(ScrumPokerSession.class, "session")
+            .alias(ScrumPokerVote.class, "vote")
+            .join(ScrumPokerVote.class, "vote.SESSION_ID = session.ISSUE_KEY")
+            .where("vote.USER_KEY = ? and session.CONFIRMED_VOTE = ?", userKey, estimation)
+            .order("session.CREATE_DATE DESC")
+            .limit(3)));
     }
 
     private ScrumPokerSession create(String issueKey, String userKey) {

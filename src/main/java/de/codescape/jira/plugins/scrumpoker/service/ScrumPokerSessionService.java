@@ -63,4 +63,13 @@ public interface ScrumPokerSessionService {
      */
     ScrumPokerSession reset(String issueKey, String userKey);
 
+    /**
+     * Returns a list of reference sessions with the same estimation to display for the given user.
+     *
+     * @param userKey    key of the user
+     * @param estimation estimation
+     * @return List of Scrum poker sessions
+     */
+    List<ScrumPokerSession> references(String userKey, Integer estimation);
+
 }

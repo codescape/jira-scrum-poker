@@ -19,12 +19,17 @@
     /* Refresh the Scrum Poker session and display results using Mustache template */
     function refreshSession(issueKey) {
         $.get(uri + '/session/' + issueKey, function(data) {
-            $('#card-section').html(
-                Mustache.render($('#card-section-template').html(), data)
-            );
             if(data.confirmedVoteExists) {
+                 $('#scrum-poker-cards').empty();
+                 $('#scrum-poker-participants').empty();
+                 $('#scrum-poker-buttons').empty();
+                 $('#scrum-poker-finished').html(Mustache.render($('#scrum-poker-finished-template').html(), data));
                 scheduleRedirectToIssue(issueKey);
             } else {
+                $('#scrum-poker-cards').html(Mustache.render($('#scrum-poker-cards-template').html(), data));
+                $('#scrum-poker-participants').html(Mustache.render($('#scrum-poker-participants-template').html(), data));
+                $('#scrum-poker-buttons').html(Mustache.render($('#scrum-poker-buttons-template').html(), data));
+                $('#scrum-poker-finished').empty();
                 cancelRedirectToIssue();
             }
         }).fail(function() {
@@ -77,6 +82,17 @@
         $.post(uri + '/session/' + issueKey + '/confirm/' + encodeURIComponent(estimation), function(data, status) {
             refreshSession(issueKey);
         });
+    }
+
+    /* Loads reference estimations that can be used to decide for or against an estimation */
+    ScrumPoker.showReferences = function(estimation) {
+        if(typeof estimation !== 'undefined' && $.isNumeric(estimation))  {
+            $.get(uri + '/session/reference/' + encodeURIComponent(estimation), function(data, status) {
+                $('#scrum-poker-references').html(Mustache.render($('#scrum-poker-references-template').html(), data));
+            }, 'json');
+        } else {
+            $('#scrum-poker-references').empty();
+        }
     }
 
 }(window.ScrumPoker = window.ScrumPoker || {}, jQuery));
