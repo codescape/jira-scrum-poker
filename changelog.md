@@ -4,6 +4,10 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
+* ...
+
+## [3.1.1] - 2018-07-18
+
 * fix: do not fail to display session list for not existing issues
 * fix: do not create sessions for not existing issues
 * feat: reduce requests to reference issues and fade out slowly in gui
@@ -371,7 +375,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.1.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.1.1...HEAD
+[3.1.1]: https://github.com/codescape/jira-scrum-poker/compare/3.1.0...3.1.1
 [3.1.0]: https://github.com/codescape/jira-scrum-poker/compare/3.0.1...3.1.0
 [3.0.1]: https://github.com/codescape/jira-scrum-poker/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/codescape/jira-scrum-poker/compare/2.8.0...3.0.0
