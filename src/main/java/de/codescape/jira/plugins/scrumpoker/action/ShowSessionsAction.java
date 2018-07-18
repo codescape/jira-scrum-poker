@@ -46,6 +46,7 @@ public class ShowSessionsAction extends JiraWebActionSupport {
     public List<SessionEntity> getOpenSessions() {
         return scrumPokerSessionService.recent().stream()
             .filter(session -> session.getConfirmedVote() == null)
+            .filter(session -> getIssue(session.getIssueKey()) != null)
             .filter(session -> currentUserIsAllowedToSeeIssue(getIssue(session.getIssueKey())))
             .map(session -> sessionEntityTransformer.build(session, currentUser().getKey()))
             .collect(Collectors.toList());
@@ -54,6 +55,7 @@ public class ShowSessionsAction extends JiraWebActionSupport {
     public List<SessionEntity> getClosedSessions() {
         return scrumPokerSessionService.recent().stream()
             .filter(session -> session.getConfirmedVote() != null)
+            .filter(session -> getIssue(session.getIssueKey()) != null)
             .filter(session -> currentUserIsAllowedToSeeIssue(getIssue(session.getIssueKey())))
             .map(session -> sessionEntityTransformer.build(session, currentUser().getKey()))
             .collect(Collectors.toList());
