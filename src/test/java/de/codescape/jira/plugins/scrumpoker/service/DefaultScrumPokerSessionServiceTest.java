@@ -1,6 +1,8 @@
 package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.activeobjects.test.TestActiveObjects;
+import com.atlassian.jira.issue.IssueManager;
+import com.atlassian.jira.issue.MutableIssue;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
 import net.java.ao.EntityManager;
@@ -13,12 +15,15 @@ import net.java.ao.test.junit.ActiveObjectsJUnitRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @RunWith(ActiveObjectsJUnitRunner.class)
 @Data(DefaultScrumPokerSessionServiceTest.ScrumPokerDatabaseUpdater.class)
@@ -27,34 +32,37 @@ import static org.junit.Assert.assertThat;
 public class DefaultScrumPokerSessionServiceTest {
 
     private EntityManager entityManager;
-    private TestActiveObjects ao;
+    private TestActiveObjects activeObjects;
 
     private ScrumPokerSessionService scrumPokerSessionService;
 
     @Before
     public void before() {
-        ao = new TestActiveObjects(entityManager);
-        scrumPokerSessionService = new DefaultScrumPokerSessionService(ao);
+        activeObjects = new TestActiveObjects(entityManager);
+        IssueManager issueManager = mock(IssueManager.class);
+        MutableIssue issue = mock(MutableIssue.class);
+        when(issueManager.getIssueObject(Matchers.startsWith("ISSUE-"))).thenReturn(issue);
+        scrumPokerSessionService = new DefaultScrumPokerSessionService(activeObjects, issueManager);
     }
 
     @Test
     public void shouldCreateSessionIfNotExists() {
         scrumPokerSessionService.byIssueKey("ISSUE-1", "USER-1");
-        assertThat(ao.get(ScrumPokerSession.class, "ISSUE-1").getCreatorUserKey(), equalTo("USER-1"));
+        assertThat(activeObjects.get(ScrumPokerSession.class, "ISSUE-1").getCreatorUserKey(), equalTo("USER-1"));
     }
 
     @Test
     public void shouldAddVoteToSession() {
         scrumPokerSessionService.addVote("ISSUE-1", "USER-1", "5");
-        assertThat(ao.get(ScrumPokerSession.class, "ISSUE-1").getVotes().length, equalTo(1));
+        assertThat(activeObjects.get(ScrumPokerSession.class, "ISSUE-1").getVotes().length, equalTo(1));
     }
 
     @Test
     public void shouldOverrideVoteOnSessionForSameUser() {
         scrumPokerSessionService.addVote("ISSUE-1", "USER-1", "5");
         scrumPokerSessionService.addVote("ISSUE-1", "USER-1", "8");
-        assertThat(ao.get(ScrumPokerSession.class, "ISSUE-1").getVotes().length, equalTo(1));
-        assertThat(ao.get(ScrumPokerSession.class, "ISSUE-1").getVotes()[0].getVote(), equalTo("8"));
+        assertThat(activeObjects.get(ScrumPokerSession.class, "ISSUE-1").getVotes().length, equalTo(1));
+        assertThat(activeObjects.get(ScrumPokerSession.class, "ISSUE-1").getVotes()[0].getVote(), equalTo("8"));
     }
 
     @Test
@@ -102,6 +110,11 @@ public class DefaultScrumPokerSessionServiceTest {
         assertThat(references.size(), is(3));
         assertThat(references.stream().map(session -> session.getIssueKey()).collect(Collectors.toList()),
             hasItems("ISSUE-8", "ISSUE-5", "ISSUE-2"));
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void shouldNotCreateSessionForIssueKeyWhichDoesNotExist() {
+        scrumPokerSessionService.byIssueKey("UNKNOWN", "USER-1");
     }
 
     public static final class ScrumPokerDatabaseUpdater implements DatabaseUpdater {

@@ -1,6 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
+import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.plugin.spring.scanner.annotation.component.Scanned;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
@@ -25,9 +26,13 @@ public class DefaultScrumPokerSessionService implements ScrumPokerSessionService
     @ComponentImport
     private final ActiveObjects activeObjects;
 
+    @ComponentImport
+    private final IssueManager issueManager;
+
     @Inject
-    public DefaultScrumPokerSessionService(ActiveObjects activeObjects) {
+    public DefaultScrumPokerSessionService(ActiveObjects activeObjects, IssueManager issueManager) {
         this.activeObjects = checkNotNull(activeObjects);
+        this.issueManager = issueManager;
     }
 
     @Override
@@ -104,6 +109,9 @@ public class DefaultScrumPokerSessionService implements ScrumPokerSessionService
     }
 
     private ScrumPokerSession create(String issueKey, String userKey) {
+        if (issueManager.getIssueObject(issueKey) == null) {
+            throw new IllegalStateException("Unable to create session for issue with key " + issueKey + " because could not find this issue.");
+        }
         ScrumPokerSession scrumPokerSession = activeObjects.create(ScrumPokerSession.class,
             new DBParam("ISSUE_KEY", issueKey));
         scrumPokerSession.setCreateDate(new Date());
