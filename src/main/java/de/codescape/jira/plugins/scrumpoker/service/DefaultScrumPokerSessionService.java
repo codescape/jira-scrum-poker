@@ -110,7 +110,8 @@ public class DefaultScrumPokerSessionService implements ScrumPokerSessionService
 
     private ScrumPokerSession create(String issueKey, String userKey) {
         if (issueManager.getIssueObject(issueKey) == null) {
-            throw new IllegalStateException("Unable to create session for issue with key " + issueKey + " because could not find this issue.");
+            throw new IllegalStateException("Unable to create session for issue with key " + issueKey
+                + " because could not find this issue.");
         }
         ScrumPokerSession scrumPokerSession = activeObjects.create(ScrumPokerSession.class,
             new DBParam("ISSUE_KEY", issueKey));
