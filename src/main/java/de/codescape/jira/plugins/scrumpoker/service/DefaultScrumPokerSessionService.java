@@ -23,23 +23,23 @@ public class DefaultScrumPokerSessionService implements ScrumPokerSessionService
     private static final int POKER_SESSION_TIMEOUT_HOURS = 12;
 
     @ComponentImport
-    private final ActiveObjects ao;
+    private final ActiveObjects activeObjects;
 
     @Inject
-    public DefaultScrumPokerSessionService(ActiveObjects ao) {
-        this.ao = checkNotNull(ao);
+    public DefaultScrumPokerSessionService(ActiveObjects activeObjects) {
+        this.activeObjects = checkNotNull(activeObjects);
     }
 
     @Override
     public List<ScrumPokerSession> recent() {
         Date date = new Date(System.currentTimeMillis() - 3600 * 1000 * POKER_SESSION_TIMEOUT_HOURS);
-        return Arrays.asList(ao.find(ScrumPokerSession.class,
-            Query.select().where("CREATE_DATE > ?", date).order("CREATE_DATE DESC")));
+        return Arrays.asList(activeObjects.find(ScrumPokerSession.class, Query.select()
+            .where("CREATE_DATE > ?", date).order("CREATE_DATE DESC")));
     }
 
     @Override
     public ScrumPokerSession byIssueKey(String issueKey, String userKey) {
-        ScrumPokerSession scrumPokerSession = ao.get(ScrumPokerSession.class, issueKey);
+        ScrumPokerSession scrumPokerSession = activeObjects.get(ScrumPokerSession.class, issueKey);
         if (scrumPokerSession == null)
             scrumPokerSession = create(issueKey, userKey);
         return scrumPokerSession;
@@ -51,11 +51,11 @@ public class DefaultScrumPokerSessionService implements ScrumPokerSessionService
         scrumPokerSession.setVisible(false);
         scrumPokerSession.save();
 
-        ScrumPokerVote[] scrumPokerVotes = ao.find(ScrumPokerVote.class,
-            Query.select().where("SESSION_ID = ? and USER_KEY = ?", issueKey, userKey));
+        ScrumPokerVote[] scrumPokerVotes = activeObjects.find(ScrumPokerVote.class, Query.select()
+            .where("SESSION_ID = ? and USER_KEY = ?", issueKey, userKey));
         ScrumPokerVote scrumPokerVote;
         if (scrumPokerVotes.length == 0) {
-            scrumPokerVote = ao.create(ScrumPokerVote.class);
+            scrumPokerVote = activeObjects.create(ScrumPokerVote.class);
             scrumPokerVote.setSession(scrumPokerSession);
             scrumPokerVote.setUserKey(userKey);
         } else {
@@ -85,15 +85,16 @@ public class DefaultScrumPokerSessionService implements ScrumPokerSessionService
 
     @Override
     public ScrumPokerSession reset(String issueKey, String userKey) {
-        ScrumPokerVote[] votes = ao.find(ScrumPokerVote.class, Query.select().where("SESSION_ID = ?", issueKey));
-        Arrays.stream(votes).forEach(ao::delete);
-        ao.delete(byIssueKey(issueKey, userKey));
+        ScrumPokerVote[] votes = activeObjects.find(ScrumPokerVote.class, Query.select()
+            .where("SESSION_ID = ?", issueKey));
+        Arrays.stream(votes).forEach(activeObjects::delete);
+        activeObjects.delete(byIssueKey(issueKey, userKey));
         return byIssueKey(issueKey, userKey);
     }
 
     @Override
     public List<ScrumPokerSession> references(String userKey, Integer estimation) {
-        return Arrays.asList(ao.find(ScrumPokerSession.class, Query.select()
+        return Arrays.asList(activeObjects.find(ScrumPokerSession.class, Query.select()
             .alias(ScrumPokerSession.class, "session")
             .alias(ScrumPokerVote.class, "vote")
             .join(ScrumPokerVote.class, "vote.SESSION_ID = session.ISSUE_KEY")
@@ -103,7 +104,7 @@ public class DefaultScrumPokerSessionService implements ScrumPokerSessionService
     }
 
     private ScrumPokerSession create(String issueKey, String userKey) {
-        ScrumPokerSession scrumPokerSession = ao.create(ScrumPokerSession.class,
+        ScrumPokerSession scrumPokerSession = activeObjects.create(ScrumPokerSession.class,
             new DBParam("ISSUE_KEY", issueKey));
         scrumPokerSession.setCreateDate(new Date());
         scrumPokerSession.setCreatorUserKey(userKey);

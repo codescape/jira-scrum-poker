@@ -5,6 +5,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 ## [Unreleased]
 
 * fix: do not fail to display session list for not existing issues
+* refactor: improve code for persistence service
 
 ## [3.1.0] - 2018-07-17
 
