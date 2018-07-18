@@ -6,6 +6,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * fix: do not fail to display session list for not existing issues
 * fix: do not create sessions for not existing issues
+* feat: reduce requests to reference issues and fade out slowly in gui
 * refactor: improve code for persistence service
 
 ## [3.1.0] - 2018-07-17

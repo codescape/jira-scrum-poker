@@ -7,6 +7,8 @@
     var refreshTimeout;
     var redirectTimeout;
     var redirectTimeoutActive = false;
+    var fadeReferencesTimeout;
+    var lastShownEstimation;
 
     /* Initialize the automatic refresh of the Scrum Poker session every 2 seconds. */
     ScrumPoker.poll = function(issueKey) {
@@ -87,11 +89,18 @@
     /* Loads reference estimations that can be used to decide for or against an estimation */
     ScrumPoker.showReferences = function(estimation) {
         if(typeof estimation !== 'undefined' && $.isNumeric(estimation))  {
-            $.get(uri + '/session/reference/' + encodeURIComponent(estimation), function(data, status) {
-                $('#scrum-poker-references').html(Mustache.render($('#scrum-poker-references-template').html(), data));
-            }, 'json');
+            clearTimeout(fadeReferencesTimeout);
+            if (estimation != lastShownEstimation || $('#scrum-poker-references').is(":empty")) {
+                $.get(uri + '/session/reference/' + encodeURIComponent(estimation), function(data, status) {
+                    $('#scrum-poker-references').html(Mustache.render($('#scrum-poker-references-template').html(), data));
+                    lastShownEstimation = estimation;
+                }, 'json');
+            }
+            $('#scrum-poker-references').fadeIn(1000);
         } else {
-            $('#scrum-poker-references').empty();
+            fadeReferencesTimeout = setTimeout(function() {
+                $('#scrum-poker-references').fadeOut(1000);
+            }, 2000);
         }
     }
 
