@@ -18,7 +18,7 @@ The following data is collected and persisted into the Jira database during a Sc
 
 All data and information is solely used for the execution of Scrum Poker sessions.
 
-The session data is kept visible for 12 hours to allow recently completed sessions being displayed to users as a reference for currently running sessions. 
+The session data is kept visible for 12 hours in the list of recently finished sessions. After that the votes are solely used to display reference issues to users for currently running sessions. 
 
 ## Log files
 

@@ -4,7 +4,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
-* ...
+* docs: improve privacy statement with details to data usage
 
 ## [3.1.1] - 2018-07-18
 
