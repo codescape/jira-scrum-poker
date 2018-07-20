@@ -26,6 +26,7 @@
                  $('#scrum-poker-cards').empty();
                  $('#scrum-poker-participants').empty();
                  $('#scrum-poker-buttons').empty();
+                 $('#scrum-poker-references').hide();
                  $('#scrum-poker-finished').html(Mustache.render($('#scrum-poker-finished-template').html(), data));
                 scheduleRedirectToIssue(issueKey);
             } else {
@@ -90,8 +91,10 @@
     /* Loads reference estimations that can be used to decide for or against an estimation */
     ScrumPoker.showReferences = function(estimation) {
         if(typeof estimation !== 'undefined' && $.isNumeric(estimation))  {
-            clearTimeout(fadeReferencesTimeout);
-            fadeReferencesTimeoutActive = false;
+            if (fadeReferencesTimeoutActive) {
+                clearTimeout(fadeReferencesTimeout);
+                fadeReferencesTimeoutActive = false;
+            }
             if (estimation != lastShownEstimation || $('#scrum-poker-references').is(":empty")) {
                 $.get(uri + '/session/reference/' + encodeURIComponent(estimation), function(data, status) {
                     $('#scrum-poker-references').html(Mustache.render($('#scrum-poker-references-template').html(), data));
