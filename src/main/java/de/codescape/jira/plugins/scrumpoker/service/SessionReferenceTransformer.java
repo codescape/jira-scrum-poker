@@ -11,6 +11,7 @@ import de.codescape.jira.plugins.scrumpoker.rest.entities.ReferenceListEntity;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -41,10 +42,11 @@ public class SessionReferenceTransformer {
         return new ReferenceListEntity(scrumPokerSessions.stream()
             .map(scrumPokerSession -> {
                 MutableIssue issue = issueManager.getIssueObject(scrumPokerSession.getIssueKey());
-                return new ReferenceEntity(scrumPokerSession.getIssueKey(),
+                return issue != null ? new ReferenceEntity(scrumPokerSession.getIssueKey(),
                     issue.getIssueType().getCompleteIconUrl(),
-                    issue.getSummary());
+                    issue.getSummary()) : null;
             })
+            .filter(Objects::nonNull)
             .collect(Collectors.toList()), estimation);
     }
 

@@ -7,6 +7,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * docs: improve privacy statement with details to data usage
 * fix: cancel fading out reference issues when references shall be displayed
 * fix: hide references immediately when estimation is confirmed
+* fix: do not show references where issue does not exist anymore
 
 ## [3.1.1] - 2018-07-18
 
