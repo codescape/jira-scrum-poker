@@ -8,6 +8,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * fix: cancel fading out reference issues when references shall be displayed
 * fix: hide references immediately when estimation is confirmed
 * fix: do not show references where issue does not exist anymore
+* chore: implement against latest Jira patch version 7.11.1
 
 ## [3.1.1] - 2018-07-18
 
