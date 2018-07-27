@@ -4,6 +4,10 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
+* ...
+
+## [3.1.2] - 2018-07-27
+
 * docs: improve privacy statement with details to data usage
 * fix: cancel fading out reference issues when references shall be displayed
 * fix: hide references immediately when estimation is confirmed
@@ -380,7 +384,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.1.1...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.1.2...HEAD
+[3.1.2]: https://github.com/codescape/jira-scrum-poker/compare/3.1.1...3.1.2
 [3.1.1]: https://github.com/codescape/jira-scrum-poker/compare/3.1.0...3.1.1
 [3.1.0]: https://github.com/codescape/jira-scrum-poker/compare/3.0.1...3.1.0
 [3.0.1]: https://github.com/codescape/jira-scrum-poker/compare/3.0.0...3.0.1
