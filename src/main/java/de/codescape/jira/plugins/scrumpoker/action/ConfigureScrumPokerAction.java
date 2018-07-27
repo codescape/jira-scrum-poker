@@ -41,9 +41,9 @@ public class ConfigureScrumPokerAction extends JiraWebActionSupport {
 
     @Override
     protected String doExecute() {
-        String newStoryPointField = getHttpRequest().getParameter(PARAM_STORY_POINT_FIELD);
         String action = getHttpRequest().getParameter(PARAM_ACTION);
         if (action != null && action.equals("save")) {
+            String newStoryPointField = getHttpRequest().getParameter(PARAM_STORY_POINT_FIELD);
             scrumPokerSettingsService.persistStoryPointFieldId(newStoryPointField);
         }
         return "success";

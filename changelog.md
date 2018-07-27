@@ -9,6 +9,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * fix: hide references immediately when estimation is confirmed
 * fix: do not show references where issue does not exist anymore
 * chore: implement against latest Jira patch version 7.11.1
+* feat: simplify add-on global configuration page
 
 ## [3.1.1] - 2018-07-18
 
