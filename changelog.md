@@ -6,6 +6,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: Scrum Poker session timeout configurable in plugin settings (#19)
 * chore: implement against latest Jira patch version 7.11.2
+* fix: button "Start Scrum Poker" is shown twice (#28)
 
 ## [3.1.2] - 2018-07-27
 
