@@ -6,6 +6,8 @@
 
 <h2>$i18n.getText("scrumpoker.title") &raquo; $i18n.getText("scrumpoker.config.title")</h2>
 
+<p>$i18n.getText("scrumpoker.config.description")</p>
+
 <form class="aui long-label" action="scrumPokerConfiguration.jspa" method="post">
     <div class="form-body">
         <div class="field-group">
