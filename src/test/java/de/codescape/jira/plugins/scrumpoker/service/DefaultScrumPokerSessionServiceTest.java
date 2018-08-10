@@ -39,10 +39,16 @@ public class DefaultScrumPokerSessionServiceTest {
     @Before
     public void before() {
         activeObjects = new TestActiveObjects(entityManager);
+
         IssueManager issueManager = mock(IssueManager.class);
         MutableIssue issue = mock(MutableIssue.class);
         when(issueManager.getIssueObject(Matchers.startsWith("ISSUE-"))).thenReturn(issue);
-        scrumPokerSessionService = new DefaultScrumPokerSessionService(activeObjects, issueManager);
+
+        ScrumPokerSettingsService scrumPokerSettingsService = mock(ScrumPokerSettingsService.class);
+        when(scrumPokerSettingsService.loadSessionTimeout()).thenReturn(12);
+
+        scrumPokerSessionService = new DefaultScrumPokerSessionService(activeObjects, issueManager,
+            scrumPokerSettingsService);
     }
 
     @Test

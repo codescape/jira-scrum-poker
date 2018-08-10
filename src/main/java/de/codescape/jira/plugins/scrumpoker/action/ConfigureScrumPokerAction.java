@@ -14,6 +14,7 @@ public class ConfigureScrumPokerAction extends JiraWebActionSupport {
 
     private static final long serialVersionUID = 1L;
     private static final String PARAM_STORY_POINT_FIELD = "storyPointField";
+    private static final String PARAM_SESSION_TIMEOUT = "sessionTimeout";
     private static final String PARAM_ACTION = "action";
 
     private final CustomFieldManager customFieldManager;
@@ -39,12 +40,17 @@ public class ConfigureScrumPokerAction extends JiraWebActionSupport {
         return scrumPokerSettingsService.loadStoryPointFieldId();
     }
 
+    public String getSessionTimeout() {
+        return scrumPokerSettingsService.loadSessionTimeout().toString();
+    }
+
     @Override
     protected String doExecute() {
         String action = getHttpRequest().getParameter(PARAM_ACTION);
         if (action != null && action.equals("save")) {
             String newStoryPointField = getHttpRequest().getParameter(PARAM_STORY_POINT_FIELD);
-            scrumPokerSettingsService.persistStoryPointFieldId(newStoryPointField);
+            String newSessionTimeout = getHttpRequest().getParameter(PARAM_SESSION_TIMEOUT);
+            scrumPokerSettingsService.persistSettings(newStoryPointField, newSessionTimeout);
         }
         return "success";
     }

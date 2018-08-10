@@ -21,25 +21,31 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @Named
 public class DefaultScrumPokerSessionService implements ScrumPokerSessionService {
 
-    private static final int POKER_SESSION_TIMEOUT_HOURS = 12;
-
     @ComponentImport
     private final ActiveObjects activeObjects;
 
     @ComponentImport
     private final IssueManager issueManager;
 
+    private final ScrumPokerSettingsService scrumPokerSettingsService;
+
     @Inject
-    public DefaultScrumPokerSessionService(ActiveObjects activeObjects, IssueManager issueManager) {
+    public DefaultScrumPokerSessionService(ActiveObjects activeObjects, IssueManager issueManager,
+                                           ScrumPokerSettingsService scrumPokerSettingsService) {
         this.activeObjects = checkNotNull(activeObjects);
         this.issueManager = issueManager;
+        this.scrumPokerSettingsService = scrumPokerSettingsService;
     }
 
     @Override
     public List<ScrumPokerSession> recent() {
-        Date date = new Date(System.currentTimeMillis() - 3600 * 1000 * POKER_SESSION_TIMEOUT_HOURS);
+        Date date = new Date(System.currentTimeMillis() - sessionTimeoutInMillis());
         return Arrays.asList(activeObjects.find(ScrumPokerSession.class, Query.select()
             .where("CREATE_DATE > ?", date).order("CREATE_DATE DESC")));
+    }
+
+    private int sessionTimeoutInMillis() {
+        return 3600 * 1000 * scrumPokerSettingsService.loadSessionTimeout();
     }
 
     @Override

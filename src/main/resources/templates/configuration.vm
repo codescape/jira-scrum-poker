@@ -25,6 +25,14 @@
             #end
             <div class="description">$i18n.getText("scrumpoker.config.estimation.description")</div>
         </div>
+        <div class="field-group">
+            <label for="sessionTimeout">$i18n.getText("scrumpoker.config.sessiontimeout")</label>
+            <input type="number" class="text short-field" step="1" id="sessionTimeout" name="sessionTimeout" value="$sessionTimeout">
+            #if (!$sessionTimeout)
+                <div class="error">$i18n.getText("scrumpoker.config.field.required")</div>
+            #end
+            <div class="description">$i18n.getText("scrumpoker.config.sessionTimeout.description")</div>
+        </div>
     </div>
     <div class="buttons-container form-footer">
         <div class="buttons">

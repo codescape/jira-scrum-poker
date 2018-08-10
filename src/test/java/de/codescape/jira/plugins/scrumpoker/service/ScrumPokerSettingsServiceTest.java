@@ -2,6 +2,7 @@ package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -9,8 +10,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import static de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingsService.SETTINGS_NAMESPACE;
-import static de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingsService.STORY_POINT_FIELD;
+import static de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingsService.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -30,18 +33,27 @@ public class ScrumPokerSettingsServiceTest {
     @Mock
     private PluginSettings pluginSettings;
 
+    @Before
+    public void before() {
+        when(pluginSettingsFactory.createGlobalSettings()).thenReturn(pluginSettings);
+    }
+
     @Test
     public void persistingShouldRemoveTheSettingIfNoFieldIsGiven() {
-        when(pluginSettingsFactory.createGlobalSettings()).thenReturn(pluginSettings);
-        scrumPokerSettingsService.persistStoryPointFieldId("");
+        scrumPokerSettingsService.persistSettings("", "12");
         verify(pluginSettings).remove(SETTINGS_NAMESPACE + "." + STORY_POINT_FIELD);
     }
 
     @Test
     public void persistingShouldSaveTheSettingIfFieldIsGiven() {
-        when(pluginSettingsFactory.createGlobalSettings()).thenReturn(pluginSettings);
-        scrumPokerSettingsService.persistStoryPointFieldId(NEW_FIELD_NAME);
+        scrumPokerSettingsService.persistSettings(NEW_FIELD_NAME, "12");
         verify(pluginSettings).put(SETTINGS_NAMESPACE + "." + STORY_POINT_FIELD, NEW_FIELD_NAME);
+    }
+
+    @Test
+    public void loadingSessionTimeoutAlwaysReturnsDefaultValueIfNoValueIsSet() {
+        when(pluginSettings.get(SESSION_TIMEOUT)).thenReturn(null);
+        assertThat(scrumPokerSettingsService.loadSessionTimeout(), is(equalTo(SESSION_TIMEOUT_DEFAULT)));
     }
 
 }
