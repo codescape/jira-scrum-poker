@@ -104,6 +104,16 @@ public class DefaultScrumPokerSessionService implements ScrumPokerSessionService
     }
 
     @Override
+    public ScrumPokerSession cancel(String issueKey, String userKey) {
+        ScrumPokerSession scrumPokerSession = byIssueKey(issueKey, userKey);
+        if (scrumPokerSession.getCreatorUserKey().equals(userKey)) {
+            scrumPokerSession.setCancelled(true);
+        }
+        scrumPokerSession.save();
+        return scrumPokerSession;
+    }
+
+    @Override
     public List<ScrumPokerSession> references(String userKey, Integer estimation) {
         return Arrays.asList(activeObjects.find(ScrumPokerSession.class, Query.select()
             .alias(ScrumPokerSession.class, "session")

@@ -37,4 +37,8 @@ public interface ScrumPokerSession extends RawEntity<String> {
 
     void setCreateDate(Date createDate);
 
+    boolean isCancelled();
+
+    void setCancelled(boolean cancelled);
+
 }

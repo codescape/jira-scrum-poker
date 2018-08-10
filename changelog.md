@@ -5,6 +5,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 ## [Unreleased]
 
 * feat: Scrum Poker session timeout configurable in plugin settings (#19)
+* feat: allow the creator of a session to cancel the session (#20)
 * chore: implement against latest Jira patch version 7.11.2
 * fix: button "Start Scrum Poker" is shown twice (#28)
 

@@ -74,6 +74,17 @@ public class SessionResource {
     }
 
     /**
+     * Cancel the Scrum Poker session.
+     */
+    @POST
+    @Path("/{issueKey}/cancel")
+    public Response cancelSession(@PathParam("issueKey") String issueKey) {
+        String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
+        scrumPokerSessionService.cancel(issueKey, userKey);
+        return Response.ok().build();
+    }
+
+    /**
      * Reset the Scrum Poker session.
      */
     @POST

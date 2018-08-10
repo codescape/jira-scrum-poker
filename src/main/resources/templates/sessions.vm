@@ -91,7 +91,13 @@
                             <td class="created">$scrumPokerSession.createDate</td>
                             <td class="assignee">$scrumPokerSession.creator</td>
                             <td>$scrumPokerSession.votes.size()</td>
-                            <td><span class="aui-badge ghx-statistic-badge">$scrumPokerSession.confirmedVote</span></td>
+                            <td>
+                                #if ($scrumPokerSession.cancelled)
+                                    <i>$i18n.getText("scrumpoker.session.cancelled")</i>
+                                #else
+                                    <span class="aui-badge ghx-statistic-badge">$scrumPokerSession.confirmedVote</span>
+                                #end
+                            </td>
                         </tr>
                         #end
                     #end

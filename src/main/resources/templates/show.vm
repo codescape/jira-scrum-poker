@@ -179,6 +179,11 @@
     {{^confirmedVoteExists}}
 
         <div class="poker-buttons">
+            <div class="aui-buttons">
+            {{#allowCancel}}
+                <button onclick="ScrumPoker.cancelSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.cancel")</button>
+            {{/allowCancel}}
+
             {{#allowReset}}
                 <button onclick="ScrumPoker.resetSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.reset")</button>
             {{/allowReset}}
@@ -192,6 +197,7 @@
             {{^allowReveal}}
                 <button class="aui-button" aria-disabled="true" disabled>$i18n.getText("scrumpoker.session.revealcards")</button>
             {{/allowReveal}}
+            </div>
         </div>
 
     {{/confirmedVoteExists}}
@@ -200,22 +206,30 @@
 
 <script id="scrum-poker-finished-template" type="text/x-handlebars-template">
 
-    {{#confirmedVoteExists}}
+    <h4>$i18n.getText("scrumpoker.title")</h4>
 
-        <h4>$i18n.getText("scrumpoker.title")</h4>
+    {{#confirmedVoteExists}}
 
         <p class="poker-comment">$i18n.getText("scrumpoker.session.estimationsaved")</p>
         <ul class="list-of-cards centered">
             <li><span class="card">{{confirmedVote}}</span></li>
         </ul>
 
-        <div class="poker-buttons">
+    {{/confirmedVoteExists}}
+
+    {{#cancelled}}
+
+        <p class="poker-comment">$i18n.getText("scrumpoker.session.cancelled.long")</p>
+
+    {{/cancelled}}
+
+    <div class="poker-buttons">
+        <div class="aui-buttons">
             <a href="$req.contextPath/secure/scrumPokerSessions.jspa" class="aui-button">$i18n.getText("scrumpoker.sessions.list")</a>
             <a href="$req.contextPath/browse/{{issueKey}}" class="aui-button">$i18n.getText("scrumpoker.issue.navigateback")</a>
             <button onclick="ScrumPoker.resetSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.reset")</button>
         </div>
-
-    {{/confirmedVoteExists}}
+    </div>
 
 </script>
 

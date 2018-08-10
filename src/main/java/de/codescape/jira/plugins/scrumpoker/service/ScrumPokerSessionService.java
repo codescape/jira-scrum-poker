@@ -64,6 +64,15 @@ public interface ScrumPokerSessionService {
     ScrumPokerSession reset(String issueKey, String userKey);
 
     /**
+     * Cancels a Scrum poker session.
+     *
+     * @param issueKey key of the issue
+     * @param userKey  key of the user
+     * @return Scrum poker session
+     */
+    ScrumPokerSession cancel(String issueKey, String userKey);
+
+    /**
      * Returns a list of reference sessions with the same estimation to display for the given user.
      *
      * @param userKey    key of the user

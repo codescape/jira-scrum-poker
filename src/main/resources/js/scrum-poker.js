@@ -22,7 +22,7 @@
     /* Refresh the Scrum Poker session and display results using Mustache template */
     function refreshSession(issueKey) {
         $.get(uri + '/session/' + issueKey, function(data) {
-            if(data.confirmedVoteExists) {
+            if(data.confirmedVoteExists || data.cancelled) {
                  $('#scrum-poker-cards').empty();
                  $('#scrum-poker-participants').empty();
                  $('#scrum-poker-buttons').empty();
@@ -84,6 +84,13 @@
     /* Confirm the estimation for a Scrum Poker session ending itself and persisting the estimation on the issue */
     ScrumPoker.confirmSession = function(issueKey, estimation) {
         $.post(uri + '/session/' + issueKey + '/confirm/' + encodeURIComponent(estimation), function(data, status) {
+            refreshSession(issueKey);
+        });
+    }
+
+    /* Cancel the Scrum Poker session */
+    ScrumPoker.cancelSession = function(issueKey) {
+        $.post(uri + '/session/' + issueKey + '/cancel', function(data, status) {
             refreshSession(issueKey);
         });
     }

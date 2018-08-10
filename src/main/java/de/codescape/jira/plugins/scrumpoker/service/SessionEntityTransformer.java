@@ -50,14 +50,23 @@ public class SessionEntityTransformer {
             .withIssueKey(scrumPokerSession.getIssueKey())
             .withConfirmedVote(scrumPokerSession.getConfirmedVote())
             .withVisible(scrumPokerSession.isVisible())
+            .withCancelled(scrumPokerSession.isCancelled())
             .withBoundedVotes(boundedVotes(scrumPokerSession.getVotes()))
             .withVotes(votes(scrumPokerSession))
             .withCards(cards(scrumPokerSession, userKey))
             .withAllowReveal(allowReveal(scrumPokerSession))
             .withAllowReset(allowReset(scrumPokerSession))
+            .withAllowCancel(allowCancel(scrumPokerSession, userKey))
             .withAgreementReached(agreementReached(scrumPokerSession))
             .withCreator(displayName(scrumPokerSession.getCreatorUserKey()))
             .withCreateDate(scrumPokerSession.getCreateDate());
+    }
+
+    /**
+     * Cancellation of a Scrum poker session is only allowed for the user who started the session.
+     */
+    private boolean allowCancel(ScrumPokerSession scrumPokerSession, String userKey) {
+        return scrumPokerSession.getCreatorUserKey() != null && scrumPokerSession.getCreatorUserKey().equals(userKey);
     }
 
     /**

@@ -18,9 +18,11 @@ public class SessionEntity {
     private boolean visible;
     private List<Integer> boundedVotes;
     private boolean agreementReached;
+    private boolean cancelled;
     private List<VoteEntity> votes;
     private boolean allowReset;
     private boolean allowReveal;
+    private boolean allowCancel;
     private String creator;
     private String createDate;
 
@@ -82,6 +84,15 @@ public class SessionEntity {
         return agreementReached;
     }
 
+    public SessionEntity withCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
+        return this;
+    }
+
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
     public SessionEntity withVotes(List<VoteEntity> votes) {
         this.votes = votes;
         return this;
@@ -102,6 +113,15 @@ public class SessionEntity {
 
     public SessionEntity withAllowReveal(boolean allowReveal) {
         this.allowReveal = allowReveal;
+        return this;
+    }
+
+    public boolean isAllowCancel() {
+        return allowCancel;
+    }
+
+    public SessionEntity withAllowCancel(boolean allowCancel) {
+        this.allowCancel = allowCancel;
         return this;
     }
 

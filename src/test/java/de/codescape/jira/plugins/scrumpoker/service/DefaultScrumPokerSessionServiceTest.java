@@ -96,6 +96,20 @@ public class DefaultScrumPokerSessionServiceTest {
     }
 
     @Test
+    public void shouldCancelASessionIfCurrentUserIsTheCreatorOfTheSession() {
+        scrumPokerSessionService.byIssueKey("ISSUE-9", "USER-1");
+        ScrumPokerSession cancelledSession = scrumPokerSessionService.cancel("ISSUE-9", "USER-1");
+        assertThat(cancelledSession.isCancelled(), is(true));
+    }
+
+    @Test
+    public void shouldNotCancelASessionIfCurrentUserIsNotTheCreatorOfTheSession() {
+        scrumPokerSessionService.byIssueKey("ISSUE-9", "USER-1");
+        ScrumPokerSession cancelledSession = scrumPokerSessionService.cancel("ISSUE-9", "USER-2");
+        assertThat(cancelledSession.isCancelled(), is(false));
+    }
+
+    @Test
     public void shouldReturnReferencesWithTheSameUserAndEstimation() {
         scrumPokerSessionService.addVote("ISSUE-1", "USER-1", "3");
         scrumPokerSessionService.confirm("ISSUE-1", "USER-1", 8);
