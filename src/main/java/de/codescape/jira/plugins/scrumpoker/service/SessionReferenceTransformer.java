@@ -43,7 +43,7 @@ public class SessionReferenceTransformer {
             .map(scrumPokerSession -> {
                 MutableIssue issue = issueManager.getIssueObject(scrumPokerSession.getIssueKey());
                 return issue != null ? new ReferenceEntity(scrumPokerSession.getIssueKey(),
-                    issue.getIssueType().getCompleteIconUrl(),
+                    issue.getIssueType() != null ? issue.getIssueType().getCompleteIconUrl() : null,
                     issue.getSummary()) : null;
             })
             .filter(Objects::nonNull)

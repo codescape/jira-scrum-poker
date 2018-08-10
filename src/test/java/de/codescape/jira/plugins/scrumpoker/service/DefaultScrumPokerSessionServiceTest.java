@@ -128,7 +128,7 @@ public class DefaultScrumPokerSessionServiceTest {
 
         List<ScrumPokerSession> references = scrumPokerSessionService.references("USER-1", 8);
         assertThat(references.size(), is(3));
-        assertThat(references.stream().map(session -> session.getIssueKey()).collect(Collectors.toList()),
+        assertThat(references.stream().map(ScrumPokerSession::getIssueKey).collect(Collectors.toList()),
             hasItems("ISSUE-8", "ISSUE-5", "ISSUE-2"));
     }
 

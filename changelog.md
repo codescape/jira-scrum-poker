@@ -9,6 +9,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * chore: implement against latest Jira patch version 7.11.2
 * fix: button "Start Scrum Poker" is shown twice (#28)
 * feat: improve readability of global plugin configuration
+* refactor: use Java 8 lambdas and use null save operations where appropriate
 
 ## [3.1.2] - 2018-07-27
 
