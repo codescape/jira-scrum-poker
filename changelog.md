@@ -4,6 +4,10 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
+* ...
+
+## [3.2.0] - 2018-08-10
+
 * feat: Scrum Poker session timeout configurable in plugin settings (#19)
 * feat: allow the creator of a session to cancel the session (#20)
 * chore: implement against latest Jira patch version 7.11.2
@@ -389,7 +393,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.1.2...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.2.0...HEAD
+[3.2.0]: https://github.com/codescape/jira-scrum-poker/compare/3.1.2...3.2.0
 [3.1.2]: https://github.com/codescape/jira-scrum-poker/compare/3.1.1...3.1.2
 [3.1.1]: https://github.com/codescape/jira-scrum-poker/compare/3.1.0...3.1.1
 [3.1.0]: https://github.com/codescape/jira-scrum-poker/compare/3.0.1...3.1.0
