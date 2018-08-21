@@ -29,7 +29,7 @@
         </div>
         <div class="field-group">
             <label for="sessionTimeout">$i18n.getText("scrumpoker.config.sessiontimeout")</label>
-            <input type="number" class="text short-field" step="1" id="sessionTimeout" name="sessionTimeout" value="$sessionTimeout">
+            <input type="number" class="text short-field" step="1" min="0" id="sessionTimeout" name="sessionTimeout" value="$sessionTimeout">
             #if (!$sessionTimeout)
                 <div class="error">$i18n.getText("scrumpoker.config.field.required")</div>
             #end
