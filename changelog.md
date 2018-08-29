@@ -6,6 +6,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: ensure minimum value of zero for session timeout configuration
 * feat: show warning/success message when saving estimation to issue
+* docs: add inline documentation to CSS code
 
 ## [3.2.0] - 2018-08-10
 

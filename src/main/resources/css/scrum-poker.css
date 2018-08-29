@@ -1,33 +1,36 @@
+/* list of cards has no list styling */
 .list-of-cards {
     list-style-type: none;
     padding: 0;
-    margin: 10px 0;
-}
+    margin: 10px 0; }
 
+/* list of cards displays cards next to each other */
 .list-of-cards li {
-    display: inline;
-}
-.list-of-cards.with-users li {
-    display: block;
-}
-.centered {
-    text-align: center;
-}
+    display: inline; }
 
+/* only list of cards with users is displayed one under another */
+.list-of-cards.with-users li {
+    display: block; }
+
+/* centered text */
+.centered {
+    text-align: center; }
+
+/* icon that signals that participants need to talk to each other */
 .need-to-talk {
     position: relative;
-    top: -10px;
-}
+    top: -10px; }
 
+/* italic styled comments */
 .poker-comment {
-    font-style: italic;
-}
+    font-style: italic; }
 
+/* buttons are displayed centered */
 .poker-buttons {
     margin: 15px 0;
-    text-align: center;
-}
+    text-align: center; }
 
+/* basic card layout */
 .card {
     display: inline-block;
     text-align: center;
@@ -42,25 +45,24 @@
     border: #172B4D 1px solid;
     -webkit-box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25);
     -moz-box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25);
-    box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25);
-}
+    box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25); }
 
+/* cards can be smaller */
 .card.small {
-    font-size: 12px;
-}
+    font-size: 12px; }
 
+/* selected card has a different background color */
 .card.active {
-    background-color: rgba(23,43,77,0.25);
-}
+    background-color: rgba(23,43,77,0.25); }
 
+/* clickable cards show this by their pointer */
 .card.clickable:hover, .card.clickable:focus {
     background-color: rgba(23,43,77,0.125);
     text-decoration: none;
-    cursor: pointer;
-}
+    cursor: pointer; }
 
+/* cards show their backside when not revealed */
 .card.backside {
     background-color: #172B4D;
     color: #fff;
-    cursor: default;
-}
+    cursor: default; }
