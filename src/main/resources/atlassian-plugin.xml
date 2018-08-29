@@ -23,6 +23,9 @@
 
     <web-resource key="scrum-poker-resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
         <resource type="download" name="scrum-poker.css" location="/css/scrum-poker.css"/>
         <resource type="download" name="scrum-poker.js" location="/js/scrum-poker.js"/>
         <resource type="download" name="mustache.min.js" location="/js/mustache.min.js"/>

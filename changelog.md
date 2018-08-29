@@ -5,6 +5,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 ## [Unreleased]
 
 * feat: ensure minimum value of zero for session timeout
+* feat: show warning/success message when saving estimation to issue
 
 ## [3.2.0] - 2018-08-10
 

@@ -1,9 +1,7 @@
 <html>
 <head>
     <title>${i18n.getText("scrumpoker.title")}</title>
-    <link rel="stylesheet" type="text/css" href="$req.contextPath/download/resources/de.codescape.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.css" media="all" />
-    <script src="$req.contextPath/download/resources/de.codescape.jira.plugins.scrum-poker:scrum-poker-resources/scrum-poker.js"></script>
-    <script src="$req.contextPath/download/resources/de.codescape.jira.plugins.scrum-poker:scrum-poker-resources/mustache.min.js"></script>
+    $webResourceManager.requireResource("de.codescape.jira.plugins.scrum-poker:scrum-poker-resources")
 </head>
 <body>
 

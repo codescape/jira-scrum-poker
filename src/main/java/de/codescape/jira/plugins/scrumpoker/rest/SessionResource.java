@@ -104,8 +104,11 @@ public class SessionResource {
                                       @PathParam("estimation") Integer estimation) {
         String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
         scrumPokerSessionService.confirm(issueKey, userKey, estimation);
-        estimationFieldService.save(issueKey, estimation);
-        return Response.ok().build();
+        if (estimationFieldService.save(issueKey, estimation)) {
+            return Response.ok().build();
+        } else {
+            return Response.serverError().build();
+        }
     }
 
     /**

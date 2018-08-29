@@ -85,6 +85,18 @@
     ScrumPoker.confirmSession = function(issueKey, estimation) {
         $.post(uri + '/session/' + issueKey + '/confirm/' + encodeURIComponent(estimation), function(data, status) {
             refreshSession(issueKey);
+            AJS.flag({
+                type: 'success',
+                body: AJS.I18n.getText('scrumpoker.session.estimation.save.success'),
+                close: 'auto'
+            });
+        }).fail(function() {
+            AJS.flag({
+                type: 'error',
+                title: AJS.I18n.getText('scrumpoker.error.title'),
+                body: AJS.I18n.getText('scrumpoker.session.estimation.save.error'),
+                close: 'manual'
+            });
         });
     }
 
