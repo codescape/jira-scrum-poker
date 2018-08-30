@@ -93,7 +93,6 @@
         }).fail(function() {
             AJS.flag({
                 type: 'error',
-                title: AJS.I18n.getText('scrumpoker.error.title'),
                 body: AJS.I18n.getText('scrumpoker.session.estimation.save.error'),
                 close: 'manual'
             });
