@@ -8,6 +8,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: show warning/success message when saving estimation to issue
 * docs: add inline documentation to CSS code
 * feat: improve error message when saving estimation to issue
+* test: improve log output for better readability
 
 ## [3.2.0] - 2018-08-10
 
