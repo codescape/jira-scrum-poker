@@ -5,6 +5,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 ## [Unreleased]
 
 * fix: correct escape for umlauts in configuration description
+* chore: implement against latest Jira version
 
 ## [3.3.0] - 2018-09-01
 
