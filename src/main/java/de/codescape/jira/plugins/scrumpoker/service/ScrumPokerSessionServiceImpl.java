@@ -17,9 +17,12 @@ import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+/**
+ * Implementation of {@link ScrumPokerSessionService} using Active Objects as persistence model.
+ */
 @Scanned
 @Named
-public class DefaultScrumPokerSessionService implements ScrumPokerSessionService {
+public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
 
     @ComponentImport
     private final ActiveObjects activeObjects;
@@ -30,8 +33,8 @@ public class DefaultScrumPokerSessionService implements ScrumPokerSessionService
     private final ScrumPokerSettingsService scrumPokerSettingsService;
 
     @Inject
-    public DefaultScrumPokerSessionService(ActiveObjects activeObjects, IssueManager issueManager,
-                                           ScrumPokerSettingsService scrumPokerSettingsService) {
+    public ScrumPokerSessionServiceImpl(ActiveObjects activeObjects, IssueManager issueManager,
+                                        ScrumPokerSettingsService scrumPokerSettingsService) {
         this.activeObjects = checkNotNull(activeObjects);
         this.issueManager = issueManager;
         this.scrumPokerSettingsService = scrumPokerSettingsService;

@@ -26,10 +26,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(ActiveObjectsJUnitRunner.class)
-@Data(DefaultScrumPokerSessionServiceTest.ScrumPokerDatabaseUpdater.class)
+@Data(ScrumPokerSessionServiceImplTest.ScrumPokerDatabaseUpdater.class)
 @Jdbc(Hsql.class)
 @NameConverters
-public class DefaultScrumPokerSessionServiceTest {
+public class ScrumPokerSessionServiceImplTest {
 
     private EntityManager entityManager;
     private TestActiveObjects activeObjects;
@@ -47,7 +47,7 @@ public class DefaultScrumPokerSessionServiceTest {
         ScrumPokerSettingsService scrumPokerSettingsService = mock(ScrumPokerSettingsService.class);
         when(scrumPokerSettingsService.loadSessionTimeout()).thenReturn(12);
 
-        scrumPokerSessionService = new DefaultScrumPokerSessionService(activeObjects, issueManager,
+        scrumPokerSessionService = new ScrumPokerSessionServiceImpl(activeObjects, issueManager,
             scrumPokerSettingsService);
     }
 
