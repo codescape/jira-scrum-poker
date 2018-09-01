@@ -4,6 +4,10 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
+* ...
+
+## [3.3.0] - 2018-09-01
+
 * feat: ensure minimum value of zero for session timeout configuration
 * feat: show warning/success message when saving estimation to issue
 * docs: add inline documentation to CSS code
@@ -397,7 +401,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.2.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.3.0...HEAD
+[3.3.0]: https://github.com/codescape/jira-scrum-poker/compare/3.2.0...3.3.0
 [3.2.0]: https://github.com/codescape/jira-scrum-poker/compare/3.1.2...3.2.0
 [3.1.2]: https://github.com/codescape/jira-scrum-poker/compare/3.1.1...3.1.2
 [3.1.1]: https://github.com/codescape/jira-scrum-poker/compare/3.1.0...3.1.1
