@@ -8,6 +8,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * chore: implement against latest Jira version
 * refactor: rename Scrum poker session service implementation
 * feat: prevent issue description from floating into poker elements
+* refactor: change primary key for persisted votes from int to Long
 
 ## [3.3.0] - 2018-09-01
 
