@@ -37,7 +37,9 @@
 
                 #set($issueDescriptionHtml = $issueDescription)
                 #if(!$issueDescriptionHtml.isEmpty())
-                    <p>$issueDescriptionHtml</p>
+                    <div class="issue-description">
+                        <p>$issueDescriptionHtml</p>
+                    </div>
                 #else
                     <p><i>$i18n.getText("scrumpoker.issue.summary.empty")</i></p>
                 #end

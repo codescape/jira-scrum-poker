@@ -25,6 +25,12 @@
 .poker-comment {
     font-style: italic; }
 
+/* prevent issue description from floating into poker elements */
+.issue-description {
+    display: inline-block;
+    max-width: 100%;
+    word-break: break-word; }
+
 /* buttons are displayed centered */
 .poker-buttons {
     margin: 15px 0;
