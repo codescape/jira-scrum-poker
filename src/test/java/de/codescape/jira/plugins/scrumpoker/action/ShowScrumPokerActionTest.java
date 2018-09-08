@@ -61,7 +61,6 @@ public class ShowScrumPokerActionTest {
     public void before() {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
         when(jiraAuthenticationContext.getLoggedInUser()).thenReturn(user);
-        when(user.getKey()).thenReturn("someUserKey");
     }
 
     @Test

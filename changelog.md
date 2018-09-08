@@ -10,7 +10,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: prevent issue description from floating into poker elements
 * refactor: change primary key for persisted votes from int to Long
 * feat: do not create Scrum poker sessions for issues missing estimation field
-* test: use Mockito ArguentMatcher instead of deprecated Mockito Matcher
+* test: use Mockito ArgumentMatcher instead of deprecated Mockito Matcher
+* test: improve tests and remove unnecessary details in setup 
 
 ## [3.3.0] - 2018-09-01
 
