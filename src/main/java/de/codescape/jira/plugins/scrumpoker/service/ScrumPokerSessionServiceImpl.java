@@ -2,10 +2,12 @@ package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
 import com.atlassian.jira.issue.IssueManager;
+import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.plugin.spring.scanner.annotation.component.Scanned;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
+import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
 import net.java.ao.DBParam;
 import net.java.ao.Query;
 
@@ -32,12 +34,16 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
 
     private final ScrumPokerSettingsService scrumPokerSettingsService;
 
+    private final ScrumPokerForIssueCondition scrumPokerForIssueCondition;
+
     @Inject
     public ScrumPokerSessionServiceImpl(ActiveObjects activeObjects, IssueManager issueManager,
-                                        ScrumPokerSettingsService scrumPokerSettingsService) {
+                                        ScrumPokerSettingsService scrumPokerSettingsService,
+                                        ScrumPokerForIssueCondition scrumPokerForIssueCondition) {
         this.activeObjects = checkNotNull(activeObjects);
         this.issueManager = issueManager;
         this.scrumPokerSettingsService = scrumPokerSettingsService;
+        this.scrumPokerForIssueCondition = scrumPokerForIssueCondition;
     }
 
     @Override
@@ -128,9 +134,14 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     }
 
     private ScrumPokerSession create(String issueKey, String userKey) {
-        if (issueManager.getIssueObject(issueKey) == null) {
+        MutableIssue issue = issueManager.getIssueObject(issueKey);
+        if (issue == null) {
             throw new IllegalStateException("Unable to create session for issue with key " + issueKey
                 + " because could not find this issue.");
+        }
+        if (!scrumPokerForIssueCondition.isEstimable(issue)) {
+            throw new IllegalStateException("Unable to create session for issue with key " + issueKey +
+                " because issue is not estimable.");
         }
         ScrumPokerSession scrumPokerSession = activeObjects.create(ScrumPokerSession.class,
             new DBParam("ISSUE_KEY", issueKey));

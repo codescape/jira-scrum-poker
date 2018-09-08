@@ -1,10 +1,12 @@
 package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.activeobjects.test.TestActiveObjects;
+import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
+import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
 import net.java.ao.EntityManager;
 import net.java.ao.test.converters.NameConverters;
 import net.java.ao.test.jdbc.Data;
@@ -15,15 +17,15 @@ import net.java.ao.test.junit.ActiveObjectsJUnitRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.*;
 
 @RunWith(ActiveObjectsJUnitRunner.class)
 @Data(ScrumPokerSessionServiceImplTest.ScrumPokerDatabaseUpdater.class)
@@ -36,19 +38,24 @@ public class ScrumPokerSessionServiceImplTest {
 
     private ScrumPokerSessionService scrumPokerSessionService;
 
+    private ScrumPokerForIssueCondition scrumPokerForIssueCondition;
+
     @Before
     public void before() {
         activeObjects = new TestActiveObjects(entityManager);
 
         IssueManager issueManager = mock(IssueManager.class);
         MutableIssue issue = mock(MutableIssue.class);
-        when(issueManager.getIssueObject(Matchers.startsWith("ISSUE-"))).thenReturn(issue);
+        when(issueManager.getIssueObject(ArgumentMatchers.startsWith("ISSUE-"))).thenReturn(issue);
 
         ScrumPokerSettingsService scrumPokerSettingsService = mock(ScrumPokerSettingsService.class);
         when(scrumPokerSettingsService.loadSessionTimeout()).thenReturn(12);
 
+        scrumPokerForIssueCondition = mock(ScrumPokerForIssueCondition.class);
+        when(scrumPokerForIssueCondition.isEstimable(ArgumentMatchers.any(Issue.class))).thenReturn(true);
+
         scrumPokerSessionService = new ScrumPokerSessionServiceImpl(activeObjects, issueManager,
-            scrumPokerSettingsService);
+            scrumPokerSettingsService, scrumPokerForIssueCondition);
     }
 
     @Test
@@ -135,6 +142,15 @@ public class ScrumPokerSessionServiceImplTest {
     @Test(expected = IllegalStateException.class)
     public void shouldNotCreateSessionForIssueKeyWhichDoesNotExist() {
         scrumPokerSessionService.byIssueKey("UNKNOWN", "USER-1");
+        fail();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void shouldNotCreateSessionForIssueWhichCannotBeEstimated() {
+        reset(scrumPokerForIssueCondition);
+        when(scrumPokerForIssueCondition.isEstimable(ArgumentMatchers.any(Issue.class))).thenReturn(false);
+        scrumPokerSessionService.byIssueKey("ISSUE-21", "USER-1");
+        fail();
     }
 
     public static final class ScrumPokerDatabaseUpdater implements DatabaseUpdater {

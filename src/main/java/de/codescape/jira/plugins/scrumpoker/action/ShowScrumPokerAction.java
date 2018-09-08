@@ -12,6 +12,7 @@ import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.web.HttpServletVariables;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
+import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
 
 import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
 
@@ -32,25 +33,28 @@ public class ShowScrumPokerAction extends JiraWebActionSupport {
     private final PermissionManager permissionManager;
     private final JiraAuthenticationContext jiraAuthenticationContext;
     private final HttpServletVariables httpServletVariables;
+    private final ScrumPokerForIssueCondition scrumPokerForIssueCondition;
 
     private String issueKey;
 
     public ShowScrumPokerAction(FieldLayoutManager fieldLayoutManager, RendererManager rendererManager,
                                 IssueManager issueManager, JiraAuthenticationContext jiraAuthenticationContext,
-                                HttpServletVariables httpServletVariables, PermissionManager permissionManager) {
+                                HttpServletVariables httpServletVariables, PermissionManager permissionManager,
+                                ScrumPokerForIssueCondition scrumPokerForIssueCondition) {
         this.issueManager = issueManager;
         this.rendererManager = rendererManager;
         this.fieldLayoutManager = fieldLayoutManager;
         this.permissionManager = permissionManager;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
         this.httpServletVariables = httpServletVariables;
+        this.scrumPokerForIssueCondition = scrumPokerForIssueCondition;
     }
 
     @Override
     protected String doExecute() {
         issueKey = httpServletVariables.getHttpRequest().getParameter(PARAM_ISSUE_KEY);
         MutableIssue issue = issueManager.getIssueObject(issueKey);
-        if (issue == null || !currentUserIsAllowedToSeeIssue(issue)) {
+        if (issue == null || currentUserIsNotAllowedToSeeIssue(issue) || issueIsNotEstimable(issue)) {
             addErrorMessage("Issue Key" + issueKey + " not found.");
             return "error";
         }
@@ -70,8 +74,12 @@ public class ShowScrumPokerAction extends JiraWebActionSupport {
         return rendererManager.getRenderedContent(rendererType, issue.getDescription(), issue.getIssueRenderContext());
     }
 
-    private boolean currentUserIsAllowedToSeeIssue(MutableIssue issue) {
-        return permissionManager.hasPermission(BROWSE_PROJECTS, issue, jiraAuthenticationContext.getLoggedInUser());
+    private boolean issueIsNotEstimable(MutableIssue issue) {
+        return !scrumPokerForIssueCondition.isEstimable(issue);
+    }
+
+    private boolean currentUserIsNotAllowedToSeeIssue(MutableIssue issue) {
+        return !permissionManager.hasPermission(BROWSE_PROJECTS, issue, jiraAuthenticationContext.getLoggedInUser());
     }
 
 }

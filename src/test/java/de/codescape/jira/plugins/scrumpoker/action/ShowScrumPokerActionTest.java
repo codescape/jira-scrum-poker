@@ -6,7 +6,7 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.HttpServletVariables;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
+import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -43,7 +43,7 @@ public class ShowScrumPokerActionTest {
     private JiraAuthenticationContext jiraAuthenticationContext;
 
     @Mock
-    private ScrumPokerSessionService scrumPokerSessionService;
+    private ScrumPokerForIssueCondition scrumPokerForIssueCondition;
 
     @InjectMocks
     private ShowScrumPokerAction showScrumPokerAction;
@@ -65,6 +65,15 @@ public class ShowScrumPokerActionTest {
     }
 
     @Test
+    public void shouldDisplayStartPageWhenUserHasPermissionForIssueAndIssueIsEstimable() {
+        whenRequestedIssueExists();
+        whenUserIsAllowedToSeeIssue();
+        whenIssueIsEstimable();
+
+        assertThat(showScrumPokerAction.doExecute(), is(equalTo("success")));
+    }
+
+    @Test
     public void shouldDisplayErrorPageWhenUserHasNoPermissionForIssue() {
         whenRequestedIssueExists();
         whenUserIsNotAllowedToSeeIssue();
@@ -73,11 +82,20 @@ public class ShowScrumPokerActionTest {
     }
 
     @Test
-    public void shouldDisplayStartPageWhenUserHasPermissionForIssue() {
+    public void shouldDisplayErrorPageWhenIssueIsNotEstimable() {
         whenRequestedIssueExists();
         whenUserIsAllowedToSeeIssue();
+        whenIssueIsNotEstimable();
 
-        assertThat(showScrumPokerAction.doExecute(), is(equalTo("success")));
+        assertThat(showScrumPokerAction.doExecute(), is(equalTo("error")));
+    }
+
+    private void whenIssueIsNotEstimable() {
+        when(scrumPokerForIssueCondition.isEstimable(issue)).thenReturn(false);
+    }
+
+    private void whenIssueIsEstimable() {
+        when(scrumPokerForIssueCondition.isEstimable(issue)).thenReturn(true);
     }
 
     private void whenUserIsAllowedToSeeIssue() {
