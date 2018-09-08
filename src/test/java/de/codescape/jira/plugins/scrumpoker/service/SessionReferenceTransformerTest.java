@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
@@ -19,6 +18,7 @@ import java.util.ArrayList;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.ArgumentMatchers.startsWith;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -38,7 +38,7 @@ public class SessionReferenceTransformerTest {
         MutableIssue issue = mock(MutableIssue.class);
         IssueType issueType = mock(IssueType.class);
         when(issue.getIssueType()).thenReturn(issueType);
-        when(issueManager.getIssueObject(Matchers.startsWith("ISSUE-"))).thenReturn(issue);
+        when(issueManager.getIssueObject(startsWith("ISSUE-"))).thenReturn(issue);
     }
 
     @Test
