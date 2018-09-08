@@ -12,6 +12,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: do not create Scrum poker sessions for issues missing estimation field
 * test: use Mockito ArgumentMatcher instead of deprecated Mockito Matcher
 * test: improve tests and remove unnecessary details in setup 
+* chore: implement against latest Jira patch version 7.12.1
 
 ## [3.3.0] - 2018-09-01
 
