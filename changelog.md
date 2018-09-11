@@ -13,6 +13,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * test: use Mockito ArgumentMatcher instead of deprecated Mockito Matcher
 * test: improve tests and remove unnecessary details in setup 
 * chore: implement against latest Jira patch version 7.12.1
+* feat: sort buttons on Scrum Poker session page by usage frequency
 
 ## [3.3.0] - 2018-09-01
 

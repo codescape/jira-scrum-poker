@@ -180,9 +180,12 @@
 
         <div class="poker-buttons">
             <div class="aui-buttons">
-            {{#allowCancel}}
-                <button onclick="ScrumPoker.cancelSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.cancel")</button>
-            {{/allowCancel}}
+            {{#allowReveal}}
+                <button onclick="ScrumPoker.revealSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.revealcards")</button>
+            {{/allowReveal}}
+            {{^allowReveal}}
+                <button class="aui-button" aria-disabled="true" disabled>$i18n.getText("scrumpoker.session.revealcards")</button>
+            {{/allowReveal}}
 
             {{#allowReset}}
                 <button onclick="ScrumPoker.resetSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.reset")</button>
@@ -191,12 +194,9 @@
                 <button class="aui-button" aria-disabled="true" disabled>$i18n.getText("scrumpoker.session.reset")</button>
             {{/allowReset}}
 
-            {{#allowReveal}}
-                <button onclick="ScrumPoker.revealSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.revealcards")</button>
-            {{/allowReveal}}
-            {{^allowReveal}}
-                <button class="aui-button" aria-disabled="true" disabled>$i18n.getText("scrumpoker.session.revealcards")</button>
-            {{/allowReveal}}
+            {{#allowCancel}}
+                <button onclick="ScrumPoker.cancelSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.cancel")</button>
+            {{/allowCancel}}
             </div>
         </div>
 
