@@ -14,14 +14,19 @@ This plugin works best in combination with the Story Point field introduced by J
 * Assist estimations with references of already performed sessions
 * Security and privacy in mind showing only issues users may view
 
-## Installation
+## Resources
 
-Installation and setup of the Scrum Poker plugin from the Atlassian Marketplace is extremely easy: 
+For users:
 
-1. Install the Scrum Poker plugin from the [Atlassian Marketplace](https://marketplace.atlassian.com/plugins/de.codescape.jira.plugins.scrum-poker).
-1. Configure the field to save the confirmed estimation after a Scrum Poker session. To do that go to the plugin configuration and choose the field from the list of possible fields.  
+* [Installation Guide](http://jira-scrum-poker.codescape.de/scrum-poker-installation)
+* [Documentation](http://jira-scrum-poker.codescape.de)
+* [Privacy Statement](https://github.com/codescape/jira-scrum-poker/blob/master/privacy_statement.md)
 
-Congratulations! After that you are ready to start your first Scrum Poker session!
+For developers:
+
+* [Contribution Guide](https://github.com/codescape/jira-scrum-poker/blob/master/contributing.md)
+* [Changelog](https://github.com/codescape/jira-scrum-poker/blob/master/changelog.md)
+* [Code of Conduct](https://github.com/codescape/jira-scrum-poker/blob/master/code_of_conduct.md)
 
 ## Screenshots
 

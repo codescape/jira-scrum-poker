@@ -5,10 +5,10 @@ Your contribution is always welcome! Please make sure to read this document whic
 
 ## Help wanted
 
-There are many things you can do to help improving the Scrum Poker plugin.
+There are many things you can do to help improving the Scrum Poker add-on.
 
 * [Create issues](https://github.com/codescape/jira-scrum-poker/issues) for new features or improvements
-* Provide new translations for the Scrum Poker plugin
+* Provide new translations for the Scrum Poker add-on
 * Add test coverage to untested code
 * Refactor the code
 * ...
