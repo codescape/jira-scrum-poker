@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/skeleton.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/js/site.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <section class="header">
+        <h1 class="title">Scrum Poker</h1>
+        <h3>Documentation</h3>
+    </section>
+
+    <div class="navbar-spacer"></div>
+    <nav class="navbar">
+        <div class="container">
+            <ul class="navbar-list">
+                <li class="navbar-item"><a class="navbar-link" href="/">Introduction</a></li>
+                <li class="navbar-item">
+                    <a class="navbar-link" href="#" data-popover="#userGuideNavPopover">User Guide</a>
+                    <div id="userGuideNavPopover" class="popover">
+                        <ul class="popover-list">
+                            <li class="popover-item">
+                                <a class="popover-link" href="/start-scrum-poker-session">Start a Scrum Poker session</a>
+                            </li>
+                            <li class="popover-item">
+                                <a class="popover-link" href="/join-scrum-poker-session">Join a Scrum Poker session</a>
+                            </li>
+                            <!--
+                            <li class="popover-item">
+                                <a class="popover-link" href="#">Process of a Scrum Poker session</a>
+                            </li>
+                            <li class="popover-item">
+                                <a class="popover-link" href="/show-reference-votes">Show reference votes for comparison</a>
+                            </li>
+                            <li class="popover-item">
+                                <a class="popover-link" href="#">Reveal all estimation votes</a>
+                            </li>
+                            <li class="popover-item">
+                                <a class="popover-link" href="#">Confirm agreed estimation</a>
+                            </li>
+                            -->
+                            <li class="popover-item">
+                                <a class="popover-link" href="/cancel-scrum-poker-session">Cancel a Scrum Poker session</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="navbar-item">
+                    <a class="navbar-link" href="#" data-popover="#administrationNavPopover">Administrator Guide</a>
+                    <div id="administrationNavPopover" class="popover">
+                        <ul class="popover-list">
+                            <li class="popover-item">
+                                <a class="popover-link" href="/scrum-poker-installation">Scrum Poker installation</a>
+                            </li>
+                            <li class="popover-item">
+                                <a class="popover-link" href="/scrum-poker-configuration">Scrum Poker Configuration</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="navbar-item">
+                    <a class="navbar-link" href="#" data-popover="#moreNavPopover">More</a>
+                    <div id="moreNavPopover" class="popover">
+                        <ul class="popover-list">
+                            <li class="popover-item">
+                                <a class="popover-link" href="{{ site.github_url }}">Scrum Poker on Github</a>
+                            </li>
+                            <li class="popover-item">
+                                <a class="popover-link" href="{{ site.marketplace_url }}">Scrum Poker on Marketplace</a>
+                            </li>
+                            <li class="popover-item">
+                                <a class="popover-link" href="{{ site.issue_tracker_url }}">Issue Tracker</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="docs-section" id="intro">
+        <h2 class="docs-header">{{ page.title }}</h2>
+
+        {{ content }}
+
+    </div>
+
+</div>
+
+</body>
+</html>

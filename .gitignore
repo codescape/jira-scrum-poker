@@ -9,3 +9,6 @@
 /.settings/
 /.classpath
 /.project
+
+# jekyll
+/docs/_site/
