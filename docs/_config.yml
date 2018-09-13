@@ -1,12 +1,14 @@
 # jekyll configuration
 # --------------------
-
 highlighter: rouge
 markdown: kramdown
 
 # site configuration
 # ------------------
 title: Scrum Poker
+
+# url configuration
+# -----------------
 github_url: https://github.com/codescape/jira-scrum-poker
 issue_tracker_url: https://github.com/codescape/jira-scrum-poker/issues
 marketplace_url: https://marketplace.atlassian.com/apps/1218884/scrum-poker?hosting=server&tab=overview
