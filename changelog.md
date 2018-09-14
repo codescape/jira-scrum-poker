@@ -4,6 +4,10 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
+* ...
+
+## [3.4.0] - 2018-09-15
+
 * fix: correct escape for umlauts in configuration description
 * chore: implement against latest Jira version
 * refactor: rename Scrum poker session service implementation
@@ -411,7 +415,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.3.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.4.0...HEAD
+[3.4.0]: https://github.com/codescape/jira-scrum-poker/compare/3.3.0...3.4.0
 [3.3.0]: https://github.com/codescape/jira-scrum-poker/compare/3.2.0...3.3.0
 [3.2.0]: https://github.com/codescape/jira-scrum-poker/compare/3.1.2...3.2.0
 [3.1.2]: https://github.com/codescape/jira-scrum-poker/compare/3.1.1...3.1.2
