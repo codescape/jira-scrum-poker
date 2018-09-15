@@ -5,6 +5,10 @@
     margin-top: 5rem;
     text-align: center; }
 
+.footer {
+    text-align: center;
+    font-size: 11px; }
+
 h2, h3, h4, h5, h6 {
     text-transform: uppercase;
     font-size: 1.4rem;
@@ -19,13 +23,16 @@ h4 {
 
 .docs-section {
     border-top: 1px solid #eee;
-    padding: 4rem 0;
+    padding: 4rem 0 0;
     margin-bottom: 0;}
 
 .heading-font-size {
     font-size: 1.2rem;
     color: #999;
     letter-spacing: normal; }
+
+a {
+    color: #ff5630; }
 
 /* Larger than phone */
 
@@ -36,7 +43,8 @@ h4 {
         margin-bottom: 4rem; }
 
     .docs-section {
-        padding: 6rem 0; }
+        padding-top: 4rem;
+        margin-bottom: 4rem; }
 
 }
 
@@ -53,7 +61,7 @@ h4 {
     .navbar-spacer {
         display: block;
         width: 100%;
-        height: 6.5rem;
+        height: 5.5rem;
         background: #fff;
         z-index: 99;
         border-top: 1px solid #eee;
@@ -72,20 +80,21 @@ h4 {
     .navbar-item {
         position: relative;
         float: left;
-        margin-bottom: 0; }
+        margin-bottom: 0;
+        width: 25%;
+        text-align: center; }
 
     .navbar-link {
         text-transform: uppercase;
         font-size: 11px;
         font-weight: 600;
-        letter-spacing: .2rem;
-        margin-right: 35px;
+        letter-spacing: .1rem;
         text-decoration: none;
-        line-height: 6.5rem;
+        line-height: 5.5rem;
         color: #222; }
 
     .navbar-link.active {
-        color: #33C3F0; }
+        color: #ff5630; }
 
     .has-docked-nav .navbar {
         position: fixed;
@@ -112,7 +121,6 @@ h4 {
         border: 1px solid #eee;
         border-radius: 4px;
         top: 92%;
-        left: -50%;
         -webkit-filter: drop-shadow(0 0 6px rgba(0,0,0,.1));
         -moz-filter: drop-shadow(0 0 6px rgba(0,0,0,.1));
         filter: drop-shadow(0 0 6px rgba(0,0,0,.1)); }
@@ -171,10 +179,10 @@ h4 {
 
     .popover-link:hover {
         color: #fff;
-        background: #33C3F0; }
+        background: #ff5630; }
 
     .popover-link:hover,
     .popover-item:first-child .popover-link:hover:after {
-        border-bottom-color: #33C3F0; }
+        border-bottom-color: #ff5630; }
 
 }

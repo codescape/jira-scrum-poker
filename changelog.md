@@ -4,7 +4,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
-* ...
+* docs: improve online documentation layout for mobile devices
 
 ## [3.4.0] - 2018-09-15
 
