@@ -64,6 +64,17 @@
         <link>/secure/scrumPokerSessions.jspa</link>
     </web-item>
 
+    <!-- section in Jira Software boards dropdown -->
+
+    <web-section key="scrum-poker-menu" location="greenhopper_menu" weight="100">
+        <label key="scrumpoker.title"/>
+    </web-section>
+
+    <web-item key="scrum-poker-menu-active-sessions" section="greenhopper_menu/scrum-poker-menu" weight="10">
+        <label key="scrumpoker.sessions.list"/>
+        <link>/secure/scrumPokerSessions.jspa</link>
+    </web-item>
+
     <!-- configuration in plugin administration sidebar -->
 
     <web-section key="scrum-poker-configuration" location="admin_plugins_menu">
