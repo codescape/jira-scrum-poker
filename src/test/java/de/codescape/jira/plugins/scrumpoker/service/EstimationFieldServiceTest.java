@@ -39,7 +39,7 @@ public class EstimationFieldServiceTest {
     private CustomFieldManager customFieldManager;
 
     @Mock
-    private ScrumPokerSettingsService scrumPokerSettingsService;
+    private ScrumPokerSettingService scrumPokerSettingService;
 
     @InjectMocks
     private EstimationFieldService estimationFieldService;
@@ -58,7 +58,7 @@ public class EstimationFieldServiceTest {
         when(jiraAuthenticationContext.getLoggedInUser()).thenReturn(applicationUser);
         when(issueManager.getIssueByCurrentKey(ISSUE_KEY)).thenReturn(issue);
         when(issue.getId()).thenReturn(ISSUE_ID);
-        when(scrumPokerSettingsService.loadStoryPointFieldId()).thenReturn(CUSTOM_FIELD_ID);
+        when(scrumPokerSettingService.loadStoryPointField()).thenReturn(CUSTOM_FIELD_ID);
         when(customFieldManager.getCustomFieldObject(CUSTOM_FIELD_ID)).thenReturn(customField);
     }
 

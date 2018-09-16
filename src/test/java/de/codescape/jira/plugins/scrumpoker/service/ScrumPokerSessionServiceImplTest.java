@@ -4,13 +4,12 @@ import com.atlassian.activeobjects.test.TestActiveObjects;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
+import de.codescape.jira.plugins.scrumpoker.ScrumPokerTestDatabaseUpdater;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
-import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
 import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
 import net.java.ao.EntityManager;
 import net.java.ao.test.converters.NameConverters;
 import net.java.ao.test.jdbc.Data;
-import net.java.ao.test.jdbc.DatabaseUpdater;
 import net.java.ao.test.jdbc.Hsql;
 import net.java.ao.test.jdbc.Jdbc;
 import net.java.ao.test.junit.ActiveObjectsJUnitRunner;
@@ -28,7 +27,7 @@ import static org.junit.Assert.fail;
 import static org.mockito.Mockito.*;
 
 @RunWith(ActiveObjectsJUnitRunner.class)
-@Data(ScrumPokerSessionServiceImplTest.ScrumPokerDatabaseUpdater.class)
+@Data(ScrumPokerTestDatabaseUpdater.class)
 @Jdbc(Hsql.class)
 @NameConverters
 public class ScrumPokerSessionServiceImplTest {
@@ -48,7 +47,7 @@ public class ScrumPokerSessionServiceImplTest {
         MutableIssue issue = mock(MutableIssue.class);
         when(issueManager.getIssueObject(ArgumentMatchers.startsWith("ISSUE-"))).thenReturn(issue);
 
-        ScrumPokerSettingsService scrumPokerSettingsService = mock(ScrumPokerSettingsService.class);
+        ScrumPokerSettingService scrumPokerSettingsService = mock(ScrumPokerSettingService.class);
         when(scrumPokerSettingsService.loadSessionTimeout()).thenReturn(12);
 
         scrumPokerForIssueCondition = mock(ScrumPokerForIssueCondition.class);
@@ -151,15 +150,6 @@ public class ScrumPokerSessionServiceImplTest {
         when(scrumPokerForIssueCondition.isEstimable(ArgumentMatchers.any(Issue.class))).thenReturn(false);
         scrumPokerSessionService.byIssueKey("ISSUE-21", "USER-1");
         fail();
-    }
-
-    public static final class ScrumPokerDatabaseUpdater implements DatabaseUpdater {
-
-        @Override
-        public void update(EntityManager entityManager) throws Exception {
-            entityManager.migrate(ScrumPokerSession.class, ScrumPokerVote.class);
-        }
-
     }
 
 }

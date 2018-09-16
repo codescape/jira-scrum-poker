@@ -114,6 +114,7 @@
 
     <ao key="scrum-poker-active-objects">
         <entity>de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession</entity>
+        <entity>de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSetting</entity>
         <entity>de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote</entity>
     </ao>
 

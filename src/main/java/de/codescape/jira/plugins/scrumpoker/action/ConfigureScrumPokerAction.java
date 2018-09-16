@@ -3,7 +3,7 @@ package de.codescape.jira.plugins.scrumpoker.action;
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingsService;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 
 import java.util.List;
 
@@ -18,11 +18,11 @@ public class ConfigureScrumPokerAction extends JiraWebActionSupport {
     private static final String PARAM_ACTION = "action";
 
     private final CustomFieldManager customFieldManager;
-    private final ScrumPokerSettingsService scrumPokerSettingsService;
+    private final ScrumPokerSettingService scrumPokerSettingService;
 
-    public ConfigureScrumPokerAction(ScrumPokerSettingsService scrumPokerSettingsService,
+    public ConfigureScrumPokerAction(ScrumPokerSettingService scrumPokerSettingService,
                                      CustomFieldManager customFieldManager) {
-        this.scrumPokerSettingsService = scrumPokerSettingsService;
+        this.scrumPokerSettingService = scrumPokerSettingService;
         this.customFieldManager = customFieldManager;
     }
 
@@ -37,11 +37,11 @@ public class ConfigureScrumPokerAction extends JiraWebActionSupport {
      * Current configured id of the story point field in this Jira instance.
      */
     public String getStoryPointFieldId() {
-        return scrumPokerSettingsService.loadStoryPointFieldId();
+        return scrumPokerSettingService.loadStoryPointField();
     }
 
     public String getSessionTimeout() {
-        return scrumPokerSettingsService.loadSessionTimeout().toString();
+        return scrumPokerSettingService.loadSessionTimeout().toString();
     }
 
     @Override
@@ -50,7 +50,7 @@ public class ConfigureScrumPokerAction extends JiraWebActionSupport {
         if (action != null && action.equals("save")) {
             String newStoryPointField = getHttpRequest().getParameter(PARAM_STORY_POINT_FIELD);
             String newSessionTimeout = getHttpRequest().getParameter(PARAM_SESSION_TIMEOUT);
-            scrumPokerSettingsService.persistSettings(newStoryPointField, newSessionTimeout);
+            scrumPokerSettingService.persistSettings(newStoryPointField, newSessionTimeout);
         }
         return "success";
     }

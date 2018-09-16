@@ -32,17 +32,17 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     @ComponentImport
     private final IssueManager issueManager;
 
-    private final ScrumPokerSettingsService scrumPokerSettingsService;
+    private final ScrumPokerSettingService scrumPokerSettingService;
 
     private final ScrumPokerForIssueCondition scrumPokerForIssueCondition;
 
     @Inject
     public ScrumPokerSessionServiceImpl(ActiveObjects activeObjects, IssueManager issueManager,
-                                        ScrumPokerSettingsService scrumPokerSettingsService,
+                                        ScrumPokerSettingService scrumPokerSettingService,
                                         ScrumPokerForIssueCondition scrumPokerForIssueCondition) {
         this.activeObjects = checkNotNull(activeObjects);
         this.issueManager = issueManager;
-        this.scrumPokerSettingsService = scrumPokerSettingsService;
+        this.scrumPokerSettingService = scrumPokerSettingService;
         this.scrumPokerForIssueCondition = scrumPokerForIssueCondition;
     }
 
@@ -54,7 +54,7 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     }
 
     private int sessionTimeoutInMillis() {
-        return 3600 * 1000 * scrumPokerSettingsService.loadSessionTimeout();
+        return 3600 * 1000 * scrumPokerSettingService.loadSessionTimeout();
     }
 
     @Override

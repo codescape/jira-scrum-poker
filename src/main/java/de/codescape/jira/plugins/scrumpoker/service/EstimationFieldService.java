@@ -25,7 +25,7 @@ public class EstimationFieldService {
 
     private static final Logger log = LoggerFactory.getLogger(EstimationFieldService.class);
 
-    private final ScrumPokerSettingsService scrumPokerSettingsService;
+    private final ScrumPokerSettingService scrumPokerSettingService;
 
     @ComponentImport
     private final CustomFieldManager customFieldManager;
@@ -38,10 +38,10 @@ public class EstimationFieldService {
 
     @Inject
     public EstimationFieldService(JiraAuthenticationContext context,
-                                  ScrumPokerSettingsService scrumPokerSettingsService,
+                                  ScrumPokerSettingService scrumPokerSettingService,
                                   IssueManager issueManager,
                                   CustomFieldManager customFieldManager) {
-        this.scrumPokerSettingsService = scrumPokerSettingsService;
+        this.scrumPokerSettingService = scrumPokerSettingService;
         this.issueManager = issueManager;
         this.customFieldManager = customFieldManager;
         this.context = context;
@@ -67,7 +67,7 @@ public class EstimationFieldService {
      * Return the story point custom field.
      */
     public CustomField findStoryPointField() {
-        return customFieldManager.getCustomFieldObject(scrumPokerSettingsService.loadStoryPointFieldId());
+        return customFieldManager.getCustomFieldObject(scrumPokerSettingService.loadStoryPointField());
     }
 
 }
