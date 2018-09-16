@@ -7,6 +7,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * docs: improve online documentation layout for mobile devices
 * feat: make Scrum Poker accessible from Jira Software boards menu
 * docs: update documentation for joining an active session
+* refactor: use links starting with uppercase for Scrum Poker
 
 ## [3.4.0] - 2018-09-15
 

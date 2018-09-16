@@ -9,9 +9,9 @@
         <vendor name="${project.organization.name}" url="${project.organization.url}"/>
         <param name="plugin-icon">images/scrum-poker-logo-16.png</param>
         <param name="plugin-logo">images/scrum-poker-logo-144.png</param>
-        <param name="configure.url">/secure/admin/scrumPokerConfiguration.jspa</param>
-        <param name="post.install.url">/secure/admin/scrumPokerConfiguration.jspa</param>
-        <param name="post.update.url">/secure/admin/scrumPokerConfiguration.jspa</param>
+        <param name="configure.url">/secure/admin/ScrumPokerConfiguration.jspa</param>
+        <param name="post.install.url">/secure/admin/ScrumPokerConfiguration.jspa</param>
+        <param name="post.update.url">/secure/admin/ScrumPokerConfiguration.jspa</param>
         <param name="atlassian-licensing-enabled">${atlassian.licensing.enabled}</param>
     </plugin-info>
 
@@ -43,13 +43,13 @@
 
     <web-item key="scrum-poker-start-from-issue-details" section="jira.issue.tools" weight="10">
         <label key="scrumpoker.session.start"/>
-        <link>/secure/scrumPoker.jspa?issueKey=$issue.key</link>
+        <link>/secure/ScrumPoker.jspa?issueKey=$issue.key</link>
         <condition class="de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition"/>
     </web-item>
 
     <web-item key="scrum-poker-start-from-context-menu" section="greenhopper_issue_dropdown" weight="200">
         <label key="scrumpoker.session.start"/>
-        <link>/secure/scrumPoker.jspa?issueKey=$issue.key</link>
+        <link>/secure/ScrumPoker.jspa?issueKey=$issue.key</link>
         <condition class="de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition"/>
     </web-item>
 
@@ -61,7 +61,7 @@
 
     <web-item section="scrum-poker-sessions" key="scrum-poker-sessions-link" weight="10">
         <label key="scrumpoker.sessions.list"/>
-        <link>/secure/scrumPokerSessions.jspa</link>
+        <link>/secure/ScrumPokerSessions.jspa</link>
     </web-item>
 
     <!-- section in Jira Software boards dropdown -->
@@ -72,7 +72,7 @@
 
     <web-item key="scrum-poker-menu-active-sessions" section="greenhopper_menu/scrum-poker-menu" weight="10">
         <label key="scrumpoker.sessions.list"/>
-        <link>/secure/scrumPokerSessions.jspa</link>
+        <link>/secure/ScrumPokerSessions.jspa</link>
     </web-item>
 
     <!-- configuration in plugin administration sidebar -->
@@ -83,7 +83,7 @@
 
     <web-item key="scrum-poker-configuration-item" section="admin_plugins_menu/scrum-poker-configuration">
         <label key="scrumpoker.config.title"/>
-        <link>/secure/admin/scrumPokerConfiguration.jspa</link>
+        <link>/secure/admin/ScrumPokerConfiguration.jspa</link>
     </web-item>
 
     <!-- webworks -->
@@ -91,14 +91,14 @@
     <webwork1 key="scrum-poker-webwork">
         <actions>
             <action name="de.codescape.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction"
-                    alias="scrumPokerConfiguration" roles-required="sysadmin">
+                    alias="ScrumPokerConfiguration" roles-required="sysadmin">
                 <view name="success">/templates/configuration.vm</view>
             </action>
-            <action name="de.codescape.jira.plugins.scrumpoker.action.ShowSessionsAction" alias="scrumPokerSessions"
+            <action name="de.codescape.jira.plugins.scrumpoker.action.ShowSessionsAction" alias="ScrumPokerSessions"
                     roles-required="use">
                 <view name="success">/templates/sessions.vm</view>
             </action>
-            <action name="de.codescape.jira.plugins.scrumpoker.action.ShowScrumPokerAction" alias="scrumPoker"
+            <action name="de.codescape.jira.plugins.scrumpoker.action.ShowScrumPokerAction" alias="ScrumPoker"
                     roles-required="use">
                 <view name="success">/templates/show.vm</view>
                 <view name="error">/templates/error.vm</view>

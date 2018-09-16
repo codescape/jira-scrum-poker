@@ -23,7 +23,7 @@
         </div>
         <div class="aui-page-header-actions">
             <div class="aui-buttons">
-                <a href="$req.contextPath/secure/scrumPokerSessions.jspa"><button class="aui-button aui-button-light">$i18n.getText("scrumpoker.sessions.list")</button></a>
+                <a href="$req.contextPath/secure/ScrumPokerSessions.jspa"><button class="aui-button aui-button-light">$i18n.getText("scrumpoker.sessions.list")</button></a>
             </div>
         </div>
     </div>
@@ -225,7 +225,7 @@
 
     <div class="poker-buttons">
         <div class="aui-buttons">
-            <a href="$req.contextPath/secure/scrumPokerSessions.jspa" class="aui-button">$i18n.getText("scrumpoker.sessions.list")</a>
+            <a href="$req.contextPath/secure/ScrumPokerSessions.jspa" class="aui-button">$i18n.getText("scrumpoker.sessions.list")</a>
             <a href="$req.contextPath/browse/{{issueKey}}" class="aui-button">$i18n.getText("scrumpoker.issue.navigateback")</a>
             <button onclick="ScrumPoker.resetSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.reset")</button>
         </div>

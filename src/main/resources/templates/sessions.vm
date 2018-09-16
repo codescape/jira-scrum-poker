@@ -22,7 +22,7 @@
         </div>
         <div class="aui-page-header-actions">
             <div class="aui-buttons">
-                <a href="$req.contextPath/secure/scrumPokerSessions.jspa"><button class="aui-button aui-button-light">$i18n.getText("scrumpoker.sessions.refresh")</button></a>
+                <a href="$req.contextPath/secure/ScrumPokerSessions.jspa"><button class="aui-button aui-button-light">$i18n.getText("scrumpoker.sessions.refresh")</button></a>
             </div>
         </div>
     </div>
@@ -51,8 +51,8 @@
                             #if ($issue)
                             <tr>
                                 <td class="issuetype"><img src="$issue.issueType.completeIconUrl"></td>
-                                <td class="issuekey"><a href="$req.contextPath/secure/scrumPoker.jspa?issueKey=$issue.key">$issue.key</a></td>
-                                <td class="summary"><a href="$req.contextPath/secure/scrumPoker.jspa?issueKey=$issue.key">$issue.summary</a></td>
+                                <td class="issuekey"><a href="$req.contextPath/secure/ScrumPoker.jspa?issueKey=$issue.key">$issue.key</a></td>
+                                <td class="summary"><a href="$req.contextPath/secure/ScrumPoker.jspa?issueKey=$issue.key">$issue.summary</a></td>
                                 <td class="created">$scrumPokerSession.createDate</td>
                                 <td class="assignee">$scrumPokerSession.creator</td>
                                 <td>$scrumPokerSession.votes.size()</td>
