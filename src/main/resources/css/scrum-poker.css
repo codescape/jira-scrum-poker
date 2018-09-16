@@ -46,9 +46,9 @@
     margin: 5px 9px 5px 0;
     padding: 2px;
     border-radius: 5px;
-    color: #172B4D;
+    color: #000000;
     background-color: #fff;
-    border: #172B4D 1px solid;
+    border: #0052cc 1px solid;
     -webkit-box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25);
     -moz-box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25);
     box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25); }
@@ -59,7 +59,7 @@
 
 /* selected card has a different background color */
 .card.active {
-    background-color: rgba(23,43,77,0.25); }
+    background-color: rgba(9,30,66,0.08); }
 
 /* clickable cards show this by their pointer */
 .card.clickable:hover, .card.clickable:focus {
@@ -69,6 +69,6 @@
 
 /* cards show their backside when not revealed */
 .card.backside {
-    background-color: #172B4D;
+    background-color: #0052cc;
     color: #fff;
     cursor: default; }

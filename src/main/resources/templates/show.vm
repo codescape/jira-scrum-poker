@@ -181,10 +181,10 @@
         <div class="poker-buttons">
             <div class="aui-buttons">
             {{#allowReveal}}
-                <button onclick="ScrumPoker.revealSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.revealcards")</button>
+                <button onclick="ScrumPoker.revealSession('{{issueKey}}');" class="aui-button aui-button-primary">$i18n.getText("scrumpoker.session.revealcards")</button>
             {{/allowReveal}}
             {{^allowReveal}}
-                <button class="aui-button" aria-disabled="true" disabled>$i18n.getText("scrumpoker.session.revealcards")</button>
+                <button class="aui-button aui-button-primary" aria-disabled="true" disabled>$i18n.getText("scrumpoker.session.revealcards")</button>
             {{/allowReveal}}
 
             {{#allowReset}}
