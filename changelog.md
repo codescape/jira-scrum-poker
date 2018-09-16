@@ -4,7 +4,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
-* ...
+* chore: upgrade all dependencies to latest stable version
 
 # [3.5.0] - 2018-09-16
 
