@@ -111,7 +111,6 @@ public class SessionResourceTest {
 
     private void expectCurrentSessionForUser(String issueKey, String userKey) {
         when(scrumPokerSessionService.byIssueKey(issueKey, userKey)).thenReturn(scrumPokerSession);
-        when(scrumPokerSession.getIssueKey()).thenReturn(issueKey);
         when(sessionEntityTransformer.build(scrumPokerSession, USER_KEY)).thenReturn(sessionEntity);
         when(sessionEntity.getIssueKey()).thenReturn(ISSUE_KEY);
     }
