@@ -11,6 +11,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: move Scrum Poker configuration into database (#31)
 * test: simplify test and remove unnecessary test data
 * feat: add parameter to signal Atlassian Data Center compatibility (#24)
+* feat: automatically migrate old configuration into new one and cleanup
 
 ## [3.4.0] - 2018-09-15
 
