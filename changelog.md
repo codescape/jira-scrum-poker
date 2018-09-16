@@ -10,7 +10,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * refactor: use links starting with uppercase for Scrum Poker
 * feat: move Scrum Poker configuration into database (#31)
 * test: simplify test and remove unnecessary test data
-* feat: add parameter to signal Atlassian Data Center compatibility
+* feat: add parameter to signal Atlassian Data Center compatibility (#24)
 
 ## [3.4.0] - 2018-09-15
 
