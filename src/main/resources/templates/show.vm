@@ -144,7 +144,7 @@
             <p class="poker-comment">$i18n.getText("scrumpoker.session.confirmestimation")</p>
             <ul class="list-of-cards centered">
                 {{#boundedVotes}}
-                    <li><a onclick="ScrumPoker.confirmSession('{{issueKey}}','{{.}}');" class="card small clickable">{{.}}</a></li>
+                    <li><a onclick="ScrumPoker.confirmSession('{{issueKey}}','{{.}}');" class="card active small clickable">{{.}}</a></li>
                 {{/boundedVotes}}
             </ul>
 
@@ -212,7 +212,7 @@
 
         <p class="poker-comment">$i18n.getText("scrumpoker.session.estimationsaved")</p>
         <ul class="list-of-cards centered">
-            <li><span class="card">{{confirmedVote}}</span></li>
+            <li><span class="card active">{{confirmedVote}}</span></li>
         </ul>
 
     {{/confirmedVoteExists}}

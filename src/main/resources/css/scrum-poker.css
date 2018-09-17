@@ -47,11 +47,7 @@
     padding: 2px;
     border-radius: 5px;
     color: #000000;
-    background-color: #fff;
-    border: #0052cc 1px solid;
-    -webkit-box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25);
-    -moz-box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25);
-    box-shadow: 2px 2px 1px 0px rgba(23,43,77,0.25); }
+    background-color: rgba(9,30,66,.08); }
 
 /* cards can be smaller */
 .card.small {
@@ -59,13 +55,19 @@
 
 /* selected card has a different background color */
 .card.active {
-    background-color: rgba(9,30,66,0.08); }
+    background-color: #0052cc;
+    color: #fff; }
 
 /* clickable cards show this by their pointer */
 .card.clickable:hover, .card.clickable:focus {
-    background-color: rgba(23,43,77,0.125);
+    background-color: #f4f5f7;
     text-decoration: none;
     cursor: pointer; }
+
+/* hover over select cards */
+.card.active:hover {
+    background-color: #0065FF;
+    color: #fff; }
 
 /* cards show their backside when not revealed */
 .card.backside {
