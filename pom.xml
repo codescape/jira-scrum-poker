@@ -39,7 +39,7 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <!-- Jira version -->
+        <!-- Dependency versions -->
         <jira.version>7.12.1</jira.version>
         <amps.version>6.3.15</amps.version>
         <plugin.testrunner.version>2.0.1</plugin.testrunner.version>
@@ -177,7 +177,7 @@
                     <!-- See here for an explanation of default instructions: -->
                     <!-- https://developer.atlassian.com/docs/advanced-topics/configuration-of-instructions-in-atlassian-plugins -->
                     <instructions>
-                        <!-- Ensure plugin is spring powered -->
+                        <!-- ensure plugin is spring powered -->
                         <Spring-Context>*</Spring-Context>
                     </instructions>
                 </configuration>
@@ -191,13 +191,11 @@
                         <goals>
                             <goal>atlassian-spring-scanner</goal>
                         </goals>
-                        <!-- process-classes seems to be skipped if you are using scala
-                             so perhaps use prepare-package -->
                         <phase>process-classes</phase>
                     </execution>
                 </executions>
                 <configuration>
-                    <!-- Enable this to get build-time logging of annotations atlassian-spring-scanner-maven-plugin has noticed -->
+                    <!-- enable for build-time logging of annotations atlassian-spring-scanner-maven-plugin has noticed -->
                     <verbose>true</verbose>
                 </configuration>
             </plugin>
@@ -208,7 +206,7 @@
         <profile>
             <id>enable-atlassian-licensing</id>
             <activation>
-                <!-- as long as the plugin is free this profile is not active by default -->
+                <!-- as long as the add-on is free this profile is not active by default -->
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>

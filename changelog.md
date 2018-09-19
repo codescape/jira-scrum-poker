@@ -7,6 +7,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * chore: upgrade all dependencies to latest stable version
 * feat: adapt Jira style guide for Scrum Poker card layout
 * refactor: use Spring annotations and conform to atlassian-spring-scanner
+* docs: update inline documentation in POM file
 
 # [3.5.0] - 2018-09-16
 
