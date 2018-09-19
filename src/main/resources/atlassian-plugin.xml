@@ -34,12 +34,6 @@
         <context>scrum-poker</context>
     </web-resource>
 
-    <!-- imported components -->
-
-    <component-import key="pluginSettingsFactory"
-                      interface="com.atlassian.sal.api.pluginsettings.PluginSettingsFactory"/>
-    <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties"/>
-
     <!-- buttons to start a new session -->
 
     <web-item key="scrum-poker-start-from-issue-details" section="jira.issue.tools" weight="10">
@@ -118,12 +112,5 @@
         <entity>de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSetting</entity>
         <entity>de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote</entity>
     </ao>
-
-    <!-- upgrade tasks -->
-
-    <component key="scrum-poker-upgrade-01" name="Scrum Poker Upgrade Task 01"
-               class="de.codescape.jira.plugins.scrumpoker.upgrade.Upgrade01RemovePluginSettings" public="true">
-        <interface>com.atlassian.sal.api.upgrade.PluginUpgradeTask</interface>
-    </component>
 
 </atlassian-plugin>

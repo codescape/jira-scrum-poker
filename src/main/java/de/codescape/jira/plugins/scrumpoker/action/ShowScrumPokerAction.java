@@ -13,6 +13,7 @@ import com.atlassian.jira.web.HttpServletVariables;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
 import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
 
@@ -37,6 +38,7 @@ public class ShowScrumPokerAction extends JiraWebActionSupport {
 
     private String issueKey;
 
+    @Autowired
     public ShowScrumPokerAction(FieldLayoutManager fieldLayoutManager, RendererManager rendererManager,
                                 IssueManager issueManager, JiraAuthenticationContext jiraAuthenticationContext,
                                 HttpServletVariables httpServletVariables, PermissionManager permissionManager,

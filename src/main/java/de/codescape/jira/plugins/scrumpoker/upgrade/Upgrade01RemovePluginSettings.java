@@ -1,23 +1,29 @@
 package de.codescape.jira.plugins.scrumpoker.upgrade;
 
+import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
+import com.atlassian.sal.api.upgrade.PluginUpgradeTask;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
-
-import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Remove the configuration from PluginSettings and migrate information into the Active Objects based configuration.
  *
  * @since 3.5.0
  */
+@Component
+@ExportAsService(PluginUpgradeTask.class)
 public class Upgrade01RemovePluginSettings extends AbstractUpgradeTask {
 
+    @ComponentImport
     private final PluginSettingsFactory pluginSettingsFactory;
 
     private final ScrumPokerSettingService scrumPokerSettingService;
 
-    @Inject
+    @Autowired
     public Upgrade01RemovePluginSettings(PluginSettingsFactory pluginSettingsFactory,
                                          ScrumPokerSettingService scrumPokerSettingService) {
         this.pluginSettingsFactory = pluginSettingsFactory;

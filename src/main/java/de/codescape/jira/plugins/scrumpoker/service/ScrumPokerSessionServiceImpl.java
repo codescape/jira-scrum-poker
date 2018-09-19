@@ -3,16 +3,15 @@ package de.codescape.jira.plugins.scrumpoker.service;
 import com.atlassian.activeobjects.external.ActiveObjects;
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
-import com.atlassian.plugin.spring.scanner.annotation.component.Scanned;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
 import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
 import net.java.ao.DBParam;
 import net.java.ao.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -22,21 +21,17 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Implementation of {@link ScrumPokerSessionService} using Active Objects as persistence model.
  */
-@Scanned
-@Named
+@Component
 public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
 
     @ComponentImport
     private final ActiveObjects activeObjects;
 
-    @ComponentImport
     private final IssueManager issueManager;
-
     private final ScrumPokerSettingService scrumPokerSettingService;
-
     private final ScrumPokerForIssueCondition scrumPokerForIssueCondition;
 
-    @Inject
+    @Autowired
     public ScrumPokerSessionServiceImpl(ActiveObjects activeObjects, IssueManager issueManager,
                                         ScrumPokerSettingService scrumPokerSettingService,
                                         ScrumPokerForIssueCondition scrumPokerForIssueCondition) {

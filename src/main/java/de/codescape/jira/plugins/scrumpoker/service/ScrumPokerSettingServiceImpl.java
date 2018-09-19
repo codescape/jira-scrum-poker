@@ -1,23 +1,20 @@
 package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
-import com.atlassian.plugin.spring.scanner.annotation.component.Scanned;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSetting;
 import net.java.ao.DBParam;
 import net.java.ao.Query;
 import org.apache.commons.lang.math.NumberUtils;
-
-import javax.inject.Inject;
-import javax.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Implementation of {@link ScrumPokerSettingService} using Active Objects as persistence model.
  */
-@Scanned
-@Named
+@Component
 public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
 
     static final String STORY_POINT_FIELD = "storyPointField";
@@ -27,7 +24,7 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
     @ComponentImport
     private final ActiveObjects activeObjects;
 
-    @Inject
+    @Autowired
     public ScrumPokerSettingServiceImpl(ActiveObjects activeObjects) {
         this.activeObjects = checkNotNull(activeObjects);
     }

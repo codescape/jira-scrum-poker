@@ -6,24 +6,22 @@ import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.plugin.webfragment.conditions.AbstractIssueWebCondition;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.user.ApplicationUser;
-import com.atlassian.plugin.spring.scanner.annotation.component.Scanned;
+import com.atlassian.plugin.web.Condition;
 import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
-
-import javax.inject.Inject;
-import javax.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * This condition is used to decide whether a button to start a Scrum poker session should be displayed or not for the
  * given issue. The issue must be editable and have the custom field that is configured for Scrum poker estimations.
  */
-@Named
-@Scanned
-public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition {
+@Component
+public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition implements Condition {
 
     private final CustomFieldManager customFieldManager;
     private final EstimationFieldService estimationFieldService;
 
-    @Inject
+    @Autowired
     public ScrumPokerForIssueCondition(CustomFieldManager customFieldManager,
                                        EstimationFieldService estimationFieldService) {
         this.customFieldManager = customFieldManager;

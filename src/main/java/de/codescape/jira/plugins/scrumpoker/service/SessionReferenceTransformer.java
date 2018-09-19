@@ -2,14 +2,12 @@ package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
-import com.atlassian.plugin.spring.scanner.annotation.component.Scanned;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.ReferenceEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.ReferenceListEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -19,14 +17,12 @@ import java.util.stream.Collectors;
  * that contains a {@link ReferenceEntity} element for every {@link ScrumPokerSession}. This service creates a model
  * that can be used and transferred as a REST resource and is optimized for a logic less templating mechanism.
  */
-@Scanned
-@Named
+@Component
 public class SessionReferenceTransformer {
 
-    @ComponentImport
     private IssueManager issueManager;
 
-    @Inject
+    @Autowired
     public SessionReferenceTransformer(IssueManager issueManager) {
         this.issueManager = issueManager;
     }

@@ -9,6 +9,7 @@ import com.atlassian.jira.web.action.JiraWebActionSupport;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
 import de.codescape.jira.plugins.scrumpoker.service.SessionEntityTransformer;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +29,7 @@ public class ShowSessionsAction extends JiraWebActionSupport {
     private final ScrumPokerSessionService scrumPokerSessionService;
     private final SessionEntityTransformer sessionEntityTransformer;
 
+    @Autowired
     public ShowSessionsAction(JiraAuthenticationContext jiraAuthenticationContext, PermissionManager permissionManager,
                               ScrumPokerSessionService scrumPokerSessionService, IssueManager issueManager,
                               SessionEntityTransformer sessionEntityTransformer) {

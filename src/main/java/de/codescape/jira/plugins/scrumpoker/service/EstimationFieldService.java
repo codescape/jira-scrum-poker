@@ -7,36 +7,26 @@ import com.atlassian.jira.issue.UpdateIssueRequest;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.user.ApplicationUser;
-import com.atlassian.plugin.spring.scanner.annotation.component.Scanned;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.inject.Inject;
-import javax.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Component to access and write the value of the configured custom field. This is typically the Story Point field
  * provided by Jira Software.
  */
-@Named
-@Scanned
+@Component
 public class EstimationFieldService {
 
     private static final Logger log = LoggerFactory.getLogger(EstimationFieldService.class);
 
     private final ScrumPokerSettingService scrumPokerSettingService;
-
-    @ComponentImport
     private final CustomFieldManager customFieldManager;
-
-    @ComponentImport
     private final JiraAuthenticationContext context;
-
-    @ComponentImport
     private final IssueManager issueManager;
 
-    @Inject
+    @Autowired
     public EstimationFieldService(JiraAuthenticationContext context,
                                   ScrumPokerSettingService scrumPokerSettingService,
                                   IssueManager issueManager,

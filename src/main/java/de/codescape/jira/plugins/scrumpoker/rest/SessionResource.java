@@ -7,6 +7,7 @@ import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
 import de.codescape.jira.plugins.scrumpoker.service.SessionEntityTransformer;
 import de.codescape.jira.plugins.scrumpoker.service.SessionReferenceTransformer;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -26,6 +27,7 @@ public class SessionResource {
     private final SessionEntityTransformer sessionEntityTransformer;
     private final SessionReferenceTransformer sessionReferenceTransformer;
 
+    @Autowired
     public SessionResource(EstimationFieldService estimationFieldService,
                            JiraAuthenticationContext jiraAuthenticationContext,
                            ScrumPokerSessionService scrumPokerSessionService,

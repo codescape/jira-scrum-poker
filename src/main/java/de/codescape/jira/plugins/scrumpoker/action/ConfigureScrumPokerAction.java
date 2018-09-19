@@ -4,6 +4,7 @@ import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class ConfigureScrumPokerAction extends JiraWebActionSupport {
     private final CustomFieldManager customFieldManager;
     private final ScrumPokerSettingService scrumPokerSettingService;
 
+    @Autowired
     public ConfigureScrumPokerAction(ScrumPokerSettingService scrumPokerSettingService,
                                      CustomFieldManager customFieldManager) {
         this.scrumPokerSettingService = scrumPokerSettingService;

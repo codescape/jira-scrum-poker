@@ -2,17 +2,15 @@ package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
-import com.atlassian.plugin.spring.scanner.annotation.component.Scanned;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.CardEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.VoteEntity;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,14 +24,12 @@ import static org.apache.commons.lang3.math.NumberUtils.isNumber;
  * Service that allows to transform a {@link ScrumPokerSession} into a {@link SessionEntity}. This service creates a
  * model that can be used and transferred as a REST resource and is optimized for a logic less templating mechanism.
  */
-@Scanned
-@Named
+@Component
 public class SessionEntityTransformer {
 
-    @ComponentImport
     private final UserManager userManager;
 
-    @Inject
+    @Autowired
     public SessionEntityTransformer(UserManager userManager) {
         this.userManager = userManager;
     }
