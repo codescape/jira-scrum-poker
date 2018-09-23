@@ -8,7 +8,7 @@ import java.util.Collection;
 /**
  * Base class to be used when implementing {@link PluginUpgradeTask}.
  */
-public abstract class AbstractUpgradeTask implements PluginUpgradeTask {
+abstract class AbstractUpgradeTask implements PluginUpgradeTask {
 
     public static final String SCRUM_POKER_PLUGIN_KEY = "de.codescape.jira.plugins.scrum-poker";
 

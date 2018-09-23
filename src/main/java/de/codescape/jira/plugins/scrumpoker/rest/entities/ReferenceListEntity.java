@@ -10,8 +10,8 @@ import java.util.List;
 @JsonAutoDetect
 public class ReferenceListEntity {
 
-    private List<ReferenceEntity> references;
-    private Integer estimation;
+    private final List<ReferenceEntity> references;
+    private final Integer estimation;
     private final boolean results;
 
     public ReferenceListEntity(List<ReferenceEntity> references, Integer estimation) {

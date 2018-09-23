@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Component
 public class SessionReferenceTransformer {
 
-    private IssueManager issueManager;
+    private final IssueManager issueManager;
 
     @Autowired
     public SessionReferenceTransformer(IssueManager issueManager) {

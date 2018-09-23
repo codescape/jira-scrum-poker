@@ -8,9 +8,9 @@ import org.codehaus.jackson.annotate.JsonAutoDetect;
 @JsonAutoDetect
 public class VoteEntity {
 
-    private String user;
-    private String vote;
-    private boolean needToTalk;
+    private final String user;
+    private final String vote;
+    private final boolean needToTalk;
 
     public VoteEntity(String user, String vote, boolean needToTalk) {
         this.user = user;

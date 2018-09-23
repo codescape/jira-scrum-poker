@@ -8,7 +8,7 @@ import net.java.ao.schema.PrimaryKey;
 /**
  * Base Entity for Active Objects that provides a primary key with a {@link Long} value.
  */
-public interface ScrumPokerEntity extends RawEntity<Long> {
+interface ScrumPokerEntity extends RawEntity<Long> {
 
     /**
      * The technical unique identifier for a concrete entity extending this interface.

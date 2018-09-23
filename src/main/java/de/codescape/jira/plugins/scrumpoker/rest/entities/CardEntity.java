@@ -8,8 +8,8 @@ import org.codehaus.jackson.annotate.JsonAutoDetect;
 @JsonAutoDetect
 public class CardEntity {
 
-    private String value;
-    private boolean selected;
+    private final String value;
+    private final boolean selected;
 
     public CardEntity(String value, boolean selected) {
         this.value = value;

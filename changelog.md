@@ -11,6 +11,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * test: add tests for correct format of message bundles for language support
 * docs: add Java documentation for developers to all Active Objects
 * test: add tests for automatic migration of old configuration
+* refactor: reduce class visibility and add final to constructor assigned fields
 
 # [3.5.0] - 2018-09-16
 
