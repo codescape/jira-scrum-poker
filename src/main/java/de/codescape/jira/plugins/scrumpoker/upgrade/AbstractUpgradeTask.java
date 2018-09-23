@@ -6,7 +6,7 @@ import com.atlassian.sal.api.upgrade.PluginUpgradeTask;
 import java.util.Collection;
 
 /**
- * Base class the be used when implementing {@link PluginUpgradeTask}.
+ * Base class to be used when implementing {@link PluginUpgradeTask}.
  */
 public abstract class AbstractUpgradeTask implements PluginUpgradeTask {
 

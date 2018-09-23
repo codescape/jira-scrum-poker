@@ -10,6 +10,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * docs: update inline documentation in POM file
 * test: add tests for correct format of message bundles for language support
 * docs: add Java documentation for developers to all Active Objects
+* test: add tests for automatic migration of old configuration
 
 # [3.5.0] - 2018-09-16
 
