@@ -12,6 +12,9 @@ import net.java.ao.schema.StringLength;
 @Preload
 public interface ScrumPokerSetting extends ScrumPokerEntity {
 
+    /**
+     * The unique key of the Scrum poker setting.
+     */
     @NotNull
     @Indexed
     @StringLength(255)
@@ -19,6 +22,9 @@ public interface ScrumPokerSetting extends ScrumPokerEntity {
 
     void setKey(String key);
 
+    /**
+     * The value of the Scrum poker setting.
+     */
     @StringLength(value = StringLength.UNLIMITED)
     String getValue();
 

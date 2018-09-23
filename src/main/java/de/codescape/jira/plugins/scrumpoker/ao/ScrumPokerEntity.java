@@ -10,6 +10,9 @@ import net.java.ao.schema.PrimaryKey;
  */
 public interface ScrumPokerEntity extends RawEntity<Long> {
 
+    /**
+     * The technical unique identifier for a concrete entity extending this interface.
+     */
     @AutoIncrement
     @NotNull
     @PrimaryKey("ID")

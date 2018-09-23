@@ -7,18 +7,30 @@ import java.util.Date;
  */
 public interface ScrumPokerVote extends ScrumPokerEntity {
 
+    /**
+     * The Scrum poker session this vote belongs to.
+     */
     ScrumPokerSession getSession();
 
     void setSession(ScrumPokerSession scrumPokerSession);
 
+    /**
+     * The unique key of the user this vote is provided by.
+     */
     String getUserKey();
 
     void setUserKey(String userKey);
 
+    /**
+     * The given vote of this user.
+     */
     String getVote();
 
     void setVote(String vote);
 
+    /**
+     * The date this vote is provided.
+     */
     Date getCreateDate();
 
     void setCreateDate(Date createDate);
