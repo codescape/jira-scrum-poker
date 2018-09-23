@@ -12,6 +12,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * docs: add Java documentation for developers to all Active Objects
 * test: add tests for automatic migration of old configuration
 * refactor: reduce class visibility and add final to constructor assigned fields
+* feat: add logging for automatic plugin updates
 
 # [3.5.0] - 2018-09-16
 

@@ -57,7 +57,7 @@ public class Upgrade01RemovePluginSettingsTest {
     public void shouldPersistBothSettingsIfStoryPointFieldExistsInPluginSettings() {
         when(pluginSettings.get(SCRUM_POKER_PLUGIN_KEY + ".storyPointField")).thenReturn("customfield-10006");
         upgrade.doUpgrade();
-        verify(scrumPokerSettingService).persistSettings("customfield-10006",null);
+        verify(scrumPokerSettingService).persistSettings("customfield-10006", null);
     }
 
     @Test
@@ -65,11 +65,11 @@ public class Upgrade01RemovePluginSettingsTest {
         when(pluginSettings.get(SCRUM_POKER_PLUGIN_KEY + ".storyPointField")).thenReturn("customfield-10006");
         when(pluginSettings.get(SCRUM_POKER_PLUGIN_KEY + ".sessionTimeout")).thenReturn("12");
         upgrade.doUpgrade();
-        verify(scrumPokerSettingService).persistSettings("customfield-10006","12");
+        verify(scrumPokerSettingService).persistSettings("customfield-10006", "12");
     }
 
     @Test
-    public void shouldReturnBuildNumber1() {
+    public void shouldReturnCorrectBuildNumber() {
         assertThat(upgrade.getBuildNumber(), is(equalTo(1)));
     }
 
