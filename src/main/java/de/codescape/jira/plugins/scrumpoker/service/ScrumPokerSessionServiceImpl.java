@@ -3,7 +3,6 @@ package de.codescape.jira.plugins.scrumpoker.service;
 import com.atlassian.activeobjects.external.ActiveObjects;
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
 import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
@@ -24,9 +23,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @Component
 public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
 
-    @ComponentImport
     private final ActiveObjects activeObjects;
-
     private final IssueManager issueManager;
     private final ScrumPokerSettingService scrumPokerSettingService;
     private final ScrumPokerForIssueCondition scrumPokerForIssueCondition;

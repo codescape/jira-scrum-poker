@@ -1,7 +1,6 @@
 package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSetting;
 import net.java.ao.DBParam;
 import net.java.ao.Query;
@@ -21,7 +20,6 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
     static final String SESSION_TIMEOUT = "sessionTimeout";
     static final Integer SESSION_TIMEOUT_DEFAULT = 12;
 
-    @ComponentImport
     private final ActiveObjects activeObjects;
 
     @Autowired
