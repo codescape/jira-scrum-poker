@@ -76,6 +76,7 @@
     color: #fff;
     cursor: default; }
 
+/* badges are positioned on the upper right corner of the card */
 .card aui-badge, .card .aui-badge {
     position: absolute;
     background-color: #ebedf0;

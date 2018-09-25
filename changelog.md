@@ -16,6 +16,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: use transactions for writing Scrum Poker data (#32)
 * feat: show badge with number of votes for every card when cards are revealed
 * refactor: format session detail view page
+* docs: update inline documentation for style sheets
 
 # [3.5.0] - 2018-09-16
 
