@@ -17,6 +17,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: show badge with number of votes for every card when cards are revealed
 * refactor: format session detail view page
 * docs: update inline documentation for style sheets
+* docs: add screenshots for online documentation
 
 # [3.5.0] - 2018-09-16
 

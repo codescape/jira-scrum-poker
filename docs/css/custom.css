@@ -34,6 +34,9 @@ h4 {
 a {
     color: #ff5630; }
 
+img {
+    max-width: 100%; }
+
 /* Larger than phone */
 
 @media (min-width: 550px) {
