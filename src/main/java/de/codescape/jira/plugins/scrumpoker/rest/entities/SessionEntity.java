@@ -16,7 +16,7 @@ public class SessionEntity {
     private List<CardEntity> cards;
     private Integer confirmedVote;
     private boolean visible;
-    private List<Integer> boundedVotes;
+    private List<BoundedVoteEntity> boundedVotes;
     private boolean agreementReached;
     private boolean cancelled;
     private List<VoteEntity> votes;
@@ -66,12 +66,12 @@ public class SessionEntity {
         return visible;
     }
 
-    public SessionEntity withBoundedVotes(List<Integer> boundedVotes) {
+    public SessionEntity withBoundedVotes(List<BoundedVoteEntity> boundedVotes) {
         this.boundedVotes = boundedVotes;
         return this;
     }
 
-    public List<Integer> getBoundedVotes() {
+    public List<BoundedVoteEntity> getBoundedVotes() {
         return boundedVotes;
     }
 

@@ -14,6 +14,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * refactor: reduce class visibility and add final to constructor assigned fields
 * feat: add logging for automatic plugin updates
 * feat: use transactions for writing Scrum Poker data (#32)
+* feat: show badge with number of votes for every card when cards are revealed
 
 # [3.5.0] - 2018-09-16
 

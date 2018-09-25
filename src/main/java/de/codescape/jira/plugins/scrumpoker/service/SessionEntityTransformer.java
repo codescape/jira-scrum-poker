@@ -4,6 +4,7 @@ import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
+import de.codescape.jira.plugins.scrumpoker.rest.entities.BoundedVoteEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.CardEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.VoteEntity;
@@ -11,7 +12,9 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -145,11 +148,15 @@ public class SessionEntityTransformer {
     /**
      * Returns the list of cards between and including the minimum and maximum vote.
      */
-    private List<Integer> boundedVotes(ScrumPokerVote[] votes) {
-        return getDeck().stream()
-            .filter(scrumPokerCard -> isNumber(scrumPokerCard.getName()))
-            .map(scrumPokerCard -> Integer.valueOf(scrumPokerCard.getName()))
-            .filter(value -> value >= getMinimumVote(votes) && value <= getMaximumVote(votes))
+    private List<BoundedVoteEntity> boundedVotes(ScrumPokerVote[] votes) {
+        Map<String, Long> voteDistribution = Arrays.stream(votes)
+            .collect(Collectors.groupingBy(ScrumPokerVote::getVote, Collectors.counting()));
+        return getDeck().stream().filter(scrumPokerCard -> isNumber(scrumPokerCard.getName()))
+            .map(scrumPokerCard -> new BoundedVoteEntity(
+                Integer.valueOf(scrumPokerCard.getName()),
+                voteDistribution.getOrDefault(scrumPokerCard.getName(), 0L).intValue()))
+            .filter(boundedVoteEntity -> boundedVoteEntity.getValue() >= getMinimumVote(votes) &&
+                boundedVoteEntity.getValue() <= getMaximumVote(votes))
             .collect(Collectors.toList());
     }
 

@@ -38,6 +38,7 @@
 
 /* basic card layout */
 .card {
+    position: relative;
     display: inline-block;
     text-align: center;
     line-height: 3.25em;
@@ -74,3 +75,10 @@
     background-color: #0052cc;
     color: #fff;
     cursor: default; }
+
+.card aui-badge, .card .aui-badge {
+    position: absolute;
+    background-color: #ebedf0;
+    margin-top: -0.95em;
+    margin-left: -0.25em;
+}

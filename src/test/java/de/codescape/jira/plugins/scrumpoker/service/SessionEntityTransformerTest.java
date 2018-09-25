@@ -4,6 +4,7 @@ import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
+import de.codescape.jira.plugins.scrumpoker.rest.entities.BoundedVoteEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import org.junit.Before;
 import org.junit.Rule;
@@ -15,7 +16,7 @@ import org.mockito.junit.MockitoRule;
 
 import java.util.Date;
 
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -66,6 +67,23 @@ public class SessionEntityTransformerTest {
 
         SessionEntity sessionEntity = sessionEntityTransformer.build(scrumPokerSession, "SOME_USER");
         assertThat(sessionEntity.isAgreementReached(), is(false));
+    }
+
+    @Test
+    public void shouldReturnBoundedVotesWithCountForEachVoteInRange() {
+        ScrumPokerVote[] scrumPokerVotes = {
+            scrumPokerVote("5"),
+            scrumPokerVote("5"),
+            scrumPokerVote("13")};
+        ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, true);
+
+        SessionEntity sessionEntity = sessionEntityTransformer.build(scrumPokerSession, "SOME_USER");
+        assertThat(sessionEntity.getBoundedVotes().size(), is(equalTo(3)));
+        assertThat(sessionEntity.getBoundedVotes(), allOf(
+            hasItem(allOf(hasProperty("value", equalTo(5)), hasProperty("count", equalTo(2)))),
+            hasItem(allOf(hasProperty("value", equalTo(8)), hasProperty("count", equalTo(0)))),
+            hasItem(allOf(hasProperty("value", equalTo(13)), hasProperty("count", equalTo(1))))
+        ));
     }
 
     private ScrumPokerSession scrumPokerSession(ScrumPokerVote[] scrumPokerVotes, boolean visible) {
