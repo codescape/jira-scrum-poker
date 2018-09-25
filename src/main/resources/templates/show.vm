@@ -93,15 +93,12 @@
 <script id="scrum-poker-cards-template" type="text/x-handlebars-template">
 
     {{^confirmedVoteExists}}
-
         <h4>$i18n.getText("scrumpoker.title")</h4>
-
         <ul class="list-of-cards">
             {{#cards}}
                 <li><a onmouseover="ScrumPoker.showReferences('{{value}}');" onmouseout="ScrumPoker.showReferences()" onclick="ScrumPoker.updateSession('{{issueKey}}','{{value}}');" class="card {{#selected}}active{{/selected}} clickable">{{value}}</a></li>
             {{/cards}}
         </ul>
-
     {{/confirmedVoteExists}}
 
 </script>
@@ -109,26 +106,21 @@
 <script id="scrum-poker-references-template" type="text/x-handlebars-template">
 
     {{#results}}
-
-    <p>$i18n.getText("scrumpoker.session.references")</p>
-
-    <table width="100%" class="aui" id="issuetable">
-        <tbody>
-            {{#references}}
-            <tr>
-                <td class="issuetype"><img src="{{issueIcon}}"></td>
-                <td class="summary">{{issueSummary}}</td>
-            </tr>
-            {{/references}}
-        </tbody>
-    </table>
-
+        <p>$i18n.getText("scrumpoker.session.references")</p>
+        <table width="100%" class="aui" id="issuetable">
+            <tbody>
+                {{#references}}
+                <tr>
+                    <td class="issuetype"><img src="{{issueIcon}}"></td>
+                    <td class="summary">{{issueSummary}}</td>
+                </tr>
+                {{/references}}
+            </tbody>
+        </table>
     {{/results}}
     {{^results}}
-
-    <p class="poker-comment">$i18n.getText("scrumpoker.session.references.empty")</p>
-    <p></p>
-
+        <p class="poker-comment">$i18n.getText("scrumpoker.session.references.empty")</p>
+        <p></p>
     {{/results}}
 
 </script>
@@ -136,18 +128,14 @@
 <script id="scrum-poker-participants-template" type="text/x-handlebars-template">
 
     {{^confirmedVoteExists}}
-
         {{#visible}}
-
             <h4>$i18n.getText("scrumpoker.session.bandwidth")</h4>
-
             <p class="poker-comment">$i18n.getText("scrumpoker.session.confirmestimation")</p>
             <ul class="list-of-cards centered">
                 {{#boundedVotes}}
                     <li><a onclick="ScrumPoker.confirmSession('{{issueKey}}','{{value}}');" class="card active small clickable">{{value}}{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</a></li>
                 {{/boundedVotes}}
             </ul>
-
         {{/visible}}
 
         <h4>$i18n.getText("scrumpoker.session.participants")</h4>
@@ -161,7 +149,7 @@
                     <span class="card small {{^visible}}backside{{/visible}}">{{vote}}</span>
                     <span>{{user}}</span>
                     {{#needToTalk}}
-                    <span class="aui-icon aui-icon-small aui-iconfont-comment need-to-talk">$i18n.getText("scrumpoker.session.needtotalk")</span>
+                        <span class="aui-icon aui-icon-small aui-iconfont-comment need-to-talk">$i18n.getText("scrumpoker.session.needtotalk")</span>
                     {{/needToTalk}}
                 </li>
             {{/votes}}
@@ -169,7 +157,6 @@
                 <p class="poker-comment">$i18n.getText("scrumpoker.session.noestimations")</p>
             {{/votes}}
         </ul>
-
     {{/confirmedVoteExists}}
 
 </script>
@@ -177,7 +164,6 @@
 <script id="scrum-poker-buttons-template" type="text/x-handlebars-template">
 
     {{^confirmedVoteExists}}
-
         <div class="poker-buttons">
             <div class="aui-buttons">
             {{#allowReveal}}
@@ -199,7 +185,6 @@
             {{/allowCancel}}
             </div>
         </div>
-
     {{/confirmedVoteExists}}
 
 </script>
@@ -209,18 +194,14 @@
     <h4>$i18n.getText("scrumpoker.title")</h4>
 
     {{#confirmedVoteExists}}
-
         <p class="poker-comment">$i18n.getText("scrumpoker.session.estimationsaved")</p>
         <ul class="list-of-cards centered">
             <li><span class="card active">{{confirmedVote}}</span></li>
         </ul>
-
     {{/confirmedVoteExists}}
 
     {{#cancelled}}
-
         <p class="poker-comment">$i18n.getText("scrumpoker.session.cancelled.long")</p>
-
     {{/cancelled}}
 
     <div class="poker-buttons">
