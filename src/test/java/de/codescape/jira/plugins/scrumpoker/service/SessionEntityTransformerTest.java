@@ -4,7 +4,6 @@ import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
-import de.codescape.jira.plugins.scrumpoker.rest.entities.BoundedVoteEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import org.junit.Before;
 import org.junit.Rule;

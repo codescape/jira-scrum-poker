@@ -2,8 +2,6 @@ package de.codescape.jira.plugins.scrumpoker.rest.entities;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
-import java.util.Objects;
-
 /**
  * REST representation of a bounded vote.
  */

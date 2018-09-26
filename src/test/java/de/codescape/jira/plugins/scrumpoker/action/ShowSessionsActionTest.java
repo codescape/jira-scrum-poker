@@ -6,9 +6,9 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
-import de.codescape.jira.plugins.scrumpoker.service.SessionEntityTransformer;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
+import de.codescape.jira.plugins.scrumpoker.service.SessionEntityTransformer;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -44,7 +44,7 @@ public class ShowSessionsActionTest {
     private IssueManager issueManager;
 
     @Mock
-    private  SessionEntityTransformer sessionEntityTransformer;
+    private SessionEntityTransformer sessionEntityTransformer;
 
     @InjectMocks
     private ShowSessionsAction showSessionsAction;
