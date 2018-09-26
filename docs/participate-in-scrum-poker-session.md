@@ -33,20 +33,19 @@ While moving your mouse cursor over the cards previous Scrum Poker sessions you 
 
 ![Compare with previously estimated issues](/images/participate-in-scrum-poker-session-compare-estimates.png)
 
-Once you have chosen a card it is highlighted and your name appears in the list of participants but the chosen card values are not shown yet.
+As you can see in the screenshot above when you have chosen a card it is highlighted and your name appears in the list of participants where the chosen card values are not shown to other participants yet.
 
-![Provide your estimate](/images/participate-in-scrum-poker-session-provide-estimate.png)
 
 ### Reveal all estimates
 
 Once all participants have provided their estimate the cards can be revealed by clicking on the `Reveal` button.
 
-The Scrum Poker add-on will then show the `Range of votes` provided by all participants and mark all participants in the `participants` list who provided a vote for an estimate on the boundaries of all estimates.
+The Scrum Poker add-on will then show the `Range of votes` and mark all participants in the `Participants` list who provided a vote for an estimate on the boundaries of all estimates.
 This can be seen as an invitation to talk about their reason for choosing that estimate.
 
 ![Reveal all estimates](/images/participate-in-scrum-poker-session-reveal-estimates.png)
 
-### Confirm an estimate
+### Confirm agreed estimate
 
 If all participants agree on an estimate one participant can confirm the estimate in clicking on the card in the `Range of votes` list.
 This saves the chosen estimate on the issue and informs all participants about the completed estimation process.
