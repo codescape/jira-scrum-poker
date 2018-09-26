@@ -27,10 +27,13 @@ On the page `Configuration` you have two configuration options to make the Scrum
 
 Select the custom field that is used to persist the confirmed estimations when completing a Scrum Poker session.
 
-Jira Software creates the field `Story Points` for estimations. Since this field is translated into your Jira system language it might have another label. In a German Jira instance this field is called `Story Punkte` for example.
+Jira Software creates the field `Story Points` for estimations.
+Since this field is translated into your Jira system language it might have another label.
+In a German Jira instance this field is called `Story Punkte` for example.
 
 It is preferred to choose this field because estimations that are saved into this field are displayed in the estimation badge on the backlog of agile boards.
 
 #### Session Timeout
 
-Adjust the session timeout of Scrum Poker sessions in hours. Sessions older than this timeout will not be shown on the `Active Sessions` page to keep this page clean and intuitive.
+Adjust the session timeout of Scrum Poker sessions in hours.
+Sessions older than this timeout will not be shown on the `Active Sessions` page to keep this page clean and intuitive.

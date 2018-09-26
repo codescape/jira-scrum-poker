@@ -18,6 +18,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * refactor: format session detail view page
 * docs: update inline documentation for style sheets
 * docs: add screenshots for online documentation
+* docs: add online documentation for the Scrum Poker process
 
 # [3.5.0] - 2018-09-16
 
