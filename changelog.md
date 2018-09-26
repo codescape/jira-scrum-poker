@@ -4,6 +4,10 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
+* ...
+
+## [3.6.0] - 2018-09-26
+
 * chore: upgrade all dependencies to latest stable version
 * feat: adapt Jira style guide for Scrum Poker card layout
 * refactor: use Spring annotations and conform to atlassian-spring-scanner
@@ -443,7 +447,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.5.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.6.0...HEAD
+[3.6.0]: https://github.com/codescape/jira-scrum-poker/compare/3.5.0...3.6.0
 [3.5.0]: https://github.com/codescape/jira-scrum-poker/compare/3.4.0...3.5.0
 [3.4.0]: https://github.com/codescape/jira-scrum-poker/compare/3.3.0...3.4.0
 [3.3.0]: https://github.com/codescape/jira-scrum-poker/compare/3.2.0...3.3.0
