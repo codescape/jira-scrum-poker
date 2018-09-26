@@ -19,6 +19,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * docs: update inline documentation for style sheets
 * docs: add screenshots for online documentation
 * docs: add online documentation for the Scrum Poker process
+* docs: simplify readme and remove unused screenshots
 
 # [3.5.0] - 2018-09-16
 

@@ -28,29 +28,11 @@ For developers:
 * [Changelog](https://github.com/codescape/jira-scrum-poker/blob/master/changelog.md)
 * [Code of Conduct](https://github.com/codescape/jira-scrum-poker/blob/master/code_of_conduct.md)
 
-## Screenshots
+## Screenshot
 
-The configuration page enables the Jira administrator to set up the estimation field used by Jira Software to integrate seamlessly.
+![Screenshot of a Scrum Poker session](/docs/images/participate-in-scrum-poker-session-reveal-estimates.png)
 
-![Configuration](/etc/screenshots/scrum-poker-configuration.png)
-
-New Scrum Poker sessions can be started from the context menu or from the issue detail page of every issue that has the configured estimation field.
-
-![Start Scrum Poker session](/etc/screenshots/scrum-poker-start.png)
-
-The Scrum Poker session page is separated into issue details like summary, description and sub tasks and the Scrum Poker session details like cards, selected estimations and participating users.   
-
-![Providing estimates by all participants](/etc/screenshots/scrum-poker-session-hidden.png)
-
-When the Scrum Poker session is revealed all estimations will be shown and to help the team finding a common estimation participants with estimations on the boundaries are advised to talk to each other.
-
-![Discussion about the bandwidth of estimates](/etc/screenshots/scrum-poker-session-revealed.png)
-
-The overview page helps users to find their Scrum Poker session within all currently active and recently closed sessions.
-
-![Active sessions Overview](/etc/screenshots/scrum-poker-active-sessions.png)
-
-## Compatibility with Jira
+## Compatibility Matrix
 
 The Scrum Poker plugin is compatible with Jira 7.5.0 and newer versions.
 
