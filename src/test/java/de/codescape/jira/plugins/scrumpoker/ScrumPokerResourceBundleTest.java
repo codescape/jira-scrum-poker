@@ -21,7 +21,7 @@ public class ScrumPokerResourceBundleTest {
     };
 
     @Test
-    public void check_bundles_do_not_contain_german_umlauts() {
+    public void resourceBundlesMustNotContainGermanUmlauts() {
         Arrays.stream(SUPPORTED_BUNDLES).forEach(bundleName -> {
                 try (Scanner scanner = new Scanner(getFile(bundleName))) {
                     while (scanner.hasNextLine()) {
@@ -42,7 +42,7 @@ public class ScrumPokerResourceBundleTest {
     }
 
     @Test
-    public void check_bundles_do_not_include_malformed_unicode_escapes() {
+    public void resourceBundlesMustNotIncludeMalformedUnicodeEscapes() {
         Arrays.stream(SUPPORTED_BUNDLES).forEach(bundleName -> {
                 try {
                     new Properties().load(new FileReader(getFile(bundleName)));

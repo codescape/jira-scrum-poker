@@ -6,7 +6,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * test: cleanup test for REST endpoint and remove unnecessary test data
 * test: cleanup test for automatic upgrade task and remove unnecessary test data
-
+* test: improve naming of test methods to better reflect test case
+ 
 ## [3.6.0] - 2018-09-26
 
 * chore: upgrade all dependencies to latest stable version
