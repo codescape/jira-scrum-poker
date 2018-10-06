@@ -34,13 +34,9 @@ public class Upgrade01RemovePluginSettingsTest {
     @Mock
     private PluginSettings pluginSettings;
 
-    @Before
-    public void before() {
-        when(pluginSettingsFactory.createGlobalSettings()).thenReturn(pluginSettings);
-    }
-
     @Test
     public void shouldDeleteSessionTimeoutIfItExistsInPluginSettings() {
+        withGlobalSettingsFactory();
         when(pluginSettings.get(SCRUM_POKER_PLUGIN_KEY + ".sessionTimeout")).thenReturn("12");
         upgrade.doUpgrade();
         verify(pluginSettings).remove(SCRUM_POKER_PLUGIN_KEY + ".sessionTimeout");
@@ -48,6 +44,7 @@ public class Upgrade01RemovePluginSettingsTest {
 
     @Test
     public void shouldDeleteStoryPointFieldIfItExistsInPluginSettings() {
+        withGlobalSettingsFactory();
         when(pluginSettings.get(SCRUM_POKER_PLUGIN_KEY + ".storyPointField")).thenReturn("customfield-10006");
         upgrade.doUpgrade();
         verify(pluginSettings).remove(SCRUM_POKER_PLUGIN_KEY + ".storyPointField");
@@ -55,6 +52,7 @@ public class Upgrade01RemovePluginSettingsTest {
 
     @Test
     public void shouldPersistBothSettingsIfStoryPointFieldExistsInPluginSettings() {
+        withGlobalSettingsFactory();
         when(pluginSettings.get(SCRUM_POKER_PLUGIN_KEY + ".storyPointField")).thenReturn("customfield-10006");
         upgrade.doUpgrade();
         verify(scrumPokerSettingService).persistSettings("customfield-10006", null);
@@ -62,6 +60,7 @@ public class Upgrade01RemovePluginSettingsTest {
 
     @Test
     public void shouldPersistBothSettingsIfStoryPointFieldAndSessionTimeoutExistInPluginSettings() {
+        withGlobalSettingsFactory();
         when(pluginSettings.get(SCRUM_POKER_PLUGIN_KEY + ".storyPointField")).thenReturn("customfield-10006");
         when(pluginSettings.get(SCRUM_POKER_PLUGIN_KEY + ".sessionTimeout")).thenReturn("12");
         upgrade.doUpgrade();
@@ -76,6 +75,10 @@ public class Upgrade01RemovePluginSettingsTest {
     @Test
     public void shouldReturnShortDescriptionWithLessThan50Characters() {
         assertThat(upgrade.getShortDescription().length(), is(lessThan(50)));
+    }
+
+    private void withGlobalSettingsFactory() {
+        when(pluginSettingsFactory.createGlobalSettings()).thenReturn(pluginSettings);
     }
 
 }

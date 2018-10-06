@@ -5,6 +5,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 ## [Unreleased]
 
 * test: cleanup test for REST endpoint and remove unnecessary test data
+* test: cleanup test for automatic upgrade task and remove unnecessary test data
 
 ## [3.6.0] - 2018-09-26
 
