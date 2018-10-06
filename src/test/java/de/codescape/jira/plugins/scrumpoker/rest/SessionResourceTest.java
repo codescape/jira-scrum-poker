@@ -66,7 +66,6 @@ public class SessionResourceTest {
     @Test
     public void updateCardShouldUpdateTheCardForTheCurrentUser() {
         expectCurrentUserIs(USER_KEY);
-        expectCurrentSessionForUser(ISSUE_KEY, USER_KEY);
 
         sessionResource.updateCard(ISSUE_KEY, CARD_VALUE);
 
@@ -76,7 +75,6 @@ public class SessionResourceTest {
     @Test
     public void revealingCardShouldRevealCardsForUnderlyingSession() {
         expectCurrentUserIs(USER_KEY);
-        expectCurrentSessionForUser(ISSUE_KEY, USER_KEY);
 
         sessionResource.revealCards(ISSUE_KEY);
 
@@ -86,7 +84,6 @@ public class SessionResourceTest {
     @Test
     public void resettingSessionShouldResetTheUnderlyingSession() {
         expectCurrentUserIs(USER_KEY);
-        expectCurrentSessionForUser(ISSUE_KEY, USER_KEY);
 
         sessionResource.resetSession(ISSUE_KEY);
 
@@ -96,7 +93,6 @@ public class SessionResourceTest {
     @Test
     public void confirmingEstimationShouldConfirmEstimationInUnderlyingSessionAndPersistEstimation() {
         expectCurrentUserIs(USER_KEY);
-        expectCurrentSessionForUser(ISSUE_KEY, USER_KEY);
 
         sessionResource.confirmEstimation(ISSUE_KEY, ESTIMATION);
 
