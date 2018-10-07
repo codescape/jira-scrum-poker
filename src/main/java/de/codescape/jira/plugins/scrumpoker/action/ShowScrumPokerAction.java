@@ -57,7 +57,7 @@ public class ShowScrumPokerAction extends JiraWebActionSupport {
         issueKey = httpServletVariables.getHttpRequest().getParameter(PARAM_ISSUE_KEY);
         MutableIssue issue = issueManager.getIssueObject(issueKey);
         if (issue == null || currentUserIsNotAllowedToSeeIssue(issue) || issueIsNotEstimable(issue)) {
-            addErrorMessage("Issue Key" + issueKey + " not found.");
+            addErrorMessage("Issue Key " + issueKey + " not found.");
             return "error";
         }
         return "success";

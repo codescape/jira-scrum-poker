@@ -1,6 +1,7 @@
 <html>
 <head>
     <title>$i18n.getText("scrumpoker.title") - $i18n.getText("scrumpoker.error.title")</title>
+    $webResourceManager.requireResource("de.codescape.jira.plugins.scrum-poker:scrum-poker-resources")
 </head>
 <body>
 
@@ -9,7 +10,7 @@
         <div class="aui-page-header-image">
             <span class="aui-avatar aui-avatar-large aui-avatar-project">
                 <span class="aui-avatar-inner">
-                    <img alt="Scrum Poker Logo" src="$req.contextPath/download/resources/de.codescape.jira.plugins.scrum-poker:scrum-poker-resources/images/pluginLogo.png">
+                    <img alt="Scrum Poker Logo" src="$req.contextPath/download/resources/de.codescape.jira.plugins.scrum-poker:scrum-poker-resources/images/scrum-poker-logo-144.png" width="72" height="72">
                 </span>
             </span>
         </div>
