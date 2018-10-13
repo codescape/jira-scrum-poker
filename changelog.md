@@ -8,6 +8,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * test: cleanup test for automatic upgrade task and remove unnecessary test data
 * test: improve naming of test methods to better reflect test case
 * feat: improve error page and error massage in case of an error
+* feat: automatically install Jira Software in development mode
 
 ## [3.6.0] - 2018-09-26
 
