@@ -9,6 +9,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * test: improve naming of test methods to better reflect test case
 * feat: improve error page and error massage in case of an error
 * feat: automatically install Jira Software in development mode
+* refactor: retrieve current user in separate and reusable method
 
 ## [3.6.0] - 2018-09-26
 

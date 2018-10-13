@@ -47,9 +47,8 @@ public class SessionResource {
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/{issueKey}")
     public Response getSession(@PathParam("issueKey") String issueKey) {
-        String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
-        ScrumPokerSession scrumPokerSession = scrumPokerSessionService.byIssueKey(issueKey, userKey);
-        SessionEntity response = sessionEntityTransformer.build(scrumPokerSession, userKey);
+        ScrumPokerSession scrumPokerSession = scrumPokerSessionService.byIssueKey(issueKey, currentUser());
+        SessionEntity response = sessionEntityTransformer.build(scrumPokerSession, currentUser());
         return Response.ok(response).build();
     }
 
@@ -59,8 +58,7 @@ public class SessionResource {
     @POST
     @Path("/{issueKey}/card/{card}")
     public Response updateCard(@PathParam("issueKey") String issueKey, @PathParam("card") String card) {
-        String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
-        scrumPokerSessionService.addVote(issueKey, userKey, card);
+        scrumPokerSessionService.addVote(issueKey, currentUser(), card);
         return Response.ok().build();
     }
 
@@ -70,8 +68,7 @@ public class SessionResource {
     @POST
     @Path("/{issueKey}/reveal")
     public Response revealCards(@PathParam("issueKey") String issueKey) {
-        String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
-        scrumPokerSessionService.reveal(issueKey, userKey);
+        scrumPokerSessionService.reveal(issueKey, currentUser());
         return Response.ok().build();
     }
 
@@ -81,8 +78,7 @@ public class SessionResource {
     @POST
     @Path("/{issueKey}/cancel")
     public Response cancelSession(@PathParam("issueKey") String issueKey) {
-        String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
-        scrumPokerSessionService.cancel(issueKey, userKey);
+        scrumPokerSessionService.cancel(issueKey, currentUser());
         return Response.ok().build();
     }
 
@@ -92,8 +88,7 @@ public class SessionResource {
     @POST
     @Path("/{issueKey}/reset")
     public Response resetSession(@PathParam("issueKey") String issueKey) {
-        String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
-        scrumPokerSessionService.reset(issueKey, userKey);
+        scrumPokerSessionService.reset(issueKey, currentUser());
         return Response.ok().build();
     }
 
@@ -104,8 +99,7 @@ public class SessionResource {
     @Path("/{issueKey}/confirm/{estimation}")
     public Response confirmEstimation(@PathParam("issueKey") String issueKey,
                                       @PathParam("estimation") Integer estimation) {
-        String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
-        scrumPokerSessionService.confirm(issueKey, userKey, estimation);
+        scrumPokerSessionService.confirm(issueKey, currentUser(), estimation);
         if (estimationFieldService.save(issueKey, estimation)) {
             return Response.ok().build();
         } else {
@@ -119,9 +113,12 @@ public class SessionResource {
     @GET
     @Path("/reference/{estimation}")
     public Response getReferences(@PathParam("estimation") Integer estimation) {
-        String userKey = jiraAuthenticationContext.getLoggedInUser().getKey();
-        List<ScrumPokerSession> references = scrumPokerSessionService.references(userKey, estimation);
+        List<ScrumPokerSession> references = scrumPokerSessionService.references(currentUser(), estimation);
         return Response.ok(sessionReferenceTransformer.build(references, estimation)).build();
+    }
+
+    private String currentUser() {
+        return jiraAuthenticationContext.getLoggedInUser().getKey();
     }
 
 }
