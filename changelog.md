@@ -11,7 +11,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: automatically install Jira Software in development mode
 * refactor: retrieve current user in separate and reusable method
 * chore: implement against latest version of Jira and upgrade Atlassian SDK
-
+* test: add test for correct behaviour when cancelling a session
+ 
 ## [3.6.0] - 2018-09-26
 
 * chore: upgrade all dependencies to latest stable version

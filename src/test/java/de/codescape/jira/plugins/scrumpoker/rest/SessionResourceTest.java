@@ -91,6 +91,15 @@ public class SessionResourceTest {
     }
 
     @Test
+    public void cancellingSessionShouldCancelTheUnderlyingSession() {
+        expectCurrentUserIs(USER_KEY);
+
+        sessionResource.cancelSession(ISSUE_KEY);
+
+        verify(scrumPokerSessionService, times(1)).cancel(ISSUE_KEY, USER_KEY);
+    }
+
+    @Test
     public void confirmingEstimationShouldConfirmEstimationInUnderlyingSessionAndPersistEstimation() {
         expectCurrentUserIs(USER_KEY);
 
