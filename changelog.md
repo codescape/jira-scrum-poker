@@ -10,8 +10,9 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: improve error page and error massage in case of an error
 * feat: automatically install Jira Software in development mode
 * refactor: retrieve current user in separate and reusable method
-* chore: implement against latest version of Jira and upgrade Atlassian SDK
+* chore: implement against latest version of Atlassian SDK
 * test: add test for correct behaviour when cancelling a session
+* chore: implement against latest Jira patch version 7.13.0
  
 ## [3.6.0] - 2018-09-26
 
