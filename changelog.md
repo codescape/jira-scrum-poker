@@ -4,6 +4,10 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
+* ...
+
+## [3.7.0] - 2018-12-03
+
 * test: cleanup test for REST endpoint and remove unnecessary test data
 * test: cleanup test for automatic upgrade task and remove unnecessary test data
 * test: improve naming of test methods to better reflect test case
@@ -455,7 +459,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.6.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.7.0...HEAD
+[3.7.0]: https://github.com/codescape/jira-scrum-poker/compare/3.6.0...3.7.0
 [3.6.0]: https://github.com/codescape/jira-scrum-poker/compare/3.5.0...3.6.0
 [3.5.0]: https://github.com/codescape/jira-scrum-poker/compare/3.4.0...3.5.0
 [3.4.0]: https://github.com/codescape/jira-scrum-poker/compare/3.3.0...3.4.0
