@@ -10,4 +10,5 @@ The documentation targets users of the Scrum Poker add-on and Jira administrator
 The documentation is split into these two categories:
 
 * The `User Guide` covers topics like how to start a session, how to join and participate in an already started session and everything else around the process of getting the most out of the Scrum Poker add-on.
-* The `Administrator Guide` covers topics like installation and configuration and running the Scrum Poker add-on in your Jira instance.
+* The `Administration` section covers topics like installation and configuration and running the Scrum Poker add-on in your Jira instance.
+* The `Legal` section holds legal documents like the Privacy Statement and the End User License Agreement.

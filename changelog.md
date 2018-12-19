@@ -4,7 +4,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
-* ...
+* docs: provide EULA and privacy statement in online documentation
 
 ## [3.7.0] - 2018-12-03
 

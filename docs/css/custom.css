@@ -16,7 +16,7 @@ h2, h3, h4, h5, h6 {
     font-weight: 600; }
 
 h2 {
-    font-size: 2rem; }
+    font-size: 2.5rem; }
 
 h4 {
     font-size: 1.2rem; }
@@ -84,7 +84,7 @@ img {
         position: relative;
         float: left;
         margin-bottom: 0;
-        width: 25%;
+        width: 20%;
         text-align: center; }
 
     .navbar-link {

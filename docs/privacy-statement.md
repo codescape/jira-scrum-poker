@@ -1,10 +1,16 @@
-# Privacy Statement
+---
+layout: default
+title: Privacy Statement
+---
+
+* Table of Contents
+{:toc}
 
 The protection of your privacy while using Scrum Poker as well as the security of all business data collected, processed and used by Scrum Poker is an important concern to us.
 
 In this document we provide details on how we secure your data. If you find something missing or you have any security related questions please feel free to contact us at stefan.glase@googlemail.com.
 
-## Collection, processing and usage of personal data
+### Collection, processing and usage of personal data
 
 We only store the minimal amount of data required to provide our service. We do not store issue details, task descriptions, comments nor other sensitive information. We never store users full names nor e-mails but we use user keys provided by Jira which can contain them.
 
@@ -20,7 +26,7 @@ All data and information is solely used for the execution of Scrum Poker session
 
 The session data is kept visible for 12 hours in the list of recently finished sessions. After that the votes are solely used to display reference issues to users for currently running sessions. 
 
-## Log files
+### Log files
 
 As we continuously strive to provide you with improvements and fixes for bugs Scrum Poker writes log files in case of an error occurring inside Scrum Poker.
 
@@ -34,14 +40,14 @@ What do we collect?
 
 We do explicitly not collect any information about your issues nor any user details.
 
-## Cookie usage
+### Cookie usage
 
 Scrum Poker uses and creates no cookies by itself. As Scrum Poker runs as a plugin inside Jira there may be cookies created by Jira but Scrum Poker does not read those cookies.
 
-## Web analytics
+### Web analytics
 
 Scrum Poker does not use any Web analytics platform to track the usage of the Scrum Poker plugin. As Scrum Poker runs as a plugin inside Jira there might be such tools gathering usage data on application level.
 
-## External links
+### External links
 
 Scrum Poker does not provide any external links apart from links to the website of Scrum Poker itself on the configuration and plugin administration page.

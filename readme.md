@@ -20,7 +20,6 @@ For users:
 
 * [Installation Guide](http://jira-scrum-poker.codescape.de/scrum-poker-installation)
 * [Documentation](http://jira-scrum-poker.codescape.de)
-* [Privacy Statement](https://github.com/codescape/jira-scrum-poker/blob/master/privacy_statement.md)
 
 For developers:
 
