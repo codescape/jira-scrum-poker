@@ -1,6 +1,5 @@
 package de.codescape.jira.plugins.scrumpoker.ao;
 
-
 import net.java.ao.Preload;
 import net.java.ao.schema.Indexed;
 import net.java.ao.schema.NotNull;
