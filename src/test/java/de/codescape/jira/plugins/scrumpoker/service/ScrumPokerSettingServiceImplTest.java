@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 
 import java.util.Arrays;
 
+import static de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingServiceImpl.DEFAULT_PROJECT_ACTIVATION_DEFAULT;
 import static de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingServiceImpl.SESSION_TIMEOUT_DEFAULT;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
@@ -39,14 +40,14 @@ public class ScrumPokerSettingServiceImplTest {
     }
 
     @Test
-    public void persistingShouldRemoveTheSettingIfNoFieldIsGiven() {
-        scrumPokerSettingService.persistSettings(null, "12");
+    public void persistStoryPointFieldShouldRemoveTheSettingIfNoValueIsGiven() {
+        scrumPokerSettingService.persistStoryPointField(null);
         assertThat(scrumPokerSettingService.loadStoryPointField(), nullValue());
     }
 
     @Test
-    public void persistingShouldSaveTheSettingIfFieldIsGiven() {
-        scrumPokerSettingService.persistSettings(NEW_FIELD_NAME, "12");
+    public void persistStoryPointFieldShouldSaveTheSettingIfFieldIsGiven() {
+        scrumPokerSettingService.persistStoryPointField(NEW_FIELD_NAME);
         assertThat(scrumPokerSettingService.loadStoryPointField(), equalTo(NEW_FIELD_NAME));
     }
 
@@ -55,6 +56,28 @@ public class ScrumPokerSettingServiceImplTest {
         ScrumPokerSetting[] scrumPokerSettings = activeObjects.find(ScrumPokerSetting.class);
         Arrays.stream(scrumPokerSettings).forEach(activeObjects::delete);
         assertThat(scrumPokerSettingService.loadSessionTimeout(), is(equalTo(SESSION_TIMEOUT_DEFAULT)));
+    }
+
+    @Test
+    public void persistSessionTimeoutShouldSaveTheValueIfValueIsGiven() {
+        scrumPokerSettingService.persistSessionTimehout(128);
+        assertThat(scrumPokerSettingService.loadSessionTimeout(), is(equalTo(128)));
+    }
+
+    @Test
+    public void persistDefaultProjectActivationShouldSaveTheSetting() {
+        scrumPokerSettingService.persistDefaultProjectActivation(true);
+        assertThat(scrumPokerSettingService.loadDefaultProjectActivation(), is(equalTo(true)));
+
+        scrumPokerSettingService.persistDefaultProjectActivation(false);
+        assertThat(scrumPokerSettingService.loadDefaultProjectActivation(), is(equalTo(false)));
+    }
+
+    @Test
+    public void loadingDefaultProjectActivationAlwaysReturnsDefaultValueIfNoValueIsSet() {
+        ScrumPokerSetting[] scrumPokerSettings = activeObjects.find(ScrumPokerSetting.class);
+        Arrays.stream(scrumPokerSettings).forEach(activeObjects::delete);
+        assertThat(scrumPokerSettingService.loadDefaultProjectActivation(), is(equalTo(DEFAULT_PROJECT_ACTIVATION_DEFAULT)));
     }
 
 }

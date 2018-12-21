@@ -19,7 +19,7 @@ You will now find a section called `Scrum Poker` in the left sidebar as shown in
 
 ### Configuration options
 
-On the page `Configuration` you have two configuration options to make the Scrum Poker add-on fit to your needs:
+On the page `Configuration` you have global configuration options to make the Scrum Poker add-on fit to your needs:
 
 ![Global configuration for Scrum Poker](/images/scrum-poker-configuration-page.png) 
 
@@ -37,3 +37,7 @@ It is preferred to choose this field because estimations that are saved into thi
 
 Adjust the session timeout of Scrum Poker sessions in hours.
 Sessions older than this timeout will not be shown on the `Active Sessions` page to keep this page clean and intuitive.
+
+#### Default Project Activation
+
+Decide whether Scrum Poker is enabled or disabled for all projects per default. This global setting can be overridden per project in the project settings.

@@ -5,9 +5,11 @@ import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.plugin.webfragment.conditions.AbstractIssueWebCondition;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
+import com.atlassian.jira.project.Project;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.plugin.web.Condition;
 import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,12 +22,15 @@ public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition imple
 
     private final CustomFieldManager customFieldManager;
     private final EstimationFieldService estimationFieldService;
+    private final ScrumPokerSettingService scrumPokerSettingService;
 
     @Autowired
     public ScrumPokerForIssueCondition(CustomFieldManager customFieldManager,
-                                       EstimationFieldService estimationFieldService) {
+                                       EstimationFieldService estimationFieldService,
+                                       ScrumPokerSettingService scrumPokerSettingService) {
         this.customFieldManager = customFieldManager;
         this.estimationFieldService = estimationFieldService;
+        this.scrumPokerSettingService = scrumPokerSettingService;
     }
 
     @Override
@@ -37,7 +42,12 @@ public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition imple
      * Returns whether a Scrum poker session can be started for the given issue.
      */
     public boolean isEstimable(Issue issue) {
-        return issue.isEditable() && hasStoryPointField(issue);
+        return issue.isEditable() && hasStoryPointField(issue) && hasScrumPokerEnabled(issue.getProjectObject());
+    }
+
+    private boolean hasScrumPokerEnabled(Project project) {
+        // TODO if the project setting is true or if the project setting is not set and the global setting is true
+        return scrumPokerSettingService.loadDefaultProjectActivation();
     }
 
     private boolean hasStoryPointField(Issue currentIssue) {

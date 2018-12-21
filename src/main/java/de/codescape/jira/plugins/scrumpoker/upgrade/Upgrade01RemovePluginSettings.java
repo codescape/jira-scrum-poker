@@ -50,6 +50,7 @@ public class Upgrade01RemovePluginSettings extends AbstractUpgradeTask {
         if (storyPointField != null) {
             globalSettings.remove(SCRUM_POKER_PLUGIN_KEY + ".storyPointField");
             newStoryPointField = (String) storyPointField;
+            scrumPokerSettingService.persistStoryPointField(newStoryPointField);
         }
 
         // Grab the Session Timeout and remove the config if exists
@@ -58,11 +59,7 @@ public class Upgrade01RemovePluginSettings extends AbstractUpgradeTask {
         if (sessionTimeout != null) {
             globalSettings.remove(SCRUM_POKER_PLUGIN_KEY + ".sessionTimeout");
             newSessionTimeout = (String) sessionTimeout;
-        }
-
-        // Persist the values if minimum the Story Point field is configured
-        if (newStoryPointField != null) {
-            scrumPokerSettingService.persistSettings(newStoryPointField, newSessionTimeout);
+            scrumPokerSettingService.persistSessionTimehout(Integer.valueOf(newSessionTimeout));
         }
     }
 

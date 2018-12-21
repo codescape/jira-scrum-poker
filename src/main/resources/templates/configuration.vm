@@ -35,6 +35,18 @@
             #end
             <div class="description">$i18n.getText("scrumpoker.config.sessionTimeout.description")</div>
         </div>
+        <fieldset class="group">
+            <legend><span>$i18n.getText("scrumpoker.config.defaultprojectactivation")</span></legend>
+            <div class="checkbox">
+                #if ($defaultProjectActivation == 'true')
+                    <input class="checkbox" type="checkbox" name="defaultProjectActivation" id="defaultProjectActivation" value="true" checked>
+                #else
+                    <input class="checkbox" type="checkbox" name="defaultProjectActivation" id="defaultProjectActivation" value="true">
+                #end
+                <label for="defaultProjectActivation">$i18n.getText("scrumpoker.config.defaultprojectactivation.checkbox")</label>
+            </div>
+            <div class="description">$i18n.getText("scrumpoker.config.defaultprojectactivation.description")</div>
+        </fieldset>
     </div>
     <div class="buttons-container form-footer">
         <div class="buttons">

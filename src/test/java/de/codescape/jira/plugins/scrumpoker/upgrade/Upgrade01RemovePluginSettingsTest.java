@@ -3,7 +3,6 @@ package de.codescape.jira.plugins.scrumpoker.upgrade;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -51,20 +50,19 @@ public class Upgrade01RemovePluginSettingsTest {
     }
 
     @Test
-    public void shouldPersistBothSettingsIfStoryPointFieldExistsInPluginSettings() {
+    public void shouldPersistStoryPointFieldIfExistsInPluginSettings() {
         withGlobalSettingsFactory();
         when(pluginSettings.get(SCRUM_POKER_PLUGIN_KEY + ".storyPointField")).thenReturn("customfield-10006");
         upgrade.doUpgrade();
-        verify(scrumPokerSettingService).persistSettings("customfield-10006", null);
+        verify(scrumPokerSettingService).persistStoryPointField("customfield-10006");
     }
 
     @Test
-    public void shouldPersistBothSettingsIfStoryPointFieldAndSessionTimeoutExistInPluginSettings() {
+    public void shouldPersistSessionTimeoutIfExistInPluginSettings() {
         withGlobalSettingsFactory();
-        when(pluginSettings.get(SCRUM_POKER_PLUGIN_KEY + ".storyPointField")).thenReturn("customfield-10006");
         when(pluginSettings.get(SCRUM_POKER_PLUGIN_KEY + ".sessionTimeout")).thenReturn("12");
         upgrade.doUpgrade();
-        verify(scrumPokerSettingService).persistSettings("customfield-10006", "12");
+        verify(scrumPokerSettingService).persistSessionTimehout(12);
     }
 
     @Test

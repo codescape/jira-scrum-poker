@@ -18,9 +18,9 @@ abstract class AbstractUpgradeTask implements PluginUpgradeTask {
 
     @Override
     public final Collection<Message> doUpgrade() {
-        log.info("Upgrade task {} to build #{} starting", getClass().getSimpleName(), getBuildNumber());
+        log.info("Upgrade to build #{} with task {} started", getBuildNumber(), getClass().getSimpleName());
         performUpgrade();
-        log.info("Upgrade task {} to build #{} finished", getClass().getSimpleName(), getBuildNumber());
+        log.info("Upgrade to build #{} with task {} finished", getBuildNumber(), getClass().getSimpleName());
         return null;
     }
 

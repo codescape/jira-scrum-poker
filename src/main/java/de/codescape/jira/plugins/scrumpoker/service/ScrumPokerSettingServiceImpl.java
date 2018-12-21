@@ -19,6 +19,8 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
     static final String STORY_POINT_FIELD = "storyPointField";
     static final String SESSION_TIMEOUT = "sessionTimeout";
     static final Integer SESSION_TIMEOUT_DEFAULT = 12;
+    static final String DEFAULT_PROJECT_ACTIVATION = "defaultProjectActivation";
+    static final boolean DEFAULT_PROJECT_ACTIVATION_DEFAULT = true;
 
     private final ActiveObjects activeObjects;
 
@@ -34,6 +36,11 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
     }
 
     @Override
+    public void persistStoryPointField(String storyPointField) {
+        persist(STORY_POINT_FIELD, storyPointField);
+    }
+
+    @Override
     public Integer loadSessionTimeout() {
         ScrumPokerSetting scrumPokerSetting = findByKey(SESSION_TIMEOUT);
         return (scrumPokerSetting != null && NumberUtils.isNumber(scrumPokerSetting.getValue()))
@@ -41,9 +48,20 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
     }
 
     @Override
-    public void persistSettings(String storyPointField, String sessionTimeout) {
-        persist(STORY_POINT_FIELD, storyPointField);
-        persist(SESSION_TIMEOUT, sessionTimeout);
+    public void persistSessionTimehout(Integer sessionTimeout) {
+        persist(SESSION_TIMEOUT, String.valueOf(sessionTimeout));
+    }
+
+    @Override
+    public boolean loadDefaultProjectActivation() {
+        ScrumPokerSetting scrumPokerSetting = findByKey(DEFAULT_PROJECT_ACTIVATION);
+        return (scrumPokerSetting != null) ?
+            Boolean.valueOf(scrumPokerSetting.getValue()) : DEFAULT_PROJECT_ACTIVATION_DEFAULT;
+    }
+
+    @Override
+    public void persistDefaultProjectActivation(boolean defaultProjectActivation) {
+        persist(DEFAULT_PROJECT_ACTIVATION, String.valueOf(defaultProjectActivation));
     }
 
     private ScrumPokerSetting findByKey(String key) {
