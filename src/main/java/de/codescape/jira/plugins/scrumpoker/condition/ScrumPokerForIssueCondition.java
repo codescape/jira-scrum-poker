@@ -9,6 +9,7 @@ import com.atlassian.jira.project.Project;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.plugin.web.Condition;
 import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
+import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,14 +24,17 @@ public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition imple
     private final CustomFieldManager customFieldManager;
     private final EstimationFieldService estimationFieldService;
     private final ScrumPokerSettingService scrumPokerSettingService;
+    private final ProjectSettingService projectSettingService;
 
     @Autowired
     public ScrumPokerForIssueCondition(CustomFieldManager customFieldManager,
                                        EstimationFieldService estimationFieldService,
-                                       ScrumPokerSettingService scrumPokerSettingService) {
+                                       ScrumPokerSettingService scrumPokerSettingService,
+                                       ProjectSettingService projectSettingService) {
         this.customFieldManager = customFieldManager;
         this.estimationFieldService = estimationFieldService;
         this.scrumPokerSettingService = scrumPokerSettingService;
+        this.projectSettingService = projectSettingService;
     }
 
     @Override
@@ -46,8 +50,8 @@ public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition imple
     }
 
     private boolean hasScrumPokerEnabled(Project project) {
-        // TODO if the project setting is true or if the project setting is not set and the global setting is true
-        return scrumPokerSettingService.loadDefaultProjectActivation();
+        return scrumPokerSettingService.loadDefaultProjectActivation()
+            || projectSettingService.loadScrumPokerEnabled(project.getId());
     }
 
     private boolean hasStoryPointField(Issue currentIssue) {

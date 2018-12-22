@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>$i18n.getText("scrumpoker.title") - $i18n.getText("scrumpoker.config.title")</title>
+    <meta name="decorator" content="atl.admin"/>
+    <meta name="admin.active.section" content="atl.jira.proj.config"/>
+    <meta name="admin.active.tab" content="scrum-poker-project-configuration-item-link"/>
+    <meta name="projectKey" content="$projectKey"/>
+</head>
+<body>
+
+<h2>$i18n.getText("scrumpoker.title") &raquo; $i18n.getText("scrumpoker.config.project.title")</h2>
+
+<p>$i18n.getText("scrumpoker.config.project.description")</p>
+
+<form class="aui long-label" action="ScrumPokerProjectConfiguration.jspa" method="post">
+    <div class="form-body">
+        <fieldset class="group">
+            <legend><span>$i18n.getText("scrumpoker.config.project.scrumpokerenabled")</span></legend>
+            <div class="checkbox">
+                #if ($scrumPokerEnabled == 'true')
+                    <input class="checkbox" type="checkbox" name="scrumPokerEnabled" id="scrumPokerEnabled" value="true" checked>
+                #else
+                    <input class="checkbox" type="checkbox" name="scrumPokerEnabled" id="scrumPokerEnabled" value="true">
+                #end
+                <label for="scrumPokerEnabled">$i18n.getText("scrumpoker.config.project.scrumpokerenabled.checkbox")</label>
+            </div>
+            <div class="description">$i18n.getText("scrumpoker.config.project.scrumpokerenabled.description")</div>
+        </fieldset>
+    </div>
+    <div class="buttons-container form-footer">
+        <div class="buttons">
+            <input type="hidden" name="action" value="save">
+            <input type="hidden" name="projectKey" value="$projectKey">
+            <button type="submit" id="save-button" class="aui-button aui-button-primary">$i18n.getText("scrumpoker.config.save")</button>
+        </div>
+    </div>
+</form>
+
+</body>
+</html>

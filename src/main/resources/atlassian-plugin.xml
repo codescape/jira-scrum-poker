@@ -81,6 +81,15 @@
         <link>/secure/admin/ScrumPokerConfiguration.jspa</link>
     </web-item>
 
+    <!-- project specific configuration in project configuration sidebar -->
+
+    <web-item key="scrum-poker-project-configuration-item" section="atl.jira.proj.config/projectgroup4" weight="200">
+        <label key="scrumpoker.title"/>
+        <link linkId="scrum-poker-project-configuration-item-link">
+            /secure/ScrumPokerProjectConfiguration.jspa?projectKey=$projectKeyEncoded
+        </link>
+    </web-item>
+
     <!-- webworks -->
 
     <webwork1 key="scrum-poker-webwork">
@@ -88,6 +97,10 @@
             <action name="de.codescape.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction"
                     alias="ScrumPokerConfiguration" roles-required="sysadmin">
                 <view name="success">/templates/configuration.vm</view>
+            </action>
+            <action name="de.codescape.jira.plugins.scrumpoker.action.ConfigureProjectSettingsAction"
+                    alias="ScrumPokerProjectConfiguration" roles-required="admin">
+                <view name="success">/templates/projectConfiguration.vm</view>
             </action>
             <action name="de.codescape.jira.plugins.scrumpoker.action.ShowSessionsAction" alias="ScrumPokerSessions"
                     roles-required="use">
@@ -108,6 +121,7 @@
     <!-- persistence with active objects -->
 
     <ao key="scrum-poker-active-objects">
+        <entity>de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject</entity>
         <entity>de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession</entity>
         <entity>de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSetting</entity>
         <entity>de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote</entity>

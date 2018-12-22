@@ -4,8 +4,10 @@ import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
+import com.atlassian.jira.project.Project;
 import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
+import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,6 +21,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 public class ScrumPokerForIssueConditionTest {
@@ -34,6 +37,9 @@ public class ScrumPokerForIssueConditionTest {
 
     @Mock
     private ScrumPokerSettingService scrumPokerSettingService;
+
+    @Mock
+    private ProjectSettingService projectSettingService;
 
     @Mock
     private ApplicationUser applicationUser;
@@ -53,6 +59,9 @@ public class ScrumPokerForIssueConditionTest {
     @Mock
     private Issue issue;
 
+    @Mock
+    private Project project;
+
     @Test
     public void shouldDisplayForEditableIssueWithStoryPointFieldAndGloballyActiveScrumPoker() {
         expectThatIssueContainsTheStoryPointField();
@@ -62,10 +71,20 @@ public class ScrumPokerForIssueConditionTest {
     }
 
     @Test
+    public void shouldDisplayForEditableIssueWithStoryPointFieldAndGloballyInactiveScrumPokerButActiveForProject() {
+        expectThatIssueContainsTheStoryPointField();
+        expectThatIssueIsEditable();
+        expectThatDefaultProjectActivationIsDisabled();
+        expectThatScrumPokerIsEnabledForProject();
+        assertThat(scrumPokerForIssueCondition.shouldDisplay(applicationUser, issue, jiraHelper), is(true));
+    }
+
+    @Test
     public void shouldNotDisplayForEditableIssueWithStoryPointFieldAndGloballyInactiveScrumPoker() {
         expectThatIssueContainsTheStoryPointField();
         expectThatIssueIsEditable();
         expectThatDefaultProjectActivationIsDisabled();
+        expectThatScrumPokerIsNotEnabledForProject();
         assertThat(scrumPokerForIssueCondition.shouldDisplay(applicationUser, issue, jiraHelper), is(false));
     }
 
@@ -80,6 +99,18 @@ public class ScrumPokerForIssueConditionTest {
         expectThatIssueDoesNotContainTheStoryPointField();
         expectThatIssueIsEditable();
         assertThat(scrumPokerForIssueCondition.shouldDisplay(applicationUser, issue, jiraHelper), is(false));
+    }
+
+    private void expectThatScrumPokerIsEnabledForProject() {
+        when(issue.getProjectObject()).thenReturn(project);
+        when(project.getId()).thenReturn(42L);
+        when(projectSettingService.loadScrumPokerEnabled(any())).thenReturn(true);
+    }
+
+    private void expectThatScrumPokerIsNotEnabledForProject() {
+        when(issue.getProjectObject()).thenReturn(project);
+        when(project.getId()).thenReturn(42L);
+        when(projectSettingService.loadScrumPokerEnabled(any())).thenReturn(false);
     }
 
     private void expectThatIssueIsNotEditable() {
