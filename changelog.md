@@ -7,6 +7,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * docs: provide EULA and privacy statement in online documentation
 * feat: add global configuration to enable or disable Scrum Poker per default
 * feat: add per project configuration to enable Scrum Poker individually
+* chore: upgrade spring and lucene dependencies to latest stable version
 
 ## [3.7.0] - 2018-12-03
 

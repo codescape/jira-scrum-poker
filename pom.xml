@@ -43,7 +43,7 @@
         <jira.version>7.13.0</jira.version>
         <amps.version>6.3.21</amps.version>
         <plugin.testrunner.version>2.0.1</plugin.testrunner.version>
-        <atlassian.spring.scanner.version>2.1.7</atlassian.spring.scanner.version>
+        <atlassian.spring.scanner.version>2.1.8</atlassian.spring.scanner.version>
         <ao.version>2.0.0</ao.version>
         <!-- Source encoding -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -98,7 +98,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>5.0.9.RELEASE</version>
+            <version>5.1.3.RELEASE</version>
             <scope>provided</scope>
         </dependency>
         <!-- test dependencies -->
@@ -148,7 +148,7 @@
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-core</artifactId>
-            <version>7.4.0</version>
+            <version>7.6.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
