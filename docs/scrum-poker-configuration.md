@@ -17,13 +17,13 @@ You will now find a section called `Scrum Poker` in the left sidebar as shown in
 
 ![Locate the global configuration for Scrum Poker](/images/scrum-poker-configuration-locate-page.png) 
 
-### Configuration options
+#### Configuration Options
 
 On the page `Configuration` you have global configuration options to make the Scrum Poker add-on fit to your needs:
 
 ![Global configuration for Scrum Poker](/images/scrum-poker-configuration-page.png) 
 
-#### Field for confirmed estimation
+##### Field for confirmed estimation
 
 Select the custom field that is used to persist the confirmed estimations when completing a Scrum Poker session.
 
@@ -33,11 +33,27 @@ In a German Jira instance this field is called `Story Punkte` for example.
 
 It is preferred to choose this field because estimations that are saved into this field are displayed in the estimation badge on the backlog of agile boards.
 
-#### Session Timeout
+##### Session Timeout
 
 Adjust the session timeout of Scrum Poker sessions in hours.
 Sessions older than this timeout will not be shown on the `Active Sessions` page to keep this page clean and intuitive.
 
-#### Default Project Activation
+##### Default Project Activation
 
 Decide whether Scrum Poker is enabled or disabled for all projects per default. This global setting can be overridden per project in the project settings.
+
+### Project Configuration
+
+The Scrum Poker add-on also provides project specific configuration for Scrum Poker.
+
+The locate the project specific configuration navigate to the project and find the `Project settings` link in the bottom of the left menu. Inside the `Project settings` you can find a menu option called `Scrum Poker` that leads to the configuration.
+
+#### Configuration Options
+
+On the page `Project Configuration` you can find the configuration options the make the Scrum Poker add-on fit to the needs of your Jira project:
+
+![Project configuration for Scrum Poker](/images/scrum-poker-configuration-project-page.png) 
+
+##### Enable Scrum Poker
+
+If Scrum Poker is not enabled for all projects per default in the global settings this setting allows you to enable Scrum Poker individually for the current project.
