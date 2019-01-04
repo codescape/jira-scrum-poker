@@ -7,8 +7,8 @@ import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
+import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionEntityMapper;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
-import de.codescape.jira.plugins.scrumpoker.service.SessionEntityTransformer;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -44,7 +44,7 @@ public class ShowSessionsActionTest {
     private IssueManager issueManager;
 
     @Mock
-    private SessionEntityTransformer sessionEntityTransformer;
+    private SessionEntityMapper sessionEntityMapper;
 
     @InjectMocks
     private ShowSessionsAction showSessionsAction;
@@ -87,8 +87,8 @@ public class ShowSessionsActionTest {
         when(jiraAuthenticationContext.getLoggedInUser()).thenReturn(applicationUser);
         when(applicationUser.getKey()).thenReturn("USER-1");
 
-        when(sessionEntityTransformer.build(secretScrumPokerSession, "USER-1")).thenReturn(secretSessionEntity);
-        when(sessionEntityTransformer.build(publicScrumPokerSession, "USER-1")).thenReturn(publicSessionEntity);
+        when(sessionEntityMapper.build(secretScrumPokerSession, "USER-1")).thenReturn(secretSessionEntity);
+        when(sessionEntityMapper.build(publicScrumPokerSession, "USER-1")).thenReturn(publicSessionEntity);
 
         when(issueManager.getIssueObject("SECRET")).thenReturn(secretIssue);
         when(issueManager.getIssueObject("PUBLIC")).thenReturn(publicIssue);

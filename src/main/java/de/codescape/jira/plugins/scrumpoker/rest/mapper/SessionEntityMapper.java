@@ -1,4 +1,4 @@
-package de.codescape.jira.plugins.scrumpoker.service;
+package de.codescape.jira.plugins.scrumpoker.rest.mapper;
 
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
@@ -24,21 +24,21 @@ import static java.util.Arrays.stream;
 import static org.apache.commons.lang3.math.NumberUtils.isNumber;
 
 /**
- * Service that allows to transform a {@link ScrumPokerSession} into a {@link SessionEntity}. This service creates a
- * model that can be used and transferred as a REST resource and is optimized for a logic less templating mechanism.
+ * Service that allows to map a {@link ScrumPokerSession} to a {@link SessionEntity}. This service creates a model that
+ * can be used and transferred as a REST resource and is optimized for a logic less templating mechanism.
  */
 @Component
-public class SessionEntityTransformer {
+public class SessionEntityMapper {
 
     private final UserManager userManager;
 
     @Autowired
-    public SessionEntityTransformer(UserManager userManager) {
+    public SessionEntityMapper(UserManager userManager) {
         this.userManager = userManager;
     }
 
     /**
-     * Transform a given {@link ScrumPokerSession} into a {@link SessionEntity}.
+     * Map a given {@link ScrumPokerSession} to a {@link SessionEntity}.
      *
      * @param scrumPokerSession {@link ScrumPokerSession} to transform
      * @param userKey           key of the user

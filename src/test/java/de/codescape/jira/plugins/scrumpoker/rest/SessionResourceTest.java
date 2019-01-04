@@ -4,9 +4,9 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
+import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionEntityMapper;
 import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
-import de.codescape.jira.plugins.scrumpoker.service.SessionEntityTransformer;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -39,7 +39,7 @@ public class SessionResourceTest {
     private EstimationFieldService estimationFieldService;
 
     @Mock
-    private SessionEntityTransformer sessionEntityTransformer;
+    private SessionEntityMapper sessionEntityMapper;
 
     @InjectMocks
     private SessionResource sessionResource;
@@ -116,7 +116,7 @@ public class SessionResourceTest {
 
     private void expectCurrentSessionForUser(String issueKey, String userKey) {
         when(scrumPokerSessionService.byIssueKey(issueKey, userKey)).thenReturn(scrumPokerSession);
-        when(sessionEntityTransformer.build(scrumPokerSession, USER_KEY)).thenReturn(sessionEntity);
+        when(sessionEntityMapper.build(scrumPokerSession, USER_KEY)).thenReturn(sessionEntity);
         when(sessionEntity.getIssueKey()).thenReturn(ISSUE_KEY);
     }
 

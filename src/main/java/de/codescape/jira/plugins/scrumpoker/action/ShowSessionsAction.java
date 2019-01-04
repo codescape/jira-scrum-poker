@@ -6,8 +6,8 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
+import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionEntityMapper;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
-import de.codescape.jira.plugins.scrumpoker.service.SessionEntityTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -26,17 +26,17 @@ public class ShowSessionsAction extends AbstractScrumPokerAction {
     private final PermissionManager permissionManager;
     private final JiraAuthenticationContext jiraAuthenticationContext;
     private final ScrumPokerSessionService scrumPokerSessionService;
-    private final SessionEntityTransformer sessionEntityTransformer;
+    private final SessionEntityMapper sessionEntityMapper;
 
     @Autowired
     public ShowSessionsAction(JiraAuthenticationContext jiraAuthenticationContext, PermissionManager permissionManager,
                               ScrumPokerSessionService scrumPokerSessionService, IssueManager issueManager,
-                              SessionEntityTransformer sessionEntityTransformer) {
+                              SessionEntityMapper sessionEntityMapper) {
         this.issueManager = issueManager;
         this.permissionManager = permissionManager;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
         this.scrumPokerSessionService = scrumPokerSessionService;
-        this.sessionEntityTransformer = sessionEntityTransformer;
+        this.sessionEntityMapper = sessionEntityMapper;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class ShowSessionsAction extends AbstractScrumPokerAction {
             .filter(session -> !session.isCancelled())
             .filter(session -> getIssue(session.getIssueKey()) != null)
             .filter(session -> currentUserIsAllowedToSeeIssue(getIssue(session.getIssueKey())))
-            .map(session -> sessionEntityTransformer.build(session, currentUser().getKey()))
+            .map(session -> sessionEntityMapper.build(session, currentUser().getKey()))
             .collect(Collectors.toList());
     }
 
@@ -59,7 +59,7 @@ public class ShowSessionsAction extends AbstractScrumPokerAction {
             .filter(session -> session.getConfirmedVote() != null || session.isCancelled())
             .filter(session -> getIssue(session.getIssueKey()) != null)
             .filter(session -> currentUserIsAllowedToSeeIssue(getIssue(session.getIssueKey())))
-            .map(session -> sessionEntityTransformer.build(session, currentUser().getKey()))
+            .map(session -> sessionEntityMapper.build(session, currentUser().getKey()))
             .collect(Collectors.toList());
     }
 

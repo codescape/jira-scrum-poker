@@ -1,4 +1,4 @@
-package de.codescape.jira.plugins.scrumpoker.service;
+package de.codescape.jira.plugins.scrumpoker.rest.mapper;
 
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
@@ -22,7 +22,7 @@ import static org.mockito.ArgumentMatchers.startsWith;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SessionReferenceTransformerTest {
+public class SessionReferenceMapperTest {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -31,7 +31,7 @@ public class SessionReferenceTransformerTest {
     private IssueManager issueManager;
 
     @InjectMocks
-    private SessionReferenceTransformer sessionReferenceTransformer;
+    private SessionReferenceMapper sessionReferenceMapper;
 
     @Before
     public void before() {
@@ -43,13 +43,13 @@ public class SessionReferenceTransformerTest {
 
     @Test
     public void shouldMapTheEstimation() {
-        ReferenceListEntity referenceListEntity = sessionReferenceTransformer.build(new ArrayList<>(), 5);
+        ReferenceListEntity referenceListEntity = sessionReferenceMapper.build(new ArrayList<>(), 5);
         assertThat(referenceListEntity.getEstimation(), is(5));
     }
 
     @Test
     public void shouldReturnEmptyListForNoReferences() {
-        ReferenceListEntity referenceListEntity = sessionReferenceTransformer.build(new ArrayList<>(), 5);
+        ReferenceListEntity referenceListEntity = sessionReferenceMapper.build(new ArrayList<>(), 5);
         assertThat(referenceListEntity.isResults(), is(false));
         assertThat(referenceListEntity.getReferences().size(), is(0));
     }
@@ -59,7 +59,7 @@ public class SessionReferenceTransformerTest {
         ArrayList<ScrumPokerSession> scrumPokerSessions = new ArrayList<>();
         scrumPokerSessions.add(sessionForIssueKey("ISSUE-5"));
         scrumPokerSessions.add(sessionForIssueKey("NOT-FOUND-1"));
-        ReferenceListEntity referenceListEntity = sessionReferenceTransformer.build(scrumPokerSessions, 5);
+        ReferenceListEntity referenceListEntity = sessionReferenceMapper.build(scrumPokerSessions, 5);
         assertThat(referenceListEntity.isResults(), is(true));
         assertThat(referenceListEntity.getReferences().size(), is(1));
         assertThat(referenceListEntity.getReferences().get(0).getIssueKey(), equalTo("ISSUE-5"));

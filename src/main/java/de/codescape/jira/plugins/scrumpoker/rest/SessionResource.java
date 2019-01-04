@@ -3,10 +3,10 @@ package de.codescape.jira.plugins.scrumpoker.rest;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
+import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionEntityMapper;
+import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionReferenceMapper;
 import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
-import de.codescape.jira.plugins.scrumpoker.service.SessionEntityTransformer;
-import de.codescape.jira.plugins.scrumpoker.service.SessionReferenceTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.*;
@@ -24,20 +24,20 @@ public class SessionResource {
     private final EstimationFieldService estimationFieldService;
     private final JiraAuthenticationContext jiraAuthenticationContext;
     private final ScrumPokerSessionService scrumPokerSessionService;
-    private final SessionEntityTransformer sessionEntityTransformer;
-    private final SessionReferenceTransformer sessionReferenceTransformer;
+    private final SessionEntityMapper sessionEntityMapper;
+    private final SessionReferenceMapper sessionReferenceMapper;
 
     @Autowired
     public SessionResource(EstimationFieldService estimationFieldService,
                            JiraAuthenticationContext jiraAuthenticationContext,
                            ScrumPokerSessionService scrumPokerSessionService,
-                           SessionEntityTransformer sessionEntityTransformer,
-                           SessionReferenceTransformer sessionReferenceTransformer) {
+                           SessionEntityMapper sessionEntityMapper,
+                           SessionReferenceMapper sessionReferenceMapper) {
         this.estimationFieldService = estimationFieldService;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
-        this.sessionEntityTransformer = sessionEntityTransformer;
+        this.sessionEntityMapper = sessionEntityMapper;
         this.scrumPokerSessionService = scrumPokerSessionService;
-        this.sessionReferenceTransformer = sessionReferenceTransformer;
+        this.sessionReferenceMapper = sessionReferenceMapper;
     }
 
     /**
@@ -48,7 +48,7 @@ public class SessionResource {
     @Path("/{issueKey}")
     public Response getSession(@PathParam("issueKey") String issueKey) {
         ScrumPokerSession scrumPokerSession = scrumPokerSessionService.byIssueKey(issueKey, currentUser());
-        SessionEntity response = sessionEntityTransformer.build(scrumPokerSession, currentUser());
+        SessionEntity response = sessionEntityMapper.build(scrumPokerSession, currentUser());
         return Response.ok(response).build();
     }
 
@@ -114,7 +114,7 @@ public class SessionResource {
     @Path("/reference/{estimation}")
     public Response getReferences(@PathParam("estimation") Integer estimation) {
         List<ScrumPokerSession> references = scrumPokerSessionService.references(currentUser(), estimation);
-        return Response.ok(sessionReferenceTransformer.build(references, estimation)).build();
+        return Response.ok(sessionReferenceMapper.build(references, estimation)).build();
     }
 
     private String currentUser() {

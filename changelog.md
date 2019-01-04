@@ -10,6 +10,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * chore: upgrade spring and lucene dependencies to latest stable version
 * docs: add online documentation for project specific configuration
 * refactor: improve readability and structure of all action classes
+* refactor: rename and move transformer classes into separate mapper package
 
 ## [3.7.0] - 2018-12-03
 

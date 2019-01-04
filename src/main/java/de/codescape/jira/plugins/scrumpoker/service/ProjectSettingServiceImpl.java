@@ -1,7 +1,6 @@
 package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
-import com.atlassian.jira.issue.IssueManager;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import net.java.ao.DBParam;
 import net.java.ao.Query;

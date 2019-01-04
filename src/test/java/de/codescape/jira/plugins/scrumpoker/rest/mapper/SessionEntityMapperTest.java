@@ -1,4 +1,4 @@
-package de.codescape.jira.plugins.scrumpoker.service;
+package de.codescape.jira.plugins.scrumpoker.rest.mapper;
 
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
@@ -21,7 +21,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SessionEntityTransformerTest {
+public class SessionEntityMapperTest {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -30,7 +30,7 @@ public class SessionEntityTransformerTest {
     private UserManager userManager;
 
     @InjectMocks
-    private SessionEntityTransformer sessionEntityTransformer;
+    private SessionEntityMapper sessionEntityMapper;
 
     @Mock
     private ApplicationUser applicationUser;
@@ -46,7 +46,7 @@ public class SessionEntityTransformerTest {
         ScrumPokerVote[] scrumPokerVotes = {scrumPokerVote("5"), scrumPokerVote("5")};
         ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, false);
 
-        SessionEntity sessionEntity = sessionEntityTransformer.build(scrumPokerSession, "SOME_USER");
+        SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession, "SOME_USER");
         assertThat(sessionEntity.isAgreementReached(), is(false));
     }
 
@@ -55,7 +55,7 @@ public class SessionEntityTransformerTest {
         ScrumPokerVote[] scrumPokerVotes = {scrumPokerVote("5"), scrumPokerVote("5")};
         ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, true);
 
-        SessionEntity sessionEntity = sessionEntityTransformer.build(scrumPokerSession, "SOME_USER");
+        SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession, "SOME_USER");
         assertThat(sessionEntity.isAgreementReached(), is(true));
     }
 
@@ -64,7 +64,7 @@ public class SessionEntityTransformerTest {
         ScrumPokerVote[] scrumPokerVotes = {scrumPokerVote("5"), scrumPokerVote("3")};
         ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, true);
 
-        SessionEntity sessionEntity = sessionEntityTransformer.build(scrumPokerSession, "SOME_USER");
+        SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession, "SOME_USER");
         assertThat(sessionEntity.isAgreementReached(), is(false));
     }
 
@@ -76,7 +76,7 @@ public class SessionEntityTransformerTest {
             scrumPokerVote("13")};
         ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, true);
 
-        SessionEntity sessionEntity = sessionEntityTransformer.build(scrumPokerSession, "SOME_USER");
+        SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession, "SOME_USER");
         assertThat(sessionEntity.getBoundedVotes().size(), is(equalTo(3)));
         assertThat(sessionEntity.getBoundedVotes(), allOf(
             hasItem(allOf(hasProperty("value", equalTo(5)), hasProperty("count", equalTo(2)))),
