@@ -9,8 +9,6 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
-import com.atlassian.jira.web.HttpServletVariables;
-import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
 import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,44 +21,52 @@ import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
  * This page verifies that the current user is allowed to see the issue and displays an error page in case the user is
  * not allowed to see the issue in question.
  */
-public class ShowScrumPokerAction extends JiraWebActionSupport {
+public class ShowScrumPokerAction extends AbstractScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
-    private static final String PARAM_ISSUE_KEY = "issueKey";
+
+    /**
+     * Names of all parameters used on the Scrum Poker session page.
+     */
+    static final class Parameters {
+
+        static final String ISSUE_KEY = "issueKey";
+
+    }
 
     private final IssueManager issueManager;
     private final RendererManager rendererManager;
     private final FieldLayoutManager fieldLayoutManager;
     private final PermissionManager permissionManager;
     private final JiraAuthenticationContext jiraAuthenticationContext;
-    private final HttpServletVariables httpServletVariables;
     private final ScrumPokerForIssueCondition scrumPokerForIssueCondition;
 
     private String issueKey;
 
     @Autowired
-    public ShowScrumPokerAction(FieldLayoutManager fieldLayoutManager, RendererManager rendererManager,
-                                IssueManager issueManager, JiraAuthenticationContext jiraAuthenticationContext,
-                                HttpServletVariables httpServletVariables, PermissionManager permissionManager,
+    public ShowScrumPokerAction(FieldLayoutManager fieldLayoutManager,
+                                RendererManager rendererManager,
+                                IssueManager issueManager,
+                                JiraAuthenticationContext jiraAuthenticationContext,
+                                PermissionManager permissionManager,
                                 ScrumPokerForIssueCondition scrumPokerForIssueCondition) {
         this.issueManager = issueManager;
         this.rendererManager = rendererManager;
         this.fieldLayoutManager = fieldLayoutManager;
         this.permissionManager = permissionManager;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
-        this.httpServletVariables = httpServletVariables;
         this.scrumPokerForIssueCondition = scrumPokerForIssueCondition;
     }
 
     @Override
     protected String doExecute() {
-        issueKey = httpServletVariables.getHttpRequest().getParameter(PARAM_ISSUE_KEY);
+        issueKey = getParameter(Parameters.ISSUE_KEY);
         MutableIssue issue = issueManager.getIssueObject(issueKey);
         if (issue == null || currentUserIsNotAllowedToSeeIssue(issue) || issueIsNotEstimable(issue)) {
             addErrorMessage("Issue Key " + issueKey + " not found.");
-            return "error";
+            return ERROR;
         }
-        return "success";
+        return SUCCESS;
     }
 
     public MutableIssue getIssue() {

@@ -5,7 +5,6 @@ import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
-import com.atlassian.jira.web.action.JiraWebActionSupport;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
 import de.codescape.jira.plugins.scrumpoker.service.SessionEntityTransformer;
@@ -19,7 +18,7 @@ import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
 /**
  * Show a list of all running and recently finished Scrum poker sessions.
  */
-public class ShowSessionsAction extends JiraWebActionSupport {
+public class ShowSessionsAction extends AbstractScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
 
@@ -42,7 +41,7 @@ public class ShowSessionsAction extends JiraWebActionSupport {
 
     @Override
     protected String doExecute() {
-        return "success";
+        return SUCCESS;
     }
 
     public List<SessionEntity> getOpenSessions() {

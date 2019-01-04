@@ -1,19 +1,26 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.project.Project;
-import com.atlassian.jira.web.action.JiraWebActionSupport;
 import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Configuration of a Jira project for Scrum Poker specific settings.
  */
-public class ConfigureProjectSettingsAction extends JiraWebActionSupport {
+public class ConfigureProjectSettingsAction extends AbstractScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
-    private static final String PARAM_ACTION = "action";
-    private static final String PARAM_PROJECT_KEY = "projectKey";
-    private static final String PARAM_SCRUM_POKER_ENABLED = "scrumPokerEnabled";
+
+    /**
+     * Names of all parameters used on the project configuration page.
+     */
+    static final class Parameters {
+
+        static final String ACTION = "action";
+        static final String PROJECT_KEY = "projectKey";
+        static final String SCRUM_POKER_ENABLED = "scrumPokerEnabled";
+
+    }
 
     private final ProjectSettingService projectSettingService;
 
@@ -24,6 +31,9 @@ public class ConfigureProjectSettingsAction extends JiraWebActionSupport {
         this.projectSettingService = projectSettingService;
     }
 
+    /**
+     * Key of the project to configure Scrum Poker for.
+     */
     public String getProjectKey() {
         return projectKey;
     }
@@ -37,14 +47,14 @@ public class ConfigureProjectSettingsAction extends JiraWebActionSupport {
 
     @Override
     protected String doExecute() {
-        projectKey = getHttpRequest().getParameter(PARAM_PROJECT_KEY);
-        String action = getHttpRequest().getParameter(PARAM_ACTION);
+        projectKey = getParameter(Parameters.PROJECT_KEY);
+        String action = getParameter(Parameters.ACTION);
         if (action != null && action.equals("save")) {
             Long projectId = getProjectByKey(projectKey).getId();
-            String newScrumPokerEnabled = getHttpRequest().getParameter(PARAM_SCRUM_POKER_ENABLED);
+            String newScrumPokerEnabled = getParameter(Parameters.SCRUM_POKER_ENABLED);
             projectSettingService.persistScrumPokerEnabled(projectId, Boolean.valueOf(newScrumPokerEnabled));
         }
-        return "success";
+        return SUCCESS;
     }
 
     private Project getProjectByKey(String projectKey) {

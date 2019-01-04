@@ -2,6 +2,9 @@ package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
+import com.atlassian.jira.junit.rules.AvailableInContainer;
+import com.atlassian.jira.junit.rules.MockitoContainer;
+import com.atlassian.jira.junit.rules.MockitoMocksInContainer;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
@@ -12,8 +15,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,12 +29,13 @@ public class ShowScrumPokerActionTest {
     private static final String ISSUE_KEY = "ISSUE-1";
 
     @Rule
-    public MockitoRule rule = MockitoJUnit.rule();
+    public MockitoContainer mockitoContainer = MockitoMocksInContainer.rule(this);
 
     @Mock
     private IssueManager issueManager;
 
     @Mock
+    @AvailableInContainer
     private HttpServletVariables httpServletVariables;
 
     @Mock
