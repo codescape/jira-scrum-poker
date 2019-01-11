@@ -59,7 +59,7 @@ public class Upgrade01RemovePluginSettings extends AbstractUpgradeTask {
         if (sessionTimeout != null) {
             globalSettings.remove(SCRUM_POKER_PLUGIN_KEY + ".sessionTimeout");
             newSessionTimeout = (String) sessionTimeout;
-            scrumPokerSettingService.persistSessionTimehout(Integer.valueOf(newSessionTimeout));
+            scrumPokerSettingService.persistSessionTimeout(Integer.valueOf(newSessionTimeout));
         }
     }
 

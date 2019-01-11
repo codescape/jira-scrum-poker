@@ -34,7 +34,7 @@ public interface ScrumPokerSettingService {
      *
      * @param sessionTimeout session timehout in hours
      */
-    void persistSessionTimehout(Integer sessionTimeout);
+    void persistSessionTimeout(Integer sessionTimeout);
 
     /**
      * Loads the currently saved default project activation from the global settings.

@@ -12,6 +12,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * refactor: improve readability and structure of all action classes
 * refactor: rename and move transformer classes into separate mapper package
 * chore: update URL for Atlassian Maven repository to new non deprecated URL
+* refactor: correct spelling for timeout in interface an implementation
 
 ## [3.7.0] - 2018-12-03
 

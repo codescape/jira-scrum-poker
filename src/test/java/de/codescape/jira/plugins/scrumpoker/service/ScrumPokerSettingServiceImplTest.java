@@ -60,7 +60,7 @@ public class ScrumPokerSettingServiceImplTest {
 
     @Test
     public void persistSessionTimeoutShouldSaveTheValueIfValueIsGiven() {
-        scrumPokerSettingService.persistSessionTimehout(128);
+        scrumPokerSettingService.persistSessionTimeout(128);
         assertThat(scrumPokerSettingService.loadSessionTimeout(), is(equalTo(128)));
     }
 

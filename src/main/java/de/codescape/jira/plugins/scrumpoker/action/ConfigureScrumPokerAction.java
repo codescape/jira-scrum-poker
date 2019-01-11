@@ -72,7 +72,7 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
             scrumPokerSettingService.persistStoryPointField(newStoryPointField);
 
             String newSessionTimeout = getParameter(Parameters.SESSION_TIMEOUT);
-            scrumPokerSettingService.persistSessionTimehout(Integer.valueOf(newSessionTimeout));
+            scrumPokerSettingService.persistSessionTimeout(Integer.valueOf(newSessionTimeout));
 
             String newDefaultProjectActivation = getParameter(Parameters.DEFAULT_PROJECT_ACTIVATION);
             scrumPokerSettingService.persistDefaultProjectActivation(Boolean.valueOf(newDefaultProjectActivation));

@@ -62,7 +62,7 @@ public class Upgrade01RemovePluginSettingsTest {
         withGlobalSettingsFactory();
         when(pluginSettings.get(SCRUM_POKER_PLUGIN_KEY + ".sessionTimeout")).thenReturn("12");
         upgrade.doUpgrade();
-        verify(scrumPokerSettingService).persistSessionTimehout(12);
+        verify(scrumPokerSettingService).persistSessionTimeout(12);
     }
 
     @Test

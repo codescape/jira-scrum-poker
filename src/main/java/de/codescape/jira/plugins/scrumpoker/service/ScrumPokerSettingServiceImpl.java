@@ -48,7 +48,7 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
     }
 
     @Override
-    public void persistSessionTimehout(Integer sessionTimeout) {
+    public void persistSessionTimeout(Integer sessionTimeout) {
         persist(SESSION_TIMEOUT, String.valueOf(sessionTimeout));
     }
 
