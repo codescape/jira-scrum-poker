@@ -54,7 +54,7 @@
         <label key="scrumpoker.title"/>
     </web-section>
 
-    <web-item section="scrum-poker-sessions" key="scrum-poker-sessions-link" weight="10">
+    <web-item key="scrum-poker-sessions-link" section="scrum-poker-sessions" weight="10">
         <label key="scrumpoker.sessions.list"/>
         <link>/secure/ScrumPokerSessions.jspa?boardId=${board.id}</link>
     </web-item>

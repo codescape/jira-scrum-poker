@@ -14,6 +14,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * chore: update URL for Atlassian Maven repository to new non deprecated URL
 * refactor: correct spelling for timeout in interface an implementation
 * refactor: build Atlassian plugin coordinates in Maven POM and use in plugin
+* refactor: reorder web-item parameters in configuration
 
 ## [3.7.0] - 2018-12-03
 
