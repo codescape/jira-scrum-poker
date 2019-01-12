@@ -50,6 +50,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Plugin licensing -->
         <atlassian.licensing.enabled>false</atlassian.licensing.enabled>
+        <!-- Plugin key -->
+        <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
     </properties>
 
     <dependencies>
@@ -177,7 +179,7 @@
                     <!-- See here for an explanation of default instructions: -->
                     <!-- https://developer.atlassian.com/docs/advanced-topics/configuration-of-instructions-in-atlassian-plugins -->
                     <instructions>
-                        <!-- ensure plugin is spring powered -->
+                        <!-- Ensure plugin is spring powered -->
                         <Spring-Context>*</Spring-Context>
                     </instructions>
                     <applications>

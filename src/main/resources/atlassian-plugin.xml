@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
 
     <!-- plugin coordinates -->
 
@@ -56,7 +56,7 @@
 
     <web-item section="scrum-poker-sessions" key="scrum-poker-sessions-link" weight="10">
         <label key="scrumpoker.sessions.list"/>
-        <link>/secure/ScrumPokerSessions.jspa</link>
+        <link>/secure/ScrumPokerSessions.jspa?boardId=${board.id}</link>
     </web-item>
 
     <!-- section in Jira Software boards dropdown -->
