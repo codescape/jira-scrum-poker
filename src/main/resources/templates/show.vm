@@ -23,11 +23,50 @@
         </div>
         <div class="aui-page-header-actions">
             <div class="aui-buttons">
-                <a href="$req.contextPath/secure/ScrumPokerSessions.jspa"><button class="aui-button aui-button-light">$i18n.getText("scrumpoker.sessions.list")</button></a>
+                <button data-aui-trigger aria-controls="share-session" class="aui-button aui-button-light">
+                    <span class="aui-icon aui-icon-small aui-iconfont-share"></span> $i18n.getText("scrumpoker.session.share")
+                </button>
+                <aui-inline-dialog id="share-session" alignment="bottom center" style="width:300px">
+                    <form class="aui top-label">
+                        <fieldset class="top-label">
+                            <div class="field-group top-label">
+                                <label for="share-session-url">$i18n.getText("scrumpoker.session.share.link")</label>
+                                <input type="text" class="text long-field" id="share-session-url" value="" readonly>
+                            </div>
+                        </fieldset>
+                        <fieldset class="top-label">
+                            <div class="field-group top-label">
+                                <label for="share-session-qrcode">$i18n.getText("scrumpoker.session.share.qrcode")</label>
+                                <div id="share-session-qrcode"></div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </aui-inline-dialog>
+                <a href="$req.contextPath/secure/ScrumPokerSessions.jspa">
+                    <button class="aui-button aui-button-light"><span class="aui-icon aui-icon-small aui-iconfont-list"></span> $i18n.getText("scrumpoker.sessions.list")</button>
+                </a>
             </div>
         </div>
     </div>
 </header>
+
+<script>
+    AJS.$(document).ready(function() {
+        // generate url
+        var qrcode_text = AJS.params.baseURL + '/secure/ScrumPoker.jspa?issueKey=$issue.key';
+
+        // insert url into text field
+        $('#share-session-url').val(qrcode_text);
+
+        // create qr code with url
+        $('#share-session-qrcode').qrcode({width: 260, height: 260, text: qrcode_text});
+
+        // when clicking on url field select all text
+        $("#share-session-url").on("click", function () {
+           $(this).select();
+        });
+    });
+</script>
 
 <section id="content" role="main">
     <div class="aui-page-panel" style="margin: 0;">

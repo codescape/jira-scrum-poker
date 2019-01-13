@@ -15,6 +15,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * refactor: correct spelling for timeout in interface an implementation
 * refactor: build Atlassian plugin coordinates in Maven POM and use in plugin
 * refactor: reorder web-item parameters in configuration
+* feat: add share option to scan QR code or copy link to Scrum Poker session
 
 ## [3.7.0] - 2018-12-03
 
