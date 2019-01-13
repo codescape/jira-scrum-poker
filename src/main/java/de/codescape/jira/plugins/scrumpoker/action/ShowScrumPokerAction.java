@@ -9,6 +9,7 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
+import com.atlassian.jira.util.http.JiraUrl;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
 import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +89,10 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
 
     private boolean currentUserIsNotAllowedToSeeIssue(MutableIssue issue) {
         return !permissionManager.hasPermission(BROWSE_PROJECTS, issue, jiraAuthenticationContext.getLoggedInUser());
+    }
+
+    public String getScrumPokerSessionUrl() {
+        return JiraUrl.constructBaseUrl(getHttpRequest()) + "/secure/ScrumPoker.jspa?issueKey=" + issueKey;
     }
 
 }

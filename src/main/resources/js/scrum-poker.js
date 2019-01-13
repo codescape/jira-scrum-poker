@@ -11,11 +11,30 @@
     var fadeReferencesTimeoutActive = false;
     var lastShownEstimation;
 
+    /* Initialize the Scrum Poker session view */
+    ScrumPoker.init = function(issueKey) {
+        constructQrCode();
+        makeSessionUrlClickable();
+        pollForUpdates(issueKey);
+    }
+
+    /* Make the session url in the share view clickable */
+    function makeSessionUrlClickable() {
+        $("#share-session-url").on("click", function () {
+           $(this).select();
+        });
+    }
+
+    /* Construct the QR code and put it into the prepared div */
+    function constructQrCode() {
+        $('#share-session-qrcode').qrcode({width: 260, height: 260, text: $('#share-session-url').val()});
+    }
+
     /* Initialize the automatic refresh of the Scrum Poker session every 2 seconds. */
-    ScrumPoker.poll = function(issueKey) {
+    function pollForUpdates(issueKey) {
         refreshSession(issueKey);
         refreshTimeout = setTimeout(function() {
-            ScrumPoker.poll(issueKey);
+            pollForUpdates(issueKey);
         }, 2000);
     }
 

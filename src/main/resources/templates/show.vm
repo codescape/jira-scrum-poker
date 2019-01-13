@@ -31,7 +31,7 @@
                         <fieldset class="top-label">
                             <div class="field-group top-label">
                                 <label for="share-session-url">$i18n.getText("scrumpoker.session.share.link")</label>
-                                <input type="text" class="text long-field" id="share-session-url" value="" readonly>
+                                <input type="text" class="text long-field" id="share-session-url" value="$scrumPokerSessionUrl" readonly>
                             </div>
                         </fieldset>
                         <fieldset class="top-label">
@@ -49,24 +49,6 @@
         </div>
     </div>
 </header>
-
-<script>
-    AJS.$(document).ready(function() {
-        // generate url
-        var qrcode_text = AJS.params.baseURL + '/secure/ScrumPoker.jspa?issueKey=$issue.key';
-
-        // insert url into text field
-        $('#share-session-url').val(qrcode_text);
-
-        // create qr code with url
-        $('#share-session-qrcode').qrcode({width: 260, height: 260, text: qrcode_text});
-
-        // when clicking on url field select all text
-        $("#share-session-url").on("click", function () {
-           $(this).select();
-        });
-    });
-</script>
 
 <section id="content" role="main">
     <div class="aui-page-panel" style="margin: 0;">
@@ -125,7 +107,7 @@
 
 <script>
     AJS.toInit(function(){
-        ScrumPoker.poll('$issue.key');
+        ScrumPoker.init('$issue.key');
     });
 </script>
 
