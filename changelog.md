@@ -17,6 +17,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * refactor: reorder web-item parameters in configuration
 * feat: add share option to scan QR code or copy link to Scrum Poker session
 * refactor: cleanup of Javascript code for QR code and copy link initialization
+* docs: add contact mail on start page of online documentation
 
 ## [3.7.0] - 2018-12-03
 

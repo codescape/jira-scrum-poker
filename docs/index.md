@@ -4,7 +4,7 @@ title: Introduction
 ---
 
 We are happy to welcome you in our Scrum Poker documentation and hope that you find answers to the questions that brought you to this documentation!
-If you are missing some information please feel welcome to <a href="">contact us</a>.
+If you are missing some information please feel welcome to <a href="mailto:stefan.glase@googlemail.com">contact us</a>.
 
 The documentation targets users of the Scrum Poker add-on and Jira administrators who administrate a Jira installation and the add-ons installed into it.
 The documentation is split into these two categories:
