@@ -37,6 +37,22 @@ a {
 img {
     max-width: 100%; }
 
+.call-to-action {
+    text-align: center; }
+
+.call-to-action a {
+    background-color: #ff5630;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    display: inline-block; }
+
+.call-to-action a:hover {
+    color: #fff;
+    background-color: #0FA0CE; }
+
 /* Larger than phone */
 
 @media (min-width: 550px) {
