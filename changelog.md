@@ -4,6 +4,10 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
+* ...
+
+## [3.8.0] - 2019-01-14
+
 * docs: provide EULA and privacy statement in online documentation
 * feat: add global configuration to enable or disable Scrum Poker per default
 * feat: add per project configuration to enable Scrum Poker individually
@@ -474,7 +478,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.7.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.8.0...HEAD
+[3.8.0]: https://github.com/codescape/jira-scrum-poker/compare/3.7.0...3.8.0
 [3.7.0]: https://github.com/codescape/jira-scrum-poker/compare/3.6.0...3.7.0
 [3.6.0]: https://github.com/codescape/jira-scrum-poker/compare/3.5.0...3.6.0
 [3.5.0]: https://github.com/codescape/jira-scrum-poker/compare/3.4.0...3.5.0
