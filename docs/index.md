@@ -4,7 +4,7 @@ title: Introduction
 ---
 
 We are happy to welcome you in our Scrum Poker documentation and hope that you find answers to the questions that brought you to this documentation!
-If you are missing some information please feel welcome to <a href="mailto:{{ contact_mail }}">contact us</a>.
+If you are missing some information please feel welcome to <a href="mailto:{{ site.contact_mail }}">contact us</a>.
 
 <p class="call-to-action"><a href="{{ site.marketplace_url }}">Get Scrum Poker for Jira</a></p>
 
