@@ -19,6 +19,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * refactor: cleanup of Javascript code for QR code and copy link initialization
 * docs: add contact mail on start page of online documentation
 * docs: add call to action button to download and install Scrum Poker
+* docs: document process of sharing a Scrum Poker session via URL and QR code
 
 ## [3.7.0] - 2018-12-03
 
