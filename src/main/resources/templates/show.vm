@@ -188,21 +188,21 @@
         <div class="poker-buttons">
             <div class="aui-buttons">
             {{#allowReveal}}
-                <button onclick="ScrumPoker.revealSession('{{issueKey}}');" class="aui-button aui-button-primary">$i18n.getText("scrumpoker.session.revealcards")</button>
+                <button onclick="ScrumPoker.revealSession('{{issueKey}}');" class="aui-button aui-button-primary"><span class="aui-icon aui-icon-small aui-iconfont-new-watch"></span> $i18n.getText("scrumpoker.session.revealcards")</button>
             {{/allowReveal}}
             {{^allowReveal}}
-                <button class="aui-button aui-button-primary" aria-disabled="true" disabled>$i18n.getText("scrumpoker.session.revealcards")</button>
+                <button class="aui-button aui-button-primary" aria-disabled="true" disabled><span class="aui-icon aui-icon-small aui-iconfont-new-watch"></span> $i18n.getText("scrumpoker.session.revealcards")</button>
             {{/allowReveal}}
 
             {{#allowReset}}
-                <button onclick="ScrumPoker.resetSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.reset")</button>
+                <button onclick="ScrumPoker.resetSession('{{issueKey}}');" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-undo"></span> $i18n.getText("scrumpoker.session.reset")</button>
             {{/allowReset}}
             {{^allowReset}}
-                <button class="aui-button" aria-disabled="true" disabled>$i18n.getText("scrumpoker.session.reset")</button>
+                <button class="aui-button" aria-disabled="true" disabled><span class="aui-icon aui-icon-small aui-iconfont-undo"></span> $i18n.getText("scrumpoker.session.reset")</button>
             {{/allowReset}}
 
             {{#allowCancel}}
-                <button onclick="ScrumPoker.cancelSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.cancel")</button>
+                <button onclick="ScrumPoker.cancelSession('{{issueKey}}');" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-cross"></span> $i18n.getText("scrumpoker.session.cancel")</button>
             {{/allowCancel}}
             </div>
         </div>
@@ -227,9 +227,9 @@
 
     <div class="poker-buttons">
         <div class="aui-buttons">
-            <a href="$req.contextPath/secure/ScrumPokerSessions.jspa" class="aui-button">$i18n.getText("scrumpoker.sessions.list")</a>
-            <a href="$req.contextPath/browse/{{issueKey}}" class="aui-button">$i18n.getText("scrumpoker.issue.navigateback")</a>
-            <button onclick="ScrumPoker.resetSession('{{issueKey}}');" class="aui-button">$i18n.getText("scrumpoker.session.reset")</button>
+            <a href="$req.contextPath/secure/ScrumPokerSessions.jspa" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-list"></span> $i18n.getText("scrumpoker.sessions.list")</a>
+            <a href="$req.contextPath/browse/{{issueKey}}" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-issue"></span> $i18n.getText("scrumpoker.issue.navigateback")</a>
+            <button onclick="ScrumPoker.resetSession('{{issueKey}}');" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-undo"></span> $i18n.getText("scrumpoker.session.reset")</button>
         </div>
     </div>
 
