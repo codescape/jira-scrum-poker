@@ -4,7 +4,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
-* ...
+* feat: improve button styling to refresh session list
 
 ## [3.8.0] - 2019-01-14
 

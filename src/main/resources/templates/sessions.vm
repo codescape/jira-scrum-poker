@@ -22,7 +22,9 @@
         </div>
         <div class="aui-page-header-actions">
             <div class="aui-buttons">
-                <a href="$req.contextPath/secure/ScrumPokerSessions.jspa"><button class="aui-button aui-button-light">$i18n.getText("scrumpoker.sessions.refresh")</button></a>
+                <a href="$req.contextPath/secure/ScrumPokerSessions.jspa">
+                    <button class="aui-button aui-button-light"><span class="aui-icon aui-icon-small aui-iconfont-refresh"></span> $i18n.getText("scrumpoker.sessions.refresh")</button>
+                </a>
             </div>
         </div>
     </div>
