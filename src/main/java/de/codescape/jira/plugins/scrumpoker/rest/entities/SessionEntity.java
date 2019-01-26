@@ -20,6 +20,7 @@ public class SessionEntity {
     private boolean agreementReached;
     private boolean cancelled;
     private List<VoteEntity> votes;
+    private Integer voteCount;
     private boolean allowReset;
     private boolean allowReveal;
     private boolean allowCancel;
@@ -95,11 +96,16 @@ public class SessionEntity {
 
     public SessionEntity withVotes(List<VoteEntity> votes) {
         this.votes = votes;
+        this.voteCount = votes.size();
         return this;
     }
 
     public List<VoteEntity> getVotes() {
         return votes;
+    }
+
+    public Integer getVoteCount() {
+        return voteCount;
     }
 
     public SessionEntity withAllowReset(boolean allowReset) {
