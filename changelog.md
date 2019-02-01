@@ -4,6 +4,10 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
+* ...
+
+## [3.9.0] - 2019-02-01
+
 * feat: improve button styling to refresh session list
 * feat: improve button styling for Scrum Poker session page
 * chore: update dependency versions of all used libraries
@@ -485,7 +489,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.8.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.9.0...HEAD
+[3.9.0]: https://github.com/codescape/jira-scrum-poker/compare/3.8.0...3.9.0
 [3.8.0]: https://github.com/codescape/jira-scrum-poker/compare/3.7.0...3.8.0
 [3.7.0]: https://github.com/codescape/jira-scrum-poker/compare/3.6.0...3.7.0
 [3.6.0]: https://github.com/codescape/jira-scrum-poker/compare/3.5.0...3.6.0
