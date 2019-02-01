@@ -4,7 +4,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
-* ...
+* chore: implement against latest Jira version
 
 ## [3.9.0] - 2019-02-01
 
