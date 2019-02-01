@@ -47,6 +47,34 @@
             </div>
             <div class="description">$i18n.getText("scrumpoker.config.defaultprojectactivation.description")</div>
         </fieldset>
+        <fieldset class="group">
+            <legend><span>$i18n.getText("scrumpoker.config.allowrevealdeck")</span></legend>
+            <div class="radio">
+                #if ($allowRevealDeck == 'EVERYONE')
+                    <input class="radio" type="radio" name="allowRevealDeck" id="allowRevealDeckEveryone" value="EVERYONE" checked="checked">
+                #else
+                    <input class="radio" type="radio" name="allowRevealDeck" id="allowRevealDeckEveryone" value="EVERYONE">
+                #end
+                <label for="allowRevealDeckEveryone">$i18n.getText("scrumpoker.config.allowrevealdeck.everyone")</label>
+            </div>
+            <div class="radio">
+                #if ($allowRevealDeck == 'PARTICIPANTS')
+                    <input class="radio" type="radio" name="allowRevealDeck" id="allowRevealDeckParticipants" value="PARTICIPANTS" checked="checked">
+                #else
+                    <input class="radio" type="radio" name="allowRevealDeck" id="allowRevealDeckParticipants" value="PARTICIPANTS">
+                #end
+                <label for="allowRevealDeckParticipants">$i18n.getText("scrumpoker.config.allowrevealdeck.participants")</label>
+            </div>
+            <div class="radio">
+                #if ($allowRevealDeck == 'CREATOR')
+                    <input class="radio" type="radio" name="allowRevealDeck" id="allowRevealDeckParticipants" value="CREATOR" checked="checked">
+                #else
+                    <input class="radio" type="radio" name="allowRevealDeck" id="allowRevealDeckParticipants" value="CREATOR">
+                #end
+                <label for="allowRevealDeckCreator">$i18n.getText("scrumpoker.config.allowrevealdeck.creator")</label>
+            </div>
+            <div class="description">$i18n.getText("scrumpoker.config.allowrevealdeck.description")</div>
+        </fieldset>
     </div>
     <div class="buttons-container form-footer">
         <div class="buttons">

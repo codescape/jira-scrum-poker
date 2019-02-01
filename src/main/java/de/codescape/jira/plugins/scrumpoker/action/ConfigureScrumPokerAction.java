@@ -2,6 +2,7 @@ package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.fields.CustomField;
+import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,6 +24,7 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
         static final String STORY_POINT_FIELD = "storyPointField";
         static final String SESSION_TIMEOUT = "sessionTimeout";
         static final String DEFAULT_PROJECT_ACTIVATION = "defaultProjectActivation";
+        static final String ALLOW_REVEAL_DECK = "allowRevealDeck";
 
     }
 
@@ -64,6 +66,13 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
         return String.valueOf(scrumPokerSettingService.loadDefaultProjectActivation());
     }
 
+    /**
+     * Current configured option how is allowed to reveal a deck.
+     */
+    public String getAllowRevealDeck() {
+        return scrumPokerSettingService.loadAllowRevealDeck().name();
+    }
+
     @Override
     protected String doExecute() {
         String action = getParameter(Parameters.ACTION);
@@ -76,6 +85,9 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
 
             String newDefaultProjectActivation = getParameter(Parameters.DEFAULT_PROJECT_ACTIVATION);
             scrumPokerSettingService.persistDefaultProjectActivation(Boolean.valueOf(newDefaultProjectActivation));
+
+            String newAllowRevealDeck = getParameter(Parameters.ALLOW_REVEAL_DECK);
+            scrumPokerSettingService.persistAllowRevealDeck(AllowRevealDeck.valueOf(newAllowRevealDeck));
         }
         return SUCCESS;
     }

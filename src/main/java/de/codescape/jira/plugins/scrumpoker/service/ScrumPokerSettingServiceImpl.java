@@ -2,6 +2,7 @@ package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSetting;
+import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import net.java.ao.DBParam;
 import net.java.ao.Query;
 import org.apache.commons.lang.math.NumberUtils;
@@ -21,6 +22,8 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
     static final Integer SESSION_TIMEOUT_DEFAULT = 12;
     static final String DEFAULT_PROJECT_ACTIVATION = "defaultProjectActivation";
     static final boolean DEFAULT_PROJECT_ACTIVATION_DEFAULT = true;
+    static final String ALLOW_REVEAL_DECK = "allowRevealDeck";
+    static final AllowRevealDeck DEFAULT_ALLOW_REVEAL_DECK = AllowRevealDeck.EVERYONE;
 
     private final ActiveObjects activeObjects;
 
@@ -62,6 +65,18 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
     @Override
     public void persistDefaultProjectActivation(boolean defaultProjectActivation) {
         persist(DEFAULT_PROJECT_ACTIVATION, String.valueOf(defaultProjectActivation));
+    }
+
+    @Override
+    public AllowRevealDeck loadAllowRevealDeck() {
+        ScrumPokerSetting scrumPokerSetting = findByKey(ALLOW_REVEAL_DECK);
+        return (scrumPokerSetting != null) ?
+            AllowRevealDeck.valueOf(scrumPokerSetting.getValue()) : DEFAULT_ALLOW_REVEAL_DECK;
+    }
+
+    @Override
+    public void persistAllowRevealDeck(AllowRevealDeck allowRevealDeck) {
+        persist(ALLOW_REVEAL_DECK, allowRevealDeck.name());
     }
 
     private ScrumPokerSetting findByKey(String key) {

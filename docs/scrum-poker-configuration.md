@@ -23,7 +23,7 @@ On the page `Configuration` you have global configuration options to make the Sc
 
 ![Global configuration for Scrum Poker](/images/scrum-poker-configuration-page.png) 
 
-##### Field for confirmed estimation
+##### Confirmed Estimation Field
 
 Select the custom field that is used to persist the confirmed estimations when completing a Scrum Poker session.
 
@@ -41,6 +41,14 @@ Sessions older than this timeout will not be shown on the `Active Sessions` page
 ##### Default Project Activation
 
 Decide whether Scrum Poker is enabled or disabled for all projects per default. This global setting can be overridden per project in the project settings.
+
+##### Allow Reveal Deck
+
+Decide who is allowed to reveal the votes and make them visible during a Scrum Poker session. You can choose from the following options:
+
+* EVERYONE - Everyone is allowed to reveal the deck.
+* PARTICIPANTS - Only participants who have provided a vote are allowed to reveal the deck.
+* CREATOR - Only the creator of the session is allowed to reveal the deck.
 
 ### Project Configuration
 

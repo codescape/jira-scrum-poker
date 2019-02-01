@@ -1,6 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.activeobjects.tx.Transactional;
+import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 
 /**
  * Service to persist and retrieve Scrum poker settings from the database.
@@ -49,5 +50,19 @@ public interface ScrumPokerSettingService {
      * @param defaultProjectActivation default project activation
      */
     void persistDefaultProjectActivation(boolean defaultProjectActivation);
+
+    /**
+     * Loads the setting who is allowed to reveal a session.
+     *
+     * @return who is allowed to reveal a session
+     */
+    AllowRevealDeck loadAllowRevealDeck();
+
+    /**
+     * Persist the setting who is allowed to reveal a session.
+     *
+     * @param allowRevealDeck who is allowed to reveal a sesion
+     */
+    void persistAllowRevealDeck(AllowRevealDeck allowRevealDeck);
 
 }

@@ -4,10 +4,12 @@ import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
+import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.BoundedVoteEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.CardEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.VoteEntity;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,10 +33,12 @@ import static org.apache.commons.lang3.math.NumberUtils.isNumber;
 public class SessionEntityMapper {
 
     private final UserManager userManager;
+    private final ScrumPokerSettingService scrumPokerSettingService;
 
     @Autowired
-    public SessionEntityMapper(UserManager userManager) {
+    public SessionEntityMapper(UserManager userManager, ScrumPokerSettingService scrumPokerSettingService) {
         this.userManager = userManager;
+        this.scrumPokerSettingService = scrumPokerSettingService;
     }
 
     /**
@@ -53,7 +57,7 @@ public class SessionEntityMapper {
             .withBoundedVotes(boundedVotes(scrumPokerSession.getVotes()))
             .withVotes(votes(scrumPokerSession))
             .withCards(cards(scrumPokerSession, userKey))
-            .withAllowReveal(allowReveal(scrumPokerSession))
+            .withAllowReveal(allowReveal(scrumPokerSession, userKey))
             .withAllowReset(allowReset(scrumPokerSession))
             .withAllowCancel(allowCancel(scrumPokerSession, userKey))
             .withAgreementReached(agreementReached(scrumPokerSession))
@@ -78,8 +82,13 @@ public class SessionEntityMapper {
     /**
      * Revealing a Scrum poker session is allowed when minimum one vote is given and the votes are hidden.
      */
-    private boolean allowReveal(ScrumPokerSession scrumPokerSession) {
-        return !scrumPokerSession.isVisible() && scrumPokerSession.getVotes().length > 0;
+    private boolean allowReveal(ScrumPokerSession scrumPokerSession, String userKey) {
+        AllowRevealDeck allowRevealDeck = scrumPokerSettingService.loadAllowRevealDeck();
+        boolean userMayReveal = allowRevealDeck.equals(AllowRevealDeck.EVERYONE) ||
+            allowRevealDeck.equals(AllowRevealDeck.CREATOR) && scrumPokerSession.getCreatorUserKey().equals(userKey) ||
+            allowRevealDeck.equals(AllowRevealDeck.PARTICIPANTS) && Arrays.stream(scrumPokerSession.getVotes())
+                .anyMatch(scrumPokerVote -> scrumPokerVote.getUserKey().equals(userKey));
+        return !scrumPokerSession.isVisible() && scrumPokerSession.getVotes().length > 0 && userMayReveal;
     }
 
     /**
