@@ -9,6 +9,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * chore: update dependency versions of all used libraries
 * feat: show number of votes during Scrum Poker session
 * feat: add global configuration to define who is allowed to reveal the deck
+* fix: display number of votes correctly for more than one participant
 
 ## [3.8.0] - 2019-01-14
 

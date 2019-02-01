@@ -159,7 +159,7 @@
             </ul>
         {{/visible}}
 
-        <h4>$i18n.getText("scrumpoker.session.participants") {{#votes}}({{voteCount}}){{/votes}}</h4>
+        <h4>$i18n.getText("scrumpoker.session.participants") {{#voteCount}}({{voteCount}}){{/voteCount}}</h4>
 
         {{#agreementReached}}
             <p class="poker-comment">$i18n.getText("scrumpoker.session.agreementreached")</p>
