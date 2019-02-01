@@ -87,4 +87,5 @@
 /* icons on buttons display aligned to the text */
 .aui-button .aui-icon {
     height: 20px;
+    vertical-align: bottom;
 }
