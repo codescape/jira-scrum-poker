@@ -11,6 +11,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: add global configuration to define who is allowed to reveal the deck
 * fix: display number of votes correctly for more than one participant
 * feat: vertically align buttons with text on buttons
+* feat: add complete internationalization of the plugin in French
 
 ## [3.8.0] - 2019-01-14
 

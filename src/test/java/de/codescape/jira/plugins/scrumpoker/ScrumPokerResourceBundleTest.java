@@ -16,7 +16,8 @@ import static org.junit.Assert.assertThat;
 public class ScrumPokerResourceBundleTest {
 
     private static final String[] SUPPORTED_BUNDLES = {
-        "scrum-poker_de_DE.properties",
+        "scrum-poker_de.properties",
+        "scrum-poker_fr.properties",
         "scrum-poker.properties"
     };
 
