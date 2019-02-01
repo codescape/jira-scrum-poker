@@ -10,6 +10,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: show number of votes during Scrum Poker session
 * feat: add global configuration to define who is allowed to reveal the deck
 * fix: display number of votes correctly for more than one participant
+* feat: vertically align buttons with text on buttons
 
 ## [3.8.0] - 2019-01-14
 

@@ -83,3 +83,8 @@
     margin-top: -0.95em;
     margin-left: -0.25em;
 }
+
+/* icons on buttons display aligned to the text */
+.aui-button .aui-icon {
+    height: 20px;
+}
