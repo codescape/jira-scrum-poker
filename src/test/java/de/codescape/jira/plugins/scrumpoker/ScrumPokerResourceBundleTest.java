@@ -27,6 +27,7 @@ public class ScrumPokerResourceBundleTest {
     private static final String UPPER_CASE_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String NUMBERS = "0123456789";
     private static final String SPECIAL_CHARACTERS = ".,!?= \\'{}:-+\"";
+    private static final String ALLOWED_CHARACTERS = LOWER_CASE_LETTERS + UPPER_CASE_LETTERS + NUMBERS + SPECIAL_CHARACTERS;
 
     @Test
     public void resourceBundlesMustOnlyContainAllowedCharacters() {
@@ -35,7 +36,7 @@ public class ScrumPokerResourceBundleTest {
                     while (scanner.hasNextLine()) {
                         String line = scanner.nextLine();
                         if (isNotACommentLine(line)) {
-                            assertThat(line, onlyContainsCharacters(LOWER_CASE_LETTERS + UPPER_CASE_LETTERS + NUMBERS + SPECIAL_CHARACTERS));
+                            assertThat(line, onlyContainsCharacters(ALLOWED_CHARACTERS));
                         }
                     }
                 } catch (FileNotFoundException e) {
