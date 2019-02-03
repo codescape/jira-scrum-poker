@@ -53,3 +53,4 @@ The Scrum Poker plugin supports the following languages and defaults to English 
 
 * English
 * German
+* French
