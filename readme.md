@@ -46,6 +46,7 @@ We always try to develop this app against the latest version of Jira to ensure s
 | 3.0.1               | 7.11.x       |
 | 3.3.1               | 7.12.x       |
 | 3.7.0               | 7.13.x       |
+| 3.10.0              | 8.0.x        |
 
 ## Supported Languages
 
