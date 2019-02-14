@@ -6,7 +6,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * chore: implement against latest Jira version
 * test: improve tests for validity of message bundles for internationalization
-
+* feat: implement with compatibility for Jira 8.0.0
+ 
 ## [3.9.0] - 2019-02-01
 
 * feat: improve button styling to refresh session list

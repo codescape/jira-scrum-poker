@@ -2,6 +2,7 @@ package de.codescape.jira.plugins.scrumpoker.rest.mapper;
 
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.ReferenceEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.ReferenceListEntity;
@@ -23,7 +24,7 @@ public class SessionReferenceMapper {
     private final IssueManager issueManager;
 
     @Autowired
-    public SessionReferenceMapper(IssueManager issueManager) {
+    public SessionReferenceMapper(@ComponentImport IssueManager issueManager) {
         this.issueManager = issueManager;
     }
 

@@ -2,6 +2,7 @@ package de.codescape.jira.plugins.scrumpoker.rest.mapper;
 
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
@@ -36,7 +37,8 @@ public class SessionEntityMapper {
     private final ScrumPokerSettingService scrumPokerSettingService;
 
     @Autowired
-    public SessionEntityMapper(UserManager userManager, ScrumPokerSettingService scrumPokerSettingService) {
+    public SessionEntityMapper(@ComponentImport UserManager userManager,
+                               ScrumPokerSettingService scrumPokerSettingService) {
         this.userManager = userManager;
         this.scrumPokerSettingService = scrumPokerSettingService;
     }

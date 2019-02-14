@@ -10,6 +10,7 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.util.http.JiraUrl;
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
 import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +46,11 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
     private String issueKey;
 
     @Autowired
-    public ShowScrumPokerAction(FieldLayoutManager fieldLayoutManager,
-                                RendererManager rendererManager,
-                                IssueManager issueManager,
-                                JiraAuthenticationContext jiraAuthenticationContext,
-                                PermissionManager permissionManager,
+    public ShowScrumPokerAction(@ComponentImport FieldLayoutManager fieldLayoutManager,
+                                @ComponentImport RendererManager rendererManager,
+                                @ComponentImport IssueManager issueManager,
+                                @ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
+                                @ComponentImport PermissionManager permissionManager,
                                 ScrumPokerForIssueCondition scrumPokerForIssueCondition) {
         this.issueManager = issueManager;
         this.rendererManager = rendererManager;

@@ -7,6 +7,7 @@ import com.atlassian.jira.plugin.webfragment.conditions.AbstractIssueWebConditio
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.project.Project;
 import com.atlassian.jira.user.ApplicationUser;
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.plugin.web.Condition;
 import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingService;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Component;
  * given issue. The issue must be editable and have the custom field that is configured for Scrum poker estimations.
  */
 @Component
-public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition implements Condition {
+public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition {
 
     private final CustomFieldManager customFieldManager;
     private final EstimationFieldService estimationFieldService;
@@ -27,7 +28,7 @@ public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition imple
     private final ProjectSettingService projectSettingService;
 
     @Autowired
-    public ScrumPokerForIssueCondition(CustomFieldManager customFieldManager,
+    public ScrumPokerForIssueCondition(@ComponentImport CustomFieldManager customFieldManager,
                                        EstimationFieldService estimationFieldService,
                                        ScrumPokerSettingService scrumPokerSettingService,
                                        ProjectSettingService projectSettingService) {

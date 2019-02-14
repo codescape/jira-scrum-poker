@@ -1,6 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.rest;
 
 import com.atlassian.jira.security.JiraAuthenticationContext;
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionEntityMapper;
@@ -29,7 +30,7 @@ public class SessionResource {
 
     @Autowired
     public SessionResource(EstimationFieldService estimationFieldService,
-                           JiraAuthenticationContext jiraAuthenticationContext,
+                           @ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
                            ScrumPokerSessionService scrumPokerSessionService,
                            SessionEntityMapper sessionEntityMapper,
                            SessionReferenceMapper sessionReferenceMapper) {

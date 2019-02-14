@@ -18,13 +18,11 @@ import org.springframework.stereotype.Component;
 @ExportAsService(PluginUpgradeTask.class)
 public class Upgrade01RemovePluginSettings extends AbstractUpgradeTask {
 
-    @ComponentImport
     private final PluginSettingsFactory pluginSettingsFactory;
-
     private final ScrumPokerSettingService scrumPokerSettingService;
 
     @Autowired
-    public Upgrade01RemovePluginSettings(PluginSettingsFactory pluginSettingsFactory,
+    public Upgrade01RemovePluginSettings(@ComponentImport PluginSettingsFactory pluginSettingsFactory,
                                          ScrumPokerSettingService scrumPokerSettingService) {
         this.pluginSettingsFactory = pluginSettingsFactory;
         this.scrumPokerSettingService = scrumPokerSettingService;

@@ -40,11 +40,14 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <!-- Dependency versions -->
-        <jira.version>7.13.1</jira.version>
-        <amps.version>6.3.21</amps.version>
+        <jira.version>8.0.0</jira.version>
+        <amps.version>8.0.0</amps.version>
         <plugin.testrunner.version>2.0.1</plugin.testrunner.version>
         <atlassian.spring.scanner.version>2.1.8</atlassian.spring.scanner.version>
-        <ao.version>2.0.0</ao.version>
+        <ao.version>3.0.0</ao.version>
+        <spring.version>5.1.5.RELEASE</spring.version>
+        <lucene.version>7.7.0</lucene.version>
+        <upm.version>4.0.1</upm.version>
         <!-- Source encoding -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -76,13 +79,13 @@
         <dependency>
             <groupId>com.atlassian.upm</groupId>
             <artifactId>licensing-api</artifactId>
-            <version>2.22.18</version>
+            <version>${upm.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.atlassian.upm</groupId>
             <artifactId>upm-api</artifactId>
-            <version>2.22.18</version>
+            <version>${upm.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -106,7 +109,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>5.1.4.RELEASE</version>
+            <version>${spring.version}</version>
             <scope>provided</scope>
         </dependency>
         <!-- test dependencies -->
@@ -156,7 +159,7 @@
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-core</artifactId>
-            <version>7.6.0</version>
+            <version>${lucene.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -171,7 +174,7 @@
         <plugins>
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
-                <artifactId>maven-jira-plugin</artifactId>
+                <artifactId>jira-maven-plugin</artifactId>
                 <version>${amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
@@ -181,10 +184,25 @@
                     <productDataVersion>${jira.version}</productDataVersion>
                     <allowGoogleTracking>false</allowGoogleTracking>
                     <enableQuickReload>true</enableQuickReload>
-                    <enableFastdev>false</enableFastdev>
                     <!-- See here for an explanation of default instructions: -->
                     <!-- https://developer.atlassian.com/docs/advanced-topics/configuration-of-instructions-in-atlassian-plugins -->
                     <instructions>
+                        <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
+                        <!-- Add package to export here -->
+                        <Export-Package>
+                            de.codescape.jira.plugins.scrumpoker,
+                        </Export-Package>
+                        <!-- Add package import here -->
+                        <Import-Package>
+                            org.springframework.osgi.*;resolution:="optional",
+                            org.eclipse.gemini.blueprint.*;resolution:="optional",
+
+                            com.atlassian.plugin.web,
+                            com.atlassian.plugin.web.baseconditions,
+                            com.atlassian.jira.plugin.webfragment.conditions,
+
+                            *
+                        </Import-Package>
                         <!-- Ensure plugin is spring powered -->
                         <Spring-Context>*</Spring-Context>
                     </instructions>

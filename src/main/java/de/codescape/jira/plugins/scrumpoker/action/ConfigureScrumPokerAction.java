@@ -2,6 +2,7 @@ package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.fields.CustomField;
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
 
     @Autowired
     public ConfigureScrumPokerAction(ScrumPokerSettingService scrumPokerSettingService,
-                                     CustomFieldManager customFieldManager) {
+                                     @ComponentImport CustomFieldManager customFieldManager) {
         this.scrumPokerSettingService = scrumPokerSettingService;
         this.customFieldManager = customFieldManager;
     }

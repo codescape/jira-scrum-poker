@@ -7,6 +7,7 @@ import com.atlassian.jira.issue.UpdateIssueRequest;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.user.ApplicationUser;
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +28,10 @@ public class EstimationFieldService {
     private final IssueManager issueManager;
 
     @Autowired
-    public EstimationFieldService(JiraAuthenticationContext context,
+    public EstimationFieldService(@ComponentImport JiraAuthenticationContext context,
                                   ScrumPokerSettingService scrumPokerSettingService,
-                                  IssueManager issueManager,
-                                  CustomFieldManager customFieldManager) {
+                                  @ComponentImport IssueManager issueManager,
+                                  @ComponentImport CustomFieldManager customFieldManager) {
         this.scrumPokerSettingService = scrumPokerSettingService;
         this.issueManager = issueManager;
         this.customFieldManager = customFieldManager;

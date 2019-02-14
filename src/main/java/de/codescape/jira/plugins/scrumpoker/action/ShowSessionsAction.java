@@ -5,6 +5,7 @@ import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionEntityMapper;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
@@ -29,8 +30,10 @@ public class ShowSessionsAction extends AbstractScrumPokerAction {
     private final SessionEntityMapper sessionEntityMapper;
 
     @Autowired
-    public ShowSessionsAction(JiraAuthenticationContext jiraAuthenticationContext, PermissionManager permissionManager,
-                              ScrumPokerSessionService scrumPokerSessionService, IssueManager issueManager,
+    public ShowSessionsAction(@ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
+                              @ComponentImport PermissionManager permissionManager,
+                              ScrumPokerSessionService scrumPokerSessionService,
+                              @ComponentImport IssueManager issueManager,
                               SessionEntityMapper sessionEntityMapper) {
         this.issueManager = issueManager;
         this.permissionManager = permissionManager;
