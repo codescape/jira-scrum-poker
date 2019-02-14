@@ -4,6 +4,10 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
+* ...
+
+## [3.10.0] - 2019-02-14
+
 * chore: implement against latest Jira version
 * test: improve tests for validity of message bundles for internationalization
 * feat: implement with compatibility for Jira 8.0.0
@@ -494,7 +498,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.9.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.10.0...HEAD
+[3.10.0]: https://github.com/codescape/jira-scrum-poker/compare/3.9.0...3.10.0
 [3.9.0]: https://github.com/codescape/jira-scrum-poker/compare/3.8.0...3.9.0
 [3.8.0]: https://github.com/codescape/jira-scrum-poker/compare/3.7.0...3.8.0
 [3.7.0]: https://github.com/codescape/jira-scrum-poker/compare/3.6.0...3.7.0
