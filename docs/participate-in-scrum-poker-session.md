@@ -40,7 +40,7 @@ As you can see in the screenshot above when you have chosen a card it is highlig
 
 Once all participants have provided their estimate the cards can be revealed by clicking on the `Reveal` button.
 
-The Scrum Poker add-on will then show the `Range of votes` and mark all participants in the `Participants` list who provided a vote for an estimate on the boundaries of all estimates.
+Scrum Poker for Jira will then show the `Range of votes` and mark all participants in the `Participants` list who provided a vote for an estimate on the boundaries of all estimates.
 This can be seen as an invitation to talk about their reason for choosing that estimate.
 
 ![Reveal all estimates](/images/participate-in-scrum-poker-session-reveal-estimates.png)

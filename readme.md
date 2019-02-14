@@ -1,9 +1,9 @@
-# Scrum Poker
+# Scrum Poker for Jira
 
-Scrum Poker is an open source plugin enabling teams to collaboratively estimate their work with the help of an interactive user interface seamlessly integrated into Jira Software.
+Scrum Poker for Jira is an open source app enabling teams to collaboratively estimate their work with the help of an interactive user interface seamlessly integrated into Jira Software.
 
-This plugin works best in combination with the Story Point field introduced by Jira Software which is also used to calculate the sprint velocity.
-
+This app works best in combination with the Story Point field introduced by Jira Software which is also used to calculate the sprint velocity.
+        
 [![Build Status](https://travis-ci.org/codescape/jira-scrum-poker.svg?branch=master)](https://travis-ci.org/codescape/jira-scrum-poker)
 
 ## Highlights
@@ -33,9 +33,9 @@ For developers:
 
 ## Compatibility Matrix
 
-The Scrum Poker plugin is compatible with Jira 7.5.0 and newer versions.
+Scrum Poker for Jira is compatible with Jira 7.6.0 and newer versions.
 
-We always try to develop the Scrum Poker plugin against the latest version of Jira to ensure support for new versions continuously.
+We always try to develop this app against the latest version of Jira to ensure support for new versions continuously.
 
 | Scrum Poker version | Jira version |
 |---------------------|--------------|
@@ -49,7 +49,7 @@ We always try to develop the Scrum Poker plugin against the latest version of Ji
 
 ## Supported Languages
 
-The Scrum Poker plugin supports the following languages and defaults to English translation if the user has no supported language configured in his Jira profile:
+Scrum Poker for Jira supports the following languages and defaults to English translation if the user has no supported language configured in his Jira profile:
 
 * English
 * German

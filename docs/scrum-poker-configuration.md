@@ -3,23 +3,23 @@ layout: default
 title: Scrum Poker configuration
 ---
 
-This page describes how to configure the Scrum Poker add-on to work in your Jira application.
+This page describes how to configure Scrum Poker for Jira to work in your Jira application.
 
 * Table of Contents
 {:toc}
 
 ### Global Configuration
 
-The Scrum Poker add-on has some global configuration parameters that can be configured from the administration section of your Jira application.
+Scrum Poker for Jira has some global configuration parameters that can be configured from the administration section of your Jira application.
 
-To locate the global configuration navigate to the `Administration` menu, then select the entry labelled `Add-ons`.
-You will now find a section called `Scrum Poker` in the left sidebar as shown in the screenshot below:
+To locate the global configuration navigate to the `Administration` menu, then select the entry labelled `Manage apps`.
+You will now find a section called `Scrum Poker for Jira` in the left sidebar as shown in the screenshot below:
 
 ![Locate the global configuration for Scrum Poker](/images/scrum-poker-configuration-locate-page.png) 
 
 #### Configuration Options
 
-On the page `Configuration` you have global configuration options to make the Scrum Poker add-on fit to your needs:
+On the page `Configuration` you have global configuration options to make Scrum Poker for Jira fit to your needs:
 
 ![Global configuration for Scrum Poker](/images/scrum-poker-configuration-page.png) 
 
@@ -52,13 +52,13 @@ Decide who is allowed to reveal the votes and make them visible during a Scrum P
 
 ### Project Configuration
 
-The Scrum Poker add-on also provides project specific configuration for Scrum Poker.
+Scrum Poker for Jira also provides project specific configuration.
 
-The locate the project specific configuration navigate to the project and find the `Project settings` link in the bottom of the left menu. Inside the `Project settings` you can find a menu option called `Scrum Poker` that leads to the configuration.
+The locate the project specific configuration navigate to the project and find the `Project settings` link in the bottom of the left menu. Inside the `Project settings` you can find a menu option called `Scrum Poker for Jira` that leads to the configuration.
 
 #### Configuration Options
 
-On the page `Project Configuration` you can find the configuration options the make the Scrum Poker add-on fit to the needs of your Jira project:
+On the page `Project Configuration` you can find the configuration options the make Scrum Poker for Jira fit to the needs of your Jira project:
 
 ![Project configuration for Scrum Poker](/images/scrum-poker-configuration-project-page.png) 
 

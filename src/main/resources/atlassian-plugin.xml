@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
 
-    <!-- plugin coordinates -->
+    <!-- app coordinates -->
 
     <plugin-info>
         <description>${project.description}</description>
@@ -72,7 +72,7 @@
         <link>/secure/ScrumPokerSessions.jspa</link>
     </web-item>
 
-    <!-- configuration in plugin administration sidebar -->
+    <!-- configuration in app administration sidebar -->
 
     <web-section key="scrum-poker-configuration" location="admin_plugins_menu">
         <label key="scrumpoker.title"/>

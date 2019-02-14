@@ -1,6 +1,6 @@
 # Changelog
 
-This changelog helps developers and users to keep track of new features, fixes and improvements for the Scrum Poker plugin.
+This changelog helps developers and users to keep track of new features, fixes and improvements for Scrum Poker for Jira.
 
 ## [Unreleased]
 
@@ -8,6 +8,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * test: improve tests for validity of message bundles for internationalization
 * feat: implement with compatibility for Jira 8.0.0
 * chore: update pom documentation and remove not required import packages
+* chore: use Scrum Poker for Jira as new name and refer to it as a Jira app
  
 ## [3.9.0] - 2019-02-01
 
