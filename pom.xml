@@ -184,26 +184,19 @@
                     <productDataVersion>${jira.version}</productDataVersion>
                     <allowGoogleTracking>false</allowGoogleTracking>
                     <enableQuickReload>true</enableQuickReload>
-                    <!-- See here for an explanation of default instructions: -->
-                    <!-- https://developer.atlassian.com/docs/advanced-topics/configuration-of-instructions-in-atlassian-plugins -->
+                    <!-- See here for a comprehensive guide with instructions: -->
+                    <!-- https://bitbucket.org/atlassian/atlassian-spring-scanner -->
                     <instructions>
                         <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
-                        <!-- Add package to export here -->
                         <Export-Package>
                             de.codescape.jira.plugins.scrumpoker,
                         </Export-Package>
-                        <!-- Add package import here -->
                         <Import-Package>
-                            org.springframework.osgi.*;resolution:="optional",
-                            org.eclipse.gemini.blueprint.*;resolution:="optional",
-
                             com.atlassian.plugin.web,
                             com.atlassian.plugin.web.baseconditions,
                             com.atlassian.jira.plugin.webfragment.conditions,
-
                             *
                         </Import-Package>
-                        <!-- Ensure plugin is spring powered -->
                         <Spring-Context>*</Spring-Context>
                     </instructions>
                     <applications>
@@ -227,7 +220,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <!-- enable for build-time logging of annotations atlassian-spring-scanner-maven-plugin has noticed -->
                     <verbose>true</verbose>
                 </configuration>
             </plugin>
