@@ -4,7 +4,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
-* ...
+* chore: use short name Scrum Poker inside Jira GUI
 
 ## [3.10.0] - 2019-02-14
 
@@ -14,7 +14,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * chore: update pom documentation and remove not required import packages
 * chore: use Scrum Poker for Jira as new name and refer to it as a Jira app
 * docs: update compatibility matrix
- 
+
 ## [3.9.0] - 2019-02-01
 
 * feat: improve button styling to refresh session list
@@ -56,7 +56,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * chore: implement against latest version of Atlassian SDK
 * test: add test for correct behaviour when cancelling a session
 * chore: implement against latest Jira patch version 7.13.0
- 
+
 ## [3.6.0] - 2018-09-26
 
 * chore: upgrade all dependencies to latest stable version
@@ -98,7 +98,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * refactor: change primary key for persisted votes from int to Long
 * feat: do not create Scrum poker sessions for issues missing estimation field
 * test: use Mockito ArgumentMatcher instead of deprecated Mockito Matcher
-* test: improve tests and remove unnecessary details in setup 
+* test: improve tests and remove unnecessary details in setup
 * chore: implement against latest Jira patch version 7.12.1
 * feat: sort buttons on Scrum Poker session page by usage frequency
 * docs: implement a first version of an online documentation
@@ -215,7 +215,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: create own ScrumPoker namespace for JavaScript code
 * docs: improve readme and add installation instructions
 * style: formatting the JavaScript file
-* feat: rename to Scrum Poker to adhere to Atlassian brand guidelines 
+* feat: rename to Scrum Poker to adhere to Atlassian brand guidelines
 
 ## [2.3.0] - 2018-04-11
 
@@ -302,7 +302,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * docs: fix credits to original author
 * docs: fix sample for commit messages
 * docs: add section about supported languages
-* docs: add section with contribution ideas 
+* docs: add section with contribution ideas
 * refactor: simplify verification custom field exists
 * refactor: remove unused import
 * refactor: log errors when updating issues
@@ -314,7 +314,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * docs: add contibution guidelines
 * fix: show questionmark on backside of cards
 * fix: preserve styling for link after click on card
-* fix: remove gap between active and closed sessions 
+* fix: remove gap between active and closed sessions
 
 ## [1.8.0] - 2017-11-03
 
@@ -364,7 +364,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [1.4.1] - 2017-08-08
 
-* chore: cleanup of unused actions and imports, css selectors 
+* chore: cleanup of unused actions and imports, css selectors
 * style: improve code formatting
 * refactor: improve internal structure of action based code and remove redundancy
 * feat: closed and open Scrum poker sessions are sorted by creation date
@@ -451,7 +451,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [1.2.3] - 2015-05-19
 
-* feat: automatic refresh of poker cards in session every two seconds 
+* feat: automatic refresh of poker cards in session every two seconds
 * docs: added section with compatibility matrix in readme
 
 ## [1.2.2] - 2015-05-07
@@ -471,7 +471,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * docs: add Apache License Version 2.0
 * docs: improve readme and add description of the plugin
 * docs: add javadoc to PlanningPokerStorage interface
-* chore: add ignored file patterns for git version control 
+* chore: add ignored file patterns for git version control
 * chore: add Atlassian repository in POM to resolve Atlassian dependencies
 
 ## [1.2.0] - 2015-04-26
