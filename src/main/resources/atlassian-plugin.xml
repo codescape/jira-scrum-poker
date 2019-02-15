@@ -2,7 +2,6 @@
 <atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
 
     <!-- app coordinates -->
-
     <plugin-info>
         <description>${project.description}</description>
         <version>${project.version}</version>
@@ -17,11 +16,9 @@
     </plugin-info>
 
     <!-- i18n message bundle -->
-
     <resource type="i18n" name="i18n" location="scrum-poker"/>
 
     <!-- static web resources -->
-
     <web-resource key="scrum-poker-resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
         <transformation extension="js">
@@ -37,13 +34,11 @@
     </web-resource>
 
     <!-- buttons to start a new session -->
-
     <web-item key="scrum-poker-start-from-issue-details" section="jira.issue.tools" weight="10">
         <label key="scrumpoker.session.start"/>
         <link>/secure/ScrumPoker.jspa?issueKey=$issue.key</link>
         <condition class="de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition"/>
     </web-item>
-
     <web-item key="scrum-poker-start-from-context-menu" section="greenhopper_issue_dropdown" weight="200">
         <label key="scrumpoker.session.start"/>
         <link>/secure/ScrumPoker.jspa?issueKey=$issue.key</link>
@@ -51,40 +46,33 @@
     </web-item>
 
     <!-- dropdown on boards -->
-
     <web-section key="scrum-poker-sessions" location="jira.agile.board.tools" weight="10">
         <label key="scrumpoker.title"/>
     </web-section>
-
     <web-item key="scrum-poker-sessions-link" section="scrum-poker-sessions" weight="10">
         <label key="scrumpoker.sessions.list"/>
         <link>/secure/ScrumPokerSessions.jspa?boardId=${board.id}</link>
     </web-item>
 
     <!-- section in Jira Software boards dropdown -->
-
     <web-section key="scrum-poker-menu" location="greenhopper_menu" weight="100">
         <label key="scrumpoker.title"/>
     </web-section>
-
     <web-item key="scrum-poker-menu-active-sessions" section="greenhopper_menu/scrum-poker-menu" weight="10">
         <label key="scrumpoker.sessions.list"/>
         <link>/secure/ScrumPokerSessions.jspa</link>
     </web-item>
 
     <!-- configuration in app administration sidebar -->
-
     <web-section key="scrum-poker-configuration" location="admin_plugins_menu">
         <label key="scrumpoker.title"/>
     </web-section>
-
     <web-item key="scrum-poker-configuration-item" section="admin_plugins_menu/scrum-poker-configuration">
         <label key="scrumpoker.config.title"/>
         <link>/secure/admin/ScrumPokerConfiguration.jspa</link>
     </web-item>
 
     <!-- project specific configuration in project configuration sidebar -->
-
     <web-item key="scrum-poker-project-configuration-item" section="atl.jira.proj.config/projectgroup4" weight="200">
         <label key="scrumpoker.title"/>
         <link linkId="scrum-poker-project-configuration-item-link">
@@ -93,7 +81,6 @@
     </web-item>
 
     <!-- webworks -->
-
     <webwork1 key="scrum-poker-webwork">
         <actions>
             <action name="de.codescape.jira.plugins.scrumpoker.action.ConfigureScrumPokerAction"
@@ -117,11 +104,9 @@
     </webwork1>
 
     <!-- rest endpoint -->
-
     <rest key="scrum-poker-rest" path="/scrumpoker" version="1.0"/>
 
     <!-- persistence with active objects -->
-
     <ao key="scrum-poker-active-objects">
         <entity>de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject</entity>
         <entity>de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession</entity>

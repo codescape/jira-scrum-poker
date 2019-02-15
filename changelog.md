@@ -5,6 +5,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 ## [Unreleased]
 
 * chore: use short name Scrum Poker inside Jira GUI
+* style: format configuration files
 
 ## [3.10.0] - 2019-02-14
 
@@ -179,7 +180,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * feat: less text same meaning for session list headings
 * docs: provide better screenshots and show more situations
 * refactor: move REST entities into separate package
-* refactor: rename REST entities to *Entity
+* refactor: rename REST entities to \*Entity
 * refactor: use Jackson annotations for JSON entity classes
 * docs: provide Privacy Statement for Scrum Poker
 
