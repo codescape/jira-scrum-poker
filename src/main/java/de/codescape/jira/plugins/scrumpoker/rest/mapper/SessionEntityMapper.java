@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 import static de.codescape.jira.plugins.scrumpoker.model.ScrumPokerCard.QUESTION_MARK;
 import static de.codescape.jira.plugins.scrumpoker.model.ScrumPokerCard.getDeck;
 import static java.util.Arrays.stream;
-import static org.apache.commons.lang3.math.NumberUtils.isNumber;
+import static org.apache.commons.lang3.math.NumberUtils.isCreatable;
 
 /**
  * Service that allows to map a {@link ScrumPokerSession} to a {@link SessionEntity}. This service creates a model that
@@ -149,7 +149,7 @@ public class SessionEntityMapper {
             return false;
         if (scrumPokerSession.getVotes().length == 1)
             return false;
-        if (!isNumber(vote))
+        if (!isCreatable(vote))
             return true;
         Integer current = Integer.valueOf(vote);
         return current.equals(getMaximumVote(scrumPokerSession.getVotes()))
@@ -162,7 +162,7 @@ public class SessionEntityMapper {
     private List<BoundedVoteEntity> boundedVotes(ScrumPokerVote[] votes) {
         Map<String, Long> voteDistribution = Arrays.stream(votes)
             .collect(Collectors.groupingBy(ScrumPokerVote::getVote, Collectors.counting()));
-        return getDeck().stream().filter(scrumPokerCard -> isNumber(scrumPokerCard.getName()))
+        return getDeck().stream().filter(scrumPokerCard -> isCreatable(scrumPokerCard.getName()))
             .map(scrumPokerCard -> new BoundedVoteEntity(
                 Integer.valueOf(scrumPokerCard.getName()),
                 voteDistribution.getOrDefault(scrumPokerCard.getName(), 0L).intValue()))
@@ -190,7 +190,7 @@ public class SessionEntityMapper {
      */
     private List<Integer> numericValues(ScrumPokerVote[] votes) {
         return stream(votes).map(ScrumPokerVote::getVote)
-            .filter(NumberUtils::isNumber)
+            .filter(NumberUtils::isCreatable)
             .map(Integer::valueOf)
             .collect(Collectors.toList());
     }
