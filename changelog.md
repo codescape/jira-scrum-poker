@@ -8,6 +8,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * style: format configuration files
 * docs: update docs according to usage of the short name
 * refactor: remove usage of deprecated API and switch to new method
+* fix: IntelliJ inspection results
 
 ## [3.10.0] - 2019-02-14
 
