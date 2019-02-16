@@ -6,6 +6,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * chore: use short name Scrum Poker inside Jira GUI
 * style: format configuration files
+* docs: update docs according to usage of the short name
 
 ## [3.10.0] - 2019-02-14
 

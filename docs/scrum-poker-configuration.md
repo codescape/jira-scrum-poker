@@ -13,7 +13,7 @@ This page describes how to configure Scrum Poker for Jira to work in your Jira a
 Scrum Poker for Jira has some global configuration parameters that can be configured from the administration section of your Jira application.
 
 To locate the global configuration navigate to the `Administration` menu, then select the entry labelled `Manage apps`.
-You will now find a section called `Scrum Poker for Jira` in the left sidebar as shown in the screenshot below:
+You will now find a section called `Scrum Poker` in the left sidebar as shown in the screenshot below:
 
 ![Locate the global configuration for Scrum Poker](/images/scrum-poker-configuration-locate-page.png) 
 
@@ -40,7 +40,8 @@ Sessions older than this timeout will not be shown on the `Active Sessions` page
 
 ##### Default Project Activation
 
-Decide whether Scrum Poker is enabled or disabled for all projects per default. This global setting can be overridden per project in the project settings.
+Decide whether Scrum Poker is enabled or disabled for all projects per default.
+This global setting can be overridden per project in the project settings.
 
 ##### Allow Reveal Deck
 
@@ -54,7 +55,8 @@ Decide who is allowed to reveal the votes and make them visible during a Scrum P
 
 Scrum Poker for Jira also provides project specific configuration.
 
-The locate the project specific configuration navigate to the project and find the `Project settings` link in the bottom of the left menu. Inside the `Project settings` you can find a menu option called `Scrum Poker for Jira` that leads to the configuration.
+The locate the project specific configuration navigate to the project and find the `Project settings` link in the bottom of the left menu.
+Inside the `Project settings` you can find a menu option called `Scrum Poker` that leads to the configuration.
 
 #### Configuration Options
 
