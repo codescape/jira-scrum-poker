@@ -26,6 +26,16 @@ During development you will find the following commands useful:
 
 Reloading the plugin during development can be triggered in your web browser when hitting `Shift + Reload` (for example `Shift + Cmd + R` on Mac OS X).
 
+## Maven Dependency Analysis
+
+From time to time it makes sense to check the dependencies required to build and run Scrum Poker for Jira.
+There are two maven commands that should be run and verified:
+
+* `mvn dependency:analyze` analyzes the dependencies of this project and determines which are: used and declared; used and undeclared; unused and declared returns a list of used but not declared and a list of declared but not used dependencies. 
+Not all results require actions since there can be dependencies not being resolved on bytecode level.
+* `mvn versions:display-dependency-updates` analyzes the dependencies of this project and lists all dependencies that exist in one of the configures repositories in a more recent version than the one being used.
+There are many false positives since versions are only compared based on the version number and there are many dependencies with irrelevant version numbers.
+
 ## Commit messages
 
 Commit messages should be written in this format:

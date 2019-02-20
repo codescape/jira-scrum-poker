@@ -9,6 +9,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * docs: update docs according to usage of the short name
 * refactor: remove usage of deprecated API and switch to new method
 * fix: IntelliJ inspection results
+* docs: add section for Maven dependency analysis
 
 ## [3.10.0] - 2019-02-14
 
