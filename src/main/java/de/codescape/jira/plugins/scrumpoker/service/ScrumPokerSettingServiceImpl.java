@@ -5,11 +5,10 @@ import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSetting;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import net.java.ao.DBParam;
 import net.java.ao.Query;
-import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static org.apache.commons.lang3.math.NumberUtils.isCreatable;
 
 /**
  * Implementation of {@link ScrumPokerSettingService} using Active Objects as persistence model.
@@ -29,7 +28,7 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
 
     @Autowired
     public ScrumPokerSettingServiceImpl(ActiveObjects activeObjects) {
-        this.activeObjects = checkNotNull(activeObjects);
+        this.activeObjects = activeObjects;
     }
 
     @Override
@@ -46,7 +45,7 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
     @Override
     public Integer loadSessionTimeout() {
         ScrumPokerSetting scrumPokerSetting = findByKey(SESSION_TIMEOUT);
-        return (scrumPokerSetting != null && NumberUtils.isNumber(scrumPokerSetting.getValue()))
+        return (scrumPokerSetting != null && isCreatable(scrumPokerSetting.getValue()))
             ? Integer.valueOf(scrumPokerSetting.getValue()) : SESSION_TIMEOUT_DEFAULT;
     }
 

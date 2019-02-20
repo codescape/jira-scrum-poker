@@ -16,8 +16,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 /**
  * Implementation of {@link ScrumPokerSessionService} using Active Objects as persistence model.
  */
@@ -34,7 +32,7 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
                                         @ComponentImport IssueManager issueManager,
                                         ScrumPokerSettingService scrumPokerSettingService,
                                         ScrumPokerForIssueCondition scrumPokerForIssueCondition) {
-        this.activeObjects = checkNotNull(activeObjects);
+        this.activeObjects = activeObjects;
         this.issueManager = issueManager;
         this.scrumPokerSettingService = scrumPokerSettingService;
         this.scrumPokerForIssueCondition = scrumPokerForIssueCondition;

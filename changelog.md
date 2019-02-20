@@ -10,6 +10,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * refactor: remove usage of deprecated API and switch to new method
 * fix: IntelliJ inspection results
 * docs: add section for Maven dependency analysis
+* chore: cleanup dependencies and remove unnecessary dependencies
 
 ## [3.10.0] - 2019-02-14
 
