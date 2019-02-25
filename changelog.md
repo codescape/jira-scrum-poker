@@ -12,6 +12,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * docs: add section for Maven dependency analysis
 * chore: cleanup dependencies and remove unnecessary dependencies
 * chore: explicitly reference required dependencies
+* chore: re-establish quick reload functionality
 
 ## [3.10.0] - 2019-02-14
 

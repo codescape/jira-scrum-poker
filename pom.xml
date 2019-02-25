@@ -49,6 +49,7 @@
         <upm.version>4.0.1</upm.version>
         <hamcrest.version>1.3</hamcrest.version>
         <jackson.version>1.9.13-atlassian-3</jackson.version>
+        <quick.reload.version>3.0.0</quick.reload.version>
 
         <!-- Source encoding -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -226,14 +227,18 @@
                 <version>${amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <!-- wait for plugins to be loaded completely (required on slower machines) -->
-                    <!-- <jvmArgs>-Datlassian.plugins.enable.wait=1000</jvmArgs> -->
                     <productVersion>${jira.version}</productVersion>
                     <productDataVersion>${jira.version}</productDataVersion>
                     <allowGoogleTracking>false</allowGoogleTracking>
                     <enableQuickReload>true</enableQuickReload>
-                    <!-- See here for a comprehensive guide with instructions: -->
-                    <!-- https://bitbucket.org/atlassian/atlassian-spring-scanner -->
+                    <pluginArtifacts>
+                        <pluginArtifact>
+                            <groupId>com.atlassian.labs.plugins</groupId>
+                            <artifactId>quickreload</artifactId>
+                            <version>${quick.reload.version}</version>
+                        </pluginArtifact>
+                    </pluginArtifacts>
+                    <!-- see https://bitbucket.org/atlassian/atlassian-spring-scanner -->
                     <instructions>
                         <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
                         <Export-Package>
