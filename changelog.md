@@ -13,6 +13,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * chore: cleanup dependencies and remove unnecessary dependencies
 * chore: explicitly reference required dependencies
 * chore: re-establish quick reload functionality
+* feat: update german translation to fit to Jira internal wording
 
 ## [3.10.0] - 2019-02-14
 
