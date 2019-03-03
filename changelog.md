@@ -15,6 +15,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * chore: re-establish quick reload functionality
 * feat: update german translation to fit to Jira internal wording
 * chore: non verbose logging on maven lifecycle
+* test: remove unused mocks from test and clean up test logging
 
 ## [3.10.0] - 2019-02-14
 

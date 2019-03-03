@@ -9,7 +9,6 @@ import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionEntityMapper;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -27,6 +26,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class ShowSessionsActionTest {
+
+    private static final String SECRET_ISSUE_KEY = "SECRET-1";
+    private static final String PUBLIC_ISSUE_KEY = "PUBLIC-1";
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -62,21 +64,43 @@ public class ShowSessionsActionTest {
     private ScrumPokerSession secretScrumPokerSession;
 
     @Mock
-    private SessionEntity secretSessionEntity;
-
-    @Mock
     private ScrumPokerSession publicScrumPokerSession;
 
     @Mock
     private SessionEntity publicSessionEntity;
 
-    @Before
-    public void before() {
-        when(secretScrumPokerSession.getIssueKey()).thenReturn("SECRET");
-        when(secretSessionEntity.getIssueKey()).thenReturn("SECRET");
+    @Test
+    public void openSessionsShouldOnlyReturnIssuesTheUserIsAllowedToSee() {
+        expectOneVisibleAndOneSecretIssue();
+        when(publicScrumPokerSession.getConfirmedVote()).thenReturn(null);
+        when(secretScrumPokerSession.getConfirmedVote()).thenReturn(null);
 
-        when(publicScrumPokerSession.getIssueKey()).thenReturn("PUBLIC");
-        when(publicSessionEntity.getIssueKey()).thenReturn("PUBLIC");
+        List<SessionEntity> openSessions = showSessionsAction.getOpenSessions();
+        assertThat(openSessions, hasSize(1));
+        assertThat(openSessions.get(0), is(equalTo(publicSessionEntity)));
+        verify(scrumPokerSessionService).recent();
+    }
+
+    @Test
+    public void closedSessionsShouldOnlyReturnIssuesTheUserIsAllowedToSee() {
+        expectOneVisibleAndOneSecretIssue();
+        when(publicScrumPokerSession.getConfirmedVote()).thenReturn(5);
+        when(secretScrumPokerSession.getConfirmedVote()).thenReturn(8);
+
+        List<SessionEntity> closedSessions = showSessionsAction.getClosedSessions();
+        assertThat(closedSessions, hasSize(1));
+        assertThat(closedSessions.get(0), is(equalTo(publicSessionEntity)));
+        verify(scrumPokerSessionService).recent();
+    }
+
+    @Test
+    public void shouldAlwaysShowSessionsPage() {
+        assertThat(showSessionsAction.doExecute(), is(equalTo("success")));
+    }
+
+    private void expectOneVisibleAndOneSecretIssue() {
+        when(secretScrumPokerSession.getIssueKey()).thenReturn(SECRET_ISSUE_KEY);
+        when(publicScrumPokerSession.getIssueKey()).thenReturn(PUBLIC_ISSUE_KEY);
 
         ArrayList<ScrumPokerSession> scrumPokerSessions = new ArrayList<>();
         scrumPokerSessions.add(secretScrumPokerSession);
@@ -87,41 +111,13 @@ public class ShowSessionsActionTest {
         when(jiraAuthenticationContext.getLoggedInUser()).thenReturn(applicationUser);
         when(applicationUser.getKey()).thenReturn("USER-1");
 
-        when(sessionEntityMapper.build(secretScrumPokerSession, "USER-1")).thenReturn(secretSessionEntity);
         when(sessionEntityMapper.build(publicScrumPokerSession, "USER-1")).thenReturn(publicSessionEntity);
 
-        when(issueManager.getIssueObject("SECRET")).thenReturn(secretIssue);
-        when(issueManager.getIssueObject("PUBLIC")).thenReturn(publicIssue);
-
+        when(issueManager.getIssueObject(SECRET_ISSUE_KEY)).thenReturn(secretIssue);
         when(permissionManager.hasPermission(BROWSE_PROJECTS, secretIssue, applicationUser)).thenReturn(false);
+
+        when(issueManager.getIssueObject(PUBLIC_ISSUE_KEY)).thenReturn(publicIssue);
         when(permissionManager.hasPermission(BROWSE_PROJECTS, publicIssue, applicationUser)).thenReturn(true);
-    }
-
-    @Test
-    public void openSessionsShouldOnlyReturnIssuesTheUserIsAllowedToSee() {
-        when(publicScrumPokerSession.getConfirmedVote()).thenReturn(null);
-        when(secretScrumPokerSession.getConfirmedVote()).thenReturn(null);
-
-        List<SessionEntity> openSessions = showSessionsAction.getOpenSessions();
-        assertThat(openSessions, hasSize(1));
-        assertThat(openSessions.get(0).getIssueKey(), is(equalTo("PUBLIC")));
-        verify(scrumPokerSessionService).recent();
-    }
-
-    @Test
-    public void closedSessionsShouldOnlyReturnIssuesTheUserIsAllowedToSee() {
-        when(publicScrumPokerSession.getConfirmedVote()).thenReturn(5);
-        when(secretScrumPokerSession.getConfirmedVote()).thenReturn(8);
-
-        List<SessionEntity> closedSessions = showSessionsAction.getClosedSessions();
-        assertThat(closedSessions, hasSize(1));
-        assertThat(closedSessions.get(0).getIssueKey(), is(equalTo("PUBLIC")));
-        verify(scrumPokerSessionService).recent();
-    }
-
-    @Test
-    public void shouldAlwaysShowSessionsPage() {
-        assertThat(showSessionsAction.doExecute(), is(equalTo("success")));
     }
 
 }

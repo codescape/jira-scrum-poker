@@ -5,7 +5,6 @@ import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.issuetype.IssueType;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.ReferenceListEntity;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -14,11 +13,13 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.ArgumentMatchers.startsWith;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -32,14 +33,6 @@ public class SessionReferenceMapperTest {
 
     @InjectMocks
     private SessionReferenceMapper sessionReferenceMapper;
-
-    @Before
-    public void before() {
-        MutableIssue issue = mock(MutableIssue.class);
-        IssueType issueType = mock(IssueType.class);
-        when(issue.getIssueType()).thenReturn(issueType);
-        when(issueManager.getIssueObject(startsWith("ISSUE-"))).thenReturn(issue);
-    }
 
     @Test
     public void shouldMapTheEstimation() {
@@ -56,13 +49,23 @@ public class SessionReferenceMapperTest {
 
     @Test
     public void shouldExcludeIssuesWhereIssueCannotBeFound() {
-        ArrayList<ScrumPokerSession> scrumPokerSessions = new ArrayList<>();
-        scrumPokerSessions.add(sessionForIssueKey("ISSUE-5"));
-        scrumPokerSessions.add(sessionForIssueKey("NOT-FOUND-1"));
+        issueManagerKnowsIssueWithKey("ISSUE-5");
+        List<ScrumPokerSession> scrumPokerSessions = scrumPokerSessionsWithKeys("ISSUE-5", "UNKNOWN-ISSUE-1");
         ReferenceListEntity referenceListEntity = sessionReferenceMapper.build(scrumPokerSessions, 5);
         assertThat(referenceListEntity.isResults(), is(true));
         assertThat(referenceListEntity.getReferences().size(), is(1));
         assertThat(referenceListEntity.getReferences().get(0).getIssueKey(), equalTo("ISSUE-5"));
+    }
+
+    private List<ScrumPokerSession> scrumPokerSessionsWithKeys(String... keys) {
+        return Arrays.stream(keys).map(this::sessionForIssueKey).collect(Collectors.toList());
+    }
+
+    private void issueManagerKnowsIssueWithKey(String issueKey) {
+        MutableIssue issue = mock(MutableIssue.class);
+        IssueType issueType = mock(IssueType.class);
+        when(issue.getIssueType()).thenReturn(issueType);
+        when(issueManager.getIssueObject(issueKey)).thenReturn(issue);
     }
 
     private ScrumPokerSession sessionForIssueKey(String issueKey) {

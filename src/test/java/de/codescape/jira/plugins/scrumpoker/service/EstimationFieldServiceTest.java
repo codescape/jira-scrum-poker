@@ -24,7 +24,6 @@ public class EstimationFieldServiceTest {
     private static final String ISSUE_KEY = "ISSUE-0815";
     private static final Integer ESTIMATION = 5;
     private static final String CUSTOM_FIELD_ID = "11045";
-    private static final long ISSUE_ID = 67L;
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -57,7 +56,6 @@ public class EstimationFieldServiceTest {
     public void before() {
         when(jiraAuthenticationContext.getLoggedInUser()).thenReturn(applicationUser);
         when(issueManager.getIssueByCurrentKey(ISSUE_KEY)).thenReturn(issue);
-        when(issue.getId()).thenReturn(ISSUE_ID);
         when(scrumPokerSettingService.loadStoryPointField()).thenReturn(CUSTOM_FIELD_ID);
         when(customFieldManager.getCustomFieldObject(CUSTOM_FIELD_ID)).thenReturn(customField);
     }
