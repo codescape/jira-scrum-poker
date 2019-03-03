@@ -14,6 +14,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * chore: explicitly reference required dependencies
 * chore: re-establish quick reload functionality
 * feat: update german translation to fit to Jira internal wording
+* chore: non verbose logging on maven lifecycle
 
 ## [3.10.0] - 2019-02-14
 
