@@ -74,6 +74,9 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
         return scrumPokerSettingService.loadAllowRevealDeck().name();
     }
 
+    /**
+     * Save the global settings if the form is saved and submitted.
+     */
     @Override
     protected String doExecute() {
         String action = getParameter(Parameters.ACTION);

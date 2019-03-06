@@ -45,6 +45,9 @@ public class ConfigureProjectSettingsAction extends AbstractScrumPokerAction {
         return projectSettingService.loadScrumPokerEnabled(getProjectByKey(projectKey).getId());
     }
 
+    /**
+     * Save the project specific settings if the form is saved and submitted.
+     */
     @Override
     protected String doExecute() {
         projectKey = getParameter(Parameters.PROJECT_KEY);

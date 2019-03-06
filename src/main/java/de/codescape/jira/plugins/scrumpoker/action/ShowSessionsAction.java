@@ -42,11 +42,17 @@ public class ShowSessionsAction extends AbstractScrumPokerAction {
         this.sessionEntityMapper = sessionEntityMapper;
     }
 
+    /**
+     * Just show the page.
+     */
     @Override
     protected String doExecute() {
         return SUCCESS;
     }
 
+    /**
+     * Return all open sessions that are visible to the current user.
+     */
     public List<SessionEntity> getOpenSessions() {
         return scrumPokerSessionService.recent().stream()
             .filter(session -> session.getConfirmedVote() == null)
@@ -57,6 +63,9 @@ public class ShowSessionsAction extends AbstractScrumPokerAction {
             .collect(Collectors.toList());
     }
 
+    /**
+     * Return all closed sessions that are visible to the current user.
+     */
     public List<SessionEntity> getClosedSessions() {
         return scrumPokerSessionService.recent().stream()
             .filter(session -> session.getConfirmedVote() != null || session.isCancelled())
@@ -66,6 +75,12 @@ public class ShowSessionsAction extends AbstractScrumPokerAction {
             .collect(Collectors.toList());
     }
 
+    /**
+     * Return the issue for the given issue key.
+     *
+     * @param issueKey issue key
+     * @return issue
+     */
     public MutableIssue getIssue(String issueKey) {
         return issueManager.getIssueObject(issueKey);
     }

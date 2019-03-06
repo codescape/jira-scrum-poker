@@ -60,6 +60,9 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
         this.scrumPokerForIssueCondition = scrumPokerForIssueCondition;
     }
 
+    /**
+     * Display the page if the current user is allowed to see the issue and a Scrum Poker session can be started.
+     */
     @Override
     protected String doExecute() {
         issueKey = getParameter(Parameters.ISSUE_KEY);
@@ -71,10 +74,16 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
         return SUCCESS;
     }
 
+    /**
+     * Current issue for that this Scrum Poker session is started.
+     */
     public MutableIssue getIssue() {
         return issueManager.getIssueObject(issueKey);
     }
 
+    /**
+     * Description of the current issue rendered with respect to the markup being used.
+     */
     @HtmlSafe
     public String getIssueDescription() {
         MutableIssue issue = issueManager.getIssueObject(issueKey);
@@ -92,6 +101,9 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
         return !permissionManager.hasPermission(BROWSE_PROJECTS, issue, jiraAuthenticationContext.getLoggedInUser());
     }
 
+    /**
+     * Url to this Scrum Poker session to be displayed and used for the client side QR code generation.
+     */
     public String getScrumPokerSessionUrl() {
         return JiraUrl.constructBaseUrl(getHttpRequest()) + "/secure/ScrumPoker.jspa?issueKey=" + issueKey;
     }

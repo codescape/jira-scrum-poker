@@ -17,6 +17,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * chore: non verbose logging on maven lifecycle
 * test: remove unused mocks from test and clean up test logging
 * docs: use long name in title of online documentation
+* docs: add documentation to all action classes
 
 ## [3.10.0] - 2019-02-14
 
