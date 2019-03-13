@@ -41,7 +41,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- Dependency versions -->
-        <jira.version>8.0.0</jira.version>
+        <jira.version>8.0.2</jira.version>
         <amps.version>8.0.0</amps.version>
         <atlassian.spring.scanner.version>2.1.8</atlassian.spring.scanner.version>
         <ao.version>3.0.0</ao.version>

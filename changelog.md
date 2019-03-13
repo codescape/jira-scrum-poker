@@ -18,6 +18,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * test: remove unused mocks from test and clean up test logging
 * docs: use long name in title of online documentation
 * docs: add documentation to all action classes
+* chore: implement against latest Jira patch version 8.0.2
 
 ## [3.10.0] - 2019-02-14
 
