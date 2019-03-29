@@ -91,6 +91,8 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     public ScrumPokerSession confirm(String issueKey, String userKey, Integer estimation) {
         ScrumPokerSession scrumPokerSession = byIssueKey(issueKey, userKey);
         scrumPokerSession.setConfirmedVote(estimation);
+        scrumPokerSession.setConfirmedUserKey(userKey);
+        scrumPokerSession.setConfirmedDate(new Date());
         scrumPokerSession.save();
         return scrumPokerSession;
     }

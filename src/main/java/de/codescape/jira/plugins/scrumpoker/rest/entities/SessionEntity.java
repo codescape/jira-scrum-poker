@@ -15,6 +15,8 @@ public class SessionEntity {
     private String issueKey;
     private List<CardEntity> cards;
     private Integer confirmedVote;
+    private String confirmedUser;
+    private String confirmedDate;
     private boolean visible;
     private List<BoundedVoteEntity> boundedVotes;
     private boolean agreementReached;
@@ -56,6 +58,25 @@ public class SessionEntity {
 
     public boolean isConfirmedVoteExists() {
         return confirmedVote != null;
+    }
+
+    public SessionEntity withConfirmedUser(String confirmedUser) {
+        this.confirmedUser = confirmedUser;
+        return this;
+    }
+
+    public String getConfirmedUser() {
+        return confirmedUser;
+    }
+
+    public SessionEntity withConfirmedDate(Date confirmedDate) {
+        if (confirmedDate != null)
+            this.confirmedDate = new SimpleDateFormat("dd.MM.yyyy - HH:mm:ss").format(confirmedDate);
+        return this;
+    }
+
+    public String getConfirmedDate() {
+        return confirmedDate;
     }
 
     public SessionEntity withVisible(boolean visible) {

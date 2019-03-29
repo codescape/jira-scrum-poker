@@ -49,6 +49,20 @@ public interface ScrumPokerSession extends RawEntity<String> {
     void setConfirmedVote(Integer confirmedVote);
 
     /**
+     * The unique key of the user who confirmed the estimation.
+     */
+    String getConfirmedUserKey();
+
+    void setConfirmedUserKey(String userKey);
+
+    /**
+     * The date this Scrum poker session got confirmed.
+     */
+    Date getConfirmedDate();
+
+    void setConfirmedDate(Date confirmedDate);
+
+    /**
      * The date this Scrum poker session is started.
      */
     Date getCreateDate();

@@ -54,6 +54,8 @@ public class SessionEntityMapper {
         return new SessionEntity()
             .withIssueKey(scrumPokerSession.getIssueKey())
             .withConfirmedVote(scrumPokerSession.getConfirmedVote())
+            .withConfirmedDate(scrumPokerSession.getConfirmedDate())
+            .withConfirmedUser(displayName(scrumPokerSession.getConfirmedUserKey()))
             .withVisible(scrumPokerSession.isVisible())
             .withCancelled(scrumPokerSession.isCancelled())
             .withBoundedVotes(boundedVotes(scrumPokerSession.getVotes()))
@@ -199,6 +201,8 @@ public class SessionEntityMapper {
      * Returns the display name of a user associated by the given user key.
      */
     private String displayName(String key) {
+        if (key == null)
+            return null;
         ApplicationUser user = userManager.getUserByKey(key);
         return user != null ? user.getDisplayName() : key;
     }

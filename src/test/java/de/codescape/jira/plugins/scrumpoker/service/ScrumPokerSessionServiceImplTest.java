@@ -95,6 +95,15 @@ public class ScrumPokerSessionServiceImplTest {
     }
 
     @Test
+    public void shouldAddUserAndDateWhenVoteIsConfirmed() {
+        scrumPokerSessionService.addVote("ISSUE-1", "USER-1", "5");
+        ScrumPokerSession scrumPokerSession = scrumPokerSessionService.confirm("ISSUE-1", "USER-2", 5);
+        assertThat(scrumPokerSession.getConfirmedVote(), is(equalTo(5)));
+        assertThat(scrumPokerSession.getConfirmedUserKey(), is(equalTo("USER-2")));
+        assertThat(scrumPokerSession.getConfirmedDate(), is(notNullValue()));
+    }
+
+    @Test
     public void shouldReturnRecentSessions() {
         scrumPokerSessionService.addVote("ISSUE-1", "USER-2", "6");
         List<ScrumPokerSession> recent = scrumPokerSessionService.recent();
