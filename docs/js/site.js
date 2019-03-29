@@ -44,8 +44,9 @@ $(document).ready(function() {
     e.preventDefault();
     $(document).off("scroll");
     var target = this.hash;
+    var offset = $(window).width() > 750 ? -50 : 20;
     $('html, body').animate({
-      scrollTop: $(target).offset().top - 50
+      scrollTop: $(target).offset().top + offset
     },'slow');
     window.location.hash = target;
     onScroll();
