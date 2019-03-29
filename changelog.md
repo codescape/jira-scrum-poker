@@ -20,6 +20,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * docs: add documentation to all action classes
 * chore: implement against latest Jira patch version 8.0.2
 * feat: persist and show user and date when confirming an estimation (#56)
+* docs: improve headings and navigation in online documentation
 
 ## [3.10.0] - 2019-02-14
 

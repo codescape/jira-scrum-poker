@@ -16,10 +16,28 @@ h2, h3, h4, h5, h6 {
     font-weight: 600; }
 
 h2 {
-    font-size: 2.5rem; }
+    font-size: 2.4rem; }
+
+h3 {
+    font-size: 1.8rem; }
 
 h4 {
+    font-size: 1.4rem; }
+
+h5 {
     font-size: 1.2rem; }
+
+h6 {
+    font-size: 1.0rem; }
+
+.docs-section h3, .docs-section h4, .docs-section h5, .docs-section h6 {
+    padding: 4rem 0 1rem 0;
+    border-bottom: 1px solid #eee; }
+
+.docs-section h3:before, .docs-section h4:before, .docs-section h5:before, .docs-section h6:before {
+    color: #ff5630;
+    margin-right: 0.5em;
+    content: '»'; }
 
 .docs-section {
     border-top: 1px solid #eee;
@@ -49,7 +67,18 @@ img {
     padding: 5px 15px;
     display: inline-block; }
 
-.call-to-action a:hover {
+.back-to-top {
+    background-color: #ff5630;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    position: fixed;
+    bottom:20px;
+    right:20px; }
+
+.call-to-action a:hover, .back-to-top:hover {
     color: #fff;
     background-color: #0FA0CE; }
 

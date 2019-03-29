@@ -6,42 +6,62 @@ $(document).ready(function() {
       $window = $(window),
       $popoverLink = $('[data-popover]'),
       navOffsetTop = $nav.offset().top,
-      $document = $(document)
+      $document = $(document);
 
   function init() {
-    $window.on('scroll', onScroll)
-    $window.on('resize', resize)
-    $popoverLink.on('click', openPopover)
-    $document.on('click', closePopover)
-    $('a[href^="#"]').on('click', smoothScroll)
-    buildSnippets();
+    $window.on('scroll', onScroll);
+    $window.on('resize', resize);
+    $popoverLink.on('click', openPopover);
+    $document.on('click', closePopover);
+    $('a[href*="#"]').on('click', smoothScroll);
+    createBackToTopButton();
+  }
+
+  function createBackToTopButton() {
+  	var back_to_top_button = ['<a href="#top" title="Scroll to top" class="back-to-top">&and;</a>'].join("");
+  	$("body").append(back_to_top_button);
+  	$(".back-to-top").hide();
+
+  	$(function () {
+  		$(window).scroll(function () {
+  			if ($(this).scrollTop() > 100) {
+  				$('.back-to-top').fadeIn();
+  			} else {
+  				$('.back-to-top').fadeOut();
+  			}
+  		});
+
+  		$('.back-to-top').click(function () {
+  			$('body,html').animate({
+  				scrollTop: 0
+  			}, 800);
+  			return false;
+  		});
+  	});
   }
 
   function smoothScroll(e) {
     e.preventDefault();
     $(document).off("scroll");
-    var target = this.hash,
-        menu = target;
-    $target = $(target);
-    $('html, body').stop().animate({
-        'scrollTop': $target.offset().top-40
-    }, 0, 'swing', function () {
-        window.location.hash = target;
-        $(document).on("scroll", onScroll);
-    });
+    var target = this.hash;
+    $('html, body').animate({
+      scrollTop: $(target).offset().top - 50
+    },'slow');
+    window.location.hash = target;
+    onScroll();
   }
 
   function openPopover(e) {
-    e.preventDefault()
+    e.preventDefault();
     closePopover();
     var popover = $($(this).data('popover'));
-    popover.toggleClass('open')
+    popover.toggleClass('open');
     e.stopImmediatePropagation();
   }
 
   function closePopover(e) {
     if($('.popover.open').length > 0) {
-      $('.popover').removeClass('open')
+      $('.popover').removeClass('open');
     }
   }
 
@@ -52,17 +72,17 @@ $(document).ready(function() {
 });
 
   function resize() {
-    $body.removeClass('has-docked-nav')
-    navOffsetTop = $nav.offset().top
-    onScroll()
+    $body.removeClass('has-docked-nav');
+    navOffsetTop = $nav.offset().top;
+    onScroll();
   }
 
   function onScroll() {
     if(navOffsetTop < $window.scrollTop() && !$body.hasClass('has-docked-nav')) {
-      $body.addClass('has-docked-nav')
+      $body.addClass('has-docked-nav');
     }
     if(navOffsetTop > $window.scrollTop() && $body.hasClass('has-docked-nav')) {
-      $body.removeClass('has-docked-nav')
+      $body.removeClass('has-docked-nav');
     }
   }
 
