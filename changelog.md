@@ -4,6 +4,10 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 ## [Unreleased]
 
+* ..
+
+## [3.11.0] - 2019-03-30
+
 * chore: use short name Scrum Poker inside Jira GUI
 * style: format configuration files
 * docs: update docs according to usage of the short name
@@ -515,7 +519,8 @@ This changelog helps developers and users to keep track of new features, fixes a
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.10.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.11.0...HEAD
+[3.11.0]: https://github.com/codescape/jira-scrum-poker/compare/3.10.0...3.11.0
 [3.10.0]: https://github.com/codescape/jira-scrum-poker/compare/3.9.0...3.10.0
 [3.9.0]: https://github.com/codescape/jira-scrum-poker/compare/3.8.0...3.9.0
 [3.8.0]: https://github.com/codescape/jira-scrum-poker/compare/3.7.0...3.8.0
