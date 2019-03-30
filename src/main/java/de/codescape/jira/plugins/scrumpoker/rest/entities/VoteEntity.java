@@ -11,11 +11,13 @@ public class VoteEntity {
     private final String user;
     private final String vote;
     private final boolean needToTalk;
+    private final boolean needABreak;
 
-    public VoteEntity(String user, String vote, boolean needToTalk) {
+    public VoteEntity(String user, String vote, boolean needToTalk, boolean needABreak) {
         this.user = user;
         this.vote = vote;
         this.needToTalk = needToTalk;
+        this.needABreak = needABreak;
     }
 
     public String getUser() {
@@ -28,6 +30,10 @@ public class VoteEntity {
 
     public boolean isNeedToTalk() {
         return needToTalk;
+    }
+
+    public boolean isNeedABreak() {
+        return needABreak;
     }
 
 }

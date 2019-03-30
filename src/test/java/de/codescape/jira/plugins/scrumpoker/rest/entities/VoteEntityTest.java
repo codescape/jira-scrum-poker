@@ -13,18 +13,20 @@ public class VoteEntityTest {
 
     @Test
     public void voteReturnsValuesItIsInitializedWith() {
-        VoteEntity voteEntity = new VoteEntity(USER, VOTE, true);
+        VoteEntity voteEntity = new VoteEntity(USER, VOTE, true, false);
         assertThat(voteEntity.getUser(), is(equalTo(USER)));
         assertThat(voteEntity.getVote(), is(equalTo(VOTE)));
         assertThat(voteEntity.isNeedToTalk(), is(equalTo(true)));
+        assertThat(voteEntity.isNeedABreak(), is(equalTo(false)));
     }
 
     @Test
     public void jsonRepresentationContainsAllFields() throws Exception {
-        String json = new ObjectMapper().writeValueAsString(new VoteEntity(USER, VOTE, false));
+        String json = new ObjectMapper().writeValueAsString(new VoteEntity(USER, VOTE, false, true));
         assertThat(json, containsString("user"));
         assertThat(json, containsString("vote"));
         assertThat(json, containsString("needToTalk"));
+        assertThat(json, containsString("needABreak"));
     }
 
 }

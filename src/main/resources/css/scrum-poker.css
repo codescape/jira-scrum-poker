@@ -89,3 +89,13 @@
     height: 20px;
     vertical-align: bottom;
 }
+
+/* coffee card with icon */
+.card-value-coffee {
+    display: inline-block;
+    text-indent: -9999px; }
+.card-value-coffee::before {
+    content: "\2668";
+    float: left;
+    text-indent: 0;
+}

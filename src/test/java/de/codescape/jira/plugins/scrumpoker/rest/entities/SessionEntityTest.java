@@ -50,7 +50,7 @@ public class SessionEntityTest {
 
     private List<VoteEntity> listOfVotes(Integer voteCount) {
         return IntStream.range(0, voteCount)
-            .mapToObj(i -> new VoteEntity("SomeUser", "SomeVote", false))
+            .mapToObj(i -> new VoteEntity("SomeUser", "SomeVote", false, false))
             .collect(Collectors.toList());
     }
 

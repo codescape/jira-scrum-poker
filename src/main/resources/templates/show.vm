@@ -117,7 +117,7 @@
         <h4>$i18n.getText("scrumpoker.title")</h4>
         <ul class="list-of-cards">
             {{#cards}}
-                <li><a onmouseover="ScrumPoker.showReferences('{{value}}');" onmouseout="ScrumPoker.showReferences()" onclick="ScrumPoker.updateSession('{{issueKey}}','{{value}}');" class="card {{#selected}}active{{/selected}} clickable">{{value}}</a></li>
+                <li><a onmouseover="ScrumPoker.showReferences('{{value}}');" onmouseout="ScrumPoker.showReferences()" onclick="ScrumPoker.updateSession('{{issueKey}}','{{value}}');" class="card {{#selected}}active{{/selected}} clickable"><span class="card-value-{{value}}">{{value}}</span></a></li>
             {{/cards}}
         </ul>
     {{/confirmedVoteExists}}
@@ -154,7 +154,12 @@
             <p class="poker-comment">$i18n.getText("scrumpoker.session.confirmestimation")</p>
             <ul class="list-of-cards centered">
                 {{#boundedVotes}}
-                    <li><a onclick="ScrumPoker.confirmSession('{{issueKey}}','{{value}}');" class="card active small clickable">{{value}}{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</a></li>
+                    {{#assignable}}
+                        <li><a onclick="ScrumPoker.confirmSession('{{issueKey}}','{{value}}');" class="card active small clickable"><span class="card-value-{{value}}">{{value}}</span>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</a></li>
+                    {{/assignable}}
+                    {{^assignable}}
+                        <li><span class="card small"><span class="card-value-{{value}}">{{value}}</span>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</span></li>
+                    {{/assignable}}
                 {{/boundedVotes}}
             </ul>
         {{/visible}}
@@ -167,11 +172,16 @@
         <ul class="list-of-cards with-users">
             {{#votes}}
                 <li>
-                    <span class="card small {{^visible}}backside{{/visible}}">{{vote}}</span>
+                    <span class="card small {{^visible}}backside{{/visible}}"><span class="card-value-{{vote}}">{{vote}}</span></span>
                     <span>{{user}}</span>
-                    {{#needToTalk}}
-                        <span class="aui-icon aui-icon-small aui-iconfont-comment need-to-talk">$i18n.getText("scrumpoker.session.needtotalk")</span>
-                    {{/needToTalk}}
+                    {{#needABreak}}
+                        <span class="poker-comment">$i18n.getText("scrumpoker.session.needabreak")</span>
+                    {{/needABreak}}
+                    {{^needABreak}}
+                        {{#needToTalk}}
+                            <span class="aui-icon aui-icon-small aui-iconfont-comment need-to-talk">$i18n.getText("scrumpoker.session.needtotalk")</span>
+                        {{/needToTalk}}
+                    {{/needABreak}}
                 </li>
             {{/votes}}
             {{^votes}}

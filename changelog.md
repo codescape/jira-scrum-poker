@@ -21,6 +21,7 @@ This changelog helps developers and users to keep track of new features, fixes a
 * chore: implement against latest Jira patch version 8.0.2
 * feat: persist and show user and date when confirming an estimation (#56)
 * docs: improve headings and navigation in online documentation
+* feat: introduce a coffee card to signal that a participant needs a break (#13)
 
 ## [3.10.0] - 2019-02-14
 

@@ -8,20 +8,26 @@ import org.codehaus.jackson.annotate.JsonAutoDetect;
 @JsonAutoDetect
 public class BoundedVoteEntity {
 
-    private final Integer value;
-    private final Integer count;
+    private final String value;
+    private final Long count;
+    private final boolean assignable;
 
-    public BoundedVoteEntity(Integer value, Integer count) {
+    public BoundedVoteEntity(String value, Long count, boolean assignable) {
         this.value = value;
         this.count = count;
+        this.assignable = assignable;
     }
 
-    public Integer getValue() {
+    public String getValue() {
         return value;
     }
 
-    public Integer getCount() {
+    public Long getCount() {
         return count;
+    }
+
+    public boolean isAssignable() {
+        return assignable;
     }
 
 }

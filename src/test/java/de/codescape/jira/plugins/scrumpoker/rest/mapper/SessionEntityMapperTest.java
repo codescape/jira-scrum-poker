@@ -20,9 +20,7 @@ import java.util.Date;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class SessionEntityMapperTest {
 
@@ -88,9 +86,9 @@ public class SessionEntityMapperTest {
         SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession, CURRENT_USER);
         assertThat(sessionEntity.getBoundedVotes().size(), is(equalTo(3)));
         assertThat(sessionEntity.getBoundedVotes(), allOf(
-            hasItem(allOf(hasProperty("value", equalTo(5)), hasProperty("count", equalTo(2)))),
-            hasItem(allOf(hasProperty("value", equalTo(8)), hasProperty("count", equalTo(0)))),
-            hasItem(allOf(hasProperty("value", equalTo(13)), hasProperty("count", equalTo(1))))
+            hasItem(allOf(hasProperty("value", equalTo("5")), hasProperty("count", equalTo(2L)))),
+            hasItem(allOf(hasProperty("value", equalTo("8")), hasProperty("count", equalTo(0L)))),
+            hasItem(allOf(hasProperty("value", equalTo("13")), hasProperty("count", equalTo(1L))))
         ));
     }
 

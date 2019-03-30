@@ -6,6 +6,7 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
+import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerCard;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.BoundedVoteEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.CardEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
@@ -21,7 +22,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static de.codescape.jira.plugins.scrumpoker.model.ScrumPokerCard.QUESTION_MARK;
 import static de.codescape.jira.plugins.scrumpoker.model.ScrumPokerCard.getDeck;
 import static java.util.Arrays.stream;
 import static org.apache.commons.lang3.math.NumberUtils.isCreatable;
@@ -97,14 +97,14 @@ public class SessionEntityMapper {
 
     /**
      * Returns that an agreement is reached when more than one vote is given, the votes are visible, there is no
-     * question mark and the minimum and maximum vote are equal.
+     * non-numeric value and the minimum and maximum vote are equal.
      */
     private boolean agreementReached(ScrumPokerSession scrumPokerSession) {
         ScrumPokerVote[] votes = scrumPokerSession.getVotes();
         return scrumPokerSession.isVisible() &&
             votes.length > 1 &&
             getMaximumVote(votes).equals(getMinimumVote(votes)) &&
-            stream(votes).noneMatch(scrumPokerVote -> scrumPokerVote.getVote().equals(QUESTION_MARK.getName()));
+            stream(votes).allMatch(scrumPokerVote -> isCreatable(scrumPokerVote.getVote()));
     }
 
     /**
@@ -136,8 +136,16 @@ public class SessionEntityMapper {
             .map(vote -> new VoteEntity(
                 displayName(vote.getUserKey()),
                 scrumPokerSession.isVisible() ? vote.getVote() : "?",
-                needToTalk(vote.getVote(), scrumPokerSession)))
+                needToTalk(vote.getVote(), scrumPokerSession),
+                needABreak(vote.getVote())))
             .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns whether the current vote needs a break by having selected the coffee card.
+     */
+    private boolean needABreak(String vote) {
+        return ScrumPokerCard.COFFEE.getName().equals(vote);
     }
 
     /**
@@ -164,13 +172,35 @@ public class SessionEntityMapper {
     private List<BoundedVoteEntity> boundedVotes(ScrumPokerVote[] votes) {
         Map<String, Long> voteDistribution = Arrays.stream(votes)
             .collect(Collectors.groupingBy(ScrumPokerVote::getVote, Collectors.counting()));
-        return getDeck().stream().filter(scrumPokerCard -> isCreatable(scrumPokerCard.getName()))
-            .map(scrumPokerCard -> new BoundedVoteEntity(
-                Integer.valueOf(scrumPokerCard.getName()),
-                voteDistribution.getOrDefault(scrumPokerCard.getName(), 0L).intValue()))
-            .filter(boundedVoteEntity -> boundedVoteEntity.getValue() >= getMinimumVote(votes) &&
-                boundedVoteEntity.getValue() <= getMaximumVote(votes))
+        return getDeck().stream()
+            .map(scrumPokerCard -> createBoundedVote(scrumPokerCard, voteDistribution))
+            .filter(boundedVoteEntity -> nonNumericValueWithVotes(boundedVoteEntity) ||
+                numericValueWithVotesInBoundary(boundedVoteEntity, votes))
             .collect(Collectors.toList());
+    }
+
+    /**
+     * Creates a bounded vote from the distribution of votes and the given card.
+     */
+    private BoundedVoteEntity createBoundedVote(ScrumPokerCard scrumPokerCard, Map<String, Long> distribution) {
+        String value = scrumPokerCard.getName();
+        return new BoundedVoteEntity(value, distribution.getOrDefault(value, 0L), isCreatable(value));
+    }
+
+    /**
+     * Verifies that the given bounded vote is numeric and inside the range of the minimum and maximum of all votes.
+     */
+    private boolean numericValueWithVotesInBoundary(BoundedVoteEntity boundedVote, ScrumPokerVote[] votes) {
+        return isCreatable(boundedVote.getValue()) && !numericValues(votes).isEmpty() &&
+            Integer.valueOf(boundedVote.getValue()) >= getMinimumVote(votes) &&
+            Integer.valueOf(boundedVote.getValue()) <= getMaximumVote(votes);
+    }
+
+    /**
+     * Verifies that the given bounded vote is non-numeric and has minimum one vote.
+     */
+    private boolean nonNumericValueWithVotes(BoundedVoteEntity boundedVote) {
+        return !isCreatable(boundedVote.getValue()) && boundedVote.getCount() > 0;
     }
 
     /**
@@ -201,8 +231,9 @@ public class SessionEntityMapper {
      * Returns the display name of a user associated by the given user key.
      */
     private String displayName(String key) {
-        if (key == null)
+        if (key == null) {
             return null;
+        }
         ApplicationUser user = userManager.getUserByKey(key);
         return user != null ? user.getDisplayName() : key;
     }

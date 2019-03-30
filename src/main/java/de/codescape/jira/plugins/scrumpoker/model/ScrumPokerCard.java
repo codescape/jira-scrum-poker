@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 public enum ScrumPokerCard {
 
     QUESTION_MARK("?"),
+    COFFEE("coffee"),
     ZERO("0"),
     ONE("1"),
     TWO("2"),
