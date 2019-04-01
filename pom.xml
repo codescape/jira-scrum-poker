@@ -262,6 +262,7 @@
                         </Import-Package>
                         <Spring-Context>*</Spring-Context>
                     </instructions>
+                    <!-- jira-latest is used by default and can be overridden with the parameter testGroup <name> -->
                     <product>jira-latest</product>
                     <products>
                         <product>
