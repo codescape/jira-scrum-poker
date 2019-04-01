@@ -5,7 +5,9 @@ import com.atlassian.jira.user.util.UserManager;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
+import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerCard;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
+import de.codescape.jira.plugins.scrumpoker.rest.entities.VoteEntity;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.junit.Before;
 import org.junit.Rule;
@@ -156,11 +158,27 @@ public class SessionEntityMapperTest {
         assertThat(sessionEntityMapper.build(sessionWhereCurrentUserIsNotCreator, CURRENT_USER).isAllowReveal(), is(true));
     }
 
-    private ScrumPokerSession scrumPokerSession(ScrumPokerVote[] scrumPokerVotes, boolean visible) {
+    @Test
+    public void shouldSignalBreakIsNeededIfUserChoosesTheCoffeeCardAndDeckIsVisible() {
+        ScrumPokerVote[] scrumPokerVotes = {scrumPokerVote(ScrumPokerCard.COFFEE.getName())};
+        ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, true);
+        SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession, CURRENT_USER);
+        assertThat(sessionEntity.getVotes().stream().anyMatch(VoteEntity::isNeedABreak), is(true));
+    }
+
+    @Test
+    public void shouldNotSignalBreakIsNeededIfUserChoosesTheCoffeeCardButDeckIsNotVisible() {
+        ScrumPokerVote[] scrumPokerVotes = {scrumPokerVote(ScrumPokerCard.COFFEE.getName())};
+        ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, false);
+        SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession, CURRENT_USER);
+        assertThat(sessionEntity.getVotes().stream().anyMatch(VoteEntity::isNeedABreak), is(false));
+    }
+
+    private static ScrumPokerSession scrumPokerSession(ScrumPokerVote[] scrumPokerVotes, boolean visible) {
         return scrumPokerSession(scrumPokerVotes, visible, "CREATOR_USER");
     }
 
-    private ScrumPokerSession scrumPokerSession(ScrumPokerVote[] scrumPokerVotes, boolean visible, String creatorUserKey) {
+    private static ScrumPokerSession scrumPokerSession(ScrumPokerVote[] scrumPokerVotes, boolean visible, String creatorUserKey) {
         ScrumPokerSession scrumPokerSession = mock(ScrumPokerSession.class);
         when(scrumPokerSession.getVotes()).thenReturn(scrumPokerVotes);
         when(scrumPokerSession.getCreateDate()).thenReturn(new Date());
@@ -170,11 +188,11 @@ public class SessionEntityMapperTest {
         return scrumPokerSession;
     }
 
-    private ScrumPokerVote scrumPokerVote(String value) {
+    private static ScrumPokerVote scrumPokerVote(String value) {
         return scrumPokerVote(value, "ANOTHER_USER");
     }
 
-    private ScrumPokerVote scrumPokerVote(String value, String userKey) {
+    private static ScrumPokerVote scrumPokerVote(String value, String userKey) {
         ScrumPokerVote vote = mock(ScrumPokerVote.class);
         when(vote.getVote()).thenReturn(value);
         when(vote.getUserKey()).thenReturn(userKey);

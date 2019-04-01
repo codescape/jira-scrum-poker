@@ -137,15 +137,15 @@ public class SessionEntityMapper {
                 displayName(vote.getUserKey()),
                 scrumPokerSession.isVisible() ? vote.getVote() : "?",
                 needToTalk(vote.getVote(), scrumPokerSession),
-                needABreak(vote.getVote())))
+                needABreak(vote.getVote(), scrumPokerSession)))
             .collect(Collectors.toList());
     }
 
     /**
      * Returns whether the current vote needs a break by having selected the coffee card.
      */
-    private boolean needABreak(String vote) {
-        return ScrumPokerCard.COFFEE.getName().equals(vote);
+    private boolean needABreak(String vote, ScrumPokerSession scrumPokerSession) {
+        return scrumPokerSession.isVisible() && ScrumPokerCard.COFFEE.getName().equals(vote);
     }
 
     /**

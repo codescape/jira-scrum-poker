@@ -11,7 +11,7 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
-* ...
+* feat: signal that a break is needed only when deck is revealed
 
 ### [3.11.1] - 2019-04-01
 
