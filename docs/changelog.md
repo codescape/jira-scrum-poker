@@ -14,6 +14,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: move changelog into online documentation
 * docs: improve changelog with additional description
 * fix: do not rely on commons-lang 3.5 for checking numeric values
+* test: add test groups for supported versions of Jira
 
 ### [3.11.0] - 2019-03-30
 
