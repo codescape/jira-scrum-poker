@@ -8,7 +8,7 @@ import net.java.ao.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static org.apache.commons.lang3.math.NumberUtils.isCreatable;
+import static org.apache.commons.lang3.math.NumberUtils.isNumber;
 
 /**
  * Implementation of {@link ScrumPokerSettingService} using Active Objects as persistence model.
@@ -45,7 +45,7 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
     @Override
     public Integer loadSessionTimeout() {
         ScrumPokerSetting scrumPokerSetting = findByKey(SESSION_TIMEOUT);
-        return (scrumPokerSetting != null && isCreatable(scrumPokerSetting.getValue()))
+        return (scrumPokerSetting != null && isNumber(scrumPokerSetting.getValue()))
             ? Integer.valueOf(scrumPokerSetting.getValue()) : SESSION_TIMEOUT_DEFAULT;
     }
 

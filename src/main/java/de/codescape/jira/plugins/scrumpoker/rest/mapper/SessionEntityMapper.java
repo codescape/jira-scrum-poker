@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 import static de.codescape.jira.plugins.scrumpoker.model.ScrumPokerCard.getDeck;
 import static java.util.Arrays.stream;
-import static org.apache.commons.lang3.math.NumberUtils.isCreatable;
+import static org.apache.commons.lang3.math.NumberUtils.isNumber;
 
 /**
  * Service that allows to map a {@link ScrumPokerSession} to a {@link SessionEntity}. This service creates a model that
@@ -104,7 +104,7 @@ public class SessionEntityMapper {
         return scrumPokerSession.isVisible() &&
             votes.length > 1 &&
             getMaximumVote(votes).equals(getMinimumVote(votes)) &&
-            stream(votes).allMatch(scrumPokerVote -> isCreatable(scrumPokerVote.getVote()));
+            stream(votes).allMatch(scrumPokerVote -> isNumber(scrumPokerVote.getVote()));
     }
 
     /**
@@ -159,7 +159,7 @@ public class SessionEntityMapper {
             return false;
         if (scrumPokerSession.getVotes().length == 1)
             return false;
-        if (!isCreatable(vote))
+        if (!isNumber(vote))
             return true;
         Integer current = Integer.valueOf(vote);
         return current.equals(getMaximumVote(scrumPokerSession.getVotes()))
@@ -184,14 +184,14 @@ public class SessionEntityMapper {
      */
     private BoundedVoteEntity createBoundedVote(ScrumPokerCard scrumPokerCard, Map<String, Long> distribution) {
         String value = scrumPokerCard.getName();
-        return new BoundedVoteEntity(value, distribution.getOrDefault(value, 0L), isCreatable(value));
+        return new BoundedVoteEntity(value, distribution.getOrDefault(value, 0L), isNumber(value));
     }
 
     /**
      * Verifies that the given bounded vote is numeric and inside the range of the minimum and maximum of all votes.
      */
     private boolean numericValueWithVotesInBoundary(BoundedVoteEntity boundedVote, ScrumPokerVote[] votes) {
-        return isCreatable(boundedVote.getValue()) && !numericValues(votes).isEmpty() &&
+        return isNumber(boundedVote.getValue()) && !numericValues(votes).isEmpty() &&
             Integer.valueOf(boundedVote.getValue()) >= getMinimumVote(votes) &&
             Integer.valueOf(boundedVote.getValue()) <= getMaximumVote(votes);
     }
@@ -200,7 +200,7 @@ public class SessionEntityMapper {
      * Verifies that the given bounded vote is non-numeric and has minimum one vote.
      */
     private boolean nonNumericValueWithVotes(BoundedVoteEntity boundedVote) {
-        return !isCreatable(boundedVote.getValue()) && boundedVote.getCount() > 0;
+        return !isNumber(boundedVote.getValue()) && boundedVote.getCount() > 0;
     }
 
     /**
@@ -222,7 +222,7 @@ public class SessionEntityMapper {
      */
     private List<Integer> numericValues(ScrumPokerVote[] votes) {
         return stream(votes).map(ScrumPokerVote::getVote)
-            .filter(NumberUtils::isCreatable)
+            .filter(NumberUtils::isNumber)
             .map(Integer::valueOf)
             .collect(Collectors.toList());
     }
