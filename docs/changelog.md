@@ -11,10 +11,14 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
+* ...
+
+### [3.11.1] - 2019-04-01
+
 * docs: move changelog into online documentation
 * docs: improve changelog with additional description
 * fix: do not rely on commons-lang 3.5 for checking numeric values
-* test: add test groups for supported versions of Jira
+* test: add test groups for supported versions of Jira (#55)
 
 ### [3.11.0] - 2019-03-30
 
@@ -529,7 +533,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.11.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.11.1...HEAD
+[3.11.1]: https://github.com/codescape/jira-scrum-poker/compare/3.11.0...3.11.1
 [3.11.0]: https://github.com/codescape/jira-scrum-poker/compare/3.10.0...3.11.0
 [3.10.0]: https://github.com/codescape/jira-scrum-poker/compare/3.9.0...3.10.0
 [3.9.0]: https://github.com/codescape/jira-scrum-poker/compare/3.8.0...3.9.0
