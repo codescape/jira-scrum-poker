@@ -2,6 +2,7 @@
 <head>
     <title>${i18n.getText("scrumpoker.title")}</title>
     $webResourceManager.requireResource("de.codescape.jira.plugins.scrum-poker:scrum-poker-resources")
+    $webResourceManager.requireResource("de.codescape.jira.plugins.scrum-poker:font-awesome-resources")
 </head>
 <body>
 
@@ -117,7 +118,7 @@
         <h4>$i18n.getText("scrumpoker.title")</h4>
         <ul class="list-of-cards">
             {{#cards}}
-                <li><a onmouseover="ScrumPoker.showReferences('{{value}}');" onmouseout="ScrumPoker.showReferences()" onclick="ScrumPoker.updateSession('{{issueKey}}','{{value}}');" class="card {{#selected}}active{{/selected}} clickable"><span class="card-value-{{value}}">{{value}}</span></a></li>
+                <li><a onmouseover="ScrumPoker.showReferences('{{value}}');" onmouseout="ScrumPoker.showReferences()" onclick="ScrumPoker.updateSession('{{issueKey}}','{{value}}');" class="card {{#selected}}active{{/selected}} clickable"><i class="card-value card-value-{{value}}">{{value}}</i></a></li>
             {{/cards}}
         </ul>
     {{/confirmedVoteExists}}
@@ -155,10 +156,10 @@
             <ul class="list-of-cards centered">
                 {{#boundedVotes}}
                     {{#assignable}}
-                        <li><a onclick="ScrumPoker.confirmSession('{{issueKey}}','{{value}}');" class="card active small clickable"><span class="card-value-{{value}}">{{value}}</span>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</a></li>
+                        <li><a onclick="ScrumPoker.confirmSession('{{issueKey}}','{{value}}');" class="card active small clickable"><i class="card-value card-value-{{value}}">{{value}}</i>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</a></li>
                     {{/assignable}}
                     {{^assignable}}
-                        <li><span class="card small"><span class="card-value-{{value}}">{{value}}</span>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</span></li>
+                        <li><span class="card small"><i class="card-value card-value-{{value}}">{{value}}</i>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</span></li>
                     {{/assignable}}
                 {{/boundedVotes}}
             </ul>
@@ -172,7 +173,7 @@
         <ul class="list-of-cards with-users">
             {{#votes}}
                 <li>
-                    <span class="card small {{^visible}}backside{{/visible}}"><span class="card-value-{{vote}}">{{vote}}</span></span>
+                    <span class="card small {{^visible}}backside{{/visible}}"><i class="card-value card-value-{{vote}}">{{vote}}</i></span>
                     <span>{{user}}</span>
                     {{#needABreak}}
                         <span class="poker-comment">$i18n.getText("scrumpoker.session.needabreak")</span>

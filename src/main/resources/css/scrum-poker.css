@@ -47,7 +47,7 @@
     margin: 5px 9px 5px 0;
     padding: 2px;
     border-radius: 5px;
-    color: #000000;
+    color: #344563;
     background-color: rgba(9,30,66,.08); }
 
 /* cards can be smaller */
@@ -81,21 +81,13 @@
     position: absolute;
     background-color: #ebedf0;
     margin-top: -0.95em;
-    margin-left: -0.25em;
-}
+    margin-left: -0.25em; }
 
 /* icons on buttons display aligned to the text */
 .aui-button .aui-icon {
     height: 20px;
-    vertical-align: bottom;
-}
+    vertical-align: bottom; }
 
-/* coffee card with icon */
-.card-value-coffee {
-    display: inline-block;
-    text-indent: -9999px; }
-.card-value-coffee::before {
-    content: "\2668";
-    float: left;
-    text-indent: 0;
-}
+/* display card values inside italic container non-italic */
+.card-value {
+    font-style: normal; }

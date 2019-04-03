@@ -135,7 +135,7 @@ public class SessionEntityMapper {
         return stream(scrumPokerSession.getVotes())
             .map(vote -> new VoteEntity(
                 displayName(vote.getUserKey()),
-                scrumPokerSession.isVisible() ? vote.getVote() : "?",
+                scrumPokerSession.isVisible() ? vote.getVote() : "question",
                 needToTalk(vote.getVote(), scrumPokerSession),
                 needABreak(vote.getVote(), scrumPokerSession)))
             .collect(Collectors.toList());

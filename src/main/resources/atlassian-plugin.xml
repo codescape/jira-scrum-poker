@@ -33,6 +33,17 @@
         <context>scrum-poker</context>
     </web-resource>
 
+    <!-- font awesome resources -->
+    <web-resource key="font-awesome-resources">
+        <resource name="fontawesome.css" type="download" location="/font-awesome/css/fontawesome.css" />
+        <resource name="solid.css" type="download" location="/font-awesome/css/solid.css" />
+        <resource name="fa-solid-900.eot"  type="download" location="/font-awesome/webfonts/fa-solid-900.eot" />
+        <resource name="fa-solid-900.svg"  type="download" location="/font-awesome/webfonts/fa-solid-900.svg" />
+        <resource name="fa-solid-900.ttf"  type="download" location="/font-awesome/webfonts/fa-solid-900.ttf" />
+        <resource name="fa-solid-900.woff"  type="download" location="/font-awesome/webfonts/fa-solid-900.woff" />
+        <resource name="fa-solid-900.woff2"  type="download" location="/font-awesome/webfonts/fa-solid-900.woff2" />
+    </web-resource>
+
     <!-- buttons to start a new session -->
     <web-item key="scrum-poker-start-from-issue-details" section="jira.issue.tools" weight="10">
         <label key="scrumpoker.session.start"/>
