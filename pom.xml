@@ -23,7 +23,9 @@
 
     <developers>
         <developer>
+            <id>codescape</id>
             <name>Stefan Glase</name>
+            <email>stefan.glase@googlemail.com</email>
         </developer>
     </developers>
 
@@ -41,7 +43,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- Jira versions -->
-        <jira.version>8.0.2</jira.version>
+        <jira.version>8.1.0</jira.version>
         <jira.version.latest>${jira.version}</jira.version.latest>
         <jira.version.enterprise>7.13.2</jira.version.enterprise>
         <jira.version.oldest>7.6.0</jira.version.oldest>
