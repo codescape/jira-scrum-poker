@@ -24,7 +24,7 @@ For users:
 For developers:
 
 * [Contribution Guide](https://github.com/codescape/jira-scrum-poker/blob/master/contributing.md)
-* [Changelog](https://github.com/codescape/jira-scrum-poker/blob/master/changelog.md)
+* [Changelog](https://github.com/codescape/jira-scrum-poker/blob/master/docs/changelog.md)
 * [Code of Conduct](https://github.com/codescape/jira-scrum-poker/blob/master/code_of_conduct.md)
 
 ## Screenshot
