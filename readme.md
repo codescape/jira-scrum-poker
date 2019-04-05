@@ -34,7 +34,6 @@ For developers:
 ## Compatibility Matrix
 
 Scrum Poker for Jira is always developed against the latest version of Jira Server to ensure compatibility with all upcoming changes.
-
 To ensure backwards compatibility with older Jira Server versions Scrum Poker for Jira is tested against the last two enterprise releases of Jira Server.
 
 | Scrum Poker version | development against | compatibility tested with   |
