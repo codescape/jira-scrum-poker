@@ -13,6 +13,7 @@ This app works best in combination with the Story Point field introduced by Jira
 * Simple and quick way of starting new Scrum Poker sessions
 * Assist estimations with references of already performed sessions
 * Security and privacy in mind showing only issues users may view
+* Share and join sessions by url or by scanning a QR code 
 
 ## Resources
 
