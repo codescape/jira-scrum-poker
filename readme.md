@@ -33,20 +33,15 @@ For developers:
 
 ## Compatibility Matrix
 
-Scrum Poker for Jira is compatible with Jira 7.6.0 and newer versions.
+Scrum Poker for Jira is always developed against the latest version of Jira Server to ensure compatibility with all upcoming changes.
 
-We always try to develop this app against the latest version of Jira to ensure support for new versions continuously.
+To ensure backwards compatibility with older Jira Server versions Scrum Poker for Jira is tested against the last two enterprise releases of Jira Server.
 
-| Scrum Poker version | Jira version |
-|---------------------|--------------|
-| 1.11.0              | 7.5.x        |
-| 1.12.0              | 7.8.x        |
-| 2.5.0               | 7.9.x        |
-| 3.0.0               | 7.10.x       |
-| 3.0.1               | 7.11.x       |
-| 3.3.1               | 7.12.x       |
-| 3.7.0               | 7.13.x       |
-| 3.10.0              | 8.0.x        |
+| Scrum Poker version | Jira version | tested against    |
+|---------------------|--------------|-------------------|
+| since 3.7.0         | 7.13.x       | 7.6.12 and 7.13.2 |
+| since 3.10.0        | 8.0.x        | 7.6.12 and 7.13.2 |
+| since 3.12.0        | 8.1.x        | 7.6.12 and 7.13.2 |
 
 ## Supported Languages
 

@@ -16,6 +16,7 @@ Click on the version in the following list to see all changes since the previous
 * feat: use Font Awesome to display icons for coffee card and question mark
 * chore: implement against latest Jira patch version 8.1.0
 * chore: update tested patch version of Jira 7.6 enterprise release
+* docs: improve compatibility matrix in readme
 
 ### [3.11.1] - 2019-04-01
 
