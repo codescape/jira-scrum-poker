@@ -11,6 +11,10 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
+* ...
+
+### [3.12.0] - 2019-04-05
+
 * feat: signal that a break is needed only when deck is revealed
 * docs: describe possible usage of test groups
 * feat: use Font Awesome to display icons for coffee card and question mark
@@ -538,7 +542,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.11.1...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.12.0...HEAD
+[3.12.0]: https://github.com/codescape/jira-scrum-poker/compare/3.11.1...3.12.0
 [3.11.1]: https://github.com/codescape/jira-scrum-poker/compare/3.11.0...3.11.1
 [3.11.0]: https://github.com/codescape/jira-scrum-poker/compare/3.10.0...3.11.0
 [3.10.0]: https://github.com/codescape/jira-scrum-poker/compare/3.9.0...3.10.0
