@@ -12,6 +12,7 @@ Click on the version in the following list to see all changes since the previous
 ### [Unreleased]
 
 * docs: change order of highlights in readme
+* feat: migrate old votes with question mark to new string format
 
 ### [3.12.0] - 2019-04-05
 
