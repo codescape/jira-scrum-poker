@@ -13,6 +13,7 @@ Click on the version in the following list to see all changes since the previous
 
 * docs: change order of highlights in readme
 * feat: migrate old votes with question mark to new string format
+* test: improve test coverage and suppress unused warnings
 
 ### [3.12.0] - 2019-04-05
 

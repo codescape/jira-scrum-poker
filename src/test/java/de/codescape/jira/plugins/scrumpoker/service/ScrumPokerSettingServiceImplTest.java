@@ -28,6 +28,7 @@ public class ScrumPokerSettingServiceImplTest {
 
     private static final String NEW_FIELD_NAME = "MY_NEW_FIELD";
 
+    @SuppressWarnings("unused")
     private EntityManager entityManager;
     private TestActiveObjects activeObjects;
 

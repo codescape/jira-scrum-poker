@@ -25,6 +25,7 @@ import static org.junit.Assert.assertThat;
 @NameConverters
 public class ProjectSettingServiceImplTest {
 
+    @SuppressWarnings("unused")
     private EntityManager entityManager;
     private TestActiveObjects activeObjects;
 

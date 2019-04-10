@@ -14,6 +14,11 @@ public class ScrumPokerCardTest {
     }
 
     @Test
+    public void shouldIncludeCoffeeCard() {
+        assertThat(ScrumPokerCard.getDeck(), hasItem(ScrumPokerCard.COFFEE));
+    }
+
+    @Test
     public void shouldIncludeTypicalScrumPokerValues() {
         assertThat(ScrumPokerCard.getDeck(), hasItems(
             ScrumPokerCard.ZERO,

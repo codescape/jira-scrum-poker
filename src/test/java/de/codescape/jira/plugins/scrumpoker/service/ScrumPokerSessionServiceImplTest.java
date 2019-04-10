@@ -32,6 +32,7 @@ import static org.mockito.Mockito.*;
 @NameConverters
 public class ScrumPokerSessionServiceImplTest {
 
+    @SuppressWarnings("unused")
     private EntityManager entityManager;
     private TestActiveObjects activeObjects;
 
