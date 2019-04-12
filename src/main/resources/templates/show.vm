@@ -4,7 +4,7 @@
     $webResourceManager.requireResource("de.codescape.jira.plugins.scrum-poker:scrum-poker-resources")
     $webResourceManager.requireResource("de.codescape.jira.plugins.scrum-poker:font-awesome-resources")
 </head>
-<body>
+<body class="scrum-poker-session">
 
 <header class="aui-page-header">
     <div class="aui-page-header-inner">
@@ -51,60 +51,58 @@
     </div>
 </header>
 
-<section id="content" role="main">
-    <div class="aui-page-panel" style="margin: 0;">
-        <div class="aui-page-panel-inner">
-            <section class="aui-page-panel-content">
-                <h4>$i18n.getText("scrumpoker.issue.summary")</h4>
+<div class="aui-page-panel" style="margin: 0;">
+    <div class="aui-page-panel-inner">
+        <section class="aui-page-panel-content">
+            <h4>$i18n.getText("scrumpoker.issue.summary")</h4>
 
-                #set($issueDescriptionHtml = $issueDescription)
-                #if(!$issueDescriptionHtml.isEmpty())
-                    <div class="issue-description">
-                        <p>$issueDescriptionHtml</p>
-                    </div>
-                #else
-                    <p><i>$i18n.getText("scrumpoker.issue.summary.empty")</i></p>
-                #end
+            #set($issueDescriptionHtml = $issueDescription)
+            #if(!$issueDescriptionHtml.isEmpty())
+                <div class="issue-description">
+                    <p>$issueDescriptionHtml</p>
+                </div>
+            #else
+                <p><i>$i18n.getText("scrumpoker.issue.summary.empty")</i></p>
+            #end
 
-                <h4>$i18n.getText("scrumpoker.issue.tasks")</h4>
+            <h4>$i18n.getText("scrumpoker.issue.tasks")</h4>
 
-                #set($subTasks = $issue.subTaskObjects)
-                #if(!$subTasks.isEmpty())
-                <table width="100%" class="aui" id="issuetable">
-                    <tbody>
-                        #set($counter = 1)
-                        #foreach($subTask in $subTasks)
-                        <tr>
-                            <td class="stsequence">$counter.</td>
-                            <td class="stsummary"><a href="$baseurl/browse/$subTask.key">$subTask.summary</a></td>
-                            <td class="issuetype"><img src="$subTask.issueType.completeIconUrl"></td>
-                            <td class="status"><span class="aui-lozenge aui-lozenge-subtle jira-issue-status-lozenge-$subTask.status.statusCategory.colorName">$subTask.status.nameTranslation</span></td>
-                            <td class="assignee">
-                                #if($subTask.assignee)
-                                    <a href="$baseurl/secure/ViewProfile.jspa?name=$subTask.assignee.key">$subTask.assignee.displayName</a>
-                                #else
-                                    <i>$i18n.getText("scrumpoker.issue.assignee.empty")</i>
-                                #end
-                            </td>
-                        </tr>
-                        #set($counter = $counter + 1)
-                        #end
-                    </tbody>
-                </table>
-                #else
-                    <p><i>$i18n.getText("scrumpoker.issue.tasks.empty")</i></p>
-                #end
-            </section>
-            <aside class="aui-page-panel-sidebar">
-                <div id="scrum-poker-cards"></div>
-                <div id="scrum-poker-references"></div>
-                <div id="scrum-poker-participants"></div>
-                <div id="scrum-poker-buttons"></div>
-                <div id="scrum-poker-finished"></div>
-            </aside>
-        </div>
+            #set($subTasks = $issue.subTaskObjects)
+            #if(!$subTasks.isEmpty())
+            <table width="100%" class="aui" id="issuetable">
+                <tbody>
+                    #set($counter = 1)
+                    #foreach($subTask in $subTasks)
+                    <tr>
+                        <td class="stsequence">$counter.</td>
+                        <td class="stsummary"><a href="$baseurl/browse/$subTask.key">$subTask.summary</a></td>
+                        <td class="issuetype"><img src="$subTask.issueType.completeIconUrl"></td>
+                        <td class="status"><span class="aui-lozenge aui-lozenge-subtle jira-issue-status-lozenge-$subTask.status.statusCategory.colorName">$subTask.status.nameTranslation</span></td>
+                        <td class="assignee">
+                            #if($subTask.assignee)
+                                <a href="$baseurl/secure/ViewProfile.jspa?name=$subTask.assignee.key">$subTask.assignee.displayName</a>
+                            #else
+                                <i>$i18n.getText("scrumpoker.issue.assignee.empty")</i>
+                            #end
+                        </td>
+                    </tr>
+                    #set($counter = $counter + 1)
+                    #end
+                </tbody>
+            </table>
+            #else
+                <p><i>$i18n.getText("scrumpoker.issue.tasks.empty")</i></p>
+            #end
+        </section>
+        <aside class="aui-page-panel-sidebar">
+            <div id="scrum-poker-cards"></div>
+            <div id="scrum-poker-references"></div>
+            <div id="scrum-poker-participants"></div>
+            <div id="scrum-poker-buttons"></div>
+            <div id="scrum-poker-finished"></div>
+        </aside>
     </div>
-</section>
+</div>
 
 <script>
     AJS.toInit(function(){

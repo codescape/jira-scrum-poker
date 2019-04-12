@@ -1,5 +1,6 @@
 package de.codescape.jira.plugins.scrumpoker.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class ScrumPokerSessionsPage extends Page {
@@ -15,7 +16,7 @@ public class ScrumPokerSessionsPage extends Page {
 
     @Override
     public boolean verifyPage() {
-        return true; // TODO: How do we identify that we are on the right page?
+        return webDriver.findElement(By.className("scrum-poker-sessions")).isDisplayed();
     }
 
 }
