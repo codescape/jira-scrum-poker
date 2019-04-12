@@ -1,0 +1,197 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------< de.codescape.jira.plugins:scrum-poker-performance >----------
+[INFO] Building Performance Tests for Scrum Poker for Jira 0.1.0
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- properties-maven-plugin:1.0.0:write-project-properties (default) @ scrum-poker-performance ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ scrum-poker-performance ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ scrum-poker-performance ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ scrum-poker-performance ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ scrum-poker-performance ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ scrum-poker-performance ---
+[INFO] Surefire report directory: /Users/stefanglase/Projects/codescape/jira-scrum-poker/etc/scrum-poker-performance/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running de.codescape.jira.plugins.scrumpoker.plugin.StartScrumPokerPerformanceTest
+LoginPage	http://jira-cluster-810-lb:1810/login.jsp	1461
+ScrumPokerPage	http://jira-cluster-810-lb:1810/secure/ScrumPoker.jspa?issueKey=SAM-1	603
+ScrumPokerPage	http://jira-cluster-810-lb:1810/secure/ScrumPoker.jspa?issueKey=SAM-1	341
+ScrumPokerPage	http://jira-cluster-810-lb:1810/secure/ScrumPoker.jspa?issueKey=SAM-1	337
+ScrumPokerPage	http://jira-cluster-810-lb:1810/secure/ScrumPoker.jspa?issueKey=SAM-1	327
+ScrumPokerPage	http://jira-cluster-810-lb:1810/secure/ScrumPoker.jspa?issueKey=SAM-1	338
+ScrumPokerPage	http://jira-cluster-810-lb:1810/secure/ScrumPoker.jspa?issueKey=SAM-1	325
+ScrumPokerPage	http://jira-cluster-810-lb:1810/secure/ScrumPoker.jspa?issueKey=SAM-1	309
+ScrumPokerPage	http://jira-cluster-810-lb:1810/secure/ScrumPoker.jspa?issueKey=SAM-1	314
+ScrumPokerPage	http://jira-cluster-810-lb:1810/secure/ScrumPoker.jspa?issueKey=SAM-1	320
+ScrumPokerPage	http://jira-cluster-810-lb:1810/secure/ScrumPoker.jspa?issueKey=SAM-1	309
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.02 sec
+Running de.codescape.jira.plugins.scrumpoker.plugin.ScrumPokerSessionsPerformanceTest
+LoginPage	http://jira-cluster-810-lb:1810/login.jsp	2593
+ScrumPokerSessionsPage	http://jira-cluster-810-lb:1810/secure/ScrumPokerSessions.jspa	21151
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 28.57 sec <<< FAILURE!
+openScrumPokerSessions(de.codescape.jira.plugins.scrumpoker.plugin.ScrumPokerSessionsPerformanceTest)  Time elapsed: 27.362 sec  <<< ERROR!
+org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"class name","selector":"scrum-poker-sessions"}
+  (Session info: chrome=73.0.3683.103)
+  (Driver info: chromedriver=73.0.3683.68 (47787ec04b6e38e22703e856e101e840b65afe72),platform=Mac OS X 10.14.3 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 0 milliseconds
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'Stefans-MBP', ip: 'fe80:0:0:0:1c62:21b8:acc9:afee%en0', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.14.3', java.version: '9.0.4'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 73.0.3683.68 (47787ec04b6e3..., userDataDir: /var/folders/vq/5c3cyz81519...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:61197}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: MAC, platformName: MAC, proxy: Proxy(), rotatable: false, setWindowRect: true, strictFileInteractability: false, takesHeapSnapshot: true, takesScreenshot: true, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unexpectedAlertBehaviour: ignore, unhandledPromptBehavior: ignore, version: 73.0.3683.103, webStorageEnabled: true}
+Session ID: 56640f9a6ba43f8b628e872085cbcc4e
+*** Element info: {Using=class name, value=scrum-poker-sessions}
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:488)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:214)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:166)
+	at org.openqa.selenium.remote.http.JsonHttpResponseCodec.reconstructValue(JsonHttpResponseCodec.java:40)
+	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:80)
+	at org.openqa.selenium.remote.http.AbstractHttpResponseCodec.decode(AbstractHttpResponseCodec.java:44)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementByClassName(RemoteWebDriver.java:412)
+	at org.openqa.selenium.By$ByClassName.findElement(By.java:389)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+	at de.codescape.jira.plugins.scrumpoker.pages.ScrumPokerSessionsPage.verifyPage(ScrumPokerSessionsPage.java:19)
+	at de.codescape.jira.plugins.scrumpoker.pages.Page.openPage(Page.java:29)
+	at de.codescape.jira.plugins.scrumpoker.plugin.ScrumPokerSessionsPerformanceTest.openScrumPokerSessions(ScrumPokerSessionsPerformanceTest.java:14)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+
+Running de.codescape.jira.plugins.scrumpoker.regression.DashboardPerformanceTest
+LoginPage	http://jira-cluster-810-lb:1810/login.jsp	1302
+DashboardPage	http://jira-cluster-810-lb:1810/secure/Dashboard.jspa	527
+DashboardPage	http://jira-cluster-810-lb:1810/secure/Dashboard.jspa	469
+DashboardPage	http://jira-cluster-810-lb:1810/secure/Dashboard.jspa	453
+DashboardPage	http://jira-cluster-810-lb:1810/secure/Dashboard.jspa	453
+DashboardPage	http://jira-cluster-810-lb:1810/secure/Dashboard.jspa	429
+DashboardPage	http://jira-cluster-810-lb:1810/secure/Dashboard.jspa	432
+DashboardPage	http://jira-cluster-810-lb:1810/secure/Dashboard.jspa	446
+DashboardPage	http://jira-cluster-810-lb:1810/secure/Dashboard.jspa	486
+DashboardPage	http://jira-cluster-810-lb:1810/secure/Dashboard.jspa	402
+DashboardPage	http://jira-cluster-810-lb:1810/secure/Dashboard.jspa	450
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.634 sec
+Running de.codescape.jira.plugins.scrumpoker.regression.IssueDetailPerformanceTest
+LoginPage	http://jira-cluster-810-lb:1810/login.jsp	1347
+IssueDetailPage	http://jira-cluster-810-lb:1810/browse/SAM-1	4677
+IssueDetailPage	http://jira-cluster-810-lb:1810/browse/SAM-1	746
+IssueDetailPage	http://jira-cluster-810-lb:1810/browse/SAM-1	655
+IssueDetailPage	http://jira-cluster-810-lb:1810/browse/SAM-1	711
+IssueDetailPage	http://jira-cluster-810-lb:1810/browse/SAM-1	675
+IssueDetailPage	http://jira-cluster-810-lb:1810/browse/SAM-1	660
+IssueDetailPage	http://jira-cluster-810-lb:1810/browse/SAM-1	611
+IssueDetailPage	http://jira-cluster-810-lb:1810/browse/SAM-1	637
+IssueDetailPage	http://jira-cluster-810-lb:1810/browse/SAM-1	662
+IssueDetailPage	http://jira-cluster-810-lb:1810/browse/SAM-1	731
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.803 sec
+Running de.codescape.jira.plugins.scrumpoker.regression.IssueSearchPerformanceTest
+LoginPage	http://jira-cluster-810-lb:1810/login.jsp	1259
+IssueSearchPage	http://jira-cluster-810-lb:1810/issues/?jql=	3021
+IssueSearchPage	http://jira-cluster-810-lb:1810/issues/?jql=	588
+IssueSearchPage	http://jira-cluster-810-lb:1810/issues/?jql=	515
+IssueSearchPage	http://jira-cluster-810-lb:1810/issues/?jql=	503
+IssueSearchPage	http://jira-cluster-810-lb:1810/issues/?jql=	488
+IssueSearchPage	http://jira-cluster-810-lb:1810/issues/?jql=	500
+IssueSearchPage	http://jira-cluster-810-lb:1810/issues/?jql=	526
+IssueSearchPage	http://jira-cluster-810-lb:1810/issues/?jql=	541
+IssueSearchPage	http://jira-cluster-810-lb:1810/issues/?jql=	528
+IssueSearchPage	http://jira-cluster-810-lb:1810/issues/?jql=	514
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.157 sec
+Running de.codescape.jira.plugins.scrumpoker.regression.BrowseProjectPerformanceTest
+LoginPage	http://jira-cluster-810-lb:1810/login.jsp	1388
+BrowseProjectPage	http://jira-cluster-810-lb:1810/browse/SAM/issues	939
+BrowseProjectPage	http://jira-cluster-810-lb:1810/browse/SAM/issues	762
+BrowseProjectPage	http://jira-cluster-810-lb:1810/browse/SAM/issues	715
+BrowseProjectPage	http://jira-cluster-810-lb:1810/browse/SAM/issues	704
+BrowseProjectPage	http://jira-cluster-810-lb:1810/browse/SAM/issues	713
+BrowseProjectPage	http://jira-cluster-810-lb:1810/browse/SAM/issues	650
+BrowseProjectPage	http://jira-cluster-810-lb:1810/browse/SAM/issues	2593
+BrowseProjectPage	http://jira-cluster-810-lb:1810/browse/SAM/issues	516
+BrowseProjectPage	http://jira-cluster-810-lb:1810/browse/SAM/issues	558
+BrowseProjectPage	http://jira-cluster-810-lb:1810/browse/SAM/issues	573
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.969 sec
+Running de.codescape.jira.plugins.scrumpoker.regression.AgileBoardPerformanceTest
+LoginPage	http://jira-cluster-810-lb:1810/login.jsp	1338
+AgileBoardPage	http://jira-cluster-810-lb:1810/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	3637
+AgileBoardPage	http://jira-cluster-810-lb:1810/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	469
+AgileBoardPage	http://jira-cluster-810-lb:1810/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	540
+AgileBoardPage	http://jira-cluster-810-lb:1810/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	482
+AgileBoardPage	http://jira-cluster-810-lb:1810/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	434
+AgileBoardPage	http://jira-cluster-810-lb:1810/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	470
+AgileBoardPage	http://jira-cluster-810-lb:1810/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	480
+AgileBoardPage	http://jira-cluster-810-lb:1810/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	352
+AgileBoardPage	http://jira-cluster-810-lb:1810/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	441
+AgileBoardPage	http://jira-cluster-810-lb:1810/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	446
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.719 sec
+
+Results :
+
+Tests in error: 
+  openScrumPokerSessions(de.codescape.jira.plugins.scrumpoker.plugin.ScrumPokerSessionsPerformanceTest): no such element: Unable to locate element: {"method":"class name","selector":"scrum-poker-sessions"}(..)
+
+Tests run: 7, Failures: 0, Errors: 1, Skipped: 0
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:42 min
+[INFO] Finished at: 2019-04-12T20:00:45+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.12.4:test (default-test) on project scrum-poker-performance: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /Users/stefanglase/Projects/codescape/jira-scrum-poker/etc/scrum-poker-performance/target/surefire-reports for the individual test results.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
