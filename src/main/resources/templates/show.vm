@@ -32,7 +32,12 @@
                         <fieldset class="top-label">
                             <div class="field-group top-label">
                                 <label for="share-session-url">$i18n.getText("scrumpoker.session.share.link")</label>
-                                <input type="text" class="text long-field" id="share-session-url" value="$scrumPokerSessionUrl" readonly>
+                                <table>
+                                    <tr>
+                                        <td><input type="text" class="text full-width-field" id="share-session-url" value="$scrumPokerSessionUrl" readonly></td>
+                                        <td><button id="share-session-copy" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-copy">Copy</span></button></td>
+                                    </tr>
+                                </table>
                             </div>
                         </fieldset>
                         <fieldset class="top-label">

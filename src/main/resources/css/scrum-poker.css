@@ -91,3 +91,13 @@
 /* display card values inside italic container non-italic */
 .card-value {
     font-style: normal; }
+
+/* position and styling of share session button */
+#share-session table {
+    width: 100%;
+    border-spacing: 0;
+}
+#share-session table td:last-child {
+    text-align: right;
+    width: 40px;
+}

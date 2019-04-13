@@ -14,14 +14,24 @@
     /* Initialize the Scrum Poker session view */
     ScrumPoker.init = function(issueKey) {
         constructQrCode();
-        makeSessionUrlClickable();
+        prepareShareSessionUrl();
         pollForUpdates(issueKey);
     }
 
     /* Make the session url in the share view clickable */
-    function makeSessionUrlClickable() {
+    function prepareShareSessionUrl() {
         $("#share-session-url").on("click", function () {
            $(this).select();
+        });
+        $('#share-session-copy').click(function(event) {
+            event.preventDefault();
+            $("#share-session-url").select();
+            document.execCommand("copy");
+            AJS.flag({
+                type: 'success',
+                body: AJS.I18n.getText('scrumpoker.session.share.link.copied'),
+                close: 'auto'
+            });
         });
     }
 
