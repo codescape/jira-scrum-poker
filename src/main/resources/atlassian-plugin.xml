@@ -3,15 +3,25 @@
 
     <!-- app coordinates -->
     <plugin-info>
+        <!-- app details -->
         <description>${project.description}</description>
         <version>${project.version}</version>
         <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+
+        <!-- logos -->
         <param name="plugin-icon">images/scrum-poker-logo-16.png</param>
         <param name="plugin-logo">images/scrum-poker-logo-144.png</param>
+
+        <!-- configuration -->
         <param name="configure.url">/secure/admin/ScrumPokerConfiguration.jspa</param>
         <param name="post.install.url">/secure/admin/ScrumPokerConfiguration.jspa</param>
         <param name="post.update.url">/secure/admin/ScrumPokerConfiguration.jspa</param>
+
+        <!-- licensing -->
         <param name="atlassian-licensing-enabled">${atlassian.licensing.enabled}</param>
+
+        <!-- data center -->
+        <param name="atlassian-data-center-status">compatible</param>
         <param name="atlassian-data-center-compatible">true</param>
     </plugin-info>
 
@@ -35,13 +45,13 @@
 
     <!-- font awesome resources -->
     <web-resource key="font-awesome-resources">
-        <resource name="fontawesome.css" type="download" location="/font-awesome/css/fontawesome.css" />
-        <resource name="solid.css" type="download" location="/font-awesome/css/solid.css" />
-        <resource name="fa-solid-900.eot"  type="download" location="/font-awesome/webfonts/fa-solid-900.eot" />
-        <resource name="fa-solid-900.svg"  type="download" location="/font-awesome/webfonts/fa-solid-900.svg" />
-        <resource name="fa-solid-900.ttf"  type="download" location="/font-awesome/webfonts/fa-solid-900.ttf" />
-        <resource name="fa-solid-900.woff"  type="download" location="/font-awesome/webfonts/fa-solid-900.woff" />
-        <resource name="fa-solid-900.woff2"  type="download" location="/font-awesome/webfonts/fa-solid-900.woff2" />
+        <resource name="fontawesome.css" type="download" location="/font-awesome/css/fontawesome.css"/>
+        <resource name="solid.css" type="download" location="/font-awesome/css/solid.css"/>
+        <resource name="fa-solid-900.eot" type="download" location="/font-awesome/webfonts/fa-solid-900.eot"/>
+        <resource name="fa-solid-900.svg" type="download" location="/font-awesome/webfonts/fa-solid-900.svg"/>
+        <resource name="fa-solid-900.ttf" type="download" location="/font-awesome/webfonts/fa-solid-900.ttf"/>
+        <resource name="fa-solid-900.woff" type="download" location="/font-awesome/webfonts/fa-solid-900.woff"/>
+        <resource name="fa-solid-900.woff2" type="download" location="/font-awesome/webfonts/fa-solid-900.woff2"/>
     </web-resource>
 
     <!-- buttons to start a new session -->

@@ -17,6 +17,7 @@ Click on the version in the following list to see all changes since the previous
 * test: include performance test suite for Jira Data Center
 * test: add markers to session list and detail view to identify pages
 * feat: copy session link with a button on the share session screen (#62)
+* feat: document Jira Data Center compatibility in plugin descriptor
 
 ### [3.12.0] - 2019-04-05
 
