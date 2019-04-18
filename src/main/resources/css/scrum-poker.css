@@ -31,6 +31,10 @@
     max-width: 100%;
     word-break: break-word; }
 
+/* prevent images in issue description from floating into poker elements */
+.issue-description img {
+    max-width: 100%; }
+
 /* buttons are displayed centered */
 .poker-buttons {
     margin: 15px 0;
