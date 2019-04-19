@@ -1,0 +1,132 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------< de.codescape.jira.plugins:scrum-poker-performance >----------
+[INFO] Building Performance Tests for Scrum Poker for Jira 0.1.0
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- properties-maven-plugin:1.0.0:write-project-properties (default) @ scrum-poker-performance ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ scrum-poker-performance ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ scrum-poker-performance ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ scrum-poker-performance ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ scrum-poker-performance ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ scrum-poker-performance ---
+[INFO] Surefire report directory: /Users/stefanglase/Projects/codescape/jira-scrum-poker/etc/scrum-poker-performance/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running de.codescape.jira.plugins.scrumpoker.plugin.StartScrumPokerPerformanceTest
+LoginPage	http://jira-cluster-802-lb:1802/login.jsp	2782
+ScrumPokerPage	http://jira-cluster-802-lb:1802/secure/ScrumPoker.jspa?issueKey=SAM-1	688
+ScrumPokerPage	http://jira-cluster-802-lb:1802/secure/ScrumPoker.jspa?issueKey=SAM-1	432
+ScrumPokerPage	http://jira-cluster-802-lb:1802/secure/ScrumPoker.jspa?issueKey=SAM-1	336
+ScrumPokerPage	http://jira-cluster-802-lb:1802/secure/ScrumPoker.jspa?issueKey=SAM-1	333
+ScrumPokerPage	http://jira-cluster-802-lb:1802/secure/ScrumPoker.jspa?issueKey=SAM-1	326
+ScrumPokerPage	http://jira-cluster-802-lb:1802/secure/ScrumPoker.jspa?issueKey=SAM-1	333
+ScrumPokerPage	http://jira-cluster-802-lb:1802/secure/ScrumPoker.jspa?issueKey=SAM-1	325
+ScrumPokerPage	http://jira-cluster-802-lb:1802/secure/ScrumPoker.jspa?issueKey=SAM-1	313
+ScrumPokerPage	http://jira-cluster-802-lb:1802/secure/ScrumPoker.jspa?issueKey=SAM-1	262
+ScrumPokerPage	http://jira-cluster-802-lb:1802/secure/ScrumPoker.jspa?issueKey=SAM-1	311
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.323 sec
+Running de.codescape.jira.plugins.scrumpoker.plugin.ScrumPokerSessionsPerformanceTest
+LoginPage	http://jira-cluster-802-lb:1802/login.jsp	1582
+ScrumPokerSessionsPage	http://jira-cluster-802-lb:1802/secure/ScrumPokerSessions.jspa	413
+ScrumPokerSessionsPage	http://jira-cluster-802-lb:1802/secure/ScrumPokerSessions.jspa	303
+ScrumPokerSessionsPage	http://jira-cluster-802-lb:1802/secure/ScrumPokerSessions.jspa	231
+ScrumPokerSessionsPage	http://jira-cluster-802-lb:1802/secure/ScrumPokerSessions.jspa	236
+ScrumPokerSessionsPage	http://jira-cluster-802-lb:1802/secure/ScrumPokerSessions.jspa	233
+ScrumPokerSessionsPage	http://jira-cluster-802-lb:1802/secure/ScrumPokerSessions.jspa	262
+ScrumPokerSessionsPage	http://jira-cluster-802-lb:1802/secure/ScrumPokerSessions.jspa	230
+ScrumPokerSessionsPage	http://jira-cluster-802-lb:1802/secure/ScrumPokerSessions.jspa	226
+ScrumPokerSessionsPage	http://jira-cluster-802-lb:1802/secure/ScrumPokerSessions.jspa	230
+ScrumPokerSessionsPage	http://jira-cluster-802-lb:1802/secure/ScrumPokerSessions.jspa	225
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.232 sec
+Running de.codescape.jira.plugins.scrumpoker.regression.DashboardPerformanceTest
+LoginPage	http://jira-cluster-802-lb:1802/login.jsp	1531
+DashboardPage	http://jira-cluster-802-lb:1802/secure/Dashboard.jspa	469
+DashboardPage	http://jira-cluster-802-lb:1802/secure/Dashboard.jspa	399
+DashboardPage	http://jira-cluster-802-lb:1802/secure/Dashboard.jspa	432
+DashboardPage	http://jira-cluster-802-lb:1802/secure/Dashboard.jspa	426
+DashboardPage	http://jira-cluster-802-lb:1802/secure/Dashboard.jspa	421
+DashboardPage	http://jira-cluster-802-lb:1802/secure/Dashboard.jspa	417
+DashboardPage	http://jira-cluster-802-lb:1802/secure/Dashboard.jspa	433
+DashboardPage	http://jira-cluster-802-lb:1802/secure/Dashboard.jspa	411
+DashboardPage	http://jira-cluster-802-lb:1802/secure/Dashboard.jspa	418
+DashboardPage	http://jira-cluster-802-lb:1802/secure/Dashboard.jspa	395
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.906 sec
+Running de.codescape.jira.plugins.scrumpoker.regression.IssueDetailPerformanceTest
+LoginPage	http://jira-cluster-802-lb:1802/login.jsp	1554
+IssueDetailPage	http://jira-cluster-802-lb:1802/browse/SAM-1	2804
+IssueDetailPage	http://jira-cluster-802-lb:1802/browse/SAM-1	749
+IssueDetailPage	http://jira-cluster-802-lb:1802/browse/SAM-1	717
+IssueDetailPage	http://jira-cluster-802-lb:1802/browse/SAM-1	735
+IssueDetailPage	http://jira-cluster-802-lb:1802/browse/SAM-1	725
+IssueDetailPage	http://jira-cluster-802-lb:1802/browse/SAM-1	805
+IssueDetailPage	http://jira-cluster-802-lb:1802/browse/SAM-1	782
+IssueDetailPage	http://jira-cluster-802-lb:1802/browse/SAM-1	675
+IssueDetailPage	http://jira-cluster-802-lb:1802/browse/SAM-1	703
+IssueDetailPage	http://jira-cluster-802-lb:1802/browse/SAM-1	721
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.427 sec
+Running de.codescape.jira.plugins.scrumpoker.regression.IssueSearchPerformanceTest
+LoginPage	http://jira-cluster-802-lb:1802/login.jsp	1556
+IssueSearchPage	http://jira-cluster-802-lb:1802/issues/?jql=	9097
+IssueSearchPage	http://jira-cluster-802-lb:1802/issues/?jql=	1291
+IssueSearchPage	http://jira-cluster-802-lb:1802/issues/?jql=	1287
+IssueSearchPage	http://jira-cluster-802-lb:1802/issues/?jql=	1266
+IssueSearchPage	http://jira-cluster-802-lb:1802/issues/?jql=	1251
+IssueSearchPage	http://jira-cluster-802-lb:1802/issues/?jql=	1294
+IssueSearchPage	http://jira-cluster-802-lb:1802/issues/?jql=	1348
+IssueSearchPage	http://jira-cluster-802-lb:1802/issues/?jql=	1300
+IssueSearchPage	http://jira-cluster-802-lb:1802/issues/?jql=	1276
+IssueSearchPage	http://jira-cluster-802-lb:1802/issues/?jql=	1266
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 25.41 sec
+Running de.codescape.jira.plugins.scrumpoker.regression.BrowseProjectPerformanceTest
+LoginPage	http://jira-cluster-802-lb:1802/login.jsp	1530
+BrowseProjectPage	http://jira-cluster-802-lb:1802/browse/SAM/issues	914
+BrowseProjectPage	http://jira-cluster-802-lb:1802/browse/SAM/issues	681
+BrowseProjectPage	http://jira-cluster-802-lb:1802/browse/SAM/issues	684
+BrowseProjectPage	http://jira-cluster-802-lb:1802/browse/SAM/issues	683
+BrowseProjectPage	http://jira-cluster-802-lb:1802/browse/SAM/issues	685
+BrowseProjectPage	http://jira-cluster-802-lb:1802/browse/SAM/issues	663
+BrowseProjectPage	http://jira-cluster-802-lb:1802/browse/SAM/issues	705
+BrowseProjectPage	http://jira-cluster-802-lb:1802/browse/SAM/issues	672
+BrowseProjectPage	http://jira-cluster-802-lb:1802/browse/SAM/issues	768
+BrowseProjectPage	http://jira-cluster-802-lb:1802/browse/SAM/issues	677
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.367 sec
+Running de.codescape.jira.plugins.scrumpoker.regression.AgileBoardPerformanceTest
+LoginPage	http://jira-cluster-802-lb:1802/login.jsp	1565
+AgileBoardPage	http://jira-cluster-802-lb:1802/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	1018
+AgileBoardPage	http://jira-cluster-802-lb:1802/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	784
+AgileBoardPage	http://jira-cluster-802-lb:1802/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	1033
+AgileBoardPage	http://jira-cluster-802-lb:1802/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	814
+AgileBoardPage	http://jira-cluster-802-lb:1802/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	1022
+AgileBoardPage	http://jira-cluster-802-lb:1802/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	824
+AgileBoardPage	http://jira-cluster-802-lb:1802/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	845
+AgileBoardPage	http://jira-cluster-802-lb:1802/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	916
+AgileBoardPage	http://jira-cluster-802-lb:1802/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	871
+AgileBoardPage	http://jira-cluster-802-lb:1802/secure/RapidBoard.jspa?projectKey=SAM&rapidView=1&view=planning	892
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.927 sec
+
+Results :
+
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ scrum-poker-performance ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:33 min
+[INFO] Finished at: 2019-04-19T12:15:16+02:00
+[INFO] ------------------------------------------------------------------------
