@@ -54,7 +54,7 @@
                             <td class="issuetype"><img src="$issue.issueType.completeIconUrl"></td>
                             <td class="issuekey"><a href="$req.contextPath/secure/ScrumPoker.jspa?issueKey=$issue.key">$issue.key</a></td>
                             <td class="summary"><a href="$req.contextPath/secure/ScrumPoker.jspa?issueKey=$issue.key">$issue.summary</a></td>
-                            <td class="created">$scrumPokerSession.createDate</td>
+                            <td class="created"><time title="$scrumPokerSession.createDate.formattedDate">$scrumPokerSession.createDate.displayValue</time></td>
                             <td class="assignee">$scrumPokerSession.creator</td>
                             <td>$scrumPokerSession.votes.size()</td>
                         </tr>
@@ -88,7 +88,7 @@
                         <td class="issuetype"><img src="$issue.issueType.completeIconUrl"></td>
                         <td class="issuekey"><a href="$req.contextPath/browse/$issue.key">$issue.key</a></td>
                         <td class="summary"><a href="$req.contextPath/browse/$issue.key">$issue.summary</a></td>
-                        <td class="created">$scrumPokerSession.createDate</td>
+                        <td class="created"><time title="$scrumPokerSession.createDate.formattedDate">$scrumPokerSession.createDate.displayValue</time></td>
                         <td class="assignee">$scrumPokerSession.creator</td>
                         <td>$scrumPokerSession.votes.size()</td>
                         <td>

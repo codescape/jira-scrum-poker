@@ -1,5 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.rest.mapper;
 
+import com.atlassian.jira.datetime.DateTimeFormatter;
+import com.atlassian.jira.datetime.DateTimeStyle;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
@@ -12,6 +14,7 @@ import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
@@ -37,6 +40,9 @@ public class SessionEntityMapperTest {
     @Mock
     private ScrumPokerSettingService scrumPokerSettingService;
 
+    @Mock
+    private DateTimeFormatter dateTimeFormatter;
+
     @InjectMocks
     private SessionEntityMapper sessionEntityMapper;
 
@@ -48,6 +54,30 @@ public class SessionEntityMapperTest {
         when(userManager.getUserByKey(anyString())).thenReturn(applicationUser);
         when(scrumPokerSettingService.loadAllowRevealDeck()).thenReturn(AllowRevealDeck.EVERYONE);
         when(applicationUser.getDisplayName()).thenReturn("John Doe");
+        DateTimeFormatter userSpecificDateTimeFormatter = mock(DateTimeFormatter.class);
+        when(userSpecificDateTimeFormatter.withStyle(ArgumentMatchers.any(DateTimeStyle.class)))
+            .thenReturn(userSpecificDateTimeFormatter);
+        when(dateTimeFormatter.forLoggedInUser()).thenReturn(userSpecificDateTimeFormatter);
+    }
+
+    @Test
+    public void shouldNotRequireConfirmedDateToBePresent() {
+        ScrumPokerSession scrumPokerSession = scrumPokerSession(new ScrumPokerVote[]{}, false);
+        scrumPokerSession.setConfirmedDate(null);
+
+        SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession, CURRENT_USER);
+        assertThat(sessionEntity.getConfirmedDate().getFormattedDate(), is(nullValue()));
+        assertThat(sessionEntity.getConfirmedDate().getDisplayValue(), is(nullValue()));
+    }
+
+    @Test
+    public void shouldNotRequireCreateDateToBePresent() {
+        ScrumPokerSession scrumPokerSession = scrumPokerSession(new ScrumPokerVote[]{}, false);
+        scrumPokerSession.setCreateDate(null);
+
+        SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession, CURRENT_USER);
+        assertThat(sessionEntity.getCreateDate().getFormattedDate(), is(nullValue()));
+        assertThat(sessionEntity.getCreateDate().getDisplayValue(), is(nullValue()));
     }
 
     @Test

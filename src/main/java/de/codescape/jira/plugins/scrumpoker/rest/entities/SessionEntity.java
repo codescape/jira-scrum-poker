@@ -2,8 +2,6 @@ package de.codescape.jira.plugins.scrumpoker.rest.entities;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,7 +14,7 @@ public class SessionEntity {
     private List<CardEntity> cards;
     private Integer confirmedVote;
     private String confirmedUser;
-    private String confirmedDate;
+    private DateEntity confirmedDate;
     private boolean visible;
     private List<BoundedVoteEntity> boundedVotes;
     private boolean agreementReached;
@@ -27,7 +25,7 @@ public class SessionEntity {
     private boolean allowReveal;
     private boolean allowCancel;
     private String creator;
-    private String createDate;
+    private DateEntity createDate;
 
     public SessionEntity withIssueKey(String issueKey) {
         this.issueKey = issueKey;
@@ -69,13 +67,12 @@ public class SessionEntity {
         return confirmedUser;
     }
 
-    public SessionEntity withConfirmedDate(Date confirmedDate) {
-        if (confirmedDate != null)
-            this.confirmedDate = new SimpleDateFormat("dd.MM.yyyy - HH:mm:ss").format(confirmedDate);
+    public SessionEntity withConfirmedDate(DateEntity confirmedDate) {
+        this.confirmedDate = confirmedDate;
         return this;
     }
 
-    public String getConfirmedDate() {
+    public DateEntity getConfirmedDate() {
         return confirmedDate;
     }
 
@@ -165,12 +162,12 @@ public class SessionEntity {
         return creator;
     }
 
-    public SessionEntity withCreateDate(Date createDate) {
-        this.createDate = new SimpleDateFormat("dd.MM.yyyy - HH:mm:ss").format(createDate);
+    public SessionEntity withCreateDate(DateEntity createDate) {
+        this.createDate = createDate;
         return this;
     }
 
-    public String getCreateDate() {
+    public DateEntity getCreateDate() {
         return createDate;
     }
 

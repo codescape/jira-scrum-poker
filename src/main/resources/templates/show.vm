@@ -230,7 +230,7 @@
 
     {{#confirmedVoteExists}}
         <p class="poker-comment">
-             {{#confirmedUser}}
+            {{#confirmedUser}}
                 $i18n.getText("scrumpoker.session.estimationsaved.long")
             {{/confirmedUser}}
             {{^confirmedUser}}

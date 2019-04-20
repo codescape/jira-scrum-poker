@@ -1,5 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.rest.mapper;
 
+import com.atlassian.jira.datetime.DateTimeFormatter;
+import com.atlassian.jira.datetime.DateTimeStyle;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
@@ -7,19 +9,13 @@ import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerCard;
-import de.codescape.jira.plugins.scrumpoker.rest.entities.BoundedVoteEntity;
-import de.codescape.jira.plugins.scrumpoker.rest.entities.CardEntity;
-import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
-import de.codescape.jira.plugins.scrumpoker.rest.entities.VoteEntity;
+import de.codescape.jira.plugins.scrumpoker.rest.entities.*;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static de.codescape.jira.plugins.scrumpoker.model.ScrumPokerCard.getDeck;
@@ -34,12 +30,15 @@ import static org.apache.commons.lang3.math.NumberUtils.isNumber;
 public class SessionEntityMapper {
 
     private final UserManager userManager;
+    private final DateTimeFormatter dateTimeFormatter;
     private final ScrumPokerSettingService scrumPokerSettingService;
 
     @Autowired
     public SessionEntityMapper(@ComponentImport UserManager userManager,
+                               @ComponentImport DateTimeFormatter dateTimeFormatter,
                                ScrumPokerSettingService scrumPokerSettingService) {
         this.userManager = userManager;
+        this.dateTimeFormatter = dateTimeFormatter;
         this.scrumPokerSettingService = scrumPokerSettingService;
     }
 
@@ -54,7 +53,7 @@ public class SessionEntityMapper {
         return new SessionEntity()
             .withIssueKey(scrumPokerSession.getIssueKey())
             .withConfirmedVote(scrumPokerSession.getConfirmedVote())
-            .withConfirmedDate(scrumPokerSession.getConfirmedDate())
+            .withConfirmedDate(dateEntity(scrumPokerSession.getConfirmedDate()))
             .withConfirmedUser(displayName(scrumPokerSession.getConfirmedUserKey()))
             .withVisible(scrumPokerSession.isVisible())
             .withCancelled(scrumPokerSession.isCancelled())
@@ -66,7 +65,22 @@ public class SessionEntityMapper {
             .withAllowCancel(allowCancel(scrumPokerSession, userKey))
             .withAgreementReached(agreementReached(scrumPokerSession))
             .withCreator(displayName(scrumPokerSession.getCreatorUserKey()))
-            .withCreateDate(scrumPokerSession.getCreateDate());
+            .withCreateDate(dateEntity(scrumPokerSession.getCreateDate()));
+    }
+
+    /**
+     * Format dates using the relative representation as display value and the complete representation as hover
+     * information.
+     */
+    private DateEntity dateEntity(Date date) {
+        String displayValue = null;
+        String formattedDate = null;
+        if (date != null) {
+            DateTimeFormatter dateTimeFormatter = this.dateTimeFormatter.forLoggedInUser();
+            displayValue = dateTimeFormatter.withStyle(DateTimeStyle.RELATIVE).format(date);
+            formattedDate = dateTimeFormatter.withStyle(DateTimeStyle.COMPLETE).format(date);
+        }
+        return new DateEntity(displayValue, formattedDate);
     }
 
     /**

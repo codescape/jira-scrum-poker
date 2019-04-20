@@ -20,6 +20,7 @@ Click on the version in the following list to see all changes since the previous
 * feat: document Jira Data Center compatibility in plugin descriptor
 * style: format css code consistently
 * feat: prevent images in issue description from floating into poker elements
+* feat: display dates in user specific date format (#57)
 
 ### [3.12.0] - 2019-04-05
 
