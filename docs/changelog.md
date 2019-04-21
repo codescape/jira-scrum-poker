@@ -21,6 +21,7 @@ Click on the version in the following list to see all changes since the previous
 * style: format css code consistently
 * feat: prevent images in issue description from floating into poker elements
 * feat: display dates in user specific date format (#57)
+* feat: explain how to start new sessions on empty active session list
 
 ### [3.12.0] - 2019-04-05
 
