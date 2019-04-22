@@ -11,6 +11,10 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
+* ...
+
+### [3.13.0] - 2019-04-22
+
 * docs: change order of highlights in readme
 * feat: migrate old votes with question mark to new string format
 * test: improve test coverage and suppress unused warnings
@@ -552,7 +556,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.12.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.13.0...HEAD
+[3.13.0]: https://github.com/codescape/jira-scrum-poker/compare/3.12.0...3.13.0
 [3.12.0]: https://github.com/codescape/jira-scrum-poker/compare/3.11.1...3.12.0
 [3.11.1]: https://github.com/codescape/jira-scrum-poker/compare/3.11.0...3.11.1
 [3.11.0]: https://github.com/codescape/jira-scrum-poker/compare/3.10.0...3.11.0
