@@ -14,7 +14,8 @@ Click on the version in the following list to see all changes since the previous
 * chore: update tested patch version of Jira 7.6 and 7.13 enterprise release
 * refactor: optimize imports and remove unused imports
 * fix: correct escaping for German umlauts in resource bundle
-* docs: add information badges to readme 
+* docs: add information badges to readme
+* chore: change configuration to produce licensed version by default
 
 ### [3.13.0] - 2019-04-22
 

@@ -63,10 +63,10 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- Plugin licensing -->
-        <atlassian.licensing.enabled>false</atlassian.licensing.enabled>
+        <!-- App licensing -->
+        <atlassian.licensing.enabled>true</atlassian.licensing.enabled>
 
-        <!-- Plugin key -->
+        <!-- App key -->
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
     </properties>
 
@@ -346,16 +346,18 @@
     </build>
 
     <profiles>
+        <!-- profile used to create a license free version of the app -->
         <profile>
-            <id>enable-atlassian-licensing</id>
+            <id>atlassian-licensing-disabled</id>
             <activation>
-                <!-- as long as the app is free this profile is not active by default -->
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <atlassian.licensing.enabled>true</atlassian.licensing.enabled>
+                <atlassian.licensing.enabled>false</atlassian.licensing.enabled>
             </properties>
         </profile>
+
+        <!-- atlassian repositories to resolve dependencies (enabled by default) -->
         <profile>
             <id>atlassian-repositories</id>
             <activation>
