@@ -16,6 +16,7 @@ Click on the version in the following list to see all changes since the previous
 * fix: correct escaping for German umlauts in resource bundle
 * docs: add information badges to readme
 * chore: change configuration to produce licensed version by default
+* feat: shorten description to start a new session on active session list
 
 ### [3.13.0] - 2019-04-22
 
