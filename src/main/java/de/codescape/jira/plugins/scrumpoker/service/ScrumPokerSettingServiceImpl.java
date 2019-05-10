@@ -3,12 +3,13 @@ package de.codescape.jira.plugins.scrumpoker.service;
 import com.atlassian.activeobjects.external.ActiveObjects;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSetting;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
+import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import net.java.ao.DBParam;
 import net.java.ao.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static org.apache.commons.lang3.math.NumberUtils.isNumber;
+import static de.codescape.jira.plugins.scrumpoker.model.GlobalSettings.*;
 
 /**
  * Implementation of {@link ScrumPokerSettingService} using Active Objects as persistence model.
@@ -16,13 +17,10 @@ import static org.apache.commons.lang3.math.NumberUtils.isNumber;
 @Component
 public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
 
-    static final String STORY_POINT_FIELD = "storyPointField";
-    static final String SESSION_TIMEOUT = "sessionTimeout";
-    static final Integer SESSION_TIMEOUT_DEFAULT = 12;
-    static final String DEFAULT_PROJECT_ACTIVATION = "defaultProjectActivation";
-    static final boolean DEFAULT_PROJECT_ACTIVATION_DEFAULT = true;
-    static final String ALLOW_REVEAL_DECK = "allowRevealDeck";
-    static final AllowRevealDeck DEFAULT_ALLOW_REVEAL_DECK = AllowRevealDeck.EVERYONE;
+    private static final String STORY_POINT_FIELD = "storyPointField";
+    private static final String SESSION_TIMEOUT = "sessionTimeout";
+    private static final String DEFAULT_PROJECT_ACTIVATION = "defaultProjectActivation";
+    private static final String ALLOW_REVEAL_DECK = "allowRevealDeck";
 
     private final ActiveObjects activeObjects;
 
@@ -32,50 +30,38 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
     }
 
     @Override
-    public String loadStoryPointField() {
-        ScrumPokerSetting scrumPokerSetting = findByKey(STORY_POINT_FIELD);
-        return (scrumPokerSetting != null) ? scrumPokerSetting.getValue() : null;
+    public GlobalSettings load() {
+        GlobalSettings globalSettings = new GlobalSettings();
+        globalSettings.setStoryPointField(loadString(STORY_POINT_FIELD, null));
+        globalSettings.setSessionTimeout(loadInteger(SESSION_TIMEOUT, SESSION_TIMEOUT_DEFAULT));
+        globalSettings.setAllowRevealDeck(AllowRevealDeck.valueOf(loadString(ALLOW_REVEAL_DECK, ALLOW_REVEAL_DECK_DEFAULT.name())));
+        globalSettings.setDefaultProjectActivation(loadBoolean(DEFAULT_PROJECT_ACTIVATION, DEFAULT_PROJECT_ACTIVATION_DEFAULT));
+        return globalSettings;
     }
 
     @Override
-    public void persistStoryPointField(String storyPointField) {
-        persist(STORY_POINT_FIELD, storyPointField);
+    public void persist(GlobalSettings globalSettings) {
+        persist(SESSION_TIMEOUT, String.valueOf(globalSettings.getSessionTimeout()));
+        persist(STORY_POINT_FIELD, globalSettings.getStoryPointField());
+        persist(DEFAULT_PROJECT_ACTIVATION, String.valueOf(globalSettings.getDefaultProjectActivation()));
+        persist(ALLOW_REVEAL_DECK, globalSettings.getAllowRevealDeck().name());
     }
 
-    @Override
-    public Integer loadSessionTimeout() {
-        ScrumPokerSetting scrumPokerSetting = findByKey(SESSION_TIMEOUT);
-        return (scrumPokerSetting != null && isNumber(scrumPokerSetting.getValue()))
-            ? Integer.valueOf(scrumPokerSetting.getValue()) : SESSION_TIMEOUT_DEFAULT;
+    private String loadString(String key, String defaultValue) {
+        ScrumPokerSetting scrumPokerSetting = findByKey(key);
+        return (scrumPokerSetting != null) ? scrumPokerSetting.getValue() : defaultValue;
     }
 
-    @Override
-    public void persistSessionTimeout(Integer sessionTimeout) {
-        persist(SESSION_TIMEOUT, String.valueOf(sessionTimeout));
+    @SuppressWarnings("SameParameterValue")
+    private Integer loadInteger(String key, Integer defaultValue) {
+        ScrumPokerSetting scrumPokerSetting = findByKey(key);
+        return (scrumPokerSetting != null) ? Integer.valueOf(scrumPokerSetting.getValue()) : defaultValue;
     }
 
-    @Override
-    public boolean loadDefaultProjectActivation() {
-        ScrumPokerSetting scrumPokerSetting = findByKey(DEFAULT_PROJECT_ACTIVATION);
-        return (scrumPokerSetting != null) ?
-            Boolean.valueOf(scrumPokerSetting.getValue()) : DEFAULT_PROJECT_ACTIVATION_DEFAULT;
-    }
-
-    @Override
-    public void persistDefaultProjectActivation(boolean defaultProjectActivation) {
-        persist(DEFAULT_PROJECT_ACTIVATION, String.valueOf(defaultProjectActivation));
-    }
-
-    @Override
-    public AllowRevealDeck loadAllowRevealDeck() {
-        ScrumPokerSetting scrumPokerSetting = findByKey(ALLOW_REVEAL_DECK);
-        return (scrumPokerSetting != null) ?
-            AllowRevealDeck.valueOf(scrumPokerSetting.getValue()) : DEFAULT_ALLOW_REVEAL_DECK;
-    }
-
-    @Override
-    public void persistAllowRevealDeck(AllowRevealDeck allowRevealDeck) {
-        persist(ALLOW_REVEAL_DECK, allowRevealDeck.name());
+    @SuppressWarnings("SameParameterValue")
+    private boolean loadBoolean(String key, boolean defaultValue) {
+        ScrumPokerSetting scrumPokerSetting = findByKey(key);
+        return (scrumPokerSetting != null) ? Boolean.valueOf(scrumPokerSetting.getValue()) : defaultValue;
     }
 
     private ScrumPokerSetting findByKey(String key) {
@@ -87,8 +73,7 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
     private void persist(String key, String value) {
         ScrumPokerSetting scrumPokerSetting = findByKey(key);
         if (scrumPokerSetting == null) {
-            scrumPokerSetting = activeObjects.create(ScrumPokerSetting.class,
-                new DBParam("KEY", key));
+            scrumPokerSetting = activeObjects.create(ScrumPokerSetting.class, new DBParam("KEY", key));
         }
         scrumPokerSetting.setValue(value);
         scrumPokerSetting.save();

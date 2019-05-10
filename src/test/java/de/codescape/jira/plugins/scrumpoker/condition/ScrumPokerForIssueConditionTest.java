@@ -6,6 +6,7 @@ import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.project.Project;
 import com.atlassian.jira.user.ApplicationUser;
+import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
@@ -61,6 +62,9 @@ public class ScrumPokerForIssueConditionTest {
 
     @Mock
     private Project project;
+
+    @Mock
+    private GlobalSettings globalSettings;
 
     @Test
     public void shouldDisplayForEditableIssueWithStoryPointFieldAndGloballyActiveScrumPoker() {
@@ -141,11 +145,13 @@ public class ScrumPokerForIssueConditionTest {
     }
 
     private void expectThatDefaultProjectActivationIsEnabled() {
-        when(scrumPokerSettingService.loadDefaultProjectActivation()).thenReturn(true);
+        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettings.getDefaultProjectActivation()).thenReturn(true);
     }
 
     private void expectThatDefaultProjectActivationIsDisabled() {
-        when(scrumPokerSettingService.loadDefaultProjectActivation()).thenReturn(false);
+        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettings.getDefaultProjectActivation()).thenReturn(false);
     }
 
 }

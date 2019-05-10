@@ -46,7 +46,7 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     }
 
     private int sessionTimeoutInMillis() {
-        return 3600 * 1000 * scrumPokerSettingService.loadSessionTimeout();
+        return 3600 * 1000 * scrumPokerSettingService.load().getSessionTimeout();
     }
 
     @Override

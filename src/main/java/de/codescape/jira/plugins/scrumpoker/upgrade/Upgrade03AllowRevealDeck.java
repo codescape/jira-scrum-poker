@@ -3,6 +3,7 @@ package de.codescape.jira.plugins.scrumpoker.upgrade;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.sal.api.upgrade.PluginUpgradeTask;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
+import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,7 +36,9 @@ public class Upgrade03AllowRevealDeck extends AbstractUpgradeTask {
 
     @Override
     protected void performUpgrade() {
-        scrumPokerSettingService.persistAllowRevealDeck(AllowRevealDeck.EVERYONE);
+        GlobalSettings globalSettings = scrumPokerSettingService.load();
+        globalSettings.setAllowRevealDeck(AllowRevealDeck.EVERYONE);
+        scrumPokerSettingService.persist(globalSettings);
     }
 
 }

@@ -15,22 +15,22 @@
             <select class="select" id="storyPointField" name="storyPointField">
                 <option value=""></option>
                 #foreach ($customField in $customFields)
-                    #if ($customField.id == $storyPointFieldId)
+                    #if ($customField.id == $globalSettings.storyPointField)
                         <option value="$customField.id" selected="selected">$customField.fieldName</option>
                     #else
                         <option value="$customField.id">$customField.fieldName</option>
                     #end
                 #end
             </select>
-            #if (!$storyPointFieldId)
+            #if (!$globalSettings.storyPointField)
                 <div class="error">$i18n.getText("scrumpoker.config.field.required")</div>
             #end
             <div class="description">$i18n.getText("scrumpoker.config.estimation.description")</div>
         </div>
         <div class="field-group">
             <label for="sessionTimeout">$i18n.getText("scrumpoker.config.sessiontimeout")</label>
-            <input type="number" class="text short-field" step="1" min="0" id="sessionTimeout" name="sessionTimeout" value="$sessionTimeout">
-            #if (!$sessionTimeout)
+            <input type="number" class="text short-field" step="1" min="0" id="sessionTimeout" name="sessionTimeout" value="$globalSettings.sessionTimeout">
+            #if (!$globalSettings.sessionTimeout)
                 <div class="error">$i18n.getText("scrumpoker.config.field.required")</div>
             #end
             <div class="description">$i18n.getText("scrumpoker.config.sessionTimeout.description")</div>
@@ -38,7 +38,7 @@
         <fieldset class="group">
             <legend><span>$i18n.getText("scrumpoker.config.defaultprojectactivation")</span></legend>
             <div class="checkbox">
-                #if ($defaultProjectActivation == 'true')
+                #if ($globalSettings.defaultProjectActivation == 'true')
                     <input class="checkbox" type="checkbox" name="defaultProjectActivation" id="defaultProjectActivation" value="true" checked>
                 #else
                     <input class="checkbox" type="checkbox" name="defaultProjectActivation" id="defaultProjectActivation" value="true">
@@ -50,7 +50,7 @@
         <fieldset class="group">
             <legend><span>$i18n.getText("scrumpoker.config.allowrevealdeck")</span></legend>
             <div class="radio">
-                #if ($allowRevealDeck == 'EVERYONE')
+                #if ($globalSettings.allowRevealDeck == 'EVERYONE')
                     <input class="radio" type="radio" name="allowRevealDeck" id="allowRevealDeckEveryone" value="EVERYONE" checked="checked">
                 #else
                     <input class="radio" type="radio" name="allowRevealDeck" id="allowRevealDeckEveryone" value="EVERYONE">
@@ -58,7 +58,7 @@
                 <label for="allowRevealDeckEveryone">$i18n.getText("scrumpoker.config.allowrevealdeck.everyone")</label>
             </div>
             <div class="radio">
-                #if ($allowRevealDeck == 'PARTICIPANTS')
+                #if ($globalSettings.allowRevealDeck == 'PARTICIPANTS')
                     <input class="radio" type="radio" name="allowRevealDeck" id="allowRevealDeckParticipants" value="PARTICIPANTS" checked="checked">
                 #else
                     <input class="radio" type="radio" name="allowRevealDeck" id="allowRevealDeckParticipants" value="PARTICIPANTS">
@@ -66,7 +66,7 @@
                 <label for="allowRevealDeckParticipants">$i18n.getText("scrumpoker.config.allowrevealdeck.participants")</label>
             </div>
             <div class="radio">
-                #if ($allowRevealDeck == 'CREATOR')
+                #if ($globalSettings.allowRevealDeck == 'CREATOR')
                     <input class="radio" type="radio" name="allowRevealDeck" id="allowRevealDeckParticipants" value="CREATOR" checked="checked">
                 #else
                     <input class="radio" type="radio" name="allowRevealDeck" id="allowRevealDeckParticipants" value="CREATOR">

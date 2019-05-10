@@ -17,6 +17,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: add information badges to readme
 * chore: change configuration to produce licensed version by default
 * feat: shorten description to start a new session on active session list
+* refactor: introduce global settings object to load and persist settings (#65)
 
 ### [3.13.0] - 2019-04-22
 

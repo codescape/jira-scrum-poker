@@ -1,6 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.upgrade;
 
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
+import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.junit.Rule;
 import org.junit.Test;
@@ -9,11 +10,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.lessThan;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class Upgrade03AllowRevealDeckTest {
 
@@ -26,10 +26,15 @@ public class Upgrade03AllowRevealDeckTest {
     @InjectMocks
     private Upgrade03AllowRevealDeck upgrade;
 
+    @Mock
+    private GlobalSettings globalSettings;
+
     @Test
     public void shouldPersistAllowRevealDeckInPluginSettings() {
+        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
         upgrade.doUpgrade();
-        verify(scrumPokerSettingService).persistAllowRevealDeck(AllowRevealDeck.EVERYONE);
+        verify(globalSettings).setAllowRevealDeck(AllowRevealDeck.EVERYONE);
+        verify(scrumPokerSettingService).persist(globalSettings);
     }
 
     @Test

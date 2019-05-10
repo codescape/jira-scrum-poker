@@ -7,6 +7,7 @@ import com.atlassian.jira.issue.MutableIssue;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerTestDatabaseUpdater;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
+import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import net.java.ao.EntityManager;
 import net.java.ao.test.converters.NameConverters;
 import net.java.ao.test.jdbc.Data;
@@ -49,7 +50,9 @@ public class ScrumPokerSessionServiceImplTest {
         when(issueManager.getIssueObject(ArgumentMatchers.startsWith("ISSUE-"))).thenReturn(issue);
 
         ScrumPokerSettingService scrumPokerSettingsService = mock(ScrumPokerSettingService.class);
-        when(scrumPokerSettingsService.loadSessionTimeout()).thenReturn(12);
+        GlobalSettings globalSettings = mock(GlobalSettings.class);
+        when(scrumPokerSettingsService.load()).thenReturn(globalSettings);
+        when(globalSettings.getSessionTimeout()).thenReturn(12);
 
         scrumPokerForIssueCondition = mock(ScrumPokerForIssueCondition.class);
         when(scrumPokerForIssueCondition.isEstimable(ArgumentMatchers.any(Issue.class))).thenReturn(true);

@@ -2,6 +2,7 @@ package de.codescape.jira.plugins.scrumpoker.upgrade;
 
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
+import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.junit.Rule;
 import org.junit.Test;
@@ -33,36 +34,45 @@ public class Upgrade01RemovePluginSettingsTest {
     @Mock
     private PluginSettings pluginSettings;
 
+    @Mock
+    private GlobalSettings globalSettings;
+
     @Test
     public void shouldDeleteSessionTimeoutIfItExistsInPluginSettings() {
-        withGlobalSettingsFactory();
+        withPluginSettingsFactory();
         when(pluginSettings.get(SCRUM_POKER_PLUGIN_KEY + ".sessionTimeout")).thenReturn("12");
+        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
         upgrade.doUpgrade();
         verify(pluginSettings).remove(SCRUM_POKER_PLUGIN_KEY + ".sessionTimeout");
     }
 
     @Test
     public void shouldDeleteStoryPointFieldIfItExistsInPluginSettings() {
-        withGlobalSettingsFactory();
+        withPluginSettingsFactory();
         when(pluginSettings.get(SCRUM_POKER_PLUGIN_KEY + ".storyPointField")).thenReturn("customfield-10006");
+        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
         upgrade.doUpgrade();
         verify(pluginSettings).remove(SCRUM_POKER_PLUGIN_KEY + ".storyPointField");
     }
 
     @Test
     public void shouldPersistStoryPointFieldIfExistsInPluginSettings() {
-        withGlobalSettingsFactory();
+        withPluginSettingsFactory();
         when(pluginSettings.get(SCRUM_POKER_PLUGIN_KEY + ".storyPointField")).thenReturn("customfield-10006");
+        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
         upgrade.doUpgrade();
-        verify(scrumPokerSettingService).persistStoryPointField("customfield-10006");
+        verify(globalSettings).setStoryPointField("customfield-10006");
+        verify(scrumPokerSettingService).persist(globalSettings);
     }
 
     @Test
     public void shouldPersistSessionTimeoutIfExistInPluginSettings() {
-        withGlobalSettingsFactory();
+        withPluginSettingsFactory();
         when(pluginSettings.get(SCRUM_POKER_PLUGIN_KEY + ".sessionTimeout")).thenReturn("12");
+        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
         upgrade.doUpgrade();
-        verify(scrumPokerSettingService).persistSessionTimeout(12);
+        verify(globalSettings).setSessionTimeout(12);
+        verify(scrumPokerSettingService).persist(globalSettings);
     }
 
     @Test
@@ -75,7 +85,7 @@ public class Upgrade01RemovePluginSettingsTest {
         assertThat(upgrade.getShortDescription().length(), is(lessThan(50)));
     }
 
-    private void withGlobalSettingsFactory() {
+    private void withPluginSettingsFactory() {
         when(pluginSettingsFactory.createGlobalSettings()).thenReturn(pluginSettings);
     }
 

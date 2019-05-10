@@ -5,6 +5,7 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 import com.atlassian.sal.api.upgrade.PluginUpgradeTask;
+import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -43,18 +44,22 @@ public class Upgrade01RemovePluginSettings extends AbstractUpgradeTask {
 
     @Override
     protected void performUpgrade() {
-        PluginSettings globalSettings = pluginSettingsFactory.createGlobalSettings();
+        PluginSettings pluginSettings = pluginSettingsFactory.createGlobalSettings();
         // Grab the Story Point field and remove the config if exists
-        String storyPointField = (String) globalSettings.get(STORY_POINT_PLUGIN_SETTINGS);
+        String storyPointField = (String) pluginSettings.get(STORY_POINT_PLUGIN_SETTINGS);
         if (storyPointField != null) {
-            globalSettings.remove(STORY_POINT_PLUGIN_SETTINGS);
-            scrumPokerSettingService.persistStoryPointField(storyPointField);
+            pluginSettings.remove(STORY_POINT_PLUGIN_SETTINGS);
+            GlobalSettings globalSettings = scrumPokerSettingService.load();
+            globalSettings.setStoryPointField(storyPointField);
+            scrumPokerSettingService.persist(globalSettings);
         }
         // Grab the Session Timeout and remove the config if exists
-        String sessionTimeout = (String) globalSettings.get(SSESSION_TIMEOUT_PLUGIN_SETTINGS);
+        String sessionTimeout = (String) pluginSettings.get(SSESSION_TIMEOUT_PLUGIN_SETTINGS);
         if (sessionTimeout != null) {
-            globalSettings.remove(SSESSION_TIMEOUT_PLUGIN_SETTINGS);
-            scrumPokerSettingService.persistSessionTimeout(Integer.valueOf(sessionTimeout));
+            pluginSettings.remove(SSESSION_TIMEOUT_PLUGIN_SETTINGS);
+            GlobalSettings globalSettings = scrumPokerSettingService.load();
+            globalSettings.setSessionTimeout(Integer.valueOf(sessionTimeout));
+            scrumPokerSettingService.persist(globalSettings);
         }
     }
 

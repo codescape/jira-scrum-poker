@@ -2,6 +2,7 @@ package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.fields.CustomField;
+import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.junit.Rule;
 import org.junit.Test;
@@ -37,6 +38,9 @@ public class ConfigureScrumPokerActionTest {
     @Mock
     private CustomField secondCustomField;
 
+    @Mock
+    private GlobalSettings globalSettings;
+
     @Test
     public void returnListOfCustomFieldsProvidedByCustomFieldManager() {
         when(customFieldManager.getCustomFieldObjects()).thenReturn(asList(firstCustomField, secondCustomField));
@@ -45,8 +49,9 @@ public class ConfigureScrumPokerActionTest {
 
     @Test
     public void returnTheStoryPointFieldConfigured() {
-        when(scrumPokerSettingsService.loadStoryPointField()).thenReturn(CUSTOM_FIELD_ID);
-        assertThat(configureScrumPokerAction.getStoryPointFieldId(), is(equalTo(CUSTOM_FIELD_ID)));
+        when(scrumPokerSettingsService.load()).thenReturn(globalSettings);
+        when(globalSettings.getStoryPointField()).thenReturn(CUSTOM_FIELD_ID);
+        assertThat(configureScrumPokerAction.getGlobalSettings().getStoryPointField(), is(equalTo(CUSTOM_FIELD_ID)));
     }
 
 }

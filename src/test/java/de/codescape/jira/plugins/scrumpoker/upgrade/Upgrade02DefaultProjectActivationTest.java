@@ -1,5 +1,6 @@
 package de.codescape.jira.plugins.scrumpoker.upgrade;
 
+import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.junit.Rule;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import org.mockito.junit.MockitoRule;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class Upgrade02DefaultProjectActivationTest {
 
@@ -24,10 +26,15 @@ public class Upgrade02DefaultProjectActivationTest {
     @InjectMocks
     private Upgrade02DefaultProjectActivation upgrade;
 
+    @Mock
+    private GlobalSettings globalSettings;
+
     @Test
     public void shouldPersistDefaultProjectActivationInPluginSettings() {
+        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
         upgrade.doUpgrade();
-        verify(scrumPokerSettingService).persistDefaultProjectActivation(true);
+        verify(globalSettings).setDefaultProjectActivation(true);
+        verify(scrumPokerSettingService).persist(globalSettings);
     }
 
     @Test

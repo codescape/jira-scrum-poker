@@ -4,6 +4,7 @@ import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
+import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -47,31 +48,10 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
     }
 
     /**
-     * Current configured id of the story point field in this Jira instance.
+     * Return the currently set global settings.
      */
-    public String getStoryPointFieldId() {
-        return scrumPokerSettingService.loadStoryPointField();
-    }
-
-    /**
-     * Current configured session timeout in this Jira instance.
-     */
-    public String getSessionTimeout() {
-        return scrumPokerSettingService.loadSessionTimeout().toString();
-    }
-
-    /**
-     * Current configured default project activation in this Jira instance.
-     */
-    public String getDefaultProjectActivation() {
-        return String.valueOf(scrumPokerSettingService.loadDefaultProjectActivation());
-    }
-
-    /**
-     * Current configured option how is allowed to reveal a deck.
-     */
-    public String getAllowRevealDeck() {
-        return scrumPokerSettingService.loadAllowRevealDeck().name();
+    public GlobalSettings getGlobalSettings() {
+        return scrumPokerSettingService.load();
     }
 
     /**
@@ -81,17 +61,21 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
     protected String doExecute() {
         String action = getParameter(Parameters.ACTION);
         if (action != null && action.equals("save")) {
+            GlobalSettings globalSettings = new GlobalSettings();
+
             String newStoryPointField = getParameter(Parameters.STORY_POINT_FIELD);
-            scrumPokerSettingService.persistStoryPointField(newStoryPointField);
+            globalSettings.setStoryPointField(newStoryPointField);
 
             String newSessionTimeout = getParameter(Parameters.SESSION_TIMEOUT);
-            scrumPokerSettingService.persistSessionTimeout(Integer.valueOf(newSessionTimeout));
+            globalSettings.setSessionTimeout(Integer.valueOf(newSessionTimeout));
 
             String newDefaultProjectActivation = getParameter(Parameters.DEFAULT_PROJECT_ACTIVATION);
-            scrumPokerSettingService.persistDefaultProjectActivation(Boolean.valueOf(newDefaultProjectActivation));
+            globalSettings.setDefaultProjectActivation(Boolean.valueOf(newDefaultProjectActivation));
 
             String newAllowRevealDeck = getParameter(Parameters.ALLOW_REVEAL_DECK);
-            scrumPokerSettingService.persistAllowRevealDeck(AllowRevealDeck.valueOf(newAllowRevealDeck));
+            globalSettings.setAllowRevealDeck(AllowRevealDeck.valueOf(newAllowRevealDeck));
+
+            scrumPokerSettingService.persist(globalSettings);
         }
         return SUCCESS;
     }

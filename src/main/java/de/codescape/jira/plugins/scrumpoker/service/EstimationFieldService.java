@@ -58,7 +58,7 @@ public class EstimationFieldService {
      * Return the story point custom field.
      */
     public CustomField findStoryPointField() {
-        return customFieldManager.getCustomFieldObject(scrumPokerSettingService.loadStoryPointField());
+        return customFieldManager.getCustomFieldObject(scrumPokerSettingService.load().getStoryPointField());
     }
 
 }

@@ -7,6 +7,7 @@ import com.atlassian.jira.user.util.UserManager;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
+import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerCard;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.VoteEntity;
@@ -49,10 +50,14 @@ public class SessionEntityMapperTest {
     @Mock
     private ApplicationUser applicationUser;
 
+    @Mock
+    private GlobalSettings globalSettings;
+
     @Before
     public void before() {
         when(userManager.getUserByKey(anyString())).thenReturn(applicationUser);
-        when(scrumPokerSettingService.loadAllowRevealDeck()).thenReturn(AllowRevealDeck.EVERYONE);
+        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettings.getAllowRevealDeck()).thenReturn(AllowRevealDeck.EVERYONE);
         when(applicationUser.getDisplayName()).thenReturn("John Doe");
         DateTimeFormatter userSpecificDateTimeFormatter = mock(DateTimeFormatter.class);
         when(userSpecificDateTimeFormatter.withStyle(ArgumentMatchers.any(DateTimeStyle.class)))
@@ -126,8 +131,8 @@ public class SessionEntityMapperTest {
 
     @Test
     public void isAllowRevealShouldDependOnCurrentVisibilityOfDeck() {
-        reset(scrumPokerSettingService);
-        when(scrumPokerSettingService.loadAllowRevealDeck()).thenReturn(AllowRevealDeck.EVERYONE);
+        reset(globalSettings);
+        when(globalSettings.getAllowRevealDeck()).thenReturn(AllowRevealDeck.EVERYONE);
         ScrumPokerVote[] scrumPokerVotes = {scrumPokerVote("5")};
 
         ScrumPokerSession hiddenScrumPokerSession = scrumPokerSession(scrumPokerVotes, false);
@@ -139,8 +144,8 @@ public class SessionEntityMapperTest {
 
     @Test
     public void isAllowRevealShouldDependOnExistenceOfVotes() {
-        reset(scrumPokerSettingService);
-        when(scrumPokerSettingService.loadAllowRevealDeck()).thenReturn(AllowRevealDeck.EVERYONE);
+        reset(globalSettings);
+        when(globalSettings.getAllowRevealDeck()).thenReturn(AllowRevealDeck.EVERYONE);
 
         ScrumPokerVote[] oneScrumPokerVote = {scrumPokerVote("5")};
         ScrumPokerSession scrumPokerSessionWithVotes = scrumPokerSession(oneScrumPokerVote, false);
@@ -153,8 +158,8 @@ public class SessionEntityMapperTest {
 
     @Test
     public void isAllowRevealShouldDependOnAllowRevealSettingForSettingEveryone() {
-        reset(scrumPokerSettingService);
-        when(scrumPokerSettingService.loadAllowRevealDeck()).thenReturn(AllowRevealDeck.EVERYONE);
+        reset(globalSettings);
+        when(globalSettings.getAllowRevealDeck()).thenReturn(AllowRevealDeck.EVERYONE);
         ScrumPokerVote[] scrumPokerVotesWithoutUser = {scrumPokerVote("5", "ANOTHER_USER"), scrumPokerVote("8", "ANOTHER_USER_2")};
 
         ScrumPokerSession scrumPokerSessionWithVotes = scrumPokerSession(scrumPokerVotesWithoutUser, false);
@@ -163,8 +168,8 @@ public class SessionEntityMapperTest {
 
     @Test
     public void isAllowRevealShouldDependOnAllowRevealSettingForSettingCreator() {
-        reset(scrumPokerSettingService);
-        when(scrumPokerSettingService.loadAllowRevealDeck()).thenReturn(AllowRevealDeck.CREATOR);
+        reset(globalSettings);
+        when(globalSettings.getAllowRevealDeck()).thenReturn(AllowRevealDeck.CREATOR);
         ScrumPokerVote[] scrumPokerVotesWithoutUser = {scrumPokerVote("5", "ANOTHER_USER")};
 
         ScrumPokerSession sessionWhereCurrentUserIsCreator = scrumPokerSession(scrumPokerVotesWithoutUser, false, CURRENT_USER);
@@ -176,8 +181,8 @@ public class SessionEntityMapperTest {
 
     @Test
     public void isAllowRevealShouldDependOnAllowRevealSettingForSettingParticipant() {
-        reset(scrumPokerSettingService);
-        when(scrumPokerSettingService.loadAllowRevealDeck()).thenReturn(AllowRevealDeck.PARTICIPANTS);
+        reset(globalSettings);
+        when(globalSettings.getAllowRevealDeck()).thenReturn(AllowRevealDeck.PARTICIPANTS);
 
         ScrumPokerVote[] scrumPokerVotesWithoutUser = {scrumPokerVote("5", "ANOTHER_USER")};
         ScrumPokerSession sessionWhereCurrentUserIsCreator = scrumPokerSession(scrumPokerVotesWithoutUser, false, CURRENT_USER);

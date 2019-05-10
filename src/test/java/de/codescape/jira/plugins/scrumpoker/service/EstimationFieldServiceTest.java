@@ -7,6 +7,7 @@ import com.atlassian.jira.issue.UpdateIssueRequest;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.user.ApplicationUser;
+import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -52,11 +53,15 @@ public class EstimationFieldServiceTest {
     @Mock
     private MutableIssue issue;
 
+    @Mock
+    private GlobalSettings globalSettings;
+
     @Before
     public void before() {
         when(jiraAuthenticationContext.getLoggedInUser()).thenReturn(applicationUser);
         when(issueManager.getIssueByCurrentKey(ISSUE_KEY)).thenReturn(issue);
-        when(scrumPokerSettingService.loadStoryPointField()).thenReturn(CUSTOM_FIELD_ID);
+        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettings.getStoryPointField()).thenReturn(CUSTOM_FIELD_ID);
         when(customFieldManager.getCustomFieldObject(CUSTOM_FIELD_ID)).thenReturn(customField);
     }
 
