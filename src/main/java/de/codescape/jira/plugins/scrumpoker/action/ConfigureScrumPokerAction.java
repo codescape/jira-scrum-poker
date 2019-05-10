@@ -27,6 +27,7 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
         static final String SESSION_TIMEOUT = "sessionTimeout";
         static final String DEFAULT_PROJECT_ACTIVATION = "defaultProjectActivation";
         static final String ALLOW_REVEAL_DECK = "allowRevealDeck";
+        static final String DISPLAY_DROPDOWN_ON_BOARDS = "displayDropdownOnBoards";
 
     }
 
@@ -74,6 +75,9 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
 
             String newAllowRevealDeck = getParameter(Parameters.ALLOW_REVEAL_DECK);
             globalSettings.setAllowRevealDeck(AllowRevealDeck.valueOf(newAllowRevealDeck));
+
+            String displayDropdownOnBoards = getParameter(Parameters.DISPLAY_DROPDOWN_ON_BOARDS);
+            globalSettings.setDisplayDropdownOnBoards(Boolean.valueOf(displayDropdownOnBoards));
 
             scrumPokerSettingService.persist(globalSettings);
         }

@@ -19,8 +19,9 @@ To join a currently running Scrum Poker session there are basically two ways in 
 
 #### Find your session in the Active Sessions list
 
-The preferred and easiest way is the so called `Active Sessions` page which can be accessed from the `Scrum Poker` dropdown that is visible on every agile board in Jira.
-This page can also be accessed from the main navigation menu `Boards` provided by Jira Software where you can find another `Active Sessions` link.
+The preferred and easiest way is the so called `Active Sessions` page which can be accessed from the main navigation menu `Boards` provided by Jira Software where you can find another `Active Sessions` link. 
+
+This page can also be accessed from the `Scrum Poker` dropdown that is visible on every agile board in Jira. This dropdown might not be shown depending on the `Show Dropdown on Boards` setting as explained on the [Scrum Poker configuration](/scrum-poker-configuration) page. 
 
 ![Navigate to the active sessions page](/images/start-scrum-poker-session-open-active-sessions.png) 
 

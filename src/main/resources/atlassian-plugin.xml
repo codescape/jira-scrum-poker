@@ -69,6 +69,7 @@
     <!-- dropdown on boards -->
     <web-section key="scrum-poker-sessions" location="jira.agile.board.tools" weight="10">
         <label key="scrumpoker.title"/>
+        <condition class="de.codescape.jira.plugins.scrumpoker.condition.DisplayScrumPokerOnBoardCondition"/>
     </web-section>
     <web-item key="scrum-poker-sessions-link" section="scrum-poker-sessions" weight="10">
         <label key="scrumpoker.sessions.list"/>

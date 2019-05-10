@@ -10,6 +10,7 @@ public class GlobalSettings {
     public static final AllowRevealDeck ALLOW_REVEAL_DECK_DEFAULT = AllowRevealDeck.EVERYONE;
     public static final boolean DEFAULT_PROJECT_ACTIVATION_DEFAULT = true;
     public static final Integer SESSION_TIMEOUT_DEFAULT = 12;
+    public static final boolean DISPLAY_DROPDOWN_ON_BOARDS_DEFAULT = false;
 
     // settings
 
@@ -17,6 +18,7 @@ public class GlobalSettings {
     private Integer sessionTimeout = SESSION_TIMEOUT_DEFAULT;
     private AllowRevealDeck allowRevealDeck = ALLOW_REVEAL_DECK_DEFAULT;
     private boolean defaultProjectActivation = DEFAULT_PROJECT_ACTIVATION_DEFAULT;
+    private boolean displayDropdownOnBoards = DISPLAY_DROPDOWN_ON_BOARDS_DEFAULT;
 
     public void setStoryPointField(String storyPointField) {
         this.storyPointField = storyPointField;
@@ -50,4 +52,11 @@ public class GlobalSettings {
         return defaultProjectActivation;
     }
 
+    public boolean isDisplayDropdownOnBoards() {
+        return displayDropdownOnBoards;
+    }
+
+    public void setDisplayDropdownOnBoards(boolean displayDropdownOnBoards) {
+        this.displayDropdownOnBoards = displayDropdownOnBoards;
+    }
 }

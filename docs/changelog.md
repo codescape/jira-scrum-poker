@@ -18,6 +18,7 @@ Click on the version in the following list to see all changes since the previous
 * chore: change configuration to produce licensed version by default
 * feat: shorten description to start a new session on active session list
 * refactor: introduce global settings object to load and persist settings (#65)
+* feat: add configuration option to show and hide Scrum Poker dropdown on boards
 
 ### [3.13.0] - 2019-04-22
 

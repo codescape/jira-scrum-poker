@@ -63,3 +63,9 @@ On the page `Project Configuration` you can find the configuration options the m
 #### Enable Scrum Poker
 
 If Scrum Poker is not enabled for all projects per default in the global settings this setting allows you to enable Scrum Poker individually for the current project.
+
+#### Show Dropdown on Boards
+
+Decide whether to show the Scrum Poker dropdown on boards or not.
+In older versions of Scrum Poker this dropdown was the only way to access the list of active Scrum Poker sessions.
+Today the Scrum Poker menu elements in the Jira top menu `Boards` are preferred. 
