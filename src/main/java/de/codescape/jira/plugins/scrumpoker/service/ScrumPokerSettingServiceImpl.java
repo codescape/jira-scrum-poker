@@ -43,7 +43,7 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
     public void persist(GlobalSettings globalSettings) {
         persist(SESSION_TIMEOUT, String.valueOf(globalSettings.getSessionTimeout()));
         persist(STORY_POINT_FIELD, globalSettings.getStoryPointField());
-        persist(DEFAULT_PROJECT_ACTIVATION, String.valueOf(globalSettings.getDefaultProjectActivation()));
+        persist(DEFAULT_PROJECT_ACTIVATION, String.valueOf(globalSettings.isDefaultProjectActivation()));
         persist(ALLOW_REVEAL_DECK, globalSettings.getAllowRevealDeck().name());
     }
 

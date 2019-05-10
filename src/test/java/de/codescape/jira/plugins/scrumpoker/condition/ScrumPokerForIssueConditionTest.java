@@ -146,12 +146,12 @@ public class ScrumPokerForIssueConditionTest {
 
     private void expectThatDefaultProjectActivationIsEnabled() {
         when(scrumPokerSettingService.load()).thenReturn(globalSettings);
-        when(globalSettings.getDefaultProjectActivation()).thenReturn(true);
+        when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
     }
 
     private void expectThatDefaultProjectActivationIsDisabled() {
         when(scrumPokerSettingService.load()).thenReturn(globalSettings);
-        when(globalSettings.getDefaultProjectActivation()).thenReturn(false);
+        when(globalSettings.isDefaultProjectActivation()).thenReturn(false);
     }
 
 }

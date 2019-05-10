@@ -75,18 +75,18 @@ public class ScrumPokerSettingServiceImplTest {
         GlobalSettings globalSettings = new GlobalSettings();
         globalSettings.setDefaultProjectActivation(true);
         scrumPokerSettingService.persist(globalSettings);
-        assertThat(scrumPokerSettingService.load().getDefaultProjectActivation(), is(equalTo(true)));
+        assertThat(scrumPokerSettingService.load().isDefaultProjectActivation(), is(equalTo(true)));
 
         globalSettings.setDefaultProjectActivation(false);
         scrumPokerSettingService.persist(globalSettings);
-        assertThat(scrumPokerSettingService.load().getDefaultProjectActivation(), is(equalTo(false)));
+        assertThat(scrumPokerSettingService.load().isDefaultProjectActivation(), is(equalTo(false)));
     }
 
     @Test
     public void loadingDefaultProjectActivationAlwaysReturnsDefaultValueIfNoValueIsSet() {
         ScrumPokerSetting[] scrumPokerSettings = activeObjects.find(ScrumPokerSetting.class);
         Arrays.stream(scrumPokerSettings).forEach(activeObjects::delete);
-        assertThat(scrumPokerSettingService.load().getDefaultProjectActivation(), is(equalTo(DEFAULT_PROJECT_ACTIVATION_DEFAULT)));
+        assertThat(scrumPokerSettingService.load().isDefaultProjectActivation(), is(equalTo(DEFAULT_PROJECT_ACTIVATION_DEFAULT)));
     }
 
 }

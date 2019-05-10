@@ -46,7 +46,7 @@ public class GlobalSettings {
         this.defaultProjectActivation = defaultProjectActivation;
     }
 
-    public boolean getDefaultProjectActivation() {
+    public boolean isDefaultProjectActivation() {
         return defaultProjectActivation;
     }
 
