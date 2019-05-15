@@ -21,6 +21,7 @@ Click on the version in the following list to see all changes since the previous
 * feat: add configuration option to show and hide Scrum Poker dropdown on boards
 * docs: update documentation for the new configuration option
 * docs: document global settings options in class
+* docs: move compatibility matrix into online documentation
 
 ### [3.13.0] - 2019-04-22
 

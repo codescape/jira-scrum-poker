@@ -35,17 +35,6 @@ For developers:
 
 ![Screenshot of a Scrum Poker session](/docs/images/participate-in-scrum-poker-session-reveal-estimates.png)
 
-## Compatibility Matrix
-
-Scrum Poker for Jira is always developed against the latest version of Jira Server to ensure compatibility with all upcoming changes.
-To ensure backwards compatibility with older Jira Server versions Scrum Poker for Jira is tested with the last two enterprise releases of Jira Server.
-
-| Scrum Poker version | development against | compatibility tested with   |
-|---------------------|---------------------|-----------------------------|
-| since 3.7.0         | Jira 7.13.x         | Jira 7.6.12 and Jira 7.13.2 |
-| since 3.10.0        | Jira 8.0.x          | Jira 7.6.12 and Jira 7.13.2 |
-| since 3.12.0        | Jira 8.1.x          | Jira 7.6.12 and Jira 7.13.2 |
-
 ## Supported Languages
 
 Scrum Poker for Jira supports the following languages and defaults to English translation if the user has no supported language configured in his Jira profile:

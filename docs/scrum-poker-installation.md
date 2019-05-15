@@ -13,10 +13,10 @@ This page describes how to install Scrum Poker for Jira in your Jira application
 In order to install Scrum Poker for Jira you must have the `Jira System Administrators` role assigned to your Jira user.
 This role provides you with the ability to upload and install Jira apps.
 
-Further more your Jira instance must be updated to an application version that is included in the supported versions of this app.
-See the [Versions](https://marketplace.atlassian.com/apps/1218884/scrum-poker?hosting=server&tab=versions) page for a list of supported versions.
+Ensure that your Jira instance is supported by a version of Scrum Poker for Jira.
+Please consult the [Compatibility Matrix](/compatibility-matrix) or have a look at the [Versions](https://marketplace.atlassian.com/apps/1218884/scrum-poker?hosting=server&tab=versions) page on the Atlassian Marketplace for the right version for your Jira instance.
 
-If those requirements are met you can proceed and follow the installation steps needed.
+If those requirements are met you can proceed and follow the installation steps below:
 
 ### Installation steps
 

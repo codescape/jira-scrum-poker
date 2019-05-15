@@ -42,7 +42,10 @@ h6 {
 .docs-section {
     border-top: 1px solid #eee;
     padding: 4rem 0 0;
-    margin-bottom: 0;}
+    margin-bottom: 0; }
+
+.docs-section table {
+    width: 100%; }
 
 .heading-font-size {
     font-size: 1.2rem;
