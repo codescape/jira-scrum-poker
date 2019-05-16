@@ -3,7 +3,7 @@ layout: default
 title: Changelog
 ---
 
-This changelog helps developers and users to keep track of new features, fixes and improvements for Scrum Poker for Jira. 
+This changelog helps developers and users to keep track of new features, fixes and improvements for Scrum Poker for Jira.
 Click on the version in the following list to see all changes since the previous version.
 
 * Table of Contents
@@ -22,6 +22,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: update documentation for the new configuration option
 * docs: document global settings options in class
 * docs: move compatibility matrix into online documentation
+* docs: improve compatibility matrix and explain development and testing
 
 ### [3.13.0] - 2019-04-22
 
