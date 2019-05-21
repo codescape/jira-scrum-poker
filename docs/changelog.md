@@ -24,6 +24,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: move compatibility matrix into online documentation
 * docs: improve compatibility matrix and explain development and testing
 * refactor: extract logic to build a reference story
+* chore: implement against latest Jira patch version 8.1.1
 
 ### [3.13.0] - 2019-04-22
 
