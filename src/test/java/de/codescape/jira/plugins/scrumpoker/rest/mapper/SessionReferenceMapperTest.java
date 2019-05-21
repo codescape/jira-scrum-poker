@@ -65,6 +65,7 @@ public class SessionReferenceMapperTest {
         MutableIssue issue = mock(MutableIssue.class);
         IssueType issueType = mock(IssueType.class);
         when(issue.getIssueType()).thenReturn(issueType);
+        when(issue.getKey()).thenReturn(issueKey);
         when(issueManager.getIssueObject(issueKey)).thenReturn(issue);
     }
 

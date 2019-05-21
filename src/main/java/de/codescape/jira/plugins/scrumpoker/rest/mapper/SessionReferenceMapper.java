@@ -39,12 +39,19 @@ public class SessionReferenceMapper {
         return new ReferenceListEntity(scrumPokerSessions.stream()
             .map(scrumPokerSession -> {
                 MutableIssue issue = issueManager.getIssueObject(scrumPokerSession.getIssueKey());
-                return issue != null ? new ReferenceEntity(scrumPokerSession.getIssueKey(),
-                    issue.getIssueType() != null ? issue.getIssueType().getCompleteIconUrl() : null,
-                    issue.getSummary()) : null;
+                return issue != null ? referenceFromIssue(issue) : null;
             })
             .filter(Objects::nonNull)
             .collect(Collectors.toList()), estimation);
+    }
+
+    /**
+     * Create the reference with key, icon and summary from the issue.
+     */
+    private ReferenceEntity referenceFromIssue(MutableIssue issue) {
+        return new ReferenceEntity(issue.getKey(),
+            issue.getIssueType() != null ? issue.getIssueType().getCompleteIconUrl() : null,
+            issue.getSummary());
     }
 
 }
