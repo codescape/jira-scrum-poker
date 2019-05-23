@@ -20,9 +20,9 @@ import static org.junit.Assert.assertThat;
 public class ScrumPokerResourceBundleTest {
 
     private static final String[] SUPPORTED_BUNDLES = {
-        "scrum-poker_de.properties",
-        "scrum-poker_fr.properties",
-        "scrum-poker.properties"
+        "i18n/scrum-poker_de.properties",
+        "i18n/scrum-poker_fr.properties",
+        "i18n/scrum-poker.properties"
     };
     private static final String LOWER_CASE_LETTERS = "abcdefghijklmnopqrstuvwxyz";
     private static final String UPPER_CASE_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
