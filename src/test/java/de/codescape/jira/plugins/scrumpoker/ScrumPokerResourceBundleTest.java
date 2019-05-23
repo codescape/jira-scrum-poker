@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
@@ -91,7 +92,11 @@ public class ScrumPokerResourceBundleTest {
     }
 
     private File getFile(String fileName) {
-        return new File(getClass().getClassLoader().getResource(fileName).getFile());
+        URL resource = getClass().getClassLoader().getResource(fileName);
+        if (resource == null) {
+            throw new RuntimeException("File " + fileName + " not found.");
+        }
+        return new File(resource.getFile());
     }
 
 }

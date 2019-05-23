@@ -25,6 +25,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: improve compatibility matrix and explain development and testing
 * refactor: extract logic to build a reference story
 * chore: implement against latest Jira patch version 8.2.0
+* test: improve test to ensure correct resource bundles for internationalization
 
 ### [3.13.0] - 2019-04-22
 
