@@ -8,7 +8,7 @@ import net.java.ao.schema.PrimaryKey;
 import java.util.Date;
 
 /**
- * Active Object to persist a Scrum poker session into the database.
+ * Active Object to persist a Scrum Poker session into the database.
  */
 public interface ScrumPokerSession extends RawEntity<String> {
 

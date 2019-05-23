@@ -6,7 +6,7 @@ import net.java.ao.schema.NotNull;
 import net.java.ao.schema.StringLength;
 
 /**
- * Active Object to persist a Scrum poker settings into the database.
+ * Active Object to persist a Scrum Poker settings into the database.
  */
 @Preload
 public interface ScrumPokerSetting extends ScrumPokerEntity {

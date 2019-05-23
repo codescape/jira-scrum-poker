@@ -3,7 +3,7 @@ package de.codescape.jira.plugins.scrumpoker.ao;
 import java.util.Date;
 
 /**
- * Active Object to persist a user vote for a Scrum poker session into the database.
+ * Active Object to persist a user vote for a Scrum Poker session into the database.
  */
 public interface ScrumPokerVote extends ScrumPokerEntity {
 
