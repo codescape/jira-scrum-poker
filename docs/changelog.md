@@ -24,7 +24,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: move compatibility matrix into online documentation
 * docs: improve compatibility matrix and explain development and testing
 * refactor: extract logic to build a reference story
-* chore: implement against latest Jira patch version 8.2.0
+* chore: implement against latest Jira patch version 8.2.1
 * test: improve test to ensure correct resource bundles for internationalization
 * refactor: move internationalization files into separate directory
 
