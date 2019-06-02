@@ -11,6 +11,10 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
+* ...
+
+### [4.0.0] - 2019-06-02
+
 * chore: update tested patch version of Jira 7.6 and 7.13 enterprise release
 * refactor: optimize imports and remove unused imports
 * fix: correct escaping for German umlauts in resource bundle
@@ -573,7 +577,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/3.13.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.0.0...HEAD
+[4.0.0]: https://github.com/codescape/jira-scrum-poker/compare/3.13.0...4.0.0
 [3.13.0]: https://github.com/codescape/jira-scrum-poker/compare/3.12.0...3.13.0
 [3.12.0]: https://github.com/codescape/jira-scrum-poker/compare/3.11.1...3.12.0
 [3.11.1]: https://github.com/codescape/jira-scrum-poker/compare/3.11.0...3.11.1
