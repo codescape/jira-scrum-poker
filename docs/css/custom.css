@@ -85,6 +85,16 @@ img {
     color: #fff;
     background-color: #0FA0CE; }
 
+#markdown-toc.reduce-toc li:nth-child(1n+11) {
+  display: none; }
+
+#markdown-toc li.expand-link {
+  display: none; }
+
+#markdown-toc.reduce-toc li.expand-link {
+  display: block;
+  text-align: center; }
+
 /* Larger than phone */
 
 @media (min-width: 550px) {

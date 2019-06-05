@@ -15,6 +15,19 @@ $(document).ready(function() {
     $document.on('click', closePopover);
     $('a[href*="#"]').on('click', smoothScroll);
     createBackToTopButton();
+    reduceTableOfContents();
+  }
+
+  function reduceTableOfContents() {
+    var count = $("#markdown-toc li").length;
+    if (count > 10) {
+      $("#markdown-toc").addClass('reduce-toc');
+      $("#markdown-toc").append('<li class="expand-link"><a href="#" class="expand-toc">Expand table of contents</a></li>')
+      $(".expand-toc").click(function(e) {
+        e.preventDefault();
+        $("#markdown-toc").removeClass('reduce-toc');
+      });
+    }
   }
 
   function createBackToTopButton() {
@@ -70,7 +83,7 @@ $(document).ready(function() {
     $('html, body').animate({
         scrollTop: $("#elementtoScrollToID").offset().top
     }, 2000);
-});
+  });
 
   function resize() {
     $body.removeClass('has-docked-nav');
