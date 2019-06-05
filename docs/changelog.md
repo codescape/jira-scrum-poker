@@ -12,6 +12,7 @@ Click on the version in the following list to see all changes since the previous
 ### [Unreleased]
 
 * docs: update compatibility matrix
+* docs: shorten initial list of table of contents
 
 ### [4.0.0] - 2019-06-02
 
