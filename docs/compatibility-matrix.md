@@ -15,8 +15,8 @@ To ensure backwards compatibility with older Jira Server versions Scrum Poker fo
 |---------------------|--------------------|----------------------------|
 | 3.7.x to 3.9.x      | Jira 7.13.x        | Jira 7.6.x and Jira 7.13.x |
 | 3.10.x to 3.11.x    | Jira 8.0.x         | Jira 7.6.x and Jira 7.13.x |
-| 3.12.x 3.13.x       | Jira 8.1.x         | Jira 7.6.x and Jira 7.13.x |
-| 4.0.x and newer     | Jira 8.2.x         | Jira 7.6.x and Jira 7.13.x |
+| 3.12.x to 3.13.x    | Jira 8.1.x         | Jira 7.6.x and Jira 7.13.x |
+| 4.0.x to latest     | Jira 8.2.x         | Jira 7.6.x and Jira 7.13.x |
 
 ### General advise
 
