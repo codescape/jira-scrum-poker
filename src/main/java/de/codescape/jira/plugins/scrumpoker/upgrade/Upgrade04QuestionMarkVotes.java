@@ -28,16 +28,6 @@ public class Upgrade04QuestionMarkVotes extends AbstractUpgradeTask {
     }
 
     @Override
-    protected void performUpgrade() {
-        ScrumPokerVote[] scrumPokerVotes = activeObjects.find(ScrumPokerVote.class,
-            Query.select().where("VOTE = ?", "?"));
-        Arrays.stream(scrumPokerVotes).forEach(vote -> {
-            vote.setVote(ScrumPokerCard.QUESTION_MARK.getName());
-            vote.save();
-        });
-    }
-
-    @Override
     public int getBuildNumber() {
         return 4;
     }
@@ -45,6 +35,16 @@ public class Upgrade04QuestionMarkVotes extends AbstractUpgradeTask {
     @Override
     public String getShortDescription() {
         return "Migrate old votes with question marks.";
+    }
+
+    @Override
+    protected void performUpgrade() {
+        ScrumPokerVote[] scrumPokerVotes = activeObjects.find(ScrumPokerVote.class,
+            Query.select().where("VOTE = ?", "?"));
+        Arrays.stream(scrumPokerVotes).forEach(vote -> {
+            vote.setVote(ScrumPokerCard.QUESTION_MARK.getName());
+            vote.save();
+        });
     }
 
 }
