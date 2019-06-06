@@ -13,6 +13,7 @@ Click on the version in the following list to see all changes since the previous
 
 * docs: update compatibility matrix
 * docs: shorten initial list of table of contents
+* test: update versions of testing libraries
 
 ### [4.0.0] - 2019-06-02
 
