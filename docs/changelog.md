@@ -16,6 +16,7 @@ Click on the version in the following list to see all changes since the previous
 * test: update versions of testing libraries
 * refactor: change order of methods to comply with other upgrades
 * refactor: optimize imports and remove unused imports
+* refactor: move configuration templates into separate directory
 
 ### [4.0.0] - 2019-06-02
 
