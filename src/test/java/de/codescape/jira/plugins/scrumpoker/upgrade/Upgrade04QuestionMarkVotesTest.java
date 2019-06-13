@@ -3,8 +3,6 @@ package de.codescape.jira.plugins.scrumpoker.upgrade;
 import com.atlassian.activeobjects.test.TestActiveObjects;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerTestDatabaseUpdater;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingServiceImpl;
 import net.java.ao.EntityManager;
 import net.java.ao.Query;
 import net.java.ao.test.converters.NameConverters;
@@ -17,7 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 @RunWith(ActiveObjectsJUnitRunner.class)
 @Data(ScrumPokerTestDatabaseUpdater.class)

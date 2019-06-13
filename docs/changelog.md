@@ -15,6 +15,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: shorten initial list of table of contents
 * test: update versions of testing libraries
 * refactor: change order of methods to comply with other upgrades
+* refactor: optimize imports and remove unused imports
 
 ### [4.0.0] - 2019-06-02
 
