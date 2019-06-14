@@ -18,6 +18,7 @@ Click on the version in the following list to see all changes since the previous
 * refactor: optimize imports and remove unused imports
 * refactor: move configuration templates into separate directory
 * chore: implement against latest Jira patch version 8.2.2
+* docs: add support page to online documentation
 
 ### [4.0.0] - 2019-06-02
 
