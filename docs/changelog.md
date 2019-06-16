@@ -11,6 +11,10 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
+* ...
+
+### [4.0.1] - 2019-06-16
+
 * docs: update compatibility matrix
 * docs: shorten initial list of table of contents
 * test: update versions of testing libraries
@@ -585,7 +589,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.0.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.0.1...HEAD
+[4.0.1]: https://github.com/codescape/jira-scrum-poker/compare/4.0.0...4.0.1
 [4.0.0]: https://github.com/codescape/jira-scrum-poker/compare/3.13.0...4.0.0
 [3.13.0]: https://github.com/codescape/jira-scrum-poker/compare/3.12.0...3.13.0
 [3.12.0]: https://github.com/codescape/jira-scrum-poker/compare/3.11.1...3.12.0
