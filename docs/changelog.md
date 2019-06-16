@@ -12,6 +12,7 @@ Click on the version in the following list to see all changes since the previous
 ### [Unreleased]
 
 * docs: add release headlines to changelog
+* refactor: improve license and issue check when starting a session
 
 ### [4.0.1] - 2019-06-16
 

@@ -70,8 +70,6 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
      */
     @Override
     protected String doExecute() {
-        issueKey = getParameter(Parameters.ISSUE_KEY);
-
         // license check
         // TODO add check whether Scrum Poker for Jira is running with parameter atlassian-licensing-enabled
         if (pluginLicenseManager.getLicense().isDefined()) {
@@ -86,6 +84,7 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
         }
 
         // issue check
+        issueKey = getParameter(Parameters.ISSUE_KEY);
         MutableIssue issue = issueManager.getIssueObject(issueKey);
         if (issue == null || currentUserIsNotAllowedToSeeIssue(issue) || issueIsNotEstimable(issue)) {
             addErrorMessage("Issue Key " + issueKey + " not found.");
