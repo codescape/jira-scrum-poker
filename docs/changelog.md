@@ -11,9 +11,11 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
-* ...
+* docs: add release headlines to changelog
 
 ### [4.0.1] - 2019-06-16
+
+**Certified support and compatibility for Jira Data Center**
 
 * docs: update compatibility matrix
 * docs: shorten initial list of table of contents
@@ -26,6 +28,10 @@ Click on the version in the following list to see all changes since the previous
 * feat: add license check for installed valid license during session creation
 
 ### [4.0.0] - 2019-06-02
+
+**Certified support and compatibility for Jira Data Center**
+
+*This version was not published on Atlassian Marketplace because of a pending approval for Jira Data Center.*
 
 * chore: update tested patch version of Jira 7.6 and 7.13 enterprise release
 * refactor: optimize imports and remove unused imports
@@ -46,7 +52,9 @@ Click on the version in the following list to see all changes since the previous
 
 ### [3.13.0] - 2019-04-22
 
-**This version was not published on Atlassian Marketplace because of a pending approval for Jira Data Center.**
+**Certified support and compatibility for Jira Data Center**
+
+*This version was not published on Atlassian Marketplace because of a pending approval for Jira Data Center.*
 
 * docs: change order of highlights in readme
 * feat: migrate old votes with question mark to new string format
@@ -62,6 +70,8 @@ Click on the version in the following list to see all changes since the previous
 
 ### [3.12.0] - 2019-04-05
 
+**Improved styling for break and question cards and compatibility with Jira 8.1.x**
+
 * feat: signal that a break is needed only when deck is revealed
 * docs: describe possible usage of test groups
 * feat: use Font Awesome to display icons for coffee card and question mark
@@ -71,12 +81,16 @@ Click on the version in the following list to see all changes since the previous
 
 ### [3.11.1] - 2019-04-01
 
+**Compatibility fix for Jira 7.x in Scrum Poker 3.11.0**
+
 * docs: move changelog into online documentation
 * docs: improve changelog with additional description
 * fix: do not rely on commons-lang 3.5 for checking numeric values
 * test: add test groups for supported versions of Jira (#55)
 
 ### [3.11.0] - 2019-03-30
+
+**Introducing coffee card for breaks and improved estimation confirmation screen**
 
 * chore: use short name Scrum Poker inside Jira GUI
 * style: format configuration files
@@ -99,6 +113,8 @@ Click on the version in the following list to see all changes since the previous
 
 ### [3.10.0] - 2019-02-14
 
+**Scrum Poker for Jira now supports Jira 8**
+
 * chore: implement against latest Jira version
 * test: improve tests for validity of message bundles for internationalization
 * feat: implement with compatibility for Jira 8.0.0
@@ -107,6 +123,8 @@ Click on the version in the following list to see all changes since the previous
 * docs: update compatibility matrix
 
 ### [3.9.0] - 2019-02-01
+
+**Improved button styling, new configuration options and French translation**
 
 * feat: improve button styling to refresh session list
 * feat: improve button styling for Scrum Poker session page
@@ -118,6 +136,8 @@ Click on the version in the following list to see all changes since the previous
 * feat: add complete internationalization of the plugin in French
 
 ### [3.8.0] - 2019-01-14
+
+**Configure Scrum Poker per project and share Scrum Poker sessions easily**
 
 * docs: provide EULA and privacy statement in online documentation
 * feat: add global configuration to enable or disable Scrum Poker per default
@@ -138,6 +158,8 @@ Click on the version in the following list to see all changes since the previous
 
 ### [3.7.0] - 2018-12-03
 
+**Compatibility with Jira 7.13**
+
 * test: cleanup test for REST endpoint and remove unnecessary test data
 * test: cleanup test for automatic upgrade task and remove unnecessary test data
 * test: improve naming of test methods to better reflect test case
@@ -149,6 +171,8 @@ Click on the version in the following list to see all changes since the previous
 * chore: implement against latest Jira patch version 7.13.0
 
 ### [3.6.0] - 2018-09-26
+
+**New styling for session page and badges with estimation distribution count**
 
 * chore: upgrade all dependencies to latest stable version
 * feat: adapt Jira style guide for Scrum Poker card layout
@@ -170,6 +194,8 @@ Click on the version in the following list to see all changes since the previous
 
 ### [3.5.0] - 2018-09-16
 
+**Readiness for Data Center with user interface improvements**
+
 * docs: improve online documentation layout for mobile devices
 * feat: make Scrum Poker accessible from Jira Software boards menu
 * docs: update documentation for joining an active session
@@ -181,6 +207,8 @@ Click on the version in the following list to see all changes since the previous
 * feat: layout improvements for Scrum Poker session to better guide users
 
 ### [3.4.0] - 2018-09-15
+
+**Improved Scrum Poker session page and new online documentation**
 
 * fix: correct escape for umlauts in configuration description
 * chore: implement against latest Jira version
@@ -196,6 +224,8 @@ Click on the version in the following list to see all changes since the previous
 
 ### [3.3.0] - 2018-09-01
 
+**Improved process of saving estimations to issues in backend and GUI**
+
 * feat: ensure minimum value of zero for session timeout configuration
 * feat: show warning/success message when saving estimation to issue
 * docs: add inline documentation to CSS code
@@ -203,6 +233,8 @@ Click on the version in the following list to see all changes since the previous
 * test: improve log output for better readability
 
 ### [3.2.0] - 2018-08-10
+
+**Scrum Poker sessions can be cancelled by the session starter**
 
 * feat: Scrum Poker session timeout configurable in plugin settings (#19)
 * feat: allow the creator of a session to cancel the session (#20)
@@ -213,6 +245,8 @@ Click on the version in the following list to see all changes since the previous
 
 ### [3.1.2] - 2018-07-27
 
+**Improvements to reference issues and active sessions list**
+
 * docs: improve privacy statement with details to data usage
 * fix: cancel fading out reference issues when references shall be displayed
 * fix: hide references immediately when estimation is confirmed
@@ -222,12 +256,16 @@ Click on the version in the following list to see all changes since the previous
 
 ### [3.1.1] - 2018-07-18
 
+**Fixes for robustness of active session list**
+
 * fix: do not fail to display session list for not existing issues
 * fix: do not create sessions for not existing issues
 * feat: reduce requests to reference issues and fade out slowly in gui
 * refactor: improve code for persistence service
 
 ### [3.1.0] - 2018-07-17
+
+**Show reference issues during session to help find the estimation**
 
 * feat: show reference issues during session to help find the estimation
 * refactor: improve code to transform database model into the view model
@@ -236,11 +274,15 @@ Click on the version in the following list to see all changes since the previous
 
 ### [3.0.1] - 2018-07-16
 
+**Fixes for correct visualization of Scrum Poker sessions**
+
 * chore: implement against Jira version 7.11.x
 * fix: do announce agreement only for revealed sessions
 * fix: hide the revealed session when new votes are added (#23)
 
 ### [3.0.0] - 2018-07-13
+
+**Complete rewrite of the persistence layer to persist Scrum poker sessions**
 
 * chore: implement against latest Jira version 7.10.2
 * test: add tests for Scrum Poker configuration action
@@ -251,9 +293,13 @@ Click on the version in the following list to see all changes since the previous
 
 ### [2.8.0] - 2018-06-01
 
+**Scrum Poker is now provided for free on Atlassian Marketplace**
+
 * feat: Scrum Poker is now provided for free on Atlassian Marketplace
 
 ### [2.7.0] - 2018-05-17
+
+**Better visualization of sub task list in Scrum Poker session**
 
 * fix: remove small typo in privacy statement
 * feat: show display name of assignee in list of sub tasks
@@ -261,6 +307,8 @@ Click on the version in the following list to see all changes since the previous
 * chore: use latest version von Jira and Lucene
 
 ### [2.6.0] - 2018-05-13
+
+**Further improvements to graphical user interface and REST backend**
 
 * feat: use buttons and Jira default styling where appropriate
 * docs: changelog includes links to GitHub comparison between tags
@@ -275,6 +323,8 @@ Click on the version in the following list to see all changes since the previous
 * docs: provide Privacy Statement for Scrum Poker
 
 ### [2.5.0] - 2018-04-29
+
+**Optimized user interface for running Scrum Poker sessions**
 
 * chore: implement against latest amps and Jira version
 * docs: update and improve compatibility description
@@ -294,12 +344,16 @@ Click on the version in the following list to see all changes since the previous
 
 ### [2.4.1] - 2018-04-20
 
+**Fixing the confirmation screen for confirmed votes of 0**
+
 * fix: estimation of 0 can be confirmed correctly
 * refactor: improved naming convention for REST representations
 * docs: update and improve general description of the Scrum Poker plugin
 * docs: update and improve installation and compatibility description
 
 ### [2.4.0] - 2018-04-16
+
+**Improved client library for Scrum Poker sessions**
 
 * feat: add post update and post install urls to improve setup process
 * refactor: move all persistence related classes into persistence package
@@ -310,6 +364,8 @@ Click on the version in the following list to see all changes since the previous
 
 ### [2.3.0] - 2018-04-11
 
+**Configuration accessible from plugin administration sidebar**
+
 * style: tabs and spaces for session template
 * docs: update screenshots and description in readme
 * feat: configuration accessible from plugin administration sidebar
@@ -318,6 +374,8 @@ Click on the version in the following list to see all changes since the previous
 * refactor: introduce better naming for plugin components
 
 ### [2.2.0] - 2018-03-26
+
+**Intelligent polling to reduce system load**
 
 * feat: after session is closed stop polling for updates
 * style: format error template
