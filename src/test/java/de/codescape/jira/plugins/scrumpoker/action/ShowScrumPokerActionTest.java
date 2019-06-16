@@ -9,6 +9,10 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.HttpServletVariables;
+import com.atlassian.upm.api.license.PluginLicenseManager;
+import com.atlassian.upm.api.license.entity.LicenseError;
+import com.atlassian.upm.api.license.entity.PluginLicense;
+import com.atlassian.upm.api.util.Option;
 import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
 import org.junit.Before;
 import org.junit.Rule;
@@ -19,9 +23,9 @@ import org.mockito.Mock;
 import javax.servlet.http.HttpServletRequest;
 
 import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ShowScrumPokerActionTest {
@@ -43,6 +47,9 @@ public class ShowScrumPokerActionTest {
 
     @Mock
     private JiraAuthenticationContext jiraAuthenticationContext;
+
+    @Mock
+    private PluginLicenseManager pluginLicenseManager;
 
     @Mock
     private ScrumPokerForIssueCondition scrumPokerForIssueCondition;
@@ -67,6 +74,7 @@ public class ShowScrumPokerActionTest {
 
     @Test
     public void shouldDisplayStartPageWhenUserHasPermissionForIssueAndIssueIsEstimable() {
+        whenLicenseIsValid();
         whenRequestedIssueExists();
         whenUserIsAllowedToSeeIssue();
         whenIssueIsEstimable();
@@ -76,6 +84,7 @@ public class ShowScrumPokerActionTest {
 
     @Test
     public void shouldDisplayErrorPageWhenUserHasNoPermissionForIssue() {
+        whenLicenseIsValid();
         whenRequestedIssueExists();
         whenUserIsNotAllowedToSeeIssue();
 
@@ -84,11 +93,44 @@ public class ShowScrumPokerActionTest {
 
     @Test
     public void shouldDisplayErrorPageWhenIssueIsNotEstimable() {
+        whenLicenseIsValid();
         whenRequestedIssueExists();
         whenUserIsAllowedToSeeIssue();
         whenIssueIsNotEstimable();
 
         assertThat(showScrumPokerAction.doExecute(), is(equalTo("error")));
+    }
+
+    @Test
+    public void shouldDisplayErrorPageWhenLicenseIsMissing() {
+        whenLicenseIsMissing();
+
+        assertThat(showScrumPokerAction.doExecute(), is(equalTo("error")));
+        assertThat(showScrumPokerAction.getErrorMessages(), hasItem("Scrum Poker for Jira is missing a valid license!"));
+    }
+
+    @Test
+    public void shouldDisplayErrorPageWhenLicenseIsInvalid() {
+        whenLicenseIsInvalid();
+
+        assertThat(showScrumPokerAction.doExecute(), is(equalTo("error")));
+        assertThat(showScrumPokerAction.getErrorMessages(), hasItem("Scrum Poker for Jira has license errors: EXPIRED"));
+    }
+
+    private void whenLicenseIsInvalid() {
+        PluginLicense pluginLicense = mock(PluginLicense.class);
+        when(pluginLicense.getError()).thenReturn(Option.option(LicenseError.EXPIRED));
+        when(pluginLicenseManager.getLicense()).thenReturn(Option.option(pluginLicense));
+    }
+
+    private void whenLicenseIsMissing() {
+        when(pluginLicenseManager.getLicense()).thenReturn(Option.none());
+    }
+
+    private void whenLicenseIsValid() {
+        PluginLicense pluginLicense = mock(PluginLicense.class);
+        when(pluginLicense.getError()).thenReturn(Option.none());
+        when(pluginLicenseManager.getLicense()).thenReturn(Option.option(pluginLicense));
     }
 
     private void whenIssueIsNotEstimable() {

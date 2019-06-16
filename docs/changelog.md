@@ -19,6 +19,7 @@ Click on the version in the following list to see all changes since the previous
 * refactor: move configuration templates into separate directory
 * chore: implement against latest Jira patch version 8.2.2
 * docs: add support page to online documentation
+* feat: add license check for installed valid license during session creation
 
 ### [4.0.0] - 2019-06-02
 

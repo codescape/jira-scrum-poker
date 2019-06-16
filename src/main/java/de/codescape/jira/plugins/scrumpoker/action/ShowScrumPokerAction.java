@@ -11,6 +11,8 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.util.http.JiraUrl;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import com.atlassian.upm.api.license.PluginLicenseManager;
+import com.atlassian.upm.api.license.entity.PluginLicense;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
 import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,7 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
     private final PermissionManager permissionManager;
     private final JiraAuthenticationContext jiraAuthenticationContext;
     private final ScrumPokerForIssueCondition scrumPokerForIssueCondition;
+    private final PluginLicenseManager pluginLicenseManager;
 
     private String issueKey;
 
@@ -51,12 +54,14 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
                                 @ComponentImport IssueManager issueManager,
                                 @ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
                                 @ComponentImport PermissionManager permissionManager,
+                                @ComponentImport PluginLicenseManager pluginLicenseManager,
                                 ScrumPokerForIssueCondition scrumPokerForIssueCondition) {
         this.issueManager = issueManager;
         this.rendererManager = rendererManager;
         this.fieldLayoutManager = fieldLayoutManager;
         this.permissionManager = permissionManager;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
+        this.pluginLicenseManager = pluginLicenseManager;
         this.scrumPokerForIssueCondition = scrumPokerForIssueCondition;
     }
 
@@ -66,11 +71,27 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
     @Override
     protected String doExecute() {
         issueKey = getParameter(Parameters.ISSUE_KEY);
+
+        // license check
+        // TODO add check whether Scrum Poker for Jira is running with parameter atlassian-licensing-enabled
+        if (pluginLicenseManager.getLicense().isDefined()) {
+            PluginLicense license = pluginLicenseManager.getLicense().get();
+            if (license.getError().isDefined()) {
+                addErrorMessage("Scrum Poker for Jira has license errors: " + license.getError().get().name());
+                return ERROR;
+            }
+        } else {
+            addErrorMessage("Scrum Poker for Jira is missing a valid license!");
+            return ERROR;
+        }
+
+        // issue check
         MutableIssue issue = issueManager.getIssueObject(issueKey);
         if (issue == null || currentUserIsNotAllowedToSeeIssue(issue) || issueIsNotEstimable(issue)) {
             addErrorMessage("Issue Key " + issueKey + " not found.");
             return ERROR;
         }
+
         return SUCCESS;
     }
 
