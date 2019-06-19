@@ -13,7 +13,7 @@ Click on the version in the following list to see all changes since the previous
 
 * docs: add release headlines to changelog
 * refactor: improve license and issue check when starting a session
-* chore: switch to Oracle JDK 9 for TravisCI build
+* chore: switch to Open JDK 11 for TravisCI build
 
 ### [4.0.1] - 2019-06-16
 
