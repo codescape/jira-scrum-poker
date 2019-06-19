@@ -1,7 +1,8 @@
+dist: xenial
 sudo: false
 language: java
 jdk:
-  - openjdk11
+  - openjdk8
 before_install:
   - wget https://marketplace.atlassian.com/download/plugins/atlassian-plugin-sdk-tgz
   - mkdir opt
