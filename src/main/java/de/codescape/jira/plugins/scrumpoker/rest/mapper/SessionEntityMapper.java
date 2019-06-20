@@ -84,21 +84,21 @@ public class SessionEntityMapper {
     }
 
     /**
-     * Cancellation of a Scrum poker session is only allowed for the user who started the session.
+     * Cancellation of a Scrum Poker session is only allowed for the user who started the session.
      */
     private boolean allowCancel(ScrumPokerSession scrumPokerSession, String userKey) {
         return scrumPokerSession.getCreatorUserKey() != null && scrumPokerSession.getCreatorUserKey().equals(userKey);
     }
 
     /**
-     * Resetting a Scrum poker session is allowed when minimum one vote is given and the votes are visible.
+     * Resetting a Scrum Poker session is allowed when minimum one vote is given and the votes are visible.
      */
     private boolean allowReset(ScrumPokerSession scrumPokerSession) {
         return scrumPokerSession.isVisible() && scrumPokerSession.getVotes().length > 0;
     }
 
     /**
-     * Revealing a Scrum poker session is allowed when minimum one vote is given and the votes are hidden.
+     * Revealing a Scrum Poker session is allowed when minimum one vote is given and the votes are hidden.
      */
     private boolean allowReveal(ScrumPokerSession scrumPokerSession, String userKey) {
         AllowRevealDeck allowRevealDeck = scrumPokerSettingService.load().getAllowRevealDeck();
@@ -163,7 +163,7 @@ public class SessionEntityMapper {
     }
 
     /**
-     * Returns whether the current vote needs to talk or not depending on the status of the Scrum poker session and the
+     * Returns whether the current vote needs to talk or not depending on the status of the Scrum Poker session and the
      * other votes provided.
      */
     private boolean needToTalk(String vote, ScrumPokerSession scrumPokerSession) {

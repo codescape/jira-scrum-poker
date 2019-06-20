@@ -3,7 +3,7 @@ package de.codescape.jira.plugins.scrumpoker.rest.entities;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 /**
- * REST representation of a date to be displayed during a Scrum poker session.
+ * REST representation of a date to be displayed during a Scrum Poker session.
  */
 @JsonAutoDetect
 public class DateEntity {

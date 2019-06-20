@@ -13,7 +13,7 @@ import java.util.Date;
 public interface ScrumPokerSession extends RawEntity<String> {
 
     /**
-     * The unique key of the issue this Scrum poker session is started for.
+     * The unique key of the issue this Scrum Poker session is started for.
      */
     @NotNull
     @PrimaryKey("issueKey")
@@ -22,27 +22,27 @@ public interface ScrumPokerSession extends RawEntity<String> {
     void setIssueKey(String issueKey);
 
     /**
-     * The unique key of the user this Scrum poker session is started by.
+     * The unique key of the user this Scrum Poker session is started by.
      */
     String getCreatorUserKey();
 
     void setCreatorUserKey(String creatorUserKey);
 
     /**
-     * The list of votes provided by users for this Scrum poker session.
+     * The list of votes provided by users for this Scrum Poker session.
      */
     @OneToMany(reverse = "getSession")
     ScrumPokerVote[] getVotes();
 
     /**
-     * The visibility of the Scrum poker session defines whether the votes are revealed or hidden.
+     * The visibility of the Scrum Poker session defines whether the votes are revealed or hidden.
      */
     boolean isVisible();
 
     void setVisible(boolean visible);
 
     /**
-     * The confirmed vote for this Scrum poker session if exists.
+     * The confirmed vote for this Scrum Poker session if exists.
      */
     Integer getConfirmedVote();
 
@@ -56,21 +56,21 @@ public interface ScrumPokerSession extends RawEntity<String> {
     void setConfirmedUserKey(String userKey);
 
     /**
-     * The date this Scrum poker session got confirmed.
+     * The date this Scrum Poker session got confirmed.
      */
     Date getConfirmedDate();
 
     void setConfirmedDate(Date confirmedDate);
 
     /**
-     * The date this Scrum poker session is started.
+     * The date this Scrum Poker session is started.
      */
     Date getCreateDate();
 
     void setCreateDate(Date createDate);
 
     /**
-     * The Scrum poker session can be cancelled.
+     * The Scrum Poker session can be cancelled.
      */
     boolean isCancelled();
 

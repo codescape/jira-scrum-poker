@@ -5,7 +5,7 @@ import org.codehaus.jackson.annotate.JsonAutoDetect;
 import java.util.List;
 
 /**
- * REST representation of a list of reference issues to be displayed during a Scrum poker session.
+ * REST representation of a list of reference issues to be displayed during a Scrum Poker session.
  */
 @JsonAutoDetect
 public class ReferenceListEntity {

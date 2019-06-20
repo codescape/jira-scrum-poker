@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * This condition is used to decide whether a button to start a Scrum poker session should be displayed or not for the
- * given issue. The issue must be editable and have the custom field that is configured for Scrum poker estimations.
+ * This condition is used to decide whether a button to start a Scrum Poker session should be displayed or not for the
+ * given issue. The issue must be editable and have the custom field that is configured for Scrum Poker estimations.
  */
 @Component
 public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition {
@@ -43,7 +43,7 @@ public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition {
     }
 
     /**
-     * Returns whether a Scrum poker session can be started for the given issue.
+     * Returns whether a Scrum Poker session can be started for the given issue.
      */
     public boolean isEstimable(Issue issue) {
         return issue.isEditable() && hasStoryPointField(issue) && hasScrumPokerEnabled(issue.getProjectObject());

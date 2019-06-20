@@ -14,6 +14,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: add release headlines to changelog
 * refactor: improve license and issue check when starting a session
 * chore: switch to Xenial distribution for Travis CI build
+* chore: fix the spelling of Scrum Poker in comments and changes
 
 ### [4.0.1] - 2019-06-16
 
@@ -214,10 +215,10 @@ Click on the version in the following list to see all changes since the previous
 
 * fix: correct escape for umlauts in configuration description
 * chore: implement against latest Jira version
-* refactor: rename Scrum poker session service implementation
+* refactor: rename Scrum Poker session service implementation
 * feat: prevent issue description from floating into poker elements
 * refactor: change primary key for persisted votes from int to Long
-* feat: do not create Scrum poker sessions for issues missing estimation field
+* feat: do not create Scrum Poker sessions for issues missing estimation field
 * test: use Mockito ArgumentMatcher instead of deprecated Mockito Matcher
 * test: improve tests and remove unnecessary details in setup
 * chore: implement against latest Jira patch version 7.12.1
@@ -284,14 +285,14 @@ Click on the version in the following list to see all changes since the previous
 
 ### [3.0.0] - 2018-07-13
 
-**Complete rewrite of the persistence layer to persist Scrum poker sessions**
+**Complete rewrite of the persistence layer to persist Scrum Poker sessions**
 
 * chore: implement against latest Jira version 7.10.2
 * test: add tests for Scrum Poker configuration action
-* refactor: rename and move condition to display Scrum poker for issue
+* refactor: rename and move condition to display Scrum Poker for issue
 * refactor: use better base class for condition to render Scrum Poker button
 * feat: add link to marketplace on plugin configuration page
-* refactor: introducing persistence to Scrum poker session with Active Objects
+* refactor: introducing persistence to Scrum Poker session with Active Objects
 
 ### [2.8.0] - 2018-06-01
 
@@ -518,7 +519,7 @@ Click on the version in the following list to see all changes since the previous
 * chore: cleanup of unused actions and imports, css selectors
 * style: improve code formatting
 * refactor: improve internal structure of action based code and remove redundancy
-* feat: closed and open Scrum poker sessions are sorted by creation date
+* feat: closed and open Scrum Poker sessions are sorted by creation date
 
 ### [1.4.0] - 2017-08-07
 

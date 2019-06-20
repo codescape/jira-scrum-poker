@@ -8,7 +8,7 @@ import java.util.Date;
 public interface ScrumPokerVote extends ScrumPokerEntity {
 
     /**
-     * The Scrum poker session this vote belongs to.
+     * The Scrum Poker session this vote belongs to.
      */
     ScrumPokerSession getSession();
 

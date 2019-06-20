@@ -4,7 +4,7 @@ import com.atlassian.activeobjects.tx.Transactional;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 
 /**
- * Service to persist and retrieve Scrum poker settings from the database.
+ * Service to persist and retrieve Scrum Poker settings from the database.
  */
 @Transactional
 public interface ScrumPokerSettingService {

@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
 
 /**
- * Show a list of all running and recently finished Scrum poker sessions.
+ * Show a list of all running and recently finished Scrum Poker sessions.
  */
 public class ShowSessionsAction extends AbstractScrumPokerAction {
 
