@@ -15,6 +15,7 @@ Click on the version in the following list to see all changes since the previous
 * refactor: improve license and issue check when starting a session
 * chore: switch to Xenial distribution for Travis CI build
 * chore: fix the spelling of Scrum Poker in comments and changes
+* test: remove todo for deployment with licensing disabled after successful test
 
 ### [4.0.1] - 2019-06-16
 

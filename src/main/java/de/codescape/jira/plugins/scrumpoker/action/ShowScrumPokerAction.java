@@ -71,7 +71,6 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
     @Override
     protected String doExecute() {
         // license check
-        // TODO add check whether Scrum Poker for Jira is running with parameter atlassian-licensing-enabled
         if (pluginLicenseManager.getLicense().isDefined()) {
             PluginLicense license = pluginLicenseManager.getLicense().get();
             if (license.getError().isDefined()) {
