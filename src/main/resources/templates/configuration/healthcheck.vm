@@ -1,0 +1,106 @@
+<html>
+<head>
+    <title>$i18n.getText("scrumpoker.title") - $i18n.getText("scrumpoker.healthcheck.title")</title>
+</head>
+<body>
+
+<h2>$i18n.getText("scrumpoker.title") &raquo; $i18n.getText("scrumpoker.healthcheck.title")</h2>
+
+<p>$i18n.getText("scrumpoker.healthcheck.description")</p>
+
+<form class="aui long-label" action="ScrumPokerHealthCheck.jspa" method="post">
+    <div class="form-body">
+        <fieldset class="group">
+            <legend><span>$i18n.getText("scrumpoker.healthcheck.checks")</span></legend>
+            <div class="checkbox">
+                <input class="checkbox" type="checkbox" name="scanLicense" id="scanLicense" value="true" checked>
+                <label for="scanLicense">$i18n.getText("scrumpoker.healthcheck.checks.scanLicense")</label>
+            </div>
+            <div class="checkbox">
+                <input class="checkbox" type="checkbox" name="scanConfiguration" id="scanConfiguration" value="true" checked>
+                <label for="scanLicense">$i18n.getText("scrumpoker.healthcheck.checks.scanConfiguration")</label>
+            </div>
+            <div class="checkbox">
+                <input class="checkbox" type="checkbox" name="scanErrors" id="scanErrors" value="true" checked>
+                <label for="scanLicense">$i18n.getText("scrumpoker.healthcheck.checks.scanErrors")</label>
+            </div>
+            <div class="description">$i18n.getText("scrumpoker.healthcheck.checks.description")</div>
+        </fieldset>
+    </div>
+    <div class="buttons-container form-footer">
+        <div class="buttons">
+            <input type="hidden" name="action" value="start">
+            <button type="submit" id="perform-healthcheck" class="aui-button aui-button-primary">$i18n.getText("scrumpoker.healthcheck.start")</button>
+        </div>
+    </div>
+</form>
+
+#if ($showResults)
+    <div id="health-check-results">
+        <h3>$i18n.getText("scrumpoker.healthcheck.results")</h3>
+
+        #if ($showLicense)
+            <h4>$i18n.getText("scrumpoker.healthcheck.checks.scanLicense")</h4>
+             #if($licenseResults.isEmpty())
+                <div class="aui-message aui-message-success">
+                    <p>$i18n.getText("scrumpoker.healthcheck.results.success")</p>
+                </div>
+             #else
+                <div class="aui-message aui-message-error">
+                    <p class="title">
+                        <strong>$i18n.getText("scrumpoker.healthcheck.results.failure")</strong>
+                    </p>
+                    <ul>
+                        #foreach ($warning in $licenseResults)
+                            <li>$i18n.getText($warning)</li>
+                        #end
+                    </ul>
+                 </div>
+             #end
+        #end
+
+        #if ($showConfiguration)
+            <h4>$i18n.getText("scrumpoker.healthcheck.checks.scanConfiguration")</h4>
+             #if($configurationResults.isEmpty())
+                <div class="aui-message aui-message-success">
+                    <p>$i18n.getText("scrumpoker.healthcheck.results.success")</p>
+                </div>
+             #else
+                <div class="aui-message aui-message-error">
+                    <p class="title">
+                        <strong>$i18n.getText("scrumpoker.healthcheck.results.failure")</strong>
+                    </p>
+                    <ul>
+                        #foreach ($warning in $configurationResults)
+                            <li>$i18n.getText($warning)</li>
+                        #end
+                    </ul>
+                 </div>
+             #end
+        #end
+
+        #if ($showErrors)
+            <h4>$i18n.getText("scrumpoker.healthcheck.checks.scanErrors")</h4>
+             #if($errorsResults.isEmpty())
+                <div class="aui-message aui-message-success">
+                    <p>$i18n.getText("scrumpoker.healthcheck.results.success")</p>
+                </div>
+             #else
+                <div class="aui-message aui-message-error">
+                    <p class="title">
+                        <strong>$i18n.getText("scrumpoker.healthcheck.results.failure")</strong>
+                    </p>
+                    <ul>
+                        #foreach ($warning in $errorsResults)
+                            <li>$i18n.getText($warning)</li>
+                        #end
+                    </ul>
+                 </div>
+             #end
+        #end
+    </div>
+
+#end
+
+</body>
+</html>
