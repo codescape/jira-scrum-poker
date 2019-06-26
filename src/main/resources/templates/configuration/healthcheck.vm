@@ -40,16 +40,15 @@
         <h3>$i18n.getText("scrumpoker.healthcheck.results")</h3>
 
         #if ($showLicense)
-            <h4>$i18n.getText("scrumpoker.healthcheck.checks.scanLicense")</h4>
              #if($licenseResults.isEmpty())
                 <div class="aui-message aui-message-success">
+                    <h4>$i18n.getText("scrumpoker.healthcheck.checks.scanLicense")</h4>
                     <p>$i18n.getText("scrumpoker.healthcheck.results.success")</p>
                 </div>
              #else
                 <div class="aui-message aui-message-error">
-                    <p class="title">
-                        <strong>$i18n.getText("scrumpoker.healthcheck.results.failure")</strong>
-                    </p>
+                    <h4>$i18n.getText("scrumpoker.healthcheck.checks.scanLicense")</h4>
+                    <p>$i18n.getText("scrumpoker.healthcheck.results.failure")</p>
                     <ul>
                         #foreach ($warning in $licenseResults)
                             <li>$i18n.getText($warning)</li>
@@ -60,16 +59,15 @@
         #end
 
         #if ($showConfiguration)
-            <h4>$i18n.getText("scrumpoker.healthcheck.checks.scanConfiguration")</h4>
              #if($configurationResults.isEmpty())
                 <div class="aui-message aui-message-success">
+                    <h4>$i18n.getText("scrumpoker.healthcheck.checks.scanConfiguration")</h4>
                     <p>$i18n.getText("scrumpoker.healthcheck.results.success")</p>
                 </div>
              #else
                 <div class="aui-message aui-message-error">
-                    <p class="title">
-                        <strong>$i18n.getText("scrumpoker.healthcheck.results.failure")</strong>
-                    </p>
+                    <h4>$i18n.getText("scrumpoker.healthcheck.checks.scanConfiguration")</h4>
+                    <p>$i18n.getText("scrumpoker.healthcheck.results.failure")</p>
                     <ul>
                         #foreach ($warning in $configurationResults)
                             <li>$i18n.getText($warning)</li>
@@ -80,16 +78,15 @@
         #end
 
         #if ($showErrors)
-            <h4>$i18n.getText("scrumpoker.healthcheck.checks.scanErrors")</h4>
              #if($errorsResults.isEmpty())
                 <div class="aui-message aui-message-success">
+                    <h4>$i18n.getText("scrumpoker.healthcheck.checks.scanErrors")</h4>
                     <p>$i18n.getText("scrumpoker.healthcheck.results.success")</p>
                 </div>
              #else
                 <div class="aui-message aui-message-error">
-                    <p class="title">
-                        <strong>$i18n.getText("scrumpoker.healthcheck.results.failure")</strong>
-                    </p>
+                    <h4>$i18n.getText("scrumpoker.healthcheck.checks.scanErrors")</h4>
+                    <p>$i18n.getText("scrumpoker.healthcheck.results.failure")</p>
                     <ul>
                         #foreach ($warning in $errorsResults)
                             <li>$i18n.getText($warning)</li>
@@ -99,7 +96,6 @@
              #end
         #end
     </div>
-
 #end
 
 </body>

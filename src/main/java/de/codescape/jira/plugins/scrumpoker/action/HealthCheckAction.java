@@ -70,6 +70,11 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
         // check that a license is defined
         if (!pluginLicenseManager.getLicense().isDefined()) {
             results.add("scrumpoker.healthcheck.results.errors.nolicensefound");
+        } else {
+            // check that the license is valid
+            if (!pluginLicenseManager.getLicense().get().isValid()) {
+                results.add("scrumpoker.healthcheck.results.errors.licensenotvalid");
+            }
         }
 
         return results;
@@ -93,12 +98,12 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
         String storyPointField = scrumPokerSettingService.load().getStoryPointField();
         if (storyPointField == null || storyPointField.isEmpty()) {
             results.add("scrumpoker.healthcheck.results.errors.estimationfieldnotset");
-        }
-
-        // check that the confirmed estimation custom field can be found
-        CustomField customField = estimationFieldService.findStoryPointField();
-        if (customField == null) {
-            results.add("scrumpoker.healthcheck.results.errors.customfieldnotfound");
+        } else {
+            // check that the confirmed estimation custom field can be found
+            CustomField customField = estimationFieldService.findStoryPointField();
+            if (customField == null) {
+                results.add("scrumpoker.healthcheck.results.errors.customfieldnotfound");
+            }
         }
 
         return results;

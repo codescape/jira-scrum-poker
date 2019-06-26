@@ -17,6 +17,7 @@ Click on the version in the following list to see all changes since the previous
 * chore: fix the spelling of Scrum Poker in comments and changes
 * test: remove todo for deployment with licensing disabled after successful test
 * feat: health check for Scrum Poker app available in configuration (#67)
+* feat: add check for validity of license to health check (#67)
 
 ### [4.0.1] - 2019-06-16
 
