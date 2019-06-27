@@ -16,6 +16,8 @@ Before creating new tickets you might want to have a look whether your request i
 
 The issue tracker is located here: [https://github.com/codescape/jira-scrum-poker/issues](https://github.com/codescape/jira-scrum-poker/issues)
 
+You do need to have a GitHub account to create new tickets. If this is no option for you please feel free to contact us by mail.
+
 ### Mail
 
 Having a question or an issue with Scrum Poker for Jira and you didn't find help inside this documentation?
