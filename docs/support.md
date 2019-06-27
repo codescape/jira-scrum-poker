@@ -3,22 +3,21 @@ layout: default
 title: Support
 ---
 
-There are many ways to get in contact.
-Please choose the one appropriate for your request:
+There are many reasons to get in contact and we are always happy to hear from you.
+Please choose your preferred way to communicate with us:
 
 * Table of Contents
 {:toc}
 
 ### Issue Tracker
 
-You can raise a ticket in the issue tracker for new feature requests or bug reports or anything else.
-Before creating new tickets you might want to have a look whether your request is already there in another ticket.
+The issue tracker is the best way to submit feature requests or bug reports.
+You can find the issue tracker and create new tickets or comment on existing tickets here:
+[https://github.com/codescape/jira-scrum-poker/issues](https://github.com/codescape/jira-scrum-poker/issues)
 
-The issue tracker is located here: [https://github.com/codescape/jira-scrum-poker/issues](https://github.com/codescape/jira-scrum-poker/issues)
-
-You do need to have a GitHub account to create new tickets. If this is no option for you please feel free to contact us by mail.
+A [GitHub](https://www.github.com) account is required to create new tickets or comment on existing tickets.
+If you do not have an account or do not want to create an account please feel free to send us a mail.
 
 ### Mail
 
-Having a question or an issue with Scrum Poker for Jira and you didn't find help inside this documentation?
-You are always welcome to send a mail using this mail address: <a href="mailto:{{ site.contact_mail }}">{{ site.contact_mail }}</a>
+If this documentation did not answer your questions or provided you with the help you were looking for then you are always welcome to send a mail using the following mail address: <a href="mailto:{{ site.contact_mail }}">{{ site.contact_mail }}</a>
