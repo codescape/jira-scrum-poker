@@ -17,6 +17,25 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
     private static final long serialVersionUID = 1L;
 
     /**
+     * Potential license error codes.
+     */
+    static final class License {
+
+        static final String LICENSE_INVALID = "scrumpoker.healthcheck.results.errors.licenseinvalid";
+        static final String NO_LICENSE_FOUND = "scrumpoker.healthcheck.results.errors.nolicensefound";
+
+    }
+
+    /**
+     * Potential configuration error codes.
+     */
+    static final class Configuration {
+
+        static final String ESTIMATION_FIELD_NOT_FOUND = "scrumpoker.healthcheck.results.errors.estimationfieldnotfound";
+        static final String ESTIMATION_FIELD_NOT_SET = "scrumpoker.healthcheck.results.errors.estimationfieldnotset";
+    }
+
+    /**
      * Names of all parameters used on the global configuration page.
      */
     static final class Parameters {
@@ -69,11 +88,11 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
 
         // check that a license is defined
         if (!pluginLicenseManager.getLicense().isDefined()) {
-            results.add("scrumpoker.healthcheck.results.errors.nolicensefound");
+            results.add(License.NO_LICENSE_FOUND);
         } else {
             // check that the license is valid
             if (!pluginLicenseManager.getLicense().get().isValid()) {
-                results.add("scrumpoker.healthcheck.results.errors.licensenotvalid");
+                results.add(License.LICENSE_INVALID);
             }
         }
 
@@ -97,12 +116,12 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
         // check that the confirmed estimation field is set
         String storyPointField = scrumPokerSettingService.load().getStoryPointField();
         if (storyPointField == null || storyPointField.isEmpty()) {
-            results.add("scrumpoker.healthcheck.results.errors.estimationfieldnotset");
+            results.add(Configuration.ESTIMATION_FIELD_NOT_SET);
         } else {
             // check that the confirmed estimation custom field can be found
             CustomField customField = estimationFieldService.findStoryPointField();
             if (customField == null) {
-                results.add("scrumpoker.healthcheck.results.errors.customfieldnotfound");
+                results.add(Configuration.ESTIMATION_FIELD_NOT_FOUND);
             }
         }
 
