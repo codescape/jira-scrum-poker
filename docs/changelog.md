@@ -21,6 +21,7 @@ Click on the version in the following list to see all changes since the previous
 * test: implement test coverage for health check logic (#67)
 * docs: notice that a GitHub account is required to create new tickets
 * docs: improve support page in online documentation
+* docs: add online documentation for the health check feature
 
 ### [4.0.1] - 2019-06-16
 
