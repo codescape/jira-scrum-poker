@@ -33,6 +33,7 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
 
         static final String ESTIMATION_FIELD_NOT_FOUND = "scrumpoker.healthcheck.results.errors.estimationfieldnotfound";
         static final String ESTIMATION_FIELD_NOT_SET = "scrumpoker.healthcheck.results.errors.estimationfieldnotset";
+
     }
 
     /**
