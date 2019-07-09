@@ -1,6 +1,9 @@
 package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.activeobjects.tx.Transactional;
+import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
+
+import java.util.List;
 
 /**
  * Service to persist and retrieve project related configuration from the database.
@@ -23,5 +26,12 @@ public interface ProjectSettingService {
      * @param scrumPokerEnabled project has Scrum Poker enabled
      */
     void persistScrumPokerEnabled(Long projectId, boolean scrumPokerEnabled);
+
+    /**
+     * Returns all project specific settings.
+     *
+     * @return settings for all projects
+     */
+    List<ScrumPokerProject> loadAll();
 
 }

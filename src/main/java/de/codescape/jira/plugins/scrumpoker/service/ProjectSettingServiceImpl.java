@@ -7,6 +7,10 @@ import net.java.ao.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Implementation of {@link ProjectSettingService} using Active Objects as persistence model.
  */
@@ -31,6 +35,11 @@ public class ProjectSettingServiceImpl implements ProjectSettingService {
         ScrumPokerProject scrumPokerProject = findOrCreateByProjectId(projectId);
         scrumPokerProject.setScrumPokerEnabled(scrumPokerEnabled);
         scrumPokerProject.save();
+    }
+
+    @Override
+    public List<ScrumPokerProject> loadAll() {
+        return Arrays.stream(activeObjects.find(ScrumPokerProject.class)).collect(Collectors.toList());
     }
 
     private ScrumPokerProject findById(Long projectId) {

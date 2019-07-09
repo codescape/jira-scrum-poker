@@ -22,6 +22,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: notice that a GitHub account is required to create new tickets
 * docs: improve support page in online documentation
 * docs: add online documentation for the health check feature
+* feat: add check for Scrum Poker enabled globally or explicitly (#67)
 
 ### [4.0.1] - 2019-06-16
 

@@ -3,7 +3,9 @@ package de.codescape.jira.plugins.scrumpoker.action;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.upm.api.license.PluginLicenseManager;
+import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
+import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
 
         static final String ESTIMATION_FIELD_NOT_FOUND = "scrumpoker.healthcheck.results.errors.estimationfieldnotfound";
         static final String ESTIMATION_FIELD_NOT_SET = "scrumpoker.healthcheck.results.errors.estimationfieldnotset";
+        static final String ENABLED_FOR_NO_PROJECT = "scrumpoker.healthcheck.results.errors.enabledfornoproject";
 
     }
 
@@ -51,13 +54,16 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
     private final ScrumPokerSettingService scrumPokerSettingService;
     private final EstimationFieldService estimationFieldService;
     private final PluginLicenseManager pluginLicenseManager;
+    private final ProjectSettingService projectSettingService;
 
     public HealthCheckAction(ScrumPokerSettingService scrumPokerSettingService,
                              EstimationFieldService estimationFieldService,
-                             @ComponentImport PluginLicenseManager pluginLicenseManager) {
+                             @ComponentImport PluginLicenseManager pluginLicenseManager,
+                             ProjectSettingService projectSettingService) {
         this.scrumPokerSettingService = scrumPokerSettingService;
         this.estimationFieldService = estimationFieldService;
         this.pluginLicenseManager = pluginLicenseManager;
+        this.projectSettingService = projectSettingService;
     }
 
     @Override
@@ -124,6 +130,12 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
             if (customField == null) {
                 results.add(Configuration.ESTIMATION_FIELD_NOT_FOUND);
             }
+        }
+
+        // check that Scrum Poker is either globally enabled or has projects explicitly enabled
+        if (!scrumPokerSettingService.load().isDefaultProjectActivation() &&
+            projectSettingService.loadAll().stream().noneMatch(ScrumPokerProject::isScrumPokerEnabled)) {
+            results.add(Configuration.ENABLED_FOR_NO_PROJECT);
         }
 
         return results;
