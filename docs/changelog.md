@@ -23,6 +23,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: improve support page in online documentation
 * docs: add online documentation for the health check feature
 * feat: add check for Scrum Poker enabled globally or explicitly (#67)
+* feat: add German translation for health check (#67) 
 
 ### [4.0.1] - 2019-06-16
 
