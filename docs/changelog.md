@@ -11,7 +11,7 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
-* ...
+* docs: include supported languages on support page in online documentation
 
 ### [4.1.0] - 2019-07-16
 
