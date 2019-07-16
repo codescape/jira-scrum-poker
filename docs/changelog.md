@@ -11,6 +11,12 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
+* ...
+
+### [4.1.0] - 2019-07-16
+
+**Health Check for your Scrum Poker for Jira installation**
+
 * docs: add release headlines to changelog
 * refactor: improve license and issue check when starting a session
 * chore: switch to Xenial distribution for Travis CI build
@@ -661,7 +667,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.0.1...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.1.0...HEAD
+[4.1.0]: https://github.com/codescape/jira-scrum-poker/compare/4.0.1...4.1.0
 [4.0.1]: https://github.com/codescape/jira-scrum-poker/compare/4.0.0...4.0.1
 [4.0.0]: https://github.com/codescape/jira-scrum-poker/compare/3.13.0...4.0.0
 [3.13.0]: https://github.com/codescape/jira-scrum-poker/compare/3.12.0...3.13.0
