@@ -24,7 +24,8 @@ Click on the version in the following list to see all changes since the previous
 * docs: add online documentation for the health check feature
 * feat: add check for Scrum Poker enabled globally or explicitly (#67)
 * feat: add German translation for health check (#67)
-* feat: add French translation for health check (#67) 
+* feat: add French translation for health check (#67)
+* chore: implement against Jira patch versions 8.2.3, 7.13.6 and 7.6.14 (#70)
 
 ### [4.0.1] - 2019-06-16
 
