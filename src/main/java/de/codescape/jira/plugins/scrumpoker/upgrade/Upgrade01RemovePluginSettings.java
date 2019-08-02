@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 public class Upgrade01RemovePluginSettings extends AbstractUpgradeTask {
 
     private static final String STORY_POINT_PLUGIN_SETTINGS = SCRUM_POKER_PLUGIN_KEY + ".storyPointField";
-    private static final String SSESSION_TIMEOUT_PLUGIN_SETTINGS = SCRUM_POKER_PLUGIN_KEY + ".sessionTimeout";
+    private static final String SESSION_TIMEOUT_PLUGIN_SETTINGS = SCRUM_POKER_PLUGIN_KEY + ".sessionTimeout";
 
     private final PluginSettingsFactory pluginSettingsFactory;
     private final ScrumPokerSettingService scrumPokerSettingService;
@@ -54,9 +54,9 @@ public class Upgrade01RemovePluginSettings extends AbstractUpgradeTask {
             scrumPokerSettingService.persist(globalSettings);
         }
         // Grab the Session Timeout and remove the config if exists
-        String sessionTimeout = (String) pluginSettings.get(SSESSION_TIMEOUT_PLUGIN_SETTINGS);
+        String sessionTimeout = (String) pluginSettings.get(SESSION_TIMEOUT_PLUGIN_SETTINGS);
         if (sessionTimeout != null) {
-            pluginSettings.remove(SSESSION_TIMEOUT_PLUGIN_SETTINGS);
+            pluginSettings.remove(SESSION_TIMEOUT_PLUGIN_SETTINGS);
             GlobalSettings globalSettings = scrumPokerSettingService.load();
             globalSettings.setSessionTimeout(Integer.valueOf(sessionTimeout));
             scrumPokerSettingService.persist(globalSettings);

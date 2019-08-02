@@ -14,6 +14,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: include supported languages on support page in online documentation
 * chore: implement against Jira patch version 8.3.0
 * docs: move support page to a more obvious menu item
+* chore: fix typo in constant in upgrade class
 
 ### [4.1.0] - 2019-07-16
 
