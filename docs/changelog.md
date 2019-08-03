@@ -11,6 +11,12 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
+* ...
+
+### [4.2.0] - 2019-08-03
+
+**Configurable permission check to confirm estimations**
+
 * docs: include supported languages on support page in online documentation
 * chore: implement against Jira patch version 8.3.0
 * docs: move support page to a more obvious menu item
@@ -676,7 +682,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.1.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.2.0...HEAD
+[4.2.0]: https://github.com/codescape/jira-scrum-poker/compare/4.1.0...4.2.0
 [4.1.0]: https://github.com/codescape/jira-scrum-poker/compare/4.0.1...4.1.0
 [4.0.1]: https://github.com/codescape/jira-scrum-poker/compare/4.0.0...4.0.1
 [4.0.0]: https://github.com/codescape/jira-scrum-poker/compare/3.13.0...4.0.0
