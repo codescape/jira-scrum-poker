@@ -11,6 +11,7 @@ public class GlobalSettings {
     public static final AllowRevealDeck ALLOW_REVEAL_DECK_DEFAULT = AllowRevealDeck.EVERYONE;
     public static final boolean DEFAULT_PROJECT_ACTIVATION_DEFAULT = true;
     public static final boolean DISPLAY_DROPDOWN_ON_BOARDS_DEFAULT = false;
+    public static final boolean CHECK_PERMISSION_TO_SAVE_ESTIMATE_DEFAULT = false;
 
     // settings
 
@@ -19,6 +20,7 @@ public class GlobalSettings {
     private AllowRevealDeck allowRevealDeck = ALLOW_REVEAL_DECK_DEFAULT;
     private boolean defaultProjectActivation = DEFAULT_PROJECT_ACTIVATION_DEFAULT;
     private boolean displayDropdownOnBoards = DISPLAY_DROPDOWN_ON_BOARDS_DEFAULT;
+    private boolean checkPermissionToSaveEstimate = CHECK_PERMISSION_TO_SAVE_ESTIMATE_DEFAULT;
 
     /**
      * Set the story point field.
@@ -88,6 +90,20 @@ public class GlobalSettings {
      */
     public boolean isDisplayDropdownOnBoards() {
         return displayDropdownOnBoards;
+    }
+
+    /**
+     * Set whether to check edit permission before persisting the estimation value.
+     */
+    public void setCheckPermissionToSaveEstimate(boolean checkPermissionToSaveEstimate) {
+        this.checkPermissionToSaveEstimate = checkPermissionToSaveEstimate;
+    }
+
+    /**
+     * Return whether to check edit permission before persisting the estimation value.
+     */
+    public boolean isCheckPermissionToSaveEstimate() {
+        return checkPermissionToSaveEstimate;
     }
 
 }

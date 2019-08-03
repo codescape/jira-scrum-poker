@@ -5,7 +5,9 @@ import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.UpdateIssueRequest;
 import com.atlassian.jira.issue.fields.CustomField;
+import com.atlassian.jira.permission.ProjectPermissions;
 import com.atlassian.jira.security.JiraAuthenticationContext;
+import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import org.slf4j.Logger;
@@ -25,17 +27,20 @@ public class EstimationFieldService {
     private final ScrumPokerSettingService scrumPokerSettingService;
     private final CustomFieldManager customFieldManager;
     private final JiraAuthenticationContext context;
+    private final PermissionManager permissionManager;
     private final IssueManager issueManager;
 
     @Autowired
     public EstimationFieldService(@ComponentImport JiraAuthenticationContext context,
                                   ScrumPokerSettingService scrumPokerSettingService,
                                   @ComponentImport IssueManager issueManager,
-                                  @ComponentImport CustomFieldManager customFieldManager) {
+                                  @ComponentImport CustomFieldManager customFieldManager,
+                                  @ComponentImport PermissionManager permissionManager) {
         this.scrumPokerSettingService = scrumPokerSettingService;
         this.issueManager = issueManager;
         this.customFieldManager = customFieldManager;
         this.context = context;
+        this.permissionManager = permissionManager;
     }
 
     /**
@@ -44,6 +49,11 @@ public class EstimationFieldService {
     public boolean save(String issueKey, Integer newValue) {
         ApplicationUser applicationUser = context.getLoggedInUser();
         MutableIssue issue = issueManager.getIssueByCurrentKey(issueKey);
+        if (scrumPokerSettingService.load().isCheckPermissionToSaveEstimate() &&
+            !permissionManager.hasPermission(ProjectPermissions.EDIT_ISSUES, issue, applicationUser)) {
+            log.error("User {} with missing permissions unable to save estimation for issue {}.", applicationUser, issueKey);
+            return false;
+        }
         issue.setCustomFieldValue(findStoryPointField(), newValue.doubleValue());
         try {
             issueManager.updateIssue(applicationUser, issue, UpdateIssueRequest.builder().build());

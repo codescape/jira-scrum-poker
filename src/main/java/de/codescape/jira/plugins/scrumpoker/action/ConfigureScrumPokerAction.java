@@ -28,6 +28,7 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
         static final String DEFAULT_PROJECT_ACTIVATION = "defaultProjectActivation";
         static final String ALLOW_REVEAL_DECK = "allowRevealDeck";
         static final String DISPLAY_DROPDOWN_ON_BOARDS = "displayDropdownOnBoards";
+        static final String CHECK_PERMISSION_TO_SAVE_ESTIMATE = "checkPermissionToSaveEstimate";
 
     }
 
@@ -78,6 +79,9 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
 
             String displayDropdownOnBoards = getParameter(Parameters.DISPLAY_DROPDOWN_ON_BOARDS);
             globalSettings.setDisplayDropdownOnBoards(Boolean.valueOf(displayDropdownOnBoards));
+
+            String checkPermissionToSaveEstimate = getParameter(Parameters.CHECK_PERMISSION_TO_SAVE_ESTIMATE);
+            globalSettings.setCheckPermissionToSaveEstimate(Boolean.valueOf(checkPermissionToSaveEstimate));
 
             scrumPokerSettingService.persist(globalSettings);
         }

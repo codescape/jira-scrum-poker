@@ -22,6 +22,7 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
     private static final String DEFAULT_PROJECT_ACTIVATION = "defaultProjectActivation";
     private static final String ALLOW_REVEAL_DECK = "allowRevealDeck";
     private static final String DISPLAY_DROPDOWN_ON_BOARDS = "displayDropdownOnBoards";
+    private static final String CHECK_PERMISSION_TO_SAVE_ESTIMATE = "checkPermissionToSaveEstimate";
 
     private final ActiveObjects activeObjects;
 
@@ -38,6 +39,7 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
         globalSettings.setAllowRevealDeck(AllowRevealDeck.valueOf(loadString(ALLOW_REVEAL_DECK, ALLOW_REVEAL_DECK_DEFAULT.name())));
         globalSettings.setDefaultProjectActivation(loadBoolean(DEFAULT_PROJECT_ACTIVATION, DEFAULT_PROJECT_ACTIVATION_DEFAULT));
         globalSettings.setDisplayDropdownOnBoards(loadBoolean(DISPLAY_DROPDOWN_ON_BOARDS, DISPLAY_DROPDOWN_ON_BOARDS_DEFAULT));
+        globalSettings.setCheckPermissionToSaveEstimate(loadBoolean(CHECK_PERMISSION_TO_SAVE_ESTIMATE, CHECK_PERMISSION_TO_SAVE_ESTIMATE_DEFAULT));
         return globalSettings;
     }
 
@@ -48,6 +50,7 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
         persist(DEFAULT_PROJECT_ACTIVATION, String.valueOf(globalSettings.isDefaultProjectActivation()));
         persist(ALLOW_REVEAL_DECK, globalSettings.getAllowRevealDeck().name());
         persist(DISPLAY_DROPDOWN_ON_BOARDS, String.valueOf(globalSettings.isDisplayDropdownOnBoards()));
+        persist(CHECK_PERMISSION_TO_SAVE_ESTIMATE, String.valueOf(globalSettings.isCheckPermissionToSaveEstimate()));
     }
 
     private String loadString(String key, String defaultValue) {

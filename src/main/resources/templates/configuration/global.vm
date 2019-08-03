@@ -87,6 +87,18 @@
             </div>
             <div class="description">$i18n.getText("scrumpoker.config.displaydropdownonboards.description")</div>
         </fieldset>
+        <fieldset class="group">
+            <legend><span>$i18n.getText("scrumpoker.config.checkpermissiontosaveestimate")</span></legend>
+            <div class="checkbox">
+                #if ($globalSettings.checkPermissionToSaveEstimate == 'true')
+                    <input class="checkbox" type="checkbox" name="checkPermissionToSaveEstimate" id="checkPermissionToSaveEstimate" value="true" checked>
+                #else
+                    <input class="checkbox" type="checkbox" name="checkPermissionToSaveEstimate" id="checkPermissionToSaveEstimate" value="true">
+                #end
+                <label for="checkPermissionToSaveEstimate">$i18n.getText("scrumpoker.config.checkpermissiontosaveestimate.checkbox")</label>
+            </div>
+            <div class="description">$i18n.getText("scrumpoker.config.checkpermissiontosaveestimate.description")</div>
+        </fieldset>
     </div>
     <div class="buttons-container form-footer">
         <div class="buttons">
