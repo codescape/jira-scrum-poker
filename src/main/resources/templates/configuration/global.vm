@@ -10,6 +10,8 @@
 
 <form class="aui long-label" action="ScrumPokerConfiguration.jspa" method="post">
     <div class="form-body">
+
+        <h3>$i18n.getText("scrumpoker.config.heading.estimation")</h3>
         <div class="field-group">
             <label for="storyPointField">$i18n.getText("scrumpoker.config.estimation")</label>
             <select class="select" id="storyPointField" name="storyPointField">
@@ -27,6 +29,20 @@
             #end
             <div class="description">$i18n.getText("scrumpoker.config.estimation.description")</div>
         </div>
+        <fieldset class="group">
+            <legend><span>$i18n.getText("scrumpoker.config.checkpermissiontosaveestimate")</span></legend>
+            <div class="checkbox">
+                #if ($globalSettings.checkPermissionToSaveEstimate == 'true')
+                    <input class="checkbox" type="checkbox" name="checkPermissionToSaveEstimate" id="checkPermissionToSaveEstimate" value="true" checked>
+                #else
+                    <input class="checkbox" type="checkbox" name="checkPermissionToSaveEstimate" id="checkPermissionToSaveEstimate" value="true">
+                #end
+                <label for="checkPermissionToSaveEstimate">$i18n.getText("scrumpoker.config.checkpermissiontosaveestimate.checkbox")</label>
+            </div>
+            <div class="description">$i18n.getText("scrumpoker.config.checkpermissiontosaveestimate.description")</div>
+        </fieldset>
+
+        <h3>$i18n.getText("scrumpoker.config.heading.session")</h3>
         <div class="field-group">
             <label for="sessionTimeout">$i18n.getText("scrumpoker.config.sessiontimeout")</label>
             <input type="number" class="text short-field" step="1" min="0" id="sessionTimeout" name="sessionTimeout" value="$globalSettings.sessionTimeout">
@@ -75,6 +91,8 @@
             </div>
             <div class="description">$i18n.getText("scrumpoker.config.allowrevealdeck.description")</div>
         </fieldset>
+
+        <h3>$i18n.getText("scrumpoker.config.heading.appearance")</h3>
         <fieldset class="group">
             <legend><span>$i18n.getText("scrumpoker.config.displaydropdownonboards")</span></legend>
             <div class="checkbox">
@@ -87,18 +105,8 @@
             </div>
             <div class="description">$i18n.getText("scrumpoker.config.displaydropdownonboards.description")</div>
         </fieldset>
-        <fieldset class="group">
-            <legend><span>$i18n.getText("scrumpoker.config.checkpermissiontosaveestimate")</span></legend>
-            <div class="checkbox">
-                #if ($globalSettings.checkPermissionToSaveEstimate == 'true')
-                    <input class="checkbox" type="checkbox" name="checkPermissionToSaveEstimate" id="checkPermissionToSaveEstimate" value="true" checked>
-                #else
-                    <input class="checkbox" type="checkbox" name="checkPermissionToSaveEstimate" id="checkPermissionToSaveEstimate" value="true">
-                #end
-                <label for="checkPermissionToSaveEstimate">$i18n.getText("scrumpoker.config.checkpermissiontosaveestimate.checkbox")</label>
-            </div>
-            <div class="description">$i18n.getText("scrumpoker.config.checkpermissiontosaveestimate.description")</div>
-        </fieldset>
+
+
     </div>
     <div class="buttons-container form-footer">
         <div class="buttons">
