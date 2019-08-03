@@ -55,6 +55,10 @@ Decide whether to show the Scrum Poker dropdown on boards or not.
 In older versions of Scrum Poker this dropdown was the only way to access the list of active Scrum Poker sessions.
 Today the Scrum Poker menu elements in the Jira top menu `Boards` are preferred. 
 
+#### Estimation Permission Check
+
+Decide whether every participant of a Scrum Poker session is allowed to save the estimation or permission to edit the issue shall be required for the current user.
+
 ### Project Configuration
 
 Scrum Poker for Jira also provides project specific configuration.
