@@ -12,6 +12,7 @@ Click on the version in the following list to see all changes since the previous
 ### [Unreleased]
 
 * chore: implement against Jira patch version 8.3.1
+* docs: add favicon for online documentation
 
 ### [4.2.0] - 2019-08-03
 
