@@ -47,6 +47,9 @@ h6 {
 .docs-section table {
     width: 100%; }
 
+.docs-section ul {
+    margin: 0 0 0 2em; }
+
 .heading-font-size {
     font-size: 1.2rem;
     color: #999;

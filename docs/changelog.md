@@ -20,6 +20,7 @@ Click on the version in the following list to see all changes since the previous
 * feat: improve structure of configuration screen
 * feat: add upgrade task with default value for permission check (#68)
 * feat: buttons to confirm estimation only displayed if permitted (#68)
+* docs: update online documentation for Scrum Poker configuration (#75)
 
 ### [4.1.0] - 2019-07-16
 
