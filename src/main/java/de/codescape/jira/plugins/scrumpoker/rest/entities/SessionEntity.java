@@ -24,6 +24,7 @@ public class SessionEntity {
     private boolean allowReset;
     private boolean allowReveal;
     private boolean allowCancel;
+    private boolean allowConfirm;
     private String creator;
     private DateEntity createDate;
 
@@ -146,6 +147,15 @@ public class SessionEntity {
 
     public SessionEntity withAllowCancel(boolean allowCancel) {
         this.allowCancel = allowCancel;
+        return this;
+    }
+
+    public boolean isAllowConfirm() {
+        return allowConfirm;
+    }
+
+    public SessionEntity withAllowConfirm(boolean allowConfirm) {
+        this.allowConfirm = allowConfirm;
         return this;
     }
 

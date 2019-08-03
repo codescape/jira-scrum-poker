@@ -2,6 +2,10 @@ package de.codescape.jira.plugins.scrumpoker.rest.mapper;
 
 import com.atlassian.jira.datetime.DateTimeFormatter;
 import com.atlassian.jira.datetime.DateTimeStyle;
+import com.atlassian.jira.issue.IssueManager;
+import com.atlassian.jira.issue.MutableIssue;
+import com.atlassian.jira.permission.ProjectPermissions;
+import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
@@ -30,6 +34,7 @@ import static org.mockito.Mockito.*;
 public class SessionEntityMapperTest {
 
     private static final String CURRENT_USER = "CURRENT_USER";
+    private static final String ISSUE_KEY = "ISSUE-1";
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -43,6 +48,12 @@ public class SessionEntityMapperTest {
     @Mock
     private DateTimeFormatter dateTimeFormatter;
 
+    @Mock
+    private PermissionManager permissionManager;
+
+    @Mock
+    private IssueManager issueManager;
+
     @InjectMocks
     private SessionEntityMapper sessionEntityMapper;
 
@@ -51,6 +62,9 @@ public class SessionEntityMapperTest {
 
     @Mock
     private GlobalSettings globalSettings;
+
+    @Mock
+    private MutableIssue issue;
 
     @Before
     public void before() {
@@ -208,6 +222,34 @@ public class SessionEntityMapperTest {
         assertThat(sessionEntity.getVotes().stream().anyMatch(VoteEntity::isNeedABreak), is(false));
     }
 
+    @Test
+    public void shouldAlwaysAllowConfirmIfPermissionCheckIsDisabled() {
+        when(globalSettings.isCheckPermissionToSaveEstimate()).thenReturn(false);
+        ScrumPokerVote[] scrumPokerVotes = {scrumPokerVote("5", CURRENT_USER)};
+        SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession(scrumPokerVotes, true, CURRENT_USER), CURRENT_USER);
+        assertThat(sessionEntity.isAllowConfirm(), is(equalTo(true)));
+    }
+
+    @Test
+    public void shouldAllowConfirmIfPermissionCheckIsEnabledAndUserHasPermission() {
+        when(globalSettings.isCheckPermissionToSaveEstimate()).thenReturn(true);
+        when(issueManager.getIssueObject(ISSUE_KEY)).thenReturn(issue);
+        when(permissionManager.hasPermission(ProjectPermissions.EDIT_ISSUES, issue, applicationUser)).thenReturn(true);
+        ScrumPokerVote[] scrumPokerVotes = {scrumPokerVote("5", CURRENT_USER)};
+        SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession(scrumPokerVotes, true, CURRENT_USER), CURRENT_USER);
+        assertThat(sessionEntity.isAllowConfirm(), is(equalTo(true)));
+    }
+
+    @Test
+    public void shouldNotAllowConfirmIfPermissionCheckIsEnabledAndUserHasNoEditPermission() {
+        when(globalSettings.isCheckPermissionToSaveEstimate()).thenReturn(true);
+        when(issueManager.getIssueObject(ISSUE_KEY)).thenReturn(issue);
+        when(permissionManager.hasPermission(ProjectPermissions.EDIT_ISSUES, issue, applicationUser)).thenReturn(false);
+        ScrumPokerVote[] scrumPokerVotes = {scrumPokerVote("5", CURRENT_USER)};
+        SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession(scrumPokerVotes, true, CURRENT_USER), CURRENT_USER);
+        assertThat(sessionEntity.isAllowConfirm(), is(equalTo(false)));
+    }
+
     private static ScrumPokerSession scrumPokerSession(ScrumPokerVote[] scrumPokerVotes, boolean visible) {
         return scrumPokerSession(scrumPokerVotes, visible, "CREATOR_USER");
     }
@@ -217,7 +259,7 @@ public class SessionEntityMapperTest {
         when(scrumPokerSession.getVotes()).thenReturn(scrumPokerVotes);
         when(scrumPokerSession.getCreateDate()).thenReturn(new Date());
         when(scrumPokerSession.getCreatorUserKey()).thenReturn(creatorUserKey);
-        when(scrumPokerSession.getIssueKey()).thenReturn("ISSUE-1");
+        when(scrumPokerSession.getIssueKey()).thenReturn(ISSUE_KEY);
         when(scrumPokerSession.isVisible()).thenReturn(visible);
         return scrumPokerSession;
     }

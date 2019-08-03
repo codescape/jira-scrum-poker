@@ -2,6 +2,9 @@ package de.codescape.jira.plugins.scrumpoker.rest.mapper;
 
 import com.atlassian.jira.datetime.DateTimeFormatter;
 import com.atlassian.jira.datetime.DateTimeStyle;
+import com.atlassian.jira.issue.IssueManager;
+import com.atlassian.jira.permission.ProjectPermissions;
+import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
@@ -32,14 +35,20 @@ public class SessionEntityMapper {
     private final UserManager userManager;
     private final DateTimeFormatter dateTimeFormatter;
     private final ScrumPokerSettingService scrumPokerSettingService;
+    private final PermissionManager permissionManager;
+    private final IssueManager issueManager;
 
     @Autowired
     public SessionEntityMapper(@ComponentImport UserManager userManager,
                                @ComponentImport DateTimeFormatter dateTimeFormatter,
-                               ScrumPokerSettingService scrumPokerSettingService) {
+                               ScrumPokerSettingService scrumPokerSettingService,
+                               @ComponentImport PermissionManager permissionManager,
+                               @ComponentImport IssueManager issueManager) {
         this.userManager = userManager;
         this.dateTimeFormatter = dateTimeFormatter;
         this.scrumPokerSettingService = scrumPokerSettingService;
+        this.permissionManager = permissionManager;
+        this.issueManager = issueManager;
     }
 
     /**
@@ -63,6 +72,7 @@ public class SessionEntityMapper {
             .withAllowReveal(allowReveal(scrumPokerSession, userKey))
             .withAllowReset(allowReset(scrumPokerSession))
             .withAllowCancel(allowCancel(scrumPokerSession, userKey))
+            .withAllowConfirm(allowConfirm(scrumPokerSession, userKey))
             .withAgreementReached(agreementReached(scrumPokerSession))
             .withCreator(displayName(scrumPokerSession.getCreatorUserKey()))
             .withCreateDate(dateEntity(scrumPokerSession.getCreateDate()));
@@ -88,6 +98,17 @@ public class SessionEntityMapper {
      */
     private boolean allowCancel(ScrumPokerSession scrumPokerSession, String userKey) {
         return scrumPokerSession.getCreatorUserKey() != null && scrumPokerSession.getCreatorUserKey().equals(userKey);
+    }
+
+    /**
+     * Confirmation of estimation is only allowed if permission check is disabled or user has permission.
+     */
+    private boolean allowConfirm(ScrumPokerSession scrumPokerSession, String userKey) {
+        return !scrumPokerSettingService.load().isCheckPermissionToSaveEstimate() ||
+            permissionManager.hasPermission(
+                ProjectPermissions.EDIT_ISSUES,
+                issueManager.getIssueObject(scrumPokerSession.getIssueKey()),
+                userManager.getUserByKey(userKey));
     }
 
     /**

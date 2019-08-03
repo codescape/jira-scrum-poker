@@ -155,16 +155,28 @@
     {{^confirmedVoteExists}}
         {{#visible}}
             <h4>$i18n.getText("scrumpoker.session.bandwidth")</h4>
-            <p class="poker-comment">$i18n.getText("scrumpoker.session.confirmestimation")</p>
+            {{#allowConfirm}}
+                <p class="poker-comment">$i18n.getText("scrumpoker.session.confirmestimation")</p>
+            {{/allowConfirm}}
+            {{^allowConfirm}}
+                <p class="poker-comment">$i18n.getText("scrumpoker.session.confirmestimation.nopermission")</p>
+            {{/allowConfirm}}
             <ul class="list-of-cards centered">
-                {{#boundedVotes}}
-                    {{#assignable}}
-                        <li><a onclick="ScrumPoker.confirmSession('{{issueKey}}','{{value}}');" class="card active small clickable"><i class="card-value card-value-{{value}}">{{value}}</i>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</a></li>
-                    {{/assignable}}
-                    {{^assignable}}
+                {{#allowConfirm}}
+                    {{#boundedVotes}}
+                        {{#assignable}}
+                            <li><a onclick="ScrumPoker.confirmSession('{{issueKey}}','{{value}}');" class="card active small clickable"><i class="card-value card-value-{{value}}">{{value}}</i>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</a></li>
+                        {{/assignable}}
+                        {{^assignable}}
+                            <li><span class="card small"><i class="card-value card-value-{{value}}">{{value}}</i>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</span></li>
+                        {{/assignable}}
+                    {{/boundedVotes}}
+                {{/allowConfirm}}
+                {{^allowConfirm}}
+                    {{#boundedVotes}}
                         <li><span class="card small"><i class="card-value card-value-{{value}}">{{value}}</i>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</span></li>
-                    {{/assignable}}
-                {{/boundedVotes}}
+                    {{/boundedVotes}}
+                {{/allowConfirm}}
             </ul>
         {{/visible}}
 
