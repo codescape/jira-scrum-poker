@@ -13,6 +13,7 @@ Click on the version in the following list to see all changes since the previous
 
 * chore: implement against Jira patch version 8.3.1
 * docs: add favicon for online documentation
+* docs: improve documentation for participation on Scrum Poker sessions
 
 ### [4.2.0] - 2019-08-03
 

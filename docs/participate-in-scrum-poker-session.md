@@ -51,3 +51,6 @@ If all participants agree on an estimate one participant can confirm the estimat
 This saves the chosen estimate on the issue and informs all participants about the completed estimation process.
 
 ![Confirmed estimate](/images/participate-in-scrum-poker-session-confirmed-estimate.png)
+
+If the feature `Estimation Permission Check` (see [Scrum Poker configuration](/scrum-poker-configuration)) is enabled users who have no edit rights for the given issue see all estimations in the `Range of votes` grayed out.
+Only those users who are allowed to confirm the estimation and save the estimation for that issue see blue clickable estimation cards.   
