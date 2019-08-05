@@ -8,23 +8,23 @@ This page describes how to participate in a Scrum Poker session.
 * Table of Contents
 {:toc}
 
-### Understanding the page structure 
+### Understanding the page structure
 
-Once you have [joined a Scrum Poker session](/join-scrum-poker-session) you can see the Scrum Poker session page. 
+Once you have [joined a Scrum Poker session](/join-scrum-poker-session) you can see the Scrum Poker session page.
 This page is divided horizontally into two sections:
 
-* On the left side you can see details about the issue. 
+* On the left side you can see details about the issue.
 This includes the full issue description and a list of all subtasks that exist for that issue.
-With this information at hand you can provide your own estimate. 
-* On the right side you can find all elements to interact with the Scrum Poker session. 
+With this information at hand you can provide your own estimate.
+* On the right side you can find all elements to interact with the Scrum Poker session.
 
-![Layout of the Scrum Poker session page](/images/participate-in-scrum-poker-session-page-layout.png) 
+![Layout of the Scrum Poker session page](/images/participate-in-scrum-poker-session-page-layout.png)
 
 The process of a Scrum Poker session normally looks like this:
 
 * All participants provide their estimate by choosing a card
 * Once all participants have provided their estimate the cards are revealed
-* When agreeing on an estimate one participant confirms the estimate, otherwise a new round can be started 
+* When agreeing on an estimate one participant confirms the estimate, otherwise a new round can be started
 
 ### Provide your estimate
 
@@ -53,4 +53,4 @@ This saves the chosen estimate on the issue and informs all participants about t
 ![Confirmed estimate](/images/participate-in-scrum-poker-session-confirmed-estimate.png)
 
 If the feature `Estimation Permission Check` (see [Scrum Poker configuration](/scrum-poker-configuration)) is enabled users who have no edit rights for the given issue see all estimations in the `Range of votes` grayed out.
-Only those users who are allowed to confirm the estimation and save the estimation for that issue see blue clickable estimation cards.   
+Only those users who are allowed to save the estimation for that issue see blue clickable estimation cards to confirm the estimation.
