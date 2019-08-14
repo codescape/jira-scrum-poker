@@ -15,6 +15,8 @@ Click on the version in the following list to see all changes since the previous
 * docs: add favicon for online documentation
 * docs: improve documentation for participation on Scrum Poker sessions
 * docs: improve invite to contact vendor
+* docs: add imprint to online documentation
+* docs: add link to imprint in footer
 
 ### [4.2.0] - 2019-08-03
 
