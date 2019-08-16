@@ -17,6 +17,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: improve invite to contact vendor
 * docs: add imprint to online documentation
 * docs: add link to imprint in footer
+* docs: move imprint into legal section
 
 ### [4.2.0] - 2019-08-03
 
