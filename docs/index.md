@@ -12,9 +12,18 @@ The documentation targets users of the Scrum Poker for Jira app and Jira adminis
 The documentation is split into these three categories:
 
 <div class="row">
-    <div class="one-third column"><i class="icon user-icon"></i> The <code>User Guide</code> explains how to start or join a session and how to participate in a session together with everything else from the user perspective.</div>
-    <div class="one-third column"><i class="icon admin-icon"></i> The <code>Administration</code> section covers topics like the installation and configuration of Scrum Poker for Jira from the administrator perspective.</div>
-    <div class="one-third column"><i class="icon legal-icon"></i> The <code>Legal</code> section holds legal documents like the Privacy Statement, the End User License Agreement und the Imprint.</div>
+    <div class="one-third column">
+      <i class="icon user-icon"></i>
+      <p>The <code>User Guide</code> explains how to start or join a session and how to participate in a session together with everything else from the user perspective.</p>
+    </div>
+    <div class="one-third column">
+      <i class="icon admin-icon"></i>
+      <p>The <code>Administration</code> section covers topics like the installation and configuration of Scrum Poker for Jira from the administrator perspective.</p>
+    </div>
+    <div class="one-third column">
+      <i class="icon legal-icon"></i>
+      <p>The <code>Legal</code> section holds legal documents like the Privacy Statement, the End User License Agreement und the Imprint.</p>
+    </div>
 </div>
 
 <style>
