@@ -19,6 +19,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: add link to imprint in footer
 * docs: move imprint into legal section
 * docs: add icons to introduction page
+* refactor: introduce service interface for the estimation field service
 
 ### [4.2.0] - 2019-08-03
 
