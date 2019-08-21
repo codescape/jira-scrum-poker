@@ -15,6 +15,7 @@ import com.atlassian.upm.api.license.PluginLicenseManager;
 import com.atlassian.upm.api.license.entity.PluginLicense;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
 import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
@@ -45,6 +46,7 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
     private final JiraAuthenticationContext jiraAuthenticationContext;
     private final ScrumPokerForIssueCondition scrumPokerForIssueCondition;
     private final PluginLicenseManager pluginLicenseManager;
+    private final ScrumPokerErrorService scrumPokerErrorService;
 
     private String issueKey;
 
@@ -55,7 +57,8 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
                                 @ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
                                 @ComponentImport PermissionManager permissionManager,
                                 @ComponentImport PluginLicenseManager pluginLicenseManager,
-                                ScrumPokerForIssueCondition scrumPokerForIssueCondition) {
+                                ScrumPokerForIssueCondition scrumPokerForIssueCondition,
+                                ScrumPokerErrorService scrumPokerErrorService) {
         this.issueManager = issueManager;
         this.rendererManager = rendererManager;
         this.fieldLayoutManager = fieldLayoutManager;
@@ -63,6 +66,7 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
         this.jiraAuthenticationContext = jiraAuthenticationContext;
         this.pluginLicenseManager = pluginLicenseManager;
         this.scrumPokerForIssueCondition = scrumPokerForIssueCondition;
+        this.scrumPokerErrorService = scrumPokerErrorService;
     }
 
     /**
@@ -74,11 +78,11 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
         if (pluginLicenseManager.getLicense().isDefined()) {
             PluginLicense license = pluginLicenseManager.getLicense().get();
             if (license.getError().isDefined()) {
-                addErrorMessage("Scrum Poker for Jira has license errors: " + license.getError().get().name());
+                errorMessage("Scrum Poker for Jira has license errors: " + license.getError().get().name());
                 return ERROR;
             }
         } else {
-            addErrorMessage("Scrum Poker for Jira is missing a valid license!");
+            errorMessage("Scrum Poker for Jira is missing a valid license!");
             return ERROR;
         }
 
@@ -86,11 +90,16 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
         issueKey = getParameter(Parameters.ISSUE_KEY);
         MutableIssue issue = issueManager.getIssueObject(issueKey);
         if (issue == null || currentUserIsNotAllowedToSeeIssue(issue) || issueIsNotEstimable(issue)) {
-            addErrorMessage("Issue Key " + issueKey + " not found.");
+            errorMessage("Issue Key " + issueKey + " not found.");
             return ERROR;
         }
 
         return SUCCESS;
+    }
+
+    private void errorMessage(String errorMessage) {
+        scrumPokerErrorService.logError(errorMessage, null);
+        addErrorMessage(errorMessage);
     }
 
     /**

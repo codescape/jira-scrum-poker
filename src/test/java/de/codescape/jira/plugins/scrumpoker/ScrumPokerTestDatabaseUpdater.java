@@ -1,9 +1,6 @@
 package de.codescape.jira.plugins.scrumpoker;
 
-import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
-import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
-import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSetting;
-import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
+import de.codescape.jira.plugins.scrumpoker.ao.*;
 import net.java.ao.EntityManager;
 import net.java.ao.test.jdbc.DatabaseUpdater;
 
@@ -16,6 +13,7 @@ public class ScrumPokerTestDatabaseUpdater implements DatabaseUpdater {
     public void update(EntityManager entityManager) throws Exception {
         //noinspection unchecked
         entityManager.migrate(
+            ScrumPokerError.class,
             ScrumPokerProject.class,
             ScrumPokerSession.class,
             ScrumPokerSetting.class,

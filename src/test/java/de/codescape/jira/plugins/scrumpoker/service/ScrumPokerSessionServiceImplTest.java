@@ -57,8 +57,10 @@ public class ScrumPokerSessionServiceImplTest {
         scrumPokerForIssueCondition = mock(ScrumPokerForIssueCondition.class);
         when(scrumPokerForIssueCondition.isEstimable(ArgumentMatchers.any(Issue.class))).thenReturn(true);
 
+        ScrumPokerErrorService scrumPokerErrorService = mock(ScrumPokerErrorService.class);
+
         scrumPokerSessionService = new ScrumPokerSessionServiceImpl(activeObjects, issueManager,
-            scrumPokerSettingsService, scrumPokerForIssueCondition);
+            scrumPokerSettingsService, scrumPokerForIssueCondition, scrumPokerErrorService);
     }
 
     @Test

@@ -26,16 +26,19 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     private final IssueManager issueManager;
     private final ScrumPokerSettingService scrumPokerSettingService;
     private final ScrumPokerForIssueCondition scrumPokerForIssueCondition;
+    private final ScrumPokerErrorService scrumPokerErrorService;
 
     @Autowired
     public ScrumPokerSessionServiceImpl(ActiveObjects activeObjects,
                                         @ComponentImport IssueManager issueManager,
                                         ScrumPokerSettingService scrumPokerSettingService,
-                                        ScrumPokerForIssueCondition scrumPokerForIssueCondition) {
+                                        ScrumPokerForIssueCondition scrumPokerForIssueCondition,
+                                        ScrumPokerErrorService scrumPokerErrorService) {
         this.activeObjects = activeObjects;
         this.issueManager = issueManager;
         this.scrumPokerSettingService = scrumPokerSettingService;
         this.scrumPokerForIssueCondition = scrumPokerForIssueCondition;
+        this.scrumPokerErrorService = scrumPokerErrorService;
     }
 
     @Override
@@ -130,12 +133,14 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     private ScrumPokerSession create(String issueKey, String userKey) {
         MutableIssue issue = issueManager.getIssueObject(issueKey);
         if (issue == null) {
-            throw new IllegalStateException("Unable to create session for issue with key " + issueKey
-                + " because could not find this issue.");
+            String message = "Unable to create session for non-existing issue " + issueKey + ".";
+            scrumPokerErrorService.logError(message, null);
+            throw new IllegalStateException(message);
         }
         if (!scrumPokerForIssueCondition.isEstimable(issue)) {
-            throw new IllegalStateException("Unable to create session for issue with key " + issueKey +
-                " because issue is not estimable.");
+            String message = "Unable to create session for non-estimable issue " + issueKey + ".";
+            scrumPokerErrorService.logError(message, null);
+            throw new IllegalStateException(message);
         }
         ScrumPokerSession scrumPokerSession = activeObjects.create(ScrumPokerSession.class,
             new DBParam("ISSUE_KEY", issueKey));

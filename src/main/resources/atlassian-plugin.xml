@@ -138,6 +138,7 @@
 
     <!-- persistence with active objects -->
     <ao key="scrum-poker-active-objects">
+        <entity>de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerError</entity>
         <entity>de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject</entity>
         <entity>de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession</entity>
         <entity>de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSetting</entity>

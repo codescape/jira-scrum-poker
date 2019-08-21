@@ -46,6 +46,9 @@ public class EstimationFieldServiceImplTest {
     @Mock
     private ScrumPokerSettingService scrumPokerSettingService;
 
+    @Mock
+    private ScrumPokerErrorService scrumPokerErrorService;
+
     @InjectMocks
     private EstimationFieldServiceImpl estimationFieldService;
 
