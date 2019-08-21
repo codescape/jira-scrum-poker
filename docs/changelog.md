@@ -22,6 +22,7 @@ Click on the version in the following list to see all changes since the previous
 * refactor: introduce service interface for the estimation field service
 * feat: add error logging capabilities to all possible error locations
 * docs: add documentation to ScrumPokerConstants class
+* feat: return errors in correct order and add test coverage
 
 ### [4.2.0] - 2019-08-03
 

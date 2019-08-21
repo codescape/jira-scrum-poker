@@ -6,8 +6,8 @@ import com.atlassian.plugin.Plugin;
 import com.atlassian.plugin.PluginAccessor;
 import com.atlassian.plugin.PluginInformation;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerError;
+import net.java.ao.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import static de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants.*;
+import static de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants.SCRUM_POKER_PLUGIN_KEY;
 
 /**
  * Implementation of {@link ScrumPokerErrorService} using Active Objects as persistence model.
@@ -51,7 +51,8 @@ public class ScrumPokerErrorServiceImpl implements ScrumPokerErrorService {
 
     @Override
     public List<ScrumPokerError> listAll() {
-        return Arrays.asList(activeObjects.find(ScrumPokerError.class));
+        return Arrays.asList(activeObjects.find(ScrumPokerError.class, Query.select()
+            .order("TIMESTAMP DESC, ID DESC")));
     }
 
     @Override

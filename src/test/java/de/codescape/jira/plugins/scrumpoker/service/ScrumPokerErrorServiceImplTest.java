@@ -18,11 +18,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
 
 import static de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants.SCRUM_POKER_PLUGIN_KEY;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -31,6 +32,9 @@ import static org.mockito.Mockito.when;
 @Jdbc(Hsql.class)
 @NameConverters
 public class ScrumPokerErrorServiceImplTest {
+
+    private static final String JIRA_VERSION = "8.3.2";
+    private static final String SCRUM_POKER_VERSION = "4.20";
 
     @SuppressWarnings("unused")
     private EntityManager entityManager;
@@ -61,30 +65,70 @@ public class ScrumPokerErrorServiceImplTest {
     }
 
     @Test
-    public void shouldSaveTheErrorToLogIntoTheDatabase() {
-        when(buildUtilsInfo.getVersion()).thenReturn("7.13");
-        when(pluginAccessor.getPlugin(SCRUM_POKER_PLUGIN_KEY)).thenReturn(scrumPokerPlugin);
-        when(scrumPokerPlugin.getPluginInformation()).thenReturn(scrumPokerPluginInformation);
-        when(scrumPokerPluginInformation.getVersion()).thenReturn("4.20");
+    public void shouldSaveErrorWithAllDetails() {
+        expectJiraVersion(JIRA_VERSION);
+        expectScrumPokerVersion(SCRUM_POKER_VERSION);
+
         scrumPokerErrorService.logError("Let's add one error!", new RuntimeException("Ooops!"));
-        assertThat(errorsFromDatabase().length, is(1));
-        System.out.println("         ID: " + errorsFromDatabase()[0].getID());
-        System.out.println("    Message: " + errorsFromDatabase()[0].getErrorMessage());
-        System.out.println("       Jira: " + errorsFromDatabase()[0].getJiraVersion());
-        System.out.println("     Plugin: " + errorsFromDatabase()[0].getScrumPokerVersion());
-        System.out.println(" Stacktrace: " + errorsFromDatabase()[0].getStacktrace());
-        System.out.println("  Timestamp: " + errorsFromDatabase()[0].getTimestamp());
-        // TODO cleanup test
+        assertThat(errorLog().length, is(1));
+        assertThat(errorLog()[0], allOf(
+            hasProperty("jiraVersion", equalTo(JIRA_VERSION)),
+            hasProperty("scrumPokerVersion", equalTo(SCRUM_POKER_VERSION)),
+            hasProperty("errorMessage", equalTo("Let's add one error!")),
+            hasProperty("timestamp", notNullValue()),
+            hasProperty("stacktrace", containsString("Ooops!"))
+        ));
     }
 
-    // TODO add tests for adding log entries
+    @Test
+    public void shouldSaveErrorWithMessageOnly() {
+        scrumPokerErrorService.logError("Message!", null);
+        assertThat(errorLog().length, is(1));
+        assertThat(errorLog()[0].getErrorMessage(), equalTo("Message!"));
+    }
 
-    // TODO add tests for getting all entries
+    @Test
+    public void shouldSaveErrorWithExceptionOnly() {
+        scrumPokerErrorService.logError(null, new RuntimeException("Ooops!"));
+        assertThat(errorLog().length, is(1));
+        assertThat(errorLog()[0].getStacktrace(), allOf(
+            containsString("Ooops!"),
+            containsString("RuntimeException")
+        ));
+    }
 
-    // TODO add tests for purging log entries
+    @Test
+    public void shouldReturnAllErrorsWithNewestFirst() {
+        scrumPokerErrorService.logError("First", null);
+        scrumPokerErrorService.logError("Second", null);
+        scrumPokerErrorService.logError("Third", null);
+        List<ScrumPokerError> scrumPokerErrors = scrumPokerErrorService.listAll();
+        assertThat(scrumPokerErrors.size(), is(3));
+        assertThat(scrumPokerErrors.get(0).getErrorMessage(), equalTo("Third"));
+        assertThat(scrumPokerErrors.get(1).getErrorMessage(), equalTo("Second"));
+        assertThat(scrumPokerErrors.get(2).getErrorMessage(), equalTo("First"));
+    }
 
-    private ScrumPokerError[] errorsFromDatabase() {
+    @Test
+    public void shouldDeleteAllErrors() {
+        IntStream.range(0, 50).forEach(i -> scrumPokerErrorService.logError("Some Error...", null));
+        assertThat(errorLog().length, is(50));
+        scrumPokerErrorService.emptyErrorLog();
+        assertThat(errorLog().length, is(0));
+    }
+
+    private ScrumPokerError[] errorLog() {
         return activeObjects.find(ScrumPokerError.class);
+    }
+
+    private void expectScrumPokerVersion(String scrumPokerVersion) {
+        when(pluginAccessor.getPlugin(SCRUM_POKER_PLUGIN_KEY)).thenReturn(scrumPokerPlugin);
+        when(scrumPokerPlugin.getPluginInformation()).thenReturn(scrumPokerPluginInformation);
+        when(scrumPokerPluginInformation.getVersion()).thenReturn(scrumPokerVersion);
+    }
+
+    private void expectJiraVersion(String jiraVersion) {
+        when(buildUtilsInfo.getVersion()).thenReturn(jiraVersion);
     }
 
 }
