@@ -23,6 +23,7 @@ Click on the version in the following list to see all changes since the previous
 * feat: add error logging capabilities to all possible error locations
 * docs: add documentation to ScrumPokerConstants class
 * feat: return errors in correct order and add test coverage
+* refactor: explicitly autowire constructor arguments
 
 ### [4.2.0] - 2019-08-03
 

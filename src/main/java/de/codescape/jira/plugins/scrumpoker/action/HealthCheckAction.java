@@ -8,6 +8,7 @@ import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerErrorService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +68,7 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
     private final ProjectSettingService projectSettingService;
     private final ScrumPokerErrorService scrumPokerErrorService;
 
+    @Autowired
     public HealthCheckAction(ScrumPokerSettingService scrumPokerSettingService,
                              EstimationFieldService estimationFieldService,
                              @ComponentImport PluginLicenseManager pluginLicenseManager,
