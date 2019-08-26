@@ -24,6 +24,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: add documentation to ScrumPokerConstants class
 * feat: return errors in correct order and add test coverage
 * refactor: explicitly autowire constructor arguments
+* fix: rename error timestamp column to avoid using reserved database keywords
 
 ### [4.2.0] - 2019-08-03
 

@@ -12,9 +12,9 @@ public interface ScrumPokerError extends ScrumPokerEntity {
     /**
      * The timestamp when the error occurred.
      */
-    Date getTimestamp();
+    Date getErrorTimestamp();
 
-    void setTimestamp(Date timestamp);
+    void setErrorTimestamp(Date errorTimestamp);
 
     /**
      * The version of the Scrum Poker add-on.

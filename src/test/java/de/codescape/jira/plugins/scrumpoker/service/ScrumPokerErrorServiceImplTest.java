@@ -75,7 +75,7 @@ public class ScrumPokerErrorServiceImplTest {
             hasProperty("jiraVersion", equalTo(JIRA_VERSION)),
             hasProperty("scrumPokerVersion", equalTo(SCRUM_POKER_VERSION)),
             hasProperty("errorMessage", equalTo("Let's add one error!")),
-            hasProperty("timestamp", notNullValue()),
+            hasProperty("errorTimestamp", notNullValue()),
             hasProperty("stacktrace", containsString("Ooops!"))
         ));
     }

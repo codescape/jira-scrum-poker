@@ -41,7 +41,7 @@ public class ScrumPokerErrorServiceImpl implements ScrumPokerErrorService {
     @Override
     public void logError(String errorMessage, Throwable throwable) {
         ScrumPokerError scrumPokerError = activeObjects.create(ScrumPokerError.class);
-        scrumPokerError.setTimestamp(new Date());
+        scrumPokerError.setErrorTimestamp(new Date());
         scrumPokerError.setStacktrace(stacktraceAsString(throwable));
         scrumPokerError.setErrorMessage(errorMessage);
         scrumPokerError.setJiraVersion(buildUtilsInfo.getVersion());
@@ -52,7 +52,7 @@ public class ScrumPokerErrorServiceImpl implements ScrumPokerErrorService {
     @Override
     public List<ScrumPokerError> listAll() {
         return Arrays.asList(activeObjects.find(ScrumPokerError.class, Query.select()
-            .order("TIMESTAMP DESC, ID DESC")));
+            .order("ERROR_TIMESTAMP DESC, ID DESC")));
     }
 
     @Override
