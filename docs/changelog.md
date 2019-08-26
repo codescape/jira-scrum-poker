@@ -25,6 +25,7 @@ Click on the version in the following list to see all changes since the previous
 * feat: return errors in correct order and add test coverage
 * refactor: explicitly autowire constructor arguments
 * fix: rename error timestamp column to avoid using reserved database keywords
+* refactor: use parseX methods instead of valueOf methods for Boolean and Integer
 
 ### [4.2.0] - 2019-08-03
 
