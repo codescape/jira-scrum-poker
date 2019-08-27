@@ -47,7 +47,8 @@ public class EstimationFieldServiceImpl implements EstimationFieldService {
         MutableIssue issue = issueManager.getIssueByCurrentKey(issueKey);
         if (scrumPokerSettingService.load().isCheckPermissionToSaveEstimate() &&
             !permissionManager.hasPermission(ProjectPermissions.EDIT_ISSUES, issue, applicationUser)) {
-            scrumPokerErrorService.logError("User " + applicationUser.getUsername() + " is missing permissions to save estimation for issue " + issueKey + ".", null);
+            scrumPokerErrorService.logError("User " + applicationUser.getUsername() +
+                " is missing permissions to save estimation for issue " + issueKey + ".", null);
             return false;
         }
         issue.setCustomFieldValue(findStoryPointField(), newValue.doubleValue());
@@ -55,7 +56,8 @@ public class EstimationFieldServiceImpl implements EstimationFieldService {
             issueManager.updateIssue(applicationUser, issue, UpdateIssueRequest.builder().build());
             return true;
         } catch (RuntimeException e) {
-            scrumPokerErrorService.logError("Unable to save estimation " + newValue + " for issue " + issueKey + ".", e);
+            scrumPokerErrorService.logError("Unable to save estimation " + newValue + " for issue "
+                + issueKey + ". See stacktrace for further details.", e);
             return false;
         }
     }
