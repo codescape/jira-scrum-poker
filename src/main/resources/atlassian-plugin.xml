@@ -97,6 +97,10 @@
         <label key="scrumpoker.healthcheck.title"/>
         <link>/secure/admin/ScrumPokerHealthCheck.jspa</link>
     </web-item>
+    <web-item key="scrum-poker-configuration-item3" section="admin_plugins_menu/scrum-poker-configuration" weight="30">
+        <label key="scrumpoker.errorlog.title"/>
+        <link>/secure/admin/ScrumPokerErrorLog.jspa</link>
+    </web-item>
 
     <!-- project specific configuration in project configuration sidebar -->
     <web-item key="scrum-poker-project-configuration-item" section="atl.jira.proj.config/projectgroup4" weight="200">
@@ -116,6 +120,10 @@
             <action name="de.codescape.jira.plugins.scrumpoker.action.HealthCheckAction"
                     alias="ScrumPokerHealthCheck" roles-required="sysadmin">
                 <view name="success">/templates/configuration/healthcheck.vm</view>
+            </action>
+            <action name="de.codescape.jira.plugins.scrumpoker.action.ShowErrorLogAction"
+                    alias="ScrumPokerErrorLog" roles-required="sysadmin">
+                <view name="success">/templates/configuration/errorlog.vm</view>
             </action>
             <action name="de.codescape.jira.plugins.scrumpoker.action.ConfigureProjectSettingsAction"
                     alias="ScrumPokerProjectConfiguration" roles-required="admin">
