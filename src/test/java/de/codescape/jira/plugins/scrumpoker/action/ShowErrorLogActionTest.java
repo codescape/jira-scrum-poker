@@ -21,6 +21,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 public class ShowErrorLogActionTest {
+
     @Rule
     public MockitoContainer mockitoContainer = MockitoMocksInContainer.rule(this);
 
