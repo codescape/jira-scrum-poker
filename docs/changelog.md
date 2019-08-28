@@ -30,6 +30,7 @@ Click on the version in the following list to see all changes since the previous
 * feat: provide better description on the health check page
 * feat: add translation for error log page
 * test: implement test coverage for error log action
+* docs: add online documentation for error log page
 
 ### [4.2.0] - 2019-08-03
 
