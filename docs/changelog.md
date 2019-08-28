@@ -11,6 +11,12 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
+* ...
+
+### [4.3.0] - 2019-08-28
+
+**Error Log for problem analysis by Jira administrators**
+
 * chore: implement against Jira patch version 8.3.3
 * docs: add favicon for online documentation
 * docs: improve documentation for participation on Scrum Poker sessions
@@ -702,7 +708,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.2.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.3.0...HEAD
+[4.3.0]: https://github.com/codescape/jira-scrum-poker/compare/4.2.0...4.3.0
 [4.2.0]: https://github.com/codescape/jira-scrum-poker/compare/4.1.0...4.2.0
 [4.1.0]: https://github.com/codescape/jira-scrum-poker/compare/4.0.1...4.1.0
 [4.0.1]: https://github.com/codescape/jira-scrum-poker/compare/4.0.0...4.0.1
