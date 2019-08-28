@@ -20,6 +20,18 @@ Click on the version in the following list to see all changes since the previous
 * docs: move imprint into legal section
 * docs: add icons to introduction page
 * refactor: introduce service interface for the estimation field service
+* feat: add error logging capabilities to all possible error locations
+* docs: add documentation to ScrumPokerConstants class
+* feat: return errors in correct order and add test coverage
+* refactor: explicitly autowire constructor arguments
+* fix: rename error timestamp column to avoid using reserved database keywords
+* refactor: use parseX methods instead of valueOf methods for Boolean and Integer
+* feat: improve error messages for failures when saving estimations
+* feat: add error log page to the plugin administration to display errors
+* feat: provide better description on the health check page
+* feat: add translation for error log page
+* test: implement test coverage for error log action
+* docs: add online documentation for error log page
 
 ### [4.2.0] - 2019-08-03
 

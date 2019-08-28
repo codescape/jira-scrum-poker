@@ -227,8 +227,8 @@ public class SessionEntityMapper {
      */
     private boolean numericValueWithVotesInBoundary(BoundedVoteEntity boundedVote, ScrumPokerVote[] votes) {
         return isNumber(boundedVote.getValue()) && !numericValues(votes).isEmpty() &&
-            Integer.valueOf(boundedVote.getValue()) >= getMinimumVote(votes) &&
-            Integer.valueOf(boundedVote.getValue()) <= getMaximumVote(votes);
+            Integer.parseInt(boundedVote.getValue()) >= getMinimumVote(votes) &&
+            Integer.parseInt(boundedVote.getValue()) <= getMaximumVote(votes);
     }
 
     /**

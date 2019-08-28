@@ -8,10 +8,12 @@ import com.atlassian.jira.web.HttpServletVariables;
 import com.atlassian.upm.api.license.PluginLicenseManager;
 import com.atlassian.upm.api.license.entity.PluginLicense;
 import com.atlassian.upm.api.util.Option;
+import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerError;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerErrorService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.junit.Rule;
 import org.junit.Test;
@@ -20,6 +22,7 @@ import org.mockito.Mock;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static de.codescape.jira.plugins.scrumpoker.action.HealthCheckAction.*;
@@ -48,6 +51,9 @@ public class HealthCheckActionTest {
 
     @Mock
     private ProjectSettingService projectSettingService;
+
+    @Mock
+    private ScrumPokerErrorService scrumPokerErrorService;
 
     @InjectMocks
     private HealthCheckAction healthCheckAction;
@@ -195,6 +201,13 @@ public class HealthCheckActionTest {
     @Test
     public void shouldSignalNoErrorsIfErrorLogIsEmpty() {
         assertThat(healthCheckAction.getErrorsResults(), is(empty()));
+    }
+
+    @Test
+    public void shouldSignalErrorsIfErrorLogContainsErrors() {
+        ScrumPokerError[] errors = {mock(ScrumPokerError.class)};
+        when(scrumPokerErrorService.listAll()).thenReturn(Arrays.asList(errors));
+        assertThat(healthCheckAction.getErrorsResults(), hasItem(ErrorLog.ERROR_LOG_NOT_EMPTY));
     }
 
 }

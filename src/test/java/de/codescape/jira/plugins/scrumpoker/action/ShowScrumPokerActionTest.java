@@ -14,6 +14,7 @@ import com.atlassian.upm.api.license.entity.LicenseError;
 import com.atlassian.upm.api.license.entity.PluginLicense;
 import com.atlassian.upm.api.util.Option;
 import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerErrorService;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -53,6 +54,9 @@ public class ShowScrumPokerActionTest {
 
     @Mock
     private ScrumPokerForIssueCondition scrumPokerForIssueCondition;
+
+    @Mock
+    private ScrumPokerErrorService scrumPokerErrorService;
 
     @InjectMocks
     private ShowScrumPokerAction showScrumPokerAction;

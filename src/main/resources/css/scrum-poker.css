@@ -16,6 +16,10 @@
 .centered {
     text-align: center; }
 
+/* right aligned */
+.right-aligned {
+    text-align: right; }
+
 /* icon that signals that participants need to talk to each other */
 .need-to-talk {
     position: relative;
@@ -103,3 +107,9 @@
 #share-session table td:last-child {
     text-align: right;
     width: 40px; }
+
+/**/
+.stacktrace {
+    font-size: 80%;
+    overflow-x: scroll;
+}

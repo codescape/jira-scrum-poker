@@ -66,7 +66,7 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
 
     private boolean loadBoolean(String key, boolean defaultValue) {
         ScrumPokerSetting scrumPokerSetting = findByKey(key);
-        return (scrumPokerSetting != null) ? Boolean.valueOf(scrumPokerSetting.getValue()) : defaultValue;
+        return (scrumPokerSetting != null) ? Boolean.parseBoolean(scrumPokerSetting.getValue()) : defaultValue;
     }
 
     private ScrumPokerSetting findByKey(String key) {

@@ -72,16 +72,16 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
             globalSettings.setSessionTimeout(Integer.valueOf(newSessionTimeout));
 
             String newDefaultProjectActivation = getParameter(Parameters.DEFAULT_PROJECT_ACTIVATION);
-            globalSettings.setDefaultProjectActivation(Boolean.valueOf(newDefaultProjectActivation));
+            globalSettings.setDefaultProjectActivation(Boolean.parseBoolean(newDefaultProjectActivation));
 
             String newAllowRevealDeck = getParameter(Parameters.ALLOW_REVEAL_DECK);
             globalSettings.setAllowRevealDeck(AllowRevealDeck.valueOf(newAllowRevealDeck));
 
             String displayDropdownOnBoards = getParameter(Parameters.DISPLAY_DROPDOWN_ON_BOARDS);
-            globalSettings.setDisplayDropdownOnBoards(Boolean.valueOf(displayDropdownOnBoards));
+            globalSettings.setDisplayDropdownOnBoards(Boolean.parseBoolean(displayDropdownOnBoards));
 
             String checkPermissionToSaveEstimate = getParameter(Parameters.CHECK_PERMISSION_TO_SAVE_ESTIMATE);
-            globalSettings.setCheckPermissionToSaveEstimate(Boolean.valueOf(checkPermissionToSaveEstimate));
+            globalSettings.setCheckPermissionToSaveEstimate(Boolean.parseBoolean(checkPermissionToSaveEstimate));
 
             scrumPokerSettingService.persist(globalSettings);
         }

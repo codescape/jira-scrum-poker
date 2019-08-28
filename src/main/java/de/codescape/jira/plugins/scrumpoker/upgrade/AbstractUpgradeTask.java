@@ -7,14 +7,14 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 
+import static de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants.SCRUM_POKER_PLUGIN_KEY;
+
 /**
  * Base class to be used when implementing {@link PluginUpgradeTask}.
  */
 abstract class AbstractUpgradeTask implements PluginUpgradeTask {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractUpgradeTask.class);
-
-    static final String SCRUM_POKER_PLUGIN_KEY = "de.codescape.jira.plugins.scrum-poker";
 
     @Override
     public final Collection<Message> doUpgrade() {

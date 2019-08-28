@@ -1,0 +1,60 @@
+<html>
+<head>
+    <title>$i18n.getText("scrumpoker.title") - $i18n.getText("scrumpoker.errorlog.title")</title>
+    $webResourceManager.requireResource("de.codescape.jira.plugins.scrum-poker:scrum-poker-resources")
+    $webResourceManager.requireResource("com.atlassian.auiplugin:aui-expander")
+</head>
+<body>
+
+<h2>$i18n.getText("scrumpoker.title") &raquo; $i18n.getText("scrumpoker.errorlog.title")</h2>
+
+<p>$i18n.getText("scrumpoker.errorlog.description")</p>
+
+#if($errorList.isEmpty())
+    <p><i>$i18n.getText("scrumpoker.errorlog.empty")</i></p>
+#else
+    <table class="aui">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>$i18n.getText("scrumpoker.errorlog.error.timestamp")</th>
+                <th>$i18n.getText("scrumpoker.errorlog.error.message")</th>
+                <th>$i18n.getText("scrumpoker.errorlog.error.stacktrace")</th>
+                <th>$i18n.getText("scrumpoker.errorlog.error.jiraversion")</th>
+                <th>$i18n.getText("scrumpoker.errorlog.error.scrumpokerversion")</th>
+            </tr>
+        </thead>
+        <tbody>
+        #foreach ($errorEntry in $errorList)
+            <tr>
+                <td>$errorEntry.iD</td>
+                <td>$errorEntry.errorTimestamp</td>
+                <td>#if($errorEntry.errorMessage) $errorEntry.errorMessage #else - #end</td>
+                <td>
+                    #if($errorEntry.stacktrace)
+                        <div id="stacktrace-$errorEntry.iD" class="aui-expander-content" aria-hidden="true">
+                            <pre class="stacktrace">$errorEntry.stacktrace</pre>
+                        </div>
+                        <a data-replace-text="$i18n.getText("scrumpoker.errorlog.error.stacktrace.hide")" class="aui-expander-trigger" aria-controls="stacktrace-$errorEntry.iD">$i18n.getText("scrumpoker.errorlog.error.stacktrace.expand")</a>
+                    #else
+                        -
+                    #end
+                </td>
+                <td>$errorEntry.jiraVersion</td>
+                <td>$errorEntry.scrumPokerVersion</td>
+            </tr>
+        #end
+        </tbody>
+    </table>
+    <form class="aui long-label" action="ScrumPokerErrorLog.jspa" method="post">
+        <div class="buttons-container">
+            <div class="buttons right-aligned">
+                <input type="hidden" name="action" value="empty">
+                <button type="submit" id="empty-errorlog" class="aui-button">$i18n.getText("scrumpoker.errorlog.purge")</button>
+            </div>
+        </div>
+    </form>
+#end
+
+</body>
+</html>

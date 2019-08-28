@@ -55,7 +55,7 @@ public class ConfigureProjectSettingsAction extends AbstractScrumPokerAction {
         if (action != null && action.equals("save")) {
             Long projectId = getProjectByKey(projectKey).getId();
             String newScrumPokerEnabled = getParameter(Parameters.SCRUM_POKER_ENABLED);
-            projectSettingService.persistScrumPokerEnabled(projectId, Boolean.valueOf(newScrumPokerEnabled));
+            projectSettingService.persistScrumPokerEnabled(projectId, Boolean.parseBoolean(newScrumPokerEnabled));
         }
         return SUCCESS;
     }

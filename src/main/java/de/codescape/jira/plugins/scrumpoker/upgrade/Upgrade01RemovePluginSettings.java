@@ -10,6 +10,8 @@ import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants.SCRUM_POKER_PLUGIN_KEY;
+
 /**
  * Remove the configuration from PluginSettings and migrate information into the Active Objects based configuration.
  *

@@ -6,7 +6,9 @@ import com.atlassian.upm.api.license.PluginLicenseManager;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerErrorService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,15 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
     }
 
     /**
+     * Potential error log error codes.
+     */
+    static final class ErrorLog {
+
+        static final String ERROR_LOG_NOT_EMPTY = "scrumpoker.healthcheck.results.errors.errorlognotempty";
+
+    }
+
+    /**
      * Names of all parameters used on the global configuration page.
      */
     static final class Parameters {
@@ -55,20 +66,24 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
     private final EstimationFieldService estimationFieldService;
     private final PluginLicenseManager pluginLicenseManager;
     private final ProjectSettingService projectSettingService;
+    private final ScrumPokerErrorService scrumPokerErrorService;
 
+    @Autowired
     public HealthCheckAction(ScrumPokerSettingService scrumPokerSettingService,
                              EstimationFieldService estimationFieldService,
                              @ComponentImport PluginLicenseManager pluginLicenseManager,
-                             ProjectSettingService projectSettingService) {
+                             ProjectSettingService projectSettingService,
+                             ScrumPokerErrorService scrumPokerErrorService) {
         this.scrumPokerSettingService = scrumPokerSettingService;
         this.estimationFieldService = estimationFieldService;
         this.pluginLicenseManager = pluginLicenseManager;
         this.projectSettingService = projectSettingService;
+        this.scrumPokerErrorService = scrumPokerErrorService;
     }
 
     @Override
     protected String doExecute() {
-        return "success";
+        return SUCCESS;
     }
 
     /**
@@ -154,8 +169,9 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
      */
     public List<String> getErrorsResults() {
         List<String> results = new ArrayList<>();
-        // TODO: add check for emptiness of the error log once #69 is implemented
-        // results.add("scrumpoker.healthcheck.results.errors.errorlognotempty");
+        if (!scrumPokerErrorService.listAll().isEmpty()) {
+            results.add(ErrorLog.ERROR_LOG_NOT_EMPTY);
+        }
         return results;
     }
 
