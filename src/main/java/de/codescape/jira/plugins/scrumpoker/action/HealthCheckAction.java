@@ -83,7 +83,7 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
 
     @Override
     protected String doExecute() {
-        return "success";
+        return SUCCESS;
     }
 
     /**

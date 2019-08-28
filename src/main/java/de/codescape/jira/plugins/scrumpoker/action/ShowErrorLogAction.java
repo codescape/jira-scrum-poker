@@ -36,7 +36,7 @@ public class ShowErrorLogAction extends AbstractScrumPokerAction {
             scrumPokerErrorService.emptyErrorLog();
         }
 
-        return "success";
+        return SUCCESS;
     }
 
     /**
