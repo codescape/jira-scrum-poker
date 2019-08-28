@@ -15,9 +15,12 @@ You will now find a section called `Scrum Poker` in the left sidebar with a link
 
 ![Locate and use the Error Log](/images/error-log-locate-and-use.png)
 
-If errors exist the error log shows a table with the most recent errors and a button `Empty error log` will also be displayed.
+If errors exist the error log shows a table with the most recent errors and a button `Empty Error Log` will also be displayed.
 One click empties the error log.
-Every error is shown with the following information if available:
+
+### What is logged?
+
+Every error is logged and listed with the following information if available:
 
 * Timestamp
 * Message
@@ -25,5 +28,5 @@ Every error is shown with the following information if available:
 * Jira version
 * Scrum Poker version
 
-Please provide all this information in case of problems with Scrum Poker for Jira.
+Please provide us with all this information in case of problems with Scrum Poker for Jira.
 This will help us to analyze and solve your problem.
