@@ -87,7 +87,7 @@ or in case of multiple issues:
 
 Releasing a new version helps to bring out new features and improvements to our customers. To keep track of all changes we do the following:
 
-* update the [Changelog](changelog.md) with the release date
+* update the [Changelog](docs/changelog.md) with the release date
 * update the [POM](pom.xml) file with the new version number
 * create a tag for the new version with reference to the latest commit
     ```

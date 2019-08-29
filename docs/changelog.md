@@ -12,6 +12,7 @@ Click on the version in the following list to see all changes since the previous
 ### [Unreleased]
 
 * docs: improve wording on error log documentation page
+* chore: remove obsolete changelog in root directory
 
 ### [4.3.0] - 2019-08-28
 
