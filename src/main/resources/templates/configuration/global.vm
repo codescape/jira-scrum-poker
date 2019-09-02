@@ -2,7 +2,7 @@
 <head>
     <title>$i18n.getText("scrumpoker.title") - $i18n.getText("scrumpoker.config.title")</title>
 </head>
-<body>
+<body class="scrum-poker">
 
 <h2>$i18n.getText("scrumpoker.title") &raquo; $i18n.getText("scrumpoker.config.title")</h2>
 

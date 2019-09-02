@@ -73,8 +73,8 @@
 
     /* special cards like the question mark and the coffee card are rendered with an icon */
     function customStylingForCards() {
-        $('.card-value-coffee').addClass('fas fa-mug-hot').empty();
-        $('.card-value-question').addClass('fas fa-question').empty();
+        $('.scrum-poker-card-value-coffee').addClass('fas fa-mug-hot').empty();
+        $('.scrum-poker-card-value-question').addClass('fas fa-question').empty();
     }
 
     /* Schedule a redirect to the issue page after 60 seconds */

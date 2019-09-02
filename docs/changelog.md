@@ -13,6 +13,7 @@ Click on the version in the following list to see all changes since the previous
 
 * docs: improve wording on error log documentation page
 * chore: remove obsolete changelog in root directory
+* feat: introduce namespace for cascading style sheets
 
 ### [4.3.0] - 2019-08-28
 

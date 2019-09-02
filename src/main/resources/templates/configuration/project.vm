@@ -6,7 +6,7 @@
     <meta name="admin.active.tab" content="scrum-poker-project-configuration-item-link"/>
     <meta name="projectKey" content="$projectKey"/>
 </head>
-<body>
+<body class="scrum-poker">
 
 <h2>$i18n.getText("scrumpoker.title") &raquo; $i18n.getText("scrumpoker.config.project.title")</h2>
 

@@ -4,7 +4,7 @@
     $webResourceManager.requireResource("de.codescape.jira.plugins.scrum-poker:scrum-poker-resources")
     $webResourceManager.requireResource("de.codescape.jira.plugins.scrum-poker:font-awesome-resources")
 </head>
-<body class="scrum-poker-session">
+<body class="scrum-poker scrum-poker-session">
 
 <header class="aui-page-header">
     <div class="aui-page-header-inner">
@@ -24,10 +24,10 @@
         </div>
         <div class="aui-page-header-actions">
             <div class="aui-buttons">
-                <button data-aui-trigger aria-controls="share-session" class="aui-button aui-button-light">
+                <button data-aui-trigger aria-controls="scrum-poker-share-session" class="aui-button aui-button-light">
                     <span class="aui-icon aui-icon-small aui-iconfont-share"></span> $i18n.getText("scrumpoker.session.share")
                 </button>
-                <aui-inline-dialog id="share-session" alignment="bottom center" style="width:300px">
+                <aui-inline-dialog id="scrum-poker-share-session" alignment="bottom center" style="width:300px">
                     <form class="aui top-label">
                         <fieldset class="top-label">
                             <div class="field-group top-label">
@@ -63,7 +63,7 @@
 
             #set($issueDescriptionHtml = $issueDescription)
             #if(!$issueDescriptionHtml.isEmpty())
-                <div class="issue-description">
+                <div class="scrum-poker-issue-description">
                     <p>$issueDescriptionHtml</p>
                 </div>
             #else
@@ -119,9 +119,9 @@
 
     {{^confirmedVoteExists}}
         <h4>$i18n.getText("scrumpoker.title")</h4>
-        <ul class="list-of-cards">
+        <ul class="scrum-poker-cards-list">
             {{#cards}}
-                <li><a onmouseover="ScrumPoker.showReferences('{{value}}');" onmouseout="ScrumPoker.showReferences()" onclick="ScrumPoker.updateSession('{{issueKey}}','{{value}}');" class="card {{#selected}}active{{/selected}} clickable"><i class="card-value card-value-{{value}}">{{value}}</i></a></li>
+                <li><a onmouseover="ScrumPoker.showReferences('{{value}}');" onmouseout="ScrumPoker.showReferences()" onclick="ScrumPoker.updateSession('{{issueKey}}','{{value}}');" class="scrum-poker-card {{#selected}}scrum-poker-card-active{{/selected}} scrum-poker-card-clickable"><i class="scrum-poker-card-value scrum-poker-card-value-{{value}}">{{value}}</i></a></li>
             {{/cards}}
         </ul>
     {{/confirmedVoteExists}}
@@ -144,7 +144,7 @@
         </table>
     {{/results}}
     {{^results}}
-        <p class="poker-comment">$i18n.getText("scrumpoker.session.references.empty")</p>
+        <p class="scrum-poker-comment">$i18n.getText("scrumpoker.session.references.empty")</p>
         <p></p>
     {{/results}}
 
@@ -156,25 +156,25 @@
         {{#visible}}
             <h4>$i18n.getText("scrumpoker.session.bandwidth")</h4>
             {{#allowConfirm}}
-                <p class="poker-comment">$i18n.getText("scrumpoker.session.confirmestimation")</p>
+                <p class="scrum-poker-comment">$i18n.getText("scrumpoker.session.confirmestimation")</p>
             {{/allowConfirm}}
             {{^allowConfirm}}
-                <p class="poker-comment">$i18n.getText("scrumpoker.session.confirmestimation.nopermission")</p>
+                <p class="scrum-poker-comment">$i18n.getText("scrumpoker.session.confirmestimation.nopermission")</p>
             {{/allowConfirm}}
-            <ul class="list-of-cards centered">
+            <ul class="scrum-poker-cards-list scrum-poker-cards-list-centered">
                 {{#allowConfirm}}
                     {{#boundedVotes}}
                         {{#assignable}}
-                            <li><a onclick="ScrumPoker.confirmSession('{{issueKey}}','{{value}}');" class="card active small clickable"><i class="card-value card-value-{{value}}">{{value}}</i>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</a></li>
+                            <li><a onclick="ScrumPoker.confirmSession('{{issueKey}}','{{value}}');" class="scrum-poker-card scrum-poker-card-active scrum-poker-card-small scrum-poker-card-clickable"><i class="scrum-poker-card-value scrum-poker-card-value-{{value}}">{{value}}</i>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</a></li>
                         {{/assignable}}
                         {{^assignable}}
-                            <li><span class="card small"><i class="card-value card-value-{{value}}">{{value}}</i>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</span></li>
+                            <li><span class="scrum-poker-card scrum-poker-card-small"><i class="scrum-poker-card-value scrum-poker-card-value-{{value}}">{{value}}</i>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</span></li>
                         {{/assignable}}
                     {{/boundedVotes}}
                 {{/allowConfirm}}
                 {{^allowConfirm}}
                     {{#boundedVotes}}
-                        <li><span class="card small"><i class="card-value card-value-{{value}}">{{value}}</i>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</span></li>
+                        <li><span class="scrum-poker-card scrum-poker-card-small"><i class="scrum-poker-card-value scrum-poker-card-value-{{value}}">{{value}}</i>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</span></li>
                     {{/boundedVotes}}
                 {{/allowConfirm}}
             </ul>
@@ -183,25 +183,25 @@
         <h4>$i18n.getText("scrumpoker.session.participants") {{#voteCount}}({{voteCount}}){{/voteCount}}</h4>
 
         {{#agreementReached}}
-            <p class="poker-comment">$i18n.getText("scrumpoker.session.agreementreached")</p>
+            <p class="scrum-poker-comment">$i18n.getText("scrumpoker.session.agreementreached")</p>
         {{/agreementReached}}
-        <ul class="list-of-cards with-users">
+        <ul class="scrum-poker-cards-list scrum-poker-cards-list-with-users">
             {{#votes}}
                 <li>
-                    <span class="card small {{^visible}}backside{{/visible}}"><i class="card-value card-value-{{vote}}">{{vote}}</i></span>
+                    <span class="scrum-poker-card scrum-poker-card-small {{^visible}}scrum-poker-card-backside{{/visible}}"><i class="scrum-poker-card-value scrum-poker-card-value-{{vote}}">{{vote}}</i></span>
                     <span>{{user}}</span>
                     {{#needABreak}}
-                        <span class="poker-comment">$i18n.getText("scrumpoker.session.needabreak")</span>
+                        <span class="scrum-poker-comment">$i18n.getText("scrumpoker.session.needabreak")</span>
                     {{/needABreak}}
                     {{^needABreak}}
                         {{#needToTalk}}
-                            <span class="aui-icon aui-icon-small aui-iconfont-comment need-to-talk">$i18n.getText("scrumpoker.session.needtotalk")</span>
+                            <span class="aui-icon aui-icon-small aui-iconfont-comment scrum-poker-should-talk">$i18n.getText("scrumpoker.session.needtotalk")</span>
                         {{/needToTalk}}
                     {{/needABreak}}
                 </li>
             {{/votes}}
             {{^votes}}
-                <p class="poker-comment">$i18n.getText("scrumpoker.session.noestimations")</p>
+                <p class="scrum-poker-comment">$i18n.getText("scrumpoker.session.noestimations")</p>
             {{/votes}}
         </ul>
     {{/confirmedVoteExists}}
@@ -211,7 +211,7 @@
 <script id="scrum-poker-buttons-template" type="text/x-handlebars-template">
 
     {{^confirmedVoteExists}}
-        <div class="poker-buttons">
+        <div class="scrum-poker-buttons">
             <div class="aui-buttons">
             {{#allowReveal}}
                 <button onclick="ScrumPoker.revealSession('{{issueKey}}');" class="aui-button aui-button-primary"><span class="aui-icon aui-icon-small aui-iconfont-new-watch"></span> $i18n.getText("scrumpoker.session.revealcards")</button>
@@ -241,7 +241,7 @@
     <h4>$i18n.getText("scrumpoker.title")</h4>
 
     {{#confirmedVoteExists}}
-        <p class="poker-comment">
+        <p class="scrum-poker-comment">
             {{#confirmedUser}}
                 $i18n.getText("scrumpoker.session.estimationsaved.long")
             {{/confirmedUser}}
@@ -249,16 +249,16 @@
                 $i18n.getText("scrumpoker.session.estimationsaved.short")
             {{/confirmedUser}}
         </p>
-        <ul class="list-of-cards centered">
-            <li><span class="card active">{{confirmedVote}}</span></li>
+        <ul class="scrum-poker-cards-list scrum-poker-cards-list-centered">
+            <li><span class="scrum-poker-card scrum-poker-card-active">{{confirmedVote}}</span></li>
         </ul>
     {{/confirmedVoteExists}}
 
     {{#cancelled}}
-        <p class="poker-comment">$i18n.getText("scrumpoker.session.cancelled.long")</p>
+        <p class="scrum-poker-comment">$i18n.getText("scrumpoker.session.cancelled.long")</p>
     {{/cancelled}}
 
-    <div class="poker-buttons">
+    <div class="scrum-poker-buttons">
         <div class="aui-buttons">
             <a href="$req.contextPath/secure/ScrumPokerSessions.jspa" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-list"></span> $i18n.getText("scrumpoker.sessions.list")</a>
             <a href="$req.contextPath/browse/{{issueKey}}" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-issue"></span> $i18n.getText("scrumpoker.issue.navigateback")</a>

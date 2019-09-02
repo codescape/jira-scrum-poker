@@ -1,51 +1,51 @@
 /* list of cards has no list styling */
-.list-of-cards {
+.scrum-poker-cards-list {
     list-style-type: none;
     padding: 0;
     margin: 10px 0; }
 
 /* list of cards displays cards next to each other */
-.list-of-cards li {
+.scrum-poker-cards-list li {
     display: inline; }
 
 /* only list of cards with users is displayed one under another */
-.list-of-cards.with-users li {
+.scrum-poker-cards-list-with-users li {
     display: block; }
 
-/* centered text */
-.centered {
+/* centered list of cards */
+.scrum-poker-cards-list-centered {
     text-align: center; }
 
-/* right aligned */
-.right-aligned {
+/* buttons right aligned */
+.scrum-poker-buttons-right {
     text-align: right; }
 
 /* icon that signals that participants need to talk to each other */
-.need-to-talk {
+.scrum-poker-should-talk {
     position: relative;
     top: -10px; }
 
 /* italic styled comments */
-.poker-comment {
+.scrum-poker-comment {
     font-style: italic; }
 
 /* prevent issue description from floating into poker elements */
-.issue-description {
+.scrum-poker-issue-description {
     display: inline-block;
     max-width: 100%;
     word-break: break-word; }
 
 /* prevent images in issue description from floating into poker elements */
-.issue-description img {
+.scrum-poker-issue-description img {
     max-width: 100%; }
 
 /* buttons are displayed centered */
-.poker-buttons {
+.scrum-poker-buttons {
     margin: 15px 0;
     text-align: center; }
 
 /* basic card layout */
-.card {
+.scrum-poker-card {
     position: relative;
     display: inline-block;
     text-align: center;
@@ -59,57 +59,59 @@
     background-color: rgba(9,30,66,.08); }
 
 /* cards can be smaller */
-.card.small {
+.scrum-poker-card-small {
     font-size: 12px; }
 
 /* selected card has a different background color */
-.card.active {
+.scrum-poker-card-active {
     background-color: #0052cc;
     color: #fff; }
 
 /* clickable cards show this by their pointer */
-.card.clickable:hover, .card.clickable:focus {
+.scrum-poker-card-clickable:hover,
+.scrum-poker-card-clickable:focus {
     background-color: #f4f5f7;
     text-decoration: none;
     cursor: pointer; }
 
 /* hover over select cards */
-.card.active:hover {
+.scrum-poker-card-active:hover {
     background-color: #0065FF;
     color: #fff; }
 
 /* cards show their backside when not revealed */
-.card.backside {
+.scrum-poker-card-backside {
     background-color: #0052cc;
     color: #fff;
     cursor: default; }
 
 /* badges are positioned on the upper right corner of the card */
-.card aui-badge, .card .aui-badge {
+.scrum-poker-card aui-badge,
+.scrum-poker-card .aui-badge {
     position: absolute;
     background-color: #ebedf0;
     margin-top: -0.95em;
     margin-left: -0.25em; }
 
 /* icons on buttons display aligned to the text */
-.aui-button .aui-icon {
+.scrum-poker .aui-button .aui-icon {
     height: 20px;
     vertical-align: bottom; }
 
 /* display card values inside italic container non-italic */
-.card-value {
+.scrum-poker-card-value {
     font-style: normal; }
 
 /* position and styling of share session button */
-#share-session table {
+#scrum-poker-share-session table {
     width: 100%;
     border-spacing: 0; }
-#share-session table td:last-child {
+#scrum-poker-share-session table td:last-child {
     text-align: right;
     width: 40px; }
 
-/**/
-.stacktrace {
+/* stack trace shall not brake table */
+.scrum-poker-stacktrace {
     font-size: 80%;
     overflow-x: scroll;
 }

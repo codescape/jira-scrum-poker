@@ -3,7 +3,7 @@
     <title>${i18n.getText("scrumpoker.title")}</title>
     $webResourceManager.requireResource("de.codescape.jira.plugins.scrum-poker:scrum-poker-resources")
 </head>
-<body class="scrum-poker-sessions">
+<body class="scrum-poker scrum-poker-sessions">
 
 <header class="aui-page-header">
     <div class="aui-page-header-inner">

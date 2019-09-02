@@ -4,7 +4,7 @@
     $webResourceManager.requireResource("de.codescape.jira.plugins.scrum-poker:scrum-poker-resources")
     $webResourceManager.requireResource("com.atlassian.auiplugin:aui-expander")
 </head>
-<body>
+<body class="scrum-poker">
 
 <h2>$i18n.getText("scrumpoker.title") &raquo; $i18n.getText("scrumpoker.errorlog.title")</h2>
 
@@ -33,7 +33,7 @@
                 <td>
                     #if($errorEntry.stacktrace)
                         <div id="stacktrace-$errorEntry.iD" class="aui-expander-content" aria-hidden="true">
-                            <pre class="stacktrace">$errorEntry.stacktrace</pre>
+                            <pre class="scrum-poker-stacktrace">$errorEntry.stacktrace</pre>
                         </div>
                         <a data-replace-text="$i18n.getText("scrumpoker.errorlog.error.stacktrace.hide")" class="aui-expander-trigger" aria-controls="stacktrace-$errorEntry.iD">$i18n.getText("scrumpoker.errorlog.error.stacktrace.expand")</a>
                     #else
@@ -48,7 +48,7 @@
     </table>
     <form class="aui long-label" action="ScrumPokerErrorLog.jspa" method="post">
         <div class="buttons-container">
-            <div class="buttons right-aligned">
+            <div class="buttons scrum-poker-buttons-right">
                 <input type="hidden" name="action" value="empty">
                 <button type="submit" id="empty-errorlog" class="aui-button">$i18n.getText("scrumpoker.errorlog.purge")</button>
             </div>
