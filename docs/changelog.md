@@ -15,6 +15,7 @@ Click on the version in the following list to see all changes since the previous
 * chore: remove obsolete changelog in root directory
 * feat: introduce namespace for cascading style sheets
 * style: add braces also around simple conditions
+* feat: add translation for the health check feature in French and German
 
 ### [4.3.0] - 2019-08-28
 
