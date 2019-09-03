@@ -55,8 +55,9 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     @Override
     public ScrumPokerSession byIssueKey(String issueKey, String userKey) {
         ScrumPokerSession scrumPokerSession = activeObjects.get(ScrumPokerSession.class, issueKey);
-        if (scrumPokerSession == null)
+        if (scrumPokerSession == null) {
             scrumPokerSession = create(issueKey, userKey);
+        }
         return scrumPokerSession;
     }
 
@@ -65,7 +66,6 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
         ScrumPokerSession scrumPokerSession = byIssueKey(issueKey, userKey);
         scrumPokerSession.setVisible(false);
         scrumPokerSession.save();
-
         ScrumPokerVote[] scrumPokerVotes = activeObjects.find(ScrumPokerVote.class, Query.select()
             .where("SESSION_ID = ? and USER_KEY = ?", issueKey, userKey));
         ScrumPokerVote scrumPokerVote;
