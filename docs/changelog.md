@@ -21,6 +21,7 @@ Click on the version in the following list to see all changes since the previous
 * feat: improve styling of back button on error page
 * feat: improve styling of save buttons on global and project configuration page
 * feat: improve styling of start button on health check page
+* feat: correct numbering of errors in error log
 
 ### [4.3.0] - 2019-08-28
 
