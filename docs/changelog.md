@@ -18,6 +18,7 @@ Click on the version in the following list to see all changes since the previous
 * feat: add translation for the health check feature in French and German
 * feat: improve presentation for no errors on error log page
 * feat: improve styling for error message and active sessions link on error page
+* feat: improve styling of back button on error page
 
 ### [4.3.0] - 2019-08-28
 

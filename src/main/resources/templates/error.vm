@@ -34,20 +34,28 @@
     <div class="aui-page-panel-inner">
         <section class="aui-page-panel-content">
             <div class="mod-content">
-                #if($action.hasAnyErrors())
-                    <div class="aui-message aui-message-error">
-                        <h4>$i18n.getText("scrumpoker.error.details")</h4>
-                        <ul>
-                            #foreach($error in $action.errorMessages)
-                                <li>$error</li>
-                            #end
-                            #foreach($error in $action.errors)
-                                <li>$error</li>
-                            #end
-                        </ul>
+                <form class="aui long-label" method="post">
+                    #if($action.hasAnyErrors())
+                        <div class="aui-message aui-message-error">
+                            <h4>$i18n.getText("scrumpoker.error.details")</h4>
+                            <ul>
+                                #foreach($error in $action.errorMessages)
+                                    <li>$error</li>
+                                #end
+                                #foreach($error in $action.errors)
+                                    <li>$error</li>
+                                #end
+                            </ul>
+                        </div>
+                    #end
+                    <div class="buttons-container">
+                        <div class="buttons scrum-poker-buttons-right">
+                            <button onclick="javascript:history.back(); return false;" onfocus="javascript:blur();" class="aui-button">
+                                <span class="aui-icon aui-icon-small aui-iconfont-undo"></span> $i18n.getText("scrumpoker.error.return")
+                            </button>
+                        </div>
                     </div>
-                #end
-                <a href="#" onclick="javascript:history.back(); return false;">$i18n.getText("scrumpoker.error.return")</a>
+                </form>
             </div>
         </section>
     </div>
