@@ -11,7 +11,9 @@
 <p>$i18n.getText("scrumpoker.errorlog.description")</p>
 
 #if($errorList.isEmpty())
-    <p><i>$i18n.getText("scrumpoker.errorlog.empty")</i></p>
+    <div class="aui-message aui-message-success">
+        <p>$i18n.getText("scrumpoker.errorlog.empty")</p>
+    </div>
 #else
     <table class="aui">
         <thead>
