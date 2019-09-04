@@ -22,7 +22,9 @@
         </div>
         <div class="aui-page-header-actions">
             <div class="aui-buttons">
-                <a href="$req.contextPath/secure/ScrumPokerSessions.jspa"><button class="aui-button aui-button-light">$i18n.getText("scrumpoker.sessions.list")</button></a>
+                <a href="$req.contextPath/secure/ScrumPokerSessions.jspa">
+                    <button class="aui-button aui-button-light"><span class="aui-icon aui-icon-small aui-iconfont-list"></span> $i18n.getText("scrumpoker.sessions.list")</button>
+                </a>
             </div>
         </div>
     </div>
@@ -33,11 +35,8 @@
         <section class="aui-page-panel-content">
             <div class="mod-content">
                 #if($action.hasAnyErrors())
-                    <div class="aui-message error">
-                        <p class="title">
-                            <span class="aui-icon icon-error"></span>
-                            <strong>$i18n.getText("scrumpoker.error.details")</strong>
-                        </p>
+                    <div class="aui-message aui-message-error">
+                        <h4>$i18n.getText("scrumpoker.error.details")</h4>
                         <ul>
                             #foreach($error in $action.errorMessages)
                                 <li>$error</li>
