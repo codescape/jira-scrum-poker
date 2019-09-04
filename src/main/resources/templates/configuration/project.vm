@@ -31,7 +31,9 @@
         <div class="buttons">
             <input type="hidden" name="action" value="save">
             <input type="hidden" name="projectKey" value="$projectKey">
-            <button type="submit" id="save-button" class="aui-button aui-button-primary">$i18n.getText("scrumpoker.config.save")</button>
+            <button type="submit" id="save-button" class="aui-button aui-button-primary">
+                <span class="aui-icon aui-icon-small aui-iconfont-check-circle"></span>  $i18n.getText("scrumpoker.config.save")
+            </button>
         </div>
     </div>
 </form>
