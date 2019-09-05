@@ -11,6 +11,12 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
+* ...
+
+### [4.4.0] - 2019-09-05
+
+**Improved styling and wording for all administration pages**
+
 * docs: improve wording on error log documentation page
 * chore: remove obsolete changelog in root directory
 * feat: introduce namespace for cascading style sheets
@@ -718,7 +724,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.3.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.4.0...HEAD
+[4.4.0]: https://github.com/codescape/jira-scrum-poker/compare/4.3.0...4.4.0
 [4.3.0]: https://github.com/codescape/jira-scrum-poker/compare/4.2.0...4.3.0
 [4.2.0]: https://github.com/codescape/jira-scrum-poker/compare/4.1.0...4.2.0
 [4.1.0]: https://github.com/codescape/jira-scrum-poker/compare/4.0.1...4.1.0
