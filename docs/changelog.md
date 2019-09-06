@@ -11,7 +11,7 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
-* ...
+* refactor: restructure folders for Scrum Poker logo
 
 ### [4.4.0] - 2019-09-05
 
