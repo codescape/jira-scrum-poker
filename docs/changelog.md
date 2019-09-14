@@ -12,6 +12,7 @@ Click on the version in the following list to see all changes since the previous
 ### [Unreleased]
 
 * refactor: restructure folders for Scrum Poker logo
+* chore: implement against Jira patch version 8.4.0 (#79)
 
 ### [4.4.0] - 2019-09-05
 
