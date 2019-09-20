@@ -20,9 +20,10 @@ If those requirements are met you can proceed and follow the installation steps 
 
 ### Installation steps
 
-The Installation and configuration of Scrum Poker for Jira from the Atlassian Marketplace is extremely easy and can be explained in two simple steps:
+The Installation and configuration of Scrum Poker for Jira from the Atlassian Marketplace is extremely easy and can be explained in three simple steps:
 
 1. Download and install Scrum Poker for Jira from the <a href="{{ site.marketplace_url }}">Atlassian Marketplace</a>.
+1. Obtain a license (evaluation or purchase) for Scrum Poker for Jira from the Atlassian Marketplace.
 1. Configure Scrum Poker for Jira as described on the <a href="/scrum-poker-configuration">Scrum Poker configuration</a> page.
 
 Congratulations!
