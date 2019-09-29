@@ -3,18 +3,21 @@ layout: default
 title: Imprint
 ---
 
-**Angaben gemäß § 5 TMG**
+Angaben gemäß § 5 TMG
 
 Stefan Glase    
 Gummerother Str. 11    
 51643 Gummersbach    
 
-Vertreten durch:    
+**Vertreten durch:**    
 Stefan Glase    
 
-Kontakt:     
+**Kontakt:**     
 Telefon: +49 (0)151 56015606    
 E-Mail: stefan.glase@googlemail.com
+
+**Umsatzsteuer-ID:**    
+Umsatzsteuer-Identifikationsnummer gemäß §27a Umsatzsteuergesetz: DE325874332
 
 ### Haftungsausschluss: 
 
@@ -52,9 +55,9 @@ Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend e
 
 Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich.
 Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis.
-Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben. 
+Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.    
 Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann.
-Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich. 
+Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.    
 Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten durch Dritte zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit ausdrücklich widersprochen.
 Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-Mails, vor.
 
@@ -68,3 +71,5 @@ Auch wird Google diese Informationen gegebenenfalls an Dritte übertragen, sofer
 Google wird in keinem Fall Ihre IP-Adresse mit anderen Daten der Google in Verbindung bringen.
 Sie können die Installation der Cookies durch eine entsprechende Einstellung Ihrer Browser Software verhindern; wir weisen Sie jedoch darauf hin, dass Sie in diesem Fall gegebenenfalls nicht sämtliche Funktionen dieser Website voll umfänglich nutzen können.
 Durch die Nutzung dieser Website erklären Sie sich mit der Bearbeitung der über Sie erhobenen Daten durch Google in der zuvor beschriebenen Art und Weise und zu dem zuvor benannten Zweck einverstanden.
+
+_Impressum vom [Impressum Generator](https://www.impressum-generator.de) der [Kanzlei Hasselbach, Rechtsanwälte für Arbeitsrecht und Familienrecht](https://www.kanzlei-hasselbach.de/)_
