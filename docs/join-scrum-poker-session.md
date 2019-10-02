@@ -15,7 +15,7 @@ A Scrum Poker session can only be joined by users who may see the issue for that
 
 ### Choose your preferred way
 
-To join a currently running Scrum Poker session there are basically two ways in doing so.
+To join a currently running Scrum Poker session there are basically three ways in doing so.
 
 #### Find your session in the Active Sessions list
 
