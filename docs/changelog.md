@@ -17,6 +17,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: improve installation instructions with license step
 * docs: improve imprint and add legal information
 * docs: better explanation to join a Scrum Poker session
+* chore: implement against Jira patch version 8.4.2 (#81)
 
 ### [4.4.0] - 2019-09-05
 
