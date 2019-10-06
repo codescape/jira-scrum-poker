@@ -18,6 +18,8 @@ Click on the version in the following list to see all changes since the previous
 * docs: improve imprint and add legal information
 * docs: better explanation to join a Scrum Poker session
 * chore: implement against Jira patch version 8.4.2 (#81)
+* chore: implement against Jira enterprise patch versions 7.13.8 and 7.6.16
+
 
 ### [4.4.0] - 2019-09-05
 

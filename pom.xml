@@ -45,8 +45,8 @@
         <!-- Jira versions -->
         <jira.version>8.4.2</jira.version>
         <jira.version.latest>${jira.version}</jira.version.latest>
-        <jira.version.enterprise>7.13.5</jira.version.enterprise>
-        <jira.version.oldest>7.6.14</jira.version.oldest>
+        <jira.version.enterprise>7.13.8</jira.version.enterprise>
+        <jira.version.oldest>7.6.16</jira.version.oldest>
 
         <!-- Dependency versions -->
         <amps.version>8.0.0</amps.version>
