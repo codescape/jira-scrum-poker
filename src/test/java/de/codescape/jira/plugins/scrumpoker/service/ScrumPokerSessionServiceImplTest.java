@@ -153,6 +153,18 @@ public class ScrumPokerSessionServiceImplTest {
             hasItems("ISSUE-8", "ISSUE-5", "ISSUE-2"));
     }
 
+    @Test
+    public void shouldReturnAnEmptyListWhenNoReferencesExistWithTheSameEstimationForTheSameUser() {
+        scrumPokerSessionService.addVote("ISSUE-1", "USER-1", "3");
+        scrumPokerSessionService.confirm("ISSUE-1", "USER-2", 5);
+
+        scrumPokerSessionService.addVote("ISSUE-2", "USER-1", "8");
+        scrumPokerSessionService.confirm("ISSUE-2", "USER-2", 3);
+
+        List<ScrumPokerSession> references = scrumPokerSessionService.references("USER-1", 8);
+        assertThat(references.isEmpty(), is(true));
+    }
+
     @Test(expected = IllegalStateException.class)
     public void shouldNotCreateSessionForIssueKeyWhichDoesNotExist() {
         scrumPokerSessionService.byIssueKey("UNKNOWN", "USER-1");
