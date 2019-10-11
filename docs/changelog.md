@@ -11,6 +11,12 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
+* ...
+
+### [4.5.0] - 2019-10-11
+
+**Improved compatibility for Oracle database and latest Jira versions**
+
 * refactor: restructure folders for Scrum Poker logo
 * chore: implement against Jira patch version 8.4.0 (#79)
 * docs: update compatibility matrix
@@ -734,7 +740,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.4.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.5.0...HEAD
+[4.5.0]: https://github.com/codescape/jira-scrum-poker/compare/4.4.0...4.5.0
 [4.4.0]: https://github.com/codescape/jira-scrum-poker/compare/4.3.0...4.4.0
 [4.3.0]: https://github.com/codescape/jira-scrum-poker/compare/4.2.0...4.3.0
 [4.2.0]: https://github.com/codescape/jira-scrum-poker/compare/4.1.0...4.2.0
