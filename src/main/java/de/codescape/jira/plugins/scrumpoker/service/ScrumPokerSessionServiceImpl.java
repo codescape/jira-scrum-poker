@@ -45,7 +45,8 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     public List<ScrumPokerSession> recent() {
         Date date = new Date(System.currentTimeMillis() - sessionTimeoutInMillis());
         return Arrays.asList(activeObjects.find(ScrumPokerSession.class, Query.select()
-            .where("CREATE_DATE > ?", date).order("CREATE_DATE DESC")));
+            .where("CREATE_DATE > ?", date)
+            .order("CREATE_DATE DESC")));
     }
 
     private int sessionTimeoutInMillis() {
@@ -122,11 +123,11 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     @Override
     public List<ScrumPokerSession> references(String userKey, Integer estimation) {
         return Arrays.asList(activeObjects.find(ScrumPokerSession.class, Query.select()
-            .alias(ScrumPokerSession.class, "session")
-            .alias(ScrumPokerVote.class, "vote")
-            .join(ScrumPokerVote.class, "vote.SESSION_ID = session.ISSUE_KEY")
-            .where("vote.USER_KEY = ? and session.CONFIRMED_VOTE = ?", userKey, estimation)
-            .order("session.CREATE_DATE DESC")
+            .alias(ScrumPokerSession.class, "sps")
+            .alias(ScrumPokerVote.class, "spv")
+            .join(ScrumPokerVote.class, "spv.SESSION_ID = sps.ISSUE_KEY")
+            .where("spv.USER_KEY = ? and sps.CONFIRMED_VOTE = ?", userKey, estimation)
+            .order("sps.CREATE_DATE DESC")
             .limit(3)));
     }
 
