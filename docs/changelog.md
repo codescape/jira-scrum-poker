@@ -20,6 +20,7 @@ Click on the version in the following list to see all changes since the previous
 * chore: implement against Jira patch version 8.4.2 (#81)
 * chore: implement against Jira enterprise patch versions 7.13.8 and 7.6.16
 * fix: rename aliases to not use reserved words in query (#82)
+* docs: improve documentation for error log check in health check
 
 ### [4.4.0] - 2019-09-05
 

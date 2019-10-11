@@ -169,9 +169,12 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
      */
     public List<String> getErrorsResults() {
         List<String> results = new ArrayList<>();
+
+        // check that the Scrum Poker error log is empty
         if (!scrumPokerErrorService.listAll().isEmpty()) {
             results.add(ErrorLog.ERROR_LOG_NOT_EMPTY);
         }
+
         return results;
     }
 
