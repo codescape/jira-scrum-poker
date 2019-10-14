@@ -11,7 +11,7 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
-* ...
+* docs: add version headings for older releases of Scrum Poker
 
 ### [4.5.0] - 2019-10-11
 
@@ -476,9 +476,13 @@ Click on the version in the following list to see all changes since the previous
 
 ### [2.1.1] - 2018-03-26
 
+**Fixing invalid URLs for services on installations without context path**
+
 * fix: always use correct path for REST requests
 
 ### [2.1.0] - 2018-03-26
+
+**Votes with question mark always have to talk**
 
 * refactor: move cards list to enum
 * refactor: remove obsolete base class
@@ -488,10 +492,14 @@ Click on the version in the following list to see all changes since the previous
 
 ### [2.0.1] - 2018-03-24
 
+**Fixing that no agreement is shown when question marks exist**
+
 * test: add tests for REST endpoint
 * fix: agreement should not ignore question marks
 
 ### [2.0.0] - 2018-03-24
+
+**Complete rework of the frontend using new template engine and REST services**
 
 * test: add test for ScrumPokerCard
 * refactor: move to namespace de.codescape for packages
@@ -508,6 +516,8 @@ Click on the version in the following list to see all changes since the previous
 
 ### [1.12.0] - 2018-03-11
 
+**New Scrum Poker sessions only for estimable items and much cleaner session overview**
+
 * refactor: implement choose card action with testability in mind
 * feat: non editable issues do not display Scrum Poker button
 * docs: rename JIRA to Jira in all places in the code
@@ -522,6 +532,8 @@ Click on the version in the following list to see all changes since the previous
 
 ### [1.11.0] - 2018-02-27
 
+**Permission check so that no issues are shown to unprivileged users**
+
 * feat: stop users from opening issues in Scrum Poker they may not see
 * feat: add robustness when a key cannot be resolved to a user
 * feat: improve error page which will now also appear when user is not allowed to see issue
@@ -532,6 +544,8 @@ Click on the version in the following list to see all changes since the previous
 
 ### [1.10.0] - 2018-02-02
 
+**Navigation for participants after confirmed estimation is shown**
+
 * feat: remove reset button from confirmed estimation page
 * feat: add active sessions link on confirmed estimation page
 * feat: add return to issue link on confirmed estimation page
@@ -539,6 +553,8 @@ Click on the version in the following list to see all changes since the previous
 * style: use white space instead of tabs for templates
 
 ### [1.9.1] - 2018-01-26
+
+**Log error when updating an issue fails with an error**
 
 * docs: improve documentation for scrum poker session
 * docs: fix credits to original author
@@ -552,6 +568,8 @@ Click on the version in the following list to see all changes since the previous
 
 ### [1.9.0] - 2017-12-21
 
+**Display Scrum Poker cards with CSS replacing previously used images**
+
 * feat: cards are rendered by CSS and replace previously used images
 * docs: add contibution guidelines
 * fix: show questionmark on backside of cards
@@ -560,21 +578,29 @@ Click on the version in the following list to see all changes since the previous
 
 ### [1.8.0] - 2017-11-03
 
+**Session overview shows issues based on user permissions**
+
 * feat: added internationalization for error page
 * feat: closed sessions link to issue instead of Scrum Poker session
 * feat: sessions overview only shows sessions the user is allowed to see
 
 ### [1.7.2] - 2017-10-19
 
+**Fixing session overview to display closed sessions even when no active sessions exist**
+
 * fix: show closed sessions when no active sessions exist
 * docs: improve changelog for better readability
 
 ### [1.7.1] - 2017-10-19
 
+**Fixing missing translations on session overview**
+
 * fix: add missing translations for English translation
 * fix: correct number of headings for active sessions in session overview
 
 ### [1.7.0] - 2017-10-19
+
+**Internationalization for all Scrum Poker pages and texts**
 
 * feat: bump version of used Jira API to version 7.5.0
 * feat: improve translations in German and English
@@ -583,28 +609,40 @@ Click on the version in the following list to see all changes since the previous
 
 ### [1.6.1] - 2017-09-08
 
+**Internationalization for the active session page**
+
 * feat: provide translation for the active sessions list
 * chore: cleanup of plugin configuration
 * chore: removed link to missing and unused javascript library
 
 ### [1.6.0] - 2017-08-22
 
+**Display the name of the session starter in the session list**
+
 * feat: show the name of the user who has started the session in the session list
 
 ### [1.5.1] - 2017-08-15
+
+**Fixing the URL to images and resources for Jira installations without context path**
 
 * fix: use base url to display images and links on estimation page
 
 ### [1.5.0] - 2017-08-15
 
+**Display all sub tasks for the current session if sub tasks exist**
+
 * feat: display sub tasks of the story currently being estimated
 
 ### [1.4.2] - 2017-08-11
+
+**Update add on using the latest Atlassian SDK**
 
 * refactor: extract settings handling into one component
 * feat: implement against latest Atlassian Maven Jira Plugin
 
 ### [1.4.1] - 2017-08-08
+
+**Sort active and recently closed Scrum Poker sessions by creation date**
 
 * chore: cleanup of unused actions and imports, css selectors
 * style: improve code formatting
@@ -613,14 +651,20 @@ Click on the version in the following list to see all changes since the previous
 
 ### [1.4.0] - 2017-08-07
 
+**Support for Atlassian Jira 7.3.6**
+
 * refactor: use Java 8 language level
 * feat: implement and test against Jira version 7.3.6
 
 ### [1.3.16] - 2017-06-21
 
+**Remove Scrum Poker sessions after the configured timeout** 
+
 * feat: cleanup Scrum Poker Sessions older than 12 hours
 
 ### [1.3.15] - 2017-02-24
+
+**Fixing access to the configuration to require a user with sysadmin role**
 
 * fix: restrict access to configuration to sysadmin role
 
@@ -737,6 +781,8 @@ Click on the version in the following list to see all changes since the previous
 * style: global optimizations regarding formatting and code style
 
 ### [1.0.0] - 2015-04-23
+
+**First runnable version of Scrum Poker**
 
 * feat: initial usable version of Planning Poker Plugin
 
