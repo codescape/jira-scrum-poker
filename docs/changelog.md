@@ -13,6 +13,7 @@ Click on the version in the following list to see all changes since the previous
 
 * docs: add version headings for older releases of Scrum Poker
 * test: use Mockito version 3.1.0 for mocks in tests
+* chore: implement against Jira patch version 8.5.0
 
 ### [4.5.0] - 2019-10-11
 
