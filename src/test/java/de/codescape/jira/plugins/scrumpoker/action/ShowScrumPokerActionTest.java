@@ -2,6 +2,8 @@ package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
+import com.atlassian.jira.issue.comments.Comment;
+import com.atlassian.jira.issue.comments.CommentManager;
 import com.atlassian.jira.junit.rules.AvailableInContainer;
 import com.atlassian.jira.junit.rules.MockitoContainer;
 import com.atlassian.jira.junit.rules.MockitoMocksInContainer;
@@ -22,6 +24,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 
 import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
 import static org.hamcrest.CoreMatchers.*;
@@ -51,6 +54,9 @@ public class ShowScrumPokerActionTest {
 
     @Mock
     private PluginLicenseManager pluginLicenseManager;
+
+    @Mock
+    private CommentManager commentManager;
 
     @Mock
     private ScrumPokerForIssueCondition scrumPokerForIssueCondition;
@@ -119,6 +125,17 @@ public class ShowScrumPokerActionTest {
 
         assertThat(showScrumPokerAction.doExecute(), is(equalTo("error")));
         assertThat(showScrumPokerAction.getErrorMessages(), hasItem("Scrum Poker for Jira has license errors: EXPIRED"));
+    }
+
+    @Test
+    public void shouldReturnCommentsForIssue() {
+        whenRequestedIssueExists();
+        whenUserIsAllowedToSeeIssue();
+
+        ArrayList<Comment> comments = new ArrayList<>();
+        when(commentManager.getCommentsForUser(issue, user)).thenReturn(comments);
+
+        assertThat(showScrumPokerAction.getComments(), is(equalTo(comments)));
     }
 
     private void whenLicenseIsInvalid() {

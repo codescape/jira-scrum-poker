@@ -29,15 +29,23 @@
 .scrum-poker-comment {
     font-style: italic; }
 
+/* stylize text boxes for descriptions and comments. */
+.scrum-poker-text-container {
+    margin: 10px 0 20px 0; }
+
 /* prevent issue description from floating into poker elements */
-.scrum-poker-issue-description {
+.scrum-poker-text-holder {
     display: inline-block;
     max-width: 100%;
     word-break: break-word; }
 
 /* prevent images in issue description from floating into poker elements */
-.scrum-poker-issue-description img {
+.scrum-poker-text-holder img {
     max-width: 100%; }
+
+/* stylize comments and emphasize header */
+.scrum-poker-comment-header {
+    margin: 0 0 10px 0; }
 
 /* buttons are displayed centered */
 .scrum-poker-buttons {

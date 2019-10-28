@@ -1,22 +1,24 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
-import com.atlassian.jira.issue.IssueFieldConstants;
+import com.atlassian.jira.datetime.DateTimeFormatter;
+import com.atlassian.jira.datetime.DateTimeStyle;
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.RendererManager;
-import com.atlassian.jira.issue.fields.layout.field.FieldLayout;
-import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
-import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
+import com.atlassian.jira.issue.comments.Comment;
+import com.atlassian.jira.issue.comments.CommentManager;
+import com.atlassian.jira.issue.fields.renderer.JiraRendererPlugin;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.util.http.JiraUrl;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.upm.api.license.PluginLicenseManager;
 import com.atlassian.upm.api.license.entity.PluginLicense;
-import com.atlassian.velocity.htmlsafe.HtmlSafe;
 import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
 
@@ -41,9 +43,10 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
 
     private final IssueManager issueManager;
     private final RendererManager rendererManager;
-    private final FieldLayoutManager fieldLayoutManager;
     private final PermissionManager permissionManager;
+    private final CommentManager commentManager;
     private final JiraAuthenticationContext jiraAuthenticationContext;
+    private final DateTimeFormatter dateTimeFormatter;
     private final ScrumPokerForIssueCondition scrumPokerForIssueCondition;
     private final PluginLicenseManager pluginLicenseManager;
     private final ScrumPokerErrorService scrumPokerErrorService;
@@ -51,20 +54,22 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
     private String issueKey;
 
     @Autowired
-    public ShowScrumPokerAction(@ComponentImport FieldLayoutManager fieldLayoutManager,
-                                @ComponentImport RendererManager rendererManager,
+    public ShowScrumPokerAction(@ComponentImport RendererManager rendererManager,
                                 @ComponentImport IssueManager issueManager,
                                 @ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
                                 @ComponentImport PermissionManager permissionManager,
+                                @ComponentImport CommentManager commentManager,
                                 @ComponentImport PluginLicenseManager pluginLicenseManager,
+                                @ComponentImport DateTimeFormatter dateTimeFormatter,
                                 ScrumPokerForIssueCondition scrumPokerForIssueCondition,
                                 ScrumPokerErrorService scrumPokerErrorService) {
         this.issueManager = issueManager;
         this.rendererManager = rendererManager;
-        this.fieldLayoutManager = fieldLayoutManager;
         this.permissionManager = permissionManager;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
+        this.commentManager = commentManager;
         this.pluginLicenseManager = pluginLicenseManager;
+        this.dateTimeFormatter = dateTimeFormatter;
         this.scrumPokerForIssueCondition = scrumPokerForIssueCondition;
         this.scrumPokerErrorService = scrumPokerErrorService;
     }
@@ -97,9 +102,25 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
         return SUCCESS;
     }
 
-    private void errorMessage(String errorMessage) {
-        scrumPokerErrorService.logError(errorMessage, null);
-        addErrorMessage(errorMessage);
+    /**
+     * All comments for that issue the currently logged in user may see.
+     */
+    public List<Comment> getComments() {
+        return commentManager.getCommentsForUser(getIssue(), jiraAuthenticationContext.getLoggedInUser());
+    }
+
+    /**
+     * The renderer to display text with wiki markup as in issue description and comments.
+     */
+    public JiraRendererPlugin getWikiRenderer() {
+        return rendererManager.getRendererForType("atlassian-wiki-renderer");
+    }
+
+    /**
+     * Return the date time formatter according to the settings of the current user.
+     */
+    public DateTimeFormatter getDateTimeFormatter() {
+        return dateTimeFormatter.forLoggedInUser().withStyle(DateTimeStyle.COMPLETE);
     }
 
     /**
@@ -110,15 +131,10 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
     }
 
     /**
-     * Description of the current issue rendered with respect to the markup being used.
+     * Url to this Scrum Poker session to be displayed and used for the client side QR code generation.
      */
-    @HtmlSafe
-    public String getIssueDescription() {
-        MutableIssue issue = issueManager.getIssueObject(issueKey);
-        FieldLayout fieldLayout = fieldLayoutManager.getFieldLayout(issue);
-        FieldLayoutItem fieldLayoutItem = fieldLayout.getFieldLayoutItem(IssueFieldConstants.DESCRIPTION);
-        String rendererType = fieldLayoutItem != null ? fieldLayoutItem.getRendererType() : null;
-        return rendererManager.getRenderedContent(rendererType, issue.getDescription(), issue.getIssueRenderContext());
+    public String getScrumPokerSessionUrl() {
+        return JiraUrl.constructBaseUrl(getHttpRequest()) + "/secure/ScrumPoker.jspa?issueKey=" + issueKey;
     }
 
     private boolean issueIsNotEstimable(MutableIssue issue) {
@@ -129,11 +145,9 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
         return !permissionManager.hasPermission(BROWSE_PROJECTS, issue, jiraAuthenticationContext.getLoggedInUser());
     }
 
-    /**
-     * Url to this Scrum Poker session to be displayed and used for the client side QR code generation.
-     */
-    public String getScrumPokerSessionUrl() {
-        return JiraUrl.constructBaseUrl(getHttpRequest()) + "/secure/ScrumPoker.jspa?issueKey=" + issueKey;
+    private void errorMessage(String errorMessage) {
+        scrumPokerErrorService.logError(errorMessage, null);
+        addErrorMessage(errorMessage);
     }
 
 }

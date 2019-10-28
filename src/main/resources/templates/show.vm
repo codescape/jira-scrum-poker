@@ -61,10 +61,11 @@
         <section class="aui-page-panel-content">
             <h4>$i18n.getText("scrumpoker.issue.summary")</h4>
 
-            #set($issueDescriptionHtml = $issueDescription)
-            #if(!$issueDescriptionHtml.isEmpty())
-                <div class="scrum-poker-issue-description">
-                    <p>$issueDescriptionHtml</p>
+            #if($issue.description)
+                <div class="scrum-poker-text-container">
+                    <div class="scrum-poker-text-holder">
+                        $wikiRenderer.render($issue.description, $issue.issueRenderContext)
+                    </div>
                 </div>
             #else
                 <p><i>$i18n.getText("scrumpoker.issue.summary.empty")</i></p>
@@ -97,6 +98,29 @@
             </table>
             #else
                 <p><i>$i18n.getText("scrumpoker.issue.tasks.empty")</i></p>
+            #end
+
+            <h4>$i18n.getText("scrumpoker.issue.comments")</h4>
+
+            #if(!$comments.isEmpty())
+            <table width="100%" class="aui">
+                <tbody>
+                #foreach($comment in $comments)
+                   <tr>
+                        <td>
+                            <div class="scrum-poker-comment-header">
+                                <p><a href="$baseurl/secure/ViewProfile.jspa?name=$comment.authorApplicationUser.key">$comment.authorApplicationUser.displayName</a> $i18n.getText("scrumpoker.issue.comments.description") - $dateTimeFormatter.format($comment.created)</p>
+                            </div>
+                            <div class="scrum-poker-text-holder">
+                                $wikiRenderer.render($comment.body, $issue.issueRenderContext)
+                            </div>
+                        </td>
+                    </tr>
+                #end
+                </tbody>
+            </table>
+            #else
+                <p><i>$i18n.getText("scrumpoker.issue.comments.empty")</i></p>
             #end
         </section>
         <aside class="aui-page-panel-sidebar">
