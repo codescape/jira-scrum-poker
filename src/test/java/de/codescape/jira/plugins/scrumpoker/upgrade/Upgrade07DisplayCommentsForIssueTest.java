@@ -30,10 +30,10 @@ public class Upgrade07DisplayCommentsForIssueTest {
     private GlobalSettings globalSettings;
 
     @Test
-    public void shouldPersistDisplayCommentsForIssueInPluginSettings() {
+    public void shouldPersistDefaultSettingForDisplayCommentsForIssueInPluginSettings() {
         when(scrumPokerSettingService.load()).thenReturn(globalSettings);
         upgrade.doUpgrade();
-        verify(globalSettings).setDisplayCommentsForIssue(DisplayCommentsForIssue.ALL);
+        verify(globalSettings).setDisplayCommentsForIssue(GlobalSettings.DISPLAY_COMMENTS_FOR_ISSUE_DEFAULT);
         verify(scrumPokerSettingService).persist(globalSettings);
     }
 
