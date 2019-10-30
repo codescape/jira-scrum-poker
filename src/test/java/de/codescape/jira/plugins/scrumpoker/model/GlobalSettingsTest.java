@@ -17,6 +17,7 @@ public class GlobalSettingsTest {
         assertThat(globalSettings.isDefaultProjectActivation(), is(equalTo(DEFAULT_PROJECT_ACTIVATION_DEFAULT)));
         assertThat(globalSettings.isDisplayDropdownOnBoards(), is(equalTo(DISPLAY_DROPDOWN_ON_BOARDS_DEFAULT)));
         assertThat(globalSettings.isCheckPermissionToSaveEstimate(), is(equalTo(CHECK_PERMISSION_TO_SAVE_ESTIMATE_DEFAULT)));
+        assertThat(globalSettings.getDisplayCommentsForIssue(), is(equalTo(DISPLAY_COMMENTS_FOR_ISSUE_DEFAULT)));
     }
 
 }

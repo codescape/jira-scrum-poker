@@ -16,7 +16,10 @@ import com.atlassian.upm.api.license.entity.LicenseError;
 import com.atlassian.upm.api.license.entity.PluginLicense;
 import com.atlassian.upm.api.util.Option;
 import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
+import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
+import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerErrorService;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -59,6 +62,9 @@ public class ShowScrumPokerActionTest {
     private CommentManager commentManager;
 
     @Mock
+    private ScrumPokerSettingService scrumPokerSettingService;
+
+    @Mock
     private ScrumPokerForIssueCondition scrumPokerForIssueCondition;
 
     @Mock
@@ -75,6 +81,9 @@ public class ShowScrumPokerActionTest {
 
     @Mock
     private ApplicationUser user;
+
+    @Mock
+    private GlobalSettings globalSettings;
 
     @Before
     public void before() {
@@ -131,11 +140,38 @@ public class ShowScrumPokerActionTest {
     public void shouldReturnCommentsForIssue() {
         whenRequestedIssueExists();
         whenUserIsAllowedToSeeIssue();
+        whenDisplayCommentsForIssueSetTo(DisplayCommentsForIssue.ALL);
 
         ArrayList<Comment> comments = new ArrayList<>();
         when(commentManager.getCommentsForUser(issue, user)).thenReturn(comments);
 
         assertThat(showScrumPokerAction.getComments(), is(equalTo(comments)));
+    }
+
+    @Test
+    public void shouldNotDisplayCommentsIfDisplayCommentsForIssueIsSetToNone() {
+        whenDisplayCommentsForIssueSetTo(DisplayCommentsForIssue.NONE);
+
+        assertThat(showScrumPokerAction.isDisplayCommentsForIssue(), is(false));
+    }
+
+    @Test
+    public void shouldDisplayCommentsIfDisplayCommentsForIssueIsSetToAll() {
+        whenDisplayCommentsForIssueSetTo(DisplayCommentsForIssue.ALL);
+
+        assertThat(showScrumPokerAction.isDisplayCommentsForIssue(), is(true));
+    }
+
+    @Test
+    public void shouldDisplayCommentsIfDisplayCommentsForIssueIsSetToLatest() {
+        whenDisplayCommentsForIssueSetTo(DisplayCommentsForIssue.LATEST);
+
+        assertThat(showScrumPokerAction.isDisplayCommentsForIssue(), is(true));
+    }
+
+    private void whenDisplayCommentsForIssueSetTo(DisplayCommentsForIssue displayCommentsForIssue) {
+        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettings.getDisplayCommentsForIssue()).thenReturn(displayCommentsForIssue);
     }
 
     private void whenLicenseIsInvalid() {

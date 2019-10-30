@@ -12,6 +12,7 @@ public class GlobalSettings {
     public static final boolean DEFAULT_PROJECT_ACTIVATION_DEFAULT = true;
     public static final boolean DISPLAY_DROPDOWN_ON_BOARDS_DEFAULT = false;
     public static final boolean CHECK_PERMISSION_TO_SAVE_ESTIMATE_DEFAULT = false;
+    public static final DisplayCommentsForIssue DISPLAY_COMMENTS_FOR_ISSUE_DEFAULT = DisplayCommentsForIssue.LATEST;
 
     // settings
 
@@ -21,6 +22,7 @@ public class GlobalSettings {
     private boolean defaultProjectActivation = DEFAULT_PROJECT_ACTIVATION_DEFAULT;
     private boolean displayDropdownOnBoards = DISPLAY_DROPDOWN_ON_BOARDS_DEFAULT;
     private boolean checkPermissionToSaveEstimate = CHECK_PERMISSION_TO_SAVE_ESTIMATE_DEFAULT;
+    private DisplayCommentsForIssue displayCommentsForIssue = DISPLAY_COMMENTS_FOR_ISSUE_DEFAULT;
 
     /**
      * Set the story point field.
@@ -104,6 +106,20 @@ public class GlobalSettings {
      */
     public boolean isCheckPermissionToSaveEstimate() {
         return checkPermissionToSaveEstimate;
+    }
+
+    /**
+     * Set whether and how many comments shall be displayed for an issue.
+     */
+    public void setDisplayCommentsForIssue(DisplayCommentsForIssue displayCommentsForIssue) {
+        this.displayCommentsForIssue = displayCommentsForIssue;
+    }
+
+    /**
+     * Return whether and how many comments shall be displayed for an issue.
+     */
+    public DisplayCommentsForIssue getDisplayCommentsForIssue() {
+        return displayCommentsForIssue;
     }
 
 }

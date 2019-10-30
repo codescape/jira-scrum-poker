@@ -91,6 +91,34 @@
             </div>
             <div class="description">$i18n.getText("scrumpoker.config.allowrevealdeck.description")</div>
         </fieldset>
+        <fieldset class="group">
+            <legend><span>$i18n.getText("scrumpoker.config.displaycommentsforissue")</span></legend>
+            <div class="radio">
+                #if ($globalSettings.displayCommentsForIssue == 'ALL')
+                    <input class="radio" type="radio" name="displayCommentsForIssue id="displayCommentsForIssueAll" value="ALL" checked="checked">
+                #else
+                    <input class="radio" type="radio" name="displayCommentsForIssue" id="displayCommentsForIssueAll" value="ALL">
+                #end
+                <label for="displayCommentsForIssueAll">$i18n.getText("scrumpoker.config.displaycommentsforissue.all")</label>
+            </div>
+            <div class="radio">
+                #if ($globalSettings.displayCommentsForIssue == 'LATEST')
+                    <input class="radio" type="radio" name="displayCommentsForIssue" id="displayCommentsForIssueLatest" value="LATEST" checked="checked">
+                #else
+                    <input class="radio" type="radio" name="displayCommentsForIssue" id="displayCommentsForIssueLatest" value="LATEST">
+                #end
+                <label for="displayCommentsForIssueLatest">$i18n.getText("scrumpoker.config.displaycommentsforissue.latest")</label>
+            </div>
+            <div class="radio">
+                #if ($globalSettings.displayCommentsForIssue == 'NONE')
+                    <input class="radio" type="radio" name="displayCommentsForIssue" id="displayCommentsForIssueNone" value="NONE" checked="checked">
+                #else
+                    <input class="radio" type="radio" name="displayCommentsForIssue" id="displayCommentsForIssueNone" value="NONE">
+                #end
+                <label for="displayCommentsForIssueNone">$i18n.getText("scrumpoker.config.displaycommentsforissue.none")</label>
+            </div>
+            <div class="description">$i18n.getText("scrumpoker.config.displaycommentsforissue.description")</div>
+        </fieldset>
 
         <h3>$i18n.getText("scrumpoker.config.heading.appearance")</h3>
         <fieldset class="group">
@@ -105,7 +133,6 @@
             </div>
             <div class="description">$i18n.getText("scrumpoker.config.displaydropdownonboards.description")</div>
         </fieldset>
-
 
     </div>
     <div class="buttons-container form-footer">

@@ -100,27 +100,29 @@
                 <p><i>$i18n.getText("scrumpoker.issue.tasks.empty")</i></p>
             #end
 
+            #if($displayCommentsForIssue)
             <h4>$i18n.getText("scrumpoker.issue.comments")</h4>
 
-            #if(!$comments.isEmpty())
-            <table width="100%" class="aui">
-                <tbody>
-                #foreach($comment in $comments)
-                   <tr>
-                        <td>
-                            <div class="scrum-poker-comment-header">
-                                <p><a href="$baseurl/secure/ViewProfile.jspa?name=$comment.authorApplicationUser.key">$comment.authorApplicationUser.displayName</a> $i18n.getText("scrumpoker.issue.comments.description") - $dateTimeFormatter.format($comment.created)</p>
-                            </div>
-                            <div class="scrum-poker-text-holder">
-                                $wikiRenderer.render($comment.body, $issue.issueRenderContext)
-                            </div>
-                        </td>
-                    </tr>
+                #if(!$comments.isEmpty())
+                <table width="100%" class="aui">
+                    <tbody>
+                    #foreach($comment in $comments)
+                       <tr>
+                            <td>
+                                <div class="scrum-poker-comment-header">
+                                    <p><a href="$baseurl/secure/ViewProfile.jspa?name=$comment.authorApplicationUser.key">$comment.authorApplicationUser.displayName</a> $i18n.getText("scrumpoker.issue.comments.description") - $dateTimeFormatter.format($comment.created)</p>
+                                </div>
+                                <div class="scrum-poker-text-holder">
+                                    $wikiRenderer.render($comment.body, $issue.issueRenderContext)
+                                </div>
+                            </td>
+                        </tr>
+                    #end
+                    </tbody>
+                </table>
+                #else
+                    <p><i>$i18n.getText("scrumpoker.issue.comments.empty")</i></p>
                 #end
-                </tbody>
-            </table>
-            #else
-                <p><i>$i18n.getText("scrumpoker.issue.comments.empty")</i></p>
             #end
         </section>
         <aside class="aui-page-panel-sidebar">

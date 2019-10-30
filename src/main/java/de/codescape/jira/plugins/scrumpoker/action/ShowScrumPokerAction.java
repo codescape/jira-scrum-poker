@@ -16,6 +16,7 @@ import com.atlassian.upm.api.license.PluginLicenseManager;
 import com.atlassian.upm.api.license.entity.PluginLicense;
 import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerErrorService;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -47,6 +48,7 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
     private final CommentManager commentManager;
     private final JiraAuthenticationContext jiraAuthenticationContext;
     private final DateTimeFormatter dateTimeFormatter;
+    private final ScrumPokerSettingService scrumPokerSettingService;
     private final ScrumPokerForIssueCondition scrumPokerForIssueCondition;
     private final PluginLicenseManager pluginLicenseManager;
     private final ScrumPokerErrorService scrumPokerErrorService;
@@ -61,6 +63,7 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
                                 @ComponentImport CommentManager commentManager,
                                 @ComponentImport PluginLicenseManager pluginLicenseManager,
                                 @ComponentImport DateTimeFormatter dateTimeFormatter,
+                                ScrumPokerSettingService scrumPokerSettingService,
                                 ScrumPokerForIssueCondition scrumPokerForIssueCondition,
                                 ScrumPokerErrorService scrumPokerErrorService) {
         this.issueManager = issueManager;
@@ -70,6 +73,7 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
         this.commentManager = commentManager;
         this.pluginLicenseManager = pluginLicenseManager;
         this.dateTimeFormatter = dateTimeFormatter;
+        this.scrumPokerSettingService = scrumPokerSettingService;
         this.scrumPokerForIssueCondition = scrumPokerForIssueCondition;
         this.scrumPokerErrorService = scrumPokerErrorService;
     }
@@ -103,10 +107,25 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
     }
 
     /**
+     * Return whether to display the comments for an issue.
+     */
+    public boolean isDisplayCommentsForIssue() {
+        return scrumPokerSettingService.load().getDisplayCommentsForIssue().shouldDisplay();
+    }
+
+    /**
      * All comments for that issue the currently logged in user may see.
      */
     public List<Comment> getComments() {
-        return commentManager.getCommentsForUser(getIssue(), jiraAuthenticationContext.getLoggedInUser());
+        List<Comment> comments = commentManager.getCommentsForUser(getIssue(), jiraAuthenticationContext.getLoggedInUser());
+        switch (scrumPokerSettingService.load().getDisplayCommentsForIssue()) {
+            case ALL:
+                return comments;
+            case LATEST:
+                return comments.subList(Math.max(comments.size() - 10, 0), comments.size());
+            default:
+                return null;
+        }
     }
 
     /**

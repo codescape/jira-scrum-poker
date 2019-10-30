@@ -4,6 +4,7 @@ import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
+import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
         static final String ALLOW_REVEAL_DECK = "allowRevealDeck";
         static final String DISPLAY_DROPDOWN_ON_BOARDS = "displayDropdownOnBoards";
         static final String CHECK_PERMISSION_TO_SAVE_ESTIMATE = "checkPermissionToSaveEstimate";
+        static final String DISPLAY_COMMENTS_FOR_ISSUE = "displayCommentsForIssue";
 
     }
 
@@ -82,6 +84,9 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
 
             String checkPermissionToSaveEstimate = getParameter(Parameters.CHECK_PERMISSION_TO_SAVE_ESTIMATE);
             globalSettings.setCheckPermissionToSaveEstimate(Boolean.parseBoolean(checkPermissionToSaveEstimate));
+
+            String displayCommentsForIssue = getParameter(Parameters.DISPLAY_COMMENTS_FOR_ISSUE);
+            globalSettings.setDisplayCommentsForIssue(DisplayCommentsForIssue.valueOf(displayCommentsForIssue));
 
             scrumPokerSettingService.persist(globalSettings);
         }
