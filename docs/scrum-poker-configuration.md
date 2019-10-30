@@ -61,6 +61,17 @@ Decide who is allowed to reveal the votes and make them visible during a Scrum P
 * `PARTICIPANTS` - Only participants who have provided a vote are allowed to reveal the deck.
 * `CREATOR` - Only the creator of the session is allowed to reveal the deck.
 
+#### Show Comments
+
+Decide whether comments on the issue will be displayed in the Scrum Poker session.
+Some teams use comments to communicate and discuss details of an issue and so those comments might help when estimating an issue. 
+
+The following options are available: 
+
+* `Show all comments` allows participants of a Scrum Poker session to see all comments they are allowed to see.
+* `Show latest comments` allows participants of a Scrum Poker session to see the most recent ten comments they are allowed to see.
+* `Show no comments` removes the section that displays comments on the Scrum Poker session page and thus shows no comments. 
+
 #### Show Dropdown on Boards
 
 Decide whether to show the Scrum Poker dropdown on boards or not.

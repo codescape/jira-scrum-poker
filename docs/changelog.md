@@ -16,7 +16,8 @@ Click on the version in the following list to see all changes since the previous
 * chore: implement against Jira patch version 8.5.0
 * docs: update compatibility matrix
 * feat: display comments for issue on Scrum Poker session page
-* feat: add configuration option to display comments on Scrum Poker session page 
+* feat: add configuration option to display comments on Scrum Poker session page
+* docs: create online documentation for configuration options
 
 ### [4.5.0] - 2019-10-11
 
