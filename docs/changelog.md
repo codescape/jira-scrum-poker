@@ -11,6 +11,12 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
+* ...
+
+### [4.6.0] - 2019-10-31
+
+**Better estimates with comments on Scrum Poker session page**
+
 * docs: add version headings for older releases of Scrum Poker
 * test: use Mockito version 3.1.0 for mocks in tests
 * chore: implement against Jira patch version 8.5.0
@@ -793,7 +799,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.5.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.6.0...HEAD
+[4.6.0]: https://github.com/codescape/jira-scrum-poker/compare/4.5.0...4.6.0
 [4.5.0]: https://github.com/codescape/jira-scrum-poker/compare/4.4.0...4.5.0
 [4.4.0]: https://github.com/codescape/jira-scrum-poker/compare/4.3.0...4.4.0
 [4.3.0]: https://github.com/codescape/jira-scrum-poker/compare/4.2.0...4.3.0
