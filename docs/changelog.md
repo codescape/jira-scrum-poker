@@ -11,7 +11,7 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
-* ...
+* chore: cleanup unused imports on upgrade class
 
 ### [4.6.0] - 2019-10-31
 
