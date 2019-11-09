@@ -13,6 +13,7 @@ Click on the version in the following list to see all changes since the previous
 
 * chore: cleanup unused imports on upgrade class
 * chore: implement against Jira patch version 8.5.1
+* chore: remove dependency to unused library velocity-htmlsafe 
 
 ### [4.6.0] - 2019-10-31
 
