@@ -32,11 +32,3 @@ For developers:
 ## Screenshot
 
 ![Screenshot of a Scrum Poker session](/docs/images/participate-in-scrum-poker-session-reveal-estimates.png)
-
-## Supported Languages
-
-Scrum Poker for Jira supports the following languages and defaults to English translation if the user has no supported language configured in his Jira profile:
-
-* English
-* German
-* French
