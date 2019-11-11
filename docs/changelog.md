@@ -17,6 +17,7 @@ Click on the version in the following list to see all changes since the previous
 * chore: use latest version of hamcrest for testing
 * docs: improve app description for Atlassian Marketplace
 * feat: improved logo for Marketplace listing and active sessions page
+* feat: use improved logo as favicon for documentation
 
 ### [4.6.0] - 2019-10-31
 
