@@ -9,7 +9,7 @@
         <vendor name="${project.organization.name}" url="${project.organization.url}"/>
 
         <!-- logos -->
-        <param name="plugin-icon">images/scrum-poker-logo-16.png</param>
+        <param name="plugin-icon">images/scrum-poker-logo-32.png</param>
         <param name="plugin-logo">images/scrum-poker-logo-144.png</param>
 
         <!-- configuration -->
