@@ -1,9 +1,7 @@
 # Scrum Poker for Jira
 
-Scrum Poker for Jira is an open source app enabling teams to collaboratively estimate their work with the help of an interactive user interface seamlessly integrated into Jira Software.
+Scrum Poker for Jira enables your teams to collaboratively estimate their work items using a clean and interactive user interface that is seamlessly integrated into Jira Software.
 
-This app works best in combination with the Story Point field introduced by Jira Software which is also used to calculate the sprint velocity.
-        
 [![Build Status](https://travis-ci.org/codescape/jira-scrum-poker.svg?branch=master)](https://travis-ci.org/codescape/jira-scrum-poker)
 [![GitHub issues](https://img.shields.io/github/issues/codescape/jira-scrum-poker.svg)](https://github.com/codescape/jira-scrum-poker/issues)
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/codescape/jira-scrum-poker.svg)](https://github.com/codescape/jira-scrum-poker/releases)
