@@ -19,6 +19,7 @@ Click on the version in the following list to see all changes since the previous
 * feat: improved logo for Marketplace listing and active sessions page
 * feat: use improved logo as favicon for documentation
 * docs: add documentation page with supported languages
+* feat: provide a marketing banner for Marketplace listing
 
 ### [4.6.0] - 2019-10-31
 
