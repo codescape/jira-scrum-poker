@@ -13,8 +13,6 @@ To ensure backwards compatibility with older Jira Server versions Scrum Poker fo
 
 | Scrum Poker version | developed for Jira | also tested with Jira      |
 |---------------------|--------------------|----------------------------|
-| since 3.9.x         | Jira 7.13.x        | Jira 7.6.x and Jira 7.13.x |
-| since 3.10.x        | Jira 8.0.x         | Jira 7.6.x and Jira 7.13.x |
 | since 3.12.x        | Jira 8.1.x         | Jira 7.6.x and Jira 7.13.x |
 | since 4.1.x         | Jira 8.2.x         | Jira 7.6.x and Jira 7.13.x |
 | since 4.4.x         | Jira 8.3.x         | Jira 7.6.x and Jira 7.13.x |
