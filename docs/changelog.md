@@ -11,6 +11,12 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
+* ...
+
+### [4.7.0] - 2019-11-20
+
+**Modernize logos and banners for Scrum Poker for Jira**
+
 * chore: cleanup unused imports on upgrade class
 * chore: implement against Jira patch version 8.5.1
 * chore: remove dependency to unused library velocity-htmlsafe
@@ -808,7 +814,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.6.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.7.0...HEAD
+[4.7.0]: https://github.com/codescape/jira-scrum-poker/compare/4.6.0...4.7.0
 [4.6.0]: https://github.com/codescape/jira-scrum-poker/compare/4.5.0...4.6.0
 [4.5.0]: https://github.com/codescape/jira-scrum-poker/compare/4.4.0...4.5.0
 [4.4.0]: https://github.com/codescape/jira-scrum-poker/compare/4.3.0...4.4.0
