@@ -42,19 +42,21 @@ public class Upgrade08FillUpdateDate extends AbstractUpgradeTask {
     protected void performUpgrade() {
         ScrumPokerSession[] scrumPokerSessions = activeObjects.find(ScrumPokerSession.class,
             Query.select().where("UPDATE_DATE is null"));
-        Arrays.stream(scrumPokerSessions).forEach(session -> {
-            session.setUpdateDate(session.getCreateDate());
-            if (session.getVotes() != null) {
-                Arrays.stream(session.getVotes())
-                    .map(ScrumPokerVote::getCreateDate)
-                    .max(Date::compareTo)
-                    .ifPresent(session::setUpdateDate);
-            }
-            if (session.getConfirmedDate() != null && session.getUpdateDate().before(session.getConfirmedDate())) {
-                session.setUpdateDate(session.getConfirmedDate());
-            }
-            session.save();
-        });
+        Arrays.stream(scrumPokerSessions).forEach(this::performUpgradeForSession);
+    }
+
+    private void performUpgradeForSession(ScrumPokerSession session) {
+        session.setUpdateDate(session.getCreateDate());
+        if (session.getVotes() != null) {
+            Arrays.stream(session.getVotes())
+                .map(ScrumPokerVote::getCreateDate)
+                .max(Date::compareTo)
+                .ifPresent(session::setUpdateDate);
+        }
+        if (session.getConfirmedDate() != null && session.getUpdateDate().before(session.getConfirmedDate())) {
+            session.setUpdateDate(session.getConfirmedDate());
+        }
+        session.save();
     }
 
 }
