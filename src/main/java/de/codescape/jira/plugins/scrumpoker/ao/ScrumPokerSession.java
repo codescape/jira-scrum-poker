@@ -70,6 +70,13 @@ public interface ScrumPokerSession extends RawEntity<String> {
     void setCreateDate(Date createDate);
 
     /**
+     * The date this Scrum Poker session was last updated.
+     */
+    Date getUpdateDate();
+
+    void setUpdateDate(Date updateDate);
+
+    /**
      * The Scrum Poker session can be cancelled.
      */
     boolean isCancelled();

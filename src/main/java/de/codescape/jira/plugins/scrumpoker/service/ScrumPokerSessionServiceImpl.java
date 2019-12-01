@@ -45,19 +45,18 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     public List<ScrumPokerSession> recent() {
         Date date = new Date(System.currentTimeMillis() - sessionTimeoutInMillis());
         return Arrays.asList(activeObjects.find(ScrumPokerSession.class, Query.select()
-            .where("CREATE_DATE > ?", date)
+            .where("UPDATE_DATE > ?", date)
             .order("CREATE_DATE DESC")));
-    }
-
-    private int sessionTimeoutInMillis() {
-        return 3600 * 1000 * scrumPokerSettingService.load().getSessionTimeout();
     }
 
     @Override
     public ScrumPokerSession byIssueKey(String issueKey, String userKey) {
-        ScrumPokerSession scrumPokerSession = activeObjects.get(ScrumPokerSession.class, issueKey);
+        ScrumPokerSession scrumPokerSession = findScrumPokerSession(issueKey);
         if (scrumPokerSession == null) {
-            scrumPokerSession = create(issueKey, userKey);
+            scrumPokerSession = createScrumPokerSession(issueKey, userKey);
+        } else if (scrumPokerSession.getUpdateDate().before(new Date(System.currentTimeMillis() - sessionTimeoutInMillis()))) {
+            deleteScrumPokerSession(issueKey, userKey);
+            scrumPokerSession = createScrumPokerSession(issueKey, userKey);
         }
         return scrumPokerSession;
     }
@@ -66,6 +65,7 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     public ScrumPokerSession addVote(String issueKey, String userKey, String vote) {
         ScrumPokerSession scrumPokerSession = byIssueKey(issueKey, userKey);
         scrumPokerSession.setVisible(false);
+        scrumPokerSession.setUpdateDate(new Date());
         scrumPokerSession.save();
         ScrumPokerVote[] scrumPokerVotes = activeObjects.find(ScrumPokerVote.class, Query.select()
             .where("SESSION_ID = ? and USER_KEY = ?", issueKey, userKey));
@@ -87,6 +87,7 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     public ScrumPokerSession reveal(String issueKey, String userKey) {
         ScrumPokerSession scrumPokerSession = byIssueKey(issueKey, userKey);
         scrumPokerSession.setVisible(true);
+        scrumPokerSession.setUpdateDate(new Date());
         scrumPokerSession.save();
         return scrumPokerSession;
     }
@@ -97,16 +98,14 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
         scrumPokerSession.setConfirmedVote(estimation);
         scrumPokerSession.setConfirmedUserKey(userKey);
         scrumPokerSession.setConfirmedDate(new Date());
+        scrumPokerSession.setUpdateDate(new Date());
         scrumPokerSession.save();
         return scrumPokerSession;
     }
 
     @Override
     public ScrumPokerSession reset(String issueKey, String userKey) {
-        ScrumPokerVote[] votes = activeObjects.find(ScrumPokerVote.class, Query.select()
-            .where("SESSION_ID = ?", issueKey));
-        Arrays.stream(votes).forEach(activeObjects::delete);
-        activeObjects.delete(byIssueKey(issueKey, userKey));
+        deleteScrumPokerSession(issueKey, userKey);
         return byIssueKey(issueKey, userKey);
     }
 
@@ -116,6 +115,7 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
         if (scrumPokerSession.getCreatorUserKey().equals(userKey)) {
             scrumPokerSession.setCancelled(true);
         }
+        scrumPokerSession.setUpdateDate(new Date());
         scrumPokerSession.save();
         return scrumPokerSession;
     }
@@ -127,11 +127,15 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
             .alias(ScrumPokerVote.class, "spv")
             .join(ScrumPokerVote.class, "spv.SESSION_ID = sps.ISSUE_KEY")
             .where("spv.USER_KEY = ? and sps.CONFIRMED_VOTE = ?", userKey, estimation)
-            .order("sps.CREATE_DATE DESC")
+            .order("sps.CONFIRMED_DATE DESC")
             .limit(3)));
     }
 
-    private ScrumPokerSession create(String issueKey, String userKey) {
+    private int sessionTimeoutInMillis() {
+        return 3600 * 1000 * scrumPokerSettingService.load().getSessionTimeout();
+    }
+
+    private ScrumPokerSession createScrumPokerSession(String issueKey, String userKey) {
         MutableIssue issue = issueManager.getIssueObject(issueKey);
         if (issue == null) {
             String message = "Unable to create session for non-existing issue " + issueKey + ".";
@@ -149,8 +153,19 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
         scrumPokerSession.setCreatorUserKey(userKey);
         scrumPokerSession.setVisible(false);
         scrumPokerSession.setConfirmedVote(null);
+        scrumPokerSession.setUpdateDate(new Date());
         scrumPokerSession.save();
         return scrumPokerSession;
+    }
+
+    private void deleteScrumPokerSession(String issueKey, String userKey) {
+        ScrumPokerSession scrumPokerSession = findScrumPokerSession(issueKey);
+        Arrays.stream(scrumPokerSession.getVotes()).forEach(activeObjects::delete);
+        activeObjects.delete(scrumPokerSession);
+    }
+
+    private ScrumPokerSession findScrumPokerSession(String issueKey) {
+        return activeObjects.get(ScrumPokerSession.class, issueKey);
     }
 
 }

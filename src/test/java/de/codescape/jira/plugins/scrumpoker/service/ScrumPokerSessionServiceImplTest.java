@@ -19,6 +19,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +33,8 @@ import static org.mockito.Mockito.*;
 @Jdbc(Hsql.class)
 @NameConverters
 public class ScrumPokerSessionServiceImplTest {
+
+    private static final int EXPECTED_SESSION_TIMEOUT = 12;
 
     @SuppressWarnings("unused")
     private EntityManager entityManager;
@@ -52,7 +55,7 @@ public class ScrumPokerSessionServiceImplTest {
         ScrumPokerSettingService scrumPokerSettingsService = mock(ScrumPokerSettingService.class);
         GlobalSettings globalSettings = mock(GlobalSettings.class);
         when(scrumPokerSettingsService.load()).thenReturn(globalSettings);
-        when(globalSettings.getSessionTimeout()).thenReturn(12);
+        when(globalSettings.getSessionTimeout()).thenReturn(EXPECTED_SESSION_TIMEOUT);
 
         scrumPokerForIssueCondition = mock(ScrumPokerForIssueCondition.class);
         when(scrumPokerForIssueCondition.isEstimable(ArgumentMatchers.any(Issue.class))).thenReturn(true);
@@ -67,6 +70,32 @@ public class ScrumPokerSessionServiceImplTest {
     public void shouldCreateSessionIfNotExists() {
         scrumPokerSessionService.byIssueKey("ISSUE-1", "USER-1");
         assertThat(activeObjects.get(ScrumPokerSession.class, "ISSUE-1").getCreatorUserKey(), equalTo("USER-1"));
+    }
+
+    @Test
+    public void shouldCreateNewSessionIfUpdateDateOfExistingSessionIsOlderThanSessionTimeout() {
+        // given a session with the update date older than the session timeout
+        ScrumPokerSession scrumPokerSession = scrumPokerSessionService.byIssueKey("ISSUE-1", "USER-1");
+        scrumPokerSession.setCreateDate(beforeTimeout());
+        scrumPokerSession.setUpdateDate(scrumPokerSession.getCreateDate());
+        scrumPokerSession.save();
+        // when requesting this session
+        ScrumPokerSession newScrumPokerSession = scrumPokerSessionService.byIssueKey("ISSUE-1", "USER-1");
+        // then a new session shall be created and returned
+        assertThat(scrumPokerSession.getCreateDate(), is(not(equalTo(newScrumPokerSession.getCreateDate()))));
+    }
+
+    @Test
+    public void shouldReturnExistingSessionIfUpdateDateOfExistingSessionIsYoungerThanSessionTimeout() {
+        // given a session with the update date younger than the session timeout
+        ScrumPokerSession scrumPokerSession = scrumPokerSessionService.byIssueKey("ISSUE-1", "USER-1");
+        scrumPokerSession.setCreateDate(afterTimeout());
+        scrumPokerSession.setUpdateDate(scrumPokerSession.getCreateDate());
+        scrumPokerSession.save();
+        // when requesting this session
+        ScrumPokerSession newScrumPokerSession = scrumPokerSessionService.byIssueKey("ISSUE-1", "USER-1");
+        // then the current session shall be returned
+        assertThat(scrumPokerSession.getCreateDate(), is(equalTo(newScrumPokerSession.getCreateDate())));
     }
 
     @Test
@@ -110,10 +139,38 @@ public class ScrumPokerSessionServiceImplTest {
     }
 
     @Test
-    public void shouldReturnRecentSessions() {
-        scrumPokerSessionService.addVote("ISSUE-1", "USER-2", "6");
+    public void shouldIncludeNewSessionInRecentSessions() {
+        // given a newly created session
+        scrumPokerSessionService.addVote("ISSUE-1", "USER-2", "5");
+        // when querying for recent sessions
         List<ScrumPokerSession> recent = scrumPokerSessionService.recent();
+        // then it should be included
         assertThat(recent.size(), equalTo(1));
+        assertThat(recent.get(0).getIssueKey(), is(equalTo("ISSUE-1")));
+    }
+
+    @Test
+    public void shouldOnlyIncludeSessionsWithinTheTimeoutInRecentSessions() {
+        // given one session older than the timeout
+        scrumPokerSessionService.addVote("ISSUE-1", "USER-2", "5");
+        ScrumPokerSession scrumPokerSession = scrumPokerSessionService.byIssueKey("ISSUE-1", "USER-2");
+        scrumPokerSession.setUpdateDate(beforeTimeout());
+        scrumPokerSession.save();
+        // given one session inside the timeout
+        scrumPokerSessionService.addVote("ISSUE-2", "USER-2", "8");
+        // when querying recent sessions
+        List<ScrumPokerSession> recent = scrumPokerSessionService.recent();
+        // then only the new one should be included
+        assertThat(recent.size(), is(equalTo(1)));
+        assertThat(recent.get(0).getIssueKey(), is(equalTo("ISSUE-2")));
+    }
+
+    private Date beforeTimeout() {
+        return new Date(System.currentTimeMillis() - 1000 * 3600 * (EXPECTED_SESSION_TIMEOUT + 1));
+    }
+
+    private Date afterTimeout() {
+        return new Date(System.currentTimeMillis() - 1000 * 3600 * (EXPECTED_SESSION_TIMEOUT - 1));
     }
 
     @Test

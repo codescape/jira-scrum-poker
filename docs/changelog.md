@@ -11,7 +11,7 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
-* ...
+* feat: improve session timeouts with new last update date (#74)
 
 ### [4.7.0] - 2019-11-20
 
