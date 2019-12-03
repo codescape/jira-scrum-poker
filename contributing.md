@@ -58,7 +58,7 @@ The first line put together from the `type` and the `subject` should not be long
 * test (adding missing tests, refactoring tests; no production code change)
 * chore (updating dependencies etc; no production code change)
 
-### Message body
+### Message body (optional)
 
 * uses the imperative, present tense: “change” not “changed” nor “changes”
 * includes motivation for the change and contrasts with previous behavior
@@ -89,6 +89,7 @@ Releasing a new version helps to bring out new features and improvements to our 
 
 * update the [Changelog](docs/changelog.md) with the release date
 * update the [POM](pom.xml) file with the new version number
+* update the [Compatibility Matrix](docs/compatibility-matrix.md) with the new version number
 * create a tag for the new version with reference to the latest commit
     ```
     git tag -a <version> -m "<version>" <commit hash>
