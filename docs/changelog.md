@@ -15,6 +15,7 @@ Click on the version in the following list to see all changes since the previous
 * refactor: cleanup for upgrade task for last update date
 * refactor: improve code to calculate and deal with session timeouts
 * docs: rework compatibility matrix and recommend updating to the latest version
+* docs: include Jira Data Center in compatibility matrix
 
 ### [4.7.0] - 2019-11-20
 
