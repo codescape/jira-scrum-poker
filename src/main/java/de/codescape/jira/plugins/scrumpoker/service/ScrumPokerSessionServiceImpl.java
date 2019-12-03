@@ -43,9 +43,8 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
 
     @Override
     public List<ScrumPokerSession> recent() {
-        Date date = new Date(System.currentTimeMillis() - sessionTimeoutInMillis());
         return Arrays.asList(activeObjects.find(ScrumPokerSession.class, Query.select()
-            .where("UPDATE_DATE > ?", date)
+            .where("UPDATE_DATE > ?", sessionTimeout())
             .order("CREATE_DATE DESC")));
     }
 
@@ -53,10 +52,11 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     public ScrumPokerSession byIssueKey(String issueKey, String userKey) {
         ScrumPokerSession scrumPokerSession = findScrumPokerSession(issueKey);
         if (scrumPokerSession == null) {
-            scrumPokerSession = createScrumPokerSession(issueKey, userKey);
-        } else if (scrumPokerSession.getUpdateDate().before(new Date(System.currentTimeMillis() - sessionTimeoutInMillis()))) {
+            return createScrumPokerSession(issueKey, userKey);
+        }
+        if (scrumPokerSession.getUpdateDate().before(sessionTimeout())) {
             deleteScrumPokerSession(issueKey, userKey);
-            scrumPokerSession = createScrumPokerSession(issueKey, userKey);
+            return createScrumPokerSession(issueKey, userKey);
         }
         return scrumPokerSession;
     }
@@ -131,8 +131,13 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
             .limit(3)));
     }
 
-    private int sessionTimeoutInMillis() {
-        return 3600 * 1000 * scrumPokerSettingService.load().getSessionTimeout();
+    private Date sessionTimeout() {
+        long sessionTimeoutMillis = hoursToMillis(scrumPokerSettingService.load().getSessionTimeout());
+        return new Date(System.currentTimeMillis() - sessionTimeoutMillis);
+    }
+
+    private static long hoursToMillis(Integer hours) {
+        return 3600 * 1000 * hours;
     }
 
     private ScrumPokerSession createScrumPokerSession(String issueKey, String userKey) {

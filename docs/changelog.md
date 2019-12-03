@@ -13,6 +13,7 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: improve session timeouts with new last update date (#74)
 * refactor: cleanup for upgrade task for last update date
+* refactor: improve code to calculate an deal with session timeouts
 
 ### [4.7.0] - 2019-11-20
 
