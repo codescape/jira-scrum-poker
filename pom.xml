@@ -46,7 +46,7 @@
         <jira.version.oldest>7.6.16</jira.version.oldest>
 
         <!-- Dependency versions -->
-        <amps.version>8.0.0</amps.version>
+        <amps.version>8.0.4</amps.version>
         <atlassian.spring.scanner.version>2.1.8</atlassian.spring.scanner.version>
         <ao.version>3.0.0</ao.version>
         <spring.version>5.1.5.RELEASE</spring.version>
