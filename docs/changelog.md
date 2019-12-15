@@ -17,6 +17,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: rework compatibility matrix and recommend updating to the latest version
 * docs: include Jira Data Center in compatibility matrix
 * chore: use latest version of AMPS plugin (#89)
+* refactor: rename condition for visibility of board dropdown
 
 ### [4.7.0] - 2019-11-20
 

@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
-public class DisplayScrumPokerOnBoardConditionTest {
+public class ScrumPokerOnBoardConditionTest {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -24,7 +24,7 @@ public class DisplayScrumPokerOnBoardConditionTest {
     private ScrumPokerSettingService scrumPokerSettingService;
 
     @InjectMocks
-    private DisplayScrumPokerOnBoardCondition displayScrumPokerOnBoardCondition;
+    private ScrumPokerOnBoardCondition scrumPokerOnBoardCondition;
 
     @Mock
     private ApplicationUser applicationUser;
@@ -39,14 +39,14 @@ public class DisplayScrumPokerOnBoardConditionTest {
     public void shouldDisplayWhenSettingDisplayDropdownOnBoardsIsSetToTrue() {
         when(scrumPokerSettingService.load()).thenReturn(globalSettings);
         when(globalSettings.isDisplayDropdownOnBoards()).thenReturn(true);
-        assertThat(displayScrumPokerOnBoardCondition.shouldDisplay(applicationUser, jiraHelper), is(true));
+        assertThat(scrumPokerOnBoardCondition.shouldDisplay(applicationUser, jiraHelper), is(true));
     }
 
     @Test
     public void shouldDisplayWhenSettingDisplayDropdownOnBoardsIsSetToFalse() {
         when(scrumPokerSettingService.load()).thenReturn(globalSettings);
         when(globalSettings.isDisplayDropdownOnBoards()).thenReturn(false);
-        assertThat(displayScrumPokerOnBoardCondition.shouldDisplay(applicationUser, jiraHelper), is(false));
+        assertThat(scrumPokerOnBoardCondition.shouldDisplay(applicationUser, jiraHelper), is(false));
     }
 
 }
