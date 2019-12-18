@@ -5,12 +5,12 @@
 
     <groupId>de.codescape.jira.plugins</groupId>
     <artifactId>scrum-poker</artifactId>
-    <version>4.7.0</version>
+    <version>4.8.0</version>
     <packaging>atlassian-plugin</packaging>
 
     <name>Scrum Poker for Jira</name>
-    <description>Scrum Poker for Jira enables your teams to collaboratively estimate their work items using a clean and
-        interactive user interface that is seamlessly integrated into Jira Software.
+    <description>Scrum Poker for Jira enables your agile teams to collaboratively estimate their work items using a
+        clean and interactive user interface that is seamlessly integrated into Jira Software.
     </description>
 
     <organization>

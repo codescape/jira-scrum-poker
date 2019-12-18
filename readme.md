@@ -1,6 +1,6 @@
 # Scrum Poker for Jira
 
-Scrum Poker for Jira enables your teams to collaboratively estimate their work items using a clean and interactive user interface that is seamlessly integrated into Jira Software.
+Scrum Poker for Jira enables your agile teams to collaboratively estimate their work items using a clean and interactive user interface that is seamlessly integrated into Jira Software.
 
 [![Build Status](https://travis-ci.org/codescape/jira-scrum-poker.svg?branch=master)](https://travis-ci.org/codescape/jira-scrum-poker)
 [![GitHub issues](https://img.shields.io/github/issues/codescape/jira-scrum-poker.svg)](https://github.com/codescape/jira-scrum-poker/issues)

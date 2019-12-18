@@ -11,6 +11,13 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
+* ...
+
+### [4.8.0] - 2019-12-18
+
+**Improved session handling with better timeout management**
+
+
 * feat: improve session timeouts with new last update date (#74)
 * refactor: cleanup for upgrade task for last update date
 * refactor: improve code to calculate and deal with session timeouts
@@ -823,7 +830,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.7.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.8.0...HEAD
+[4.8.0]: https://github.com/codescape/jira-scrum-poker/compare/4.7.0...4.8.0
 [4.7.0]: https://github.com/codescape/jira-scrum-poker/compare/4.6.0...4.7.0
 [4.6.0]: https://github.com/codescape/jira-scrum-poker/compare/4.5.0...4.6.0
 [4.5.0]: https://github.com/codescape/jira-scrum-poker/compare/4.4.0...4.5.0
