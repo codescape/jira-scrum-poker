@@ -20,6 +20,7 @@ Click on the version in the following list to see all changes since the previous
 * refactor: rename condition for visibility of board dropdown
 * chore: implement against Jira patch version 8.6.0
 * chore: update tested enterprise version to Jira patch version 8.5.2
+* chore: update tested oldest version to Jira patch version 7.6.17
 
 ### [4.7.0] - 2019-11-20
 
