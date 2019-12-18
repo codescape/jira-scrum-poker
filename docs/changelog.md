@@ -19,6 +19,7 @@ Click on the version in the following list to see all changes since the previous
 * chore: use latest version of AMPS plugin (#89)
 * refactor: rename condition for visibility of board dropdown
 * chore: implement against Jira patch version 8.6.0
+* chore: update tested enterprise version to Jira patch version 8.5.2
 
 ### [4.7.0] - 2019-11-20
 
