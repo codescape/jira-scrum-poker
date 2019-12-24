@@ -123,11 +123,11 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     @Override
     public List<ScrumPokerSession> references(String userKey, Integer estimation) {
         return Arrays.asList(activeObjects.find(ScrumPokerSession.class, Query.select()
-            .alias(ScrumPokerSession.class, "sps")
-            .alias(ScrumPokerVote.class, "spv")
-            .join(ScrumPokerVote.class, "spv.SESSION_ID = sps.ISSUE_KEY")
-            .where("spv.USER_KEY = ? and sps.CONFIRMED_VOTE = ?", userKey, estimation)
-            .order("sps.CONFIRMED_DATE DESC")
+            .alias(ScrumPokerSession.class, "SPS")
+            .alias(ScrumPokerVote.class, "SPV")
+            .join(ScrumPokerVote.class, "SPV.SESSION_ID = SPS.ISSUE_KEY")
+            .where("SPV.USER_KEY = ? and SPS.CONFIRMED_VOTE = ?", userKey, estimation)
+            .order("SPS.CONFIRMED_DATE DESC")
             .limit(3)));
     }
 
