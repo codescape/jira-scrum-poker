@@ -11,6 +11,12 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
+* ...
+
+### [4.8.1] - 2019-12-24
+
+**Bugfixes for compatibility with Oracle dialect and configuration option**
+
 * fix: allow to restrict revealing Scrum Poker deck to the session creator
 * chore: cleanup formatting of changelog
 * fix: lower case query aliases cause SQL error for Oracle drivers
@@ -835,7 +841,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.8.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.8.1...HEAD
+[4.8.1]: https://github.com/codescape/jira-scrum-poker/compare/4.8.0...4.8.1
 [4.8.0]: https://github.com/codescape/jira-scrum-poker/compare/4.7.0...4.8.0
 [4.7.0]: https://github.com/codescape/jira-scrum-poker/compare/4.6.0...4.7.0
 [4.6.0]: https://github.com/codescape/jira-scrum-poker/compare/4.5.0...4.6.0
