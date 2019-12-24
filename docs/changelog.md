@@ -11,12 +11,12 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
-* fix: allow to restrict revealing Scrum Poker deck to the session creator 
+* fix: allow to restrict revealing Scrum Poker deck to the session creator
+* chore: cleanup formatting of changelog
 
 ### [4.8.0] - 2019-12-18
 
 **Improved session handling with better timeout management**
-
 
 * feat: improve session timeouts with new last update date (#74)
 * refactor: cleanup for upgrade task for last update date
@@ -714,11 +714,15 @@ Click on the version in the following list to see all changes since the previous
 
 ### [1.3.14] - 2017-02-24
 
+**Improve configuration page to have valid and working configurations**
+
 * feat: configuration of story point field is saved by id and not by name anymore (requires reconfiguration)
 * feat: configuration page includes link to issue tracker on GitHub
 * feat: configuration page has alert if no story point field ist configured
 
 ### [1.3.13] - 2017-02-16
+
+**Allow to easily refresh the active session page**
 
 * feat: overview page supports refreshing with button
 
