@@ -13,6 +13,7 @@ Click on the version in the following list to see all changes since the previous
 
 * fix: allow to restrict revealing Scrum Poker deck to the session creator
 * chore: cleanup formatting of changelog
+* fix: lower case query aliases cause SQL error for Oracle drivers
 
 ### [4.8.0] - 2019-12-18
 
