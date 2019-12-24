@@ -11,7 +11,7 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
-* ...
+* docs: update compatibility matrix
 
 ### [4.8.1] - 2019-12-24
 
