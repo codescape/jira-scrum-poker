@@ -83,9 +83,9 @@
             </div>
             <div class="radio">
                 #if ($globalSettings.allowRevealDeck == 'CREATOR')
-                    <input class="radio" type="radio" name="allowRevealDeck" id="allowRevealDeckParticipants" value="CREATOR" checked="checked">
+                    <input class="radio" type="radio" name="allowRevealDeck" id="allowRevealDeckCreator" value="CREATOR" checked="checked">
                 #else
-                    <input class="radio" type="radio" name="allowRevealDeck" id="allowRevealDeckParticipants" value="CREATOR">
+                    <input class="radio" type="radio" name="allowRevealDeck" id="allowRevealDeckCreator" value="CREATOR">
                 #end
                 <label for="allowRevealDeckCreator">$i18n.getText("scrumpoker.config.allowrevealdeck.creator")</label>
             </div>

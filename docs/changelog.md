@@ -11,7 +11,7 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
-* ...
+* fix: allow to restrict revealing Scrum Poker deck to the session creator 
 
 ### [4.8.0] - 2019-12-18
 
