@@ -10,8 +10,9 @@ public final class ScrumPokerConstants {
      */
     public static final String SCRUM_POKER_PLUGIN_KEY = "de.codescape.jira.plugins.scrum-poker";
 
+    // Prevent utility class from being instantiated
     private ScrumPokerConstants() {
-        throw new IllegalStateException("ScrumPokerConstants should never be instantiated.");
+        throw new AssertionError("ScrumPokerConstants must not be instantiated.");
     }
 
 }

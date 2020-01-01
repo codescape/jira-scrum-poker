@@ -12,6 +12,7 @@ Click on the version in the following list to see all changes since the previous
 ### [Unreleased]
 
 * docs: update compatibility matrix
+* refactor: improve descriptiveness of private constructor of utility class
 
 ### [4.8.1] - 2019-12-24
 
