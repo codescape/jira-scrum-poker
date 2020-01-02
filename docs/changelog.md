@@ -14,6 +14,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: update compatibility matrix
 * refactor: improve descriptiveness of private constructor of utility class
 * docs: add documentation to Scrum Poker card class
+* docs: ignore temporary jekyll directory for generated online documentation
 
 ### [4.8.1] - 2019-12-24
 
@@ -711,7 +712,7 @@ Click on the version in the following list to see all changes since the previous
 
 ### [1.3.16] - 2017-06-21
 
-**Remove Scrum Poker sessions after the configured timeout** 
+**Remove Scrum Poker sessions after the configured timeout**
 
 * feat: cleanup Scrum Poker Sessions older than 12 hours
 

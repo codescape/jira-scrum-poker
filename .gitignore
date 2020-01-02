@@ -12,3 +12,4 @@
 
 # jekyll
 /docs/_site/
+/docs/.jekyll-cache/
