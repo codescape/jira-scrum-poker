@@ -98,6 +98,24 @@ img {
   display: block;
   text-align: center; }
 
+.navbar .hamburger {
+  display: block;
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  text-decoration: none;
+  font-size: 2em;
+  padding: 0 10px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 3px; }
+
+.navbar .navbar-list {
+  display: none; }
+
+.navbar.responsive .navbar-list {
+  display: block;
+  width: 100%; }
+
 /* Larger than phone */
 
 @media (min-width: 550px) {
@@ -115,6 +133,9 @@ img {
 /* Larger than tablet */
 
 @media (min-width: 750px) {
+
+    .navbar .hamburger {
+      display: none; }
 
     /* Navbar */
 

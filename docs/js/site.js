@@ -18,6 +18,22 @@ $(document).ready(function() {
     reduceTableOfContents();
   }
 
+  $(".hamburger").click(function() {
+    if($('.navbar.responsive').length > 0) {
+      $('.navbar').removeClass('responsive');
+    } else {
+      $('.navbar').addClass('responsive');
+      scrollToNav();
+    }
+  });
+
+  function scrollToNav() {
+    $('body,html').animate({
+      scrollTop: $('.navbar').position().top
+    }, 800);
+    return false;
+  }
+
   function reduceTableOfContents() {
     var count = $("#markdown-toc li").length;
     if (count > 10) {

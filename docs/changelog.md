@@ -15,6 +15,7 @@ Click on the version in the following list to see all changes since the previous
 * refactor: improve descriptiveness of private constructor of utility class
 * docs: add documentation to Scrum Poker card class
 * docs: ignore temporary jekyll directory for generated online documentation
+* docs: add hamburger menu to mobile version of online documentation
 
 ### [4.8.1] - 2019-12-24
 
