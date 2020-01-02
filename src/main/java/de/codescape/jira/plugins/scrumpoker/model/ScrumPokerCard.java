@@ -28,10 +28,16 @@ public enum ScrumPokerCard {
         this.name = name;
     }
 
+    /**
+     * Return the name of the Scrum Poker card.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Return the whole deck of cards.
+     */
     public static List<ScrumPokerCard> getDeck() {
         return Arrays.stream(values()).collect(Collectors.toList());
     }

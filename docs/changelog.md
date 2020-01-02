@@ -13,6 +13,7 @@ Click on the version in the following list to see all changes since the previous
 
 * docs: update compatibility matrix
 * refactor: improve descriptiveness of private constructor of utility class
+* docs: add documentation to Scrum Poker card class
 
 ### [4.8.1] - 2019-12-24
 
