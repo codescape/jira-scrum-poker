@@ -137,6 +137,9 @@ img {
     .navbar .hamburger {
       display: none; }
 
+    .navbar .navbar-list {
+      display: block; }
+
     /* Navbar */
 
     .navbar + .docs-section {
