@@ -11,6 +11,12 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
+* ...
+
+### [4.8.2] - 2020-01-22
+
+**Bugfix for configuration option and compatibility for latest Jira version**
+
 * docs: update compatibility matrix
 * refactor: improve descriptiveness of private constructor of utility class
 * docs: add documentation to Scrum Poker card class
@@ -741,10 +747,14 @@ Click on the version in the following list to see all changes since the previous
 
 ### [1.3.12] - 2017-02-13
 
+**Access the active session list from every Scrum Poker session**
+
 * feat: overview page with all Scrum Poker sessions is accessible from currently opened session
 * feat: overview page with all Scrum Poker sessions shows start date of every Scrum Poker session
 
 ### [1.3.11] - 2016-08-02
+
+**Improve testing and include continuous integration system**
 
 * chore: add Travis CI build
 
@@ -756,14 +766,20 @@ Click on the version in the following list to see all changes since the previous
 
 ### [1.3.9] - 2016-07-22
 
+**Bugfix for wrong hyperlinks on session overview page**
+
 * fix: display correct URL in session overview
 
 ### [1.3.8] - 2016-07-22
+
+**Open issue instead of session on sessions with estimation already agreed on**
 
 * feat: navigate to issue for estimated Scrum Poker sessions in session overview
 * refactor: new naming for Scrum Poker URLs reflecting the plugin name
 
 ### [1.3.7] - 2016-07-13
+
+**First version of active session page**
 
 * feat: add overview page with all currently active Scrum Poker sessions
 
@@ -847,7 +863,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.8.1...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.8.2...HEAD
+[4.8.2]: https://github.com/codescape/jira-scrum-poker/compare/4.8.1...4.8.2
 [4.8.1]: https://github.com/codescape/jira-scrum-poker/compare/4.8.0...4.8.1
 [4.8.0]: https://github.com/codescape/jira-scrum-poker/compare/4.7.0...4.8.0
 [4.7.0]: https://github.com/codescape/jira-scrum-poker/compare/4.6.0...4.7.0
