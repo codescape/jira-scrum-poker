@@ -17,7 +17,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: ignore temporary jekyll directory for generated online documentation
 * docs: add hamburger menu to mobile version of online documentation
 * chore: implement against Jira patch version 8.6.1
-* fix: label for dropdown on board is clickable
+* fix: label for configuration option dropdown on board is clickable
 
 ### [4.8.1] - 2019-12-24
 
