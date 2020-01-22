@@ -129,7 +129,7 @@
                 #else
                     <input class="checkbox" type="checkbox" name="displayDropdownOnBoards" id="displayDropdownOnBoards" value="true">
                 #end
-                <label for="defaultProjectActivation">$i18n.getText("scrumpoker.config.displaydropdownonboards.checkbox")</label>
+                <label for="displayDropdownOnBoards">$i18n.getText("scrumpoker.config.displaydropdownonboards.checkbox")</label>
             </div>
             <div class="description">$i18n.getText("scrumpoker.config.displaydropdownonboards.description")</div>
         </fieldset>
