@@ -5,9 +5,9 @@ title: Imprint
 
 Angaben gemäß § 5 TMG
 
-Stefan Glase    
-Gummerother Str. 11    
-51643 Gummersbach    
+codescape - Stefan Glase    
+Alte Holzer Str. 26a        
+42799 Leichlingen    
 
 **Vertreten durch:**    
 Stefan Glase    

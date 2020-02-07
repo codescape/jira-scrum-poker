@@ -26,6 +26,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: add hamburger menu to mobile version of online documentation
 * chore: implement against Jira patch version 8.6.1
 * fix: label for configuration option dropdown on board is clickable
+* docs: update address in imprint for online documentation
 
 ### [4.8.1] - 2019-12-24
 
