@@ -95,7 +95,7 @@
             <legend><span>$i18n.getText("scrumpoker.config.displaycommentsforissue")</span></legend>
             <div class="radio">
                 #if ($globalSettings.displayCommentsForIssue == 'ALL')
-                    <input class="radio" type="radio" name="displayCommentsForIssue id="displayCommentsForIssueAll" value="ALL" checked="checked">
+                    <input class="radio" type="radio" name="displayCommentsForIssue" id="displayCommentsForIssueAll" value="ALL" checked="checked">
                 #else
                     <input class="radio" type="radio" name="displayCommentsForIssue" id="displayCommentsForIssueAll" value="ALL">
                 #end
