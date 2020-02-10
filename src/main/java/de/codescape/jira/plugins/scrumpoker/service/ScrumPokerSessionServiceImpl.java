@@ -29,7 +29,7 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     private final ScrumPokerErrorService scrumPokerErrorService;
 
     @Autowired
-    public ScrumPokerSessionServiceImpl(ActiveObjects activeObjects,
+    public ScrumPokerSessionServiceImpl(@ComponentImport ActiveObjects activeObjects,
                                         @ComponentImport IssueManager issueManager,
                                         ScrumPokerSettingService scrumPokerSettingService,
                                         ScrumPokerForIssueCondition scrumPokerForIssueCondition,

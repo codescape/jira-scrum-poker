@@ -1,6 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSetting;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
@@ -29,7 +30,7 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
     private final ActiveObjects activeObjects;
 
     @Autowired
-    public ScrumPokerSettingServiceImpl(ActiveObjects activeObjects) {
+    public ScrumPokerSettingServiceImpl(@ComponentImport ActiveObjects activeObjects) {
         this.activeObjects = activeObjects;
     }
 

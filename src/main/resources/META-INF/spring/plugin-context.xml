@@ -1,27 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:atlassian-scanner="http://www.atlassian.com/schema/atlassian-scanner/2"
-       xmlns:osgi="http://www.eclipse.org/gemini/blueprint/schema/blueprint"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-           http://www.atlassian.com/schema/atlassian-scanner/2
-           http://www.atlassian.com/schema/atlassian-scanner/2/atlassian-scanner.xsd
-           http://www.eclipse.org/gemini/blueprint/schema/blueprint
-           http://www.eclipse.org/gemini/blueprint/schema/blueprint/gemini-blueprint.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.atlassian.com/schema/atlassian-scanner/2 http://www.atlassian.com/schema/atlassian-scanner/2/atlassian-scanner.xsd">
 
-    <!-- resolve Active Objects from OSGi -->
-    <osgi:reference id="activeObjects">
-        <osgi:interfaces>
-            <value>com.atlassian.activeobjects.external.ActiveObjects</value>
-        </osgi:interfaces>
-    </osgi:reference>
-
-    <!-- initialize bean post processor for Spring @Transactional annotations -->
-    <bean id="tx-processor" class="com.atlassian.activeobjects.external.TransactionalAnnotationProcessor">
-        <constructor-arg ref="activeObjects"/>
-    </bean>
-
-    <!-- create the index for all Spring managed components -->
+    <!-- find all Spring managed components -->
     <atlassian-scanner:scan-indexes/>
 
 </beans>

@@ -66,10 +66,10 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
                                 ScrumPokerSettingService scrumPokerSettingService,
                                 ScrumPokerForIssueCondition scrumPokerForIssueCondition,
                                 ScrumPokerErrorService scrumPokerErrorService) {
-        this.issueManager = issueManager;
         this.rendererManager = rendererManager;
-        this.permissionManager = permissionManager;
+        this.issueManager = issueManager;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
+        this.permissionManager = permissionManager;
         this.commentManager = commentManager;
         this.pluginLicenseManager = pluginLicenseManager;
         this.dateTimeFormatter = dateTimeFormatter;

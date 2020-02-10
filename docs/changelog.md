@@ -16,6 +16,7 @@ Click on the version in the following list to see all changes since the previous
 * fix: allow to save configuration after selection to display all comments
 * fix: ensure migration task 7 performs correctly
 * chore: format style sheets according to standard code style
+* refactor: inject and import Active Objects in preferred way
 
 ### [4.8.2] - 2020-01-22
 

@@ -28,16 +28,16 @@ public class EstimationFieldServiceImpl implements EstimationFieldService {
 
     @Autowired
     public EstimationFieldServiceImpl(@ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
-                                      ScrumPokerSettingService scrumPokerSettingService,
                                       @ComponentImport IssueManager issueManager,
                                       @ComponentImport CustomFieldManager customFieldManager,
                                       @ComponentImport PermissionManager permissionManager,
+                                      ScrumPokerSettingService scrumPokerSettingService,
                                       ScrumPokerErrorService scrumPokerErrorService) {
-        this.scrumPokerSettingService = scrumPokerSettingService;
+        this.jiraAuthenticationContext = jiraAuthenticationContext;
         this.issueManager = issueManager;
         this.customFieldManager = customFieldManager;
-        this.jiraAuthenticationContext = jiraAuthenticationContext;
         this.permissionManager = permissionManager;
+        this.scrumPokerSettingService = scrumPokerSettingService;
         this.scrumPokerErrorService = scrumPokerErrorService;
     }
 

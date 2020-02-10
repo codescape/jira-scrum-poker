@@ -2,6 +2,7 @@ package de.codescape.jira.plugins.scrumpoker.upgrade;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.upgrade.PluginUpgradeTask;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
@@ -24,7 +25,7 @@ public class Upgrade08FillUpdateDate extends AbstractUpgradeTask {
     private final ActiveObjects activeObjects;
 
     @Autowired
-    public Upgrade08FillUpdateDate(ActiveObjects activeObjects) {
+    public Upgrade08FillUpdateDate(@ComponentImport ActiveObjects activeObjects) {
         this.activeObjects = activeObjects;
     }
 

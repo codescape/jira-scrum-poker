@@ -69,14 +69,14 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
     private final ScrumPokerErrorService scrumPokerErrorService;
 
     @Autowired
-    public HealthCheckAction(ScrumPokerSettingService scrumPokerSettingService,
+    public HealthCheckAction(@ComponentImport PluginLicenseManager pluginLicenseManager,
+                             ScrumPokerSettingService scrumPokerSettingService,
                              EstimationFieldService estimationFieldService,
-                             @ComponentImport PluginLicenseManager pluginLicenseManager,
                              ProjectSettingService projectSettingService,
                              ScrumPokerErrorService scrumPokerErrorService) {
+        this.pluginLicenseManager = pluginLicenseManager;
         this.scrumPokerSettingService = scrumPokerSettingService;
         this.estimationFieldService = estimationFieldService;
-        this.pluginLicenseManager = pluginLicenseManager;
         this.projectSettingService = projectSettingService;
         this.scrumPokerErrorService = scrumPokerErrorService;
     }

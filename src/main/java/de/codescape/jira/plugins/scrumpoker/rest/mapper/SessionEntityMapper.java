@@ -41,14 +41,14 @@ public class SessionEntityMapper {
     @Autowired
     public SessionEntityMapper(@ComponentImport UserManager userManager,
                                @ComponentImport DateTimeFormatter dateTimeFormatter,
-                               ScrumPokerSettingService scrumPokerSettingService,
                                @ComponentImport PermissionManager permissionManager,
-                               @ComponentImport IssueManager issueManager) {
+                               @ComponentImport IssueManager issueManager,
+                               ScrumPokerSettingService scrumPokerSettingService) {
         this.userManager = userManager;
         this.dateTimeFormatter = dateTimeFormatter;
-        this.scrumPokerSettingService = scrumPokerSettingService;
         this.permissionManager = permissionManager;
         this.issueManager = issueManager;
+        this.scrumPokerSettingService = scrumPokerSettingService;
     }
 
     /**

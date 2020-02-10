@@ -29,15 +29,15 @@ public class SessionResource {
     private final SessionReferenceMapper sessionReferenceMapper;
 
     @Autowired
-    public SessionResource(EstimationFieldService estimationFieldService,
-                           @ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
+    public SessionResource(@ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
+                           EstimationFieldService estimationFieldService,
                            ScrumPokerSessionService scrumPokerSessionService,
                            SessionEntityMapper sessionEntityMapper,
                            SessionReferenceMapper sessionReferenceMapper) {
-        this.estimationFieldService = estimationFieldService;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
-        this.sessionEntityMapper = sessionEntityMapper;
+        this.estimationFieldService = estimationFieldService;
         this.scrumPokerSessionService = scrumPokerSessionService;
+        this.sessionEntityMapper = sessionEntityMapper;
         this.sessionReferenceMapper = sessionReferenceMapper;
     }
 

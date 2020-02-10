@@ -1,6 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import net.java.ao.DBParam;
 import net.java.ao.Query;
@@ -20,7 +21,7 @@ public class ProjectSettingServiceImpl implements ProjectSettingService {
     private final ActiveObjects activeObjects;
 
     @Autowired
-    public ProjectSettingServiceImpl(ActiveObjects activeObjects) {
+    public ProjectSettingServiceImpl(@ComponentImport ActiveObjects activeObjects) {
         this.activeObjects = activeObjects;
     }
 

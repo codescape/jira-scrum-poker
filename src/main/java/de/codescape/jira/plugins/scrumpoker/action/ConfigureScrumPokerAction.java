@@ -38,10 +38,10 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
     private final ScrumPokerSettingService scrumPokerSettingService;
 
     @Autowired
-    public ConfigureScrumPokerAction(ScrumPokerSettingService scrumPokerSettingService,
-                                     @ComponentImport CustomFieldManager customFieldManager) {
-        this.scrumPokerSettingService = scrumPokerSettingService;
+    public ConfigureScrumPokerAction(@ComponentImport CustomFieldManager customFieldManager,
+                                     ScrumPokerSettingService scrumPokerSettingService) {
         this.customFieldManager = customFieldManager;
+        this.scrumPokerSettingService = scrumPokerSettingService;
     }
 
     /**

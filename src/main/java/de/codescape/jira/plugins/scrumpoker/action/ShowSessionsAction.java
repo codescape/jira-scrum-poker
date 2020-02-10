@@ -32,12 +32,12 @@ public class ShowSessionsAction extends AbstractScrumPokerAction {
     @Autowired
     public ShowSessionsAction(@ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
                               @ComponentImport PermissionManager permissionManager,
-                              ScrumPokerSessionService scrumPokerSessionService,
                               @ComponentImport IssueManager issueManager,
+                              ScrumPokerSessionService scrumPokerSessionService,
                               SessionEntityMapper sessionEntityMapper) {
-        this.issueManager = issueManager;
-        this.permissionManager = permissionManager;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
+        this.permissionManager = permissionManager;
+        this.issueManager = issueManager;
         this.scrumPokerSessionService = scrumPokerSessionService;
         this.sessionEntityMapper = sessionEntityMapper;
     }

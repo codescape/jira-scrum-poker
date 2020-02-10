@@ -30,7 +30,7 @@ public class ScrumPokerErrorServiceImpl implements ScrumPokerErrorService {
     private final PluginAccessor pluginAccessor;
 
     @Autowired
-    public ScrumPokerErrorServiceImpl(ActiveObjects activeObjects,
+    public ScrumPokerErrorServiceImpl(@ComponentImport ActiveObjects activeObjects,
                                       @ComponentImport BuildUtilsInfo buildUtilsInfo,
                                       @ComponentImport PluginAccessor pluginAccessor) {
         this.activeObjects = activeObjects;
