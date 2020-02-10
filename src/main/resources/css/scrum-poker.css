@@ -121,5 +121,4 @@
 /* stack trace shall not brake table */
 .scrum-poker-stacktrace {
     font-size: 80%;
-    overflow-x: scroll;
-}
+    overflow-x: scroll; }
