@@ -19,6 +19,7 @@ Click on the version in the following list to see all changes since the previous
 * refactor: inject and import Active Objects in preferred way
 * test: test against latest patch versions of previous enterprise releases
 * chore: drop support for Jira Software versions older than 7.13.x
+* docs: update address in imprint for online documentation
 
 ### [4.8.2] - 2020-01-22
 
@@ -31,7 +32,6 @@ Click on the version in the following list to see all changes since the previous
 * docs: add hamburger menu to mobile version of online documentation
 * chore: implement against Jira patch version 8.6.1
 * fix: label for configuration option dropdown on board is clickable
-* docs: update address in imprint for online documentation
 
 ### [4.8.1] - 2019-12-24
 
