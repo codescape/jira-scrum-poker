@@ -12,7 +12,7 @@ Click on the version in the following list to see all changes since the previous
 ### [Unreleased]
 
 * feat: current page name is included in page title on active session page
-* chore: implement against Jira patch version 8.7.0
+* chore: implement against Jira patch version 8.7.1
 * fix: allow to save configuration after selection to display all comments
 * fix: ensure migration task 7 performs correctly
 * chore: format style sheets according to standard code style
