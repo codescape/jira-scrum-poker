@@ -42,7 +42,7 @@
         <!-- Jira versions -->
         <jira.version>8.7.1</jira.version>
         <jira.version.latest>${jira.version}</jira.version.latest>
-        <jira.version.enterprise>8.5.2</jira.version.enterprise>
+        <jira.version.enterprise>8.5.3</jira.version.enterprise>
         <jira.version.oldest>7.6.17</jira.version.oldest>
 
         <!-- Dependency versions -->
