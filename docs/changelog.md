@@ -11,6 +11,12 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
+* ...
+
+### [4.9.0] - 2020-02-16
+
+**Minor improvements and updates to compatibility with Jira 8.7**
+
 * feat: current page name is included in page title on active session page
 * chore: implement against Jira patch version 8.7.1
 * fix: allow to save configuration after selection to display all comments
@@ -23,7 +29,7 @@ Click on the version in the following list to see all changes since the previous
 
 ### [4.8.2] - 2020-01-22
 
-**Bugfix for configuration option and compatibility for latest Jira version**
+**Bugfix for configuration option and compatibility with latest Jira version**
 
 * docs: update compatibility matrix
 * refactor: improve descriptiveness of private constructor of utility class
@@ -871,7 +877,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.8.2...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.9.0...HEAD
+[4.9.0]: https://github.com/codescape/jira-scrum-poker/compare/4.8.2...4.9.0
 [4.8.2]: https://github.com/codescape/jira-scrum-poker/compare/4.8.1...4.8.2
 [4.8.1]: https://github.com/codescape/jira-scrum-poker/compare/4.8.0...4.8.1
 [4.8.0]: https://github.com/codescape/jira-scrum-poker/compare/4.7.0...4.8.0
