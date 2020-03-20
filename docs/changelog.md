@@ -11,7 +11,8 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
-* chore: implement against Jira patch version 8.8.0
+* chore: implement against Jira 8.8.0
+* test: test against Jira 7.13.13 and 8.5.4 of previous enterprise releases
 
 ### [4.9.0] - 2020-02-16
 
