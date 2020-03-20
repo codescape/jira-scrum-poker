@@ -11,7 +11,7 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
-* ...
+* chore: implement against Jira patch version 8.8.0
 
 ### [4.9.0] - 2020-02-16
 
