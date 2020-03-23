@@ -4,50 +4,46 @@ import com.atlassian.activeobjects.external.ActiveObjects;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.upgrade.PluginUpgradeTask;
-import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
+import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerCards;
 import de.codescape.jira.plugins.scrumpoker.model.SpecialCards;
-import net.java.ao.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-
 /**
- * Migrate persisted votes that contain a question mark and save with the new value 'question'.
+ * Create the simplified Fibonacci card set as the default card set.
  *
- * @since 3.13.0
+ * @since 4.10
  */
 @Component
 @ExportAsService(PluginUpgradeTask.class)
-public class Upgrade04QuestionMarkVotes extends AbstractUpgradeTask {
-
-    private static final String LEGACY_QUESTION_MARK = "?";
+public class Upgrade09CreateDefaultCardSet extends AbstractUpgradeTask {
 
     private final ActiveObjects activeObjects;
 
     @Autowired
-    public Upgrade04QuestionMarkVotes(@ComponentImport ActiveObjects activeObjects) {
+    public Upgrade09CreateDefaultCardSet(@ComponentImport ActiveObjects activeObjects) {
         this.activeObjects = activeObjects;
     }
 
     @Override
     public int getBuildNumber() {
-        return 4;
+        return 9;
     }
 
     @Override
     public String getShortDescription() {
-        return "Migrate old votes with question marks.";
+        return "Create the simplified Fibonacci card set.";
     }
 
     @Override
     protected void performUpgrade() {
-        ScrumPokerVote[] scrumPokerVotes = activeObjects.find(ScrumPokerVote.class,
-            Query.select().where("VOTE = ?", LEGACY_QUESTION_MARK));
-        Arrays.stream(scrumPokerVotes).forEach(vote -> {
-            vote.setVote(SpecialCards.QUESTION_MARK);
-            vote.save();
-        });
+        ScrumPokerCards scrumPokerCards = activeObjects.create(ScrumPokerCards.class);
+        scrumPokerCards.setCardSet(simplifiedFibonacciCardSet());
+        scrumPokerCards.save();
+    }
+
+    private String simplifiedFibonacciCardSet() {
+        return SpecialCards.QUESTION_MARK + "," + SpecialCards.COFFEE_CARD + ",0,1,2,3,5,8,13,20,40,100";
     }
 
 }

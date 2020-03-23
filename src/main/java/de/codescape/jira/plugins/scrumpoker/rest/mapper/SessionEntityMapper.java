@@ -11,8 +11,9 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
-import de.codescape.jira.plugins.scrumpoker.model.ScrumPokerCard;
+import de.codescape.jira.plugins.scrumpoker.model.SpecialCards;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.*;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerCardService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,6 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static de.codescape.jira.plugins.scrumpoker.model.ScrumPokerCard.getDeck;
 import static java.util.Arrays.stream;
 import static org.apache.commons.lang3.math.NumberUtils.isNumber;
 
@@ -37,18 +37,21 @@ public class SessionEntityMapper {
     private final ScrumPokerSettingService scrumPokerSettingService;
     private final PermissionManager permissionManager;
     private final IssueManager issueManager;
+    private final ScrumPokerCardService scrumPokerCardService;
 
     @Autowired
     public SessionEntityMapper(@ComponentImport UserManager userManager,
                                @ComponentImport DateTimeFormatter dateTimeFormatter,
                                @ComponentImport PermissionManager permissionManager,
                                @ComponentImport IssueManager issueManager,
-                               ScrumPokerSettingService scrumPokerSettingService) {
+                               ScrumPokerSettingService scrumPokerSettingService,
+                               ScrumPokerCardService scrumPokerCardService) {
         this.userManager = userManager;
         this.dateTimeFormatter = dateTimeFormatter;
         this.permissionManager = permissionManager;
         this.issueManager = issueManager;
         this.scrumPokerSettingService = scrumPokerSettingService;
+        this.scrumPokerCardService = scrumPokerCardService;
     }
 
     /**
@@ -147,8 +150,8 @@ public class SessionEntityMapper {
      */
     private List<CardEntity> cards(ScrumPokerSession scrumPokerSession, String userKey) {
         String chosenValue = cardForUser(scrumPokerSession.getVotes(), userKey);
-        return getDeck().stream()
-            .map(card -> new CardEntity(card.getName(), card.getName().equals(chosenValue)))
+        return scrumPokerCardService.getCardSet().stream()
+            .map(card -> new CardEntity(card, card.equals(chosenValue)))
             .collect(Collectors.toList());
     }
 
@@ -170,7 +173,7 @@ public class SessionEntityMapper {
         return stream(scrumPokerSession.getVotes())
             .map(vote -> new VoteEntity(
                 displayName(vote.getUserKey()),
-                scrumPokerSession.isVisible() ? vote.getVote() : "question",
+                scrumPokerSession.isVisible() ? vote.getVote() : SpecialCards.QUESTION_MARK,
                 needToTalk(vote.getVote(), scrumPokerSession),
                 needABreak(vote.getVote(), scrumPokerSession)))
             .collect(Collectors.toList());
@@ -180,7 +183,7 @@ public class SessionEntityMapper {
      * Returns whether the current vote needs a break by having selected the coffee card.
      */
     private boolean needABreak(String vote, ScrumPokerSession scrumPokerSession) {
-        return scrumPokerSession.isVisible() && ScrumPokerCard.COFFEE.getName().equals(vote);
+        return scrumPokerSession.isVisible() && SpecialCards.COFFEE_CARD.equals(vote);
     }
 
     /**
@@ -207,8 +210,8 @@ public class SessionEntityMapper {
     private List<BoundedVoteEntity> boundedVotes(ScrumPokerVote[] votes) {
         Map<String, Long> voteDistribution = Arrays.stream(votes)
             .collect(Collectors.groupingBy(ScrumPokerVote::getVote, Collectors.counting()));
-        return getDeck().stream()
-            .map(scrumPokerCard -> createBoundedVote(scrumPokerCard, voteDistribution))
+        return scrumPokerCardService.getCardSet().stream()
+            .map(card -> createBoundedVote(card, voteDistribution))
             .filter(boundedVoteEntity -> nonNumericValueWithVotes(boundedVoteEntity) ||
                 numericValueWithVotesInBoundary(boundedVoteEntity, votes))
             .collect(Collectors.toList());
@@ -217,8 +220,7 @@ public class SessionEntityMapper {
     /**
      * Creates a bounded vote from the distribution of votes and the given card.
      */
-    private BoundedVoteEntity createBoundedVote(ScrumPokerCard scrumPokerCard, Map<String, Long> distribution) {
-        String value = scrumPokerCard.getName();
+    private BoundedVoteEntity createBoundedVote(String value, Map<String, Long> distribution) {
         return new BoundedVoteEntity(value, distribution.getOrDefault(value, 0L), isNumber(value));
     }
 

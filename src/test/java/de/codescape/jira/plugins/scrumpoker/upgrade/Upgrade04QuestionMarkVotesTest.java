@@ -3,6 +3,7 @@ package de.codescape.jira.plugins.scrumpoker.upgrade;
 import com.atlassian.activeobjects.test.TestActiveObjects;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerTestDatabaseUpdater;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
+import de.codescape.jira.plugins.scrumpoker.model.SpecialCards;
 import net.java.ao.EntityManager;
 import net.java.ao.Query;
 import net.java.ao.test.converters.NameConverters;
@@ -22,6 +23,8 @@ import static org.junit.Assert.assertThat;
 @Jdbc(Hsql.class)
 @NameConverters
 public class Upgrade04QuestionMarkVotesTest {
+
+    private static final String LEGACY_QUESTION_MARK = "?";
 
     @SuppressWarnings("unused")
     private EntityManager entityManager;
@@ -63,17 +66,17 @@ public class Upgrade04QuestionMarkVotesTest {
 
     private ScrumPokerVote[] votesWithQuestionString() {
         return activeObjects.find(ScrumPokerVote.class,
-            Query.select().where("VOTE = ?", "question"));
+            Query.select().where("VOTE = ?", SpecialCards.QUESTION_MARK));
     }
 
     private ScrumPokerVote[] votesWithQuestionMark() {
-        return activeObjects.find(ScrumPokerVote.class, Query.select().where("VOTE = ?", "?"));
+        return activeObjects.find(ScrumPokerVote.class, Query.select().where("VOTE = ?", LEGACY_QUESTION_MARK));
     }
 
     private void createVoteWithQuestionMark(int count) {
         for (int i = 0; i < count; i++) {
             ScrumPokerVote scrumPokerVote = activeObjects.create(ScrumPokerVote.class);
-            scrumPokerVote.setUserKey("SOME-USER-1");
+            scrumPokerVote.setUserKey("SOME-USER-" + i);
             scrumPokerVote.setVote("?");
             scrumPokerVote.save();
         }

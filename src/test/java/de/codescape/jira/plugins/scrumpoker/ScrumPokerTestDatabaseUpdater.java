@@ -13,6 +13,7 @@ public class ScrumPokerTestDatabaseUpdater implements DatabaseUpdater {
     public void update(EntityManager entityManager) throws Exception {
         //noinspection unchecked
         entityManager.migrate(
+            ScrumPokerCards.class,
             ScrumPokerError.class,
             ScrumPokerProject.class,
             ScrumPokerSession.class,
