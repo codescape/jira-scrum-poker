@@ -69,7 +69,7 @@ public class SessionEntityMapper {
             .withConfirmedUser(displayName(scrumPokerSession.getConfirmedUserKey()))
             .withVisible(scrumPokerSession.isVisible())
             .withCancelled(scrumPokerSession.isCancelled())
-            .withBoundedVotes(boundedVotes(scrumPokerSession.getVotes()))
+            .withBoundedVotes(boundedVotes(scrumPokerSession))
             .withVotes(votes(scrumPokerSession))
             .withCards(cards(scrumPokerSession, userKey))
             .withAllowReveal(allowReveal(scrumPokerSession, userKey))
@@ -207,10 +207,11 @@ public class SessionEntityMapper {
     /**
      * Returns the list of cards between and including the minimum and maximum vote.
      */
-    private List<BoundedVoteEntity> boundedVotes(ScrumPokerVote[] votes) {
+    private List<BoundedVoteEntity> boundedVotes(ScrumPokerSession scrumPokerSession) {
+        ScrumPokerVote[] votes = scrumPokerSession.getVotes();
         Map<String, Long> voteDistribution = Arrays.stream(votes)
             .collect(Collectors.groupingBy(ScrumPokerVote::getVote, Collectors.counting()));
-        return scrumPokerCardService.getCardSet().stream()
+        return scrumPokerCardService.getCardSet(scrumPokerSession).stream()
             .map(card -> createBoundedVote(card, voteDistribution))
             .filter(boundedVoteEntity -> nonNumericValueWithVotes(boundedVoteEntity) ||
                 numericValueWithVotesInBoundary(boundedVoteEntity, votes))

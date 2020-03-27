@@ -19,6 +19,7 @@ Click on the version in the following list to see all changes since the previous
 * test: suppress unchecked cast warnings for class matcher
 * feat: default card set can be configured and is persisted in session
 * feat: add translations for the configuration of the default card set
+* fix: calculate bounded votes based on cards for Scrum Poker session
 
 ### [4.9.0] - 2020-02-16
 
