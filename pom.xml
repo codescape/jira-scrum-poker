@@ -46,15 +46,25 @@
         <jira.version.oldest>7.13.13</jira.version.oldest>
 
         <!-- Dependency versions -->
+        <!-- see com.atlassian.jira:jira-project:${jira.version} for correct versions -->
+        <activeobjects.version>3.2.3</activeobjects.version>
         <amps.version>8.0.4</amps.version>
         <atlassian.spring.scanner.version>2.1.8</atlassian.spring.scanner.version>
-        <ao.version>3.0.0</ao.version>
-        <spring.version>5.1.5.RELEASE</spring.version>
-        <upm.version>4.0.1</upm.version>
+        <commons.lang3.version>3.8</commons.lang3.version>
         <hamcrest.version>2.2</hamcrest.version>
-        <jackson.version>1.9.13-atlassian-3</jackson.version>
+        <hsqldb.version>2.5.0</hsqldb.version>
+        <jackson.version>1.9.13-atlassian-4</jackson.version>
+        <jersey.version>1.19.4</jersey.version>
+        <jsr311.version>1.1.1</jsr311.version>
+        <junit.version>4.12</junit.version>
+        <lucene.version>7.3.1</lucene.version>
+        <mockito.version>3.1.0</mockito.version>
         <quick.reload.version>3.0.0</quick.reload.version>
+        <sal.version>4.1.0</sal.version>
+        <servlet.api.version>3.0.1</servlet.api.version>
         <slf4j.version>1.7.25</slf4j.version>
+        <spring.version>5.0.10.RELEASE</spring.version>
+        <upm.version>4.0.8</upm.version>
 
         <!-- Source encoding -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -68,6 +78,7 @@
     </properties>
 
     <dependencies>
+        <!-- Addon dependencies -->
         <dependency>
             <groupId>com.atlassian.jira</groupId>
             <artifactId>jira-api</artifactId>
@@ -77,7 +88,7 @@
         <dependency>
             <groupId>com.atlassian.sal</groupId>
             <artifactId>sal-api</artifactId>
-            <version>4.0.0</version>
+            <version>${sal.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -95,7 +106,7 @@
         <dependency>
             <groupId>com.atlassian.activeobjects</groupId>
             <artifactId>activeobjects-plugin</artifactId>
-            <version>${ao.version}</version>
+            <version>${activeobjects.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -125,13 +136,13 @@
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>jsr311-api</artifactId>
-            <version>1.1.1</version>
+            <version>${jsr311.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.8</version>
+            <version>${commons.lang3.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -149,11 +160,11 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
+            <version>${servlet.api.version}</version>
             <scope>provided</scope>
         </dependency>
 
-        <!-- test dependencies -->
+        <!-- Test dependencies -->
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
@@ -175,31 +186,31 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>3.1.0</version>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>net.java.dev.activeobjects</groupId>
             <artifactId>activeobjects-test</artifactId>
-            <version>${ao.version}</version>
+            <version>${activeobjects.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.atlassian.activeobjects</groupId>
             <artifactId>activeobjects-test</artifactId>
-            <version>${ao.version}</version>
+            <version>${activeobjects.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
-            <version>2.5.0</version>
+            <version>${hsqldb.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -209,17 +220,17 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- test dependencies required by mockito -->
+        <!-- Test dependencies required by Mockito -->
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-core</artifactId>
-            <version>8.1.1</version>
+            <version>${lucene.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-client</artifactId>
-            <version>1.19.4</version>
+            <version>${jersey.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -232,7 +243,15 @@
                 <version>${amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
+                    <!-- make AMPS faster -->
+                    <enableDevToolbox>false</enableDevToolbox>
+                    <enablePde>false</enablePde>
+                    <skipRestDocGeneration>true</skipRestDocGeneration>
                     <allowGoogleTracking>false</allowGoogleTracking>
+                    <skipManifestValidation>true</skipManifestValidation>
+                    <extractDependencies>false</extractDependencies>
+
+                    <!-- see https://bitbucket.org/atlassianlabs/quickreload -->
                     <enableQuickReload>true</enableQuickReload>
                     <pluginArtifacts>
                         <pluginArtifact>
@@ -241,6 +260,7 @@
                             <version>${quick.reload.version}</version>
                         </pluginArtifact>
                     </pluginArtifacts>
+
                     <!-- see https://bitbucket.org/atlassian/atlassian-spring-scanner -->
                     <instructions>
                         <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
@@ -255,6 +275,7 @@
                         </Import-Package>
                         <Spring-Context>*</Spring-Context>
                     </instructions>
+
                     <!-- jira-latest is used by default and can be overridden with the parameter testGroup <name> -->
                     <product>jira-latest</product>
                     <products>
@@ -337,7 +358,7 @@
     </build>
 
     <profiles>
-        <!-- profile used to create a license free version of the app -->
+        <!-- Profile used to create a license free version of the app -->
         <profile>
             <id>atlassian-licensing-disabled</id>
             <activation>
@@ -348,7 +369,7 @@
             </properties>
         </profile>
 
-        <!-- atlassian repositories to resolve dependencies (enabled by default) -->
+        <!-- Atlassian repositories to resolve dependencies (enabled by default) -->
         <profile>
             <id>atlassian-repositories</id>
             <activation>
