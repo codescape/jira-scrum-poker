@@ -48,7 +48,7 @@ The default card set that is preconfigured is the simplified Fibonacci sequence:
 
     question, coffee, 0, 1, 2, 3, 5, 8, 13, 20, 40, 100
 
-When you define other card sets please keep in mind that only numeric values can be assigned to the `Story Points` field created by Jira Software.
+When you define your own card sets always keep in mind that only numeric values can be confirmed and assigned to the `Story Points` field created by Jira Software.
 
 #### Session Timeout
 
