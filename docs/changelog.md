@@ -13,14 +13,14 @@ Click on the version in the following list to see all changes since the previous
 
 * chore: implement against Jira 8.8.0
 * test: test against Jira 7.13.13 and 8.5.4 of previous enterprise releases
-* feat: one globally used card set can be configured via database
+* feat: one globally used card set can be configured via database (#18)
 * docs: update compatibility matrix for Jira 8.8
 * chore: adapt dependency versions according to Jira 8.8.0 (#95)
 * test: suppress unchecked cast warnings for class matcher
-* feat: default card set can be configured and is persisted in session
-* feat: add translations for the configuration of the default card set
-* fix: calculate bounded votes based on cards for Scrum Poker session
-* docs: document the configuration of the default card set
+* feat: default card set can be configured and is persisted in session (#18)
+* feat: add translations for the configuration of the default card set (#18)
+* fix: calculate bounded votes based on cards for Scrum Poker session (#18)
+* docs: document the configuration of the default card set (#18)
 
 ### [4.9.0] - 2020-02-16
 
