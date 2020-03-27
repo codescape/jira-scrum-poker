@@ -16,6 +16,7 @@ Click on the version in the following list to see all changes since the previous
 * feat: one globally used card set can be configured via database
 * docs: update compatibility matrix for Jira 8.8
 * chore: adapt dependency versions according to Jira 8.8.0 (#95)
+* test: suppress unchecked cast warnings for class matcher
 
 ### [4.9.0] - 2020-02-16
 

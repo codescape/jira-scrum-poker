@@ -51,6 +51,7 @@ public class ScrumPokerCardServiceImplTest {
     private void expectResultFromActiveObjects(String expectedString) {
         when(scrumPokerCards.getCardSet()).thenReturn(expectedString);
         ScrumPokerCards[] scrumPokerCards = {this.scrumPokerCards};
+        // noinspection unchecked
         when(activeObjects.find(any(Class.class), any(Query.class))).thenReturn(scrumPokerCards);
     }
 
