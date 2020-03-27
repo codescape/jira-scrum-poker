@@ -1,5 +1,8 @@
 package de.codescape.jira.plugins.scrumpoker.model;
 
+import static de.codescape.jira.plugins.scrumpoker.model.SpecialCards.COFFEE_CARD;
+import static de.codescape.jira.plugins.scrumpoker.model.SpecialCards.QUESTION_MARK;
+
 /**
  * Global Settings for Scrum Poker to be used across all Jira projects.
  */
@@ -13,6 +16,7 @@ public class GlobalSettings {
     public static final boolean DISPLAY_DROPDOWN_ON_BOARDS_DEFAULT = false;
     public static final boolean CHECK_PERMISSION_TO_SAVE_ESTIMATE_DEFAULT = false;
     public static final DisplayCommentsForIssue DISPLAY_COMMENTS_FOR_ISSUE_DEFAULT = DisplayCommentsForIssue.LATEST;
+    public static final String CARD_SET_DEFAULT = QUESTION_MARK + "," + COFFEE_CARD + ",0,1,2,3,5,8,13,20,40,100";
 
     // settings
 
@@ -23,6 +27,7 @@ public class GlobalSettings {
     private boolean displayDropdownOnBoards = DISPLAY_DROPDOWN_ON_BOARDS_DEFAULT;
     private boolean checkPermissionToSaveEstimate = CHECK_PERMISSION_TO_SAVE_ESTIMATE_DEFAULT;
     private DisplayCommentsForIssue displayCommentsForIssue = DISPLAY_COMMENTS_FOR_ISSUE_DEFAULT;
+    private String cardSet = CARD_SET_DEFAULT;
 
     /**
      * Set the story point field.
@@ -120,6 +125,20 @@ public class GlobalSettings {
      */
     public DisplayCommentsForIssue getDisplayCommentsForIssue() {
         return displayCommentsForIssue;
+    }
+
+    /**
+     * Set the globally defined card set.
+     */
+    public void setCardSet(String cardSet) {
+        this.cardSet = cardSet;
+    }
+
+    /**
+     * Return the globally defined card set.
+     */
+    public String getCardSet() {
+        return cardSet;
     }
 
 }

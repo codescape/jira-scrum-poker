@@ -83,4 +83,11 @@ public interface ScrumPokerSession extends RawEntity<String> {
 
     void setCancelled(boolean cancelled);
 
+    /**
+     * The card set used by this Scrum Poker session.
+     */
+    String getCardSet();
+
+    void setCardSet(String cardSet);
+
 }

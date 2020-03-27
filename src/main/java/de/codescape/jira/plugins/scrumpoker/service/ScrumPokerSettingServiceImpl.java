@@ -26,6 +26,7 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
     private static final String DISPLAY_DROPDOWN_ON_BOARDS = "displayDropdownOnBoards";
     private static final String CHECK_PERMISSION_TO_SAVE_ESTIMATE = "checkPermissionToSaveEstimate";
     private static final String DISPLAY_COMMENTS_FOR_ISSUE = "displayCommentsForIssue";
+    private static final String CARD_SET = "defaultCardSet";
 
     private final ActiveObjects activeObjects;
 
@@ -37,10 +38,8 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
     @Override
     public GlobalSettings load() {
         GlobalSettings globalSettings = new GlobalSettings();
-        globalSettings.setStoryPointField(
-            loadString(STORY_POINT_FIELD, null));
-        globalSettings.setSessionTimeout(
-            loadInteger(SESSION_TIMEOUT, SESSION_TIMEOUT_DEFAULT));
+        globalSettings.setStoryPointField(loadString(STORY_POINT_FIELD, null));
+        globalSettings.setSessionTimeout(loadInteger(SESSION_TIMEOUT, SESSION_TIMEOUT_DEFAULT));
         globalSettings.setAllowRevealDeck(
             AllowRevealDeck.valueOf(loadString(ALLOW_REVEAL_DECK, ALLOW_REVEAL_DECK_DEFAULT.name())));
         globalSettings.setDefaultProjectActivation(
@@ -51,6 +50,7 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
             loadBoolean(CHECK_PERMISSION_TO_SAVE_ESTIMATE, CHECK_PERMISSION_TO_SAVE_ESTIMATE_DEFAULT));
         globalSettings.setDisplayCommentsForIssue(DisplayCommentsForIssue.valueOf(
             loadString(DISPLAY_COMMENTS_FOR_ISSUE, DISPLAY_COMMENTS_FOR_ISSUE_DEFAULT.name())));
+        globalSettings.setCardSet(loadString(CARD_SET, CARD_SET_DEFAULT));
         return globalSettings;
     }
 
@@ -63,6 +63,7 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
         persist(DISPLAY_DROPDOWN_ON_BOARDS, String.valueOf(globalSettings.isDisplayDropdownOnBoards()));
         persist(CHECK_PERMISSION_TO_SAVE_ESTIMATE, String.valueOf(globalSettings.isCheckPermissionToSaveEstimate()));
         persist(DISPLAY_COMMENTS_FOR_ISSUE, globalSettings.getDisplayCommentsForIssue().name());
+        persist(CARD_SET, globalSettings.getCardSet());
     }
 
     private String loadString(String key, String defaultValue) {

@@ -1,11 +1,10 @@
 package de.codescape.jira.plugins.scrumpoker.upgrade;
 
-import com.atlassian.activeobjects.external.ActiveObjects;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.upgrade.PluginUpgradeTask;
-import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerCards;
+import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.model.SpecialCards;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,11 +17,11 @@ import org.springframework.stereotype.Component;
 @ExportAsService(PluginUpgradeTask.class)
 public class Upgrade09CreateDefaultCardSet extends AbstractUpgradeTask {
 
-    private final ActiveObjects activeObjects;
+    private final ScrumPokerSettingService scrumPokerSettingService;
 
     @Autowired
-    public Upgrade09CreateDefaultCardSet(@ComponentImport ActiveObjects activeObjects) {
-        this.activeObjects = activeObjects;
+    public Upgrade09CreateDefaultCardSet(ScrumPokerSettingService scrumPokerSettingService) {
+        this.scrumPokerSettingService = scrumPokerSettingService;
     }
 
     @Override
@@ -37,9 +36,9 @@ public class Upgrade09CreateDefaultCardSet extends AbstractUpgradeTask {
 
     @Override
     protected void performUpgrade() {
-        ScrumPokerCards scrumPokerCards = activeObjects.create(ScrumPokerCards.class);
-        scrumPokerCards.setCardSet(simplifiedFibonacciCardSet());
-        scrumPokerCards.save();
+        GlobalSettings globalSettings = scrumPokerSettingService.load();
+        globalSettings.setCardSet(simplifiedFibonacciCardSet());
+        scrumPokerSettingService.persist(globalSettings);
     }
 
     private String simplifiedFibonacciCardSet() {

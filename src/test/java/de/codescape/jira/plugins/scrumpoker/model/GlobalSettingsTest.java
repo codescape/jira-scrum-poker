@@ -18,6 +18,7 @@ public class GlobalSettingsTest {
         assertThat(globalSettings.isDisplayDropdownOnBoards(), is(equalTo(DISPLAY_DROPDOWN_ON_BOARDS_DEFAULT)));
         assertThat(globalSettings.isCheckPermissionToSaveEstimate(), is(equalTo(CHECK_PERMISSION_TO_SAVE_ESTIMATE_DEFAULT)));
         assertThat(globalSettings.getDisplayCommentsForIssue(), is(equalTo(DISPLAY_COMMENTS_FOR_ISSUE_DEFAULT)));
+        assertThat(globalSettings.getCardSet(), is(equalTo(CARD_SET_DEFAULT)));
     }
 
 }

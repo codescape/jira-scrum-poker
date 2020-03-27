@@ -31,6 +31,7 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
         static final String DISPLAY_DROPDOWN_ON_BOARDS = "displayDropdownOnBoards";
         static final String CHECK_PERMISSION_TO_SAVE_ESTIMATE = "checkPermissionToSaveEstimate";
         static final String DISPLAY_COMMENTS_FOR_ISSUE = "displayCommentsForIssue";
+        static final String CARD_SET = "cardSet";
 
     }
 
@@ -87,6 +88,9 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
 
             String displayCommentsForIssue = getParameter(Parameters.DISPLAY_COMMENTS_FOR_ISSUE);
             globalSettings.setDisplayCommentsForIssue(DisplayCommentsForIssue.valueOf(displayCommentsForIssue));
+
+            String cardSet = getParameter(Parameters.CARD_SET);
+            globalSettings.setCardSet(cardSet);
 
             scrumPokerSettingService.persist(globalSettings);
         }

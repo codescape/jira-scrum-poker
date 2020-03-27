@@ -150,7 +150,7 @@ public class SessionEntityMapper {
      */
     private List<CardEntity> cards(ScrumPokerSession scrumPokerSession, String userKey) {
         String chosenValue = cardForUser(scrumPokerSession.getVotes(), userKey);
-        return scrumPokerCardService.getCardSet().stream()
+        return scrumPokerCardService.getCardSet(scrumPokerSession).stream()
             .map(card -> new CardEntity(card, card.equals(chosenValue)))
             .collect(Collectors.toList());
     }

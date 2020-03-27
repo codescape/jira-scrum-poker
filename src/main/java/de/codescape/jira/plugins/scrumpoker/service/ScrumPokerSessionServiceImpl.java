@@ -158,6 +158,7 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
         scrumPokerSession.setCreatorUserKey(userKey);
         scrumPokerSession.setVisible(false);
         scrumPokerSession.setConfirmedVote(null);
+        scrumPokerSession.setCardSet(scrumPokerSettingService.load().getCardSet());
         scrumPokerSession.setUpdateDate(new Date());
         scrumPokerSession.save();
         return scrumPokerSession;
