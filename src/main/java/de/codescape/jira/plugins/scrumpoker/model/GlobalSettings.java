@@ -16,7 +16,7 @@ public class GlobalSettings {
     public static final boolean DISPLAY_DROPDOWN_ON_BOARDS_DEFAULT = false;
     public static final boolean CHECK_PERMISSION_TO_SAVE_ESTIMATE_DEFAULT = false;
     public static final DisplayCommentsForIssue DISPLAY_COMMENTS_FOR_ISSUE_DEFAULT = DisplayCommentsForIssue.LATEST;
-    public static final String CARD_SET_DEFAULT = QUESTION_MARK + "," + COFFEE_CARD + ",0,1,2,3,5,8,13,20,40,100";
+    public static final String CARD_SET_DEFAULT = QUESTION_MARK + ", " + COFFEE_CARD + ", 0, 1, 2, 3, 5, 8, 13, 20, 40, 100";
 
     // settings
 

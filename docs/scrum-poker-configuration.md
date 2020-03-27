@@ -38,6 +38,18 @@ Decide whether every participant of a Scrum Poker session is allowed to save the
 * If disabled all participants of the Scrum Poker session regardless of their permissions on the current issue can confirm the estimation and end the Scrum Poker session.
 * If enabled only users with edit permission on the current issue the Scrum Poker session is started for can confirm the estimation and end the Scrum Poker session.
 
+#### Card Set
+
+Define the default card set to be used for Scrum Poker sessions. 
+Use a comma-separated list of values. 
+Special cards are defined by the keywords `coffee` (the user needs a break) and `question` (the user is not able to estimate).
+
+The default card set that is preconfigured is the simplified Fibonacci sequence:
+
+    question, coffee, 0, 1, 2, 3, 5, 8, 13, 20, 40, 100
+
+When you define other card sets please keep in mind that only numeric values can be assigned to the `Story Points` field created by Jira Software.
+
 #### Session Timeout
 
 Adjust the session timeout of Scrum Poker sessions in hours.

@@ -42,7 +42,7 @@ public class Upgrade09CreateDefaultCardSet extends AbstractUpgradeTask {
     }
 
     private String simplifiedFibonacciCardSet() {
-        return SpecialCards.QUESTION_MARK + "," + SpecialCards.COFFEE_CARD + ",0,1,2,3,5,8,13,20,40,100";
+        return SpecialCards.QUESTION_MARK + ", " + SpecialCards.COFFEE_CARD + ", 0, 1, 2, 3, 5, 8, 13, 20, 40, 100";
     }
 
 }
