@@ -9,7 +9,7 @@ import java.util.List;
  * Service to persist and retrieve card sets from the database.
  */
 @Transactional
-public interface ScrumPokerCardService {
+public interface ScrumPokerCardSetService {
 
     /**
      * Returns the default card set.

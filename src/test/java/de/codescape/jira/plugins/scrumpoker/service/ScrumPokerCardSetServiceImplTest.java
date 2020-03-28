@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
-public class ScrumPokerCardServiceImplTest {
+public class ScrumPokerCardSetServiceImplTest {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -24,7 +24,7 @@ public class ScrumPokerCardServiceImplTest {
     private ScrumPokerSettingService scrumPokerSettingService;
 
     @InjectMocks
-    private ScrumPokerCardServiceImpl service;
+    private ScrumPokerCardSetServiceImpl service;
 
     @Mock
     private GlobalSettings globalSettings;
