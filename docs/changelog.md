@@ -24,6 +24,7 @@ Click on the version in the following list to see all changes since the previous
 * refactor: better naming for card set service
 * fix: correct escaping for special characters in German translation  
 * feat: allow to switch back to default settings in global configuration (#100)
+* fix: do not save empty values instead of null if nothing is selected
 
 ### [4.9.0] - 2020-02-16
 

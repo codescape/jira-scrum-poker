@@ -8,13 +8,14 @@ import com.atlassian.jira.web.action.JiraWebActionSupport;
 abstract class AbstractScrumPokerAction extends JiraWebActionSupport {
 
     /**
-     * Short form for resolving a parameter from the HTTP request.
+     * Short form for resolving a parameter from the HTTP request. If the parameter is empty return null instead.
      *
      * @param parameterName name of the parameter
      * @return value of the parameter
      */
     String getParameter(String parameterName) {
-        return getHttpRequest().getParameter(parameterName);
+        String value = getHttpRequest().getParameter(parameterName);
+        return value != null && !value.isEmpty() ? value : null;
     }
 
 }
