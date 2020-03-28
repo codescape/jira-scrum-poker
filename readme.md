@@ -6,6 +6,7 @@ Scrum Poker for Jira enables your agile teams to collaboratively estimate their 
 [![GitHub issues](https://img.shields.io/github/issues/codescape/jira-scrum-poker.svg)](https://github.com/codescape/jira-scrum-poker/issues)
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/codescape/jira-scrum-poker.svg)](https://github.com/codescape/jira-scrum-poker/releases)
 [![GitHub](https://img.shields.io/github/license/codescape/jira-scrum-poker.svg)](https://github.com/codescape/jira-scrum-poker/blob/master/LICENSE)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
 
 ## Highlights
 

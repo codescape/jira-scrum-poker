@@ -11,7 +11,7 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
-* ...
+* docs: adapt version 2.0 of the Contributor Covenant Code of Conduct
 
 ### [4.10.0] - 2020-03-28
 
