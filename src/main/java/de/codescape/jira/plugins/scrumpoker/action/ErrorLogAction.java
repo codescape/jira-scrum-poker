@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Error Log page to display and empty the error log.
  */
-public class ShowErrorLogAction extends AbstractScrumPokerAction {
+public class ErrorLogAction extends AbstractScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,7 +25,7 @@ public class ShowErrorLogAction extends AbstractScrumPokerAction {
     private final ErrorLogService errorLogService;
 
     @Autowired
-    public ShowErrorLogAction(ErrorLogService errorLogService) {
+    public ErrorLogAction(ErrorLogService errorLogService) {
         this.errorLogService = errorLogService;
     }
 

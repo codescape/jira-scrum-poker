@@ -25,7 +25,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class ShowSessionsActionTest {
+public class ActiveSessionsActionTest {
 
     private static final String SECRET_ISSUE_KEY = "SECRET-1";
     private static final String PUBLIC_ISSUE_KEY = "PUBLIC-1";
@@ -49,7 +49,7 @@ public class ShowSessionsActionTest {
     private SessionEntityMapper sessionEntityMapper;
 
     @InjectMocks
-    private ShowSessionsAction showSessionsAction;
+    private ActiveSessionsAction activeSessionsAction;
 
     @Mock
     private MutableIssue secretIssue;
@@ -75,7 +75,7 @@ public class ShowSessionsActionTest {
         when(publicScrumPokerSession.getConfirmedVote()).thenReturn(null);
         when(secretScrumPokerSession.getConfirmedVote()).thenReturn(null);
 
-        List<SessionEntity> openSessions = showSessionsAction.getOpenSessions();
+        List<SessionEntity> openSessions = activeSessionsAction.getOpenSessions();
         assertThat(openSessions, hasSize(1));
         assertThat(openSessions.get(0), is(equalTo(publicSessionEntity)));
         verify(scrumPokerSessionService).recent();
@@ -87,7 +87,7 @@ public class ShowSessionsActionTest {
         when(publicScrumPokerSession.getConfirmedVote()).thenReturn(5);
         when(secretScrumPokerSession.getConfirmedVote()).thenReturn(8);
 
-        List<SessionEntity> closedSessions = showSessionsAction.getClosedSessions();
+        List<SessionEntity> closedSessions = activeSessionsAction.getClosedSessions();
         assertThat(closedSessions, hasSize(1));
         assertThat(closedSessions.get(0), is(equalTo(publicSessionEntity)));
         verify(scrumPokerSessionService).recent();
@@ -95,7 +95,7 @@ public class ShowSessionsActionTest {
 
     @Test
     public void shouldAlwaysShowSessionsPage() {
-        assertThat(showSessionsAction.doExecute(), is(equalTo("success")));
+        assertThat(activeSessionsAction.doExecute(), is(equalTo("success")));
     }
 
     private void expectOneVisibleAndOneSecretIssue() {

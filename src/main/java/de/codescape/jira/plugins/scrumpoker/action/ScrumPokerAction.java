@@ -29,7 +29,7 @@ import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
  * This page verifies that the current user is allowed to see the issue and displays an error page in case the user is
  * not allowed to see the issue in question.
  */
-public class ShowScrumPokerAction extends AbstractScrumPokerAction {
+public class ScrumPokerAction extends AbstractScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
 
@@ -56,16 +56,16 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
     private String issueKey;
 
     @Autowired
-    public ShowScrumPokerAction(@ComponentImport RendererManager rendererManager,
-                                @ComponentImport IssueManager issueManager,
-                                @ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
-                                @ComponentImport PermissionManager permissionManager,
-                                @ComponentImport CommentManager commentManager,
-                                @ComponentImport PluginLicenseManager pluginLicenseManager,
-                                @ComponentImport DateTimeFormatter dateTimeFormatter,
-                                GlobalSettingsService globalSettingsService,
-                                ScrumPokerForIssueCondition scrumPokerForIssueCondition,
-                                ErrorLogService errorLogService) {
+    public ScrumPokerAction(@ComponentImport RendererManager rendererManager,
+                            @ComponentImport IssueManager issueManager,
+                            @ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
+                            @ComponentImport PermissionManager permissionManager,
+                            @ComponentImport CommentManager commentManager,
+                            @ComponentImport PluginLicenseManager pluginLicenseManager,
+                            @ComponentImport DateTimeFormatter dateTimeFormatter,
+                            GlobalSettingsService globalSettingsService,
+                            ScrumPokerForIssueCondition scrumPokerForIssueCondition,
+                            ErrorLogService errorLogService) {
         this.rendererManager = rendererManager;
         this.issueManager = issueManager;
         this.jiraAuthenticationContext = jiraAuthenticationContext;

@@ -35,7 +35,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ShowScrumPokerActionTest {
+public class ScrumPokerActionTest {
 
     private static final String ISSUE_KEY = "ISSUE-1";
 
@@ -71,7 +71,7 @@ public class ShowScrumPokerActionTest {
     private ErrorLogService errorLogService;
 
     @InjectMocks
-    private ShowScrumPokerAction showScrumPokerAction;
+    private ScrumPokerAction scrumPokerAction;
 
     @Mock
     private HttpServletRequest httpServletRequest;
@@ -98,7 +98,7 @@ public class ShowScrumPokerActionTest {
         whenUserIsAllowedToSeeIssue();
         whenIssueIsEstimable();
 
-        assertThat(showScrumPokerAction.doExecute(), is(equalTo("success")));
+        assertThat(scrumPokerAction.doExecute(), is(equalTo("success")));
     }
 
     @Test
@@ -107,7 +107,7 @@ public class ShowScrumPokerActionTest {
         whenRequestedIssueExists();
         whenUserIsNotAllowedToSeeIssue();
 
-        assertThat(showScrumPokerAction.doExecute(), is(equalTo("error")));
+        assertThat(scrumPokerAction.doExecute(), is(equalTo("error")));
     }
 
     @Test
@@ -117,23 +117,23 @@ public class ShowScrumPokerActionTest {
         whenUserIsAllowedToSeeIssue();
         whenIssueIsNotEstimable();
 
-        assertThat(showScrumPokerAction.doExecute(), is(equalTo("error")));
+        assertThat(scrumPokerAction.doExecute(), is(equalTo("error")));
     }
 
     @Test
     public void shouldDisplayErrorPageWhenLicenseIsMissing() {
         whenLicenseIsMissing();
 
-        assertThat(showScrumPokerAction.doExecute(), is(equalTo("error")));
-        assertThat(showScrumPokerAction.getErrorMessages(), hasItem("Scrum Poker for Jira is missing a valid license!"));
+        assertThat(scrumPokerAction.doExecute(), is(equalTo("error")));
+        assertThat(scrumPokerAction.getErrorMessages(), hasItem("Scrum Poker for Jira is missing a valid license!"));
     }
 
     @Test
     public void shouldDisplayErrorPageWhenLicenseIsInvalid() {
         whenLicenseIsInvalid();
 
-        assertThat(showScrumPokerAction.doExecute(), is(equalTo("error")));
-        assertThat(showScrumPokerAction.getErrorMessages(), hasItem("Scrum Poker for Jira has license errors: EXPIRED"));
+        assertThat(scrumPokerAction.doExecute(), is(equalTo("error")));
+        assertThat(scrumPokerAction.getErrorMessages(), hasItem("Scrum Poker for Jira has license errors: EXPIRED"));
     }
 
     @Test
@@ -145,28 +145,28 @@ public class ShowScrumPokerActionTest {
         ArrayList<Comment> comments = new ArrayList<>();
         when(commentManager.getCommentsForUser(issue, user)).thenReturn(comments);
 
-        assertThat(showScrumPokerAction.getComments(), is(equalTo(comments)));
+        assertThat(scrumPokerAction.getComments(), is(equalTo(comments)));
     }
 
     @Test
     public void shouldNotDisplayCommentsIfDisplayCommentsForIssueIsSetToNone() {
         whenDisplayCommentsForIssueSetTo(DisplayCommentsForIssue.NONE);
 
-        assertThat(showScrumPokerAction.isDisplayCommentsForIssue(), is(false));
+        assertThat(scrumPokerAction.isDisplayCommentsForIssue(), is(false));
     }
 
     @Test
     public void shouldDisplayCommentsIfDisplayCommentsForIssueIsSetToAll() {
         whenDisplayCommentsForIssueSetTo(DisplayCommentsForIssue.ALL);
 
-        assertThat(showScrumPokerAction.isDisplayCommentsForIssue(), is(true));
+        assertThat(scrumPokerAction.isDisplayCommentsForIssue(), is(true));
     }
 
     @Test
     public void shouldDisplayCommentsIfDisplayCommentsForIssueIsSetToLatest() {
         whenDisplayCommentsForIssueSetTo(DisplayCommentsForIssue.LATEST);
 
-        assertThat(showScrumPokerAction.isDisplayCommentsForIssue(), is(true));
+        assertThat(scrumPokerAction.isDisplayCommentsForIssue(), is(true));
     }
 
     private void whenDisplayCommentsForIssueSetTo(DisplayCommentsForIssue displayCommentsForIssue) {
