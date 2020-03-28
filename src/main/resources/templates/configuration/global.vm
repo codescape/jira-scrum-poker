@@ -13,8 +13,9 @@
 
         <h3>$i18n.getText("scrumpoker.config.heading.estimation")</h3>
         <div class="field-group">
-            <label for="storyPointField">$i18n.getText("scrumpoker.config.estimation")</label>
-            <select class="select" id="storyPointField" name="storyPointField">
+            <label for="storyPointField">$i18n.getText("scrumpoker.config.estimation")
+                <span class="aui-icon icon-required">(required)</span></label>
+            <select class="select" id="storyPointField" name="storyPointField" required>
                 <option value=""></option>
                 #foreach ($customField in $customFields)
                     #if ($customField.id == $globalSettings.storyPointField)
@@ -44,16 +45,18 @@
 
         <h3>$i18n.getText("scrumpoker.config.heading.session")</h3>
         <div class="field-group">
-            <label for="cardSet">$i18n.getText("scrumpoker.config.cardset")</label>
-            <input type="text" class="text long-field" id="cardSet" name="cardSet" value="$globalSettings.cardSet">
+            <label for="cardSet">$i18n.getText("scrumpoker.config.cardset")
+                <span class="aui-icon icon-required">(required)</span></label>
+            <input type="text" class="text long-field" id="cardSet" name="cardSet" value="$globalSettings.cardSet" required>
             #if (!$globalSettings.cardSet)
                 <div class="error">$i18n.getText("scrumpoker.config.field.required")</div>
             #end
             <div class="description">$i18n.getText("scrumpoker.config.cardset.description")</div>
         </div>
         <div class="field-group">
-            <label for="sessionTimeout">$i18n.getText("scrumpoker.config.sessiontimeout")</label>
-            <input type="number" class="text short-field" step="1" min="0" id="sessionTimeout" name="sessionTimeout" value="$globalSettings.sessionTimeout">
+            <label for="sessionTimeout">$i18n.getText("scrumpoker.config.sessiontimeout")
+                <span class="aui-icon icon-required">(required)</span></label>
+            <input type="number" class="text short-field" step="1" min="0" id="sessionTimeout" name="sessionTimeout" value="$globalSettings.sessionTimeout" required>
             #if (!$globalSettings.sessionTimeout)
                 <div class="error">$i18n.getText("scrumpoker.config.field.required")</div>
             #end
