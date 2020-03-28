@@ -22,6 +22,7 @@ Click on the version in the following list to see all changes since the previous
 * fix: calculate bounded votes based on cards for Scrum Poker session (#18)
 * docs: document the configuration of the default card set (#18)
 * refactor: better naming for card set service
+* fix: correct escaping for special characters in German translation  
 
 ### [4.9.0] - 2020-02-16
 
