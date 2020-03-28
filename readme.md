@@ -8,6 +8,10 @@ Scrum Poker for Jira enables your agile teams to collaboratively estimate their 
 [![GitHub](https://img.shields.io/github/license/codescape/jira-scrum-poker.svg)](https://github.com/codescape/jira-scrum-poker/blob/master/LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
 
+Visit our official documentation at [jira-scrum-poker.codescape.de](https://jira-scrum-poker.codescape.de) to learn more about Scrum Poker for Jira. 
+
+![Screenshot of a Scrum Poker session](/docs/images/participate-in-scrum-poker-session-reveal-estimates.png)
+
 ## Highlights
 
 * Easy installation and quick setup in just two steps
@@ -16,20 +20,3 @@ Scrum Poker for Jira enables your agile teams to collaboratively estimate their 
 * Share and join sessions by url or by scanning a QR code 
 * Assist estimations with references of already performed sessions
 * Security and privacy in mind showing only issues users may view
-
-## Resources
-
-For users:
-
-* [Installation Guide](http://jira-scrum-poker.codescape.de/scrum-poker-installation)
-* [Documentation](http://jira-scrum-poker.codescape.de)
-
-For developers:
-
-* [Contribution Guide](https://github.com/codescape/jira-scrum-poker/blob/master/contributing.md)
-* [Changelog](https://github.com/codescape/jira-scrum-poker/blob/master/docs/changelog.md)
-* [Code of Conduct](https://github.com/codescape/jira-scrum-poker/blob/master/code_of_conduct.md)
-
-## Screenshot
-
-![Screenshot of a Scrum Poker session](/docs/images/participate-in-scrum-poker-session-reveal-estimates.png)
