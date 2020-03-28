@@ -23,6 +23,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: document the configuration of the default card set (#18)
 * refactor: better naming for card set service
 * fix: correct escaping for special characters in German translation  
+* feat: allow to switch back to default settings in global configuration (#100)
 
 ### [4.9.0] - 2020-02-16
 

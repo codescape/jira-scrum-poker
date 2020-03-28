@@ -65,34 +65,38 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
     @Override
     protected String doExecute() {
         String action = getParameter(Parameters.ACTION);
-        if (action != null && action.equals("save")) {
-            GlobalSettings globalSettings = new GlobalSettings();
+        if (action != null) {
+            if (action.equals("save")) {
+                GlobalSettings globalSettings = new GlobalSettings();
 
-            String newStoryPointField = getParameter(Parameters.STORY_POINT_FIELD);
-            globalSettings.setStoryPointField(newStoryPointField);
+                String newStoryPointField = getParameter(Parameters.STORY_POINT_FIELD);
+                globalSettings.setStoryPointField(newStoryPointField);
 
-            String newSessionTimeout = getParameter(Parameters.SESSION_TIMEOUT);
-            globalSettings.setSessionTimeout(Integer.valueOf(newSessionTimeout));
+                String newSessionTimeout = getParameter(Parameters.SESSION_TIMEOUT);
+                globalSettings.setSessionTimeout(Integer.valueOf(newSessionTimeout));
 
-            String newDefaultProjectActivation = getParameter(Parameters.DEFAULT_PROJECT_ACTIVATION);
-            globalSettings.setDefaultProjectActivation(Boolean.parseBoolean(newDefaultProjectActivation));
+                String newDefaultProjectActivation = getParameter(Parameters.DEFAULT_PROJECT_ACTIVATION);
+                globalSettings.setDefaultProjectActivation(Boolean.parseBoolean(newDefaultProjectActivation));
 
-            String newAllowRevealDeck = getParameter(Parameters.ALLOW_REVEAL_DECK);
-            globalSettings.setAllowRevealDeck(AllowRevealDeck.valueOf(newAllowRevealDeck));
+                String newAllowRevealDeck = getParameter(Parameters.ALLOW_REVEAL_DECK);
+                globalSettings.setAllowRevealDeck(AllowRevealDeck.valueOf(newAllowRevealDeck));
 
-            String displayDropdownOnBoards = getParameter(Parameters.DISPLAY_DROPDOWN_ON_BOARDS);
-            globalSettings.setDisplayDropdownOnBoards(Boolean.parseBoolean(displayDropdownOnBoards));
+                String displayDropdownOnBoards = getParameter(Parameters.DISPLAY_DROPDOWN_ON_BOARDS);
+                globalSettings.setDisplayDropdownOnBoards(Boolean.parseBoolean(displayDropdownOnBoards));
 
-            String checkPermissionToSaveEstimate = getParameter(Parameters.CHECK_PERMISSION_TO_SAVE_ESTIMATE);
-            globalSettings.setCheckPermissionToSaveEstimate(Boolean.parseBoolean(checkPermissionToSaveEstimate));
+                String checkPermissionToSaveEstimate = getParameter(Parameters.CHECK_PERMISSION_TO_SAVE_ESTIMATE);
+                globalSettings.setCheckPermissionToSaveEstimate(Boolean.parseBoolean(checkPermissionToSaveEstimate));
 
-            String displayCommentsForIssue = getParameter(Parameters.DISPLAY_COMMENTS_FOR_ISSUE);
-            globalSettings.setDisplayCommentsForIssue(DisplayCommentsForIssue.valueOf(displayCommentsForIssue));
+                String displayCommentsForIssue = getParameter(Parameters.DISPLAY_COMMENTS_FOR_ISSUE);
+                globalSettings.setDisplayCommentsForIssue(DisplayCommentsForIssue.valueOf(displayCommentsForIssue));
 
-            String cardSet = getParameter(Parameters.CARD_SET);
-            globalSettings.setCardSet(cardSet);
+                String cardSet = getParameter(Parameters.CARD_SET);
+                globalSettings.setCardSet(cardSet);
 
-            scrumPokerSettingService.persist(globalSettings);
+                scrumPokerSettingService.persist(globalSettings);
+            } else if (action.equals("defaults")) {
+                scrumPokerSettingService.persist(new GlobalSettings());
+            }
         }
         return SUCCESS;
     }
