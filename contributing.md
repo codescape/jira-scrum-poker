@@ -1,44 +1,38 @@
 Contributing
 ============
 
-Your contribution is always welcome! Please make sure to read this document which aims to help you to contribute in a way that makes it easier to bring your changes into this project.
+Your contribution is always welcome!
+Please read this document to help you with this.
 
-## Help wanted
+### Creating new issues
 
-There are many things you can do to help to improve Scrum Poker for Jira:
+Please feel invited to [create issues](https://github.com/codescape/jira-scrum-poker/issues/new/choose) to let us know about your ideas and wishes or any bugs that you have found.
+Have a look at the current list of [open issues](https://github.com/codescape/jira-scrum-poker/issues) to avoid duplicates.
 
-* [Create issues](https://github.com/codescape/jira-scrum-poker/issues) for new features or improvements
-* Provide new translations for this app or improve existing ones
-* Add test coverage for untested code
-* Refactor the code
-* ...
+### Improving or adding translations
 
-## Development
+Want Scrum Poker for Jira to be translated into your language?
+Please help us translating our app.
+For further details see [Supported Languages](docs/supported-languages.md).
 
-Development of Atlassian Jira plugins is closely bound to the Atlassian Plugin SDK. Setting up your development environment is documented here: [Set up the Atlassian SDK and build a project](https://developer.atlassian.com/docs/getting-started/set-up-the-atlassian-plugin-sdk-and-build-a-project) 
+### Running app in development mode
+
+Development of Atlassian Jira plugins is closely bound to the Atlassian Plugin SDK.
+Setting up your development environment is documented here: 
+[Set up the Atlassian SDK and build a project](https://developer.atlassian.com/docs/getting-started/set-up-the-atlassian-plugin-sdk-and-build-a-project) 
 
 During development you will find the following commands useful:
 
-* `atlas-run` installs this plugin into Jira and starts it on localhost
-* `atlas-debug` same as atlas-run, but allows a debugger to attach at port 5005
-* `atlas-package` to generate a Jar file of the plugin which can be installed into your Jira instance
-* `atlas-clean` to clean up the `target` folder and so allow you to start with a clean Jira instance again
+* `atlas-run` installs this plugin into Jira and starts an instance on localhost
+* `atlas-package` generate a Jar file of the plugin and installs it into the currently running instance (see `atlas-run`)
+* `atlas-clean` cleans up the `target` folder and so allows you to start with a fresh Jira instance
 
-Reloading the plugin during development can be triggered in your web browser when hitting `Shift + Reload` (for example `Shift + Cmd + R` on Mac OS X).
+To fasten up development start a first terminal with a running instance of Jira with the command `atlas-run` and trigger deployments of updated versions by the command `atlas-package`.
 
-## Maven Dependency Analysis
+### Committing changes
 
-From time to time it makes sense to check the dependencies required to build and run Scrum Poker for Jira.
-There are two maven commands that should be run and verified:
-
-* `mvn dependency:analyze` analyzes the dependencies of this project and determines which are: used and declared; used and undeclared; unused and declared returns a list of used but not declared and a list of declared but not used dependencies. 
-Not all results require actions since there can be dependencies not being resolved on bytecode level.
-* `mvn versions:display-dependency-updates` analyzes the dependencies of this project and lists all dependencies that exist in one of the configures repositories in a more recent version than the one being used.
-There are many false positives since versions are only compared based on the version number and there are many dependencies with irrelevant version numbers.
-
-## Commit messages
-
-Commit messages should be written in this format:
+Changes to the source code of Scrum Poker for Jira shall be informative and help to understand what has changed and why.
+Commit messages should always be written in this format:
 
     <type>: <subject>
     
@@ -48,7 +42,7 @@ Commit messages should be written in this format:
 
 The first line put together from the `type` and the `subject` should not be longer than 70 characters, the second line is always blank and the following lines should be wrapped at 80 characters.
 
-### Allowed `type` values
+**Allowed `type` values**
 
 * feat (new feature)
 * fix (bug fix)
@@ -58,14 +52,15 @@ The first line put together from the `type` and the `subject` should not be long
 * test (adding missing tests, refactoring tests; no production code change)
 * chore (updating dependencies etc; no production code change)
 
-### Message body (optional)
+**Message body (optional)**
 
 * uses the imperative, present tense: “change” not “changed” nor “changes”
 * includes motivation for the change and contrasts with previous behavior
 
-### Message footer
+**Message footer (optional)**
 
-The message footer is used to reference issue that are addressed and closed by this commit. Closed issues should be listed on a separate line in the footer prefixed with "Closes" keyword like this:
+The message footer is used to reference issue that are addressed and closed by this commit.
+Closed issues should be listed on a separate line in the footer prefixed with "Closes" keyword like this:
 
     Closes #17
 
@@ -73,7 +68,13 @@ or in case of multiple issues:
 
     Closes #17, #18, #19
 
-### Sample
+**Samples**
+
+A simple commit message would look like this:
+
+    feat: configuration page reloads on configuration changes
+
+A more complex sample would look like this:
 
     feat: users cannot see sessions for issues without permission
     
@@ -83,23 +84,18 @@ or in case of multiple issues:
     
     Closes #17
 
-## Releases
+### Releasing new versions
 
-Releasing a new version helps to bring out new features and improvements to our customers. To keep track of all changes we do the following:
+Releasing a new version helps to bring out new features and improvements to our customers.
+To keep track of all changes we do the following:
 
-* update the [Changelog](docs/changelog.md) with the release date
-* update the [POM](pom.xml) file with the new version number
-* update the [Compatibility Matrix](docs/compatibility-matrix.md) with the new version number
-* create a tag for the new version with reference to the latest commit
+1. update the [POM](pom.xml) file with the new version number
+1. add the new version and the release date to the [Changelog](docs/changelog.md)
+1. update the [Compatibility Matrix](docs/compatibility-matrix.md) with the new version number
+1. create a tag for the new version with reference to the latest commit
     ```
+    git rev-parse HEAD
     git tag -a <version> -m "<version>" <commit hash>
     git push origin <version>
     ```
-* upload and promote the new version at [Atlassian Marketplace](https://marketplace.atlassian.com/manage/plugins/de.codescape.jira.plugins.scrum-poker/versions)
-
-## Credits
-
-* Contributing code by [Elmar Jobs](https://www.ejobs.de) and [Stefan Höhn](https://github.com/stefan-hoehn)
-* Inspiration for Contributing page by [Karma](http://karma-runner.github.io)
-* Inspiration for Changelog page by [Keep a Changelog](https://keepachangelog.com)
-* Intensive testing and feedback by [congstar GmbH](http://www.congstar.de)
+1. upload and promote the new version at [Atlassian Marketplace](https://marketplace.atlassian.com/manage/plugins/de.codescape.jira.plugins.scrum-poker/versions)
