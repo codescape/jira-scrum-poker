@@ -151,7 +151,7 @@
             <button name="action" value="save" type="submit" id="project-config-save-button" class="aui-button aui-button-primary">
                 <span class="aui-icon aui-icon-small aui-iconfont-check-circle"></span> $i18n.getText("scrumpoker.config.save")
             </button>
-            <button name="action" value="defaults" type="submit" id="project-config-defaults-button" class="aui-button">
+            <button name="action" value="defaults" type="submit" id="project-config-defaults-button" class="aui-button" formnovalidate>
                 <span class="aui-icon aui-icon-small aui-iconfont-document"></span> $i18n.getText("scrumpoker.config.defaults")
             </button>
         </div>
