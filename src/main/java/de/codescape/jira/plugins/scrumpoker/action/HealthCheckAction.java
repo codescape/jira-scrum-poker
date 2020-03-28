@@ -4,14 +4,13 @@ import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.upm.api.license.PluginLicenseManager;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
-import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
-import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingsService;
-import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
-import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
+import de.codescape.jira.plugins.scrumpoker.model.SpecialCards;
+import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Health Check page for the Scrum Poker app.
@@ -38,6 +37,7 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
         static final String ESTIMATION_FIELD_NOT_FOUND = "scrumpoker.healthcheck.results.errors.estimationfieldnotfound";
         static final String ESTIMATION_FIELD_NOT_SET = "scrumpoker.healthcheck.results.errors.estimationfieldnotset";
         static final String ENABLED_FOR_NO_PROJECT = "scrumpoker.healthcheck.results.errors.enabledfornoproject";
+        static final String CARD_SET_WITHOUT_OPTIONS = "scrumpoker.healthcheck.results.errors.cardsetwithoutoptions";
 
     }
 
@@ -67,18 +67,21 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
     private final PluginLicenseManager pluginLicenseManager;
     private final ProjectSettingsService projectSettingsService;
     private final ErrorLogService errorLogService;
+    private final CardSetService cardSetService;
 
     @Autowired
     public HealthCheckAction(@ComponentImport PluginLicenseManager pluginLicenseManager,
                              GlobalSettingsService globalSettingsService,
                              EstimationFieldService estimationFieldService,
                              ProjectSettingsService projectSettingsService,
-                             ErrorLogService errorLogService) {
+                             ErrorLogService errorLogService,
+                             CardSetService cardSetService) {
         this.pluginLicenseManager = pluginLicenseManager;
         this.globalSettingsService = globalSettingsService;
         this.estimationFieldService = estimationFieldService;
         this.projectSettingsService = projectSettingsService;
         this.errorLogService = errorLogService;
+        this.cardSetService = cardSetService;
     }
 
     @Override
@@ -151,6 +154,14 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
         if (!globalSettingsService.load().isDefaultProjectActivation() &&
             projectSettingsService.loadAll().stream().noneMatch(ScrumPokerProject::isScrumPokerEnabled)) {
             results.add(Configuration.ENABLED_FOR_NO_PROJECT);
+        }
+
+        // check that a card set is defined that can be parsed into different cards
+        List<String> cardSet = cardSetService.getCardSet().stream()
+            .filter(s -> !s.equals(SpecialCards.COFFEE_CARD) && !s.equals(SpecialCards.QUESTION_MARK))
+            .collect(Collectors.toList());
+        if (cardSet.isEmpty() || cardSet.size() == 1) {
+            results.add(Configuration.CARD_SET_WITHOUT_OPTIONS);
         }
 
         return results;

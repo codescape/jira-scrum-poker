@@ -11,10 +11,8 @@ import com.atlassian.upm.api.util.Option;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerError;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
-import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
-import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingsService;
-import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
-import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
+import de.codescape.jira.plugins.scrumpoker.model.SpecialCards;
+import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -23,6 +21,7 @@ import org.mockito.Mock;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static de.codescape.jira.plugins.scrumpoker.action.HealthCheckAction.*;
@@ -54,6 +53,9 @@ public class HealthCheckActionTest {
 
     @Mock
     private ErrorLogService errorLogService;
+
+    @Mock
+    private CardSetService cardSetService;
 
     @InjectMocks
     private HealthCheckAction healthCheckAction;
@@ -188,11 +190,43 @@ public class HealthCheckActionTest {
     }
 
     @Test
+    public void shouldSignalCardSetWithoutOptionsIfCardSetHasOnlyOneOption() {
+        when(globalSettingsService.load()).thenReturn(globalSettings);
+        when(globalSettings.getStoryPointField()).thenReturn("something");
+        when(estimationFieldService.findStoryPointField()).thenReturn(estimationField);
+        when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
+        when(cardSetService.getCardSet()).thenReturn(Collections.singletonList("1"));
+        assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.CARD_SET_WITHOUT_OPTIONS));
+    }
+
+    @Test
+    public void shouldSignalCardSetWithoutOptionsIfCardSetHasNoOptionAtAll() {
+        when(globalSettingsService.load()).thenReturn(globalSettings);
+        when(globalSettings.getStoryPointField()).thenReturn("something");
+        when(estimationFieldService.findStoryPointField()).thenReturn(estimationField);
+        when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
+        when(cardSetService.getCardSet()).thenReturn(Collections.emptyList());
+        assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.CARD_SET_WITHOUT_OPTIONS));
+    }
+
+    @Test
+    public void shouldSignalCardSetWithoutOptionsIfCardSetHasOnlyOneOptionApartFromThoseSpecialCards() {
+        when(globalSettingsService.load()).thenReturn(globalSettings);
+        when(globalSettings.getStoryPointField()).thenReturn("something");
+        when(estimationFieldService.findStoryPointField()).thenReturn(estimationField);
+        when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
+        when(cardSetService.getCardSet()).thenReturn(Arrays.asList(SpecialCards.COFFEE_CARD, SpecialCards.QUESTION_MARK, "1"));
+        assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.CARD_SET_WITHOUT_OPTIONS));
+    }
+
+
+    @Test
     public void shouldSignalNoConfigurationErrorsIfNoneAreFound() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getStoryPointField()).thenReturn("something");
         when(estimationFieldService.findStoryPointField()).thenReturn(estimationField);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
+        when(cardSetService.getCardSet()).thenReturn(Arrays.asList("1", "2", "3", "5"));
         assertThat(healthCheckAction.getConfigurationResults(), is(empty()));
     }
 
