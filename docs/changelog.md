@@ -30,6 +30,7 @@ Click on the version in the following list to see all changes since the previous
 * refactor: simplify way to identify pressed button for chosen action
 * refactor: static import card constants for readability
 * refactor: simplify and shorten class names for services
+* test: add tests for error active object
 
 ### [4.9.0] - 2020-02-16
 
