@@ -11,6 +11,12 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
+* ...
+
+### [4.10.0] - 2020-03-28
+
+**Configure your card set and benefit from the improved configuration page**
+
 * chore: implement against Jira 8.8.0
 * test: test against Jira 7.13.13 and 8.5.4 of previous enterprise releases
 * feat: one globally used card set can be configured via database (#18)
@@ -896,7 +902,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.9.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.10.0...HEAD
+[4.10.0]: https://github.com/codescape/jira-scrum-poker/compare/4.9.0...4.10.0
 [4.9.0]: https://github.com/codescape/jira-scrum-poker/compare/4.8.2...4.9.0
 [4.8.2]: https://github.com/codescape/jira-scrum-poker/compare/4.8.1...4.8.2
 [4.8.1]: https://github.com/codescape/jira-scrum-poker/compare/4.8.0...4.8.1
