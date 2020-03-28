@@ -17,6 +17,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: improve contributing page and separate credits
 * refactor: rename actions for project specific and global configuration
 * refactor: rename actions for active sessions, error log and current session
+* refactor: rename and shorten service for card sets
 
 ### [4.10.0] - 2020-03-28
 

@@ -9,15 +9,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Implementation of {@link ScrumPokerCardSetService} using Active Objects as persistence model.
+ * Implementation of {@link CardSetService} using Active Objects as persistence model.
  */
 @Component
-public class ScrumPokerCardSetServiceImpl implements ScrumPokerCardSetService {
+public class CardSetServiceImpl implements CardSetService {
 
     private final GlobalSettingsService globalSettingsService;
 
     @Autowired
-    public ScrumPokerCardSetServiceImpl(GlobalSettingsService globalSettingsService) {
+    public CardSetServiceImpl(GlobalSettingsService globalSettingsService) {
         this.globalSettingsService = globalSettingsService;
     }
 

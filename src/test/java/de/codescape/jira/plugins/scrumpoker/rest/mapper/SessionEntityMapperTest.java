@@ -14,7 +14,7 @@ import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.VoteEntity;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerCardSetService;
+import de.codescape.jira.plugins.scrumpoker.service.CardSetService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.junit.Before;
 import org.junit.Rule;
@@ -58,7 +58,7 @@ public class SessionEntityMapperTest {
     private IssueManager issueManager;
 
     @Mock
-    private ScrumPokerCardSetService scrumPokerCardSetService;
+    private CardSetService cardSetService;
 
     @InjectMocks
     private SessionEntityMapper sessionEntityMapper;
@@ -138,7 +138,7 @@ public class SessionEntityMapperTest {
             scrumPokerVote("5"),
             scrumPokerVote("13")};
         ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, true);
-        when(scrumPokerCardSetService.getCardSet(ArgumentMatchers.any(ScrumPokerSession.class))).thenReturn(
+        when(cardSetService.getCardSet(ArgumentMatchers.any(ScrumPokerSession.class))).thenReturn(
             Arrays.asList(QUESTION_MARK, COFFEE_CARD, "0", "1", "2", "3", "5", "8", "13", "20", "40", "100"));
 
         SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession, CURRENT_USER);
