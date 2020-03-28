@@ -27,6 +27,7 @@ Click on the version in the following list to see all changes since the previous
 * fix: do not save empty values instead of null if nothing is selected
 * feat: require mandatory fields in global configuration
 * fix: ignore required fields when switching back to default settings
+* refactor: simplify way to identify pressed button for chosen action
 
 ### [4.9.0] - 2020-02-16
 

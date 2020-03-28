@@ -53,8 +53,7 @@
     <form class="aui long-label" action="ScrumPokerErrorLog.jspa" method="post">
         <div class="buttons-container">
             <div class="buttons scrum-poker-buttons-right">
-                <input type="hidden" name="action" value="empty">
-                <button type="submit" id="empty-errorlog" class="aui-button" onfocus="javascript:blur();">
+                <button name="action" value="empty" type="submit" id="empty-errorlog" class="aui-button" onfocus="javascript:blur();">
                     <span class="aui-icon aui-icon-small aui-iconfont-trash"></span> $i18n.getText("scrumpoker.errorlog.purge")
                 </button>
             </div>
