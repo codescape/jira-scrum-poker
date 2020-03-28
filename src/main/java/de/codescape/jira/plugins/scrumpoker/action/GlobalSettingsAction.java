@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Global configuration of the Scrum Poker plugin.
  */
-public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
+public class GlobalSettingsAction extends AbstractScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
 
@@ -39,8 +39,8 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
     private final GlobalSettingsService globalSettingsService;
 
     @Autowired
-    public ConfigureScrumPokerAction(@ComponentImport CustomFieldManager customFieldManager,
-                                     GlobalSettingsService globalSettingsService) {
+    public GlobalSettingsAction(@ComponentImport CustomFieldManager customFieldManager,
+                                GlobalSettingsService globalSettingsService) {
         this.customFieldManager = customFieldManager;
         this.globalSettingsService = globalSettingsService;
     }

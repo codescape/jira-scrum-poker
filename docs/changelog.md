@@ -14,7 +14,8 @@ Click on the version in the following list to see all changes since the previous
 * docs: adapt version 2.0 of the Contributor Covenant Code of Conduct
 * docs: update readme and reduce to most relevant information
 * docs: rename license and update link from readme
-* docs: improve contributing page and separate credits 
+* docs: improve contributing page and separate credits
+* refactor: rename actions for project specific and global configuration
 
 ### [4.10.0] - 2020-03-28
 

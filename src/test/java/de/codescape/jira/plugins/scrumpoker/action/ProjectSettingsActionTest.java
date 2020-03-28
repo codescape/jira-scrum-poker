@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
-public class ConfigureProjectSettingsActionTest {
+public class ProjectSettingsActionTest {
 
     @Rule
     public MockitoContainer mockitoContainer = MockitoMocksInContainer.rule(this);
@@ -26,7 +26,7 @@ public class ConfigureProjectSettingsActionTest {
     private HttpServletVariables httpServletVariables;
 
     @InjectMocks
-    private ConfigureProjectSettingsAction configureProjectSettingsAction;
+    private ProjectSettingsAction projectSettingsAction;
 
     @Mock
     private HttpServletRequest httpServletRequest;
@@ -34,9 +34,9 @@ public class ConfigureProjectSettingsActionTest {
     @Test
     public void shouldExposeTheProjectKeyWhenCalled() {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
-        when(httpServletRequest.getParameter(ConfigureProjectSettingsAction.Parameters.PROJECT_KEY)).thenReturn("ABC");
-        configureProjectSettingsAction.doExecute();
-        assertThat(configureProjectSettingsAction.getProjectKey(), is(equalTo("ABC")));
+        when(httpServletRequest.getParameter(ProjectSettingsAction.Parameters.PROJECT_KEY)).thenReturn("ABC");
+        projectSettingsAction.doExecute();
+        assertThat(projectSettingsAction.getProjectKey(), is(equalTo("ABC")));
     }
 
 }

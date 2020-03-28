@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
-public class ConfigureScrumPokerActionTest {
+public class GlobalSettingsActionTest {
 
     private static final String CUSTOM_FIELD_ID = "CustomFieldId";
 
@@ -30,7 +30,7 @@ public class ConfigureScrumPokerActionTest {
     private GlobalSettingsService scrumPokerSettingsService;
 
     @InjectMocks
-    private ConfigureScrumPokerAction configureScrumPokerAction;
+    private GlobalSettingsAction globalSettingsAction;
 
     @Mock
     private CustomField firstCustomField;
@@ -44,14 +44,14 @@ public class ConfigureScrumPokerActionTest {
     @Test
     public void returnListOfCustomFieldsProvidedByCustomFieldManager() {
         when(customFieldManager.getCustomFieldObjects()).thenReturn(asList(firstCustomField, secondCustomField));
-        assertThat(configureScrumPokerAction.getCustomFields(), hasItems(firstCustomField, secondCustomField));
+        assertThat(globalSettingsAction.getCustomFields(), hasItems(firstCustomField, secondCustomField));
     }
 
     @Test
     public void returnTheStoryPointFieldConfigured() {
         when(scrumPokerSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getStoryPointField()).thenReturn(CUSTOM_FIELD_ID);
-        assertThat(configureScrumPokerAction.getGlobalSettings().getStoryPointField(), is(equalTo(CUSTOM_FIELD_ID)));
+        assertThat(globalSettingsAction.getGlobalSettings().getStoryPointField(), is(equalTo(CUSTOM_FIELD_ID)));
     }
 
 }
