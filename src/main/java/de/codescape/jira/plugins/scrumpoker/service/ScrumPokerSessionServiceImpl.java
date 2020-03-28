@@ -24,21 +24,21 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
 
     private final ActiveObjects activeObjects;
     private final IssueManager issueManager;
-    private final ScrumPokerSettingService scrumPokerSettingService;
+    private final GlobalSettingsService globalSettingsService;
     private final ScrumPokerForIssueCondition scrumPokerForIssueCondition;
-    private final ScrumPokerErrorService scrumPokerErrorService;
+    private final ErrorLogService errorLogService;
 
     @Autowired
     public ScrumPokerSessionServiceImpl(@ComponentImport ActiveObjects activeObjects,
                                         @ComponentImport IssueManager issueManager,
-                                        ScrumPokerSettingService scrumPokerSettingService,
+                                        GlobalSettingsService globalSettingsService,
                                         ScrumPokerForIssueCondition scrumPokerForIssueCondition,
-                                        ScrumPokerErrorService scrumPokerErrorService) {
+                                        ErrorLogService errorLogService) {
         this.activeObjects = activeObjects;
         this.issueManager = issueManager;
-        this.scrumPokerSettingService = scrumPokerSettingService;
+        this.globalSettingsService = globalSettingsService;
         this.scrumPokerForIssueCondition = scrumPokerForIssueCondition;
-        this.scrumPokerErrorService = scrumPokerErrorService;
+        this.errorLogService = errorLogService;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
             return createScrumPokerSession(issueKey, userKey);
         }
         if (scrumPokerSession.getUpdateDate().before(sessionTimeout())) {
-            deleteScrumPokerSession(issueKey, userKey);
+            deleteScrumPokerSession(issueKey);
             return createScrumPokerSession(issueKey, userKey);
         }
         return scrumPokerSession;
@@ -105,7 +105,7 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
 
     @Override
     public ScrumPokerSession reset(String issueKey, String userKey) {
-        deleteScrumPokerSession(issueKey, userKey);
+        deleteScrumPokerSession(issueKey);
         return byIssueKey(issueKey, userKey);
     }
 
@@ -132,7 +132,7 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     }
 
     private Date sessionTimeout() {
-        long sessionTimeoutMillis = hoursToMillis(scrumPokerSettingService.load().getSessionTimeout());
+        long sessionTimeoutMillis = hoursToMillis(globalSettingsService.load().getSessionTimeout());
         return new Date(System.currentTimeMillis() - sessionTimeoutMillis);
     }
 
@@ -144,12 +144,12 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
         MutableIssue issue = issueManager.getIssueObject(issueKey);
         if (issue == null) {
             String message = "Unable to create session for non-existing issue " + issueKey + ".";
-            scrumPokerErrorService.logError(message, null);
+            errorLogService.logError(message, null);
             throw new IllegalStateException(message);
         }
         if (!scrumPokerForIssueCondition.isEstimable(issue)) {
             String message = "Unable to create session for non-estimable issue " + issueKey + ".";
-            scrumPokerErrorService.logError(message, null);
+            errorLogService.logError(message, null);
             throw new IllegalStateException(message);
         }
         ScrumPokerSession scrumPokerSession = activeObjects.create(ScrumPokerSession.class,
@@ -158,13 +158,13 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
         scrumPokerSession.setCreatorUserKey(userKey);
         scrumPokerSession.setVisible(false);
         scrumPokerSession.setConfirmedVote(null);
-        scrumPokerSession.setCardSet(scrumPokerSettingService.load().getCardSet());
+        scrumPokerSession.setCardSet(globalSettingsService.load().getCardSet());
         scrumPokerSession.setUpdateDate(new Date());
         scrumPokerSession.save();
         return scrumPokerSession;
     }
 
-    private void deleteScrumPokerSession(String issueKey, String userKey) {
+    private void deleteScrumPokerSession(String issueKey) {
         ScrumPokerSession scrumPokerSession = findScrumPokerSession(issueKey);
         Arrays.stream(scrumPokerSession.getVotes()).forEach(activeObjects::delete);
         activeObjects.delete(scrumPokerSession);

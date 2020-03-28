@@ -1,7 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.upgrade;
 
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -21,7 +21,7 @@ public class Upgrade02DefaultProjectActivationTest {
 
 
     @Mock
-    private ScrumPokerSettingService scrumPokerSettingService;
+    private GlobalSettingsService globalSettingsService;
 
     @InjectMocks
     private Upgrade02DefaultProjectActivation upgrade;
@@ -31,10 +31,10 @@ public class Upgrade02DefaultProjectActivationTest {
 
     @Test
     public void shouldPersistDefaultProjectActivationInPluginSettings() {
-        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
         upgrade.doUpgrade();
         verify(globalSettings).setDefaultProjectActivation(true);
-        verify(scrumPokerSettingService).persist(globalSettings);
+        verify(globalSettingsService).persist(globalSettings);
     }
 
     @Test

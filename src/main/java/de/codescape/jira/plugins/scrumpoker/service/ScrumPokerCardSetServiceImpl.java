@@ -14,16 +14,16 @@ import java.util.stream.Collectors;
 @Component
 public class ScrumPokerCardSetServiceImpl implements ScrumPokerCardSetService {
 
-    private final ScrumPokerSettingService scrumPokerSettingService;
+    private final GlobalSettingsService globalSettingsService;
 
     @Autowired
-    public ScrumPokerCardSetServiceImpl(ScrumPokerSettingService scrumPokerSettingService) {
-        this.scrumPokerSettingService = scrumPokerSettingService;
+    public ScrumPokerCardSetServiceImpl(GlobalSettingsService globalSettingsService) {
+        this.globalSettingsService = globalSettingsService;
     }
 
     @Override
     public List<String> getCardSet() {
-        return splitToCards(scrumPokerSettingService.load().getCardSet());
+        return splitToCards(globalSettingsService.load().getCardSet());
     }
 
     @Override

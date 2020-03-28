@@ -5,7 +5,7 @@ import com.atlassian.jira.junit.rules.MockitoContainer;
 import com.atlassian.jira.junit.rules.MockitoMocksInContainer;
 import com.atlassian.jira.web.HttpServletVariables;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerError;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerErrorService;
+import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -30,7 +30,7 @@ public class ShowErrorLogActionTest {
     private HttpServletVariables httpServletVariables;
 
     @Mock
-    private ScrumPokerErrorService scrumPokerErrorService;
+    private ErrorLogService errorLogService;
 
     @InjectMocks
     private ShowErrorLogAction showErrorLogAction;
@@ -41,7 +41,7 @@ public class ShowErrorLogActionTest {
     @Test
     public void shouldExposeTheErrorList() {
         List<ScrumPokerError> scrumPokerErrors = new ArrayList<>();
-        when(scrumPokerErrorService.listAll()).thenReturn(scrumPokerErrors);
+        when(errorLogService.listAll()).thenReturn(scrumPokerErrors);
         assertThat(showErrorLogAction.getErrorList(), is(equalTo(scrumPokerErrors)));
     }
 
@@ -50,7 +50,7 @@ public class ShowErrorLogActionTest {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
         when(httpServletRequest.getParameter(ShowErrorLogAction.Parameters.ACTION)).thenReturn("empty");
         assertThat(showErrorLogAction.doExecute(), is(equalTo(showErrorLogAction.SUCCESS)));
-        verify(scrumPokerErrorService, times(1)).emptyErrorLog();
+        verify(errorLogService, times(1)).emptyErrorLog();
     }
 
     @Test
@@ -58,7 +58,7 @@ public class ShowErrorLogActionTest {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
         when(httpServletRequest.getParameter(ShowErrorLogAction.Parameters.ACTION)).thenReturn(null);
         assertThat(showErrorLogAction.doExecute(), is(equalTo(showErrorLogAction.SUCCESS)));
-        verify(scrumPokerErrorService, never()).emptyErrorLog();
+        verify(errorLogService, never()).emptyErrorLog();
     }
 
 }

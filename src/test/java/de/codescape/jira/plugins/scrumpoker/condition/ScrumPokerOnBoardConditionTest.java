@@ -3,7 +3,7 @@ package de.codescape.jira.plugins.scrumpoker.condition;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -21,7 +21,7 @@ public class ScrumPokerOnBoardConditionTest {
     public MockitoRule rule = MockitoJUnit.rule();
 
     @Mock
-    private ScrumPokerSettingService scrumPokerSettingService;
+    private GlobalSettingsService globalSettingsService;
 
     @InjectMocks
     private ScrumPokerOnBoardCondition scrumPokerOnBoardCondition;
@@ -37,14 +37,14 @@ public class ScrumPokerOnBoardConditionTest {
 
     @Test
     public void shouldDisplayWhenSettingDisplayDropdownOnBoardsIsSetToTrue() {
-        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.isDisplayDropdownOnBoards()).thenReturn(true);
         assertThat(scrumPokerOnBoardCondition.shouldDisplay(applicationUser, jiraHelper), is(true));
     }
 
     @Test
     public void shouldDisplayWhenSettingDisplayDropdownOnBoardsIsSetToFalse() {
-        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.isDisplayDropdownOnBoards()).thenReturn(false);
         assertThat(scrumPokerOnBoardCondition.shouldDisplay(applicationUser, jiraHelper), is(false));
     }

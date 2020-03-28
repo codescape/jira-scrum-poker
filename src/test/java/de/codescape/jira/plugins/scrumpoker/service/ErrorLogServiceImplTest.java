@@ -31,7 +31,7 @@ import static org.mockito.Mockito.when;
 @Data(ScrumPokerTestDatabaseUpdater.class)
 @Jdbc(Hsql.class)
 @NameConverters
-public class ScrumPokerErrorServiceImplTest {
+public class ErrorLogServiceImplTest {
 
     private static final String JIRA_VERSION = "8.3.2";
     private static final String SCRUM_POKER_VERSION = "4.20";
@@ -43,7 +43,7 @@ public class ScrumPokerErrorServiceImplTest {
     private BuildUtilsInfo buildUtilsInfo;
     private PluginAccessor pluginAccessor;
 
-    private ScrumPokerErrorService scrumPokerErrorService;
+    private ErrorLogService errorLogService;
 
     private Plugin scrumPokerPlugin;
     private PluginInformation scrumPokerPluginInformation;
@@ -55,7 +55,7 @@ public class ScrumPokerErrorServiceImplTest {
         activeObjects = new TestActiveObjects(entityManager);
         buildUtilsInfo = mock(BuildUtilsInfo.class);
         pluginAccessor = mock(PluginAccessor.class);
-        scrumPokerErrorService = new ScrumPokerErrorServiceImpl(activeObjects, buildUtilsInfo, pluginAccessor);
+        errorLogService = new ErrorLogServiceImpl(activeObjects, buildUtilsInfo, pluginAccessor);
         deleteAllScrumPokerErrors();
     }
 
@@ -69,7 +69,7 @@ public class ScrumPokerErrorServiceImplTest {
         expectJiraVersion(JIRA_VERSION);
         expectScrumPokerVersion(SCRUM_POKER_VERSION);
 
-        scrumPokerErrorService.logError("Let's add one error!", new RuntimeException("Ooops!"));
+        errorLogService.logError("Let's add one error!", new RuntimeException("Ooops!"));
         assertThat(errorLog().length, is(1));
         assertThat(errorLog()[0], allOf(
             hasProperty("jiraVersion", equalTo(JIRA_VERSION)),
@@ -82,14 +82,14 @@ public class ScrumPokerErrorServiceImplTest {
 
     @Test
     public void shouldSaveErrorWithMessageOnly() {
-        scrumPokerErrorService.logError("Message!", null);
+        errorLogService.logError("Message!", null);
         assertThat(errorLog().length, is(1));
         assertThat(errorLog()[0].getErrorMessage(), equalTo("Message!"));
     }
 
     @Test
     public void shouldSaveErrorWithExceptionOnly() {
-        scrumPokerErrorService.logError(null, new RuntimeException("Ooops!"));
+        errorLogService.logError(null, new RuntimeException("Ooops!"));
         assertThat(errorLog().length, is(1));
         assertThat(errorLog()[0].getStacktrace(), allOf(
             containsString("Ooops!"),
@@ -99,10 +99,10 @@ public class ScrumPokerErrorServiceImplTest {
 
     @Test
     public void shouldReturnAllErrorsWithNewestFirst() {
-        scrumPokerErrorService.logError("First", null);
-        scrumPokerErrorService.logError("Second", null);
-        scrumPokerErrorService.logError("Third", null);
-        List<ScrumPokerError> scrumPokerErrors = scrumPokerErrorService.listAll();
+        errorLogService.logError("First", null);
+        errorLogService.logError("Second", null);
+        errorLogService.logError("Third", null);
+        List<ScrumPokerError> scrumPokerErrors = errorLogService.listAll();
         assertThat(scrumPokerErrors.size(), is(3));
         assertThat(scrumPokerErrors.get(0).getErrorMessage(), equalTo("Third"));
         assertThat(scrumPokerErrors.get(1).getErrorMessage(), equalTo("Second"));
@@ -111,9 +111,9 @@ public class ScrumPokerErrorServiceImplTest {
 
     @Test
     public void shouldDeleteAllErrors() {
-        IntStream.range(0, 50).forEach(i -> scrumPokerErrorService.logError("Some Error...", null));
+        IntStream.range(0, 50).forEach(i -> errorLogService.logError("Some Error...", null));
         assertThat(errorLog().length, is(50));
-        scrumPokerErrorService.emptyErrorLog();
+        errorLogService.emptyErrorLog();
         assertThat(errorLog().length, is(0));
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
  * Service to persist and retrieve Scrum Poker errors from the database.
  */
 @Transactional
-public interface ScrumPokerErrorService {
+public interface ErrorLogService {
 
     /**
      * Adds a new Scrum Poker error to the error log.

@@ -8,8 +8,8 @@ import com.atlassian.jira.project.Project;
 import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
-import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingService;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingsService;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -37,10 +37,10 @@ public class ScrumPokerForIssueConditionTest {
     private EstimationFieldService estimationFieldService;
 
     @Mock
-    private ScrumPokerSettingService scrumPokerSettingService;
+    private GlobalSettingsService globalSettingsService;
 
     @Mock
-    private ProjectSettingService projectSettingService;
+    private ProjectSettingsService projectSettingsService;
 
     @Mock
     private ApplicationUser applicationUser;
@@ -108,13 +108,13 @@ public class ScrumPokerForIssueConditionTest {
     private void expectThatScrumPokerIsEnabledForProject() {
         when(issue.getProjectObject()).thenReturn(project);
         when(project.getId()).thenReturn(42L);
-        when(projectSettingService.loadScrumPokerEnabled(any())).thenReturn(true);
+        when(projectSettingsService.loadScrumPokerEnabled(any())).thenReturn(true);
     }
 
     private void expectThatScrumPokerIsNotEnabledForProject() {
         when(issue.getProjectObject()).thenReturn(project);
         when(project.getId()).thenReturn(42L);
-        when(projectSettingService.loadScrumPokerEnabled(any())).thenReturn(false);
+        when(projectSettingsService.loadScrumPokerEnabled(any())).thenReturn(false);
     }
 
     private void expectThatIssueIsNotEditable() {
@@ -145,12 +145,12 @@ public class ScrumPokerForIssueConditionTest {
     }
 
     private void expectThatDefaultProjectActivationIsEnabled() {
-        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
     }
 
     private void expectThatDefaultProjectActivationIsDisabled() {
-        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(false);
     }
 

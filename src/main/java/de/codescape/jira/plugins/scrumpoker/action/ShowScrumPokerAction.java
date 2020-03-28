@@ -15,8 +15,8 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.upm.api.license.PluginLicenseManager;
 import com.atlassian.upm.api.license.entity.PluginLicense;
 import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerErrorService;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -48,10 +48,10 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
     private final CommentManager commentManager;
     private final JiraAuthenticationContext jiraAuthenticationContext;
     private final DateTimeFormatter dateTimeFormatter;
-    private final ScrumPokerSettingService scrumPokerSettingService;
+    private final GlobalSettingsService globalSettingsService;
     private final ScrumPokerForIssueCondition scrumPokerForIssueCondition;
     private final PluginLicenseManager pluginLicenseManager;
-    private final ScrumPokerErrorService scrumPokerErrorService;
+    private final ErrorLogService errorLogService;
 
     private String issueKey;
 
@@ -63,9 +63,9 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
                                 @ComponentImport CommentManager commentManager,
                                 @ComponentImport PluginLicenseManager pluginLicenseManager,
                                 @ComponentImport DateTimeFormatter dateTimeFormatter,
-                                ScrumPokerSettingService scrumPokerSettingService,
+                                GlobalSettingsService globalSettingsService,
                                 ScrumPokerForIssueCondition scrumPokerForIssueCondition,
-                                ScrumPokerErrorService scrumPokerErrorService) {
+                                ErrorLogService errorLogService) {
         this.rendererManager = rendererManager;
         this.issueManager = issueManager;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
@@ -73,9 +73,9 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
         this.commentManager = commentManager;
         this.pluginLicenseManager = pluginLicenseManager;
         this.dateTimeFormatter = dateTimeFormatter;
-        this.scrumPokerSettingService = scrumPokerSettingService;
+        this.globalSettingsService = globalSettingsService;
         this.scrumPokerForIssueCondition = scrumPokerForIssueCondition;
-        this.scrumPokerErrorService = scrumPokerErrorService;
+        this.errorLogService = errorLogService;
     }
 
     /**
@@ -110,7 +110,7 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
      * Return whether to display the comments for an issue.
      */
     public boolean isDisplayCommentsForIssue() {
-        return scrumPokerSettingService.load().getDisplayCommentsForIssue().shouldDisplay();
+        return globalSettingsService.load().getDisplayCommentsForIssue().shouldDisplay();
     }
 
     /**
@@ -118,7 +118,7 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
      */
     public List<Comment> getComments() {
         List<Comment> comments = commentManager.getCommentsForUser(getIssue(), jiraAuthenticationContext.getLoggedInUser());
-        switch (scrumPokerSettingService.load().getDisplayCommentsForIssue()) {
+        switch (globalSettingsService.load().getDisplayCommentsForIssue()) {
             case ALL:
                 return comments;
             case LATEST:
@@ -165,7 +165,7 @@ public class ShowScrumPokerAction extends AbstractScrumPokerAction {
     }
 
     private void errorMessage(String errorMessage) {
-        scrumPokerErrorService.logError(errorMessage, null);
+        errorLogService.logError(errorMessage, null);
         addErrorMessage(errorMessage);
     }
 

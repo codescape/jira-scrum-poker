@@ -3,7 +3,7 @@ package de.codescape.jira.plugins.scrumpoker.action;
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.fields.CustomField;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -27,7 +27,7 @@ public class ConfigureScrumPokerActionTest {
     private CustomFieldManager customFieldManager;
 
     @Mock
-    private ScrumPokerSettingService scrumPokerSettingsService;
+    private GlobalSettingsService scrumPokerSettingsService;
 
     @InjectMocks
     private ConfigureScrumPokerAction configureScrumPokerAction;

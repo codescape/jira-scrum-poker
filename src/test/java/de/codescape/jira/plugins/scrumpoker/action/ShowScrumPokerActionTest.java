@@ -18,8 +18,8 @@ import com.atlassian.upm.api.util.Option;
 import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
 import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerErrorService;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -62,13 +62,13 @@ public class ShowScrumPokerActionTest {
     private CommentManager commentManager;
 
     @Mock
-    private ScrumPokerSettingService scrumPokerSettingService;
+    private GlobalSettingsService globalSettingsService;
 
     @Mock
     private ScrumPokerForIssueCondition scrumPokerForIssueCondition;
 
     @Mock
-    private ScrumPokerErrorService scrumPokerErrorService;
+    private ErrorLogService errorLogService;
 
     @InjectMocks
     private ShowScrumPokerAction showScrumPokerAction;
@@ -170,7 +170,7 @@ public class ShowScrumPokerActionTest {
     }
 
     private void whenDisplayCommentsForIssueSetTo(DisplayCommentsForIssue displayCommentsForIssue) {
-        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getDisplayCommentsForIssue()).thenReturn(displayCommentsForIssue);
     }
 

@@ -1,7 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.project.Project;
-import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -22,13 +22,13 @@ public class ConfigureProjectSettingsAction extends AbstractScrumPokerAction {
 
     }
 
-    private final ProjectSettingService projectSettingService;
+    private final ProjectSettingsService projectSettingsService;
 
     private String projectKey;
 
     @Autowired
-    public ConfigureProjectSettingsAction(ProjectSettingService projectSettingService) {
-        this.projectSettingService = projectSettingService;
+    public ConfigureProjectSettingsAction(ProjectSettingsService projectSettingsService) {
+        this.projectSettingsService = projectSettingsService;
     }
 
     /**
@@ -42,7 +42,7 @@ public class ConfigureProjectSettingsAction extends AbstractScrumPokerAction {
      * Current configured project activation for this concrete project.
      */
     public boolean isScrumPokerEnabled() {
-        return projectSettingService.loadScrumPokerEnabled(getProjectByKey(projectKey).getId());
+        return projectSettingsService.loadScrumPokerEnabled(getProjectByKey(projectKey).getId());
     }
 
     /**
@@ -55,7 +55,7 @@ public class ConfigureProjectSettingsAction extends AbstractScrumPokerAction {
         if (action != null && action.equals("save")) {
             Long projectId = getProjectByKey(projectKey).getId();
             String newScrumPokerEnabled = getParameter(Parameters.SCRUM_POKER_ENABLED);
-            projectSettingService.persistScrumPokerEnabled(projectId, Boolean.parseBoolean(newScrumPokerEnabled));
+            projectSettingsService.persistScrumPokerEnabled(projectId, Boolean.parseBoolean(newScrumPokerEnabled));
         }
         return SUCCESS;
     }

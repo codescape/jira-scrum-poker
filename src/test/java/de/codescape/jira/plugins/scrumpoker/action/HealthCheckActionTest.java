@@ -12,9 +12,9 @@ import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerError;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
-import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingService;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerErrorService;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingsService;
+import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -44,16 +44,16 @@ public class HealthCheckActionTest {
     private PluginLicenseManager pluginLicenseManager;
 
     @Mock
-    private ScrumPokerSettingService scrumPokerSettingService;
+    private GlobalSettingsService globalSettingsService;
 
     @Mock
     private EstimationFieldService estimationFieldService;
 
     @Mock
-    private ProjectSettingService projectSettingService;
+    private ProjectSettingsService projectSettingsService;
 
     @Mock
-    private ScrumPokerErrorService scrumPokerErrorService;
+    private ErrorLogService errorLogService;
 
     @InjectMocks
     private HealthCheckAction healthCheckAction;
@@ -154,7 +154,7 @@ public class HealthCheckActionTest {
 
     @Test
     public void shouldSignalUnsetEstimationFieldIfEstimationFieldIsNotSet() {
-        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getStoryPointField()).thenReturn(null);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
         assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATION_FIELD_NOT_SET));
@@ -162,7 +162,7 @@ public class HealthCheckActionTest {
 
     @Test
     public void shouldSignalMissingEstimationFieldIfEstimationFieldIsSetButDoesNotExist() {
-        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getStoryPointField()).thenReturn("something");
         when(estimationFieldService.findStoryPointField()).thenReturn(null);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
@@ -171,7 +171,7 @@ public class HealthCheckActionTest {
 
     @Test
     public void shouldSignalNoProjectEnabledWhenNeitherGloballyEnabledNorHavingAProjectExplicitlyEnabled() {
-        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getStoryPointField()).thenReturn("something");
         when(estimationFieldService.findStoryPointField()).thenReturn(null);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(false);
@@ -184,12 +184,12 @@ public class HealthCheckActionTest {
         ScrumPokerProject scrumPokerProject = mock(ScrumPokerProject.class);
         when(scrumPokerProject.isScrumPokerEnabled()).thenReturn(false);
         scrumPokerProjects.add(scrumPokerProject);
-        when(projectSettingService.loadAll()).thenReturn(scrumPokerProjects);
+        when(projectSettingsService.loadAll()).thenReturn(scrumPokerProjects);
     }
 
     @Test
     public void shouldSignalNoConfigurationErrorsIfNoneAreFound() {
-        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getStoryPointField()).thenReturn("something");
         when(estimationFieldService.findStoryPointField()).thenReturn(estimationField);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
@@ -206,7 +206,7 @@ public class HealthCheckActionTest {
     @Test
     public void shouldSignalErrorsIfErrorLogContainsErrors() {
         ScrumPokerError[] errors = {mock(ScrumPokerError.class)};
-        when(scrumPokerErrorService.listAll()).thenReturn(Arrays.asList(errors));
+        when(errorLogService.listAll()).thenReturn(Arrays.asList(errors));
         assertThat(healthCheckAction.getErrorsResults(), hasItem(ErrorLog.ERROR_LOG_NOT_EMPTY));
     }
 

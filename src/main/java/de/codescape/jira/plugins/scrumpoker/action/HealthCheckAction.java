@@ -5,9 +5,9 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.upm.api.license.PluginLicenseManager;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
-import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingService;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerErrorService;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingsService;
+import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -62,23 +62,23 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
 
     }
 
-    private final ScrumPokerSettingService scrumPokerSettingService;
+    private final GlobalSettingsService globalSettingsService;
     private final EstimationFieldService estimationFieldService;
     private final PluginLicenseManager pluginLicenseManager;
-    private final ProjectSettingService projectSettingService;
-    private final ScrumPokerErrorService scrumPokerErrorService;
+    private final ProjectSettingsService projectSettingsService;
+    private final ErrorLogService errorLogService;
 
     @Autowired
     public HealthCheckAction(@ComponentImport PluginLicenseManager pluginLicenseManager,
-                             ScrumPokerSettingService scrumPokerSettingService,
+                             GlobalSettingsService globalSettingsService,
                              EstimationFieldService estimationFieldService,
-                             ProjectSettingService projectSettingService,
-                             ScrumPokerErrorService scrumPokerErrorService) {
+                             ProjectSettingsService projectSettingsService,
+                             ErrorLogService errorLogService) {
         this.pluginLicenseManager = pluginLicenseManager;
-        this.scrumPokerSettingService = scrumPokerSettingService;
+        this.globalSettingsService = globalSettingsService;
         this.estimationFieldService = estimationFieldService;
-        this.projectSettingService = projectSettingService;
-        this.scrumPokerErrorService = scrumPokerErrorService;
+        this.projectSettingsService = projectSettingsService;
+        this.errorLogService = errorLogService;
     }
 
     @Override
@@ -136,7 +136,7 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
         List<String> results = new ArrayList<>();
 
         // check that the confirmed estimation field is set
-        String storyPointField = scrumPokerSettingService.load().getStoryPointField();
+        String storyPointField = globalSettingsService.load().getStoryPointField();
         if (storyPointField == null || storyPointField.isEmpty()) {
             results.add(Configuration.ESTIMATION_FIELD_NOT_SET);
         } else {
@@ -148,8 +148,8 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
         }
 
         // check that Scrum Poker is either globally enabled or has projects explicitly enabled
-        if (!scrumPokerSettingService.load().isDefaultProjectActivation() &&
-            projectSettingService.loadAll().stream().noneMatch(ScrumPokerProject::isScrumPokerEnabled)) {
+        if (!globalSettingsService.load().isDefaultProjectActivation() &&
+            projectSettingsService.loadAll().stream().noneMatch(ScrumPokerProject::isScrumPokerEnabled)) {
             results.add(Configuration.ENABLED_FOR_NO_PROJECT);
         }
 
@@ -171,7 +171,7 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
         List<String> results = new ArrayList<>();
 
         // check that the Scrum Poker error log is empty
-        if (!scrumPokerErrorService.listAll().isEmpty()) {
+        if (!errorLogService.listAll().isEmpty()) {
             results.add(ErrorLog.ERROR_LOG_NOT_EMPTY);
         }
 

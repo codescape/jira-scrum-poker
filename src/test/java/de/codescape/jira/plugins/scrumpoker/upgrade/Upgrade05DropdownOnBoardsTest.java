@@ -1,7 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.upgrade;
 
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -20,7 +20,7 @@ public class Upgrade05DropdownOnBoardsTest {
     public MockitoRule rule = MockitoJUnit.rule();
 
     @Mock
-    private ScrumPokerSettingService scrumPokerSettingService;
+    private GlobalSettingsService globalSettingsService;
 
     @InjectMocks
     private Upgrade05DropdownOnBoards upgrade;
@@ -30,10 +30,10 @@ public class Upgrade05DropdownOnBoardsTest {
 
     @Test
     public void shouldPersistDisplayDropdownOnBoardsInPluginSettings() {
-        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
         upgrade.doUpgrade();
         verify(globalSettings).setDisplayDropdownOnBoards(false);
-        verify(scrumPokerSettingService).persist(globalSettings);
+        verify(globalSettingsService).persist(globalSettings);
     }
 
     @Test

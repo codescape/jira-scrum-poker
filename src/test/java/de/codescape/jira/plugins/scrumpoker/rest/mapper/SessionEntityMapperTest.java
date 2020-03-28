@@ -15,7 +15,7 @@ import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.VoteEntity;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerCardSetService;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -46,7 +46,7 @@ public class SessionEntityMapperTest {
     private UserManager userManager;
 
     @Mock
-    private ScrumPokerSettingService scrumPokerSettingService;
+    private GlobalSettingsService globalSettingsService;
 
     @Mock
     private DateTimeFormatter dateTimeFormatter;
@@ -75,7 +75,7 @@ public class SessionEntityMapperTest {
     @Before
     public void before() {
         when(userManager.getUserByKey(anyString())).thenReturn(applicationUser);
-        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getAllowRevealDeck()).thenReturn(AllowRevealDeck.EVERYONE);
         when(applicationUser.getDisplayName()).thenReturn("John Doe");
         DateTimeFormatter userSpecificDateTimeFormatter = mock(DateTimeFormatter.class);

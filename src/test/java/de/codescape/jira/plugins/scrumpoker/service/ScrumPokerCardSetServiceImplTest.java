@@ -21,7 +21,7 @@ public class ScrumPokerCardSetServiceImplTest {
     public MockitoRule rule = MockitoJUnit.rule();
 
     @Mock
-    private ScrumPokerSettingService scrumPokerSettingService;
+    private GlobalSettingsService globalSettingsService;
 
     @InjectMocks
     private ScrumPokerCardSetServiceImpl service;
@@ -46,7 +46,7 @@ public class ScrumPokerCardSetServiceImplTest {
     }
 
     private void expectResultFromActiveObjects(String expectedString) {
-        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getCardSet()).thenReturn(expectedString);
     }
 

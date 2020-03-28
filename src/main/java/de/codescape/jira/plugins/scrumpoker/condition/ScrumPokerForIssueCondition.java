@@ -9,8 +9,8 @@ import com.atlassian.jira.project.Project;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
-import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingService;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingsService;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,18 +23,18 @@ public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition {
 
     private final CustomFieldManager customFieldManager;
     private final EstimationFieldService estimationFieldService;
-    private final ScrumPokerSettingService scrumPokerSettingService;
-    private final ProjectSettingService projectSettingService;
+    private final GlobalSettingsService globalSettingsService;
+    private final ProjectSettingsService projectSettingsService;
 
     @Autowired
     public ScrumPokerForIssueCondition(@ComponentImport CustomFieldManager customFieldManager,
                                        EstimationFieldService estimationFieldService,
-                                       ScrumPokerSettingService scrumPokerSettingService,
-                                       ProjectSettingService projectSettingService) {
+                                       GlobalSettingsService globalSettingsService,
+                                       ProjectSettingsService projectSettingsService) {
         this.customFieldManager = customFieldManager;
         this.estimationFieldService = estimationFieldService;
-        this.scrumPokerSettingService = scrumPokerSettingService;
-        this.projectSettingService = projectSettingService;
+        this.globalSettingsService = globalSettingsService;
+        this.projectSettingsService = projectSettingsService;
     }
 
     @Override
@@ -50,8 +50,8 @@ public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition {
     }
 
     private boolean hasScrumPokerEnabled(Project project) {
-        return scrumPokerSettingService.load().isDefaultProjectActivation()
-            || projectSettingService.loadScrumPokerEnabled(project.getId());
+        return globalSettingsService.load().isDefaultProjectActivation()
+            || projectSettingsService.loadScrumPokerEnabled(project.getId());
     }
 
     private boolean hasStoryPointField(Issue currentIssue) {

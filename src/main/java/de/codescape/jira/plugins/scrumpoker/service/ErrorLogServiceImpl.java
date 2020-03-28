@@ -20,19 +20,19 @@ import java.util.List;
 import static de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants.SCRUM_POKER_PLUGIN_KEY;
 
 /**
- * Implementation of {@link ScrumPokerErrorService} using Active Objects as persistence model.
+ * Implementation of {@link ErrorLogService} using Active Objects as persistence model.
  */
 @Component
-public class ScrumPokerErrorServiceImpl implements ScrumPokerErrorService {
+public class ErrorLogServiceImpl implements ErrorLogService {
 
     private final ActiveObjects activeObjects;
     private final BuildUtilsInfo buildUtilsInfo;
     private final PluginAccessor pluginAccessor;
 
     @Autowired
-    public ScrumPokerErrorServiceImpl(@ComponentImport ActiveObjects activeObjects,
-                                      @ComponentImport BuildUtilsInfo buildUtilsInfo,
-                                      @ComponentImport PluginAccessor pluginAccessor) {
+    public ErrorLogServiceImpl(@ComponentImport ActiveObjects activeObjects,
+                               @ComponentImport BuildUtilsInfo buildUtilsInfo,
+                               @ComponentImport PluginAccessor pluginAccessor) {
         this.activeObjects = activeObjects;
         this.buildUtilsInfo = buildUtilsInfo;
         this.pluginAccessor = pluginAccessor;

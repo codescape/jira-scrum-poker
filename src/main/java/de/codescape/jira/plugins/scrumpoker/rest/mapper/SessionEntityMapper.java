@@ -14,7 +14,7 @@ import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import de.codescape.jira.plugins.scrumpoker.model.SpecialCards;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.*;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerCardSetService;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,7 +34,7 @@ public class SessionEntityMapper {
 
     private final UserManager userManager;
     private final DateTimeFormatter dateTimeFormatter;
-    private final ScrumPokerSettingService scrumPokerSettingService;
+    private final GlobalSettingsService globalSettingsService;
     private final PermissionManager permissionManager;
     private final IssueManager issueManager;
     private final ScrumPokerCardSetService scrumPokerCardSetService;
@@ -44,13 +44,13 @@ public class SessionEntityMapper {
                                @ComponentImport DateTimeFormatter dateTimeFormatter,
                                @ComponentImport PermissionManager permissionManager,
                                @ComponentImport IssueManager issueManager,
-                               ScrumPokerSettingService scrumPokerSettingService,
+                               GlobalSettingsService globalSettingsService,
                                ScrumPokerCardSetService scrumPokerCardSetService) {
         this.userManager = userManager;
         this.dateTimeFormatter = dateTimeFormatter;
         this.permissionManager = permissionManager;
         this.issueManager = issueManager;
-        this.scrumPokerSettingService = scrumPokerSettingService;
+        this.globalSettingsService = globalSettingsService;
         this.scrumPokerCardSetService = scrumPokerCardSetService;
     }
 
@@ -107,7 +107,7 @@ public class SessionEntityMapper {
      * Confirmation of estimation is only allowed if permission check is disabled or user has permission.
      */
     private boolean allowConfirm(ScrumPokerSession scrumPokerSession, String userKey) {
-        return !scrumPokerSettingService.load().isCheckPermissionToSaveEstimate() ||
+        return !globalSettingsService.load().isCheckPermissionToSaveEstimate() ||
             permissionManager.hasPermission(
                 ProjectPermissions.EDIT_ISSUES,
                 issueManager.getIssueObject(scrumPokerSession.getIssueKey()),
@@ -125,7 +125,7 @@ public class SessionEntityMapper {
      * Revealing a Scrum Poker session is allowed when minimum one vote is given and the votes are hidden.
      */
     private boolean allowReveal(ScrumPokerSession scrumPokerSession, String userKey) {
-        AllowRevealDeck allowRevealDeck = scrumPokerSettingService.load().getAllowRevealDeck();
+        AllowRevealDeck allowRevealDeck = globalSettingsService.load().getAllowRevealDeck();
         boolean userMayReveal = allowRevealDeck.equals(AllowRevealDeck.EVERYONE) ||
             allowRevealDeck.equals(AllowRevealDeck.CREATOR) && scrumPokerSession.getCreatorUserKey().equals(userKey) ||
             allowRevealDeck.equals(AllowRevealDeck.PARTICIPANTS) && Arrays.stream(scrumPokerSession.getVotes())

@@ -1,7 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.upgrade;
 
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -20,7 +20,7 @@ public class Upgrade07DisplayCommentsForIssueTest {
     public MockitoRule rule = MockitoJUnit.rule();
 
     @Mock
-    private ScrumPokerSettingService scrumPokerSettingService;
+    private GlobalSettingsService globalSettingsService;
 
     @InjectMocks
     private Upgrade07DisplayCommentsForIssue upgrade;
@@ -30,10 +30,10 @@ public class Upgrade07DisplayCommentsForIssueTest {
 
     @Test
     public void shouldPersistDefaultSettingForDisplayCommentsForIssueInPluginSettings() {
-        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
         upgrade.doUpgrade();
         verify(globalSettings).setDisplayCommentsForIssue(GlobalSettings.DISPLAY_COMMENTS_FOR_ISSUE_DEFAULT);
-        verify(scrumPokerSettingService).persist(globalSettings);
+        verify(globalSettingsService).persist(globalSettings);
     }
 
     @Test

@@ -44,10 +44,10 @@ public class EstimationFieldServiceImplTest {
     private PermissionManager permissionManager;
 
     @Mock
-    private ScrumPokerSettingService scrumPokerSettingService;
+    private GlobalSettingsService globalSettingsService;
 
     @Mock
-    private ScrumPokerErrorService scrumPokerErrorService;
+    private ErrorLogService errorLogService;
 
     @InjectMocks
     private EstimationFieldServiceImpl estimationFieldService;
@@ -68,7 +68,7 @@ public class EstimationFieldServiceImplTest {
     public void before() {
         when(jiraAuthenticationContext.getLoggedInUser()).thenReturn(applicationUser);
         when(issueManager.getIssueByCurrentKey(ISSUE_KEY)).thenReturn(issue);
-        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
     }
 
     @Test

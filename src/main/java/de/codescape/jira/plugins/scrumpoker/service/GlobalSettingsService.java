@@ -7,7 +7,7 @@ import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
  * Service to persist and retrieve Scrum Poker settings from the database.
  */
 @Transactional
-public interface ScrumPokerSettingService {
+public interface GlobalSettingsService {
 
     /**
      * Loads the global Scrum Poker settings from the database.

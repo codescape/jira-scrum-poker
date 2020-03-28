@@ -23,18 +23,18 @@ import static org.junit.Assert.assertThat;
 @Data(ScrumPokerTestDatabaseUpdater.class)
 @Jdbc(Hsql.class)
 @NameConverters
-public class ProjectSettingServiceImplTest {
+public class ProjectSettingsServiceImplTest {
 
     @SuppressWarnings("unused")
     private EntityManager entityManager;
     private TestActiveObjects activeObjects;
 
-    private ProjectSettingService projectSettingService;
+    private ProjectSettingsService projectSettingsService;
 
     @Before
     public void before() {
         activeObjects = new TestActiveObjects(entityManager);
-        projectSettingService = new ProjectSettingServiceImpl(activeObjects);
+        projectSettingsService = new ProjectSettingsServiceImpl(activeObjects);
         deleteAllScrumPokerProjectConfigurations();
     }
 
@@ -45,13 +45,13 @@ public class ProjectSettingServiceImplTest {
 
     @Test
     public void shouldPersistScrumPokerEnabledFlag() {
-        projectSettingService.persistScrumPokerEnabled(1L, true);
+        projectSettingsService.persistScrumPokerEnabled(1L, true);
         assertThat(scrumPokerProject(1L).isScrumPokerEnabled(), is(true));
     }
 
     @Test
     public void scrumPokerEnableFlagReturnsFalseIfProjectHasNoConfiguration() {
-        assertThat(projectSettingService.loadScrumPokerEnabled(2L), is(false));
+        assertThat(projectSettingsService.loadScrumPokerEnabled(2L), is(false));
     }
 
     private ScrumPokerProject scrumPokerProject(Long projectId) {

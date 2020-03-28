@@ -25,7 +25,7 @@ import static org.junit.Assert.assertThat;
 @Data(ScrumPokerTestDatabaseUpdater.class)
 @Jdbc(Hsql.class)
 @NameConverters
-public class ScrumPokerSettingServiceImplTest {
+public class GlobalSettingsServiceImplTest {
 
     private static final String NEW_FIELD_NAME = "MY_NEW_FIELD";
 
@@ -33,60 +33,60 @@ public class ScrumPokerSettingServiceImplTest {
     private EntityManager entityManager;
     private TestActiveObjects activeObjects;
 
-    private ScrumPokerSettingService scrumPokerSettingService;
+    private GlobalSettingsService globalSettingsService;
 
     @Before
     public void before() {
         activeObjects = new TestActiveObjects(entityManager);
-        scrumPokerSettingService = new ScrumPokerSettingServiceImpl(activeObjects);
+        globalSettingsService = new GlobalSettingsServiceImpl(activeObjects);
     }
 
     @Test
     public void persistStoryPointFieldShouldRemoveTheSettingIfNoValueIsGiven() {
-        scrumPokerSettingService.persist(new GlobalSettings());
-        assertThat(scrumPokerSettingService.load().getStoryPointField(), nullValue());
+        globalSettingsService.persist(new GlobalSettings());
+        assertThat(globalSettingsService.load().getStoryPointField(), nullValue());
     }
 
     @Test
     public void persistStoryPointFieldShouldSaveTheSettingIfFieldIsGiven() {
         GlobalSettings globalSettings = new GlobalSettings();
         globalSettings.setStoryPointField(NEW_FIELD_NAME);
-        scrumPokerSettingService.persist(globalSettings);
-        assertThat(scrumPokerSettingService.load().getStoryPointField(), equalTo(NEW_FIELD_NAME));
+        globalSettingsService.persist(globalSettings);
+        assertThat(globalSettingsService.load().getStoryPointField(), equalTo(NEW_FIELD_NAME));
     }
 
     @Test
     public void loadingSessionTimeoutAlwaysReturnsDefaultValueIfNoValueIsSet() {
         ScrumPokerSetting[] scrumPokerSettings = activeObjects.find(ScrumPokerSetting.class);
         Arrays.stream(scrumPokerSettings).forEach(activeObjects::delete);
-        assertThat(scrumPokerSettingService.load().getSessionTimeout(), is(equalTo(SESSION_TIMEOUT_DEFAULT)));
+        assertThat(globalSettingsService.load().getSessionTimeout(), is(equalTo(SESSION_TIMEOUT_DEFAULT)));
     }
 
     @Test
     public void persistSessionTimeoutShouldSaveTheValueIfValueIsGiven() {
         GlobalSettings globalSettings = new GlobalSettings();
         globalSettings.setSessionTimeout(128);
-        scrumPokerSettingService.persist(globalSettings);
-        assertThat(scrumPokerSettingService.load().getSessionTimeout(), is(equalTo(128)));
+        globalSettingsService.persist(globalSettings);
+        assertThat(globalSettingsService.load().getSessionTimeout(), is(equalTo(128)));
     }
 
     @Test
     public void persistDefaultProjectActivationShouldSaveTheSetting() {
         GlobalSettings globalSettings = new GlobalSettings();
         globalSettings.setDefaultProjectActivation(true);
-        scrumPokerSettingService.persist(globalSettings);
-        assertThat(scrumPokerSettingService.load().isDefaultProjectActivation(), is(equalTo(true)));
+        globalSettingsService.persist(globalSettings);
+        assertThat(globalSettingsService.load().isDefaultProjectActivation(), is(equalTo(true)));
 
         globalSettings.setDefaultProjectActivation(false);
-        scrumPokerSettingService.persist(globalSettings);
-        assertThat(scrumPokerSettingService.load().isDefaultProjectActivation(), is(equalTo(false)));
+        globalSettingsService.persist(globalSettings);
+        assertThat(globalSettingsService.load().isDefaultProjectActivation(), is(equalTo(false)));
     }
 
     @Test
     public void loadingDefaultProjectActivationAlwaysReturnsDefaultValueIfNoValueIsSet() {
         ScrumPokerSetting[] scrumPokerSettings = activeObjects.find(ScrumPokerSetting.class);
         Arrays.stream(scrumPokerSettings).forEach(activeObjects::delete);
-        assertThat(scrumPokerSettingService.load().isDefaultProjectActivation(), is(equalTo(DEFAULT_PROJECT_ACTIVATION_DEFAULT)));
+        assertThat(globalSettingsService.load().isDefaultProjectActivation(), is(equalTo(DEFAULT_PROJECT_ACTIVATION_DEFAULT)));
     }
 
 }

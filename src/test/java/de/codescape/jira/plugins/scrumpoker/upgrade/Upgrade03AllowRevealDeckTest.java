@@ -2,7 +2,7 @@ package de.codescape.jira.plugins.scrumpoker.upgrade;
 
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -21,7 +21,7 @@ public class Upgrade03AllowRevealDeckTest {
     public MockitoRule rule = MockitoJUnit.rule();
 
     @Mock
-    private ScrumPokerSettingService scrumPokerSettingService;
+    private GlobalSettingsService globalSettingsService;
 
     @InjectMocks
     private Upgrade03AllowRevealDeck upgrade;
@@ -31,10 +31,10 @@ public class Upgrade03AllowRevealDeckTest {
 
     @Test
     public void shouldPersistAllowRevealDeckInPluginSettings() {
-        when(scrumPokerSettingService.load()).thenReturn(globalSettings);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
         upgrade.doUpgrade();
         verify(globalSettings).setAllowRevealDeck(AllowRevealDeck.EVERYONE);
-        verify(scrumPokerSettingService).persist(globalSettings);
+        verify(globalSettingsService).persist(globalSettings);
     }
 
     @Test

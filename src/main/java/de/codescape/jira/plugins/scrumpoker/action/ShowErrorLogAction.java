@@ -1,7 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerError;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerErrorService;
+import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -22,18 +22,18 @@ public class ShowErrorLogAction extends AbstractScrumPokerAction {
 
     }
 
-    private final ScrumPokerErrorService scrumPokerErrorService;
+    private final ErrorLogService errorLogService;
 
     @Autowired
-    public ShowErrorLogAction(ScrumPokerErrorService scrumPokerErrorService) {
-        this.scrumPokerErrorService = scrumPokerErrorService;
+    public ShowErrorLogAction(ErrorLogService errorLogService) {
+        this.errorLogService = errorLogService;
     }
 
     @Override
     protected String doExecute() {
         String action = getParameter(Parameters.ACTION);
         if (action != null && action.equals("empty")) {
-            scrumPokerErrorService.emptyErrorLog();
+            errorLogService.emptyErrorLog();
         }
 
         return SUCCESS;
@@ -43,7 +43,7 @@ public class ShowErrorLogAction extends AbstractScrumPokerAction {
      * Returns the list of all logged errors.
      */
     public List<ScrumPokerError> getErrorList() {
-        return scrumPokerErrorService.listAll();
+        return errorLogService.listAll();
     }
 
 }

@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component;
 import static de.codescape.jira.plugins.scrumpoker.model.GlobalSettings.*;
 
 /**
- * Implementation of {@link ScrumPokerSettingService} using Active Objects as persistence model.
+ * Implementation of {@link GlobalSettingsService} using Active Objects as persistence model.
  */
 @Component
-public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
+public class GlobalSettingsServiceImpl implements GlobalSettingsService {
 
     private static final String STORY_POINT_FIELD = "storyPointField";
     private static final String SESSION_TIMEOUT = "sessionTimeout";
@@ -31,7 +31,7 @@ public class ScrumPokerSettingServiceImpl implements ScrumPokerSettingService {
     private final ActiveObjects activeObjects;
 
     @Autowired
-    public ScrumPokerSettingServiceImpl(@ComponentImport ActiveObjects activeObjects) {
+    public GlobalSettingsServiceImpl(@ComponentImport ActiveObjects activeObjects) {
         this.activeObjects = activeObjects;
     }
 

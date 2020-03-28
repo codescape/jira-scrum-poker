@@ -6,7 +6,7 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -36,13 +36,13 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
     }
 
     private final CustomFieldManager customFieldManager;
-    private final ScrumPokerSettingService scrumPokerSettingService;
+    private final GlobalSettingsService globalSettingsService;
 
     @Autowired
     public ConfigureScrumPokerAction(@ComponentImport CustomFieldManager customFieldManager,
-                                     ScrumPokerSettingService scrumPokerSettingService) {
+                                     GlobalSettingsService globalSettingsService) {
         this.customFieldManager = customFieldManager;
-        this.scrumPokerSettingService = scrumPokerSettingService;
+        this.globalSettingsService = globalSettingsService;
     }
 
     /**
@@ -56,7 +56,7 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
      * Return the currently set global settings.
      */
     public GlobalSettings getGlobalSettings() {
-        return scrumPokerSettingService.load();
+        return globalSettingsService.load();
     }
 
     /**
@@ -93,9 +93,9 @@ public class ConfigureScrumPokerAction extends AbstractScrumPokerAction {
                 String cardSet = getParameter(Parameters.CARD_SET);
                 globalSettings.setCardSet(cardSet);
 
-                scrumPokerSettingService.persist(globalSettings);
+                globalSettingsService.persist(globalSettings);
             } else if (action.equals("defaults")) {
-                scrumPokerSettingService.persist(new GlobalSettings());
+                globalSettingsService.persist(new GlobalSettings());
             }
         }
         return SUCCESS;

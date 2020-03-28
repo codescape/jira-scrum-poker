@@ -19,35 +19,35 @@ import org.springframework.stereotype.Component;
 @Component
 public class EstimationFieldServiceImpl implements EstimationFieldService {
 
-    private final ScrumPokerSettingService scrumPokerSettingService;
+    private final GlobalSettingsService globalSettingsService;
     private final CustomFieldManager customFieldManager;
     private final JiraAuthenticationContext jiraAuthenticationContext;
     private final PermissionManager permissionManager;
     private final IssueManager issueManager;
-    private final ScrumPokerErrorService scrumPokerErrorService;
+    private final ErrorLogService errorLogService;
 
     @Autowired
     public EstimationFieldServiceImpl(@ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
                                       @ComponentImport IssueManager issueManager,
                                       @ComponentImport CustomFieldManager customFieldManager,
                                       @ComponentImport PermissionManager permissionManager,
-                                      ScrumPokerSettingService scrumPokerSettingService,
-                                      ScrumPokerErrorService scrumPokerErrorService) {
+                                      GlobalSettingsService globalSettingsService,
+                                      ErrorLogService errorLogService) {
         this.jiraAuthenticationContext = jiraAuthenticationContext;
         this.issueManager = issueManager;
         this.customFieldManager = customFieldManager;
         this.permissionManager = permissionManager;
-        this.scrumPokerSettingService = scrumPokerSettingService;
-        this.scrumPokerErrorService = scrumPokerErrorService;
+        this.globalSettingsService = globalSettingsService;
+        this.errorLogService = errorLogService;
     }
 
     @Override
     public boolean save(String issueKey, Integer newValue) {
         ApplicationUser applicationUser = jiraAuthenticationContext.getLoggedInUser();
         MutableIssue issue = issueManager.getIssueByCurrentKey(issueKey);
-        if (scrumPokerSettingService.load().isCheckPermissionToSaveEstimate() &&
+        if (globalSettingsService.load().isCheckPermissionToSaveEstimate() &&
             !permissionManager.hasPermission(ProjectPermissions.EDIT_ISSUES, issue, applicationUser)) {
-            scrumPokerErrorService.logError("User " + applicationUser.getUsername() +
+            errorLogService.logError("User " + applicationUser.getUsername() +
                 " is missing permissions to save estimation for issue " + issueKey + ".", null);
             return false;
         }
@@ -56,7 +56,7 @@ public class EstimationFieldServiceImpl implements EstimationFieldService {
             issueManager.updateIssue(applicationUser, issue, UpdateIssueRequest.builder().build());
             return true;
         } catch (RuntimeException e) {
-            scrumPokerErrorService.logError("Unable to save estimation " + newValue + " for issue "
+            errorLogService.logError("Unable to save estimation " + newValue + " for issue "
                 + issueKey + ". See stacktrace for further details.", e);
             return false;
         }
@@ -64,7 +64,7 @@ public class EstimationFieldServiceImpl implements EstimationFieldService {
 
     @Override
     public CustomField findStoryPointField() {
-        return customFieldManager.getCustomFieldObject(scrumPokerSettingService.load().getStoryPointField());
+        return customFieldManager.getCustomFieldObject(globalSettingsService.load().getStoryPointField());
     }
 
 }

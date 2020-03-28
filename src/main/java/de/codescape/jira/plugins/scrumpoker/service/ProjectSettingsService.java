@@ -9,7 +9,7 @@ import java.util.List;
  * Service to persist and retrieve project related configuration from the database.
  */
 @Transactional
-public interface ProjectSettingService {
+public interface ProjectSettingsService {
 
     /**
      * Returns whether a specific project has Scrum Poker explicitly enabled.

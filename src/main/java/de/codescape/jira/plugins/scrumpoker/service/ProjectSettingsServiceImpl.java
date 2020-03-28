@@ -13,15 +13,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Implementation of {@link ProjectSettingService} using Active Objects as persistence model.
+ * Implementation of {@link ProjectSettingsService} using Active Objects as persistence model.
  */
 @Component
-public class ProjectSettingServiceImpl implements ProjectSettingService {
+public class ProjectSettingsServiceImpl implements ProjectSettingsService {
 
     private final ActiveObjects activeObjects;
 
     @Autowired
-    public ProjectSettingServiceImpl(@ComponentImport ActiveObjects activeObjects) {
+    public ProjectSettingsServiceImpl(@ComponentImport ActiveObjects activeObjects) {
         this.activeObjects = activeObjects;
     }
 

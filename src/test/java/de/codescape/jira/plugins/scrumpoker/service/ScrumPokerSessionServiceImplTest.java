@@ -52,7 +52,7 @@ public class ScrumPokerSessionServiceImplTest {
         MutableIssue issue = mock(MutableIssue.class);
         when(issueManager.getIssueObject(ArgumentMatchers.startsWith("ISSUE-"))).thenReturn(issue);
 
-        ScrumPokerSettingService scrumPokerSettingsService = mock(ScrumPokerSettingService.class);
+        GlobalSettingsService scrumPokerSettingsService = mock(GlobalSettingsService.class);
         GlobalSettings globalSettings = mock(GlobalSettings.class);
         when(scrumPokerSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getSessionTimeout()).thenReturn(EXPECTED_SESSION_TIMEOUT);
@@ -60,10 +60,10 @@ public class ScrumPokerSessionServiceImplTest {
         scrumPokerForIssueCondition = mock(ScrumPokerForIssueCondition.class);
         when(scrumPokerForIssueCondition.isEstimable(ArgumentMatchers.any(Issue.class))).thenReturn(true);
 
-        ScrumPokerErrorService scrumPokerErrorService = mock(ScrumPokerErrorService.class);
+        ErrorLogService errorLogService = mock(ErrorLogService.class);
 
         scrumPokerSessionService = new ScrumPokerSessionServiceImpl(activeObjects, issueManager,
-            scrumPokerSettingsService, scrumPokerForIssueCondition, scrumPokerErrorService);
+            scrumPokerSettingsService, scrumPokerForIssueCondition, errorLogService);
     }
 
     @Test

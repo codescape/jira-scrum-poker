@@ -3,7 +3,7 @@ package de.codescape.jira.plugins.scrumpoker.condition;
 import com.atlassian.jira.plugin.webfragment.conditions.AbstractWebCondition;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.user.ApplicationUser;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSettingService;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,16 +14,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScrumPokerOnBoardCondition extends AbstractWebCondition {
 
-    private final ScrumPokerSettingService scrumPokerSettingService;
+    private final GlobalSettingsService globalSettingsService;
 
     @Autowired
-    public ScrumPokerOnBoardCondition(ScrumPokerSettingService scrumPokerSettingService) {
-        this.scrumPokerSettingService = scrumPokerSettingService;
+    public ScrumPokerOnBoardCondition(GlobalSettingsService globalSettingsService) {
+        this.globalSettingsService = globalSettingsService;
     }
 
     @Override
     public boolean shouldDisplay(ApplicationUser applicationUser, JiraHelper jiraHelper) {
-        return scrumPokerSettingService.load().isDisplayDropdownOnBoards();
+        return globalSettingsService.load().isDisplayDropdownOnBoards();
     }
 
 }
