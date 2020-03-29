@@ -23,7 +23,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.stream;
-import static org.apache.commons.lang3.math.NumberUtils.isNumber;
 
 /**
  * Service that allows to map a {@link ScrumPokerSession} to a {@link SessionEntity}. This service creates a model that
@@ -142,7 +141,7 @@ public class SessionEntityMapper {
         return scrumPokerSession.isVisible() &&
             votes.length > 1 &&
             getMaximumVote(votes).equals(getMinimumVote(votes)) &&
-            stream(votes).allMatch(scrumPokerVote -> isNumber(scrumPokerVote.getVote()));
+            stream(votes).allMatch(scrumPokerVote -> isAssignableToEstimationField(scrumPokerVote.getVote()));
     }
 
     /**
@@ -197,7 +196,7 @@ public class SessionEntityMapper {
             return false;
         if (scrumPokerSession.getVotes().length == 1)
             return false;
-        if (!isNumber(vote))
+        if (!isAssignableToEstimationField(vote))
             return true;
         Integer current = Integer.valueOf(vote);
         return current.equals(getMaximumVote(scrumPokerSession.getVotes()))
@@ -222,14 +221,16 @@ public class SessionEntityMapper {
      * Creates a bounded vote from the distribution of votes and the given card.
      */
     private BoundedVoteEntity createBoundedVote(String value, Map<String, Long> distribution) {
-        return new BoundedVoteEntity(value, distribution.getOrDefault(value, 0L), isNumber(value));
+        return new BoundedVoteEntity(value, distribution.getOrDefault(value, 0L),
+            isAssignableToEstimationField(value));
     }
 
     /**
-     * Verifies that the given bounded vote is numeric and inside the range of the minimum and maximum of all votes.
+     * Verifies that the given bounded vote is assignable to the estimation field and inside the range of the minimum
+     * and maximum of all votes.
      */
     private boolean numericValueWithVotesInBoundary(BoundedVoteEntity boundedVote, ScrumPokerVote[] votes) {
-        return isNumber(boundedVote.getValue()) && !numericValues(votes).isEmpty() &&
+        return isAssignableToEstimationField(boundedVote.getValue()) && !numericValues(votes).isEmpty() &&
             Integer.parseInt(boundedVote.getValue()) >= getMinimumVote(votes) &&
             Integer.parseInt(boundedVote.getValue()) <= getMaximumVote(votes);
     }
@@ -238,7 +239,7 @@ public class SessionEntityMapper {
      * Verifies that the given bounded vote is non-numeric and has minimum one vote.
      */
     private boolean nonNumericValueWithVotes(BoundedVoteEntity boundedVote) {
-        return !isNumber(boundedVote.getValue()) && boundedVote.getCount() > 0;
+        return !isAssignableToEstimationField(boundedVote.getValue()) && boundedVote.getCount() > 0;
     }
 
     /**
@@ -260,7 +261,7 @@ public class SessionEntityMapper {
      */
     private List<Integer> numericValues(ScrumPokerVote[] votes) {
         return stream(votes).map(ScrumPokerVote::getVote)
-            .filter(NumberUtils::isNumber)
+            .filter(this::isAssignableToEstimationField)
             .map(Integer::valueOf)
             .collect(Collectors.toList());
     }
@@ -274,6 +275,13 @@ public class SessionEntityMapper {
         }
         ApplicationUser user = userManager.getUserByKey(key);
         return user != null ? user.getDisplayName() : key;
+    }
+
+    /**
+     * Returns whether the given vote  can be assigned to the estimation field.
+     */
+    private boolean isAssignableToEstimationField(String vote) {
+        return NumberUtils.isNumber(vote);
     }
 
 }

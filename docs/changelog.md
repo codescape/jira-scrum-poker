@@ -19,6 +19,7 @@ Click on the version in the following list to see all changes since the previous
 * refactor: rename actions for active sessions, error log and current session
 * refactor: rename and shorten service for card sets
 * feat: add health check to find problems with configured card set
+* refactor: centralize identification for assignable votes
 
 ### [4.10.0] - 2020-03-28
 
