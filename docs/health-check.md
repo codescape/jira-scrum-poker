@@ -33,6 +33,7 @@ The following checks are implemented and performed when started:
   * Check that an estimation field is configured
   * Check that the configured field exists in your Jira instance
   * Check that Scrum Poker is either globally enabled or has projects explicitly enabled
+  * Check that the configured card set has no obvious problems
 
 * Error Log Check
   * Check that the error log is empty
