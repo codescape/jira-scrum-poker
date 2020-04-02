@@ -21,6 +21,7 @@ Click on the version in the following list to see all changes since the previous
 * feat: add health check to find problems with configured card set
 * refactor: centralize identification for assignable votes
 * fix: correct value for coffee card in German translation for field description
+* docs: improve styling for main navigation in online documentation
 
 ### [4.10.0] - 2020-03-28
 
