@@ -20,6 +20,7 @@ Click on the version in the following list to see all changes since the previous
 * refactor: rename and shorten service for card sets
 * feat: add health check to find problems with configured card set
 * refactor: centralize identification for assignable votes
+* fix: correct value for coffee card in German translation for field description
 
 ### [4.10.0] - 2020-03-28
 
