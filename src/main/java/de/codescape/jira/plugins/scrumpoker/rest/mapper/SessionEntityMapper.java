@@ -278,7 +278,7 @@ public class SessionEntityMapper {
     }
 
     /**
-     * Returns whether the given vote  can be assigned to the estimation field.
+     * Returns whether the given vote can be assigned to the estimation field.
      */
     private boolean isAssignableToEstimationField(String vote) {
         return NumberUtils.isNumber(vote);
