@@ -243,7 +243,7 @@
                 <version>${amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <!-- make AMPS faster -->
+                    <!-- AMPS is faster with those settings -->
                     <enableDevToolbox>false</enableDevToolbox>
                     <enablePde>false</enablePde>
                     <skipRestDocGeneration>true</skipRestDocGeneration>
@@ -251,6 +251,7 @@
                     <skipManifestValidation>true</skipManifestValidation>
                     <extractDependencies>false</extractDependencies>
 
+                    <!-- QuickReload plugin allows reloading the plugin during development -->
                     <!-- see https://bitbucket.org/atlassianlabs/quickreload -->
                     <enableQuickReload>true</enableQuickReload>
                     <pluginArtifacts>
@@ -261,6 +262,7 @@
                         </pluginArtifact>
                     </pluginArtifacts>
 
+                    <!-- OSGi instructions for Spring Scanner -->
                     <!-- see https://bitbucket.org/atlassian/atlassian-spring-scanner -->
                     <instructions>
                         <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
@@ -276,7 +278,7 @@
                         <Spring-Context>*</Spring-Context>
                     </instructions>
 
-                    <!-- jira-latest is used by default and can be overridden with the parameter testGroup <name> -->
+                    <!-- Product configurations -->
                     <product>jira-latest</product>
                     <products>
                         <product>
@@ -316,6 +318,9 @@
                             </applications>
                         </product>
                     </products>
+
+                    <!-- Test environments using above product configurations -->
+                    <!-- jira-latest is used by default and can be overridden with the parameter testGroup <name> -->
                     <testGroups>
                         <testGroup>
                             <id>jira-latest</id>

@@ -24,6 +24,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: improve styling for main navigation in online documentation
 * docs: update compatibility matrix with database hints
 * docs: improve internal developer documentation
+* docs: add developer documentation for several elements in POM
 
 ### [4.10.0] - 2020-03-28
 
