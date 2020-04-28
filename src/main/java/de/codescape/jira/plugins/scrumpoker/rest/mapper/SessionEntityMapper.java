@@ -159,10 +159,11 @@ public class SessionEntityMapper {
      * Returns the value of the card the current user has selected or null if the user has not voted.
      */
     private String cardForUser(ScrumPokerVote[] votes, String userKey) {
-        Optional<ScrumPokerVote> match = stream(votes)
+        return stream(votes)
             .filter(vote -> vote.getUserKey().equals(userKey))
-            .findFirst();
-        return match.map(ScrumPokerVote::getVote).orElse(null);
+            .findFirst()
+            .map(ScrumPokerVote::getVote)
+            .orElse(null);
     }
 
     /**
@@ -173,33 +174,40 @@ public class SessionEntityMapper {
         return stream(scrumPokerSession.getVotes())
             .map(vote -> new VoteEntity(
                 displayName(vote.getUserKey()),
-                scrumPokerSession.isVisible() ? vote.getVote() : QUESTION_MARK.getValue(),
-                needToTalk(vote.getVote(), scrumPokerSession),
-                needABreak(vote.getVote(), scrumPokerSession)))
+                displayValue(vote, scrumPokerSession),
+                needToTalk(vote, scrumPokerSession),
+                needABreak(vote, scrumPokerSession)))
             .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns the display value of a vote. As long as the cards are not revealed it always displays question marks.
+     */
+    private String displayValue(ScrumPokerVote vote, ScrumPokerSession scrumPokerSession) {
+        return scrumPokerSession.isVisible() ? vote.getVote() : QUESTION_MARK.getValue();
     }
 
     /**
      * Returns whether the current vote needs a break by having selected the coffee card.
      */
-    private boolean needABreak(String vote, ScrumPokerSession scrumPokerSession) {
-        return scrumPokerSession.isVisible() && COFFEE_BREAK.getValue().equals(vote);
+    private boolean needABreak(ScrumPokerVote vote, ScrumPokerSession scrumPokerSession) {
+        return scrumPokerSession.isVisible() && COFFEE_BREAK.getValue().equals(vote.getVote());
     }
 
     /**
      * Returns whether the current vote needs to talk or not depending on the status of the Scrum Poker session and the
      * other votes provided.
      */
-    private boolean needToTalk(String vote, ScrumPokerSession scrumPokerSession) {
+    private boolean needToTalk(ScrumPokerVote vote, ScrumPokerSession scrumPokerSession) {
         if (!scrumPokerSession.isVisible())
             return false;
         if (agreementReached(scrumPokerSession))
             return false;
         if (scrumPokerSession.getVotes().length == 1)
             return false;
-        if (!isAssignableToEstimationField(vote))
+        if (!isAssignableToEstimationField(vote.getVote()))
             return true;
-        Integer current = Integer.valueOf(vote);
+        Integer current = Integer.valueOf(vote.getVote());
         return current.equals(getMaximumVote(scrumPokerSession.getVotes()))
             || current.equals(getMinimumVote(scrumPokerSession.getVotes()));
     }

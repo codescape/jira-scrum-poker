@@ -27,6 +27,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: add developer documentation for several elements in POM
 * refactor: introduce the concept of a card to allow further logic
 * refactor: optimize imports
+* refactor: improve readability of mapper for REST representation of a session
 
 ### [4.10.0] - 2020-03-28
 
