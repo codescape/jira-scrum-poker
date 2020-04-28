@@ -11,7 +11,6 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
-import de.codescape.jira.plugins.scrumpoker.model.SpecialCards;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.*;
 import de.codescape.jira.plugins.scrumpoker.service.CardSetService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
@@ -22,6 +21,8 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static de.codescape.jira.plugins.scrumpoker.model.Card.COFFEE_BREAK;
+import static de.codescape.jira.plugins.scrumpoker.model.Card.QUESTION_MARK;
 import static java.util.Arrays.stream;
 
 /**
@@ -150,7 +151,7 @@ public class SessionEntityMapper {
     private List<CardEntity> cards(ScrumPokerSession scrumPokerSession, String userKey) {
         String chosenValue = cardForUser(scrumPokerSession.getVotes(), userKey);
         return cardSetService.getCardSet(scrumPokerSession).stream()
-            .map(card -> new CardEntity(card, card.equals(chosenValue)))
+            .map(card -> new CardEntity(card.getValue(), card.getValue().equals(chosenValue)))
             .collect(Collectors.toList());
     }
 
@@ -172,7 +173,7 @@ public class SessionEntityMapper {
         return stream(scrumPokerSession.getVotes())
             .map(vote -> new VoteEntity(
                 displayName(vote.getUserKey()),
-                scrumPokerSession.isVisible() ? vote.getVote() : SpecialCards.QUESTION_MARK,
+                scrumPokerSession.isVisible() ? vote.getVote() : QUESTION_MARK.getValue(),
                 needToTalk(vote.getVote(), scrumPokerSession),
                 needABreak(vote.getVote(), scrumPokerSession)))
             .collect(Collectors.toList());
@@ -182,7 +183,7 @@ public class SessionEntityMapper {
      * Returns whether the current vote needs a break by having selected the coffee card.
      */
     private boolean needABreak(String vote, ScrumPokerSession scrumPokerSession) {
-        return scrumPokerSession.isVisible() && SpecialCards.COFFEE_CARD.equals(vote);
+        return scrumPokerSession.isVisible() && COFFEE_BREAK.getValue().equals(vote);
     }
 
     /**
@@ -211,7 +212,7 @@ public class SessionEntityMapper {
         Map<String, Long> voteDistribution = Arrays.stream(votes)
             .collect(Collectors.groupingBy(ScrumPokerVote::getVote, Collectors.counting()));
         return cardSetService.getCardSet(scrumPokerSession).stream()
-            .map(card -> createBoundedVote(card, voteDistribution))
+            .map(card -> createBoundedVote(card.getValue(), voteDistribution))
             .filter(boundedVoteEntity -> nonNumericValueWithVotes(boundedVoteEntity) ||
                 numericValueWithVotesInBoundary(boundedVoteEntity, votes))
             .collect(Collectors.toList());

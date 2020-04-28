@@ -4,7 +4,7 @@ import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.upm.api.license.PluginLicenseManager;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
-import de.codescape.jira.plugins.scrumpoker.model.SpecialCards;
+import de.codescape.jira.plugins.scrumpoker.model.Card;
 import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -157,8 +157,8 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
         }
 
         // check that a card set is defined that can be parsed into different cards
-        List<String> cardSet = cardSetService.getCardSet().stream()
-            .filter(s -> !s.equals(SpecialCards.COFFEE_CARD) && !s.equals(SpecialCards.QUESTION_MARK))
+        List<Card> cardSet = cardSetService.getCardSet().stream()
+            .filter(Card::isAssignable)
             .collect(Collectors.toList());
         if (cardSet.isEmpty() || cardSet.size() == 1) {
             results.add(Configuration.CARD_SET_WITHOUT_OPTIONS);

@@ -7,9 +7,6 @@ import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static de.codescape.jira.plugins.scrumpoker.model.SpecialCards.COFFEE_CARD;
-import static de.codescape.jira.plugins.scrumpoker.model.SpecialCards.QUESTION_MARK;
-
 /**
  * Create the simplified Fibonacci card set as the default card set.
  *
@@ -39,12 +36,8 @@ public class Upgrade09CreateDefaultCardSet extends AbstractUpgradeTask {
     @Override
     protected void performUpgrade() {
         GlobalSettings globalSettings = globalSettingsService.load();
-        globalSettings.setCardSet(simplifiedFibonacciCardSet());
+        globalSettings.setCardSet(GlobalSettings.CARD_SET_DEFAULT);
         globalSettingsService.persist(globalSettings);
-    }
-
-    private String simplifiedFibonacciCardSet() {
-        return QUESTION_MARK + ", " + COFFEE_CARD + ", 0, 1, 2, 3, 5, 8, 13, 20, 40, 100";
     }
 
 }

@@ -3,7 +3,6 @@ package de.codescape.jira.plugins.scrumpoker.upgrade;
 import com.atlassian.activeobjects.test.TestActiveObjects;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerTestDatabaseUpdater;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
-import de.codescape.jira.plugins.scrumpoker.model.SpecialCards;
 import net.java.ao.EntityManager;
 import net.java.ao.Query;
 import net.java.ao.test.converters.NameConverters;
@@ -15,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static de.codescape.jira.plugins.scrumpoker.model.Card.QUESTION_MARK;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
@@ -66,7 +66,7 @@ public class Upgrade04QuestionMarkVotesTest {
 
     private ScrumPokerVote[] votesWithQuestionString() {
         return activeObjects.find(ScrumPokerVote.class,
-            Query.select().where("VOTE = ?", SpecialCards.QUESTION_MARK));
+            Query.select().where("VOTE = ?", QUESTION_MARK.getValue()));
     }
 
     private ScrumPokerVote[] votesWithQuestionMark() {

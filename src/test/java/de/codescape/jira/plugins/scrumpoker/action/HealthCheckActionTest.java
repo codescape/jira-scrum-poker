@@ -10,8 +10,8 @@ import com.atlassian.upm.api.license.entity.PluginLicense;
 import com.atlassian.upm.api.util.Option;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerError;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
+import de.codescape.jira.plugins.scrumpoker.model.Card;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
-import de.codescape.jira.plugins.scrumpoker.model.SpecialCards;
 import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.junit.Rule;
 import org.junit.Test;
@@ -195,7 +195,7 @@ public class HealthCheckActionTest {
         when(globalSettings.getStoryPointField()).thenReturn("something");
         when(estimationFieldService.findStoryPointField()).thenReturn(estimationField);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
-        when(cardSetService.getCardSet()).thenReturn(Collections.singletonList("1"));
+        when(cardSetService.getCardSet()).thenReturn(Collections.singletonList(new Card("1", true)));
         assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.CARD_SET_WITHOUT_OPTIONS));
     }
 
@@ -215,10 +215,12 @@ public class HealthCheckActionTest {
         when(globalSettings.getStoryPointField()).thenReturn("something");
         when(estimationFieldService.findStoryPointField()).thenReturn(estimationField);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
-        when(cardSetService.getCardSet()).thenReturn(Arrays.asList(SpecialCards.COFFEE_CARD, SpecialCards.QUESTION_MARK, "1"));
+        when(cardSetService.getCardSet()).thenReturn(Arrays.asList(
+            Card.COFFEE_BREAK,
+            Card.QUESTION_MARK,
+            new Card("1", true)));
         assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.CARD_SET_WITHOUT_OPTIONS));
     }
-
 
     @Test
     public void shouldSignalNoConfigurationErrorsIfNoneAreFound() {
@@ -226,7 +228,11 @@ public class HealthCheckActionTest {
         when(globalSettings.getStoryPointField()).thenReturn("something");
         when(estimationFieldService.findStoryPointField()).thenReturn(estimationField);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
-        when(cardSetService.getCardSet()).thenReturn(Arrays.asList("1", "2", "3", "5"));
+        when(cardSetService.getCardSet()).thenReturn(Arrays.asList(
+            new Card("1", true),
+            new Card("2", true),
+            new Card("3", true),
+            new Card("5", true)));
         assertThat(healthCheckAction.getConfigurationResults(), is(empty()));
     }
 

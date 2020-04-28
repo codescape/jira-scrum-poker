@@ -11,6 +11,7 @@ import com.atlassian.jira.user.util.UserManager;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
+import de.codescape.jira.plugins.scrumpoker.model.Card;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.VoteEntity;
@@ -28,8 +29,7 @@ import org.mockito.junit.MockitoRule;
 import java.util.Arrays;
 import java.util.Date;
 
-import static de.codescape.jira.plugins.scrumpoker.model.SpecialCards.COFFEE_CARD;
-import static de.codescape.jira.plugins.scrumpoker.model.SpecialCards.QUESTION_MARK;
+import static de.codescape.jira.plugins.scrumpoker.model.Card.COFFEE_BREAK;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -139,7 +139,19 @@ public class SessionEntityMapperTest {
             scrumPokerVote("13")};
         ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, true);
         when(cardSetService.getCardSet(ArgumentMatchers.any(ScrumPokerSession.class))).thenReturn(
-            Arrays.asList(QUESTION_MARK, COFFEE_CARD, "0", "1", "2", "3", "5", "8", "13", "20", "40", "100"));
+            Arrays.asList(
+                Card.QUESTION_MARK,
+                COFFEE_BREAK,
+                new Card("0", true),
+                new Card("1", true),
+                new Card("2", true),
+                new Card("3", true),
+                new Card("5", true),
+                new Card("8", true),
+                new Card("13", true),
+                new Card("20", true),
+                new Card("40", true),
+                new Card("100", true)));
 
         SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession, CURRENT_USER);
         assertThat(sessionEntity.getBoundedVotes().size(), is(equalTo(3)));
@@ -216,7 +228,7 @@ public class SessionEntityMapperTest {
 
     @Test
     public void shouldSignalBreakIsNeededIfUserChoosesTheCoffeeCardAndDeckIsVisible() {
-        ScrumPokerVote[] scrumPokerVotes = {scrumPokerVote(COFFEE_CARD)};
+        ScrumPokerVote[] scrumPokerVotes = {scrumPokerVote(COFFEE_BREAK.getValue())};
         ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, true);
         SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession, CURRENT_USER);
         assertThat(sessionEntity.getVotes().stream().anyMatch(VoteEntity::isNeedABreak), is(true));
@@ -224,7 +236,7 @@ public class SessionEntityMapperTest {
 
     @Test
     public void shouldNotSignalBreakIsNeededIfUserChoosesTheCoffeeCardButDeckIsNotVisible() {
-        ScrumPokerVote[] scrumPokerVotes = {scrumPokerVote(COFFEE_CARD)};
+        ScrumPokerVote[] scrumPokerVotes = {scrumPokerVote(COFFEE_BREAK.getValue())};
         ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, false);
         SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession, CURRENT_USER);
         assertThat(sessionEntity.getVotes().stream().anyMatch(VoteEntity::isNeedABreak), is(false));

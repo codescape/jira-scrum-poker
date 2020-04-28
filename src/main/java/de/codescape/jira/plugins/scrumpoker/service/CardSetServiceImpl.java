@@ -1,6 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.service;
 
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
+import de.codescape.jira.plugins.scrumpoker.model.Card;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,20 +23,34 @@ public class CardSetServiceImpl implements CardSetService {
     }
 
     @Override
-    public List<String> getCardSet() {
+    public List<Card> getCardSet() {
         return splitToCards(globalSettingsService.load().getCardSet());
     }
 
     @Override
-    public List<String> getCardSet(ScrumPokerSession scrumPokerSession) {
+    public List<Card> getCardSet(ScrumPokerSession scrumPokerSession) {
         return scrumPokerSession.getCardSet() != null ? splitToCards(scrumPokerSession.getCardSet()) : getCardSet();
     }
 
-    private List<String> splitToCards(String cardSet) {
+    private List<Card> splitToCards(String cardSet) {
         return Arrays.stream(cardSet.split(","))
             .map(String::trim)
-            .filter(s -> !s.isEmpty())
+            .filter(cardValue -> !cardValue.isEmpty())
+            .map(cardValue -> new Card(cardValue, isAssignable(cardValue)))
             .collect(Collectors.toList());
+    }
+
+    private boolean isAssignable(String cardValue) {
+        return valueIsNotASpecialCard(cardValue) && valueIsAssignableToEstimationField(cardValue);
+    }
+
+    private boolean valueIsAssignableToEstimationField(String cardValue) {
+        // TODO can the cardValue be persisted into the configured estimation field?
+        return true;
+    }
+
+    private boolean valueIsNotASpecialCard(String cardValue) {
+        return !(Card.COFFEE_BREAK.getValue().equals(cardValue) || Card.QUESTION_MARK.getValue().equals(cardValue));
     }
 
 }

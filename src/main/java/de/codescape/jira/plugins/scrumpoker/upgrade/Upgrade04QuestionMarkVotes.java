@@ -5,12 +5,13 @@ import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.upgrade.PluginUpgradeTask;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
-import de.codescape.jira.plugins.scrumpoker.model.SpecialCards;
 import net.java.ao.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+
+import static de.codescape.jira.plugins.scrumpoker.model.Card.QUESTION_MARK;
 
 /**
  * Migrate persisted votes that contain a question mark and save with the new value 'question'.
@@ -45,7 +46,7 @@ public class Upgrade04QuestionMarkVotes extends AbstractUpgradeTask {
         ScrumPokerVote[] scrumPokerVotes = activeObjects.find(ScrumPokerVote.class,
             Query.select().where("VOTE = ?", LEGACY_QUESTION_MARK));
         Arrays.stream(scrumPokerVotes).forEach(vote -> {
-            vote.setVote(SpecialCards.QUESTION_MARK);
+            vote.setVote(QUESTION_MARK.getValue());
             vote.save();
         });
     }
