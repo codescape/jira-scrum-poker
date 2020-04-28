@@ -26,6 +26,7 @@ Click on the version in the following list to see all changes since the previous
 * docs: improve internal developer documentation
 * docs: add developer documentation for several elements in POM
 * refactor: introduce the concept of a card to allow further logic
+* refactor: optimize imports
 
 ### [4.10.0] - 2020-03-28
 
