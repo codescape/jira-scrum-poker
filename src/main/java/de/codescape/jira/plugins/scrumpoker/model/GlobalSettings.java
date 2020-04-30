@@ -21,7 +21,7 @@ public class GlobalSettings {
 
     // settings
 
-    private String storyPointField;
+    private String estimateField;
     private Integer sessionTimeout = SESSION_TIMEOUT_DEFAULT;
     private AllowRevealDeck allowRevealDeck = ALLOW_REVEAL_DECK_DEFAULT;
     private boolean defaultProjectActivation = DEFAULT_PROJECT_ACTIVATION_DEFAULT;
@@ -31,17 +31,17 @@ public class GlobalSettings {
     private String cardSet = CARD_SET_DEFAULT;
 
     /**
-     * Set the story point field.
+     * Set the estimate field.
      */
-    public void setStoryPointField(String storyPointField) {
-        this.storyPointField = storyPointField;
+    public void setEstimateField(String estimateField) {
+        this.estimateField = estimateField;
     }
 
     /**
-     * Return the story point field.
+     * Return the estimate field.
      */
-    public String getStoryPointField() {
-        return storyPointField;
+    public String getEstimateField() {
+        return estimateField;
     }
 
     /**

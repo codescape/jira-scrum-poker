@@ -48,10 +48,10 @@ public class GlobalSettingsActionTest {
     }
 
     @Test
-    public void returnTheStoryPointFieldConfigured() {
+    public void returnTheEstimateFieldConfigured() {
         when(scrumPokerSettingsService.load()).thenReturn(globalSettings);
-        when(globalSettings.getStoryPointField()).thenReturn(CUSTOM_FIELD_ID);
-        assertThat(globalSettingsAction.getGlobalSettings().getStoryPointField(), is(equalTo(CUSTOM_FIELD_ID)));
+        when(globalSettings.getEstimateField()).thenReturn(CUSTOM_FIELD_ID);
+        assertThat(globalSettingsAction.getGlobalSettings().getEstimateField(), is(equalTo(CUSTOM_FIELD_ID)));
     }
 
 }

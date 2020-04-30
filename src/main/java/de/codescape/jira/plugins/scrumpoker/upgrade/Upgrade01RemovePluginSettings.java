@@ -52,7 +52,7 @@ public class Upgrade01RemovePluginSettings extends AbstractUpgradeTask {
         if (storyPointField != null) {
             pluginSettings.remove(STORY_POINT_PLUGIN_SETTINGS);
             GlobalSettings globalSettings = globalSettingsService.load();
-            globalSettings.setStoryPointField(storyPointField);
+            globalSettings.setEstimateField(storyPointField);
             globalSettingsService.persist(globalSettings);
         }
         // Grab the Session Timeout and remove the config if exists

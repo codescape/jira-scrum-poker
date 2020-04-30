@@ -42,17 +42,17 @@ public class GlobalSettingsServiceImplTest {
     }
 
     @Test
-    public void persistStoryPointFieldShouldRemoveTheSettingIfNoValueIsGiven() {
+    public void persistEstimateFieldShouldRemoveTheSettingIfNoValueIsGiven() {
         globalSettingsService.persist(new GlobalSettings());
-        assertThat(globalSettingsService.load().getStoryPointField(), nullValue());
+        assertThat(globalSettingsService.load().getEstimateField(), nullValue());
     }
 
     @Test
-    public void persistStoryPointFieldShouldSaveTheSettingIfFieldIsGiven() {
+    public void persistEstimateFieldShouldSaveTheSettingIfFieldIsGiven() {
         GlobalSettings globalSettings = new GlobalSettings();
-        globalSettings.setStoryPointField(NEW_FIELD_NAME);
+        globalSettings.setEstimateField(NEW_FIELD_NAME);
         globalSettingsService.persist(globalSettings);
-        assertThat(globalSettingsService.load().getStoryPointField(), equalTo(NEW_FIELD_NAME));
+        assertThat(globalSettingsService.load().getEstimateField(), equalTo(NEW_FIELD_NAME));
     }
 
     @Test

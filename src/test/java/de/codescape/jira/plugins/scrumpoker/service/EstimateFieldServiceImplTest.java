@@ -102,7 +102,7 @@ public class EstimateFieldServiceImplTest {
     }
 
     private void expectCustomFieldFound() {
-        when(globalSettings.getStoryPointField()).thenReturn(CUSTOM_FIELD_ID);
+        when(globalSettings.getEstimateField()).thenReturn(CUSTOM_FIELD_ID);
         when(customFieldManager.getCustomFieldObject(CUSTOM_FIELD_ID)).thenReturn(customField);
     }
 

@@ -61,7 +61,7 @@ public class Upgrade01RemovePluginSettingsTest {
         when(pluginSettings.get(SCRUM_POKER_PLUGIN_KEY + ".storyPointField")).thenReturn("customfield-10006");
         when(globalSettingsService.load()).thenReturn(globalSettings);
         upgrade.doUpgrade();
-        verify(globalSettings).setStoryPointField("customfield-10006");
+        verify(globalSettings).setEstimateField("customfield-10006");
         verify(globalSettingsService).persist(globalSettings);
     }
 

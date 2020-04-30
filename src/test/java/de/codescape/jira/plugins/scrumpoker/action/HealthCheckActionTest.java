@@ -157,7 +157,7 @@ public class HealthCheckActionTest {
     @Test
     public void shouldSignalUnsetEstimationFieldIfEstimationFieldIsNotSet() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
-        when(globalSettings.getStoryPointField()).thenReturn(null);
+        when(globalSettings.getEstimateField()).thenReturn(null);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
         assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATION_FIELD_NOT_SET));
     }
@@ -165,7 +165,7 @@ public class HealthCheckActionTest {
     @Test
     public void shouldSignalMissingEstimationFieldIfEstimationFieldIsSetButDoesNotExist() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
-        when(globalSettings.getStoryPointField()).thenReturn("something");
+        when(globalSettings.getEstimateField()).thenReturn("something");
         when(estimateFieldService.findEstimateField()).thenReturn(null);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
         assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATION_FIELD_NOT_FOUND));
@@ -174,7 +174,7 @@ public class HealthCheckActionTest {
     @Test
     public void shouldSignalNoProjectEnabledWhenNeitherGloballyEnabledNorHavingAProjectExplicitlyEnabled() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
-        when(globalSettings.getStoryPointField()).thenReturn("something");
+        when(globalSettings.getEstimateField()).thenReturn("something");
         when(estimateFieldService.findEstimateField()).thenReturn(null);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(false);
         expectNoProjectExplicitlyEnabled();
@@ -192,7 +192,7 @@ public class HealthCheckActionTest {
     @Test
     public void shouldSignalCardSetWithoutOptionsIfCardSetHasOnlyOneOption() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
-        when(globalSettings.getStoryPointField()).thenReturn("something");
+        when(globalSettings.getEstimateField()).thenReturn("something");
         when(estimateFieldService.findEstimateField()).thenReturn(estimationField);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
         when(cardSetService.getCardSet()).thenReturn(Collections.singletonList(new Card("1", true)));
@@ -202,7 +202,7 @@ public class HealthCheckActionTest {
     @Test
     public void shouldSignalCardSetWithoutOptionsIfCardSetHasNoOptionAtAll() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
-        when(globalSettings.getStoryPointField()).thenReturn("something");
+        when(globalSettings.getEstimateField()).thenReturn("something");
         when(estimateFieldService.findEstimateField()).thenReturn(estimationField);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
         when(cardSetService.getCardSet()).thenReturn(Collections.emptyList());
@@ -212,7 +212,7 @@ public class HealthCheckActionTest {
     @Test
     public void shouldSignalCardSetWithoutOptionsIfCardSetHasOnlyOneOptionApartFromThoseSpecialCards() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
-        when(globalSettings.getStoryPointField()).thenReturn("something");
+        when(globalSettings.getEstimateField()).thenReturn("something");
         when(estimateFieldService.findEstimateField()).thenReturn(estimationField);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
         when(cardSetService.getCardSet()).thenReturn(Arrays.asList(
@@ -225,7 +225,7 @@ public class HealthCheckActionTest {
     @Test
     public void shouldSignalNoConfigurationErrorsIfNoneAreFound() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
-        when(globalSettings.getStoryPointField()).thenReturn("something");
+        when(globalSettings.getEstimateField()).thenReturn("something");
         when(estimateFieldService.findEstimateField()).thenReturn(estimationField);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
         when(cardSetService.getCardSet()).thenReturn(Arrays.asList(

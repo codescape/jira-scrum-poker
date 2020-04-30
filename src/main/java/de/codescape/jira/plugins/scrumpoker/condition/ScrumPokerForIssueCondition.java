@@ -46,7 +46,7 @@ public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition {
      * Returns whether a Scrum Poker session can be started for the given issue.
      */
     public boolean isEstimable(Issue issue) {
-        return issue.isEditable() && hasStoryPointField(issue) && hasScrumPokerEnabled(issue.getProjectObject());
+        return issue.isEditable() && hasEstimateField(issue) && hasScrumPokerEnabled(issue.getProjectObject());
     }
 
     private boolean hasScrumPokerEnabled(Project project) {
@@ -54,9 +54,10 @@ public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition {
             || projectSettingsService.loadScrumPokerEnabled(project.getId());
     }
 
-    private boolean hasStoryPointField(Issue currentIssue) {
-        CustomField storyPointField = estimateFieldService.findEstimateField();
-        return customFieldManager.getCustomFieldObjects(currentIssue).contains(storyPointField);
+    // TODO move method to EstimateFieldService
+    private boolean hasEstimateField(Issue currentIssue) {
+        CustomField estimateField = estimateFieldService.findEstimateField();
+        return customFieldManager.getCustomFieldObjects(currentIssue).contains(estimateField);
     }
 
 }

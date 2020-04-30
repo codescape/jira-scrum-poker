@@ -64,7 +64,7 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
 
     @Override
     public CustomField findEstimateField() {
-        return customFieldManager.getCustomFieldObject(globalSettingsService.load().getStoryPointField());
+        return customFieldManager.getCustomFieldObject(globalSettingsService.load().getEstimateField());
     }
 
 }

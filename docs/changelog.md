@@ -29,6 +29,7 @@ Click on the version in the following list to see all changes since the previous
 * refactor: optimize imports
 * refactor: improve readability of mapper for REST representation of a session
 * refactor: rename estimate service in preparation for new custom field logic
+* refactor: rename story point field in preparation for new custom field logic
 
 ### [4.10.0] - 2020-03-28
 

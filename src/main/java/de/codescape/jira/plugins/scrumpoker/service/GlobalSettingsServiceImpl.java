@@ -19,7 +19,7 @@ import static de.codescape.jira.plugins.scrumpoker.model.GlobalSettings.*;
 @Component
 public class GlobalSettingsServiceImpl implements GlobalSettingsService {
 
-    private static final String STORY_POINT_FIELD = "storyPointField";
+    private static final String ESTIMATE_FIELD = "storyPointField";
     private static final String SESSION_TIMEOUT = "sessionTimeout";
     private static final String DEFAULT_PROJECT_ACTIVATION = "defaultProjectActivation";
     private static final String ALLOW_REVEAL_DECK = "allowRevealDeck";
@@ -38,7 +38,7 @@ public class GlobalSettingsServiceImpl implements GlobalSettingsService {
     @Override
     public GlobalSettings load() {
         GlobalSettings globalSettings = new GlobalSettings();
-        globalSettings.setStoryPointField(loadString(STORY_POINT_FIELD, null));
+        globalSettings.setEstimateField(loadString(ESTIMATE_FIELD, null));
         globalSettings.setSessionTimeout(loadInteger(SESSION_TIMEOUT, SESSION_TIMEOUT_DEFAULT));
         globalSettings.setAllowRevealDeck(
             AllowRevealDeck.valueOf(loadString(ALLOW_REVEAL_DECK, ALLOW_REVEAL_DECK_DEFAULT.name())));
@@ -57,7 +57,7 @@ public class GlobalSettingsServiceImpl implements GlobalSettingsService {
     @Override
     public void persist(GlobalSettings globalSettings) {
         persist(SESSION_TIMEOUT, String.valueOf(globalSettings.getSessionTimeout()));
-        persist(STORY_POINT_FIELD, globalSettings.getStoryPointField());
+        persist(ESTIMATE_FIELD, globalSettings.getEstimateField());
         persist(DEFAULT_PROJECT_ACTIVATION, String.valueOf(globalSettings.isDefaultProjectActivation()));
         persist(ALLOW_REVEAL_DECK, globalSettings.getAllowRevealDeck().name());
         persist(DISPLAY_DROPDOWN_ON_BOARDS, String.valueOf(globalSettings.isDisplayDropdownOnBoards()));

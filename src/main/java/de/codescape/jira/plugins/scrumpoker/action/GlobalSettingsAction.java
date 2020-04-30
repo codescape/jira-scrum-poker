@@ -24,7 +24,7 @@ public class GlobalSettingsAction extends AbstractScrumPokerAction {
     static final class Parameters {
 
         static final String ACTION = "action";
-        static final String STORY_POINT_FIELD = "storyPointField";
+        static final String ESTIMATE_FIELD = "estimateField";
         static final String SESSION_TIMEOUT = "sessionTimeout";
         static final String DEFAULT_PROJECT_ACTIVATION = "defaultProjectActivation";
         static final String ALLOW_REVEAL_DECK = "allowRevealDeck";
@@ -69,8 +69,8 @@ public class GlobalSettingsAction extends AbstractScrumPokerAction {
             if (action.equals("save")) {
                 GlobalSettings globalSettings = new GlobalSettings();
 
-                String newStoryPointField = getParameter(Parameters.STORY_POINT_FIELD);
-                globalSettings.setStoryPointField(newStoryPointField);
+                String newEstimateField = getParameter(Parameters.ESTIMATE_FIELD);
+                globalSettings.setEstimateField(newEstimateField);
 
                 String newSessionTimeout = getParameter(Parameters.SESSION_TIMEOUT);
                 globalSettings.setSessionTimeout(Integer.valueOf(newSessionTimeout));

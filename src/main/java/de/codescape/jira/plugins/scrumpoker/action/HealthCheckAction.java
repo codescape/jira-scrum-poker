@@ -139,7 +139,7 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
         List<String> results = new ArrayList<>();
 
         // check that the confirmed estimation field is set
-        String storyPointField = globalSettingsService.load().getStoryPointField();
+        String storyPointField = globalSettingsService.load().getEstimateField();
         if (storyPointField == null || storyPointField.isEmpty()) {
             results.add(Configuration.ESTIMATION_FIELD_NOT_SET);
         } else {

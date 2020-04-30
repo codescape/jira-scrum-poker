@@ -13,19 +13,19 @@
 
         <h3>$i18n.getText("scrumpoker.config.heading.estimation")</h3>
         <div class="field-group">
-            <label for="storyPointField">$i18n.getText("scrumpoker.config.estimation")
+            <label for="estimateField">$i18n.getText("scrumpoker.config.estimation")
                 <span class="aui-icon icon-required">(required)</span></label>
-            <select class="select" id="storyPointField" name="storyPointField" required>
+            <select class="select" id="estimateField" name="estimateField" required>
                 <option value=""></option>
                 #foreach ($customField in $customFields)
-                    #if ($customField.id == $globalSettings.storyPointField)
+                    #if ($customField.id == $globalSettings.estimateField)
                         <option value="$customField.id" selected="selected">$customField.fieldName</option>
                     #else
                         <option value="$customField.id">$customField.fieldName</option>
                     #end
                 #end
             </select>
-            #if (!$globalSettings.storyPointField)
+            #if (!$globalSettings.estimateField)
                 <div class="error">$i18n.getText("scrumpoker.config.field.required")</div>
             #end
             <div class="description">$i18n.getText("scrumpoker.config.estimation.description")</div>

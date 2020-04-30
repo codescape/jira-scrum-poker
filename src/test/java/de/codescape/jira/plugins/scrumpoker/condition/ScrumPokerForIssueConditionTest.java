@@ -52,7 +52,7 @@ public class ScrumPokerForIssueConditionTest {
     private ScrumPokerForIssueCondition scrumPokerForIssueCondition;
 
     @Mock
-    private CustomField storyPointField;
+    private CustomField estimateField;
 
     @Mock
     private CustomField someOtherField;
@@ -67,16 +67,16 @@ public class ScrumPokerForIssueConditionTest {
     private GlobalSettings globalSettings;
 
     @Test
-    public void shouldDisplayForEditableIssueWithStoryPointFieldAndGloballyActiveScrumPoker() {
-        expectThatIssueContainsTheStoryPointField();
+    public void shouldDisplayForEditableIssueWithEstimateFieldAndGloballyActiveScrumPoker() {
+        expectThatIssueContainsTheEstimateField();
         expectThatIssueIsEditable();
         expectThatDefaultProjectActivationIsEnabled();
         assertThat(scrumPokerForIssueCondition.shouldDisplay(applicationUser, issue, jiraHelper), is(true));
     }
 
     @Test
-    public void shouldDisplayForEditableIssueWithStoryPointFieldAndGloballyInactiveScrumPokerButActiveForProject() {
-        expectThatIssueContainsTheStoryPointField();
+    public void shouldDisplayForEditableIssueWithEstimateFieldAndGloballyInactiveScrumPokerButActiveForProject() {
+        expectThatIssueContainsTheEstimateField();
         expectThatIssueIsEditable();
         expectThatDefaultProjectActivationIsDisabled();
         expectThatScrumPokerIsEnabledForProject();
@@ -84,8 +84,8 @@ public class ScrumPokerForIssueConditionTest {
     }
 
     @Test
-    public void shouldNotDisplayForEditableIssueWithStoryPointFieldAndGloballyInactiveScrumPoker() {
-        expectThatIssueContainsTheStoryPointField();
+    public void shouldNotDisplayForEditableIssueWithEstimateFieldAndGloballyInactiveScrumPoker() {
+        expectThatIssueContainsTheEstimateField();
         expectThatIssueIsEditable();
         expectThatDefaultProjectActivationIsDisabled();
         expectThatScrumPokerIsNotEnabledForProject();
@@ -99,8 +99,8 @@ public class ScrumPokerForIssueConditionTest {
     }
 
     @Test
-    public void shouldNotDisplayForEditableIssueWithoutStoryPointField() {
-        expectThatIssueDoesNotContainTheStoryPointField();
+    public void shouldNotDisplayForEditableIssueWithoutEstimateField() {
+        expectThatIssueDoesNotContainTheEstimateField();
         expectThatIssueIsEditable();
         assertThat(scrumPokerForIssueCondition.shouldDisplay(applicationUser, issue, jiraHelper), is(false));
     }
@@ -125,23 +125,23 @@ public class ScrumPokerForIssueConditionTest {
         when(issue.isEditable()).thenReturn(true);
     }
 
-    private void expectThatIssueDoesNotContainTheStoryPointField() {
-        expectThatEstimationFieldExists();
+    private void expectThatIssueDoesNotContainTheEstimateField() {
+        expectThatEstimateFieldExists();
         List<CustomField> emptyList = new ArrayList<>();
         emptyList.add(someOtherField);
         when(customFieldManager.getCustomFieldObjects(issue)).thenReturn(emptyList);
     }
 
-    private void expectThatIssueContainsTheStoryPointField() {
-        expectThatEstimationFieldExists();
+    private void expectThatIssueContainsTheEstimateField() {
+        expectThatEstimateFieldExists();
         ArrayList<CustomField> listOfCustomFields = new ArrayList<>();
-        listOfCustomFields.add(storyPointField);
+        listOfCustomFields.add(estimateField);
         listOfCustomFields.add(someOtherField);
         when(customFieldManager.getCustomFieldObjects(issue)).thenReturn(listOfCustomFields);
     }
 
-    private void expectThatEstimationFieldExists() {
-        when(estimateFieldService.findEstimateField()).thenReturn(storyPointField);
+    private void expectThatEstimateFieldExists() {
+        when(estimateFieldService.findEstimateField()).thenReturn(estimateField);
     }
 
     private void expectThatDefaultProjectActivationIsEnabled() {
