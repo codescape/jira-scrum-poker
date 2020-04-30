@@ -63,7 +63,7 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
     }
 
     private final GlobalSettingsService globalSettingsService;
-    private final EstimationFieldService estimationFieldService;
+    private final EstimateFieldService estimateFieldService;
     private final PluginLicenseManager pluginLicenseManager;
     private final ProjectSettingsService projectSettingsService;
     private final ErrorLogService errorLogService;
@@ -72,13 +72,13 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
     @Autowired
     public HealthCheckAction(@ComponentImport PluginLicenseManager pluginLicenseManager,
                              GlobalSettingsService globalSettingsService,
-                             EstimationFieldService estimationFieldService,
+                             EstimateFieldService estimateFieldService,
                              ProjectSettingsService projectSettingsService,
                              ErrorLogService errorLogService,
                              CardSetService cardSetService) {
         this.pluginLicenseManager = pluginLicenseManager;
         this.globalSettingsService = globalSettingsService;
-        this.estimationFieldService = estimationFieldService;
+        this.estimateFieldService = estimateFieldService;
         this.projectSettingsService = projectSettingsService;
         this.errorLogService = errorLogService;
         this.cardSetService = cardSetService;
@@ -144,7 +144,7 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
             results.add(Configuration.ESTIMATION_FIELD_NOT_SET);
         } else {
             // check that the confirmed estimation custom field can be found
-            CustomField customField = estimationFieldService.findStoryPointField();
+            CustomField customField = estimateFieldService.findEstimateField();
             if (customField == null) {
                 results.add(Configuration.ESTIMATION_FIELD_NOT_FOUND);
             }

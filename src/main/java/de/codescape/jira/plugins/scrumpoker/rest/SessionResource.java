@@ -6,7 +6,7 @@ import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionEntityMapper;
 import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionReferenceMapper;
-import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
+import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,7 +22,7 @@ import java.util.List;
 @Path("/session")
 public class SessionResource {
 
-    private final EstimationFieldService estimationFieldService;
+    private final EstimateFieldService estimateFieldService;
     private final JiraAuthenticationContext jiraAuthenticationContext;
     private final ScrumPokerSessionService scrumPokerSessionService;
     private final SessionEntityMapper sessionEntityMapper;
@@ -30,12 +30,12 @@ public class SessionResource {
 
     @Autowired
     public SessionResource(@ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
-                           EstimationFieldService estimationFieldService,
+                           EstimateFieldService estimateFieldService,
                            ScrumPokerSessionService scrumPokerSessionService,
                            SessionEntityMapper sessionEntityMapper,
                            SessionReferenceMapper sessionReferenceMapper) {
         this.jiraAuthenticationContext = jiraAuthenticationContext;
-        this.estimationFieldService = estimationFieldService;
+        this.estimateFieldService = estimateFieldService;
         this.scrumPokerSessionService = scrumPokerSessionService;
         this.sessionEntityMapper = sessionEntityMapper;
         this.sessionReferenceMapper = sessionReferenceMapper;
@@ -101,7 +101,7 @@ public class SessionResource {
     public Response confirmEstimation(@PathParam("issueKey") String issueKey,
                                       @PathParam("estimation") Integer estimation) {
         scrumPokerSessionService.confirm(issueKey, currentUser(), estimation);
-        if (estimationFieldService.save(issueKey, estimation)) {
+        if (estimateFieldService.save(issueKey, estimation)) {
             return Response.ok().build();
         } else {
             return Response.serverError().build();

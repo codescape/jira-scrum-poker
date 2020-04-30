@@ -22,7 +22,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
-public class EstimationFieldServiceImplTest {
+public class EstimateFieldServiceImplTest {
 
     private static final String ISSUE_KEY = "ISSUE-0815";
     private static final Integer ESTIMATION = 5;
@@ -50,7 +50,7 @@ public class EstimationFieldServiceImplTest {
     private ErrorLogService errorLogService;
 
     @InjectMocks
-    private EstimationFieldServiceImpl estimationFieldService;
+    private EstimateFieldServiceImpl estimationFieldService;
 
     @Mock
     private ApplicationUser applicationUser;

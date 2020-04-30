@@ -8,7 +8,7 @@ import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.project.Project;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
+import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +22,17 @@ import org.springframework.stereotype.Component;
 public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition {
 
     private final CustomFieldManager customFieldManager;
-    private final EstimationFieldService estimationFieldService;
+    private final EstimateFieldService estimateFieldService;
     private final GlobalSettingsService globalSettingsService;
     private final ProjectSettingsService projectSettingsService;
 
     @Autowired
     public ScrumPokerForIssueCondition(@ComponentImport CustomFieldManager customFieldManager,
-                                       EstimationFieldService estimationFieldService,
+                                       EstimateFieldService estimateFieldService,
                                        GlobalSettingsService globalSettingsService,
                                        ProjectSettingsService projectSettingsService) {
         this.customFieldManager = customFieldManager;
-        this.estimationFieldService = estimationFieldService;
+        this.estimateFieldService = estimateFieldService;
         this.globalSettingsService = globalSettingsService;
         this.projectSettingsService = projectSettingsService;
     }
@@ -55,7 +55,7 @@ public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition {
     }
 
     private boolean hasStoryPointField(Issue currentIssue) {
-        CustomField storyPointField = estimationFieldService.findStoryPointField();
+        CustomField storyPointField = estimateFieldService.findEstimateField();
         return customFieldManager.getCustomFieldObjects(currentIssue).contains(storyPointField);
     }
 

@@ -14,10 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * Implementation of {@link EstimationFieldService} with access to Jira custom fields.
+ * Implementation of {@link EstimateFieldService} with access to Jira custom fields.
  */
 @Component
-public class EstimationFieldServiceImpl implements EstimationFieldService {
+public class EstimateFieldServiceImpl implements EstimateFieldService {
 
     private final GlobalSettingsService globalSettingsService;
     private final CustomFieldManager customFieldManager;
@@ -27,12 +27,12 @@ public class EstimationFieldServiceImpl implements EstimationFieldService {
     private final ErrorLogService errorLogService;
 
     @Autowired
-    public EstimationFieldServiceImpl(@ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
-                                      @ComponentImport IssueManager issueManager,
-                                      @ComponentImport CustomFieldManager customFieldManager,
-                                      @ComponentImport PermissionManager permissionManager,
-                                      GlobalSettingsService globalSettingsService,
-                                      ErrorLogService errorLogService) {
+    public EstimateFieldServiceImpl(@ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
+                                    @ComponentImport IssueManager issueManager,
+                                    @ComponentImport CustomFieldManager customFieldManager,
+                                    @ComponentImport PermissionManager permissionManager,
+                                    GlobalSettingsService globalSettingsService,
+                                    ErrorLogService errorLogService) {
         this.jiraAuthenticationContext = jiraAuthenticationContext;
         this.issueManager = issueManager;
         this.customFieldManager = customFieldManager;
@@ -42,7 +42,7 @@ public class EstimationFieldServiceImpl implements EstimationFieldService {
     }
 
     @Override
-    public boolean save(String issueKey, Integer newValue) {
+    public boolean save(String issueKey, Integer estimate) {
         ApplicationUser applicationUser = jiraAuthenticationContext.getLoggedInUser();
         MutableIssue issue = issueManager.getIssueByCurrentKey(issueKey);
         if (globalSettingsService.load().isCheckPermissionToSaveEstimate() &&
@@ -51,19 +51,19 @@ public class EstimationFieldServiceImpl implements EstimationFieldService {
                 " is missing permissions to save estimation for issue " + issueKey + ".", null);
             return false;
         }
-        issue.setCustomFieldValue(findStoryPointField(), newValue.doubleValue());
+        issue.setCustomFieldValue(findEstimateField(), estimate.doubleValue());
         try {
             issueManager.updateIssue(applicationUser, issue, UpdateIssueRequest.builder().build());
             return true;
         } catch (RuntimeException e) {
-            errorLogService.logError("Unable to save estimation " + newValue + " for issue "
+            errorLogService.logError("Unable to save estimation " + estimate + " for issue "
                 + issueKey + ". See stacktrace for further details.", e);
             return false;
         }
     }
 
     @Override
-    public CustomField findStoryPointField() {
+    public CustomField findEstimateField() {
         return customFieldManager.getCustomFieldObject(globalSettingsService.load().getStoryPointField());
     }
 

@@ -7,7 +7,7 @@ import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.project.Project;
 import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
-import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
+import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingsService;
 import org.junit.Rule;
@@ -34,7 +34,7 @@ public class ScrumPokerForIssueConditionTest {
     private CustomFieldManager customFieldManager;
 
     @Mock
-    private EstimationFieldService estimationFieldService;
+    private EstimateFieldService estimateFieldService;
 
     @Mock
     private GlobalSettingsService globalSettingsService;
@@ -141,7 +141,7 @@ public class ScrumPokerForIssueConditionTest {
     }
 
     private void expectThatEstimationFieldExists() {
-        when(estimationFieldService.findStoryPointField()).thenReturn(storyPointField);
+        when(estimateFieldService.findEstimateField()).thenReturn(storyPointField);
     }
 
     private void expectThatDefaultProjectActivationIsEnabled() {

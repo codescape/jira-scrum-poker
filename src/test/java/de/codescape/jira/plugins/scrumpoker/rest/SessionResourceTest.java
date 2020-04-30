@@ -5,7 +5,7 @@ import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionEntityMapper;
-import de.codescape.jira.plugins.scrumpoker.service.EstimationFieldService;
+import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
 import org.junit.Rule;
 import org.junit.Test;
@@ -36,7 +36,7 @@ public class SessionResourceTest {
     private ScrumPokerSessionService scrumPokerSessionService;
 
     @Mock
-    private EstimationFieldService estimationFieldService;
+    private EstimateFieldService estimateFieldService;
 
     @Mock
     private SessionEntityMapper sessionEntityMapper;
@@ -106,7 +106,7 @@ public class SessionResourceTest {
         sessionResource.confirmEstimation(ISSUE_KEY, ESTIMATION);
 
         verify(scrumPokerSessionService, times(1)).confirm(ISSUE_KEY, USER_KEY, ESTIMATION);
-        verify(estimationFieldService, times(1)).save(ISSUE_KEY, ESTIMATION);
+        verify(estimateFieldService, times(1)).save(ISSUE_KEY, ESTIMATION);
     }
 
     private void expectCurrentUserIs(String userKey) {
