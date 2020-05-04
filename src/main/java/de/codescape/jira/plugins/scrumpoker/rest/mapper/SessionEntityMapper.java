@@ -136,16 +136,15 @@ public class SessionEntityMapper {
     }
 
     /**
-     * Returns that an agreement is reached when more than one vote is given, the votes are visible, there is no
-     * non-numeric value and the minimum and maximum vote are equal.
+     * Returns that an agreement is reached when more than one vote is given, the votes are visible, there is only one
+     * kind of a vote and this is not a special value.
      */
     private boolean agreementReached(ScrumPokerSession scrumPokerSession) {
         ScrumPokerVote[] votes = scrumPokerSession.getVotes();
         return scrumPokerSession.isVisible() &&
             votes.length > 1 &&
-            getMaximumVote(votes).equals(getMinimumVote(votes)) &&
-            stream(votes).allMatch(scrumPokerVote -> isAssignableToEstimationField(scrumPokerVote.getVote()));
-        // TODO find a more simple solution for this calculation
+            stream(votes).noneMatch(scrumPokerVote -> isSpecialCardValue(scrumPokerVote.getVote())) &&
+            stream(votes).collect(Collectors.groupingBy(ScrumPokerVote::getVote, Collectors.counting())).size() == 1;
     }
 
     /**
