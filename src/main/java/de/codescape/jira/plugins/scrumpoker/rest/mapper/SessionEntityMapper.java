@@ -18,11 +18,13 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-import static de.codescape.jira.plugins.scrumpoker.model.Card.COFFEE_BREAK;
-import static de.codescape.jira.plugins.scrumpoker.model.Card.QUESTION_MARK;
+import static de.codescape.jira.plugins.scrumpoker.model.Card.*;
 import static java.util.Arrays.stream;
 
 /**
@@ -66,7 +68,7 @@ public class SessionEntityMapper {
             .withIssueKey(scrumPokerSession.getIssueKey())
             .withConfirmedVote(scrumPokerSession.getConfirmedVote())
             .withConfirmedDate(dateEntity(scrumPokerSession.getConfirmedDate()))
-            .withConfirmedUser(displayName(scrumPokerSession.getConfirmedUserKey()))
+            .withConfirmedUser(displayNameForUser(scrumPokerSession.getConfirmedUserKey()))
             .withVisible(scrumPokerSession.isVisible())
             .withCancelled(scrumPokerSession.isCancelled())
             .withBoundedVotes(boundedVotes(scrumPokerSession))
@@ -77,7 +79,7 @@ public class SessionEntityMapper {
             .withAllowCancel(allowCancel(scrumPokerSession, userKey))
             .withAllowConfirm(allowConfirm(scrumPokerSession, userKey))
             .withAgreementReached(agreementReached(scrumPokerSession))
-            .withCreator(displayName(scrumPokerSession.getCreatorUserKey()))
+            .withCreator(displayNameForUser(scrumPokerSession.getCreatorUserKey()))
             .withCreateDate(dateEntity(scrumPokerSession.getCreateDate()));
     }
 
@@ -143,6 +145,7 @@ public class SessionEntityMapper {
             votes.length > 1 &&
             getMaximumVote(votes).equals(getMinimumVote(votes)) &&
             stream(votes).allMatch(scrumPokerVote -> isAssignableToEstimationField(scrumPokerVote.getVote()));
+        // TODO find a more simple solution for this calculation
     }
 
     /**
@@ -173,7 +176,7 @@ public class SessionEntityMapper {
     private List<VoteEntity> votes(ScrumPokerSession scrumPokerSession) {
         return stream(scrumPokerSession.getVotes())
             .map(vote -> new VoteEntity(
-                displayName(vote.getUserKey()),
+                displayNameForUser(vote.getUserKey()),
                 displayValue(vote, scrumPokerSession),
                 needToTalk(vote, scrumPokerSession),
                 needABreak(vote, scrumPokerSession)))
@@ -216,14 +219,37 @@ public class SessionEntityMapper {
      * Returns the list of cards between and including the minimum and maximum vote.
      */
     private List<BoundedVoteEntity> boundedVotes(ScrumPokerSession scrumPokerSession) {
-        ScrumPokerVote[] votes = scrumPokerSession.getVotes();
-        Map<String, Long> voteDistribution = Arrays.stream(votes)
+        Map<String, Long> voteDistribution = Arrays.stream(scrumPokerSession.getVotes())
             .collect(Collectors.groupingBy(ScrumPokerVote::getVote, Collectors.counting()));
-        return cardSetService.getCardSet(scrumPokerSession).stream()
+        List<BoundedVoteEntity> cardSetWithVotes = cardSetService.getCardSet(scrumPokerSession).stream()
             .map(card -> createBoundedVote(card.getValue(), voteDistribution))
-            .filter(boundedVoteEntity -> nonNumericValueWithVotes(boundedVoteEntity) ||
-                numericValueWithVotesInBoundary(boundedVoteEntity, votes))
             .collect(Collectors.toList());
+        return cardSetWithVotes.stream()
+            .filter(boundedVote -> boundedVoteShouldDisplay(boundedVote, cardSetWithVotes))
+            .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns whether a bounded vote should display or not. Every card with minimum one vote will be included and also
+     * all values in between those cards with minimum one vote while not including special cards into this calculation.
+     */
+    private boolean boundedVoteShouldDisplay(BoundedVoteEntity boundedVoteEntity, List<BoundedVoteEntity> boundedVoteEntities) {
+        // Bounded vote should have a value itself...
+        if (boundedVoteEntity.getCount() > 0) {
+            return true;
+        } else {
+            // ...or should have a non special card before and after inside the list with minimum one vote
+            int position = boundedVoteEntities.indexOf(boundedVoteEntity);
+            boolean hasVoteBefore = false;
+            boolean hasVoteAfter = false;
+            for (int i = 0; i < boundedVoteEntities.size(); i++) {
+                if (!isSpecialCardValue(boundedVoteEntities.get(i).getValue())) {
+                    hasVoteBefore = hasVoteBefore || (i < position && boundedVoteEntities.get(i).getCount() > 0);
+                    hasVoteAfter = hasVoteAfter || (i > position && boundedVoteEntities.get(i).getCount() > 0);
+                }
+            }
+            return hasVoteAfter && hasVoteBefore;
+        }
     }
 
     /**
@@ -232,23 +258,6 @@ public class SessionEntityMapper {
     private BoundedVoteEntity createBoundedVote(String value, Map<String, Long> distribution) {
         return new BoundedVoteEntity(value, distribution.getOrDefault(value, 0L),
             isAssignableToEstimationField(value));
-    }
-
-    /**
-     * Verifies that the given bounded vote is assignable to the estimation field and inside the range of the minimum
-     * and maximum of all votes.
-     */
-    private boolean numericValueWithVotesInBoundary(BoundedVoteEntity boundedVote, ScrumPokerVote[] votes) {
-        return isAssignableToEstimationField(boundedVote.getValue()) && !numericValues(votes).isEmpty() &&
-            Integer.parseInt(boundedVote.getValue()) >= getMinimumVote(votes) &&
-            Integer.parseInt(boundedVote.getValue()) <= getMaximumVote(votes);
-    }
-
-    /**
-     * Verifies that the given bounded vote is non-numeric and has minimum one vote.
-     */
-    private boolean nonNumericValueWithVotes(BoundedVoteEntity boundedVote) {
-        return !isAssignableToEstimationField(boundedVote.getValue()) && boundedVote.getCount() > 0;
     }
 
     /**
@@ -268,6 +277,7 @@ public class SessionEntityMapper {
     /**
      * Reduces the list of votes to only numeric votes removing all other values from the list.
      */
+    @Deprecated
     private List<Integer> numericValues(ScrumPokerVote[] votes) {
         return stream(votes).map(ScrumPokerVote::getVote)
             .filter(this::isAssignableToEstimationField)
@@ -278,7 +288,7 @@ public class SessionEntityMapper {
     /**
      * Returns the display name of a user associated by the given user key.
      */
-    private String displayName(String key) {
+    private String displayNameForUser(String key) {
         if (key == null) {
             return null;
         }

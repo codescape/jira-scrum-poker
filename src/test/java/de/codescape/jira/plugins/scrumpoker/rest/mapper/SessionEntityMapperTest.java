@@ -30,6 +30,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import static de.codescape.jira.plugins.scrumpoker.model.Card.COFFEE_BREAK;
+import static de.codescape.jira.plugins.scrumpoker.model.Card.QUESTION_MARK;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -114,7 +115,7 @@ public class SessionEntityMapperTest {
     }
 
     @Test
-    public void shouldReturnAgreementForVisibleDeck() {
+    public void shouldReturnAgreementForVisibleDeckWithNonSpecialCards() {
         ScrumPokerVote[] scrumPokerVotes = {scrumPokerVote("5"), scrumPokerVote("5")};
         ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, true);
 
@@ -132,6 +133,17 @@ public class SessionEntityMapperTest {
     }
 
     @Test
+    public void shouldNotReturnAgreementForVisibleDeckWithSameSpecialCard() {
+        ScrumPokerVote[] scrumPokerVotes = {
+            scrumPokerVote(QUESTION_MARK.getValue()),
+            scrumPokerVote(QUESTION_MARK.getValue())};
+        ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, true);
+
+        SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession, CURRENT_USER);
+        assertThat(sessionEntity.isAgreementReached(), is(false));
+    }
+
+    @Test
     public void shouldReturnBoundedVotesWithCountForEachVoteInRange() {
         ScrumPokerVote[] scrumPokerVotes = {
             scrumPokerVote("5"),
@@ -140,7 +152,7 @@ public class SessionEntityMapperTest {
         ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, true);
         when(cardSetService.getCardSet(ArgumentMatchers.any(ScrumPokerSession.class))).thenReturn(
             Arrays.asList(
-                Card.QUESTION_MARK,
+                QUESTION_MARK,
                 COFFEE_BREAK,
                 new Card("0", true),
                 new Card("1", true),
@@ -159,6 +171,89 @@ public class SessionEntityMapperTest {
             hasItem(allOf(hasProperty("value", equalTo("5")), hasProperty("count", equalTo(2L)))),
             hasItem(allOf(hasProperty("value", equalTo("8")), hasProperty("count", equalTo(0L)))),
             hasItem(allOf(hasProperty("value", equalTo("13")), hasProperty("count", equalTo(1L))))
+        ));
+    }
+
+    @Test
+    public void shouldReturnBoundedVotesIncludingCoffeeBreakAndQuestionMark() {
+        ScrumPokerVote[] scrumPokerVotes = {
+            scrumPokerVote(COFFEE_BREAK.getValue()),
+            scrumPokerVote(QUESTION_MARK.getValue()),
+            scrumPokerVote("8")};
+        ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, true);
+        when(cardSetService.getCardSet(ArgumentMatchers.any(ScrumPokerSession.class))).thenReturn(
+            Arrays.asList(
+                QUESTION_MARK,
+                COFFEE_BREAK,
+                new Card("0", true),
+                new Card("1", true),
+                new Card("2", true),
+                new Card("3", true),
+                new Card("5", true),
+                new Card("8", true),
+                new Card("13", true),
+                new Card("20", true),
+                new Card("40", true),
+                new Card("100", true)));
+
+        SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession, CURRENT_USER);
+        assertThat(sessionEntity.getBoundedVotes().size(), is(equalTo(3)));
+        assertThat(sessionEntity.getBoundedVotes(), allOf(
+            hasItem(allOf(hasProperty("value", equalTo(QUESTION_MARK.getValue())), hasProperty("count", equalTo(1L)))),
+            hasItem(allOf(hasProperty("value", equalTo(COFFEE_BREAK.getValue())), hasProperty("count", equalTo(1L)))),
+            hasItem(allOf(hasProperty("value", equalTo("8")), hasProperty("count", equalTo(1L))))
+        ));
+    }
+
+    @Test
+    public void shouldReturnBoundedVotesFromFirstVoteToLastVoteAndSpecialCardsWithMinimumOneVote() {
+        ScrumPokerVote[] scrumPokerVotes = {
+            scrumPokerVote("question"),
+            scrumPokerVote("S"),
+            scrumPokerVote("S"),
+            scrumPokerVote("L")};
+        ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, true);
+        when(cardSetService.getCardSet(ArgumentMatchers.any(ScrumPokerSession.class))).thenReturn(
+            Arrays.asList(
+                QUESTION_MARK,
+                COFFEE_BREAK,
+                new Card("XS", true),
+                new Card("S", true),
+                new Card("M", true),
+                new Card("L", true),
+                new Card("XL", true),
+                new Card("XXL", true)));
+
+        SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession, CURRENT_USER);
+        assertThat(sessionEntity.getBoundedVotes().size(), is(equalTo(4)));
+        assertThat(sessionEntity.getBoundedVotes(), allOf(
+            hasItem(allOf(hasProperty("value", equalTo("question")), hasProperty("count", equalTo(1L)))),
+            hasItem(allOf(hasProperty("value", equalTo("S")), hasProperty("count", equalTo(2L)))),
+            hasItem(allOf(hasProperty("value", equalTo("M")), hasProperty("count", equalTo(0L)))),
+            hasItem(allOf(hasProperty("value", equalTo("L")), hasProperty("count", equalTo(1L))))
+        ));
+    }
+
+    @Test
+    public void shouldReturnBoundedVotesForOnlySpecialCardsProvided() {
+        ScrumPokerVote[] scrumPokerVotes = {
+            scrumPokerVote("question"),
+            scrumPokerVote("coffee"),
+            scrumPokerVote("question")};
+        ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, true);
+        when(cardSetService.getCardSet(ArgumentMatchers.any(ScrumPokerSession.class))).thenReturn(
+            Arrays.asList(
+                QUESTION_MARK,
+                COFFEE_BREAK,
+                new Card("S", true),
+                new Card("M", true),
+                new Card("L", true)));
+
+        SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession, CURRENT_USER);
+        assertThat(sessionEntity.getBoundedVotes().size(), is(equalTo(2)));
+        assertThat(sessionEntity.getBoundedVotes(), allOf(
+            hasItem(allOf(hasProperty("value", equalTo(QUESTION_MARK.getValue())), hasProperty("count", equalTo(2L)))),
+            hasItem(allOf(hasProperty("value", equalTo(COFFEE_BREAK.getValue())), hasProperty("count", equalTo(1L))))
         ));
     }
 

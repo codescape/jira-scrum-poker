@@ -2,6 +2,7 @@ package de.codescape.jira.plugins.scrumpoker.model;
 
 import org.junit.Test;
 
+import static de.codescape.jira.plugins.scrumpoker.model.Card.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
@@ -24,12 +25,32 @@ public class CardTest {
 
     @Test
     public void questionMarkShouldHaveTheCorrectDatabaseRepresentation() {
-        assertThat(Card.QUESTION_MARK.getValue(), is(equalTo("question")));
+        assertThat(QUESTION_MARK.getValue(), is(equalTo("question")));
     }
 
     @Test
     public void coffeeBreakShouldHaveTheCorrectDatabaseRepresentation() {
-        assertThat(Card.COFFEE_BREAK.getValue(), is(equalTo("coffee")));
+        assertThat(COFFEE_BREAK.getValue(), is(equalTo("coffee")));
+    }
+
+    @Test
+    public void specialCardCoffeeBreakShouldReturnAsSpecialCard() {
+        assertThat(isSpecialCardValue(COFFEE_BREAK.getValue()), is(true));
+    }
+
+    @Test
+    public void specialCardQuestionMarkShouldReturnAsSpecialCard() {
+        assertThat(isSpecialCardValue(QUESTION_MARK.getValue()), is(true));
+    }
+
+    @Test
+    public void nonSpecialLiteralCardShouldNotReturnAsSpecialCard() {
+        assertThat(isSpecialCardValue("XL"), is(false));
+    }
+
+    @Test
+    public void nonSpecialNumericCardShouldNotReturnAsSpecialCard() {
+        assertThat(isSpecialCardValue("13"), is(false));
     }
 
 }

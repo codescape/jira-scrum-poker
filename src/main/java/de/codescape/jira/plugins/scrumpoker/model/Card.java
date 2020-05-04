@@ -17,6 +17,13 @@ public class Card {
      */
     public static final Card COFFEE_BREAK = new Card("coffee", false);
 
+    /**
+     * Returns whether a card value equals one of the special cards.
+     */
+    public static boolean isSpecialCardValue(String value) {
+        return value != null && (value.equals(QUESTION_MARK.getValue()) || value.equals(COFFEE_BREAK.getValue()));
+    }
+
     private final String value;
     private final boolean assignable;
 
