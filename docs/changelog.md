@@ -32,6 +32,7 @@ Click on the version in the following list to see all changes since the previous
 * refactor: rename story point field in preparation for new custom field logic
 * feat: calculation of bounded votes supports non-numeric card values (#102)
 * feat: simplify logic to calculate agreement reached flag (#102)
+* chore: implement against Jira 8.8.1
 
 ### [4.10.0] - 2020-03-28
 
