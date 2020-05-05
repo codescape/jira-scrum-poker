@@ -127,12 +127,20 @@ public class SessionEntityMapper {
      * Revealing a Scrum Poker session is allowed when minimum one vote is given and the votes are hidden.
      */
     private boolean allowReveal(ScrumPokerSession scrumPokerSession, String userKey) {
+        // only hidden decks can be revealed
+        if (scrumPokerSession.isVisible()) {
+            return false;
+        }
+        // only decks with votes can be revealed
+        if (scrumPokerSession.getVotes().length == 0) {
+            return false;
+        }
+        // depending on configuration not all users are allowed to reveal the deck
         AllowRevealDeck allowRevealDeck = globalSettingsService.load().getAllowRevealDeck();
-        boolean userMayReveal = allowRevealDeck.equals(AllowRevealDeck.EVERYONE) ||
+        return allowRevealDeck.equals(AllowRevealDeck.EVERYONE) ||
             allowRevealDeck.equals(AllowRevealDeck.CREATOR) && scrumPokerSession.getCreatorUserKey().equals(userKey) ||
             allowRevealDeck.equals(AllowRevealDeck.PARTICIPANTS) && Arrays.stream(scrumPokerSession.getVotes())
-                .anyMatch(scrumPokerVote -> scrumPokerVote.getUserKey().equals(userKey));
-        return !scrumPokerSession.isVisible() && scrumPokerSession.getVotes().length > 0 && userMayReveal;
+                .anyMatch(vote -> vote.getUserKey().equals(userKey));
     }
 
     /**
