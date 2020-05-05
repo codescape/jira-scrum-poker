@@ -33,6 +33,7 @@ Click on the version in the following list to see all changes since the previous
 * feat: calculation of bounded votes supports non-numeric card values (#102)
 * feat: simplify logic to calculate agreement reached flag (#102)
 * chore: implement against Jira 8.8.1
+* refactor: cleanup code for composing dates to display values 
 
 ### [4.10.0] - 2020-03-28
 

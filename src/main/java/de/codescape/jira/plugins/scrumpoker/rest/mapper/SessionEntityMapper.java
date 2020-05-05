@@ -91,9 +91,9 @@ public class SessionEntityMapper {
         String displayValue = null;
         String formattedDate = null;
         if (date != null) {
-            DateTimeFormatter dateTimeFormatter = this.dateTimeFormatter.forLoggedInUser();
-            displayValue = dateTimeFormatter.withStyle(DateTimeStyle.RELATIVE).format(date);
-            formattedDate = dateTimeFormatter.withStyle(DateTimeStyle.COMPLETE).format(date);
+            DateTimeFormatter formatterForUser = dateTimeFormatter.forLoggedInUser();
+            displayValue = formatterForUser.withStyle(DateTimeStyle.RELATIVE).format(date);
+            formattedDate = formatterForUser.withStyle(DateTimeStyle.COMPLETE).format(date);
         }
         return new DateEntity(displayValue, formattedDate);
     }
