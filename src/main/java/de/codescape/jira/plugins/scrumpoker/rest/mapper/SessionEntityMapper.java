@@ -240,19 +240,19 @@ public class SessionEntityMapper {
      * Returns whether a bounded vote should display or not. Every card with minimum one vote will be included and also
      * all values in between those cards with minimum one vote while not including special cards into this calculation.
      */
-    private boolean boundedVoteShouldDisplay(BoundedVoteEntity boundedVoteEntity, List<BoundedVoteEntity> boundedVoteEntities) {
+    private boolean boundedVoteShouldDisplay(BoundedVoteEntity boundedVote, List<BoundedVoteEntity> boundedVotes) {
         // Bounded vote should have a value itself...
-        if (boundedVoteEntity.getCount() > 0) {
+        if (boundedVote.getCount() > 0) {
             return true;
         } else {
             // ...or should have a non special card before and after inside the list with minimum one vote
-            int position = boundedVoteEntities.indexOf(boundedVoteEntity);
+            int position = boundedVotes.indexOf(boundedVote);
             boolean hasVoteBefore = false;
             boolean hasVoteAfter = false;
-            for (int i = 0; i < boundedVoteEntities.size(); i++) {
-                if (!isSpecialCardValue(boundedVoteEntities.get(i).getValue())) {
-                    hasVoteBefore = hasVoteBefore || (i < position && boundedVoteEntities.get(i).getCount() > 0);
-                    hasVoteAfter = hasVoteAfter || (i > position && boundedVoteEntities.get(i).getCount() > 0);
+            for (int i = 0; i < boundedVotes.size(); i++) {
+                if (!isSpecialCardValue(boundedVotes.get(i).getValue())) {
+                    hasVoteBefore = hasVoteBefore || (i < position && boundedVotes.get(i).getCount() > 0);
+                    hasVoteAfter = hasVoteAfter || (i > position && boundedVotes.get(i).getCount() > 0);
                 }
             }
             return hasVoteAfter && hasVoteBefore;

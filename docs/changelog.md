@@ -34,7 +34,8 @@ Click on the version in the following list to see all changes since the previous
 * feat: simplify logic to calculate agreement reached flag (#102)
 * chore: implement against Jira 8.8.1
 * refactor: cleanup code for composing dates to display values
-* refactor: improve speed for calculation for revealing deck permission 
+* refactor: improve speed for calculation for revealing deck permission
+* refactor: improve readability for session mapping 
 
 ### [4.10.0] - 2020-03-28
 
