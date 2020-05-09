@@ -11,10 +11,10 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
+import de.codescape.jira.plugins.scrumpoker.model.Card;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.*;
 import de.codescape.jira.plugins.scrumpoker.service.CardSetService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -64,16 +64,18 @@ public class SessionEntityMapper {
      * @return transformed {@link SessionEntity}
      */
     public SessionEntity build(ScrumPokerSession scrumPokerSession, String userKey) {
+        List<Card> cardSet = cardSetService.getCardSet(scrumPokerSession);
+        List<BoundedVoteEntity> boundedVotes = boundedVotes(scrumPokerSession, cardSet);
         return new SessionEntity()
             .withIssueKey(scrumPokerSession.getIssueKey())
-            .withConfirmedVote(scrumPokerSession.getConfirmedVote())
+            .withConfirmedEstimate(scrumPokerSession.getConfirmedEstimate())
             .withConfirmedDate(dateEntity(scrumPokerSession.getConfirmedDate()))
             .withConfirmedUser(displayNameForUser(scrumPokerSession.getConfirmedUserKey()))
             .withVisible(scrumPokerSession.isVisible())
             .withCancelled(scrumPokerSession.isCancelled())
-            .withBoundedVotes(boundedVotes(scrumPokerSession))
-            .withVotes(votes(scrumPokerSession))
-            .withCards(cards(scrumPokerSession, userKey))
+            .withBoundedVotes(boundedVotes)
+            .withVotes(votes(scrumPokerSession, boundedVotes))
+            .withCards(cards(scrumPokerSession, cardSet, userKey))
             .withAllowReveal(allowReveal(scrumPokerSession, userKey))
             .withAllowReset(allowReset(scrumPokerSession))
             .withAllowCancel(allowCancel(scrumPokerSession, userKey))
@@ -158,10 +160,10 @@ public class SessionEntityMapper {
     /**
      * Returns the cards and if the current user has provided a vote highlights the selected card.
      */
-    private List<CardEntity> cards(ScrumPokerSession scrumPokerSession, String userKey) {
+    private List<CardEntity> cards(ScrumPokerSession scrumPokerSession, List<Card> cardSet, String userKey) {
         String chosenValue = cardForUser(scrumPokerSession.getVotes(), userKey);
-        return cardSetService.getCardSet(scrumPokerSession).stream()
-            .map(card -> new CardEntity(card.getValue(), card.getValue().equals(chosenValue)))
+        return cardSet.stream()
+            .map(card -> new CardEntity(card.getValue(), card.getValue().equals(chosenValue), card.isAssignable()))
             .collect(Collectors.toList());
     }
 
@@ -180,12 +182,12 @@ public class SessionEntityMapper {
      * Returns all votes and marks all votes that need to talk. If the deck is currently hidden only returns a question
      * mark instead of the correct values in order to not leak them to the clients.
      */
-    private List<VoteEntity> votes(ScrumPokerSession scrumPokerSession) {
+    private List<VoteEntity> votes(ScrumPokerSession scrumPokerSession, List<BoundedVoteEntity> boundedVotes) {
         return stream(scrumPokerSession.getVotes())
             .map(vote -> new VoteEntity(
                 displayNameForUser(vote.getUserKey()),
                 displayValue(vote, scrumPokerSession),
-                needToTalk(vote, scrumPokerSession),
+                needToTalk(vote, scrumPokerSession, boundedVotes),
                 needABreak(vote, scrumPokerSession)))
             .collect(Collectors.toList());
     }
@@ -208,27 +210,37 @@ public class SessionEntityMapper {
      * Returns whether the current vote needs to talk or not depending on the status of the Scrum Poker session and the
      * other votes provided.
      */
-    private boolean needToTalk(ScrumPokerVote vote, ScrumPokerSession scrumPokerSession) {
+    private boolean needToTalk(ScrumPokerVote vote, ScrumPokerSession scrumPokerSession, List<BoundedVoteEntity> boundedVotes) {
         if (!scrumPokerSession.isVisible())
             return false;
         if (agreementReached(scrumPokerSession))
             return false;
         if (scrumPokerSession.getVotes().length == 1)
             return false;
-        if (!isAssignableToEstimationField(vote.getVote()))
+        if (!isAssignableToEstimateField(vote.getVote()))
             return true;
-        Integer current = Integer.valueOf(vote.getVote());
-        return current.equals(getMaximumVote(scrumPokerSession.getVotes()))
-            || current.equals(getMinimumVote(scrumPokerSession.getVotes()));
+        return onBoundaries(vote.getVote(), boundedVotes);
+    }
+
+    private boolean onBoundaries(String vote, List<BoundedVoteEntity> boundedVotes) {
+        if (boundedVotes.isEmpty())
+            return false;
+        List<String> assignableVotes = boundedVotes.stream()
+            .filter(BoundedVoteEntity::isAssignable)
+            .map(BoundedVoteEntity::getValue)
+            .collect(Collectors.toList());
+        if (assignableVotes.isEmpty())
+            return false;
+        return vote.equals(assignableVotes.get(0)) || vote.equals(assignableVotes.get(assignableVotes.size() - 1));
     }
 
     /**
      * Returns the list of cards between and including the minimum and maximum vote.
      */
-    private List<BoundedVoteEntity> boundedVotes(ScrumPokerSession scrumPokerSession) {
+    private List<BoundedVoteEntity> boundedVotes(ScrumPokerSession scrumPokerSession, List<Card> cardSet) {
         Map<String, Long> voteDistribution = Arrays.stream(scrumPokerSession.getVotes())
             .collect(Collectors.groupingBy(ScrumPokerVote::getVote, Collectors.counting()));
-        List<BoundedVoteEntity> cardSetWithVotes = cardSetService.getCardSet(scrumPokerSession).stream()
+        List<BoundedVoteEntity> cardSetWithVotes = cardSet.stream()
             .map(card -> createBoundedVote(card.getValue(), voteDistribution))
             .collect(Collectors.toList());
         return cardSetWithVotes.stream()
@@ -264,32 +276,7 @@ public class SessionEntityMapper {
      */
     private BoundedVoteEntity createBoundedVote(String value, Map<String, Long> distribution) {
         return new BoundedVoteEntity(value, distribution.getOrDefault(value, 0L),
-            isAssignableToEstimationField(value));
-    }
-
-    /**
-     * Returns the minimum vote from the given list of votes.
-     */
-    private Integer getMinimumVote(ScrumPokerVote[] votes) {
-        return numericValues(votes).stream().reduce(Integer::min).orElse(0);
-    }
-
-    /**
-     * Returns the maximum vote from the given list of votes.
-     */
-    private Integer getMaximumVote(ScrumPokerVote[] votes) {
-        return numericValues(votes).stream().reduce(Integer::max).orElse(100);
-    }
-
-    /**
-     * Reduces the list of votes to only numeric votes removing all other values from the list.
-     */
-    @Deprecated
-    private List<Integer> numericValues(ScrumPokerVote[] votes) {
-        return stream(votes).map(ScrumPokerVote::getVote)
-            .filter(this::isAssignableToEstimationField)
-            .map(Integer::valueOf)
-            .collect(Collectors.toList());
+            isAssignableToEstimateField(value));
     }
 
     /**
@@ -306,8 +293,8 @@ public class SessionEntityMapper {
     /**
      * Returns whether the given vote can be assigned to the estimation field.
      */
-    private boolean isAssignableToEstimationField(String vote) {
-        return NumberUtils.isNumber(vote);
+    private boolean isAssignableToEstimateField(String vote) {
+        return !isSpecialCardValue(vote);
     }
 
 }

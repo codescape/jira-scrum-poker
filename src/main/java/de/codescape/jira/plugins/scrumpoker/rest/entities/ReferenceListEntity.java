@@ -11,12 +11,12 @@ import java.util.List;
 public class ReferenceListEntity {
 
     private final List<ReferenceEntity> references;
-    private final Integer estimation;
+    private final String estimate;
     private final boolean results;
 
-    public ReferenceListEntity(List<ReferenceEntity> references, Integer estimation) {
+    public ReferenceListEntity(List<ReferenceEntity> references, String estimate) {
         this.references = references;
-        this.estimation = estimation;
+        this.estimate = estimate;
         this.results = !references.isEmpty();
     }
 
@@ -24,8 +24,8 @@ public class ReferenceListEntity {
         return references;
     }
 
-    public Integer getEstimation() {
-        return estimation;
+    public String getEstimate() {
+        return estimate;
     }
 
     public boolean isResults() {

@@ -1,8 +1,8 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
-import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.fields.CustomField;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
+import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,7 +24,7 @@ public class GlobalSettingsActionTest {
     public MockitoRule rule = MockitoJUnit.rule();
 
     @Mock
-    private CustomFieldManager customFieldManager;
+    private EstimateFieldService estimateFieldService;
 
     @Mock
     private GlobalSettingsService scrumPokerSettingsService;
@@ -42,8 +42,8 @@ public class GlobalSettingsActionTest {
     private GlobalSettings globalSettings;
 
     @Test
-    public void returnListOfCustomFieldsProvidedByCustomFieldManager() {
-        when(customFieldManager.getCustomFieldObjects()).thenReturn(asList(firstCustomField, secondCustomField));
+    public void returnListOfSupportedFieldsProvidedByEstimateFieldService() {
+        when(estimateFieldService.supportedCustomFields()).thenReturn(asList(firstCustomField, secondCustomField));
         assertThat(globalSettingsAction.getCustomFields(), hasItems(firstCustomField, secondCustomField));
     }
 

@@ -36,13 +36,13 @@ public class SessionReferenceMapperTest {
 
     @Test
     public void shouldMapTheEstimation() {
-        ReferenceListEntity referenceListEntity = sessionReferenceMapper.build(new ArrayList<>(), 5);
-        assertThat(referenceListEntity.getEstimation(), is(5));
+        ReferenceListEntity referenceListEntity = sessionReferenceMapper.build(new ArrayList<>(), "5");
+        assertThat(referenceListEntity.getEstimate(), is("5"));
     }
 
     @Test
     public void shouldReturnEmptyListForNoReferences() {
-        ReferenceListEntity referenceListEntity = sessionReferenceMapper.build(new ArrayList<>(), 5);
+        ReferenceListEntity referenceListEntity = sessionReferenceMapper.build(new ArrayList<>(), "5");
         assertThat(referenceListEntity.isResults(), is(false));
         assertThat(referenceListEntity.getReferences().size(), is(0));
     }
@@ -51,7 +51,7 @@ public class SessionReferenceMapperTest {
     public void shouldExcludeIssuesWhereIssueCannotBeFound() {
         issueManagerKnowsIssueWithKey("ISSUE-5");
         List<ScrumPokerSession> scrumPokerSessions = scrumPokerSessionsWithKeys("ISSUE-5", "UNKNOWN-ISSUE-1");
-        ReferenceListEntity referenceListEntity = sessionReferenceMapper.build(scrumPokerSessions, 5);
+        ReferenceListEntity referenceListEntity = sessionReferenceMapper.build(scrumPokerSessions, "5");
         assertThat(referenceListEntity.isResults(), is(true));
         assertThat(referenceListEntity.getReferences().size(), is(1));
         assertThat(referenceListEntity.getReferences().get(0).getIssueKey(), equalTo("ISSUE-5"));

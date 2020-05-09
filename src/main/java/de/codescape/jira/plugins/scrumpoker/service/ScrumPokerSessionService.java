@@ -45,14 +45,14 @@ public interface ScrumPokerSessionService {
     ScrumPokerSession reveal(String issueKey, String userKey);
 
     /**
-     * Confirms an estimation for the Scrum Poker session.
+     * Confirms an estimate for the Scrum Poker session.
      *
-     * @param issueKey   key of the issue
-     * @param userKey    key of the user
-     * @param estimation confirmed estimation
+     * @param issueKey key of the issue
+     * @param userKey  key of the user
+     * @param estimate confirmed estimate
      * @return Scrum Poker session
      */
-    ScrumPokerSession confirm(String issueKey, String userKey, Integer estimation);
+    ScrumPokerSession confirm(String issueKey, String userKey, String estimate);
 
     /**
      * Resets a Scrum Poker session and allows a new round.
@@ -73,12 +73,12 @@ public interface ScrumPokerSessionService {
     ScrumPokerSession cancel(String issueKey, String userKey);
 
     /**
-     * Returns a list of reference sessions with the same estimation to display for the given user.
+     * Returns a list of reference sessions with the same estimate to display for the given user.
      *
-     * @param userKey    key of the user
-     * @param estimation estimation
+     * @param userKey  key of the user
+     * @param estimate estimate
      * @return List of Scrum Poker sessions
      */
-    List<ScrumPokerSession> references(String userKey, Integer estimation);
+    List<ScrumPokerSession> references(String userKey, String estimate);
 
 }

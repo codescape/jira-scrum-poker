@@ -29,20 +29,20 @@ public class SessionReferenceMapper {
     }
 
     /**
-     * Map a given list of {@link ScrumPokerSession} and a given estimation to a {@link ReferenceListEntity}.
+     * Map a given list of {@link ScrumPokerSession} and a given estimate to a {@link ReferenceListEntity}.
      *
      * @param scrumPokerSessions list of {@link ScrumPokerSession}
-     * @param estimation         estimation
+     * @param estimate           estimate
      * @return transformed {@link ReferenceListEntity}
      */
-    public ReferenceListEntity build(List<ScrumPokerSession> scrumPokerSessions, Integer estimation) {
+    public ReferenceListEntity build(List<ScrumPokerSession> scrumPokerSessions, String estimate) {
         return new ReferenceListEntity(scrumPokerSessions.stream()
             .map(scrumPokerSession -> {
                 MutableIssue issue = issueManager.getIssueObject(scrumPokerSession.getIssueKey());
                 return issue != null ? referenceFromIssue(issue) : null;
             })
             .filter(Objects::nonNull)
-            .collect(Collectors.toList()), estimation);
+            .collect(Collectors.toList()), estimate);
     }
 
     /**

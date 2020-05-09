@@ -72,8 +72,8 @@ public class ActiveSessionsActionTest {
     @Test
     public void openSessionsShouldOnlyReturnIssuesTheUserIsAllowedToSee() {
         expectOneVisibleAndOneSecretIssue();
-        when(publicScrumPokerSession.getConfirmedVote()).thenReturn(null);
-        when(secretScrumPokerSession.getConfirmedVote()).thenReturn(null);
+        when(publicScrumPokerSession.getConfirmedEstimate()).thenReturn(null);
+        when(secretScrumPokerSession.getConfirmedEstimate()).thenReturn(null);
 
         List<SessionEntity> openSessions = activeSessionsAction.getOpenSessions();
         assertThat(openSessions, hasSize(1));
@@ -84,8 +84,8 @@ public class ActiveSessionsActionTest {
     @Test
     public void closedSessionsShouldOnlyReturnIssuesTheUserIsAllowedToSee() {
         expectOneVisibleAndOneSecretIssue();
-        when(publicScrumPokerSession.getConfirmedVote()).thenReturn(5);
-        when(secretScrumPokerSession.getConfirmedVote()).thenReturn(8);
+        when(publicScrumPokerSession.getConfirmedEstimate()).thenReturn("5");
+        when(secretScrumPokerSession.getConfirmedEstimate()).thenReturn("8");
 
         List<SessionEntity> closedSessions = activeSessionsAction.getClosedSessions();
         assertThat(closedSessions, hasSize(1));

@@ -36,6 +36,13 @@ Click on the version in the following list to see all changes since the previous
 * refactor: cleanup code for composing dates to display values
 * refactor: improve speed for calculation for revealing deck permission
 * refactor: improve readability for session mapping 
+* feat: support non-numeric estimates (#102)
+* feat: treat all votes that are not a special card as assignable (#102)
+* feat: evaluate need to talk flag for all kind of cards (#102)
+* feat: persist estimate based on custom field type (#102)
+* feat: only show supported custom fields in configuration (#102)
+* refactor: optimize loading card set for mapped session (#102)
+* feat: show parent task information for sub tasks (#110)
 
 ### [4.10.0] - 2020-03-28
 

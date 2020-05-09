@@ -18,7 +18,10 @@
         <div class="aui-page-header-main">
             <ol class="aui-nav aui-nav-breadcrumbs">
                 <li><a href="$req.contextPath/browse/$issue.projectObject.key" id="project-name-val">$issue.projectObject.name</a></li>
-                <li><a rel="10006" id="key-val" href="$req.contextPath/browse/$issue.key" data-issue-key="$issue.key" class="issue-link">$issue.key</a></li>
+                #if($issue.parentObject)
+                    <li><a href="$req.contextPath/browse/$issue.parentObject.key" id="parent_issue_summary">$issue.parentObject.key $issue.parentObject.summary</a></li>
+                #end
+                <li><a id="key-val" href="$req.contextPath/browse/$issue.key" data-issue-key="$issue.key" class="issue-link">$issue.key</a></li>
             </ol>
             <h1>$issue.summary</h1>
         </div>
@@ -143,14 +146,14 @@
 
 <script id="scrum-poker-cards-template" type="text/x-handlebars-template">
 
-    {{^confirmedVoteExists}}
+    {{^confirmedEstimateExists}}
         <h4>$i18n.getText("scrumpoker.title")</h4>
         <ul class="scrum-poker-cards-list">
             {{#cards}}
-                <li><a onmouseover="ScrumPoker.showReferences('{{value}}');" onmouseout="ScrumPoker.showReferences()" onclick="ScrumPoker.updateSession('{{issueKey}}','{{value}}');" class="scrum-poker-card {{#selected}}scrum-poker-card-active{{/selected}} scrum-poker-card-clickable"><i class="scrum-poker-card-value scrum-poker-card-value-{{value}}">{{value}}</i></a></li>
+                <li><a onmouseover="ScrumPoker.showReferences('{{value}}',{{assignable}});" onmouseout="ScrumPoker.showReferences()" onclick="ScrumPoker.updateSession('{{issueKey}}','{{value}}');" class="scrum-poker-card {{#selected}}scrum-poker-card-active{{/selected}} scrum-poker-card-clickable"><i class="scrum-poker-card-value scrum-poker-card-value-{{value}}">{{value}}</i></a></li>
             {{/cards}}
         </ul>
-    {{/confirmedVoteExists}}
+    {{/confirmedEstimateExists}}
 
 </script>
 
@@ -178,7 +181,7 @@
 
 <script id="scrum-poker-participants-template" type="text/x-handlebars-template">
 
-    {{^confirmedVoteExists}}
+    {{^confirmedEstimateExists}}
         {{#visible}}
             <h4>$i18n.getText("scrumpoker.session.bandwidth")</h4>
             {{#allowConfirm}}
@@ -230,13 +233,13 @@
                 <p class="scrum-poker-comment">$i18n.getText("scrumpoker.session.noestimations")</p>
             {{/votes}}
         </ul>
-    {{/confirmedVoteExists}}
+    {{/confirmedEstimateExists}}
 
 </script>
 
 <script id="scrum-poker-buttons-template" type="text/x-handlebars-template">
 
-    {{^confirmedVoteExists}}
+    {{^confirmedEstimateExists}}
         <div class="scrum-poker-buttons">
             <div class="aui-buttons">
             {{#allowReveal}}
@@ -258,7 +261,7 @@
             {{/allowCancel}}
             </div>
         </div>
-    {{/confirmedVoteExists}}
+    {{/confirmedEstimateExists}}
 
 </script>
 
@@ -266,7 +269,7 @@
 
     <h4>$i18n.getText("scrumpoker.title")</h4>
 
-    {{#confirmedVoteExists}}
+    {{#confirmedEstimateExists}}
         <p class="scrum-poker-comment">
             {{#confirmedUser}}
                 $i18n.getText("scrumpoker.session.estimationsaved.long")
@@ -276,9 +279,9 @@
             {{/confirmedUser}}
         </p>
         <ul class="scrum-poker-cards-list scrum-poker-cards-list-centered">
-            <li><span class="scrum-poker-card scrum-poker-card-active">{{confirmedVote}}</span></li>
+            <li><span class="scrum-poker-card scrum-poker-card-active">{{confirmedEstimate}}</span></li>
         </ul>
-    {{/confirmedVoteExists}}
+    {{/confirmedEstimateExists}}
 
     {{#cancelled}}
         <p class="scrum-poker-comment">$i18n.getText("scrumpoker.session.cancelled.long")</p>

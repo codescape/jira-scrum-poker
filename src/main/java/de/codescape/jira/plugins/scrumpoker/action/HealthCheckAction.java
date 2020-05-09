@@ -34,8 +34,8 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
      */
     static final class Configuration {
 
-        static final String ESTIMATION_FIELD_NOT_FOUND = "scrumpoker.healthcheck.results.errors.estimationfieldnotfound";
-        static final String ESTIMATION_FIELD_NOT_SET = "scrumpoker.healthcheck.results.errors.estimationfieldnotset";
+        static final String ESTIMATE_FIELD_NOT_FOUND = "scrumpoker.healthcheck.results.errors.estimationfieldnotfound";
+        static final String ESTIMATE_FIELD_NOT_SET = "scrumpoker.healthcheck.results.errors.estimationfieldnotset";
         static final String ENABLED_FOR_NO_PROJECT = "scrumpoker.healthcheck.results.errors.enabledfornoproject";
         static final String CARD_SET_WITHOUT_OPTIONS = "scrumpoker.healthcheck.results.errors.cardsetwithoutoptions";
 
@@ -138,15 +138,15 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
     public List<String> getConfigurationResults() {
         List<String> results = new ArrayList<>();
 
-        // check that the confirmed estimation field is set
+        // check that the estimate custom field is set
         String storyPointField = globalSettingsService.load().getEstimateField();
         if (storyPointField == null || storyPointField.isEmpty()) {
-            results.add(Configuration.ESTIMATION_FIELD_NOT_SET);
+            results.add(Configuration.ESTIMATE_FIELD_NOT_SET);
         } else {
-            // check that the confirmed estimation custom field can be found
+            // check that the estimate custom field can be found
             CustomField customField = estimateFieldService.findEstimateField();
             if (customField == null) {
-                results.add(Configuration.ESTIMATION_FIELD_NOT_FOUND);
+                results.add(Configuration.ESTIMATE_FIELD_NOT_FOUND);
             }
         }
 

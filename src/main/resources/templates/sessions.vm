@@ -100,7 +100,7 @@
                                 #if ($scrumPokerSession.cancelled)
                                     <i>$i18n.getText("scrumpoker.session.cancelled")</i>
                                 #else
-                                    <span class="aui-badge ghx-statistic-badge">$scrumPokerSession.confirmedVote</span>
+                                    <span class="aui-badge ghx-statistic-badge">$scrumPokerSession.confirmedEstimate</span>
                                 #end
                             </td>
                         </tr>
