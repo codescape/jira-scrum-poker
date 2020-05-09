@@ -37,6 +37,7 @@ Click on the version in the following list to see all changes since the previous
 * refactor: improve speed for calculation for revealing deck permission
 * refactor: improve readability for session mapping 
 * feat: support non-numeric estimates (#102)
+* feat: treat all votes that are not a special card as assignable (#102)
 
 ### [4.10.0] - 2020-03-28
 
