@@ -39,6 +39,7 @@ Click on the version in the following list to see all changes since the previous
 * feat: support non-numeric estimates (#102)
 * feat: treat all votes that are not a special card as assignable (#102)
 * feat: evaluate need to talk flag for all kind of cards (#102)
+* feat: persist estimate based on custom field type (#102)
 
 ### [4.10.0] - 2020-03-28
 

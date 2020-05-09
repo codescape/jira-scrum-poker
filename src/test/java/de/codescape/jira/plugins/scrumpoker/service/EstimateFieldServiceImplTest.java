@@ -4,6 +4,7 @@ import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.UpdateIssueRequest;
+import com.atlassian.jira.issue.customfields.CustomFieldType;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.permission.ProjectPermissions;
 import com.atlassian.jira.security.JiraAuthenticationContext;
@@ -21,6 +22,7 @@ import org.mockito.junit.MockitoRule;
 import java.util.Arrays;
 import java.util.Collections;
 
+import static de.codescape.jira.plugins.scrumpoker.service.EstimateFieldServiceImpl.CUSTOM_FIELD_TYPE_NUMBER;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -62,6 +64,9 @@ public class EstimateFieldServiceImplTest {
     private CustomField customField;
 
     @Mock
+    private CustomFieldType customFieldType;
+
+    @Mock
     private CustomField anotherField;
 
     @Mock
@@ -81,6 +86,7 @@ public class EstimateFieldServiceImplTest {
         expectIssueWithIssueKeyExists();
         expectPermissionCheckDisabled();
         expectCustomFieldFound();
+        expectCustomFieldTypeSupported();
         expectUpdatingIssueFails();
         assertThat(estimateFieldService.save(ISSUE_KEY, ESTIMATE), is(false));
     }
@@ -91,6 +97,7 @@ public class EstimateFieldServiceImplTest {
         expectIssueWithIssueKeyExists();
         expectPermissionCheckDisabled();
         expectCustomFieldFound();
+        expectCustomFieldTypeSupported();
         expectUpdatingIssueSuccessful();
         assertThat(estimateFieldService.save(ISSUE_KEY, ESTIMATE), is(true));
     }
@@ -111,8 +118,30 @@ public class EstimateFieldServiceImplTest {
         expectPermissionCheckEnabled();
         expectPermissionCheckSuccessful();
         expectCustomFieldFound();
+        expectCustomFieldTypeSupported();
         expectUpdatingIssueSuccessful();
         assertThat(estimateFieldService.save(ISSUE_KEY, ESTIMATE), is(true));
+    }
+
+
+    @Test
+    public void saveFailsWithCustomFieldNotSupported() {
+        expectUserLoggedIn();
+        expectIssueWithIssueKeyExists();
+        expectPermissionCheckDisabled();
+        expectCustomFieldFound();
+        expectCustomFieldTypeNotSupported();
+        assertThat(estimateFieldService.save(ISSUE_KEY, ESTIMATE), is(false));
+    }
+
+    private void expectCustomFieldTypeNotSupported() {
+        when(customField.getCustomFieldType()).thenReturn(customFieldType);
+        when(customFieldType.getKey()).thenReturn("some.crazy.unknown::customfield");
+    }
+
+    private void expectCustomFieldTypeSupported() {
+        when(customField.getCustomFieldType()).thenReturn(customFieldType);
+        when(customFieldType.getKey()).thenReturn(CUSTOM_FIELD_TYPE_NUMBER);
     }
 
     @Test
