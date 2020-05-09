@@ -42,11 +42,14 @@ public interface ScrumPokerSession extends RawEntity<String> {
     void setVisible(boolean visible);
 
     /**
-     * The confirmed vote for this Scrum Poker session if exists.
+     * @deprecated since 4.11 replaced by {@link #getConfirmedEstimate()}
      */
     @Deprecated
     Integer getConfirmedVote();
 
+    /**
+     * @deprecated since 4.11 replaced by {@link #setConfirmedEstimate(String)}
+     */
     @Deprecated
     void setConfirmedVote(Integer confirmedVote);
 

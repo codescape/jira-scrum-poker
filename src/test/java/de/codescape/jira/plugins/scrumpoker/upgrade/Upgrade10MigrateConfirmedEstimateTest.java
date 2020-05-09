@@ -48,6 +48,7 @@ public class Upgrade10MigrateConfirmedEstimateTest {
     }
 
     @Test
+    @SuppressWarnings("deprecation")
     public void shouldMigrateSessionsWithConfirmedVoteSet() {
         createScrumPokerSession("ISSUE-1", 5, null);
 
@@ -59,6 +60,7 @@ public class Upgrade10MigrateConfirmedEstimateTest {
     }
 
     @Test
+    @SuppressWarnings("deprecation")
     public void shouldNotChangeSessionsWithConfirmedVoteAndConfirmedEstimateEmpty() {
         createScrumPokerSession("ISSUE-2", null, null);
 
@@ -70,6 +72,7 @@ public class Upgrade10MigrateConfirmedEstimateTest {
     }
 
     @Test
+    @SuppressWarnings("deprecation")
     public void shouldNotChangeSessionsWithConfirmedVoteEmptyButConfirmedEstimateSet() {
         createScrumPokerSession("ISSUE-3", null, "5");
 
@@ -80,6 +83,7 @@ public class Upgrade10MigrateConfirmedEstimateTest {
         assertThat(scrumPokerSession.getConfirmedEstimate(), is("5"));
     }
 
+    @SuppressWarnings("deprecation")
     private ScrumPokerSession createScrumPokerSession(String issueKey, Integer confirmedVote, String confirmedEstimate) {
         ScrumPokerSession scrumPokerSession = activeObjects.create(ScrumPokerSession.class, new DBParam("ISSUE_KEY", issueKey));
         scrumPokerSession.setConfirmedVote(confirmedVote);
