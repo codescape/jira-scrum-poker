@@ -12,6 +12,7 @@ Click on the version in the following list to see all changes since the previous
 ### [Unreleased]
 
 * test: improve mock usage in tests for session entity mapper
+* docs: fix reference to version comparison in changelog
 
 ### [20.05.0] - 2020-05-09
 
@@ -940,8 +941,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.05...HEAD
-[20.05.0]: https://github.com/codescape/jira-scrum-poker/compare/4.10.0...20.05
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.05.0...HEAD
+[20.05.0]: https://github.com/codescape/jira-scrum-poker/compare/4.10.0...20.05.0
 [4.10.0]: https://github.com/codescape/jira-scrum-poker/compare/4.9.0...4.10.0
 [4.9.0]: https://github.com/codescape/jira-scrum-poker/compare/4.8.2...4.9.0
 [4.8.2]: https://github.com/codescape/jira-scrum-poker/compare/4.8.1...4.8.2
