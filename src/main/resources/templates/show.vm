@@ -18,7 +18,10 @@
         <div class="aui-page-header-main">
             <ol class="aui-nav aui-nav-breadcrumbs">
                 <li><a href="$req.contextPath/browse/$issue.projectObject.key" id="project-name-val">$issue.projectObject.name</a></li>
-                <li><a rel="10006" id="key-val" href="$req.contextPath/browse/$issue.key" data-issue-key="$issue.key" class="issue-link">$issue.key</a></li>
+                #if($issue.parentObject)
+                    <li><a href="$req.contextPath/browse/$issue.parentObject.key" id="parent_issue_summary">$issue.parentObject.key $issue.parentObject.summary</a></li>
+                #end
+                <li><a id="key-val" href="$req.contextPath/browse/$issue.key" data-issue-key="$issue.key" class="issue-link">$issue.key</a></li>
             </ol>
             <h1>$issue.summary</h1>
         </div>

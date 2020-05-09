@@ -42,6 +42,7 @@ Click on the version in the following list to see all changes since the previous
 * feat: persist estimate based on custom field type (#102)
 * feat: only show supported custom fields in configuration (#102)
 * refactor: optimize loading card set for mapped session (#102)
+* feat: show parent task information for sub tasks (#110)
 
 ### [4.10.0] - 2020-03-28
 
