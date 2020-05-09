@@ -14,12 +14,12 @@ import static org.junit.Assert.assertThat;
 public class SessionEntityTest {
 
     @Test
-    public void shouldSignalExistenceOfConfirmedVoteIfConfirmedVoteIsSet() {
+    public void shouldSignalExistenceOfConfirmedEstimateIfConfirmedEstimateIsSet() {
         assertThat(new SessionEntity().withConfirmedEstimate("1").isConfirmedEstimateExists(), is(true));
     }
 
     @Test
-    public void shouldSignalNoExistenceOfConfirmedVoteIfNoConfirmedVoteIsSet() {
+    public void shouldSignalNoExistenceOfConfirmedEstimateIfNoConfirmedEstimateIsSet() {
         assertThat(new SessionEntity().withConfirmedEstimate(null).isConfirmedEstimateExists(), is(false));
     }
 

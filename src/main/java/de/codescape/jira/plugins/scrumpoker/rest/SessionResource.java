@@ -94,14 +94,14 @@ public class SessionResource {
     }
 
     /**
-     * Confirm the estimation of the Scrum Poker session.
+     * Confirm the estimate of the Scrum Poker session.
      */
     @POST
-    @Path("/{issueKey}/confirm/{estimation}")
+    @Path("/{issueKey}/confirm/{estimate}")
     public Response confirmEstimation(@PathParam("issueKey") String issueKey,
-                                      @PathParam("estimation") String estimation) {
-        scrumPokerSessionService.confirm(issueKey, currentUser(), estimation);
-        if (estimateFieldService.save(issueKey, estimation)) {
+                                      @PathParam("estimate") String estimate) {
+        scrumPokerSessionService.confirm(issueKey, currentUser(), estimate);
+        if (estimateFieldService.save(issueKey, estimate)) {
             return Response.ok().build();
         } else {
             return Response.serverError().build();
