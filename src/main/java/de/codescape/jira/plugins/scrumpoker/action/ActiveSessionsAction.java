@@ -55,7 +55,7 @@ public class ActiveSessionsAction extends AbstractScrumPokerAction {
      */
     public List<SessionEntity> getOpenSessions() {
         return scrumPokerSessionService.recent().stream()
-            .filter(session -> session.getConfirmedVote() == null)
+            .filter(session -> session.getConfirmedEstimate() == null)
             .filter(session -> !session.isCancelled())
             .filter(session -> getIssue(session.getIssueKey()) != null)
             .filter(session -> currentUserIsAllowedToSeeIssue(getIssue(session.getIssueKey())))
@@ -68,7 +68,7 @@ public class ActiveSessionsAction extends AbstractScrumPokerAction {
      */
     public List<SessionEntity> getClosedSessions() {
         return scrumPokerSessionService.recent().stream()
-            .filter(session -> session.getConfirmedVote() != null || session.isCancelled())
+            .filter(session -> session.getConfirmedEstimate() != null || session.isCancelled())
             .filter(session -> getIssue(session.getIssueKey()) != null)
             .filter(session -> currentUserIsAllowedToSeeIssue(getIssue(session.getIssueKey())))
             .map(session -> sessionEntityMapper.build(session, currentUser().getKey()))

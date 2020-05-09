@@ -15,12 +15,12 @@ public class SessionEntityTest {
 
     @Test
     public void shouldSignalExistenceOfConfirmedVoteIfConfirmedVoteIsSet() {
-        assertThat(new SessionEntity().withConfirmedVote(1).isConfirmedVoteExists(), is(true));
+        assertThat(new SessionEntity().withConfirmedEstimate("1").isConfirmedEstimateExists(), is(true));
     }
 
     @Test
     public void shouldSignalNoExistenceOfConfirmedVoteIfNoConfirmedVoteIsSet() {
-        assertThat(new SessionEntity().withConfirmedVote(null).isConfirmedVoteExists(), is(false));
+        assertThat(new SessionEntity().withConfirmedEstimate(null).isConfirmedEstimateExists(), is(false));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class SessionEntityTest {
         String json = new ObjectMapper().writeValueAsString(new SessionEntity());
         assertThat(json, containsString("issueKey"));
         assertThat(json, containsString("cards"));
-        assertThat(json, containsString("confirmedVote"));
+        assertThat(json, containsString("confirmedEstimate"));
         assertThat(json, containsString("visible"));
         assertThat(json, containsString("boundedVotes"));
         assertThat(json, containsString("agreementReached"));

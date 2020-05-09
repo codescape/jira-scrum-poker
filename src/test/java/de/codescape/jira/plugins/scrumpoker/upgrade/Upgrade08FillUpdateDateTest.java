@@ -18,8 +18,7 @@ import org.junit.runner.RunWith;
 
 import java.util.Date;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
@@ -35,9 +34,9 @@ public class Upgrade08FillUpdateDateTest {
 
     private Upgrade08FillUpdateDate upgrade;
 
-    private static Date OLD_DATE = new Date(System.currentTimeMillis() / 1000 * 1000 - 1000 * 3600 * 24 * 10);
-    private static Date MIDDLE_DATE = new Date(System.currentTimeMillis() / 1000 * 1000 - 1000 * 3600 * 10);
-    private static Date NEW_DATE = new Date(System.currentTimeMillis() / 1000 * 1000 - 1000 * 3600 * 2);
+    private static final Date OLD_DATE = new Date(System.currentTimeMillis() / 1000 * 1000 - 1000 * 3600 * 24 * 10);
+    private static final Date MIDDLE_DATE = new Date(System.currentTimeMillis() / 1000 * 1000 - 1000 * 3600 * 10);
+    private static final Date NEW_DATE = new Date(System.currentTimeMillis() / 1000 * 1000 - 1000 * 3600 * 2);
 
     @Before
     public void before() {
@@ -77,6 +76,16 @@ public class Upgrade08FillUpdateDateTest {
 
         ScrumPokerSession upgradedScrumPokerSession = getScrumPokerSession("ISSUE-3");
         assertThat(upgradedScrumPokerSession.getUpdateDate(), is(equalTo(upgradedScrumPokerSession.getConfirmedDate())));
+    }
+
+    @Test
+    public void shouldReturnCorrectBuildNumber() {
+        assertThat(upgrade.getBuildNumber(), is(equalTo(8)));
+    }
+
+    @Test
+    public void shouldReturnShortDescriptionWithLessThan50Characters() {
+        assertThat(upgrade.getShortDescription().length(), is(lessThan(50)));
     }
 
     private void createScrumPokerVote(ScrumPokerSession scrumPokerSession, Date createDate) {

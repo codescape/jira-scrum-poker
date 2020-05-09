@@ -99,7 +99,7 @@ public class SessionResource {
     @POST
     @Path("/{issueKey}/confirm/{estimation}")
     public Response confirmEstimation(@PathParam("issueKey") String issueKey,
-                                      @PathParam("estimation") Integer estimation) {
+                                      @PathParam("estimation") String estimation) {
         scrumPokerSessionService.confirm(issueKey, currentUser(), estimation);
         if (estimateFieldService.save(issueKey, estimation)) {
             return Response.ok().build();
@@ -109,13 +109,13 @@ public class SessionResource {
     }
 
     /**
-     * Retrieve reference issues for the given estimation.
+     * Retrieve reference issues for the given estimate.
      */
     @GET
-    @Path("/reference/{estimation}")
-    public Response getReferences(@PathParam("estimation") Integer estimation) {
-        List<ScrumPokerSession> references = scrumPokerSessionService.references(currentUser(), estimation);
-        return Response.ok(sessionReferenceMapper.build(references, estimation)).build();
+    @Path("/reference/{estimate}")
+    public Response getReferences(@PathParam("estimate") String estimate) {
+        List<ScrumPokerSession> references = scrumPokerSessionService.references(currentUser(), estimate);
+        return Response.ok(sessionReferenceMapper.build(references, estimate)).build();
     }
 
     private String currentUser() {

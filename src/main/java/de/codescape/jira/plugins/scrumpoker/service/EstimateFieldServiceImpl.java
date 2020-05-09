@@ -1,9 +1,6 @@
 package de.codescape.jira.plugins.scrumpoker.service;
 
-import com.atlassian.jira.issue.CustomFieldManager;
-import com.atlassian.jira.issue.IssueManager;
-import com.atlassian.jira.issue.MutableIssue;
-import com.atlassian.jira.issue.UpdateIssueRequest;
+import com.atlassian.jira.issue.*;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.permission.ProjectPermissions;
 import com.atlassian.jira.security.JiraAuthenticationContext;
@@ -42,7 +39,7 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
     }
 
     @Override
-    public boolean save(String issueKey, Integer estimate) {
+    public boolean save(String issueKey, String estimate) {
         ApplicationUser applicationUser = jiraAuthenticationContext.getLoggedInUser();
         MutableIssue issue = issueManager.getIssueByCurrentKey(issueKey);
         if (globalSettingsService.load().isCheckPermissionToSaveEstimate() &&
@@ -51,7 +48,7 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
                 " is missing permissions to save estimation for issue " + issueKey + ".", null);
             return false;
         }
-        issue.setCustomFieldValue(findEstimateField(), estimate.doubleValue());
+        issue.setCustomFieldValue(findEstimateField(), estimate);
         try {
             issueManager.updateIssue(applicationUser, issue, UpdateIssueRequest.builder().build());
             return true;
@@ -65,6 +62,12 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
     @Override
     public CustomField findEstimateField() {
         return customFieldManager.getCustomFieldObject(globalSettingsService.load().getEstimateField());
+    }
+
+    @Override
+    public boolean hasEstimateField(Issue issue) {
+        CustomField estimateField = findEstimateField();
+        return estimateField != null && customFieldManager.getCustomFieldObjects(issue).contains(estimateField);
     }
 
 }

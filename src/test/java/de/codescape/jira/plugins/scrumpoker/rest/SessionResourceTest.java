@@ -24,7 +24,7 @@ public class SessionResourceTest {
     private static final String ISSUE_KEY = "ISSUE-1";
     private static final String USER_KEY = "userKey";
     private static final String CARD_VALUE = "5";
-    private static final int ESTIMATION = 5;
+    private static final String ESTIMATE = "5";
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -100,13 +100,13 @@ public class SessionResourceTest {
     }
 
     @Test
-    public void confirmingEstimationShouldConfirmEstimationInUnderlyingSessionAndPersistEstimation() {
+    public void confirmingEstimateShouldConfirmEstimateInUnderlyingSessionAndPersistEstimate() {
         expectCurrentUserIs(USER_KEY);
 
-        sessionResource.confirmEstimation(ISSUE_KEY, ESTIMATION);
+        sessionResource.confirmEstimation(ISSUE_KEY, ESTIMATE);
 
-        verify(scrumPokerSessionService, times(1)).confirm(ISSUE_KEY, USER_KEY, ESTIMATION);
-        verify(estimateFieldService, times(1)).save(ISSUE_KEY, ESTIMATION);
+        verify(scrumPokerSessionService, times(1)).confirm(ISSUE_KEY, USER_KEY, ESTIMATE);
+        verify(estimateFieldService, times(1)).save(ISSUE_KEY, ESTIMATE);
     }
 
     private void expectCurrentUserIs(String userKey) {

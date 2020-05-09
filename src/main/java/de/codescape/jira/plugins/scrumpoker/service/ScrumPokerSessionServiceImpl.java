@@ -93,9 +93,9 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     }
 
     @Override
-    public ScrumPokerSession confirm(String issueKey, String userKey, Integer estimation) {
+    public ScrumPokerSession confirm(String issueKey, String userKey, String estimate) {
         ScrumPokerSession scrumPokerSession = byIssueKey(issueKey, userKey);
-        scrumPokerSession.setConfirmedVote(estimation);
+        scrumPokerSession.setConfirmedEstimate(estimate);
         scrumPokerSession.setConfirmedUserKey(userKey);
         scrumPokerSession.setConfirmedDate(new Date());
         scrumPokerSession.setUpdateDate(new Date());
@@ -121,12 +121,12 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     }
 
     @Override
-    public List<ScrumPokerSession> references(String userKey, Integer estimation) {
+    public List<ScrumPokerSession> references(String userKey, String estimate) {
         return Arrays.asList(activeObjects.find(ScrumPokerSession.class, Query.select()
             .alias(ScrumPokerSession.class, "SPS")
             .alias(ScrumPokerVote.class, "SPV")
             .join(ScrumPokerVote.class, "SPV.SESSION_ID = SPS.ISSUE_KEY")
-            .where("SPV.USER_KEY = ? and SPS.CONFIRMED_VOTE = ?", userKey, estimation)
+            .where("SPV.USER_KEY = ? and SPS.CONFIRMED_ESTIMATE = ?", userKey, estimate)
             .order("SPS.CONFIRMED_DATE DESC")
             .limit(3)));
     }
@@ -157,7 +157,7 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
         scrumPokerSession.setCreateDate(new Date());
         scrumPokerSession.setCreatorUserKey(userKey);
         scrumPokerSession.setVisible(false);
-        scrumPokerSession.setConfirmedVote(null);
+        scrumPokerSession.setConfirmedEstimate(null);
         scrumPokerSession.setCardSet(globalSettingsService.load().getCardSet());
         scrumPokerSession.setUpdateDate(new Date());
         scrumPokerSession.save();

@@ -44,9 +44,18 @@ public interface ScrumPokerSession extends RawEntity<String> {
     /**
      * The confirmed vote for this Scrum Poker session if exists.
      */
+    @Deprecated
     Integer getConfirmedVote();
 
+    @Deprecated
     void setConfirmedVote(Integer confirmedVote);
+
+    /**
+     * The confirmed estimate for this Scrum Poker session if exists.
+     */
+    String getConfirmedEstimate();
+
+    void setConfirmedEstimate(String estimate);
 
     /**
      * The unique key of the user who confirmed the estimation.

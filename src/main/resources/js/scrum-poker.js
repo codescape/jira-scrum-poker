@@ -51,7 +51,7 @@
     /* Refresh the Scrum Poker session and display results using Mustache template */
     function refreshSession(issueKey) {
         $.get(uri + '/session/' + issueKey, function(data) {
-            if(data.confirmedVoteExists || data.cancelled) {
+            if(data.confirmedEstimateExists || data.cancelled) {
                  $('#scrum-poker-cards').empty();
                  $('#scrum-poker-participants').empty();
                  $('#scrum-poker-buttons').empty();

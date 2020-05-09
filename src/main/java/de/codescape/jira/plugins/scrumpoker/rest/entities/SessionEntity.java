@@ -12,7 +12,7 @@ public class SessionEntity {
 
     private String issueKey;
     private List<CardEntity> cards;
-    private Integer confirmedVote;
+    private String confirmedEstimate;
     private String confirmedUser;
     private DateEntity confirmedDate;
     private boolean visible;
@@ -46,17 +46,17 @@ public class SessionEntity {
         return cards;
     }
 
-    public SessionEntity withConfirmedVote(Integer confirmedVote) {
-        this.confirmedVote = confirmedVote;
+    public SessionEntity withConfirmedEstimate(String confirmedEstimate) {
+        this.confirmedEstimate = confirmedEstimate;
         return this;
     }
 
-    public Integer getConfirmedVote() {
-        return confirmedVote;
+    public String getConfirmedEstimate() {
+        return confirmedEstimate;
     }
 
-    public boolean isConfirmedVoteExists() {
-        return confirmedVote != null;
+    public boolean isConfirmedEstimateExists() {
+        return confirmedEstimate != null;
     }
 
     public SessionEntity withConfirmedUser(String confirmedUser) {

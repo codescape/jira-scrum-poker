@@ -1,6 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.activeobjects.tx.Transactional;
+import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.fields.CustomField;
 
 /**
@@ -17,7 +18,7 @@ public interface EstimateFieldService {
      * @param estimate new estimate
      * @return <code>true</code> if value is persisted, otherwise <code>false</code>
      */
-    boolean save(String issueKey, Integer estimate);
+    boolean save(String issueKey, String estimate);
 
     /**
      * Return the estimate custom field.
@@ -25,5 +26,13 @@ public interface EstimateFieldService {
      * @return the estimate custom field
      */
     CustomField findEstimateField();
+
+    /**
+     * Return whether the given issue has the estimate field configured.
+     *
+     * @param issue issue
+     * @return <code>true</code> if estimate field exists, otherwise <code>false</code>
+     */
+    boolean hasEstimateField(Issue issue);
 
 }

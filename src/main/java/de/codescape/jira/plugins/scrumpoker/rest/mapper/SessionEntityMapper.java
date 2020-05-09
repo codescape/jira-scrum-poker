@@ -66,7 +66,7 @@ public class SessionEntityMapper {
     public SessionEntity build(ScrumPokerSession scrumPokerSession, String userKey) {
         return new SessionEntity()
             .withIssueKey(scrumPokerSession.getIssueKey())
-            .withConfirmedVote(scrumPokerSession.getConfirmedVote())
+            .withConfirmedEstimate(scrumPokerSession.getConfirmedEstimate())
             .withConfirmedDate(dateEntity(scrumPokerSession.getConfirmedDate()))
             .withConfirmedUser(displayNameForUser(scrumPokerSession.getConfirmedUserKey()))
             .withVisible(scrumPokerSession.isVisible())

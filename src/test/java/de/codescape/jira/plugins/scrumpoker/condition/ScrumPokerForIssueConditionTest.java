@@ -1,6 +1,5 @@
 package de.codescape.jira.plugins.scrumpoker.condition;
 
-import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
@@ -17,9 +16,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -29,9 +25,6 @@ public class ScrumPokerForIssueConditionTest {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
-
-    @Mock
-    private CustomFieldManager customFieldManager;
 
     @Mock
     private EstimateFieldService estimateFieldService;
@@ -126,22 +119,11 @@ public class ScrumPokerForIssueConditionTest {
     }
 
     private void expectThatIssueDoesNotContainTheEstimateField() {
-        expectThatEstimateFieldExists();
-        List<CustomField> emptyList = new ArrayList<>();
-        emptyList.add(someOtherField);
-        when(customFieldManager.getCustomFieldObjects(issue)).thenReturn(emptyList);
+        when(estimateFieldService.hasEstimateField(issue)).thenReturn(false);
     }
 
     private void expectThatIssueContainsTheEstimateField() {
-        expectThatEstimateFieldExists();
-        ArrayList<CustomField> listOfCustomFields = new ArrayList<>();
-        listOfCustomFields.add(estimateField);
-        listOfCustomFields.add(someOtherField);
-        when(customFieldManager.getCustomFieldObjects(issue)).thenReturn(listOfCustomFields);
-    }
-
-    private void expectThatEstimateFieldExists() {
-        when(estimateFieldService.findEstimateField()).thenReturn(estimateField);
+        when(estimateFieldService.hasEstimateField(issue)).thenReturn(true);
     }
 
     private void expectThatDefaultProjectActivationIsEnabled() {

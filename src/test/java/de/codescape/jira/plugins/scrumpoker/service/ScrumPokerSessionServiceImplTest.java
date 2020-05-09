@@ -132,8 +132,8 @@ public class ScrumPokerSessionServiceImplTest {
     @Test
     public void shouldAddUserAndDateWhenVoteIsConfirmed() {
         scrumPokerSessionService.addVote("ISSUE-1", "USER-1", "5");
-        ScrumPokerSession scrumPokerSession = scrumPokerSessionService.confirm("ISSUE-1", "USER-2", 5);
-        assertThat(scrumPokerSession.getConfirmedVote(), is(equalTo(5)));
+        ScrumPokerSession scrumPokerSession = scrumPokerSessionService.confirm("ISSUE-1", "USER-2", "5");
+        assertThat(scrumPokerSession.getConfirmedEstimate(), is(equalTo("5")));
         assertThat(scrumPokerSession.getConfirmedUserKey(), is(equalTo("USER-2")));
         assertThat(scrumPokerSession.getConfirmedDate(), is(notNullValue()));
     }
@@ -190,21 +190,21 @@ public class ScrumPokerSessionServiceImplTest {
     @Test
     public void shouldReturnReferencesWithTheSameUserAndEstimation() {
         scrumPokerSessionService.addVote("ISSUE-1", "USER-1", "3");
-        scrumPokerSessionService.confirm("ISSUE-1", "USER-1", 8);
+        scrumPokerSessionService.confirm("ISSUE-1", "USER-1", "8");
 
         scrumPokerSessionService.addVote("ISSUE-2", "USER-1", "8");
-        scrumPokerSessionService.confirm("ISSUE-2", "USER-1", 8);
+        scrumPokerSessionService.confirm("ISSUE-2", "USER-1", "8");
 
         scrumPokerSessionService.addVote("ISSUE-5", "USER-1", "5");
-        scrumPokerSessionService.confirm("ISSUE-5", "USER-1", 8);
+        scrumPokerSessionService.confirm("ISSUE-5", "USER-1", "8");
 
         scrumPokerSessionService.addVote("ISSUE-8", "USER-1", "8");
-        scrumPokerSessionService.confirm("ISSUE-8", "USER-1", 8);
+        scrumPokerSessionService.confirm("ISSUE-8", "USER-1", "8");
 
         scrumPokerSessionService.addVote("ISSUE-3", "USER-2", "8");
-        scrumPokerSessionService.confirm("ISSUE-3", "USER-2", 8);
+        scrumPokerSessionService.confirm("ISSUE-3", "USER-2", "8");
 
-        List<ScrumPokerSession> references = scrumPokerSessionService.references("USER-1", 8);
+        List<ScrumPokerSession> references = scrumPokerSessionService.references("USER-1", "8");
         assertThat(references.size(), is(3));
         assertThat(references.stream().map(ScrumPokerSession::getIssueKey).collect(Collectors.toList()),
             hasItems("ISSUE-8", "ISSUE-5", "ISSUE-2"));
@@ -213,12 +213,12 @@ public class ScrumPokerSessionServiceImplTest {
     @Test
     public void shouldReturnAnEmptyListWhenNoReferencesExistWithTheSameEstimationForTheSameUser() {
         scrumPokerSessionService.addVote("ISSUE-1", "USER-1", "3");
-        scrumPokerSessionService.confirm("ISSUE-1", "USER-2", 5);
+        scrumPokerSessionService.confirm("ISSUE-1", "USER-2", "5");
 
         scrumPokerSessionService.addVote("ISSUE-2", "USER-1", "8");
-        scrumPokerSessionService.confirm("ISSUE-2", "USER-2", 3);
+        scrumPokerSessionService.confirm("ISSUE-2", "USER-2", "3");
 
-        List<ScrumPokerSession> references = scrumPokerSessionService.references("USER-1", 8);
+        List<ScrumPokerSession> references = scrumPokerSessionService.references("USER-1", "8");
         assertThat(references.isEmpty(), is(true));
     }
 

@@ -1,13 +1,10 @@
 package de.codescape.jira.plugins.scrumpoker.condition;
 
-import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.Issue;
-import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.plugin.webfragment.conditions.AbstractIssueWebCondition;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.project.Project;
 import com.atlassian.jira.user.ApplicationUser;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingsService;
@@ -21,17 +18,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition {
 
-    private final CustomFieldManager customFieldManager;
     private final EstimateFieldService estimateFieldService;
     private final GlobalSettingsService globalSettingsService;
     private final ProjectSettingsService projectSettingsService;
 
     @Autowired
-    public ScrumPokerForIssueCondition(@ComponentImport CustomFieldManager customFieldManager,
-                                       EstimateFieldService estimateFieldService,
+    public ScrumPokerForIssueCondition(EstimateFieldService estimateFieldService,
                                        GlobalSettingsService globalSettingsService,
                                        ProjectSettingsService projectSettingsService) {
-        this.customFieldManager = customFieldManager;
         this.estimateFieldService = estimateFieldService;
         this.globalSettingsService = globalSettingsService;
         this.projectSettingsService = projectSettingsService;
@@ -54,10 +48,8 @@ public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition {
             || projectSettingsService.loadScrumPokerEnabled(project.getId());
     }
 
-    // TODO move method to EstimateFieldService
     private boolean hasEstimateField(Issue currentIssue) {
-        CustomField estimateField = estimateFieldService.findEstimateField();
-        return customFieldManager.getCustomFieldObjects(currentIssue).contains(estimateField);
+        return estimateFieldService.hasEstimateField(currentIssue);
     }
 
 }
