@@ -77,7 +77,6 @@ public class SessionEntityMapperTest {
     public void before() {
         when(userManager.getUserByKey(anyString())).thenReturn(applicationUser);
         when(globalSettingsService.load()).thenReturn(globalSettings);
-        when(globalSettings.getAllowRevealDeck()).thenReturn(AllowRevealDeck.EVERYONE);
         when(applicationUser.getDisplayName()).thenReturn("John Doe");
         DateTimeFormatter userSpecificDateTimeFormatter = mock(DateTimeFormatter.class);
         when(userSpecificDateTimeFormatter.withStyle(ArgumentMatchers.any(DateTimeStyle.class)))
@@ -107,6 +106,7 @@ public class SessionEntityMapperTest {
 
     @Test
     public void shouldNotReturnAgreementForHiddenDeck() {
+        when(globalSettings.getAllowRevealDeck()).thenReturn(AllowRevealDeck.EVERYONE);
         ScrumPokerVote[] scrumPokerVotes = {scrumPokerVote("5"), scrumPokerVote("5")};
         ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, false);
 
@@ -331,6 +331,7 @@ public class SessionEntityMapperTest {
 
     @Test
     public void shouldNotSignalBreakIsNeededIfUserChoosesTheCoffeeCardButDeckIsNotVisible() {
+        when(globalSettings.getAllowRevealDeck()).thenReturn(AllowRevealDeck.EVERYONE);
         ScrumPokerVote[] scrumPokerVotes = {scrumPokerVote(COFFEE_BREAK.getValue())};
         ScrumPokerSession scrumPokerSession = scrumPokerSession(scrumPokerVotes, false);
         SessionEntity sessionEntity = sessionEntityMapper.build(scrumPokerSession, CURRENT_USER);

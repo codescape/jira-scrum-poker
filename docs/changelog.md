@@ -11,7 +11,7 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
-* ...
+* test: improve mock usage in tests for session entity mapper
 
 ### [20.05.0] - 2020-05-09
 
