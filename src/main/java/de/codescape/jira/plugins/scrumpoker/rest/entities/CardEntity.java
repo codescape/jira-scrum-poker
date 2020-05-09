@@ -10,10 +10,12 @@ public class CardEntity {
 
     private final String value;
     private final boolean selected;
+    private final boolean assignable;
 
-    public CardEntity(String value, boolean selected) {
+    public CardEntity(String value, boolean selected, boolean assignable) {
         this.value = value;
         this.selected = selected;
+        this.assignable = assignable;
     }
 
     public String getValue() {
@@ -22,6 +24,10 @@ public class CardEntity {
 
     public boolean isSelected() {
         return selected;
+    }
+
+    public boolean isAssignable() {
+        return assignable;
     }
 
 }

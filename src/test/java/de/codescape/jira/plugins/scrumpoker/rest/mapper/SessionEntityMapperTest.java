@@ -365,6 +365,52 @@ public class SessionEntityMapperTest {
         assertThat(sessionEntity.isAllowConfirm(), is(equalTo(false)));
     }
 
+    @Test
+    public void needToTalkShouldSignalFlagToNonSpecialValuesOnBoundariesForVisibleDeck() {
+        when(cardSetService.getCardSet(ArgumentMatchers.any(ScrumPokerSession.class))).thenReturn(
+            Arrays.asList(
+                QUESTION_MARK,
+                COFFEE_BREAK,
+                new Card("3", true),
+                new Card("5", true),
+                new Card("8", true),
+                new Card("13", true)));
+        ScrumPokerVote[] scrumPokerVotes = {
+            scrumPokerVote("3", "USER-1"),
+            scrumPokerVote("5", "USER-2"),
+            scrumPokerVote("8", "USER-3")};
+        SessionEntity sessionEntity = sessionEntityMapper
+            .build(scrumPokerSession(scrumPokerVotes, true, CURRENT_USER), CURRENT_USER);
+        assertThat(sessionEntity.getVotes(), hasItems(
+            allOf(hasProperty("vote", is("3")), hasProperty("needToTalk", is(true))),
+            allOf(hasProperty("vote", is("5")), hasProperty("needToTalk", is(false))),
+            allOf(hasProperty("vote", is("8")), hasProperty("needToTalk", is(true)))
+        ));
+    }
+
+    @Test
+    public void needToTalkShouldSignalFlagToNonNumericValuesOnBoundariesForVisibleDeck() {
+        when(cardSetService.getCardSet(ArgumentMatchers.any(ScrumPokerSession.class))).thenReturn(
+            Arrays.asList(
+                QUESTION_MARK,
+                COFFEE_BREAK,
+                new Card("S", true),
+                new Card("M", true),
+                new Card("L", true),
+                new Card("XL", true)));
+        ScrumPokerVote[] scrumPokerVotes = {
+            scrumPokerVote("M", "USER-1"),
+            scrumPokerVote("M", "USER-2"),
+            scrumPokerVote(QUESTION_MARK.getValue(), "USER-3")};
+        SessionEntity sessionEntity = sessionEntityMapper
+            .build(scrumPokerSession(scrumPokerVotes, true, CURRENT_USER), CURRENT_USER);
+        assertThat(sessionEntity.getVotes(), hasItems(
+            allOf(hasProperty("vote", is("M")), hasProperty("needToTalk", is(true))),
+            allOf(hasProperty("vote", is("M")), hasProperty("needToTalk", is(true))),
+            allOf(hasProperty("vote", is(QUESTION_MARK.getValue())), hasProperty("needToTalk", is(true)))
+        ));
+    }
+
     private static ScrumPokerSession scrumPokerSession(ScrumPokerVote[] scrumPokerVotes, boolean visible) {
         return scrumPokerSession(scrumPokerVotes, visible, "CREATOR_USER");
     }

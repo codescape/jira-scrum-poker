@@ -9,7 +9,7 @@
     var redirectTimeoutActive = false;
     var fadeReferencesTimeout;
     var fadeReferencesTimeoutActive = false;
-    var lastShownEstimation;
+    var lastShownEstimate;
 
     /* Initialize the Scrum Poker session view */
     ScrumPoker.init = function(issueKey) {
@@ -117,9 +117,9 @@
         });
     }
 
-    /* Confirm the estimation for a Scrum Poker session ending itself and persisting the estimation on the issue */
-    ScrumPoker.confirmSession = function(issueKey, estimation) {
-        $.post(uri + '/session/' + issueKey + '/confirm/' + encodeURIComponent(estimation), function(data, status) {
+    /* Confirm the estimate for a Scrum Poker session ending itself and persisting the estimate on the issue */
+    ScrumPoker.confirmSession = function(issueKey, estimate) {
+        $.post(uri + '/session/' + issueKey + '/confirm/' + encodeURIComponent(estimate), function(data, status) {
             refreshSession(issueKey);
             AJS.flag({
                 type: 'success',
@@ -142,17 +142,17 @@
         });
     }
 
-    /* Loads reference estimations that can be used to decide for or against an estimation */
-    ScrumPoker.showReferences = function(estimation) {
-        if(typeof estimation !== 'undefined' && $.isNumeric(estimation))  {
+    /* Loads reference estimates that can be used to decide for or against an estimate */
+    ScrumPoker.showReferences = function(estimate, assignable) {
+        if(typeof estimate !== 'undefined' && assignable)  {
             if (fadeReferencesTimeoutActive) {
                 clearTimeout(fadeReferencesTimeout);
                 fadeReferencesTimeoutActive = false;
             }
-            if (estimation != lastShownEstimation || $('#scrum-poker-references').is(":empty")) {
-                $.get(uri + '/session/reference/' + encodeURIComponent(estimation), function(data, status) {
+            if (estimate != lastShownEstimate || $('#scrum-poker-references').is(":empty")) {
+                $.get(uri + '/session/reference/' + encodeURIComponent(estimate), function(data, status) {
                     $('#scrum-poker-references').html(Mustache.render($('#scrum-poker-references-template').html(), data));
-                    lastShownEstimation = estimation;
+                    lastShownEstimate = estimate;
                 }, 'json');
             }
             $('#scrum-poker-references').fadeIn(1000);

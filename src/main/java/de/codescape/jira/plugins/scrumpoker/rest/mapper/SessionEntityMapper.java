@@ -63,6 +63,7 @@ public class SessionEntityMapper {
      * @return transformed {@link SessionEntity}
      */
     public SessionEntity build(ScrumPokerSession scrumPokerSession, String userKey) {
+        List<BoundedVoteEntity> boundedVotes = boundedVotes(scrumPokerSession);
         return new SessionEntity()
             .withIssueKey(scrumPokerSession.getIssueKey())
             .withConfirmedEstimate(scrumPokerSession.getConfirmedEstimate())
@@ -70,8 +71,8 @@ public class SessionEntityMapper {
             .withConfirmedUser(displayNameForUser(scrumPokerSession.getConfirmedUserKey()))
             .withVisible(scrumPokerSession.isVisible())
             .withCancelled(scrumPokerSession.isCancelled())
-            .withBoundedVotes(boundedVotes(scrumPokerSession))
-            .withVotes(votes(scrumPokerSession))
+            .withBoundedVotes(boundedVotes)
+            .withVotes(votes(scrumPokerSession, boundedVotes))
             .withCards(cards(scrumPokerSession, userKey))
             .withAllowReveal(allowReveal(scrumPokerSession, userKey))
             .withAllowReset(allowReset(scrumPokerSession))
@@ -160,7 +161,7 @@ public class SessionEntityMapper {
     private List<CardEntity> cards(ScrumPokerSession scrumPokerSession, String userKey) {
         String chosenValue = cardForUser(scrumPokerSession.getVotes(), userKey);
         return cardSetService.getCardSet(scrumPokerSession).stream()
-            .map(card -> new CardEntity(card.getValue(), card.getValue().equals(chosenValue)))
+            .map(card -> new CardEntity(card.getValue(), card.getValue().equals(chosenValue), card.isAssignable()))
             .collect(Collectors.toList());
     }
 
@@ -179,12 +180,12 @@ public class SessionEntityMapper {
      * Returns all votes and marks all votes that need to talk. If the deck is currently hidden only returns a question
      * mark instead of the correct values in order to not leak them to the clients.
      */
-    private List<VoteEntity> votes(ScrumPokerSession scrumPokerSession) {
+    private List<VoteEntity> votes(ScrumPokerSession scrumPokerSession, List<BoundedVoteEntity> boundedVotes) {
         return stream(scrumPokerSession.getVotes())
             .map(vote -> new VoteEntity(
                 displayNameForUser(vote.getUserKey()),
                 displayValue(vote, scrumPokerSession),
-                needToTalk(vote, scrumPokerSession),
+                needToTalk(vote, scrumPokerSession, boundedVotes),
                 needABreak(vote, scrumPokerSession)))
             .collect(Collectors.toList());
     }
@@ -207,7 +208,7 @@ public class SessionEntityMapper {
      * Returns whether the current vote needs to talk or not depending on the status of the Scrum Poker session and the
      * other votes provided.
      */
-    private boolean needToTalk(ScrumPokerVote vote, ScrumPokerSession scrumPokerSession) {
+    private boolean needToTalk(ScrumPokerVote vote, ScrumPokerSession scrumPokerSession, List<BoundedVoteEntity> boundedVotes) {
         if (!scrumPokerSession.isVisible())
             return false;
         if (agreementReached(scrumPokerSession))
@@ -216,9 +217,19 @@ public class SessionEntityMapper {
             return false;
         if (!isAssignableToEstimateField(vote.getVote()))
             return true;
-        Integer current = Integer.valueOf(vote.getVote());
-        return current.equals(getMaximumVote(scrumPokerSession.getVotes()))
-            || current.equals(getMinimumVote(scrumPokerSession.getVotes()));
+        return onBoundaries(vote.getVote(), boundedVotes);
+    }
+
+    private boolean onBoundaries(String vote, List<BoundedVoteEntity> boundedVotes) {
+        if (boundedVotes.isEmpty())
+            return false;
+        List<String> assignableVotes = boundedVotes.stream()
+            .filter(BoundedVoteEntity::isAssignable)
+            .map(BoundedVoteEntity::getValue)
+            .collect(Collectors.toList());
+        if (assignableVotes.isEmpty())
+            return false;
+        return vote.equals(assignableVotes.get(0)) || vote.equals(assignableVotes.get(assignableVotes.size() - 1));
     }
 
     /**
@@ -264,31 +275,6 @@ public class SessionEntityMapper {
     private BoundedVoteEntity createBoundedVote(String value, Map<String, Long> distribution) {
         return new BoundedVoteEntity(value, distribution.getOrDefault(value, 0L),
             isAssignableToEstimateField(value));
-    }
-
-    /**
-     * Returns the minimum vote from the given list of votes.
-     */
-    private Integer getMinimumVote(ScrumPokerVote[] votes) {
-        return numericValues(votes).stream().reduce(Integer::min).orElse(0);
-    }
-
-    /**
-     * Returns the maximum vote from the given list of votes.
-     */
-    private Integer getMaximumVote(ScrumPokerVote[] votes) {
-        return numericValues(votes).stream().reduce(Integer::max).orElse(100);
-    }
-
-    /**
-     * Reduces the list of votes to only numeric votes removing all other values from the list.
-     */
-    @Deprecated
-    private List<Integer> numericValues(ScrumPokerVote[] votes) {
-        return stream(votes).map(ScrumPokerVote::getVote)
-            .filter(this::isAssignableToEstimateField)
-            .map(Integer::valueOf)
-            .collect(Collectors.toList());
     }
 
     /**
