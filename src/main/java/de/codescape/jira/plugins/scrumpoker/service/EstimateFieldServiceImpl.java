@@ -10,6 +10,10 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Implementation of {@link EstimateFieldService} with access to Jira custom fields.
  */
@@ -19,6 +23,9 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
     static final String CUSTOM_FIELD_TYPE_NUMBER = "com.atlassian.jira.plugin.system.customfieldtypes:float";
     static final String CUSTOM_FIELD_TYPE_TEXT = "com.atlassian.jira.plugin.system.customfieldtypes:textfield";
     static final String CUSTOM_FIELD_TYPE_TEXTAREA = "com.atlassian.jira.plugin.system.customfieldtypes:textarea";
+
+    static final List<String> SUPPORTED_FIELD_TYPES = Arrays.asList(
+        CUSTOM_FIELD_TYPE_NUMBER, CUSTOM_FIELD_TYPE_TEXT, CUSTOM_FIELD_TYPE_TEXTAREA);
 
     private final GlobalSettingsService globalSettingsService;
     private final CustomFieldManager customFieldManager;
@@ -89,6 +96,13 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
     public boolean hasEstimateField(Issue issue) {
         CustomField estimateField = findEstimateField();
         return estimateField != null && customFieldManager.getCustomFieldObjects(issue).contains(estimateField);
+    }
+
+    @Override
+    public List<CustomField> supportedCustomFields() {
+        return customFieldManager.getCustomFieldObjects().stream()
+            .filter(customField -> SUPPORTED_FIELD_TYPES.contains(customField.getCustomFieldType().getKey()))
+            .collect(Collectors.toList());
     }
 
 }

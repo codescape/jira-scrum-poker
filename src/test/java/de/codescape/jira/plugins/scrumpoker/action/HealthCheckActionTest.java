@@ -159,7 +159,7 @@ public class HealthCheckActionTest {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getEstimateField()).thenReturn(null);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
-        assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATION_FIELD_NOT_SET));
+        assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATE_FIELD_NOT_SET));
     }
 
     @Test
@@ -168,7 +168,7 @@ public class HealthCheckActionTest {
         when(globalSettings.getEstimateField()).thenReturn("something");
         when(estimateFieldService.findEstimateField()).thenReturn(null);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
-        assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATION_FIELD_NOT_FOUND));
+        assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATE_FIELD_NOT_FOUND));
     }
 
     @Test
@@ -178,7 +178,7 @@ public class HealthCheckActionTest {
         when(estimateFieldService.findEstimateField()).thenReturn(null);
         when(globalSettings.isDefaultProjectActivation()).thenReturn(false);
         expectNoProjectExplicitlyEnabled();
-        assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATION_FIELD_NOT_FOUND));
+        assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATE_FIELD_NOT_FOUND));
     }
 
     private void expectNoProjectExplicitlyEnabled() {

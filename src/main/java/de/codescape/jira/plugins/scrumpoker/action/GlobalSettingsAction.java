@@ -1,11 +1,10 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
-import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.fields.CustomField;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
+import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,13 +34,13 @@ public class GlobalSettingsAction extends AbstractScrumPokerAction {
 
     }
 
-    private final CustomFieldManager customFieldManager;
+    private final EstimateFieldService estimateFieldService;
     private final GlobalSettingsService globalSettingsService;
 
     @Autowired
-    public GlobalSettingsAction(@ComponentImport CustomFieldManager customFieldManager,
+    public GlobalSettingsAction(EstimateFieldService estimateFieldService,
                                 GlobalSettingsService globalSettingsService) {
-        this.customFieldManager = customFieldManager;
+        this.estimateFieldService = estimateFieldService;
         this.globalSettingsService = globalSettingsService;
     }
 
@@ -49,7 +48,7 @@ public class GlobalSettingsAction extends AbstractScrumPokerAction {
      * List of all custom fields currently available in this Jira instance.
      */
     public List<CustomField> getCustomFields() {
-        return customFieldManager.getCustomFieldObjects();
+        return estimateFieldService.supportedCustomFields();
     }
 
     /**

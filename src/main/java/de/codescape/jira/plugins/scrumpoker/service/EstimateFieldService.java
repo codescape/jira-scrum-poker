@@ -4,6 +4,8 @@ import com.atlassian.activeobjects.tx.Transactional;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.fields.CustomField;
 
+import java.util.List;
+
 /**
  * Service to access and write the value of the configured estimate field. This is typically the Story Point field
  * provided by Jira Software.
@@ -34,5 +36,12 @@ public interface EstimateFieldService {
      * @return <code>true</code> if estimate field exists, otherwise <code>false</code>
      */
     boolean hasEstimateField(Issue issue);
+
+    /**
+     * Return a list of supported custom fields.
+     *
+     * @return list of supported custom fields
+     */
+    List<CustomField> supportedCustomFields();
 
 }
