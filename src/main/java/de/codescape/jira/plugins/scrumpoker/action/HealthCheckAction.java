@@ -34,8 +34,8 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
      */
     static final class Configuration {
 
-        static final String ESTIMATE_FIELD_NOT_FOUND = "scrumpoker.healthcheck.results.errors.estimationfieldnotfound";
-        static final String ESTIMATE_FIELD_NOT_SET = "scrumpoker.healthcheck.results.errors.estimationfieldnotset";
+        static final String ESTIMATE_FIELD_NOT_FOUND = "scrumpoker.healthcheck.results.errors.estimatefieldnotfound";
+        static final String ESTIMATE_FIELD_NOT_SET = "scrumpoker.healthcheck.results.errors.estimatefieldnotset";
         static final String ENABLED_FOR_NO_PROJECT = "scrumpoker.healthcheck.results.errors.enabledfornoproject";
         static final String CARD_SET_WITHOUT_OPTIONS = "scrumpoker.healthcheck.results.errors.cardsetwithoutoptions";
 

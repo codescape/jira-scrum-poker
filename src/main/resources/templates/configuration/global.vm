@@ -13,7 +13,7 @@
 
         <h3>$i18n.getText("scrumpoker.config.heading.estimation")</h3>
         <div class="field-group">
-            <label for="estimateField">$i18n.getText("scrumpoker.config.estimation")
+            <label for="estimateField">$i18n.getText("scrumpoker.config.estimate")
                 <span class="aui-icon icon-required">(required)</span></label>
             <select class="select" id="estimateField" name="estimateField" required>
                 <option value=""></option>
@@ -28,7 +28,7 @@
             #if (!$globalSettings.estimateField)
                 <div class="error">$i18n.getText("scrumpoker.config.field.required")</div>
             #end
-            <div class="description">$i18n.getText("scrumpoker.config.estimation.description")</div>
+            <div class="description">$i18n.getText("scrumpoker.config.estimate.description")</div>
         </div>
         <fieldset class="group">
             <legend><span>$i18n.getText("scrumpoker.config.checkpermissiontosaveestimate")</span></legend>
