@@ -36,6 +36,7 @@ Click on the version in the following list to see all changes since the previous
 * refactor: cleanup code for composing dates to display values
 * refactor: improve speed for calculation for revealing deck permission
 * refactor: improve readability for session mapping 
+* feat: support non-numeric estimates (#102)
 
 ### [4.10.0] - 2020-03-28
 
