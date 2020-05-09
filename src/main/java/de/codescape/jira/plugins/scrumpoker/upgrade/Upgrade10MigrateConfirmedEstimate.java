@@ -15,7 +15,7 @@ import java.util.Arrays;
  * Migrate deprecated numeric-only values in the database field confirmed_vote for every session with a value set to
  * new string based value in the newly created database field confirmed_estimate.
  *
- * @since 4.11
+ * @since 20.05.0
  */
 @Component
 @ExportAsService(PluginUpgradeTask.class)

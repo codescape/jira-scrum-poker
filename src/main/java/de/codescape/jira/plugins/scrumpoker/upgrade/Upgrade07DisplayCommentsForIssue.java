@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 /**
  * Set the default setting for configuration option Display Comments for Issue.
  *
- * @since 4.6
+ * @since 4.6.0
  */
 @Component
 @ExportAsService(PluginUpgradeTask.class)

@@ -16,7 +16,7 @@ import java.util.Date;
 /**
  * Fill the update date for all existing Scrum Poker sessions.
  *
- * @since 4.8
+ * @since 4.8.0
  */
 @Component
 @ExportAsService(PluginUpgradeTask.class)

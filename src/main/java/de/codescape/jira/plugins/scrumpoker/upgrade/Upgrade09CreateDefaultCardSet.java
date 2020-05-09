@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 /**
  * Create the simplified Fibonacci card set as the default card set.
  *
- * @since 4.10
+ * @since 4.10.0
  */
 @Component
 @ExportAsService(PluginUpgradeTask.class)

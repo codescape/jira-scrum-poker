@@ -11,6 +11,12 @@ Click on the version in the following list to see all changes since the previous
 
 ### [Unreleased]
 
+* ...
+
+### [20.05.0] - 2020-05-09
+
+**Configure and use card sets with non-numeric and floating point cards**
+
 * docs: adapt version 2.0 of the Contributor Covenant Code of Conduct
 * docs: update readme and reduce to most relevant information
 * docs: rename license and update link from readme
@@ -934,7 +940,8 @@ Click on the version in the following list to see all changes since the previous
 
 * feat: initial usable version of Planning Poker Plugin
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/4.10.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.05...HEAD
+[20.05.0]: https://github.com/codescape/jira-scrum-poker/compare/4.10.0...20.05
 [4.10.0]: https://github.com/codescape/jira-scrum-poker/compare/4.9.0...4.10.0
 [4.9.0]: https://github.com/codescape/jira-scrum-poker/compare/4.8.2...4.9.0
 [4.8.2]: https://github.com/codescape/jira-scrum-poker/compare/4.8.1...4.8.2
