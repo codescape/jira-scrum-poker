@@ -65,8 +65,14 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
         String estimateFieldKey = estimateField.getCustomFieldType().getKey();
         switch (estimateFieldKey) {
             case CUSTOM_FIELD_TYPE_NUMBER:
-                issue.setCustomFieldValue(estimateField, Double.valueOf(estimate));
-                break;
+                try {
+                    issue.setCustomFieldValue(estimateField, Double.valueOf(estimate));
+                    break;
+                } catch (NumberFormatException numberFormatException) {
+                    errorLogService.logError("Unable to save estimate of " + estimate + " because field "
+                        + estimateField.getFieldName() + " does not support value.", numberFormatException);
+                    return false;
+                }
             case CUSTOM_FIELD_TYPE_TEXT:
             case CUSTOM_FIELD_TYPE_TEXTAREA:
                 issue.setCustomFieldValue(estimateField, estimate);

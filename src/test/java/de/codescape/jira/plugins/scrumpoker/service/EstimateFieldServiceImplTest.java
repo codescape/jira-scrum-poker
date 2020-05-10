@@ -123,7 +123,6 @@ public class EstimateFieldServiceImplTest {
         assertThat(estimateFieldService.save(ISSUE_KEY, ESTIMATE), is(true));
     }
 
-
     @Test
     public void saveFailsWithCustomFieldNotSupported() {
         expectUserLoggedIn();
@@ -134,14 +133,15 @@ public class EstimateFieldServiceImplTest {
         assertThat(estimateFieldService.save(ISSUE_KEY, ESTIMATE), is(false));
     }
 
-    private void expectCustomFieldTypeNotSupported() {
-        when(customField.getCustomFieldType()).thenReturn(customFieldType);
-        when(customFieldType.getKey()).thenReturn("some.crazy.unknown::customfield");
-    }
-
-    private void expectCustomFieldTypeSupported() {
-        when(customField.getCustomFieldType()).thenReturn(customFieldType);
-        when(customFieldType.getKey()).thenReturn(CUSTOM_FIELD_TYPE_NUMBER);
+    @Test
+    public void saveFailsWithNumericFieldNotSupportingEstimate() {
+        expectUserLoggedIn();
+        expectIssueWithIssueKeyExists();
+        expectPermissionCheckDisabled();
+        expectCustomFieldFound();
+        expectCustomFieldType(CUSTOM_FIELD_TYPE_NUMBER);
+        assertThat(estimateFieldService.save(ISSUE_KEY, "S"), is(false));
+        verify(errorLogService).logError(anyString(), any(NumberFormatException.class));
     }
 
     @Test
@@ -160,6 +160,20 @@ public class EstimateFieldServiceImplTest {
         when(customFieldManager.getCustomFieldObjects(issue)).thenReturn(Collections.singletonList(anotherField));
 
         assertThat(estimateFieldService.hasEstimateField(issue), is(false));
+    }
+
+    private void expectCustomFieldTypeNotSupported() {
+        when(customField.getCustomFieldType()).thenReturn(customFieldType);
+        when(customFieldType.getKey()).thenReturn("some.crazy.unknown::customfield");
+    }
+
+    private void expectCustomFieldTypeSupported() {
+        expectCustomFieldType(CUSTOM_FIELD_TYPE_NUMBER);
+    }
+
+    private void expectCustomFieldType(String customFieldTypeKey) {
+        when(customField.getCustomFieldType()).thenReturn(customFieldType);
+        when(customFieldType.getKey()).thenReturn(customFieldTypeKey);
     }
 
     private void expectIssueWithIssueKeyExists() {
