@@ -31,6 +31,14 @@ In a German Jira instance this field is called `Story Punkte` for example.
 
 It is preferred to choose this field because estimates that are saved into this field are displayed in the estimate badge on the backlog of agile boards.
 
+Scrum Poker for Jira currently supports the following field types to be chosen in the configuration and be filled with the confirmed estimate:
+
+* Number Field
+* Text Field (multi-line)
+* Text Field (single line)
+
+Please [let us know](/support) if you require other field types to be supported.
+
 #### Estimate Permission Check
 
 Decide whether every participant of a Scrum Poker session is allowed to save the estimate or permission to edit the issue shall be required for the current user.

@@ -17,6 +17,7 @@ Click on the version in the following list to see all changes since the previous
 * feat: catch and report incompatible estimate values for custom field when saving (#114)
 * docs: update configuration documentation to recent changes
 * feat: display own estimates of current user on active sessions page (#106)
+* docs: document supported field types for the estimate field
 
 ### [20.05.0] - 2020-05-09
 
