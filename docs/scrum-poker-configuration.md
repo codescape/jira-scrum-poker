@@ -21,22 +21,22 @@ On the page `Configuration` you have global configuration options to make Scrum 
 
 ![Global configuration for Scrum Poker](/images/scrum-poker-configuration-page.png) 
 
-#### Confirmed Estimation Field
+#### Confirmed Estimate Field
 
-Select the custom field that is used to persist the confirmed estimations when completing a Scrum Poker session.
+Select the custom field that is used to persist the confirmed estimate when completing a Scrum Poker session.
 
-Jira Software creates the field `Story Points` for estimations.
+Jira Software creates the field `Story Points` for estimates.
 Since this field is translated into your Jira system language it might have another label.
 In a German Jira instance this field is called `Story Punkte` for example.
 
-It is preferred to choose this field because estimations that are saved into this field are displayed in the estimation badge on the backlog of agile boards.
+It is preferred to choose this field because estimates that are saved into this field are displayed in the estimate badge on the backlog of agile boards.
 
-#### Estimation Permission Check
+#### Estimate Permission Check
 
-Decide whether every participant of a Scrum Poker session is allowed to save the estimation or permission to edit the issue shall be required for the current user.
+Decide whether every participant of a Scrum Poker session is allowed to save the estimate or permission to edit the issue shall be required for the current user.
 
-* If disabled all participants of the Scrum Poker session regardless of their permissions on the current issue can confirm the estimation and end the Scrum Poker session.
-* If enabled only users with edit permission on the current issue the Scrum Poker session is started for can confirm the estimation and end the Scrum Poker session.
+* If disabled all participants of the Scrum Poker session regardless of their permissions on the current issue can confirm the estimate and end the Scrum Poker session.
+* If enabled only users with edit permission on the current issue the Scrum Poker session is started for can confirm the estimate and end the Scrum Poker session.
 
 #### Card Set
 
