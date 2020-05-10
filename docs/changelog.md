@@ -10,6 +10,10 @@ title: Changelog
 
 ### [Unreleased]
 
+* ...
+
+### [20.05.1] - 2020-05-10
+
 * test: improve mock usage in tests for session entity mapper
 * docs: fix reference to version comparison in changelog
 * docs: correct version number in deprecation information
@@ -66,6 +70,6 @@ Older versions are moved into separate changelog documents accumulated by major 
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.05.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.05.1...HEAD
+[20.05.1]: https://github.com/codescape/jira-scrum-poker/compare/20.05.0...20.05.1
 [20.05.0]: https://github.com/codescape/jira-scrum-poker/compare/4.10.0...20.05.0
