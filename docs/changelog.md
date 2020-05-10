@@ -14,8 +14,9 @@ Click on the version in the following list to see all changes since the previous
 * test: improve mock usage in tests for session entity mapper
 * docs: fix reference to version comparison in changelog
 * docs: correct version number in deprecation information
-* feat: catch and report incompatible estimate values for custom field when saving
+* feat: catch and report incompatible estimate values for custom field when saving (#114)
 * docs: update configuration documentation to recent changes
+* feat: display own estimates of current user on active sessions page (#106)
 
 ### [20.05.0] - 2020-05-09
 

@@ -44,6 +44,7 @@
                             <th>$i18n.getText("scrumpoker.session.startdate")</th>
                             <th>$i18n.getText("scrumpoker.session.startedby")</th>
                             <th>$i18n.getText("scrumpoker.session.participants")</th>
+                            <th>$i18n.getText("scrumpoker.session.ownestimate")</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,6 +58,13 @@
                             <td class="created"><time title="$scrumPokerSession.createDate.formattedDate">$scrumPokerSession.createDate.displayValue</time></td>
                             <td class="assignee">$scrumPokerSession.creator</td>
                             <td>$scrumPokerSession.votes.size()</td>
+                            <td>
+                            #foreach($card in $scrumPokerSession.cards)
+                                #if ($card.selected)
+                                    <span class="aui-badge ghx-statistic-badge">$card.value</span>
+                                #end
+                            #end
+                            </td>
                         </tr>
                         #end
                     #end
