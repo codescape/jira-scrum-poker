@@ -14,6 +14,8 @@ title: Changelog
 
 ### [20.05.1] - 2020-05-10
 
+**Improvements for non-numeric card sets and active sessions overview**
+
 * test: improve mock usage in tests for session entity mapper
 * docs: fix reference to version comparison in changelog
 * docs: correct version number in deprecation information
