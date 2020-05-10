@@ -255,19 +255,27 @@ title: Changelog 1.x
 
 ### [1.3.0] - 2015-11-02
 
+**Improvements to polling functionality for a better experience**
+
 * feat: faster and more responsive interface during Scrum Poker session
 
 ### [1.2.3] - 2015-05-19
+
+**Scrum Poker session automatically polls for updates**
 
 * feat: automatic refresh of poker cards in session every two seconds
 * docs: added section with compatibility matrix in readme
 
 ### [1.2.2] - 2015-05-07
 
+**Improved identification of referrer data to provide back links**
+
 * refactor: extract votes logic into separate class and add tests
 * feat: better approach to recognize referrer and lead back after poker session
 
 ### [1.2.1] - 2015-05-05
+
+**Planning Poker Plugin is now called Scrum Poker Plugin**
 
 * feat: implement and test against Jira 6.4.3
 * feat: rename Planning Poker Plugin to Scrum Poker Plugin
@@ -284,14 +292,18 @@ title: Changelog 1.x
 
 ### [1.2.0] - 2015-04-26
 
+**Improved saving of estimates to immediately be displayed in backlog view**
+
 * fix: save and refresh estimation to be displayed in product backlog
+* feat: allow resetting a deck after a Scrum Poker session
 
 ### [1.1.0] - 2015-04-24
+
+**Engage participants with need-to-talk flag and make starting new sessions easier**
 
 * feat: rename Planning Poker Plugin to Scrum Poker Plugin
 * feat: reveal deck only if there are no new votes coming in
 * feat: identify people with votes on the boundaries to engage talking to each other
-* feat: allow resetting a deck after a Scrum Poker session
 * feat: allow opening Scrum Poker from issue sidebar in Agile Board
 * feat: add localization for German language
 * feat: add filter to show and hide the Scrum Poker button based on issue types

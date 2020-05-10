@@ -10,7 +10,7 @@ title: Changelog
 
 ### [Unreleased]
 
-* ...
+* docs: add summary for older versions currently missing one
 
 ### [20.05.1] - 2020-05-10
 
