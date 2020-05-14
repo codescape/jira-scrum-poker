@@ -10,6 +10,12 @@ title: Changelog
 
 ### [Unreleased]
 
+* ...
+
+### [20.05.2] - 2020-05-14
+
+**Configuration available for all users who can install Marketplace apps**
+
 * docs: add summary for older versions currently missing one
 * feat: require admin and not sysadmin role to configure Scrum Poker for Jira
 
@@ -73,6 +79,7 @@ Older versions are moved into separate changelog documents accumulated by major 
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.05.1...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.05.2...HEAD
+[20.05.2]: https://github.com/codescape/jira-scrum-poker/compare/20.05.1...20.05.2
 [20.05.1]: https://github.com/codescape/jira-scrum-poker/compare/20.05.0...20.05.1
 [20.05.0]: https://github.com/codescape/jira-scrum-poker/compare/4.10.0...20.05.0
