@@ -114,15 +114,15 @@
     <webwork1 key="scrum-poker-webwork">
         <actions>
             <action name="de.codescape.jira.plugins.scrumpoker.action.GlobalSettingsAction"
-                    alias="ScrumPokerConfiguration" roles-required="sysadmin">
+                    alias="ScrumPokerConfiguration" roles-required="admin">
                 <view name="success">/templates/configuration/global.vm</view>
             </action>
             <action name="de.codescape.jira.plugins.scrumpoker.action.HealthCheckAction" alias="ScrumPokerHealthCheck"
-                    roles-required="sysadmin">
+                    roles-required="admin">
                 <view name="success">/templates/configuration/healthcheck.vm</view>
             </action>
             <action name="de.codescape.jira.plugins.scrumpoker.action.ErrorLogAction" alias="ScrumPokerErrorLog"
-                    roles-required="sysadmin">
+                    roles-required="admin">
                 <view name="success">/templates/configuration/errorlog.vm</view>
             </action>
             <action name="de.codescape.jira.plugins.scrumpoker.action.ProjectSettingsAction"

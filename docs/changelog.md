@@ -11,6 +11,7 @@ title: Changelog
 ### [Unreleased]
 
 * docs: add summary for older versions currently missing one
+* feat: require admin and not sysadmin role to configure Scrum Poker for Jira
 
 ### [20.05.1] - 2020-05-10
 
