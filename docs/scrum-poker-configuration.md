@@ -11,6 +11,7 @@ This page describes how to configure Scrum Poker for Jira to work in your Jira a
 ### Global Configuration
 
 Scrum Poker for Jira has some global configuration parameters that can be configured from the administration section of your Jira application.
+This configuration is only available to users with the `Jira Administrators` role assigned.
 
 To locate the global configuration navigate to the `Administration` menu, then select the entry labelled `Manage apps`.
 You will now find a section called `Scrum Poker` in the left sidebar as shown in the screenshot below:

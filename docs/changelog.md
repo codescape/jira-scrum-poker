@@ -10,7 +10,7 @@ title: Changelog
 
 ### [Unreleased]
 
-* ...
+* docs: document required admin role to configure Scrum Poker for Jira (#116)
 
 ### [20.05.2] - 2020-05-14
 
