@@ -114,26 +114,32 @@
     <webwork1 key="scrum-poker-webwork">
         <actions>
             <action name="de.codescape.jira.plugins.scrumpoker.action.GlobalSettingsAction"
-                    alias="ScrumPokerConfiguration" roles-required="admin">
+                    alias="ScrumPokerConfiguration"
+                    roles-required="admin">
                 <view name="success">/templates/configuration/global.vm</view>
             </action>
-            <action name="de.codescape.jira.plugins.scrumpoker.action.HealthCheckAction" alias="ScrumPokerHealthCheck"
+            <action name="de.codescape.jira.plugins.scrumpoker.action.HealthCheckAction"
+                    alias="ScrumPokerHealthCheck"
                     roles-required="admin">
                 <view name="success">/templates/configuration/healthcheck.vm</view>
             </action>
-            <action name="de.codescape.jira.plugins.scrumpoker.action.ErrorLogAction" alias="ScrumPokerErrorLog"
+            <action name="de.codescape.jira.plugins.scrumpoker.action.ErrorLogAction"
+                    alias="ScrumPokerErrorLog"
                     roles-required="admin">
                 <view name="success">/templates/configuration/errorlog.vm</view>
             </action>
             <action name="de.codescape.jira.plugins.scrumpoker.action.ProjectSettingsAction"
-                    alias="ScrumPokerProjectConfiguration" roles-required="admin">
+                    alias="ScrumPokerProjectConfiguration"
+                    roles-required="admin">
                 <view name="success">/templates/configuration/project.vm</view>
             </action>
-            <action name="de.codescape.jira.plugins.scrumpoker.action.ActiveSessionsAction" alias="ScrumPokerSessions"
+            <action name="de.codescape.jira.plugins.scrumpoker.action.ActiveSessionsAction"
+                    alias="ScrumPokerSessions"
                     roles-required="use">
                 <view name="success">/templates/sessions.vm</view>
             </action>
-            <action name="de.codescape.jira.plugins.scrumpoker.action.ScrumPokerAction" alias="ScrumPoker"
+            <action name="de.codescape.jira.plugins.scrumpoker.action.ScrumPokerAction"
+                    alias="ScrumPoker"
                     roles-required="use">
                 <view name="success">/templates/show.vm</view>
                 <view name="error">/templates/error.vm</view>
