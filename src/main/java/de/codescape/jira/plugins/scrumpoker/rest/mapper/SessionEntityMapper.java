@@ -222,6 +222,9 @@ public class SessionEntityMapper {
         return onBoundaries(vote.getVote(), boundedVotes);
     }
 
+    /**
+     * Returns whether the given vote is on the boundaries of the bounded votes while ignoring all special cards.
+     */
     private boolean onBoundaries(String vote, List<BoundedVoteEntity> boundedVotes) {
         if (boundedVotes.isEmpty())
             return false;
