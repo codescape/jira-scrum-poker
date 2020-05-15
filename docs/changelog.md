@@ -11,6 +11,7 @@ title: Changelog
 ### [Unreleased]
 
 * docs: document required admin role to configure Scrum Poker for Jira (#116)
+* refactor: rename variables in health check to better explain checks
 
 ### [20.05.2] - 2020-05-14
 

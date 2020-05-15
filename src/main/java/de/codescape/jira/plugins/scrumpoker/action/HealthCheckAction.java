@@ -139,13 +139,12 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
         List<String> results = new ArrayList<>();
 
         // check that the estimate custom field is set
-        String storyPointField = globalSettingsService.load().getEstimateField();
-        if (storyPointField == null || storyPointField.isEmpty()) {
+        String estimateFieldKey = globalSettingsService.load().getEstimateField();
+        if (estimateFieldKey == null || estimateFieldKey.isEmpty()) {
             results.add(Configuration.ESTIMATE_FIELD_NOT_SET);
         } else {
             // check that the estimate custom field can be found
-            CustomField customField = estimateFieldService.findEstimateField();
-            if (customField == null) {
+            if (estimateFieldService.findEstimateField() == null) {
                 results.add(Configuration.ESTIMATE_FIELD_NOT_FOUND);
             }
         }
