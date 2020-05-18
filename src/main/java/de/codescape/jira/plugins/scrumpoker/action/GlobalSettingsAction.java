@@ -25,7 +25,7 @@ public class GlobalSettingsAction extends AbstractScrumPokerAction {
         static final String ACTION = "action";
         static final String ESTIMATE_FIELD = "estimateField";
         static final String SESSION_TIMEOUT = "sessionTimeout";
-        static final String DEFAULT_PROJECT_ACTIVATION = "defaultProjectActivation";
+        static final String ACTIVATE_SCRUM_POKER = "activateScrumPoker";
         static final String ALLOW_REVEAL_DECK = "allowRevealDeck";
         static final String DISPLAY_DROPDOWN_ON_BOARDS = "displayDropdownOnBoards";
         static final String CHECK_PERMISSION_TO_SAVE_ESTIMATE = "checkPermissionToSaveEstimate";
@@ -74,8 +74,8 @@ public class GlobalSettingsAction extends AbstractScrumPokerAction {
                 String newSessionTimeout = getParameter(Parameters.SESSION_TIMEOUT);
                 globalSettings.setSessionTimeout(Integer.valueOf(newSessionTimeout));
 
-                String newDefaultProjectActivation = getParameter(Parameters.DEFAULT_PROJECT_ACTIVATION);
-                globalSettings.setDefaultProjectActivation(Boolean.parseBoolean(newDefaultProjectActivation));
+                String newActivateScrumPoker = getParameter(Parameters.ACTIVATE_SCRUM_POKER);
+                globalSettings.setActivateScrumPoker(Boolean.parseBoolean(newActivateScrumPoker));
 
                 String newAllowRevealDeck = getParameter(Parameters.ALLOW_REVEAL_DECK);
                 globalSettings.setAllowRevealDeck(AllowRevealDeck.valueOf(newAllowRevealDeck));

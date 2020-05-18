@@ -44,7 +44,7 @@ public class ScrumPokerForIssueCondition extends AbstractIssueWebCondition {
     }
 
     private boolean hasScrumPokerEnabled(Project project) {
-        return globalSettingsService.load().isDefaultProjectActivation()
+        return globalSettingsService.load().isActivateScrumPoker()
             || projectSettingsService.loadScrumPokerEnabled(project.getId());
     }
 

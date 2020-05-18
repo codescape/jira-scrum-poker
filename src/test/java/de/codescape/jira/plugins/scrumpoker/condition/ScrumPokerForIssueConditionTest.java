@@ -63,7 +63,7 @@ public class ScrumPokerForIssueConditionTest {
     public void shouldDisplayForEditableIssueWithEstimateFieldAndGloballyActiveScrumPoker() {
         expectThatIssueContainsTheEstimateField();
         expectThatIssueIsEditable();
-        expectThatDefaultProjectActivationIsEnabled();
+        expectScrumPokerGloballyActivated();
         assertThat(scrumPokerForIssueCondition.shouldDisplay(applicationUser, issue, jiraHelper), is(true));
     }
 
@@ -71,7 +71,7 @@ public class ScrumPokerForIssueConditionTest {
     public void shouldDisplayForEditableIssueWithEstimateFieldAndGloballyInactiveScrumPokerButActiveForProject() {
         expectThatIssueContainsTheEstimateField();
         expectThatIssueIsEditable();
-        expectThatDefaultProjectActivationIsDisabled();
+        expectScrumPokerNotGloballyActive();
         expectThatScrumPokerIsEnabledForProject();
         assertThat(scrumPokerForIssueCondition.shouldDisplay(applicationUser, issue, jiraHelper), is(true));
     }
@@ -80,7 +80,7 @@ public class ScrumPokerForIssueConditionTest {
     public void shouldNotDisplayForEditableIssueWithEstimateFieldAndGloballyInactiveScrumPoker() {
         expectThatIssueContainsTheEstimateField();
         expectThatIssueIsEditable();
-        expectThatDefaultProjectActivationIsDisabled();
+        expectScrumPokerNotGloballyActive();
         expectThatScrumPokerIsNotEnabledForProject();
         assertThat(scrumPokerForIssueCondition.shouldDisplay(applicationUser, issue, jiraHelper), is(false));
     }
@@ -126,14 +126,14 @@ public class ScrumPokerForIssueConditionTest {
         when(estimateFieldService.hasEstimateField(issue)).thenReturn(true);
     }
 
-    private void expectThatDefaultProjectActivationIsEnabled() {
+    private void expectScrumPokerGloballyActivated() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
-        when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
+        when(globalSettings.isActivateScrumPoker()).thenReturn(true);
     }
 
-    private void expectThatDefaultProjectActivationIsDisabled() {
+    private void expectScrumPokerNotGloballyActive() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
-        when(globalSettings.isDefaultProjectActivation()).thenReturn(false);
+        when(globalSettings.isActivateScrumPoker()).thenReturn(false);
     }
 
 }

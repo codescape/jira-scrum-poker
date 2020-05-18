@@ -1,6 +1,5 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
-import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.upm.api.license.PluginLicenseManager;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
@@ -150,7 +149,7 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
         }
 
         // check that Scrum Poker is either globally enabled or has projects explicitly enabled
-        if (!globalSettingsService.load().isDefaultProjectActivation() &&
+        if (!globalSettingsService.load().isActivateScrumPoker() &&
             projectSettingsService.loadAll().stream().noneMatch(ScrumPokerProject::isScrumPokerEnabled)) {
             results.add(Configuration.ENABLED_FOR_NO_PROJECT);
         }

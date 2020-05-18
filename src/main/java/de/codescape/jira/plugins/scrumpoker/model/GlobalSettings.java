@@ -12,7 +12,7 @@ public class GlobalSettings {
 
     public static final Integer SESSION_TIMEOUT_DEFAULT = 12;
     public static final AllowRevealDeck ALLOW_REVEAL_DECK_DEFAULT = AllowRevealDeck.EVERYONE;
-    public static final boolean DEFAULT_PROJECT_ACTIVATION_DEFAULT = true;
+    public static final boolean ACTIVATE_SCRUM_POKER_DEFAULT = true;
     public static final boolean DISPLAY_DROPDOWN_ON_BOARDS_DEFAULT = false;
     public static final boolean CHECK_PERMISSION_TO_SAVE_ESTIMATE_DEFAULT = false;
     public static final DisplayCommentsForIssue DISPLAY_COMMENTS_FOR_ISSUE_DEFAULT = DisplayCommentsForIssue.LATEST;
@@ -24,7 +24,7 @@ public class GlobalSettings {
     private String estimateField;
     private Integer sessionTimeout = SESSION_TIMEOUT_DEFAULT;
     private AllowRevealDeck allowRevealDeck = ALLOW_REVEAL_DECK_DEFAULT;
-    private boolean defaultProjectActivation = DEFAULT_PROJECT_ACTIVATION_DEFAULT;
+    private boolean activateScrumPoker = ACTIVATE_SCRUM_POKER_DEFAULT;
     private boolean displayDropdownOnBoards = DISPLAY_DROPDOWN_ON_BOARDS_DEFAULT;
     private boolean checkPermissionToSaveEstimate = CHECK_PERMISSION_TO_SAVE_ESTIMATE_DEFAULT;
     private DisplayCommentsForIssue displayCommentsForIssue = DISPLAY_COMMENTS_FOR_ISSUE_DEFAULT;
@@ -75,15 +75,15 @@ public class GlobalSettings {
     /**
      * Set whether Scrum Poker is globally enabled.
      */
-    public void setDefaultProjectActivation(boolean defaultProjectActivation) {
-        this.defaultProjectActivation = defaultProjectActivation;
+    public void setActivateScrumPoker(boolean activateScrumPoker) {
+        this.activateScrumPoker = activateScrumPoker;
     }
 
     /**
      * Return whether Scrum Poker is globally enabled.
      */
-    public boolean isDefaultProjectActivation() {
-        return defaultProjectActivation;
+    public boolean isActivateScrumPoker() {
+        return activateScrumPoker;
     }
 
     /**

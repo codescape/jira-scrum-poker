@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
 
 import java.util.Arrays;
 
-import static de.codescape.jira.plugins.scrumpoker.model.GlobalSettings.DEFAULT_PROJECT_ACTIVATION_DEFAULT;
+import static de.codescape.jira.plugins.scrumpoker.model.GlobalSettings.ACTIVATE_SCRUM_POKER_DEFAULT;
 import static de.codescape.jira.plugins.scrumpoker.model.GlobalSettings.SESSION_TIMEOUT_DEFAULT;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
@@ -73,20 +73,20 @@ public class GlobalSettingsServiceImplTest {
     @Test
     public void persistDefaultProjectActivationShouldSaveTheSetting() {
         GlobalSettings globalSettings = new GlobalSettings();
-        globalSettings.setDefaultProjectActivation(true);
+        globalSettings.setActivateScrumPoker(true);
         globalSettingsService.persist(globalSettings);
-        assertThat(globalSettingsService.load().isDefaultProjectActivation(), is(equalTo(true)));
+        assertThat(globalSettingsService.load().isActivateScrumPoker(), is(equalTo(true)));
 
-        globalSettings.setDefaultProjectActivation(false);
+        globalSettings.setActivateScrumPoker(false);
         globalSettingsService.persist(globalSettings);
-        assertThat(globalSettingsService.load().isDefaultProjectActivation(), is(equalTo(false)));
+        assertThat(globalSettingsService.load().isActivateScrumPoker(), is(equalTo(false)));
     }
 
     @Test
     public void loadingDefaultProjectActivationAlwaysReturnsDefaultValueIfNoValueIsSet() {
         ScrumPokerSetting[] scrumPokerSettings = activeObjects.find(ScrumPokerSetting.class);
         Arrays.stream(scrumPokerSettings).forEach(activeObjects::delete);
-        assertThat(globalSettingsService.load().isDefaultProjectActivation(), is(equalTo(DEFAULT_PROJECT_ACTIVATION_DEFAULT)));
+        assertThat(globalSettingsService.load().isActivateScrumPoker(), is(equalTo(ACTIVATE_SCRUM_POKER_DEFAULT)));
     }
 
 }

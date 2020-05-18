@@ -33,7 +33,7 @@ public class Upgrade02DefaultProjectActivationTest {
     public void shouldPersistDefaultProjectActivationInPluginSettings() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         upgrade.doUpgrade();
-        verify(globalSettings).setDefaultProjectActivation(true);
+        verify(globalSettings).setActivateScrumPoker(true);
         verify(globalSettingsService).persist(globalSettings);
     }
 

@@ -158,7 +158,7 @@ public class HealthCheckActionTest {
     public void shouldSignalUnsetEstimationFieldIfEstimationFieldIsNotSet() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getEstimateField()).thenReturn(null);
-        when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
+        when(globalSettings.isActivateScrumPoker()).thenReturn(true);
         assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATE_FIELD_NOT_SET));
     }
 
@@ -167,7 +167,7 @@ public class HealthCheckActionTest {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getEstimateField()).thenReturn("something");
         when(estimateFieldService.findEstimateField()).thenReturn(null);
-        when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
+        when(globalSettings.isActivateScrumPoker()).thenReturn(true);
         assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATE_FIELD_NOT_FOUND));
     }
 
@@ -176,7 +176,7 @@ public class HealthCheckActionTest {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getEstimateField()).thenReturn("something");
         when(estimateFieldService.findEstimateField()).thenReturn(null);
-        when(globalSettings.isDefaultProjectActivation()).thenReturn(false);
+        when(globalSettings.isActivateScrumPoker()).thenReturn(false);
         expectNoProjectExplicitlyEnabled();
         assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATE_FIELD_NOT_FOUND));
     }
@@ -194,7 +194,7 @@ public class HealthCheckActionTest {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getEstimateField()).thenReturn("something");
         when(estimateFieldService.findEstimateField()).thenReturn(estimationField);
-        when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
+        when(globalSettings.isActivateScrumPoker()).thenReturn(true);
         when(cardSetService.getCardSet()).thenReturn(Collections.singletonList(new Card("1", true)));
         assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.CARD_SET_WITHOUT_OPTIONS));
     }
@@ -204,7 +204,7 @@ public class HealthCheckActionTest {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getEstimateField()).thenReturn("something");
         when(estimateFieldService.findEstimateField()).thenReturn(estimationField);
-        when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
+        when(globalSettings.isActivateScrumPoker()).thenReturn(true);
         when(cardSetService.getCardSet()).thenReturn(Collections.emptyList());
         assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.CARD_SET_WITHOUT_OPTIONS));
     }
@@ -214,7 +214,7 @@ public class HealthCheckActionTest {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getEstimateField()).thenReturn("something");
         when(estimateFieldService.findEstimateField()).thenReturn(estimationField);
-        when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
+        when(globalSettings.isActivateScrumPoker()).thenReturn(true);
         when(cardSetService.getCardSet()).thenReturn(Arrays.asList(
             Card.COFFEE_BREAK,
             Card.QUESTION_MARK,
@@ -227,7 +227,7 @@ public class HealthCheckActionTest {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getEstimateField()).thenReturn("something");
         when(estimateFieldService.findEstimateField()).thenReturn(estimationField);
-        when(globalSettings.isDefaultProjectActivation()).thenReturn(true);
+        when(globalSettings.isActivateScrumPoker()).thenReturn(true);
         when(cardSetService.getCardSet()).thenReturn(Arrays.asList(
             new Card("1", true),
             new Card("2", true),

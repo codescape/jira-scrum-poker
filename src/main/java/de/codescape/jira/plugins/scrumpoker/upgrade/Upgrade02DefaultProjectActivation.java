@@ -36,7 +36,7 @@ public class Upgrade02DefaultProjectActivation extends AbstractUpgradeTask {
     @Override
     protected void performUpgrade() {
         GlobalSettings globalSettings = globalSettingsService.load();
-        globalSettings.setDefaultProjectActivation(true);
+        globalSettings.setActivateScrumPoker(true);
         globalSettingsService.persist(globalSettings);
     }
 

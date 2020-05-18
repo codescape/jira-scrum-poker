@@ -19,9 +19,10 @@ import static de.codescape.jira.plugins.scrumpoker.model.GlobalSettings.*;
 @Component
 public class GlobalSettingsServiceImpl implements GlobalSettingsService {
 
+    public static final String ACTIVATE_SCRUM_POKER = "activateScrumPoker";
+
     private static final String ESTIMATE_FIELD = "storyPointField";
     private static final String SESSION_TIMEOUT = "sessionTimeout";
-    private static final String DEFAULT_PROJECT_ACTIVATION = "defaultProjectActivation";
     private static final String ALLOW_REVEAL_DECK = "allowRevealDeck";
     private static final String DISPLAY_DROPDOWN_ON_BOARDS = "displayDropdownOnBoards";
     private static final String CHECK_PERMISSION_TO_SAVE_ESTIMATE = "checkPermissionToSaveEstimate";
@@ -42,8 +43,7 @@ public class GlobalSettingsServiceImpl implements GlobalSettingsService {
         globalSettings.setSessionTimeout(loadInteger(SESSION_TIMEOUT, SESSION_TIMEOUT_DEFAULT));
         globalSettings.setAllowRevealDeck(
             AllowRevealDeck.valueOf(loadString(ALLOW_REVEAL_DECK, ALLOW_REVEAL_DECK_DEFAULT.name())));
-        globalSettings.setDefaultProjectActivation(
-            loadBoolean(DEFAULT_PROJECT_ACTIVATION, DEFAULT_PROJECT_ACTIVATION_DEFAULT));
+        globalSettings.setActivateScrumPoker(loadBoolean(ACTIVATE_SCRUM_POKER, ACTIVATE_SCRUM_POKER_DEFAULT));
         globalSettings.setDisplayDropdownOnBoards(
             loadBoolean(DISPLAY_DROPDOWN_ON_BOARDS, DISPLAY_DROPDOWN_ON_BOARDS_DEFAULT));
         globalSettings.setCheckPermissionToSaveEstimate(
@@ -58,7 +58,7 @@ public class GlobalSettingsServiceImpl implements GlobalSettingsService {
     public void persist(GlobalSettings globalSettings) {
         persist(SESSION_TIMEOUT, String.valueOf(globalSettings.getSessionTimeout()));
         persist(ESTIMATE_FIELD, globalSettings.getEstimateField());
-        persist(DEFAULT_PROJECT_ACTIVATION, String.valueOf(globalSettings.isDefaultProjectActivation()));
+        persist(ACTIVATE_SCRUM_POKER, String.valueOf(globalSettings.isActivateScrumPoker()));
         persist(ALLOW_REVEAL_DECK, globalSettings.getAllowRevealDeck().name());
         persist(DISPLAY_DROPDOWN_ON_BOARDS, String.valueOf(globalSettings.isDisplayDropdownOnBoards()));
         persist(CHECK_PERMISSION_TO_SAVE_ESTIMATE, String.valueOf(globalSettings.isCheckPermissionToSaveEstimate()));

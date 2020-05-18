@@ -63,16 +63,16 @@
             <div class="description">$i18n.getText("scrumpoker.config.sessionTimeout.description")</div>
         </div>
         <fieldset class="group">
-            <legend><span>$i18n.getText("scrumpoker.config.defaultprojectactivation")</span></legend>
+            <legend><span>$i18n.getText("scrumpoker.config.activatescrumpoker")</span></legend>
             <div class="checkbox">
-                #if ($globalSettings.defaultProjectActivation == 'true')
-                    <input class="checkbox" type="checkbox" name="defaultProjectActivation" id="defaultProjectActivation" value="true" checked>
+                #if ($globalSettings.activateScrumPoker == 'true')
+                    <input class="checkbox" type="checkbox" name="activateScrumPoker" id="activateScrumPoker" value="true" checked>
                 #else
-                    <input class="checkbox" type="checkbox" name="defaultProjectActivation" id="defaultProjectActivation" value="true">
+                    <input class="checkbox" type="checkbox" name="activateScrumPoker" id="activateScrumPoker" value="true">
                 #end
-                <label for="defaultProjectActivation">$i18n.getText("scrumpoker.config.defaultprojectactivation.checkbox")</label>
+                <label for="activateScrumPoker">$i18n.getText("scrumpoker.config.activatescrumpoker.checkbox")</label>
             </div>
-            <div class="description">$i18n.getText("scrumpoker.config.defaultprojectactivation.description")</div>
+            <div class="description">$i18n.getText("scrumpoker.config.activatescrumpoker.description")</div>
         </fieldset>
         <fieldset class="group">
             <legend><span>$i18n.getText("scrumpoker.config.allowrevealdeck")</span></legend>
