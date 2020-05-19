@@ -26,15 +26,15 @@ public class ProjectSettingsServiceImpl implements ProjectSettingsService {
     }
 
     @Override
-    public boolean loadScrumPokerEnabled(Long projectId) {
+    public boolean loadActivateScrumPoker(Long projectId) {
         ScrumPokerProject scrumPokerProject = findById(projectId);
         return scrumPokerProject != null && scrumPokerProject.isScrumPokerEnabled();
     }
 
     @Override
-    public void persistScrumPokerEnabled(Long projectId, boolean scrumPokerEnabled) {
+    public void persistActivateScrumPoker(Long projectId, boolean activateScrumPoker) {
         ScrumPokerProject scrumPokerProject = findOrCreateByProjectId(projectId);
-        scrumPokerProject.setScrumPokerEnabled(scrumPokerEnabled);
+        scrumPokerProject.setScrumPokerEnabled(activateScrumPoker);
         scrumPokerProject.save();
     }
 

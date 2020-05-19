@@ -45,13 +45,13 @@ public class ProjectSettingsServiceImplTest {
 
     @Test
     public void shouldPersistScrumPokerEnabledFlag() {
-        projectSettingsService.persistScrumPokerEnabled(1L, true);
+        projectSettingsService.persistActivateScrumPoker(1L, true);
         assertThat(scrumPokerProject(1L).isScrumPokerEnabled(), is(true));
     }
 
     @Test
     public void scrumPokerEnableFlagReturnsFalseIfProjectHasNoConfiguration() {
-        assertThat(projectSettingsService.loadScrumPokerEnabled(2L), is(false));
+        assertThat(projectSettingsService.loadActivateScrumPoker(2L), is(false));
     }
 
     private ScrumPokerProject scrumPokerProject(Long projectId) {

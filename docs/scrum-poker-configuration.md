@@ -66,13 +66,13 @@ Sessions older than this timeout will not be shown on the `Active Sessions` page
 
 The default value is set to `12 hours` which implies that sessions of the last half day are shown on the `Active Sessions` page.
 
-#### Default Project Activation
+#### Activate Scrum Poker
 
-Decide whether Scrum Poker is enabled or disabled for all projects per default.
-This global setting can be overridden per project in the project settings.
+Decide whether Scrum Poker is activated globally for all projects.
+If not activated globally this global setting can be overridden per project in the project settings.
 
-* If enabled Scrum Poker sessions can be started for all issues in all Jira projects that have the `Confirmed Estimation Field` configured.
-* If disabled Scrum Poker sessions can only be started for issues in those projects that have Scrum Poker explicitly enabled in the `Project Configuration` and have the `Confirmed Estimation Field` configured. 
+* If activated Scrum Poker sessions can be started for all issues in all Jira projects that have the `Confirmed Estimation Field` configured.
+* If not activated Scrum Poker sessions can only be started for issues in those projects that have Scrum Poker explicitly activated in the `Project Configuration` and have the `Confirmed Estimation Field` configured. 
 
 #### Allow Reveal Deck
 
@@ -112,6 +112,6 @@ On the page `Project Configuration` you can find the configuration options the m
 
 ![Project configuration for Scrum Poker](/images/scrum-poker-configuration-project-page.png) 
 
-#### Enable Scrum Poker
+#### Activate Scrum Poker
 
-If Scrum Poker is not enabled for all projects with the `Default Project Activation` setting in the global settings this project specific setting allows you to enable Scrum Poker explicitly for the current project.
+If Scrum Poker is not activated for all projects with the `Activate Scrum Poker` setting in the global settings this project specific setting allows you to activate Scrum Poker explicitly for the current project.

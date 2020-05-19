@@ -1,6 +1,9 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.project.Project;
+import com.atlassian.jira.project.ProjectManager;
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,17 +21,23 @@ public class ProjectSettingsAction extends AbstractScrumPokerAction {
 
         static final String ACTION = "action";
         static final String PROJECT_KEY = "projectKey";
-        static final String SCRUM_POKER_ENABLED = "scrumPokerEnabled";
+        static final String ACTIVATE_SCRUM_POKER = "activateScrumPoker";
 
     }
 
+    private final ProjectManager projectManager;
     private final ProjectSettingsService projectSettingsService;
+    private final GlobalSettingsService globalSettingsService;
 
     private String projectKey;
 
     @Autowired
-    public ProjectSettingsAction(ProjectSettingsService projectSettingsService) {
+    public ProjectSettingsAction(@ComponentImport ProjectManager projectManager,
+                                 ProjectSettingsService projectSettingsService,
+                                 GlobalSettingsService globalSettingsService) {
+        this.projectManager = projectManager;
         this.projectSettingsService = projectSettingsService;
+        this.globalSettingsService = globalSettingsService;
     }
 
     /**
@@ -39,10 +48,17 @@ public class ProjectSettingsAction extends AbstractScrumPokerAction {
     }
 
     /**
-     * Current configured project activation for this concrete project.
+     * Return whether Scrum Poker is activated for the current project.
      */
-    public boolean isScrumPokerEnabled() {
-        return projectSettingsService.loadScrumPokerEnabled(getProjectByKey(projectKey).getId());
+    public boolean isActivateScrumPokerForProject() {
+        return projectSettingsService.loadActivateScrumPoker(getProjectByKey(projectKey).getId());
+    }
+
+    /**
+     * Return whether Scrum Poker is activated globally.
+     */
+    public boolean isActivateScrumPokerGlobally() {
+        return globalSettingsService.load().isActivateScrumPoker();
     }
 
     /**
@@ -54,14 +70,14 @@ public class ProjectSettingsAction extends AbstractScrumPokerAction {
         String action = getParameter(Parameters.ACTION);
         if (action != null && action.equals("save")) {
             Long projectId = getProjectByKey(projectKey).getId();
-            String newScrumPokerEnabled = getParameter(Parameters.SCRUM_POKER_ENABLED);
-            projectSettingsService.persistScrumPokerEnabled(projectId, Boolean.parseBoolean(newScrumPokerEnabled));
+            String newActivateScrumPoker = getParameter(Parameters.ACTIVATE_SCRUM_POKER);
+            projectSettingsService.persistActivateScrumPoker(projectId, Boolean.parseBoolean(newActivateScrumPoker));
         }
         return SUCCESS;
     }
 
     private Project getProjectByKey(String projectKey) {
-        return getProjectManager().getProjectByCurrentKey(projectKey);
+        return projectManager.getProjectByCurrentKey(projectKey);
     }
 
 }

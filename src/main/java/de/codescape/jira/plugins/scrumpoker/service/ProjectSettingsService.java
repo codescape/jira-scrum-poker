@@ -12,20 +12,20 @@ import java.util.List;
 public interface ProjectSettingsService {
 
     /**
-     * Returns whether a specific project has Scrum Poker explicitly enabled.
+     * Returns whether a specific project has Scrum Poker explicitly activated.
      *
      * @param projectId Unique ID of the Jira project
-     * @return project has Scrum Poker enabled
+     * @return <code>true</code> if project has Scrum Poker activated, otherwise <code>false</code>
      */
-    boolean loadScrumPokerEnabled(Long projectId);
+    boolean loadActivateScrumPoker(Long projectId);
 
     /**
-     * Saves whether a specific project has Scrum Poker explicitly enabled.
+     * Saves whether a specific project has Scrum Poker explicitly activated.
      *
-     * @param projectId         Unique ID of the Jira project
-     * @param scrumPokerEnabled project has Scrum Poker enabled
+     * @param projectId          Unique ID of the Jira project
+     * @param activateScrumPoker project has Scrum Poker activated
      */
-    void persistScrumPokerEnabled(Long projectId, boolean scrumPokerEnabled);
+    void persistActivateScrumPoker(Long projectId, boolean activateScrumPoker);
 
     /**
      * Returns all project specific settings.

@@ -20,7 +20,7 @@ public interface ScrumPokerProject extends ScrumPokerEntity {
     void setProjectId(Long projectId);
 
     /**
-     * Flag whether Scrum Poker is enabled for this project or not.
+     * Flag whether Scrum Poker is activated for this project or not.
      */
     boolean isScrumPokerEnabled();
 

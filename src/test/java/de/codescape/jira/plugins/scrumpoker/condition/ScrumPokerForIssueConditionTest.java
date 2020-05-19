@@ -101,13 +101,13 @@ public class ScrumPokerForIssueConditionTest {
     private void expectThatScrumPokerIsEnabledForProject() {
         when(issue.getProjectObject()).thenReturn(project);
         when(project.getId()).thenReturn(42L);
-        when(projectSettingsService.loadScrumPokerEnabled(any())).thenReturn(true);
+        when(projectSettingsService.loadActivateScrumPoker(any())).thenReturn(true);
     }
 
     private void expectThatScrumPokerIsNotEnabledForProject() {
         when(issue.getProjectObject()).thenReturn(project);
         when(project.getId()).thenReturn(42L);
-        when(projectSettingsService.loadScrumPokerEnabled(any())).thenReturn(false);
+        when(projectSettingsService.loadActivateScrumPoker(any())).thenReturn(false);
     }
 
     private void expectThatIssueIsNotEditable() {

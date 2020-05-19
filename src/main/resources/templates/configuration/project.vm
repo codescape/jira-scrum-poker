@@ -15,23 +15,28 @@
 <form class="aui long-label" action="ScrumPokerProjectConfiguration.jspa" method="post">
     <div class="form-body">
         <fieldset class="group">
-            <legend><span>$i18n.getText("scrumpoker.config.project.scrumpokerenabled")</span></legend>
+            <legend><span>$i18n.getText("scrumpoker.config.project.activatescrumpoker")</span></legend>
             <div class="checkbox">
-                #if ($scrumPokerEnabled == 'true')
-                    <input class="checkbox" type="checkbox" name="scrumPokerEnabled" id="scrumPokerEnabled" value="true" checked>
+                #if ($activateScrumPokerGlobally == 'true')
+                    <input class="checkbox" type="checkbox" name="activateScrumPoker" id="activateScrumPoker" value="true" disabled checked>
+                    <label for="activateScrumPoker">$i18n.getText("scrumpoker.config.project.activatescrumpoker.checkbox.globallyactivated")</label>
                 #else
-                    <input class="checkbox" type="checkbox" name="scrumPokerEnabled" id="scrumPokerEnabled" value="true">
+                    #if ($activateScrumPokerForProject == 'true')
+                        <input class="checkbox" type="checkbox" name="activateScrumPoker" id="activateScrumPoker" value="true" checked>
+                    #else
+                        <input class="checkbox" type="checkbox" name="activateScrumPoker" id="activateScrumPoker" value="true">
+                    #end
+                    <label for="activateScrumPoker">$i18n.getText("scrumpoker.config.project.activatescrumpoker.checkbox")</label>
                 #end
-                <label for="scrumPokerEnabled">$i18n.getText("scrumpoker.config.project.scrumpokerenabled.checkbox")</label>
             </div>
-            <div class="description">$i18n.getText("scrumpoker.config.project.scrumpokerenabled.description")</div>
+            <div class="description">$i18n.getText("scrumpoker.config.project.activatescrumpoker.description")</div>
         </fieldset>
     </div>
     <div class="buttons-container form-footer">
         <div class="buttons">
             <input type="hidden" name="projectKey" value="$projectKey">
             <button name="action" value="save" type="submit" id="save-button" class="aui-button aui-button-primary">
-                <span class="aui-icon aui-icon-small aui-iconfont-check-circle"></span>  $i18n.getText("scrumpoker.config.save")
+                <span class="aui-icon aui-icon-small aui-iconfont-check-circle"></span> $i18n.getText("scrumpoker.config.save")
             </button>
         </div>
     </div>

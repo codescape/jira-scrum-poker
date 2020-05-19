@@ -15,6 +15,7 @@ title: Changelog
 * docs: add documentation to logic for need to talk flag
 * style: clean up formatting of plugin configuration
 * feat: rename global setting for Scrum Poker activation (#105)
+* feat: rename and improve project setting for Scrum Poker activation (#105)
 
 ### [20.05.2] - 2020-05-14
 
