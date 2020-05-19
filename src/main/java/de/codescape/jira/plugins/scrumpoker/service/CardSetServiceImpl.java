@@ -41,10 +41,10 @@ public class CardSetServiceImpl implements CardSetService {
     }
 
     private boolean isAssignable(String cardValue) {
-        return valueIsNotASpecialCard(cardValue) && valueIsAssignableToEstimationField(cardValue);
+        return valueIsNotASpecialCard(cardValue) && valueIsAssignableToEstimateField(cardValue);
     }
 
-    private boolean valueIsAssignableToEstimationField(String cardValue) {
+    private boolean valueIsAssignableToEstimateField(String cardValue) {
         // TODO can the cardValue be persisted into the configured estimation field?
         return true;
     }
