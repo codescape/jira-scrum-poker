@@ -10,6 +10,10 @@ title: Changelog
 
 ### [Unreleased]
 
+* ...
+
+### [20.05.3] - 2020-05-20
+
 * docs: document required admin role to configure Scrum Poker for Jira (#116)
 * refactor: rename variables in health check to better explain checks
 * docs: add documentation to logic for need to talk flag
@@ -87,7 +91,8 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.05.2...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.05.3...HEAD
+[20.05.3]: https://github.com/codescape/jira-scrum-poker/compare/20.05.2...20.05.3
 [20.05.2]: https://github.com/codescape/jira-scrum-poker/compare/20.05.1...20.05.2
 [20.05.1]: https://github.com/codescape/jira-scrum-poker/compare/20.05.0...20.05.1
 [20.05.0]: https://github.com/codescape/jira-scrum-poker/compare/4.10.0...20.05.0
