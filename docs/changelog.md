@@ -18,6 +18,7 @@ title: Changelog
 * feat: rename and improve project setting for Scrum Poker activation (#105)
 * chore: optimize imports for test classes
 * feat: add support for Jira 8.9.0
+* docs: improve wording in changelog
 
 ### [20.05.2] - 2020-05-14
 
@@ -79,7 +80,7 @@ title: Changelog
 
 ### Older versions
 
-Older versions are moved into separate changelog documents accumulated by major version:
+Older versions have been moved into separate changelog documents grouped by their major version:
 
 * [Scrum Poker for Jira 4.x](/changelog-4x)
 * [Scrum Poker for Jira 3.x](/changelog-3x)
