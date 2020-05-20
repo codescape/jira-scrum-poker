@@ -17,6 +17,7 @@ title: Changelog
 * feat: rename global setting for Scrum Poker activation (#105)
 * feat: rename and improve project setting for Scrum Poker activation (#105)
 * chore: optimize imports for test classes
+* feat: add support for Jira 8.9.0
 
 ### [20.05.2] - 2020-05-14
 
