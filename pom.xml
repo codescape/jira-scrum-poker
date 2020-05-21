@@ -49,8 +49,8 @@
         <!-- see com.atlassian.jira:jira-project:${jira.version} for correct versions -->
         <activeobjects.version>3.2.3</activeobjects.version>
         <amps.version>8.0.4</amps.version>
-        <atlassian.spring.scanner.version>2.1.8</atlassian.spring.scanner.version>
-        <commons.lang3.version>3.8</commons.lang3.version>
+        <atlassian-spring-scanner.version>2.1.13</atlassian-spring-scanner.version>
+        <commons-lang3.version>3.8</commons-lang3.version>
         <hamcrest.version>2.2</hamcrest.version>
         <hsqldb.version>2.5.0</hsqldb.version>
         <jackson.version>1.9.13-atlassian-4</jackson.version>
@@ -59,9 +59,9 @@
         <junit.version>4.12</junit.version>
         <lucene.version>7.3.1</lucene.version>
         <mockito.version>3.1.0</mockito.version>
-        <quick.reload.version>3.0.0</quick.reload.version>
-        <sal.version>4.1.0</sal.version>
-        <servlet.api.version>3.0.1</servlet.api.version>
+        <quickreload.version>3.0.0</quickreload.version>
+        <sal.version>4.2.0</sal.version>
+        <servlet-api.version>3.0.1</servlet-api.version>
         <slf4j.version>1.7.25</slf4j.version>
         <spring.version>5.0.10.RELEASE</spring.version>
         <upm.version>4.0.8</upm.version>
@@ -112,7 +112,7 @@
         <dependency>
             <groupId>com.atlassian.plugin</groupId>
             <artifactId>atlassian-spring-scanner-annotation</artifactId>
-            <version>${atlassian.spring.scanner.version}</version>
+            <version>${atlassian-spring-scanner.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -142,7 +142,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>${commons.lang3.version}</version>
+            <version>${commons-lang3.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -160,7 +160,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>${servlet.api.version}</version>
+            <version>${servlet-api.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -258,7 +258,7 @@
                         <pluginArtifact>
                             <groupId>com.atlassian.labs.plugins</groupId>
                             <artifactId>quickreload</artifactId>
-                            <version>${quick.reload.version}</version>
+                            <version>${quickreload.version}</version>
                         </pluginArtifact>
                     </pluginArtifacts>
 
@@ -346,7 +346,7 @@
             <plugin>
                 <groupId>com.atlassian.plugin</groupId>
                 <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>
-                <version>${atlassian.spring.scanner.version}</version>
+                <version>${atlassian-spring-scanner.version}</version>
                 <executions>
                     <execution>
                         <goals>

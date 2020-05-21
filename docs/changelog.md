@@ -10,7 +10,7 @@ title: Changelog
 
 ### [Unreleased]
 
-* ...
+* chore: update dependency versions from Jira 8.9.0 project
 
 ### [20.05.3] - 2020-05-20
 
