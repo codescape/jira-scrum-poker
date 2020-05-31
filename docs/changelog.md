@@ -10,9 +10,13 @@ title: Changelog
 
 ### [Unreleased]
 
+* chore: update dependency versions from Jira 8.9.0 project
+* docs: improve installation instructions in online documentation
 * test: add test coverage for valid Scrum Poker session URL links
 
 ### [20.05.3] - 2020-05-20
+
+**Improved configuration for selective activation of Scrum Poker**
 
 * docs: document required admin role to configure Scrum Poker for Jira (#116)
 * refactor: rename variables in health check to better explain checks
@@ -72,7 +76,7 @@ title: Changelog
 * chore: implement against Jira 8.8.1
 * refactor: cleanup code for composing dates to display values
 * refactor: improve speed for calculation for revealing deck permission
-* refactor: improve readability for session mapping 
+* refactor: improve readability for session mapping
 * feat: support non-numeric estimates (#102)
 * feat: treat all votes that are not a special card as assignable (#102)
 * feat: evaluate need to talk flag for all kind of cards (#102)
