@@ -10,7 +10,7 @@ title: Changelog
 
 ### [Unreleased]
 
-* ...
+* test: add test coverage for valid Scrum Poker session URL links
 
 ### [20.05.3] - 2020-05-20
 

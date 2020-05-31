@@ -91,6 +91,8 @@ public class ScrumPokerActionTest {
         when(jiraAuthenticationContext.getLoggedInUser()).thenReturn(user);
     }
 
+    /* tests for doExecute() */
+
     @Test
     public void shouldDisplayStartPageWhenUserHasPermissionForIssueAndIssueIsEstimable() {
         whenLicenseIsValid();
@@ -136,6 +138,8 @@ public class ScrumPokerActionTest {
         assertThat(scrumPokerAction.getErrorMessages(), hasItem("Scrum Poker for Jira has license errors: EXPIRED"));
     }
 
+    /* tests for getComments() */
+
     @Test
     public void shouldReturnCommentsForIssue() {
         whenRequestedIssueExists();
@@ -147,6 +151,8 @@ public class ScrumPokerActionTest {
 
         assertThat(scrumPokerAction.getComments(), is(equalTo(comments)));
     }
+
+    /* tests for isDisplayCommentsForIssue() */
 
     @Test
     public void shouldNotDisplayCommentsIfDisplayCommentsForIssueIsSetToNone() {
@@ -168,6 +174,24 @@ public class ScrumPokerActionTest {
 
         assertThat(scrumPokerAction.isDisplayCommentsForIssue(), is(true));
     }
+
+    /* tests for getScrumPokerSessionUrl() */
+
+    @Test
+    public void shouldReturnExpectedScrumPokerSessionUrlForCurrentIssue() {
+        // use the "happy path test" to allow further method calls
+        shouldDisplayStartPageWhenUserHasPermissionForIssueAndIssueIsEstimable();
+
+        // mock url construction of com.atlassian.jira.util.http.JiraUrl class
+        when(httpServletRequest.getScheme()).thenReturn("https");
+        when(httpServletRequest.getServerName()).thenReturn("apps.codescape.de");
+        when(httpServletRequest.getContextPath()).thenReturn("/jira");
+        when(httpServletRequest.getServerPort()).thenReturn(443);
+
+        assertThat(scrumPokerAction.getScrumPokerSessionUrl(), is(equalTo("https://apps.codescape.de/jira/secure/ScrumPoker.jspa?issueKey=" + ISSUE_KEY)));
+    }
+
+    /* supporting methods */
 
     private void whenDisplayCommentsForIssueSetTo(DisplayCommentsForIssue displayCommentsForIssue) {
         when(globalSettingsService.load()).thenReturn(globalSettings);
