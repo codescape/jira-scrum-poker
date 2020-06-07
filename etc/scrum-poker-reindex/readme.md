@@ -46,8 +46,8 @@ The following steps were used to set up the environment and perform the required
 
 * Take screenshot(s) without app installed
 
-![without app installed](screenshots/2020-06-07 at 10-19-28 reindex without app installed.png)
-![without app installed](screenshots/2020-06-07 at 10-21-03 reindex without app installed.png)
+![without app installed](/screenshots/2020-06-07 at 10-19-28 reindex without app installed.png)
+![without app installed](/screenshots/2020-06-07 at 10-21-03 reindex without app installed.png)
 
 * Install latest version of Scrum Poker for Jira
 
@@ -59,5 +59,5 @@ The following steps were used to set up the environment and perform the required
 
 * Take screenshot(s) with app installed
 
-![with app installed](screenshots/2020-06-07 at 18-43-51 reindex with app installed.png)
-![with app installed](screenshots/2020-06-07 at 18-44-30 reindex with app installed.png)
+![with app installed](/screenshots/2020-06-07 at 18-43-51 reindex with app installed.png)
+![with app installed](/screenshots/2020-06-07 at 18-44-30 reindex with app installed.png)
