@@ -12,12 +12,12 @@ import org.springframework.stereotype.Component;
  * introduced by Jira Software. This is one possible entry point to the active sessions list for example.
  */
 @Component
-public class ScrumPokerOnBoardCondition extends AbstractWebCondition {
+public class ScrumPokerDropdownOnBoardCondition extends AbstractWebCondition {
 
     private final GlobalSettingsService globalSettingsService;
 
     @Autowired
-    public ScrumPokerOnBoardCondition(GlobalSettingsService globalSettingsService) {
+    public ScrumPokerDropdownOnBoardCondition(GlobalSettingsService globalSettingsService) {
         this.globalSettingsService = globalSettingsService;
     }
 

@@ -80,6 +80,8 @@ public class EstimateFieldServiceImplTest {
         when(globalSettingsService.load()).thenReturn(globalSettings);
     }
 
+    /* tests for save(..) */
+
     @Test
     public void saveFailsWithoutPermissionCheckAndWithErrorsDuringUpdate() {
         expectUserLoggedIn();
@@ -144,23 +146,31 @@ public class EstimateFieldServiceImplTest {
         verify(errorLogService).logError(anyString(), any(NumberFormatException.class));
     }
 
+    /* tests for isEstimable(..) */
+
     @Test
-    public void hasEstimateFieldReturnsTrueForIssueWithCustomField() {
+    public void isEstimableReturnsTrueForEditableIssueWithCustomFieldAndScrumPokerActivated() {
+        when(issue.isEditable()).thenReturn(true);
+        when(globalSettings.isActivateScrumPoker()).thenReturn(true);
         when(globalSettings.getEstimateField()).thenReturn(CUSTOM_FIELD_ID);
         when(customFieldManager.getCustomFieldObject(CUSTOM_FIELD_ID)).thenReturn(customField);
         when(customFieldManager.getCustomFieldObjects(issue)).thenReturn(Arrays.asList(customField, anotherField));
 
-        assertThat(estimateFieldService.hasEstimateField(issue), is(true));
+        assertThat(estimateFieldService.isEstimable(issue), is(true));
     }
 
     @Test
-    public void hasEstimateFieldReturnsFalseForIssueWithoutCustomField() {
+    public void isEstimableReturnsFalseForIssueWithoutCustomFieldAndScrumPokerActivated() {
+        when(issue.isEditable()).thenReturn(true);
+        when(globalSettings.isActivateScrumPoker()).thenReturn(true);
         when(globalSettings.getEstimateField()).thenReturn(CUSTOM_FIELD_ID);
         when(customFieldManager.getCustomFieldObject(CUSTOM_FIELD_ID)).thenReturn(customField);
         when(customFieldManager.getCustomFieldObjects(issue)).thenReturn(Collections.singletonList(anotherField));
 
-        assertThat(estimateFieldService.hasEstimateField(issue), is(false));
+        assertThat(estimateFieldService.isEstimable(issue), is(false));
     }
+
+    /* supporting methods */
 
     private void expectCustomFieldTypeNotSupported() {
         when(customField.getCustomFieldType()).thenReturn(customFieldType);

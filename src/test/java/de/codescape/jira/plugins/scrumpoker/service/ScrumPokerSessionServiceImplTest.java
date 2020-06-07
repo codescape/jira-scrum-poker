@@ -6,7 +6,6 @@ import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerTestDatabaseUpdater;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
-import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import net.java.ao.EntityManager;
 import net.java.ao.test.converters.NameConverters;
@@ -42,7 +41,7 @@ public class ScrumPokerSessionServiceImplTest {
 
     private ScrumPokerSessionService scrumPokerSessionService;
 
-    private ScrumPokerForIssueCondition scrumPokerForIssueCondition;
+    private EstimateFieldService estimateFieldService;
 
     @Before
     public void before() {
@@ -57,13 +56,13 @@ public class ScrumPokerSessionServiceImplTest {
         when(scrumPokerSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getSessionTimeout()).thenReturn(EXPECTED_SESSION_TIMEOUT);
 
-        scrumPokerForIssueCondition = mock(ScrumPokerForIssueCondition.class);
-        when(scrumPokerForIssueCondition.isEstimable(ArgumentMatchers.any(Issue.class))).thenReturn(true);
+        estimateFieldService = mock(EstimateFieldService.class);
+        when(estimateFieldService.isEstimable(ArgumentMatchers.any(Issue.class))).thenReturn(true);
 
         ErrorLogService errorLogService = mock(ErrorLogService.class);
 
         scrumPokerSessionService = new ScrumPokerSessionServiceImpl(activeObjects, issueManager,
-            scrumPokerSettingsService, scrumPokerForIssueCondition, errorLogService);
+            scrumPokerSettingsService, estimateFieldService, errorLogService);
     }
 
     @Test
@@ -230,8 +229,8 @@ public class ScrumPokerSessionServiceImplTest {
 
     @Test(expected = IllegalStateException.class)
     public void shouldNotCreateSessionForIssueWhichCannotBeEstimated() {
-        reset(scrumPokerForIssueCondition);
-        when(scrumPokerForIssueCondition.isEstimable(ArgumentMatchers.any(Issue.class))).thenReturn(false);
+        reset(estimateFieldService);
+        when(estimateFieldService.isEstimable(ArgumentMatchers.any(Issue.class))).thenReturn(false);
         scrumPokerSessionService.byIssueKey("ISSUE-21", "USER-1");
         fail();
     }

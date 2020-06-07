@@ -13,6 +13,7 @@ title: Changelog
 * chore: update dependency versions from Jira 8.9.0 project
 * docs: improve installation instructions in online documentation
 * test: add test coverage for valid Scrum Poker session URL links
+* feat: show option to join Scrum Poker session if already started (#109)
 
 ### [20.05.3] - 2020-05-20
 

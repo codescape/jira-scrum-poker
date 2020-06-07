@@ -33,7 +33,7 @@ It allows you to directly jump into all running sessions.
 #### Start the session from the Issue detail page
 
 As an alternative you can use all the ways described on the page showing how to [Start a Scrum Poker session](/start-scrum-poker-session), too.
-When a user tries to start a session for an issue that already has a running session the user is being redirected into this session instead. 
+The button is not labelled `Start Scrum Poker` when an active session exists but displays as `Join Scrum Poker` in this case. 
 
 #### Join a session through scanning QR code from the session page
 

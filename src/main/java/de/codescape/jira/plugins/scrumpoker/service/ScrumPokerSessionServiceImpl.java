@@ -6,7 +6,6 @@ import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
-import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
 import net.java.ao.DBParam;
 import net.java.ao.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,19 +24,19 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     private final ActiveObjects activeObjects;
     private final IssueManager issueManager;
     private final GlobalSettingsService globalSettingsService;
-    private final ScrumPokerForIssueCondition scrumPokerForIssueCondition;
+    private final EstimateFieldService estimateFieldService;
     private final ErrorLogService errorLogService;
 
     @Autowired
     public ScrumPokerSessionServiceImpl(@ComponentImport ActiveObjects activeObjects,
                                         @ComponentImport IssueManager issueManager,
                                         GlobalSettingsService globalSettingsService,
-                                        ScrumPokerForIssueCondition scrumPokerForIssueCondition,
+                                        EstimateFieldService estimateFieldService,
                                         ErrorLogService errorLogService) {
         this.activeObjects = activeObjects;
         this.issueManager = issueManager;
         this.globalSettingsService = globalSettingsService;
-        this.scrumPokerForIssueCondition = scrumPokerForIssueCondition;
+        this.estimateFieldService = estimateFieldService;
         this.errorLogService = errorLogService;
     }
 
@@ -131,6 +130,17 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
             .limit(3)));
     }
 
+    @Override
+    public boolean hasActiveSession(String issueKey) {
+        /* a session is defined as an active session if the session exists, the session has not been confirmed yet, the
+           session has not been cancelled and the session has not timed out yet */
+        ScrumPokerSession scrumPokerSession = findScrumPokerSession(issueKey);
+        return scrumPokerSession != null
+            && scrumPokerSession.getConfirmedEstimate() == null
+            && !scrumPokerSession.isCancelled()
+            && !(scrumPokerSession.getUpdateDate().before(sessionTimeout()));
+    }
+
     private Date sessionTimeout() {
         long sessionTimeoutMillis = hoursToMillis(globalSettingsService.load().getSessionTimeout());
         return new Date(System.currentTimeMillis() - sessionTimeoutMillis);
@@ -147,7 +157,7 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
             errorLogService.logError(message, null);
             throw new IllegalStateException(message);
         }
-        if (!scrumPokerForIssueCondition.isEstimable(issue)) {
+        if (!estimateFieldService.isEstimable(issue)) {
             String message = "Unable to create session for non-estimable issue " + issueKey + ".";
             errorLogService.logError(message, null);
             throw new IllegalStateException(message);

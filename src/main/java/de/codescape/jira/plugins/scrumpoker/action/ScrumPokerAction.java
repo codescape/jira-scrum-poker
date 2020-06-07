@@ -14,8 +14,8 @@ import com.atlassian.jira.util.http.JiraUrl;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.upm.api.license.PluginLicenseManager;
 import com.atlassian.upm.api.license.entity.PluginLicense;
-import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
 import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
+import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -49,8 +49,8 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
     private final JiraAuthenticationContext jiraAuthenticationContext;
     private final DateTimeFormatter dateTimeFormatter;
     private final GlobalSettingsService globalSettingsService;
-    private final ScrumPokerForIssueCondition scrumPokerForIssueCondition;
     private final PluginLicenseManager pluginLicenseManager;
+    private final EstimateFieldService estimateFieldService;
     private final ErrorLogService errorLogService;
 
     private String issueKey;
@@ -64,7 +64,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
                             @ComponentImport PluginLicenseManager pluginLicenseManager,
                             @ComponentImport DateTimeFormatter dateTimeFormatter,
                             GlobalSettingsService globalSettingsService,
-                            ScrumPokerForIssueCondition scrumPokerForIssueCondition,
+                            EstimateFieldService estimateFieldService,
                             ErrorLogService errorLogService) {
         this.rendererManager = rendererManager;
         this.issueManager = issueManager;
@@ -74,7 +74,8 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
         this.pluginLicenseManager = pluginLicenseManager;
         this.dateTimeFormatter = dateTimeFormatter;
         this.globalSettingsService = globalSettingsService;
-        this.scrumPokerForIssueCondition = scrumPokerForIssueCondition;
+        this.estimateFieldService = estimateFieldService;
+
         this.errorLogService = errorLogService;
     }
 
@@ -157,7 +158,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
     }
 
     private boolean issueIsNotEstimable(MutableIssue issue) {
-        return !scrumPokerForIssueCondition.isEstimable(issue);
+        return !estimateFieldService.isEstimable(issue);
     }
 
     private boolean currentUserIsNotAllowedToSeeIssue(MutableIssue issue) {

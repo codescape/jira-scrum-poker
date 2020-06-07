@@ -30,12 +30,13 @@ public interface EstimateFieldService {
     CustomField findEstimateField();
 
     /**
-     * Return whether the given issue has the estimate field configured.
+     * Returns whether an issue can be estimated. This means the issue is editable, has the estimate field and Scrum
+     * Poker is either activated globally or for the project the issue is in.
      *
-     * @param issue issue
-     * @return <code>true</code> if estimate field exists, otherwise <code>false</code>
+     * @param issue the issue
+     * @return <code>true</code> if the issue can be estimated, otherwise <code>false</code>
      */
-    boolean hasEstimateField(Issue issue);
+    boolean isEstimable(Issue issue);
 
     /**
      * Return a list of supported custom fields.

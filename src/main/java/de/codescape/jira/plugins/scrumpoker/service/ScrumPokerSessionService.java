@@ -81,4 +81,12 @@ public interface ScrumPokerSessionService {
      */
     List<ScrumPokerSession> references(String userKey, String estimate);
 
+    /**
+     * Returns whether an active Scrum Poker session for this issue exists.
+     *
+     * @param issueKey key of the issue
+     * @return <code>true</code> if session exists, otherwise <code>false</code>
+     */
+    boolean hasActiveSession(String issueKey);
+
 }

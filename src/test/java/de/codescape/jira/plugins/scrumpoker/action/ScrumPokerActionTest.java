@@ -15,10 +15,10 @@ import com.atlassian.upm.api.license.PluginLicenseManager;
 import com.atlassian.upm.api.license.entity.LicenseError;
 import com.atlassian.upm.api.license.entity.PluginLicense;
 import com.atlassian.upm.api.util.Option;
-import de.codescape.jira.plugins.scrumpoker.condition.ScrumPokerForIssueCondition;
 import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
+import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.junit.Before;
 import org.junit.Rule;
@@ -46,6 +46,9 @@ public class ScrumPokerActionTest {
     private IssueManager issueManager;
 
     @Mock
+    private EstimateFieldService estimateFieldService;
+
+    @Mock
     @AvailableInContainer
     private HttpServletVariables httpServletVariables;
 
@@ -63,9 +66,6 @@ public class ScrumPokerActionTest {
 
     @Mock
     private GlobalSettingsService globalSettingsService;
-
-    @Mock
-    private ScrumPokerForIssueCondition scrumPokerForIssueCondition;
 
     @Mock
     private ErrorLogService errorLogService;
@@ -215,11 +215,11 @@ public class ScrumPokerActionTest {
     }
 
     private void whenIssueIsNotEstimable() {
-        when(scrumPokerForIssueCondition.isEstimable(issue)).thenReturn(false);
+        when(estimateFieldService.isEstimable(issue)).thenReturn(false);
     }
 
     private void whenIssueIsEstimable() {
-        when(scrumPokerForIssueCondition.isEstimable(issue)).thenReturn(true);
+        when(estimateFieldService.isEstimable(issue)).thenReturn(true);
     }
 
     private void whenUserIsAllowedToSeeIssue() {
