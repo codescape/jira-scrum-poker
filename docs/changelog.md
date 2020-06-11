@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Changelog
+category: Administration
 ---
 
 {% include changelog-preface.md %}
@@ -15,6 +16,7 @@ title: Changelog
 * test: add test coverage for valid Scrum Poker session URL links
 * feat: show option to join Scrum Poker session if already started (#109)
 * test: perform required Lucene index timing tests for Data Center approval
+* docs: mark external links in documentation and improve overall visual appearance
 
 ### [20.05.3] - 2020-05-20
 

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Scrum Poker configuration
+category: Administration
 ---
 
 This page describes how to configure Scrum Poker for Jira to work in your Jira application.
@@ -16,11 +17,11 @@ This configuration is only available to users with the `Jira Administrators` rol
 To locate the global configuration navigate to the `Administration` menu, then select the entry labelled `Manage apps`.
 You will now find a section called `Scrum Poker` in the left sidebar as shown in the screenshot below:
 
-![Locate the global configuration for Scrum Poker](/images/scrum-poker-configuration-locate-page.png) 
+![Locate the global configuration for Scrum Poker](/images/scrum-poker-configuration-locate-page.png)
 
 On the page `Configuration` you have global configuration options to make Scrum Poker for Jira fit to your needs:
 
-![Global configuration for Scrum Poker](/images/scrum-poker-configuration-page.png) 
+![Global configuration for Scrum Poker](/images/scrum-poker-configuration-page.png)
 
 #### Confirmed Estimate Field
 
@@ -49,8 +50,8 @@ Decide whether every participant of a Scrum Poker session is allowed to save the
 
 #### Card Set
 
-Define the default card set to be used for Scrum Poker sessions. 
-Use a comma-separated list of values. 
+Define the default card set to be used for Scrum Poker sessions.
+Use a comma-separated list of values.
 Special cards are defined by the keywords `coffee` (the user needs a break) and `question` (the user is not able to estimate).
 
 The default card set that is preconfigured is the simplified Fibonacci sequence:
@@ -72,7 +73,7 @@ Decide whether Scrum Poker is activated globally for all projects.
 If not activated globally this global setting can be overridden per project in the project settings.
 
 * If activated Scrum Poker sessions can be started for all issues in all Jira projects that have the `Confirmed Estimation Field` configured.
-* If not activated Scrum Poker sessions can only be started for issues in those projects that have Scrum Poker explicitly activated in the `Project Configuration` and have the `Confirmed Estimation Field` configured. 
+* If not activated Scrum Poker sessions can only be started for issues in those projects that have Scrum Poker explicitly activated in the `Project Configuration` and have the `Confirmed Estimation Field` configured.
 
 #### Allow Reveal Deck
 
@@ -85,13 +86,13 @@ Decide who is allowed to reveal the votes and make them visible during a Scrum P
 #### Show Comments
 
 Decide whether comments on the issue will be displayed in the Scrum Poker session.
-Some teams use comments to communicate and discuss details of an issue and so those comments might help when estimating an issue. 
+Some teams use comments to communicate and discuss details of an issue and so those comments might help when estimating an issue.
 
-The following options are available: 
+The following options are available:
 
 * `Show all comments` allows participants of a Scrum Poker session to see all comments they are allowed to see.
 * `Show latest comments` allows participants of a Scrum Poker session to see the most recent ten comments they are allowed to see.
-* `Show no comments` removes the section that displays comments on the Scrum Poker session page and thus shows no comments. 
+* `Show no comments` removes the section that displays comments on the Scrum Poker session page and thus shows no comments.
 
 #### Show Dropdown on Boards
 
@@ -99,7 +100,7 @@ Decide whether to show the Scrum Poker dropdown on boards or not.
 In older versions of Scrum Poker this dropdown was the only way to access the list of active Scrum Poker sessions.
 Today the Scrum Poker menu elements in the Jira top menu `Boards` are preferred.
 
-By default this option is disabled as this feature is just a convenience feature for users of older Scrum Poker versions who want to use this way to open the `Active Sessions` page. 
+By default this option is disabled as this feature is just a convenience feature for users of older Scrum Poker versions who want to use this way to open the `Active Sessions` page.
 
 ### Project Configuration
 
@@ -110,7 +111,7 @@ Inside the `Project settings` you can find a menu option called `Scrum Poker` th
 
 On the page `Project Configuration` you can find the configuration options the make Scrum Poker for Jira fit to the needs of your Jira project:
 
-![Project configuration for Scrum Poker](/images/scrum-poker-configuration-project-page.png) 
+![Project configuration for Scrum Poker](/images/scrum-poker-configuration-project-page.png)
 
 #### Activate Scrum Poker
 

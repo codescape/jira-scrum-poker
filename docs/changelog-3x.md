@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Changelog 3.x
+category: Administration
 ---
 
 {% include changelog-preface.md %}
@@ -267,4 +268,3 @@ title: Changelog 3.x
 [3.1.0]: https://github.com/codescape/jira-scrum-poker/compare/3.0.1...3.1.0
 [3.0.1]: https://github.com/codescape/jira-scrum-poker/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/codescape/jira-scrum-poker/compare/2.8.0...3.0.0
-

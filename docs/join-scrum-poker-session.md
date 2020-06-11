@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Join a Scrum Poker session
+category: User Guide
 ---
 
 This page describes how to join a currently running Scrum Poker session.
@@ -19,11 +20,11 @@ To join a currently running Scrum Poker session there are basically three ways i
 
 #### Find your session in the Active Sessions list
 
-The preferred and easiest way is the so called `Active Sessions` page which can be accessed from the main navigation menu `Boards` provided by Jira Software where you can find another `Active Sessions` link. 
+The preferred and easiest way is the so called `Active Sessions` page which can be accessed from the main navigation menu `Boards` provided by Jira Software where you can find another `Active Sessions` link.
 
-This page can also be accessed from the `Scrum Poker` dropdown that is visible on every agile board in Jira. This dropdown might not be shown depending on the `Show Dropdown on Boards` setting as explained on the [Scrum Poker configuration](/scrum-poker-configuration) page. 
+This page can also be accessed from the `Scrum Poker` dropdown that is visible on every agile board in Jira. This dropdown might not be shown depending on the `Show Dropdown on Boards` setting as explained on the [Scrum Poker configuration](/scrum-poker-configuration) page.
 
-![Navigate to the active sessions page](/images/start-scrum-poker-session-open-active-sessions.png) 
+![Navigate to the active sessions page](/images/start-scrum-poker-session-open-active-sessions.png)
 
 The `Active Session` page displays all currently running and recently finished sessions related to issues that are visible to you.
 It allows you to directly jump into all running sessions.
@@ -33,7 +34,7 @@ It allows you to directly jump into all running sessions.
 #### Start the session from the Issue detail page
 
 As an alternative you can use all the ways described on the page showing how to [Start a Scrum Poker session](/start-scrum-poker-session), too.
-The button is not labelled `Start Scrum Poker` when an active session exists but displays as `Join Scrum Poker` in this case. 
+The button is not labelled `Start Scrum Poker` when an active session exists but displays as `Join Scrum Poker` in this case.
 
 #### Join a session through scanning QR code from the session page
 

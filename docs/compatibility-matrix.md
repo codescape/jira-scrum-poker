@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Compatibility Matrix
+category: Administration
 ---
 
 * Table of Contents

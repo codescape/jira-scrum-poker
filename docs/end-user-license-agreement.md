@@ -1,6 +1,7 @@
 ---
 layout: default
 title: End User License Agreement (EULA)
+category: Legal
 ---
 
 * Table of Contents

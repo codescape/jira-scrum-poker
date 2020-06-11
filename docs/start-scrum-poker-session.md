@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Start a Scrum Poker session
+category: User Guide
 ---
 
 This page describes how to start a new Scrum Poker session.

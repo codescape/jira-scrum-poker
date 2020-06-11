@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Imprint
+category: Legal
 ---
 
 Angaben gemäß § 5 TMG
@@ -19,7 +20,7 @@ E-Mail: stefan.glase@googlemail.com
 **Umsatzsteuer-ID:**    
 Umsatzsteuer-Identifikationsnummer gemäß §27a Umsatzsteuergesetz: DE325874332
 
-### Haftungsausschluss: 
+### Haftungsausschluss:
 
 #### Haftung für Inhalte
 
@@ -72,4 +73,4 @@ Google wird in keinem Fall Ihre IP-Adresse mit anderen Daten der Google in Verbi
 Sie können die Installation der Cookies durch eine entsprechende Einstellung Ihrer Browser Software verhindern; wir weisen Sie jedoch darauf hin, dass Sie in diesem Fall gegebenenfalls nicht sämtliche Funktionen dieser Website voll umfänglich nutzen können.
 Durch die Nutzung dieser Website erklären Sie sich mit der Bearbeitung der über Sie erhobenen Daten durch Google in der zuvor beschriebenen Art und Weise und zu dem zuvor benannten Zweck einverstanden.
 
-_Impressum vom [Impressum Generator](https://www.impressum-generator.de) der [Kanzlei Hasselbach, Rechtsanwälte für Arbeitsrecht und Familienrecht](https://www.kanzlei-hasselbach.de/)_
+_Dieses Impressum wurde mit dem [Impressum Generator](https://www.impressum-generator.de) der [Kanzlei Hasselbach, Rechtsanwälte für Arbeitsrecht und Familienrecht](https://www.kanzlei-hasselbach.de/) erstellt._

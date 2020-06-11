@@ -2,7 +2,7 @@
     max-width: 800px; }
 
 .header {
-    margin-top: 5rem;
+    margin-top: 2rem;
     text-align: center; }
 
 .footer {
@@ -29,6 +29,10 @@ h5 {
 
 h6 {
     font-size: 1.0rem; }
+
+.logo {
+    max-height: 8rem;
+    margin: 1rem; }
 
 .docs-section h3, .docs-section h4, .docs-section h5, .docs-section h6 {
     padding: 4rem 0 1rem 0;
@@ -58,6 +62,13 @@ h6 {
 a {
     color: #ff5630; }
 
+.docs-section a[href^="http://"]:not([href*="jira-scrum-poker.codescape.de"]),
+.docs-section a[href^="https://"]:not([href*="jira-scrum-poker.codescape.de"]) {
+  padding-right: 1em;
+  /* source: https://www.iconfinder.com/icons/2561428/external_link_icon */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgZmlsbD0ibm9uZSIgaGVpZ2h0PSIyNCIgc3Ryb2tlPSIjMDAwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgdmlld0JveD0iMCAwIDI0IDI0IiB3aWR0aD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE4IDEzdjZhMiAyIDAgMCAxLTIgMkg1YTIgMiAwIDAgMS0yLTJWOGEyIDIgMCAwIDEgMi0yaDYiLz48cG9seWxpbmUgcG9pbnRzPSIxNSAzIDIxIDMgMjEgOSIvPjxsaW5lIHgxPSIxMCIgeDI9IjIxIiB5MT0iMTQiIHkyPSIzIi8+PC9zdmc+) no-repeat top right;
+  background-size: 0.75em; }
+
 img {
     max-width: 100%; }
 
@@ -65,7 +76,7 @@ img {
     text-align: center; }
 
 .call-to-action a {
-    background-color: #ff5630;
+    background: #ff5630 !important;
     color: #fff;
     font-weight: bold;
     text-decoration: none;
@@ -74,7 +85,7 @@ img {
     display: inline-block; }
 
 .back-to-top {
-    background-color: #ff5630;
+    background: #ff5630 !important;
     color: #fff;
     font-weight: bold;
     text-decoration: none;
@@ -86,7 +97,7 @@ img {
 
 .call-to-action a:hover, .back-to-top:hover {
     color: #fff;
-    background-color: #0FA0CE; }
+    background: #0FA0CE !important; }
 
 #markdown-toc.reduce-toc li:nth-child(1n+11) {
   display: none; }
@@ -121,7 +132,7 @@ img {
 @media (min-width: 550px) {
 
     .header {
-        margin-top: 6rem;
+        margin-top: 4rem;
         margin-bottom: 4rem; }
 
     .docs-section {

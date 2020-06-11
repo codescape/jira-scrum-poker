@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Health Check
+category: Administration
 ---
 
 This page describes how to perform a basic health check for Scrum Poker for Jira to find potential problems with the license or the configuration.

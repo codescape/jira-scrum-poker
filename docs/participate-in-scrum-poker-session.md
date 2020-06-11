@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Participate in a Scrum Poker session
+category: User Guide
 ---
 
 This page describes how to participate in a Scrum Poker session.

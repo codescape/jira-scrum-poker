@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Privacy Statement
+category: Legal
 ---
 
 * Table of Contents
@@ -24,7 +25,7 @@ The following data is collected and persisted into the Jira database during a Sc
 
 All data and information is solely used for the execution of Scrum Poker sessions.
 
-The session data is kept visible for 12 hours in the list of recently finished sessions. After that the votes are solely used to display reference issues to users for currently running sessions. 
+The session data is kept visible for 12 hours in the list of recently finished sessions. After that the votes are solely used to display reference issues to users for currently running sessions.
 
 ### Log files
 
@@ -36,7 +37,7 @@ What do we collect?
 
 * error details - time, error message and stacktrace
 * information about Scrum Poker - version
-* information about Jira - version 
+* information about Jira - version
 
 We do explicitly not collect any information about your issues nor any user details.
 

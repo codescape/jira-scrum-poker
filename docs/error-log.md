@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Error Log
+category: Administration
 ---
 
 This page describes how to use the error log for Scrum Poker for Jira to see a list of errors that were raised from Scrum Poker for Jira code.

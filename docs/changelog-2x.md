@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Changelog 2.x
+category: Administration
 ---
 
 {% include changelog-preface.md %}

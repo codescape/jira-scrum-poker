@@ -22,8 +22,11 @@
 
 <div class="container">
     <section class="header">
+        <img class="logo" src="/images/scrum-poker-logo.png" alt="Scrum Poker for Jira Logo">
         <h1 class="title">{{ site.title }}</h1>
-        <h3>Documentation</h3>
+        {% if page.category %}
+          <h3>{{ page.category }}</h3>
+        {% endif %}
     </section>
 
     <div class="navbar-spacer"></div>
@@ -100,13 +103,13 @@
                     <div id="moreNavPopover" class="popover">
                         <ul class="popover-list">
                             <li class="popover-item">
-                                <a class="popover-link" href="{{ site.github_url }}">Scrum Poker on Github</a>
+                                <a class="popover-link" href="{{ site.github_url }}">Scrum Poker on GitHub</a>
                             </li>
                             <li class="popover-item">
                                 <a class="popover-link" href="{{ site.marketplace_url }}">Scrum Poker on Marketplace</a>
                             </li>
                             <li class="popover-item">
-                                <a class="popover-link" href="{{ site.issue_tracker_url }}">Issue Tracker</a>
+                                <a class="popover-link" href="{{ site.issue_tracker_url }}">Issue Tracker on GitHub</a>
                             </li>
                             <li class="popover-item">
                                 <a class="popover-link" href="/support">Support</a>
@@ -126,7 +129,7 @@
     </div>
 
     <div class="footer">
-        <p>&copy; 2015 - <script>document.write(new Date().getFullYear())</script> <a href="http://www.codescape.de">codescape</a></p>
+        <p>&copy; 2015 - <script>document.write(new Date().getFullYear())</script> <a href="/imprint">codescape</a></p>
     </div>
 
 </div>

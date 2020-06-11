@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Scrum Poker installation
+category: Administration
 ---
 
 This page describes how to install Scrum Poker for Jira in your Jira application.

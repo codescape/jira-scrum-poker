@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Cancel a Scrum Poker session
+category: User Guide
 ---
 
 This page describes how to cancel a currently running Scrum Poker session.

@@ -4,8 +4,8 @@ title: Support
 ---
 
 There are many reasons to get in contact and we are always happy to hear from you.
-You can talk in English and German language with us.
-Please choose your preferred channel to communicate with us:
+You can communicate in English and German language with us.
+Please choose your preferred channel to get in contact:
 
 * Table of Contents
 {:toc}
