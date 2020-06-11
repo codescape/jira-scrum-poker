@@ -17,6 +17,7 @@ category: Administration
 * feat: show option to join Scrum Poker session if already started (#109)
 * test: perform required Lucene index timing tests for Data Center approval
 * docs: mark external links in documentation and improve overall visual appearance
+* docs: add feature overview to online documentation (#98)
 
 ### [20.05.3] - 2020-05-20
 
