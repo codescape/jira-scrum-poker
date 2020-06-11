@@ -35,7 +35,7 @@ Participants with different estimates are marked and encouraged to discuss with 
 
 The user guide explains how to [participate in a Scrum Poker session](/participate-in-scrum-poker-session).
 
-### Reference estimates guide participants
+### Reference estimates lead to better estimates
 
 When participants hover over the possible cards they can choose from during a Scrum Poker sessions they see a list of references to previous sessions they participated in with the same estimate agreed on.
 
