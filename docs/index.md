@@ -9,12 +9,14 @@ If you miss any information please do not hesitate to <a href="mailto:{{ site.co
 <p class="call-to-action"><a href="{{ site.marketplace_url }}">Get Scrum Poker for Jira</a></p>
 
 The documentation targets users of the Scrum Poker for Jira app and Jira administrators who administrate a Jira installation and the apps installed into it.
+Check out our [feature overview](/features) to learn more about Scrum Poker for Jira.
+
 The documentation is split into these three categories:
 
 <div class="row">
     <div class="one-third column">
       <i class="icon user-icon"></i>
-      <p>The <code>User Guide</code> explains how to start or join a session and how to participate in a session together with everything else from the user perspective.</p>
+      <p>The <code>User Guide</code> contains a feature overview, explains how to start or join a session and how to participate in a session together with everything else from the user perspective.</p>
     </div>
     <div class="one-third column">
       <i class="icon admin-icon"></i>
