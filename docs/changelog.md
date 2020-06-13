@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* test: remove unused mock hints from test case and simplify test
 
 ### [20.06.0] - 2020-06-13
 

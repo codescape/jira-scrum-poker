@@ -162,7 +162,6 @@ public class EstimateFieldServiceImplTest {
     @Test
     public void isEstimableReturnsFalseForIssueWithoutCustomFieldAndScrumPokerActivated() {
         when(issue.isEditable()).thenReturn(true);
-        when(globalSettings.isActivateScrumPoker()).thenReturn(true);
         when(globalSettings.getEstimateField()).thenReturn(CUSTOM_FIELD_ID);
         when(customFieldManager.getCustomFieldObject(CUSTOM_FIELD_ID)).thenReturn(customField);
         when(customFieldManager.getCustomFieldObjects(issue)).thenReturn(Collections.singletonList(anotherField));
