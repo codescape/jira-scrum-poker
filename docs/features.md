@@ -39,8 +39,24 @@ The user guide explains how to [participate in a Scrum Poker session](/participa
 
 When participants hover over the possible cards they can choose from during a Scrum Poker sessions they see a list of references to previous sessions they participated in with the same estimate agreed on.
 
+See this feature in action in the user guide on the page that shows how to [participate in a Scrum Poker session](/participate-in-scrum-poker-session).
+
+### Define your own card sets
+
+Scrum Poker for Jira is initially configured with the simplified Fibonacci card set.
+This card set allows you to choose from the following values: 0, 1, 2, 3, 5, 8, 20, 40 and 100.
+In addition, a coffee cup and a question mark can be used to indicate that you need a break or cannot estimate the issue.
+This initial configuration can be easily adjusted according to your wishes.
+
+The administration section explains all possible settings including the card set setting on the [Scrum Poker configuration](/scrum-poker-configuration) page.
+
+### Use Scrum Poker for Jira in your language
+
+The entire user interface is internationalized and follows the language set by the user, if available. You are welcome to request translations into other languages.
+
+You can find a list of currently [supported languages](/supported-languages) in the user guide.
+
 {% comment %}
 ### Share and join sessions by url or by scanning a QR code
 ### Security and privacy in mind showing only issues users may view
-### Translated into multiple languages
 {% endcomment %}
