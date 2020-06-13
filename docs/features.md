@@ -56,7 +56,16 @@ The entire user interface is internationalized and follows the language set by t
 
 You can find a list of currently [supported languages](/supported-languages) in the user guide.
 
-{% comment %}
-### Share and join sessions by url or by scanning a QR code
+### Many ways to easily join a Scrum Poker session
+
+There are several ways to join a Scrum Poker session.
+A list of active sessions is available to all users.
+The Scrum Poker session can also be accessed from individual issues or by URL.
+Another option is the QR code, which can be scanned to join the Scrum Poker session.
+
+All these options are explained on the [Join a Scrum Poker session](/join-scrum-poker-session) page.
+
 ### Security and privacy in mind showing only issues users may view
-{% endcomment %}
+
+Scrum Poker for Jira takes permissions and access restrictions very seriously.
+Users are only allowed to access Scrum Poker sessions on the issues that the user can see based on their roles and rights.
