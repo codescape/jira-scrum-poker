@@ -11,6 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [20.06.0] - 2020-06-13
+
+**Different buttons to start and join a Scrum Poker session**
+
 * chore: update dependency versions from Jira 8.9.0 project
 * docs: improve installation instructions in online documentation
 * test: add test coverage for valid Scrum Poker session URL links
@@ -101,7 +107,8 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.05.3...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.06.0...HEAD
+[20.06.0]: https://github.com/codescape/jira-scrum-poker/compare/20.05.3...20.06.0
 [20.05.3]: https://github.com/codescape/jira-scrum-poker/compare/20.05.2...20.05.3
 [20.05.2]: https://github.com/codescape/jira-scrum-poker/compare/20.05.1...20.05.2
 [20.05.1]: https://github.com/codescape/jira-scrum-poker/compare/20.05.0...20.05.1
