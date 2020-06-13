@@ -15,9 +15,9 @@ No matter which agile framework you use, Scrum Poker for Jira helps Kanban, SAFe
 
 Scrum Poker for Jira can easily be installed and configured for your existing Jira instance.
 Complete the setup and start your first Scrum Poker sessions after three easy steps.
-You can get a free trial license in the Atlassian Marketplace to evaluate Scrum Poker for Jira and tests all functionality.
+You can get a free trial license in the Atlassian Marketplace to evaluate Scrum Poker for Jira and test all functionality.
 
-The administration section contains two pages that explain how to [install Scrum Poker for Jira](/scrum-poker-installation) and that guides you through the possible settings to [configure Scrum Poker for Jira](/scrum-poker-configuration).
+The administration section contains two pages that explain how to [install Scrum Poker for Jira](/scrum-poker-installation) and that guide you through the possible settings to [configure Scrum Poker for Jira](/scrum-poker-configuration).
 
 ### Start Scrum Poker sessions with a single click
 
