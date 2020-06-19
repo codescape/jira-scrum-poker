@@ -11,6 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [20.06.1] - 2020-06-19
+
+**Ensure Scrum Poker compatibility with other installed plugins**
+
 * test: remove unused mock hints from test case and simplify test
 * docs: add developer documentation regarding unique simple name for actions (#115)
 * refactor: add unique prefix to active sessions action (#115)
@@ -114,7 +120,8 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.06.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.06.1...HEAD
+[20.06.1]: https://github.com/codescape/jira-scrum-poker/compare/20.06.0...20.06.1
 [20.06.0]: https://github.com/codescape/jira-scrum-poker/compare/20.05.3...20.06.0
 [20.05.3]: https://github.com/codescape/jira-scrum-poker/compare/20.05.2...20.05.3
 [20.05.2]: https://github.com/codescape/jira-scrum-poker/compare/20.05.1...20.05.2
