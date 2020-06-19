@@ -19,7 +19,7 @@ import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
 /**
  * Show a list of all running and recently finished Scrum Poker sessions.
  */
-public class ActiveSessionsAction extends AbstractScrumPokerAction {
+public class ScrumPokerSessionsAction extends AbstractScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,11 +30,11 @@ public class ActiveSessionsAction extends AbstractScrumPokerAction {
     private final SessionEntityMapper sessionEntityMapper;
 
     @Autowired
-    public ActiveSessionsAction(@ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
-                                @ComponentImport PermissionManager permissionManager,
-                                @ComponentImport IssueManager issueManager,
-                                ScrumPokerSessionService scrumPokerSessionService,
-                                SessionEntityMapper sessionEntityMapper) {
+    public ScrumPokerSessionsAction(@ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
+                                    @ComponentImport PermissionManager permissionManager,
+                                    @ComponentImport IssueManager issueManager,
+                                    ScrumPokerSessionService scrumPokerSessionService,
+                                    SessionEntityMapper sessionEntityMapper) {
         this.jiraAuthenticationContext = jiraAuthenticationContext;
         this.permissionManager = permissionManager;
         this.issueManager = issueManager;

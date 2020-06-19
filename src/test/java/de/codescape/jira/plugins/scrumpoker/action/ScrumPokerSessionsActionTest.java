@@ -25,7 +25,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class ActiveSessionsActionTest {
+public class ScrumPokerSessionsActionTest {
 
     private static final String SECRET_ISSUE_KEY = "SECRET-1";
     private static final String PUBLIC_ISSUE_KEY = "PUBLIC-1";
@@ -49,7 +49,7 @@ public class ActiveSessionsActionTest {
     private SessionEntityMapper sessionEntityMapper;
 
     @InjectMocks
-    private ActiveSessionsAction activeSessionsAction;
+    private ScrumPokerSessionsAction scrumPokerSessionsAction;
 
     @Mock
     private MutableIssue secretIssue;
@@ -75,7 +75,7 @@ public class ActiveSessionsActionTest {
         when(publicScrumPokerSession.getConfirmedEstimate()).thenReturn(null);
         when(secretScrumPokerSession.getConfirmedEstimate()).thenReturn(null);
 
-        List<SessionEntity> openSessions = activeSessionsAction.getOpenSessions();
+        List<SessionEntity> openSessions = scrumPokerSessionsAction.getOpenSessions();
         assertThat(openSessions, hasSize(1));
         assertThat(openSessions.get(0), is(equalTo(publicSessionEntity)));
         verify(scrumPokerSessionService).recent();
@@ -87,7 +87,7 @@ public class ActiveSessionsActionTest {
         when(publicScrumPokerSession.getConfirmedEstimate()).thenReturn("5");
         when(secretScrumPokerSession.getConfirmedEstimate()).thenReturn("8");
 
-        List<SessionEntity> closedSessions = activeSessionsAction.getClosedSessions();
+        List<SessionEntity> closedSessions = scrumPokerSessionsAction.getClosedSessions();
         assertThat(closedSessions, hasSize(1));
         assertThat(closedSessions.get(0), is(equalTo(publicSessionEntity)));
         verify(scrumPokerSessionService).recent();
@@ -95,7 +95,7 @@ public class ActiveSessionsActionTest {
 
     @Test
     public void shouldAlwaysShowSessionsPage() {
-        assertThat(activeSessionsAction.doExecute(), is(equalTo("success")));
+        assertThat(scrumPokerSessionsAction.doExecute(), is(equalTo("success")));
     }
 
     private void expectOneVisibleAndOneSecretIssue() {
