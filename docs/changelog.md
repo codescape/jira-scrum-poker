@@ -24,7 +24,8 @@ category: Administration
 * refactor: add unique prefix to project configuration action (#115)
 * refactor: add unique prefix to health check action (#115)
 * refactor: add unique prefix to error log action (#115)
-* docs: remove highlights from readme in favor of feature list 
+* docs: remove highlights from readme in favor of feature list
+* feat: add support for Jira 8.9.1
 
 ### [20.06.0] - 2020-06-13
 
