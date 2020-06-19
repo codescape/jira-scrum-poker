@@ -140,7 +140,7 @@
                     roles-required="admin">
                 <view name="success">/templates/configuration/errorlog.vm</view>
             </action>
-            <action name="de.codescape.jira.plugins.scrumpoker.action.ProjectSettingsAction"
+            <action name="de.codescape.jira.plugins.scrumpoker.action.ScrumPokerProjectConfigurationAction"
                     alias="ScrumPokerProjectConfiguration"
                     roles-required="admin">
                 <view name="success">/templates/configuration/project.vm</view>

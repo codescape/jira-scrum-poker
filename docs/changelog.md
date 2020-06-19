@@ -15,6 +15,7 @@ category: Administration
 * docs: add developer documentation regarding unique simple name for actions (#115)
 * refactor: add unique prefix to active sessions action (#115)
 * refactor: add unique prefix to global configuration action (#115)
+* refactor: add unique prefix to project configuration action (#115)
 
 ### [20.06.0] - 2020-06-13
 

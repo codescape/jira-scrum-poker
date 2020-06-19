@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Configuration of a Jira project for Scrum Poker specific settings.
  */
-public class ProjectSettingsAction extends AbstractScrumPokerAction {
+public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,9 +32,9 @@ public class ProjectSettingsAction extends AbstractScrumPokerAction {
     private String projectKey;
 
     @Autowired
-    public ProjectSettingsAction(@ComponentImport ProjectManager projectManager,
-                                 ProjectSettingsService projectSettingsService,
-                                 GlobalSettingsService globalSettingsService) {
+    public ScrumPokerProjectConfigurationAction(@ComponentImport ProjectManager projectManager,
+                                                ProjectSettingsService projectSettingsService,
+                                                GlobalSettingsService globalSettingsService) {
         this.projectManager = projectManager;
         this.projectSettingsService = projectSettingsService;
         this.globalSettingsService = globalSettingsService;

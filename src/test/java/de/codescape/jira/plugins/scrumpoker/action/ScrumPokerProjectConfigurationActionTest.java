@@ -22,7 +22,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
-public class ProjectSettingsActionTest {
+public class ScrumPokerProjectConfigurationActionTest {
 
     @Rule
     public MockitoContainer mockitoContainer = MockitoMocksInContainer.rule(this);
@@ -41,7 +41,7 @@ public class ProjectSettingsActionTest {
     private HttpServletVariables httpServletVariables;
 
     @InjectMocks
-    private ProjectSettingsAction projectSettingsAction;
+    private ScrumPokerProjectConfigurationAction scrumPokerProjectConfigurationAction;
 
     @Mock
     private HttpServletRequest httpServletRequest;
@@ -55,30 +55,30 @@ public class ProjectSettingsActionTest {
     @Test
     public void shouldExposeTheProjectKeyWhenCalled() {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
-        when(httpServletRequest.getParameter(ProjectSettingsAction.Parameters.PROJECT_KEY)).thenReturn("ABC");
-        projectSettingsAction.doExecute();
-        assertThat(projectSettingsAction.getProjectKey(), is(equalTo("ABC")));
+        when(httpServletRequest.getParameter(ScrumPokerProjectConfigurationAction.Parameters.PROJECT_KEY)).thenReturn("ABC");
+        scrumPokerProjectConfigurationAction.doExecute();
+        assertThat(scrumPokerProjectConfigurationAction.getProjectKey(), is(equalTo("ABC")));
     }
 
     @Test
     public void shouldReturnGlobalActivateScrumPokerFlag() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.isActivateScrumPoker()).thenReturn(true);
-        assertThat(projectSettingsAction.isActivateScrumPokerGlobally(), is(true));
+        assertThat(scrumPokerProjectConfigurationAction.isActivateScrumPokerGlobally(), is(true));
     }
 
     @Test
     public void shouldReturnProjectSpecificActivateScrumPokerFlag() {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
-        when(httpServletRequest.getParameter(ProjectSettingsAction.Parameters.PROJECT_KEY)).thenReturn("ABC");
+        when(httpServletRequest.getParameter(ScrumPokerProjectConfigurationAction.Parameters.PROJECT_KEY)).thenReturn("ABC");
 
-        projectSettingsAction.doExecute();
+        scrumPokerProjectConfigurationAction.doExecute();
 
         when(projectManager.getProjectByCurrentKey(eq("ABC"))).thenReturn(project);
         when(project.getId()).thenReturn(42L);
         when(projectSettingsService.loadActivateScrumPoker(eq(42L))).thenReturn(true);
 
-        assertThat(projectSettingsAction.isActivateScrumPokerForProject(), is(true));
+        assertThat(scrumPokerProjectConfigurationAction.isActivateScrumPokerForProject(), is(true));
     }
 
 }
