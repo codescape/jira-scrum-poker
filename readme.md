@@ -9,15 +9,6 @@ Scrum Poker for Jira enables your agile teams to collaboratively estimate their 
 [![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
 [![CalVer](https://img.shields.io/badge/calver-YY.MM.MICRO-22bfda.svg)](https://calver.org/)
 
-Visit our official documentation at [jira-scrum-poker.codescape.de](https://jira-scrum-poker.codescape.de) to learn more about Scrum Poker for Jira. 
+Visit our official documentation at [jira-scrum-poker.codescape.de](https://jira-scrum-poker.codescape.de) to learn more about Scrum Poker for Jira and it's [features](https://jira-scrum-poker.codescape.de/features). 
 
 ![Screenshot of a Scrum Poker session](/docs/images/participate-in-scrum-poker-session-reveal-estimates.png)
-
-## Highlights
-
-* Easy installation and quick setup in just two steps
-* Interactive user interface fostering interaction and conversation
-* Simple and quick way of starting new Scrum Poker sessions
-* Share and join sessions by url or by scanning a QR code 
-* Assist estimations with references of already performed sessions
-* Security and privacy in mind showing only issues users may view
