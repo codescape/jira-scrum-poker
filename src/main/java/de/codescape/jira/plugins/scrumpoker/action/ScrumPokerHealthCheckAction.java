@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 /**
  * Health Check page for the Scrum Poker app.
  */
-public class HealthCheckAction extends AbstractScrumPokerAction {
+public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
 
@@ -69,12 +69,12 @@ public class HealthCheckAction extends AbstractScrumPokerAction {
     private final CardSetService cardSetService;
 
     @Autowired
-    public HealthCheckAction(@ComponentImport PluginLicenseManager pluginLicenseManager,
-                             GlobalSettingsService globalSettingsService,
-                             EstimateFieldService estimateFieldService,
-                             ProjectSettingsService projectSettingsService,
-                             ErrorLogService errorLogService,
-                             CardSetService cardSetService) {
+    public ScrumPokerHealthCheckAction(@ComponentImport PluginLicenseManager pluginLicenseManager,
+                                       GlobalSettingsService globalSettingsService,
+                                       EstimateFieldService estimateFieldService,
+                                       ProjectSettingsService projectSettingsService,
+                                       ErrorLogService errorLogService,
+                                       CardSetService cardSetService) {
         this.pluginLicenseManager = pluginLicenseManager;
         this.globalSettingsService = globalSettingsService;
         this.estimateFieldService = estimateFieldService;

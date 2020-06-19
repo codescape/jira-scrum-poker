@@ -24,13 +24,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static de.codescape.jira.plugins.scrumpoker.action.HealthCheckAction.*;
+import static de.codescape.jira.plugins.scrumpoker.action.ScrumPokerHealthCheckAction.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class HealthCheckActionTest {
+public class ScrumPokerHealthCheckActionTest {
 
     @Rule
     public MockitoContainer mockitoContainer = MockitoMocksInContainer.rule(this);
@@ -58,7 +58,7 @@ public class HealthCheckActionTest {
     private CardSetService cardSetService;
 
     @InjectMocks
-    private HealthCheckAction healthCheckAction;
+    private ScrumPokerHealthCheckAction scrumPokerHealthCheckAction;
 
     @Mock
     private HttpServletRequest httpServletRequest;
@@ -74,55 +74,55 @@ public class HealthCheckActionTest {
 
     @Test
     public void shouldAlwaysDisplayThePage() {
-        assertThat(healthCheckAction.doExecute(), is(equalTo("success")));
+        assertThat(scrumPokerHealthCheckAction.doExecute(), is(equalTo("success")));
     }
 
     @Test
     public void shouldShowResultsIfButtonForResultsIsClicked() {
         expectParameterToReturnValue(Parameters.ACTION, "start");
-        assertThat(healthCheckAction.showResults(), is(equalTo(true)));
+        assertThat(scrumPokerHealthCheckAction.showResults(), is(equalTo(true)));
     }
 
     @Test
     public void shouldNotShowResultsIfButtonForResultsIsNotClicked() {
         expectParameterToReturnValue(Parameters.ACTION, null);
-        assertThat(healthCheckAction.showResults(), is(equalTo(false)));
+        assertThat(scrumPokerHealthCheckAction.showResults(), is(equalTo(false)));
     }
 
     @Test
     public void shouldShowLicenseChecksWhenSelected() {
         expectParameterToReturnValue(Parameters.SCAN_LICENSE, "true");
-        assertThat(healthCheckAction.showLicense(), is(equalTo(true)));
+        assertThat(scrumPokerHealthCheckAction.showLicense(), is(equalTo(true)));
     }
 
     @Test
     public void shouldShowNoLicenseChecksWhenNotSelected() {
         expectParameterToReturnValue(Parameters.SCAN_LICENSE, null);
-        assertThat(healthCheckAction.showLicense(), is(equalTo(false)));
+        assertThat(scrumPokerHealthCheckAction.showLicense(), is(equalTo(false)));
     }
 
     @Test
     public void shouldShowConfigurationChecksWhenSelected() {
         expectParameterToReturnValue(Parameters.SCAN_CONFIGURATION, "true");
-        assertThat(healthCheckAction.showConfiguration(), is(equalTo(true)));
+        assertThat(scrumPokerHealthCheckAction.showConfiguration(), is(equalTo(true)));
     }
 
     @Test
     public void shouldShowNoConfigurationChecksWhenNotSelected() {
         expectParameterToReturnValue(Parameters.SCAN_CONFIGURATION, null);
-        assertThat(healthCheckAction.showConfiguration(), is(equalTo(false)));
+        assertThat(scrumPokerHealthCheckAction.showConfiguration(), is(equalTo(false)));
     }
 
     @Test
     public void shouldShowErrorLogChecksWhenSelected() {
         expectParameterToReturnValue(Parameters.SCAN_ERRORS, "true");
-        assertThat(healthCheckAction.showErrors(), is(equalTo(true)));
+        assertThat(scrumPokerHealthCheckAction.showErrors(), is(equalTo(true)));
     }
 
     @Test
     public void shouldShowNoErrorLogChecksWhenNotSelected() {
         expectParameterToReturnValue(Parameters.SCAN_ERRORS, null);
-        assertThat(healthCheckAction.showErrors(), is(equalTo(false)));
+        assertThat(scrumPokerHealthCheckAction.showErrors(), is(equalTo(false)));
     }
 
     private void expectParameterToReturnValue(String parameterName, String parameterValue) {
@@ -135,21 +135,21 @@ public class HealthCheckActionTest {
     @Test
     public void shouldSignalMissingLicenseIfNoLicenseIsFound() {
         when(pluginLicenseManager.getLicense()).thenReturn(Option.none());
-        assertThat(healthCheckAction.getLicenseResults(), hasItem(License.NO_LICENSE_FOUND));
+        assertThat(scrumPokerHealthCheckAction.getLicenseResults(), hasItem(License.NO_LICENSE_FOUND));
     }
 
     @Test
     public void shouldSignalInvalidLicenseIfLicenseIsFoundButHasErrors() {
         when(pluginLicenseManager.getLicense()).thenReturn(Option.option(pluginLicense));
         when(pluginLicense.isValid()).thenReturn(false);
-        assertThat(healthCheckAction.getLicenseResults(), hasItem(License.LICENSE_INVALID));
+        assertThat(scrumPokerHealthCheckAction.getLicenseResults(), hasItem(License.LICENSE_INVALID));
     }
 
     @Test
     public void shouldSignalNoLicenseErrorsForExistingAndValidLicense() {
         when(pluginLicenseManager.getLicense()).thenReturn(Option.option(pluginLicense));
         when(pluginLicense.isValid()).thenReturn(true);
-        assertThat(healthCheckAction.getLicenseResults(), is(empty()));
+        assertThat(scrumPokerHealthCheckAction.getLicenseResults(), is(empty()));
     }
 
     // configuration
@@ -159,7 +159,7 @@ public class HealthCheckActionTest {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getEstimateField()).thenReturn(null);
         when(globalSettings.isActivateScrumPoker()).thenReturn(true);
-        assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATE_FIELD_NOT_SET));
+        assertThat(scrumPokerHealthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATE_FIELD_NOT_SET));
     }
 
     @Test
@@ -168,7 +168,7 @@ public class HealthCheckActionTest {
         when(globalSettings.getEstimateField()).thenReturn("something");
         when(estimateFieldService.findEstimateField()).thenReturn(null);
         when(globalSettings.isActivateScrumPoker()).thenReturn(true);
-        assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATE_FIELD_NOT_FOUND));
+        assertThat(scrumPokerHealthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATE_FIELD_NOT_FOUND));
     }
 
     @Test
@@ -178,7 +178,7 @@ public class HealthCheckActionTest {
         when(estimateFieldService.findEstimateField()).thenReturn(null);
         when(globalSettings.isActivateScrumPoker()).thenReturn(false);
         expectNoProjectExplicitlyEnabled();
-        assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATE_FIELD_NOT_FOUND));
+        assertThat(scrumPokerHealthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATE_FIELD_NOT_FOUND));
     }
 
     private void expectNoProjectExplicitlyEnabled() {
@@ -196,7 +196,7 @@ public class HealthCheckActionTest {
         when(estimateFieldService.findEstimateField()).thenReturn(estimationField);
         when(globalSettings.isActivateScrumPoker()).thenReturn(true);
         when(cardSetService.getCardSet()).thenReturn(Collections.singletonList(new Card("1", true)));
-        assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.CARD_SET_WITHOUT_OPTIONS));
+        assertThat(scrumPokerHealthCheckAction.getConfigurationResults(), hasItem(Configuration.CARD_SET_WITHOUT_OPTIONS));
     }
 
     @Test
@@ -206,7 +206,7 @@ public class HealthCheckActionTest {
         when(estimateFieldService.findEstimateField()).thenReturn(estimationField);
         when(globalSettings.isActivateScrumPoker()).thenReturn(true);
         when(cardSetService.getCardSet()).thenReturn(Collections.emptyList());
-        assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.CARD_SET_WITHOUT_OPTIONS));
+        assertThat(scrumPokerHealthCheckAction.getConfigurationResults(), hasItem(Configuration.CARD_SET_WITHOUT_OPTIONS));
     }
 
     @Test
@@ -219,7 +219,7 @@ public class HealthCheckActionTest {
             Card.COFFEE_BREAK,
             Card.QUESTION_MARK,
             new Card("1", true)));
-        assertThat(healthCheckAction.getConfigurationResults(), hasItem(Configuration.CARD_SET_WITHOUT_OPTIONS));
+        assertThat(scrumPokerHealthCheckAction.getConfigurationResults(), hasItem(Configuration.CARD_SET_WITHOUT_OPTIONS));
     }
 
     @Test
@@ -233,21 +233,21 @@ public class HealthCheckActionTest {
             new Card("2", true),
             new Card("3", true),
             new Card("5", true)));
-        assertThat(healthCheckAction.getConfigurationResults(), is(empty()));
+        assertThat(scrumPokerHealthCheckAction.getConfigurationResults(), is(empty()));
     }
 
     // error log
 
     @Test
     public void shouldSignalNoErrorsIfErrorLogIsEmpty() {
-        assertThat(healthCheckAction.getErrorsResults(), is(empty()));
+        assertThat(scrumPokerHealthCheckAction.getErrorsResults(), is(empty()));
     }
 
     @Test
     public void shouldSignalErrorsIfErrorLogContainsErrors() {
         ScrumPokerError[] errors = {mock(ScrumPokerError.class)};
         when(errorLogService.listAll()).thenReturn(Arrays.asList(errors));
-        assertThat(healthCheckAction.getErrorsResults(), hasItem(ErrorLog.ERROR_LOG_NOT_EMPTY));
+        assertThat(scrumPokerHealthCheckAction.getErrorsResults(), hasItem(ErrorLog.ERROR_LOG_NOT_EMPTY));
     }
 
 }
