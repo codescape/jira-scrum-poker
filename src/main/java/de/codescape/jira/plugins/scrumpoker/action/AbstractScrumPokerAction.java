@@ -4,6 +4,12 @@ import com.atlassian.jira.web.action.JiraWebActionSupport;
 
 /**
  * Base class to be used when normally extending {@link JiraWebActionSupport}.
+ * <p>
+ * The simple name of the concrete class must be unique across all JIRA add-ons. That is, if one add-on has an action
+ * class MyEditAction then no other add-on should have an action class MyEditAction. It is recommended that each add-on
+ * use a prefix to make their action classes unique.
+ * <p>
+ * Source: https://developer.atlassian.com/server/jira/platform/webwork/
  */
 abstract class AbstractScrumPokerAction extends JiraWebActionSupport {
 

@@ -12,6 +12,7 @@ category: Administration
 ### [Unreleased]
 
 * test: remove unused mock hints from test case and simplify test
+* docs: add developer documentation regarding unique simple name for actions (#115)
 
 ### [20.06.0] - 2020-06-13
 
