@@ -17,6 +17,7 @@ category: Administration
 * refactor: add unique prefix to global configuration action (#115)
 * refactor: add unique prefix to project configuration action (#115)
 * refactor: add unique prefix to health check action (#115)
+* refactor: add unique prefix to error log action (#115)
 
 ### [20.06.0] - 2020-06-13
 

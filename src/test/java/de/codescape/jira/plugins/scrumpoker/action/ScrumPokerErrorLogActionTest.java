@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
-public class ErrorLogActionTest {
+public class ScrumPokerErrorLogActionTest {
 
     @Rule
     public MockitoContainer mockitoContainer = MockitoMocksInContainer.rule(this);
@@ -33,7 +33,7 @@ public class ErrorLogActionTest {
     private ErrorLogService errorLogService;
 
     @InjectMocks
-    private ErrorLogAction errorLogAction;
+    private ScrumPokerErrorLogAction scrumPokerErrorLogAction;
 
     @Mock
     private HttpServletRequest httpServletRequest;
@@ -42,22 +42,22 @@ public class ErrorLogActionTest {
     public void shouldExposeTheErrorList() {
         List<ScrumPokerError> scrumPokerErrors = new ArrayList<>();
         when(errorLogService.listAll()).thenReturn(scrumPokerErrors);
-        assertThat(errorLogAction.getErrorList(), is(equalTo(scrumPokerErrors)));
+        assertThat(scrumPokerErrorLogAction.getErrorList(), is(equalTo(scrumPokerErrors)));
     }
 
     @Test
     public void shouldEmptyTheErrorLogWhenRequested() {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
-        when(httpServletRequest.getParameter(ErrorLogAction.Parameters.ACTION)).thenReturn("empty");
-        assertThat(errorLogAction.doExecute(), is(equalTo(errorLogAction.SUCCESS)));
+        when(httpServletRequest.getParameter(ScrumPokerErrorLogAction.Parameters.ACTION)).thenReturn("empty");
+        assertThat(scrumPokerErrorLogAction.doExecute(), is(equalTo(scrumPokerErrorLogAction.SUCCESS)));
         verify(errorLogService, times(1)).emptyErrorLog();
     }
 
     @Test
     public void shouldNotEmptyTheErrorWhenNotRequested() {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
-        when(httpServletRequest.getParameter(ErrorLogAction.Parameters.ACTION)).thenReturn(null);
-        assertThat(errorLogAction.doExecute(), is(equalTo(errorLogAction.SUCCESS)));
+        when(httpServletRequest.getParameter(ScrumPokerErrorLogAction.Parameters.ACTION)).thenReturn(null);
+        assertThat(scrumPokerErrorLogAction.doExecute(), is(equalTo(scrumPokerErrorLogAction.SUCCESS)));
         verify(errorLogService, never()).emptyErrorLog();
     }
 
