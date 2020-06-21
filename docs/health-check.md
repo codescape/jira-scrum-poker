@@ -31,8 +31,8 @@ The following checks are implemented and performed when started:
   * Check that the license is valid
 
 * Configuration Check
-  * Check that an estimation field is configured
-  * Check that the configured field exists in your Jira instance
+  * Check that the estimate field is configured
+  * Check that the configured estimate field exists in your Jira instance
   * Check that Scrum Poker is either globally activated or has projects explicitly activated
   * Check that the configured card set has no obvious problems
 

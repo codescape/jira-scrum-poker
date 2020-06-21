@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* docs: ensure consistent naming for estimate field
 
 ### [20.06.1] - 2020-06-19
 

@@ -294,7 +294,7 @@ public class SessionEntityMapper {
     }
 
     /**
-     * Returns whether the given vote can be assigned to the estimation field.
+     * Returns whether the given vote can be assigned to the estimate field.
      */
     private boolean isAssignableToEstimateField(String vote) {
         return !isSpecialCardValue(vote);

@@ -45,7 +45,7 @@ public class CardSetServiceImpl implements CardSetService {
     }
 
     private boolean valueIsAssignableToEstimateField(String cardValue) {
-        // TODO can the cardValue be persisted into the configured estimation field?
+        // TODO can the cardValue be persisted into the configured estimate field?
         return true;
     }
 
