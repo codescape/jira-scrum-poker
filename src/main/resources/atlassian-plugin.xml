@@ -171,4 +171,16 @@
         <entity>de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote</entity>
     </ao>
 
+    <!-- workflow function to start a new session -->
+    <workflow-function key="scrum-poker-start-session-workflow-function"
+                       i18n-name-key="scrumpoker.workflowfunction.startsession.name"
+                       class="de.codescape.jira.plugins.scrumpoker.workflow.StartSessionWorkflowFunctionFactory">
+        <description key="scrumpoker.workflowfunction.startsession.description"/>
+        <function-class>de.codescape.jira.plugins.scrumpoker.workflow.StartSessionWorkflowFunction</function-class>
+        <orderable>true</orderable>
+        <unique>true</unique>
+        <deletable>true</deletable>
+        <resource type="velocity" name="view" location="templates/workflow-function/start-session-view.vm"/>
+    </workflow-function>
+
 </atlassian-plugin>
