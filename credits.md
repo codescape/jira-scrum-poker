@@ -12,5 +12,4 @@ Special thanks to:
 * [Stefan Sondermann](https://github.com/gnomegemini)
 * [congstar GmbH](http://www.congstar.de)
 
-For a full list of contributors you can mine the commit history:
-https://github.com/codescape/jira-scrum-poker/commits
+For a full list of contributors you can mine the [commit history](https://github.com/codescape/jira-scrum-poker/commits) of the GitHub repository.
