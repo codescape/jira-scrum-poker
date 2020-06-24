@@ -13,6 +13,7 @@ category: Administration
 
 * docs: ensure consistent naming for estimate field
 * feat: add workflow function to start Scrum Poker session (#104)
+* feat: add support for Jira 8.10.0 and test latest enterprise versions
 
 ### [20.06.1] - 2020-06-19
 
