@@ -15,6 +15,7 @@ category: Administration
 * feat: add workflow function to start Scrum Poker session (#104)
 * feat: add support for Jira 8.10.0 and test latest enterprise versions
 * docs: improve credits document
+* docs: update compatibility matrix
 
 ### [20.06.1] - 2020-06-19
 
