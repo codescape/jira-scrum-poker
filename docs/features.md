@@ -26,6 +26,12 @@ Whether you currently display an agile board, have the issue detail page opened 
 
 The user guide explains how to [start a Scrum Poker session](/start-scrum-poker-session) or how to [join a Scrum Poker session](/join-scrum-poker-session).
 
+### Start Scrum Poker sessions from workflow transitions
+
+If required Scrum Poker sessions can also be automatically started from workflow transitions using the workflow function provided by Scrum Poker for Jira. For example, this allows you to start a Scrum Poker session when an issue transitions from a status like `Refinement` into another status like `Estimation`.
+
+Read more about how to enable this feature for your workflows in the administration guide that explains how to [configure Scrum Poker for Jira](/scrum-poker-configuration).
+
 ### User interface fostering interaction and discussion
 
 The user interface for Scrum Poker sessions focuses on the presentation of the information that is important for an estimate and motivates the participants to interact and discuss.

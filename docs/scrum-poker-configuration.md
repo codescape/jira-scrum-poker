@@ -9,7 +9,7 @@ This page describes how to configure Scrum Poker for Jira to work in your Jira a
 * Table of Contents
 {:toc}
 
-### Global Configuration
+### Global configuration
 
 Scrum Poker for Jira has some global configuration parameters that can be configured from the administration section of your Jira application.
 This configuration is only available to users with the `Jira Administrators` role assigned.
@@ -102,7 +102,7 @@ Today the Scrum Poker menu elements in the Jira top menu `Boards` are preferred.
 
 By default this option is disabled as this feature is just a convenience feature for users of older Scrum Poker versions who want to use this way to open the `Active Sessions` page.
 
-### Project Configuration
+### Project configuration
 
 Scrum Poker for Jira also provides project specific configuration.
 
@@ -116,3 +116,24 @@ On the page `Project Configuration` you can find the configuration options the m
 #### Activate Scrum Poker
 
 If Scrum Poker is not activated for all projects with the `Activate Scrum Poker` setting in the global settings this project specific setting allows you to activate Scrum Poker explicitly for the current project.
+
+### Workflow configuration
+
+Scrum Poker for Jira provides functions to interact with Scrum Poker from your Jira workflows.
+
+#### Start Scrum Poker session (Workflow Function)
+
+Scrum Poker offers the `Start Scrum Poker session (Workflow Function)` to start a Scrum Poker session on a workflow transition if the following conditions are met:
+
+* a valid Scrum Poker for Jira license exists
+* the issue is estimable
+* there is no active session already started for this issue
+
+Inside your workflow configuration you can add so called `Post Functions` to a workflow transition (see screenshot below).
+
+![Start Scrum Poker session (Workflow Function)](/images/scrum-poker-configuration-start-session-workflow-function.png)
+
+After adding this workflow function remember to publish the changed workflow.
+Changes to workflows are only applied to future workflow transitions using this workflow if the workflow configuration is published.
+
+If required the `Start Scrum Poker session (Workflow Function)` can easily be removed from the `Post Functions` overview again.
