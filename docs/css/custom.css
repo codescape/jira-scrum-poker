@@ -99,7 +99,7 @@ img {
     color: #fff;
     background: #0FA0CE !important; }
 
-#markdown-toc.reduce-toc li:nth-child(1n+11) {
+#markdown-toc.reduce-toc li:nth-child(1n+20) {
   display: none; }
 
 #markdown-toc li.expand-link {

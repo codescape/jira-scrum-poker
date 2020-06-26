@@ -36,7 +36,7 @@ $(document).ready(function() {
 
   function reduceTableOfContents() {
     var count = $("#markdown-toc li").length;
-    if (count > 10) {
+    if (count > 20) {
       $("#markdown-toc").addClass('reduce-toc');
       $("#markdown-toc").append('<li class="expand-link"><a href="#" class="expand-toc">Expand table of contents</a></li>')
       $(".expand-toc").click(function(e) {

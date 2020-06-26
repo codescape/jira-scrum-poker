@@ -16,6 +16,7 @@ category: Administration
 * feat: add support for Jira 8.10.0 and test latest enterprise versions
 * docs: improve credits document
 * docs: update compatibility matrix
+* docs: reduce table of contents for more than 20 entries
 
 ### [20.06.1] - 2020-06-19
 
