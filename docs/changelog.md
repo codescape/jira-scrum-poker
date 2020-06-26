@@ -19,6 +19,7 @@ category: Administration
 * docs: reduce table of contents for more than 20 entries
 * docs: explain feature and configuration of workflow function (#104)
 * feat: check for valid license in workflow function (#104)
+* refactor: remove obsolete method call and method 
 
 ### [20.06.1] - 2020-06-19
 
