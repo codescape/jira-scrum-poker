@@ -15,6 +15,8 @@ category: Administration
 
 ### [20.06.2] - 2020-06-26
 
+**Introduce workflow function to start Scrum Poker session**
+
 * docs: ensure consistent naming for estimate field
 * feat: add workflow function to start Scrum Poker session (#104)
 * feat: add support for Jira 8.10.0 and test latest enterprise versions
