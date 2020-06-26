@@ -20,6 +20,13 @@ public interface ErrorLogService {
     void logError(String errorMessage, Throwable throwable);
 
     /**
+     * Adds a new Scrum Poker error to the error log.
+     *
+     * @param errorMessage the message to be logged
+     */
+    void logError(String errorMessage);
+
+    /**
      * Returns a list of all logged Scrum Poker errors.
      *
      * @return list of Scrum Poker errors

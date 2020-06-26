@@ -61,7 +61,7 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
         if (globalSettingsService.load().isCheckPermissionToSaveEstimate() &&
             !permissionManager.hasPermission(ProjectPermissions.EDIT_ISSUES, issue, applicationUser)) {
             errorLogService.logError("User " + applicationUser.getUsername() +
-                " is missing permissions to save estimation for issue " + issueKey + ".", null);
+                " is missing permissions to save estimation for issue " + issueKey + ".");
             return false;
         }
         // based on the type of the custom field apply the estimate in the correct data type
@@ -83,7 +83,7 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
                 break;
             default:
                 errorLogService.logError("Unable to save estimate because field type "
-                    + estimateFieldKey + " is not supported.", null);
+                    + estimateFieldKey + " is not supported.");
                 return false;
         }
         // finally update the issue

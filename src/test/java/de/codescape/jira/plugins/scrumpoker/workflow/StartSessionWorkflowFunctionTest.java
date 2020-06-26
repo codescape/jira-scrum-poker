@@ -2,7 +2,12 @@ package de.codescape.jira.plugins.scrumpoker.workflow;
 
 
 import com.atlassian.jira.issue.MutableIssue;
+import com.atlassian.upm.api.license.PluginLicenseManager;
+import com.atlassian.upm.api.license.entity.LicenseError;
+import com.atlassian.upm.api.license.entity.PluginLicense;
+import com.atlassian.upm.api.util.Option;
 import com.opensymphony.module.propertyset.PropertySet;
+import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
 import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
 import org.junit.Rule;
@@ -32,6 +37,12 @@ public class StartSessionWorkflowFunctionTest {
     @Mock
     private ScrumPokerSessionService scrumPokerSessionService;
 
+    @Mock
+    private ErrorLogService errorLogService;
+
+    @Mock
+    private PluginLicenseManager pluginLicenseManager;
+
     @InjectMocks
     private StartSessionWorkflowFunction startSessionWorkflowFunction;
 
@@ -49,8 +60,34 @@ public class StartSessionWorkflowFunctionTest {
     @Mock
     private MutableIssue issue;
 
+    @Mock
+    private PluginLicense pluginLicense;
+
+    @Test
+    public void shouldNotStartSessionForLicenseErrors() {
+        expectPluginLicenseHasErrors();
+
+        startSessionWorkflowFunction.execute(transientVars, args, propertySet);
+
+        verify(scrumPokerSessionService, never()).byIssueKey(anyString(), anyString());
+        verifyNoInteractions(scrumPokerSessionService);
+        verify(errorLogService, times(1)).logError(anyString());
+    }
+
+    @Test
+    public void shouldNotStartSessionForMissingLicense() {
+        expectPluginLicenseIsMissing();
+
+        startSessionWorkflowFunction.execute(transientVars, args, propertySet);
+
+        verify(scrumPokerSessionService, never()).byIssueKey(anyString(), anyString());
+        verifyNoInteractions(scrumPokerSessionService);
+        verify(errorLogService, times(1)).logError(anyString());
+    }
+
     @Test
     public void shouldNotStartSessionForNonEstimableIssue() {
+        expectPluginLicenseIsValid();
         expectIssueExists();
         expectIssueIsEstimable(false);
 
@@ -62,6 +99,7 @@ public class StartSessionWorkflowFunctionTest {
 
     @Test
     public void shouldNotStartSessionForEstimableIssueIfSessionAlreadyExists() {
+        expectPluginLicenseIsValid();
         expectIssueExists();
         expectIssueIsEstimable(true);
         expectScrumPokerSessionExists(true);
@@ -74,6 +112,7 @@ public class StartSessionWorkflowFunctionTest {
 
     @Test
     public void shouldStartSessionForEstimableIssueIfNoSessionExists() {
+        expectPluginLicenseIsValid();
         expectIssueExists();
         expectIssueIsEstimable(true);
         expectScrumPokerSessionExists(false);
@@ -87,6 +126,20 @@ public class StartSessionWorkflowFunctionTest {
     }
 
     /* supporting methods */
+
+    private void expectPluginLicenseIsValid() {
+        when(pluginLicenseManager.getLicense()).thenReturn(Option.option(pluginLicense));
+        when(pluginLicense.getError()).thenReturn(Option.none());
+    }
+
+    private void expectPluginLicenseHasErrors() {
+        when(pluginLicenseManager.getLicense()).thenReturn(Option.option(pluginLicense));
+        when(pluginLicense.getError()).thenReturn(Option.option(LicenseError.EXPIRED));
+    }
+
+    private void expectPluginLicenseIsMissing() {
+        when(pluginLicenseManager.getLicense()).thenReturn(Option.none());
+    }
 
     private void expectUserKeyExists() {
         when(args.get("userKey")).thenReturn(USER_KEY);

@@ -154,12 +154,12 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
         MutableIssue issue = issueManager.getIssueObject(issueKey);
         if (issue == null) {
             String message = "Unable to create session for non-existing issue " + issueKey + ".";
-            errorLogService.logError(message, null);
+            errorLogService.logError(message);
             throw new IllegalStateException(message);
         }
         if (!estimateFieldService.isEstimable(issue)) {
             String message = "Unable to create session for non-estimable issue " + issueKey + ".";
-            errorLogService.logError(message, null);
+            errorLogService.logError(message);
             throw new IllegalStateException(message);
         }
         ScrumPokerSession scrumPokerSession = activeObjects.create(ScrumPokerSession.class,

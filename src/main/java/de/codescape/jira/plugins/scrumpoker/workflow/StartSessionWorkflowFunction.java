@@ -2,7 +2,11 @@ package de.codescape.jira.plugins.scrumpoker.workflow;
 
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.workflow.function.issue.AbstractJiraFunctionProvider;
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import com.atlassian.upm.api.license.PluginLicenseManager;
+import com.atlassian.upm.api.license.entity.PluginLicense;
 import com.opensymphony.module.propertyset.PropertySet;
+import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
 import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
 import org.slf4j.Logger;
@@ -20,17 +24,35 @@ public class StartSessionWorkflowFunction extends AbstractJiraFunctionProvider {
 
     private final ScrumPokerSessionService scrumPokerSessionService;
     private final EstimateFieldService estimateFieldService;
+    private final PluginLicenseManager pluginLicenseManager;
+    private final ErrorLogService errorLogService;
 
     @Autowired
-    public StartSessionWorkflowFunction(ScrumPokerSessionService scrumPokerSessionService,
-                                        EstimateFieldService estimateFieldService) {
+    public StartSessionWorkflowFunction(@ComponentImport PluginLicenseManager pluginLicenseManager,
+                                        ScrumPokerSessionService scrumPokerSessionService,
+                                        EstimateFieldService estimateFieldService,
+                                        ErrorLogService errorLogService) {
+        this.pluginLicenseManager = pluginLicenseManager;
         this.scrumPokerSessionService = scrumPokerSessionService;
         this.estimateFieldService = estimateFieldService;
+        this.errorLogService = errorLogService;
     }
 
     @Override
     public void execute(Map transientVars, Map args, PropertySet propertySet) {
-        // TODO check for valid Scrum Poker app license
+        // license check
+        if (pluginLicenseManager.getLicense().isDefined()) {
+            PluginLicense license = pluginLicenseManager.getLicense().get();
+            if (license.getError().isDefined()) {
+                errorLogService.logError("Unable to start Scrum Poker session because of license errors: "
+                    + license.getError().get().name());
+                return;
+            }
+        } else {
+            errorLogService.logError("Unable to start Scrum Poker session because of missing license.");
+            return;
+        }
+
         MutableIssue issue = getIssue(transientVars);
         if (!estimateFieldService.isEstimable(issue)) {
             log.info("Unable to start Scrum Poker session for issue {} because it is not estimable.", issue.getKey());
@@ -41,7 +63,7 @@ public class StartSessionWorkflowFunction extends AbstractJiraFunctionProvider {
             return;
         }
         scrumPokerSessionService.byIssueKey(issue.getKey(), getCallerKey(transientVars, args));
-        log.info("Scrum Poker session successfully started for issue {} on workflow transition.", issue.getKey());
+        log.debug("Scrum Poker session successfully started for issue {} on workflow transition.", issue.getKey());
     }
 
 }

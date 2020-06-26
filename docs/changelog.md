@@ -18,6 +18,7 @@ category: Administration
 * docs: update compatibility matrix for Jira 8.10.0
 * docs: reduce table of contents for more than 20 entries
 * docs: explain feature and configuration of workflow function (#104)
+* feat: check for valid license in workflow function (#104)
 
 ### [20.06.1] - 2020-06-19
 

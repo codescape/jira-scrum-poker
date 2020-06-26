@@ -82,7 +82,7 @@ public class ErrorLogServiceImplTest {
 
     @Test
     public void shouldSaveErrorWithMessageOnly() {
-        errorLogService.logError("Message!", null);
+        errorLogService.logError("Message!");
         assertThat(errorLog().length, is(1));
         assertThat(errorLog()[0].getErrorMessage(), equalTo("Message!"));
     }
@@ -99,9 +99,9 @@ public class ErrorLogServiceImplTest {
 
     @Test
     public void shouldReturnAllErrorsWithNewestFirst() {
-        errorLogService.logError("First", null);
-        errorLogService.logError("Second", null);
-        errorLogService.logError("Third", null);
+        errorLogService.logError("First");
+        errorLogService.logError("Second");
+        errorLogService.logError("Third");
         List<ScrumPokerError> scrumPokerErrors = errorLogService.listAll();
         assertThat(scrumPokerErrors.size(), is(3));
         assertThat(scrumPokerErrors.get(0).getErrorMessage(), equalTo("Third"));
@@ -111,7 +111,7 @@ public class ErrorLogServiceImplTest {
 
     @Test
     public void shouldDeleteAllErrors() {
-        IntStream.range(0, 50).forEach(i -> errorLogService.logError("Some Error...", null));
+        IntStream.range(0, 50).forEach(i -> errorLogService.logError("Some Error..."));
         assertThat(errorLog().length, is(50));
         errorLogService.emptyErrorLog();
         assertThat(errorLog().length, is(0));

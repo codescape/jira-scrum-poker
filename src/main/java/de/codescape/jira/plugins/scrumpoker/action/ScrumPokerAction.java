@@ -92,7 +92,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
                 return ERROR;
             }
         } else {
-            errorMessage("Scrum Poker for Jira is missing a valid license!");
+            errorMessage("Scrum Poker for Jira is missing a valid license.");
             return ERROR;
         }
 
@@ -166,7 +166,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
     }
 
     private void errorMessage(String errorMessage) {
-        errorLogService.logError(errorMessage, null);
+        errorLogService.logError(errorMessage);
         addErrorMessage(errorMessage);
     }
 

@@ -40,9 +40,20 @@ public class ErrorLogServiceImpl implements ErrorLogService {
 
     @Override
     public void logError(String errorMessage, Throwable throwable) {
+        logErrorInternal(errorMessage, throwable);
+    }
+
+    @Override
+    public void logError(String errorMessage) {
+        logErrorInternal(errorMessage, null);
+    }
+
+    private void logErrorInternal(String errorMessage, Throwable throwable) {
         ScrumPokerError scrumPokerError = activeObjects.create(ScrumPokerError.class);
         scrumPokerError.setErrorTimestamp(new Date());
-        scrumPokerError.setStacktrace(stacktraceAsString(throwable));
+        if (throwable != null) {
+            scrumPokerError.setStacktrace(stacktraceAsString(throwable));
+        }
         scrumPokerError.setErrorMessage(errorMessage);
         scrumPokerError.setJiraVersion(buildUtilsInfo.getVersion());
         scrumPokerError.setScrumPokerVersion(getScrumPokerVersion());

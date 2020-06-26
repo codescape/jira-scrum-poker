@@ -127,7 +127,7 @@ public class ScrumPokerActionTest {
         whenLicenseIsMissing();
 
         assertThat(scrumPokerAction.doExecute(), is(equalTo("error")));
-        assertThat(scrumPokerAction.getErrorMessages(), hasItem("Scrum Poker for Jira is missing a valid license!"));
+        assertThat(scrumPokerAction.getErrorMessages(), hasItem("Scrum Poker for Jira is missing a valid license."));
     }
 
     @Test
