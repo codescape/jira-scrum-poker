@@ -7,7 +7,8 @@ import com.opensymphony.workflow.loader.AbstractDescriptor;
 import java.util.Map;
 
 /**
- * Factory class for the {@link StartSessionWorkflowFunction}.
+ * Factory class for the {@link StartSessionWorkflowFunction}. This factory class is mainly empty because the function
+ * does not require any configuration options yet.
  */
 public class StartSessionWorkflowFunctionFactory extends AbstractWorkflowPluginFactory
     implements WorkflowPluginFunctionFactory {

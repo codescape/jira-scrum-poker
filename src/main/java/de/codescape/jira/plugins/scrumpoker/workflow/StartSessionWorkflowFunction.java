@@ -40,7 +40,7 @@ public class StartSessionWorkflowFunction extends AbstractJiraFunctionProvider {
 
     @Override
     public void execute(Map transientVars, Map args, PropertySet propertySet) {
-        // license check
+        // check license
         if (pluginLicenseManager.getLicense().isDefined()) {
             PluginLicense license = pluginLicenseManager.getLicense().get();
             if (license.getError().isDefined()) {
@@ -53,6 +53,7 @@ public class StartSessionWorkflowFunction extends AbstractJiraFunctionProvider {
             return;
         }
 
+        // check issue and sessions
         MutableIssue issue = getIssue(transientVars);
         if (!estimateFieldService.isEstimable(issue)) {
             log.info("Unable to start Scrum Poker session for issue {} because it is not estimable.", issue.getKey());
@@ -62,6 +63,8 @@ public class StartSessionWorkflowFunction extends AbstractJiraFunctionProvider {
             log.info("Unable to start Scrum Poker session for issue {} because it is already started.", issue.getKey());
             return;
         }
+
+        // start session
         scrumPokerSessionService.byIssueKey(issue.getKey(), getCallerKey(transientVars, args));
         log.debug("Scrum Poker session successfully started for issue {} on workflow transition.", issue.getKey());
     }
