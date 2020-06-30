@@ -12,6 +12,7 @@ category: Administration
 ### [Unreleased]
 
 * docs: improve developer documentation for workflow function
+* refactor: use shorter name for workflow function
 
 ### [20.06.2] - 2020-06-26
 

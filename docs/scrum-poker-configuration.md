@@ -121,9 +121,9 @@ If Scrum Poker is not activated for all projects with the `Activate Scrum Poker`
 
 Scrum Poker for Jira provides functions to interact with Scrum Poker from your Jira workflows.
 
-#### Start Scrum Poker session (Workflow Function)
+#### Start Scrum Poker session
 
-Scrum Poker offers the `Start Scrum Poker session (Workflow Function)` to start a Scrum Poker session on a workflow transition if the following conditions are met:
+Scrum Poker offers the workflow function `Start Scrum Poker session` to start a Scrum Poker session on a workflow transition under the following conditions:
 
 * a valid Scrum Poker for Jira license exists
 * the issue is estimable
@@ -131,9 +131,9 @@ Scrum Poker offers the `Start Scrum Poker session (Workflow Function)` to start 
 
 Inside your workflow configuration you can add so called `Post Functions` to a workflow transition (see screenshot below).
 
-![Start Scrum Poker session (Workflow Function)](/images/scrum-poker-configuration-start-session-workflow-function.png)
+![Start Scrum Poker session](/images/scrum-poker-configuration-start-session-workflow-function.png)
 
 After adding this workflow function remember to publish the changed workflow.
 Changes to workflows are only applied to future workflow transitions using this workflow if the workflow configuration is published.
 
-If required the `Start Scrum Poker session (Workflow Function)` can easily be removed from the `Post Functions` overview again.
+If required you can easily remove the workflow function `Start Scrum Poker session` from the `Post Functions` overview panel again.
