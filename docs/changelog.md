@@ -11,8 +11,15 @@ category: Administration
 
 ### [Unreleased]
 
+* ..
+
+### [20.07.0] - 2020-07-15
+
+**Provide support for Jira 8.11**
+
 * docs: improve developer documentation for workflow function
 * refactor: use shorter name for workflow function
+* feat: add support for Jira 8.11.0
 
 ### [20.06.2] - 2020-06-26
 
@@ -136,7 +143,8 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.06.2...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.07.0...HEAD
+[20.07.0]: https://github.com/codescape/jira-scrum-poker/compare/20.06.2...20.07.0
 [20.06.2]: https://github.com/codescape/jira-scrum-poker/compare/20.06.1...20.06.2
 [20.06.1]: https://github.com/codescape/jira-scrum-poker/compare/20.06.0...20.06.1
 [20.06.0]: https://github.com/codescape/jira-scrum-poker/compare/20.05.3...20.06.0
