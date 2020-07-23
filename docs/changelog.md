@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ..
+* feat: show message in configuration for no supported custom fields (#119)
 
 ### [20.07.0] - 2020-07-15
 
