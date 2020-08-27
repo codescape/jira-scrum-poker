@@ -53,6 +53,7 @@ Scrum Poker for Jira is initially configured with the simplified Fibonacci card 
 This card set allows you to choose from the following values: 0, 1, 2, 3, 5, 8, 20, 40 and 100.
 In addition, a coffee cup and a question mark can be used to indicate that you need a break or cannot estimate the issue.
 This initial configuration can be easily adjusted according to your wishes.
+T-shirt sizes, working hours or rubber dots are just a few clicks away.
 
 The administration section explains all possible settings including the card set setting on the [Scrum Poker configuration](/scrum-poker-configuration) page.
 
