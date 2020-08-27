@@ -15,6 +15,7 @@ category: Administration
 * style: optimize code formatting in configuration view
 * feat: add support for Jira 8.12.0 and latest enterprise releases
 * docs: improve feature overview in online documentation
+* docs: update compatibility matrix
 
 ### [20.07.0] - 2020-07-15
 
