@@ -11,6 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [20.08.0] - 2020-08-27
+
+**Improve custom field configuration and provide support for Jira 8.12**
+
 * feat: show message in configuration for no supported custom fields (#119)
 * style: optimize code formatting in configuration view
 * feat: add support for Jira 8.12.0 and latest enterprise releases
@@ -147,7 +153,8 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.07.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.08.0...HEAD
+[20.08.0]: https://github.com/codescape/jira-scrum-poker/compare/20.07.0...20.08.0
 [20.07.0]: https://github.com/codescape/jira-scrum-poker/compare/20.06.2...20.07.0
 [20.06.2]: https://github.com/codescape/jira-scrum-poker/compare/20.06.1...20.06.2
 [20.06.1]: https://github.com/codescape/jira-scrum-poker/compare/20.06.0...20.06.1
