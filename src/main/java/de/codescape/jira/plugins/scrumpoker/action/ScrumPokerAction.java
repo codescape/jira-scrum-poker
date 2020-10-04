@@ -7,6 +7,7 @@ import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.RendererManager;
 import com.atlassian.jira.issue.comments.Comment;
 import com.atlassian.jira.issue.comments.CommentManager;
+import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.renderer.JiraRendererPlugin;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
@@ -14,6 +15,8 @@ import com.atlassian.jira.util.http.JiraUrl;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.upm.api.license.PluginLicenseManager;
 import com.atlassian.upm.api.license.entity.PluginLicense;
+import com.atlassian.velocity.htmlsafe.HtmlSafe;
+import de.codescape.jira.plugins.scrumpoker.service.AdditionalFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
 import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
@@ -52,6 +55,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
     private final PluginLicenseManager pluginLicenseManager;
     private final EstimateFieldService estimateFieldService;
     private final ErrorLogService errorLogService;
+    private final AdditionalFieldService additionalFieldService;
 
     private String issueKey;
 
@@ -65,7 +69,8 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
                             @ComponentImport DateTimeFormatter dateTimeFormatter,
                             GlobalSettingsService globalSettingsService,
                             EstimateFieldService estimateFieldService,
-                            ErrorLogService errorLogService) {
+                            ErrorLogService errorLogService,
+                            AdditionalFieldService additionalFieldService) {
         this.rendererManager = rendererManager;
         this.issueManager = issueManager;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
@@ -75,8 +80,8 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
         this.dateTimeFormatter = dateTimeFormatter;
         this.globalSettingsService = globalSettingsService;
         this.estimateFieldService = estimateFieldService;
-
         this.errorLogService = errorLogService;
+        this.additionalFieldService = additionalFieldService;
     }
 
     /**
@@ -127,6 +132,26 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
             default:
                 return null;
         }
+    }
+
+    /**
+     * Returns the list of all configured fields to be additionally displayed on the session view.
+     *
+     * @return list of fields
+     */
+    public List<CustomField> getAdditionalFields() {
+        return additionalFieldService.configuredCustomFields();
+    }
+
+    /**
+     * Renders the field value for the given custom field.
+     *
+     * @param customField custom field to render for the current issue
+     * @return html code including the field value
+     */
+    @HtmlSafe
+    public String renderFieldValue(CustomField customField) {
+        return additionalFieldService.renderFieldValue(customField, this, getIssue());
     }
 
     /**

@@ -28,6 +28,7 @@ public class GlobalSettingsServiceImpl implements GlobalSettingsService {
     private static final String CHECK_PERMISSION_TO_SAVE_ESTIMATE = "checkPermissionToSaveEstimate";
     private static final String DISPLAY_COMMENTS_FOR_ISSUE = "displayCommentsForIssue";
     private static final String CARD_SET = "defaultCardSet";
+    private static final String ADDITIONAL_FIELDS = "additionalFields";
 
     private final ActiveObjects activeObjects;
 
@@ -51,6 +52,7 @@ public class GlobalSettingsServiceImpl implements GlobalSettingsService {
         globalSettings.setDisplayCommentsForIssue(DisplayCommentsForIssue.valueOf(
             loadString(DISPLAY_COMMENTS_FOR_ISSUE, DISPLAY_COMMENTS_FOR_ISSUE_DEFAULT.name())));
         globalSettings.setCardSet(loadString(CARD_SET, CARD_SET_DEFAULT));
+        globalSettings.setAdditionalFields(loadString(ADDITIONAL_FIELDS, null));
         return globalSettings;
     }
 
@@ -64,6 +66,7 @@ public class GlobalSettingsServiceImpl implements GlobalSettingsService {
         persist(CHECK_PERMISSION_TO_SAVE_ESTIMATE, String.valueOf(globalSettings.isCheckPermissionToSaveEstimate()));
         persist(DISPLAY_COMMENTS_FOR_ISSUE, globalSettings.getDisplayCommentsForIssue().name());
         persist(CARD_SET, globalSettings.getCardSet());
+        persist(ADDITIONAL_FIELDS, globalSettings.getAdditionalFields());
     }
 
     private String loadString(String key, String defaultValue) {

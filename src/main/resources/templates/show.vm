@@ -74,6 +74,20 @@
                 <p><i>$i18n.getText("scrumpoker.issue.summary.empty")</i></p>
             #end
 
+            #if(!$additionalFields.isEmpty())
+            <h4>$i18n.getText("scrumpoker.issue.details")</h4>
+                <ul id="issuedetails" class="property-list two-cols">
+                #foreach($additionalField in $additionalFields)
+                    <li class="item full-width">
+                        <div class="wrap">
+                            <strong class="name">$additionalField.fieldName:</strong>
+                            <span class="value">$action.renderFieldValue($additionalField)</span>
+                        </div>
+                    </li>
+                #end
+                </ul>
+            #end
+
             <h4>$i18n.getText("scrumpoker.issue.tasks")</h4>
 
             #set($subTasks = $issue.subTaskObjects)

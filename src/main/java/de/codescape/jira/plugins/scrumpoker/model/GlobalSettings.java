@@ -29,6 +29,7 @@ public class GlobalSettings {
     private boolean checkPermissionToSaveEstimate = CHECK_PERMISSION_TO_SAVE_ESTIMATE_DEFAULT;
     private DisplayCommentsForIssue displayCommentsForIssue = DISPLAY_COMMENTS_FOR_ISSUE_DEFAULT;
     private String cardSet = CARD_SET_DEFAULT;
+    private String additionalFields;
 
     /**
      * Set the estimate field.
@@ -140,6 +141,20 @@ public class GlobalSettings {
      */
     public String getCardSet() {
         return cardSet;
+    }
+
+    /**
+     * Set the globally defined list of additional fields.
+     */
+    public void setAdditionalFields(String additionalFields) {
+        this.additionalFields = additionalFields;
+    }
+
+    /**
+     * Return the globally defined list of additional fields.
+     */
+    public String getAdditionalFields() {
+        return additionalFields;
     }
 
 }

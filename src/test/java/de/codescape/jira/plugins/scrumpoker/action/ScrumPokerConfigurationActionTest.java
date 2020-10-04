@@ -44,7 +44,7 @@ public class ScrumPokerConfigurationActionTest {
     @Test
     public void returnListOfSupportedFieldsProvidedByEstimateFieldService() {
         when(estimateFieldService.supportedCustomFields()).thenReturn(asList(firstCustomField, secondCustomField));
-        assertThat(scrumPokerConfigurationAction.getCustomFields(), hasItems(firstCustomField, secondCustomField));
+        assertThat(scrumPokerConfigurationAction.getEstimateFields(), hasItems(firstCustomField, secondCustomField));
     }
 
     @Test

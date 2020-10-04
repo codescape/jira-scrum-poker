@@ -16,15 +16,15 @@
             <label for="estimateField">$i18n.getText("scrumpoker.config.estimate") <span class="aui-icon icon-required">(required)</span></label>
             <select class="select" id="estimateField" name="estimateField" required>
                 <option value=""></option>
-                #foreach ($customField in $customFields)
-                    #if ($customField.id == $globalSettings.estimateField)
-                        <option value="$customField.id" selected="selected">$customField.fieldName</option>
+                #foreach ($estimateField in $estimateFields)
+                    #if ($estimateField.id == $globalSettings.estimateField)
+                        <option value="$estimateField.id" selected="selected">$estimateField.fieldName</option>
                     #else
-                        <option value="$customField.id">$customField.fieldName</option>
+                        <option value="$estimateField.id">$estimateField.fieldName</option>
                     #end
                 #end
             </select>
-            #if($customFields.isEmpty())
+            #if($estimateFields.isEmpty())
                 <div class="error"><span class="aui-icon aui-icon-small aui-iconfont-warning"></span> $i18n.getText("scrumpoker.config.estimate.missingfields")</div>
             #end
             #if (!$globalSettings.estimateField)
@@ -131,6 +131,47 @@
                 <label for="displayCommentsForIssueNone">$i18n.getText("scrumpoker.config.displaycommentsforissue.none")</label>
             </div>
             <div class="description">$i18n.getText("scrumpoker.config.displaycommentsforissue.description")</div>
+        </fieldset>
+        <fieldset class="group">
+            <legend><span>$i18n.getText("scrumpoker.config.displayadditionalfields")</span></legend>
+            #if(!$customFields.isEmpty())
+                <select class="select" id="addAdditionalField" name="addAdditionalField">
+                    <option value=""></option>
+                    #foreach ($additionalField in $additionalFields)
+                        <option value="$additionalField.id">$additionalField.fieldName</option>
+                    #end
+                </select>
+                <button name="action" value="addAdditionalField" class="aui-button aui-button-subtle" formnovalidate>
+                    <span class="aui-icon aui-icon-small aui-iconfont-add-circle"></span>
+                    $i18n.getText("scrumpoker.config.displayadditionalfields.add")
+                </button>
+            #else
+                <div class="error"><span class="aui-icon aui-icon-small aui-iconfont-warning"></span> $i18n.getText("scrumpoker.config.displayadditionalfields.missingfields")</div>
+            #end
+            #if(!$configuredAdditionalFields.isEmpty())
+                <table class="aui aui-table-list">
+                    <thead>
+                        <tr>
+                            <th>$i18n.getText("scrumpoker.config.displayadditionalfields.configured")</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    #foreach ($configuredAdditionalField in $configuredAdditionalFields)
+                        <tr>
+                            <td>$configuredAdditionalField.fieldName</td>
+                            <td>
+                                <button name="removeAdditionalField" value="$configuredAdditionalField.id" class="aui-button aui-button-subtle" formnovalidate>
+                                    <span class="aui-icon aui-icon-small aui-iconfont-cross-circle"></span>
+                                    $i18n.getText("scrumpoker.config.displayadditionalfields.remove")
+                                </button>
+                            </td>
+                        </tr>
+                    #end
+                    </tbody>
+                </table>
+            #end
+            <div class="description">$i18n.getText("scrumpoker.config.displayadditionalfields.description")</div>
         </fieldset>
 
         <h3>$i18n.getText("scrumpoker.config.heading.appearance")</h3>
