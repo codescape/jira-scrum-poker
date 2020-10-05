@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 /**
  * Implementation of {@link AdditionalFieldService}.
  */
-// TODO implement unit tests
 @Component
 public class AdditionalFieldServiceImpl implements AdditionalFieldService {
 
@@ -64,10 +63,11 @@ public class AdditionalFieldServiceImpl implements AdditionalFieldService {
         }
 
         GlobalSettings globalSettings = globalSettingsService.load();
-
-        // prevent duplicates and only add fields that are not configured yet
         List<String> additionalFields = additionalFieldsAsList(globalSettings.getAdditionalFields());
+
+        // remove invalid fields before adding new ones
         additionalFields.removeAll(invalidCustomFieldIds(additionalFields));
+        // prevent duplicates and only add fields that are not yet configured
         if (!additionalFields.contains(newAdditionalField)) {
             additionalFields.add(newAdditionalField);
         }
@@ -79,8 +79,9 @@ public class AdditionalFieldServiceImpl implements AdditionalFieldService {
     @Override
     public void removeConfiguredField(String customFieldId) {
         GlobalSettings globalSettings = globalSettingsService.load();
-
         List<String> additionalFields = additionalFieldsAsList(globalSettings.getAdditionalFields());
+
+        // remove invalid fields and the one requested
         additionalFields.removeAll(invalidCustomFieldIds(additionalFields));
         additionalFields.remove(customFieldId);
 
@@ -88,13 +89,14 @@ public class AdditionalFieldServiceImpl implements AdditionalFieldService {
         globalSettingsService.persist(globalSettings);
     }
 
-    // identifies all invalid custom field ids (e.g. pointing to a non existent field)
+    // find all invalid custom field ids (e.g. pointing to a field that does not exist)
     private List<String> invalidCustomFieldIds(List<String> additionalFields) {
         return additionalFields.stream()
             .filter(customField -> customFieldManager.getCustomFieldObject(customField) == null)
             .collect(Collectors.toList());
     }
 
+    // split the comma separated string into a list of strings
     private List<String> additionalFieldsAsList(String additionalFields) {
         if (additionalFields != null) {
             return new ArrayList<>(Arrays.asList(additionalFields.split(",")));
@@ -103,6 +105,7 @@ public class AdditionalFieldServiceImpl implements AdditionalFieldService {
         }
     }
 
+    // transform the list into a comma separated string
     private String additionalFieldsAsString(List<String> additionalFields) {
         return String.join(",", additionalFields);
     }
