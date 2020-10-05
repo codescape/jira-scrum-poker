@@ -134,18 +134,17 @@
         </fieldset>
         <fieldset class="group">
             <legend><span>$i18n.getText("scrumpoker.config.displayadditionalfields")</span></legend>
-            #if(!$customFields.isEmpty())
-                <select class="select" id="addAdditionalField" name="addAdditionalField">
-                    <option value=""></option>
-                    #foreach ($additionalField in $additionalFields)
-                        <option value="$additionalField.id">$additionalField.fieldName</option>
-                    #end
-                </select>
-                <button name="action" value="addAdditionalField" class="aui-button aui-button-subtle" formnovalidate>
-                    <span class="aui-icon aui-icon-small aui-iconfont-add-circle"></span>
-                    $i18n.getText("scrumpoker.config.displayadditionalfields.add")
-                </button>
-            #else
+            <select class="select" id="addAdditionalField" name="addAdditionalField">
+                <option value=""></option>
+                #foreach ($additionalField in $additionalFields)
+                    <option value="$additionalField.id">$additionalField.fieldName</option>
+                #end
+            </select>
+            <button name="action" value="addAdditionalField" class="aui-button aui-button-subtle" formnovalidate>
+                <span class="aui-icon aui-icon-small aui-iconfont-add-circle"></span>
+                $i18n.getText("scrumpoker.config.displayadditionalfields.add")
+            </button>
+            #if($additionalFields.isEmpty())
                 <div class="error"><span class="aui-icon aui-icon-small aui-iconfont-warning"></span> $i18n.getText("scrumpoker.config.displayadditionalfields.missingfields")</div>
             #end
             #if(!$configuredAdditionalFields.isEmpty())

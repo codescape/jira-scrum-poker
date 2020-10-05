@@ -15,6 +15,7 @@ category: Administration
 * feat: add support for Jira 8.12.2
 * feat: allow to display additional fields on session view (#21)
 * feat: add internationalization for additional fields on session view (#21)
+* feat: ensure correct displaying with no fields configured (#21)
 
 ### [20.08.0] - 2020-08-27
 
