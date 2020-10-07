@@ -7,7 +7,7 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayout;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
+import de.codescape.jira.plugins.scrumpoker.model.AdditionalField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import webwork.action.Action;
@@ -42,8 +42,16 @@ public class AdditionalFieldServiceImpl implements AdditionalFieldService {
     }
 
     @Override
-    public List<CustomField> supportedCustomFields() {
-        return customFieldManager.getCustomFieldObjects();
+    public List<AdditionalField> supportedCustomFields() {
+        List<String> configuredFields = additionalFieldsAsList(globalSettingsService.load().getAdditionalFields());
+        return customFieldManager.getCustomFieldObjects().stream()
+            // add boolean flag whether this field is configured or not
+            .map(customField -> new AdditionalField(customField, configuredFields.contains(customField.getId())))
+            // sorting must preserve sorting of configured fields and thus they are moved in front of all other fields
+            .sorted((Comparator.comparingInt(additionalField ->
+                configuredFields.contains(additionalField.getCustomField().getId()) ?
+                    configuredFields.indexOf(additionalField.getCustomField().getId()) : Integer.MAX_VALUE)))
+            .collect(Collectors.toList());
     }
 
     @Override
@@ -55,47 +63,6 @@ public class AdditionalFieldServiceImpl implements AdditionalFieldService {
             .collect(Collectors.toList());
     }
 
-    @Override
-    public void addConfiguredField(String newAdditionalField) {
-        // prevent empty values being added
-        if (newAdditionalField == null || newAdditionalField.isEmpty()) {
-            return;
-        }
-
-        GlobalSettings globalSettings = globalSettingsService.load();
-        List<String> additionalFields = additionalFieldsAsList(globalSettings.getAdditionalFields());
-
-        // remove invalid fields before adding new ones
-        additionalFields.removeAll(invalidCustomFieldIds(additionalFields));
-        // prevent duplicates and only add fields that are not yet configured
-        if (!additionalFields.contains(newAdditionalField)) {
-            additionalFields.add(newAdditionalField);
-        }
-
-        globalSettings.setAdditionalFields(additionalFieldsAsString(additionalFields));
-        globalSettingsService.persist(globalSettings);
-    }
-
-    @Override
-    public void removeConfiguredField(String customFieldId) {
-        GlobalSettings globalSettings = globalSettingsService.load();
-        List<String> additionalFields = additionalFieldsAsList(globalSettings.getAdditionalFields());
-
-        // remove invalid fields and the one requested
-        additionalFields.removeAll(invalidCustomFieldIds(additionalFields));
-        additionalFields.remove(customFieldId);
-
-        globalSettings.setAdditionalFields(additionalFieldsAsString(additionalFields));
-        globalSettingsService.persist(globalSettings);
-    }
-
-    // find all invalid custom field ids (e.g. pointing to a field that does not exist)
-    private List<String> invalidCustomFieldIds(List<String> additionalFields) {
-        return additionalFields.stream()
-            .filter(customField -> customFieldManager.getCustomFieldObject(customField) == null)
-            .collect(Collectors.toList());
-    }
-
     // split the comma separated string into a list of strings
     private List<String> additionalFieldsAsList(String additionalFields) {
         if (additionalFields != null) {
@@ -103,11 +70,6 @@ public class AdditionalFieldServiceImpl implements AdditionalFieldService {
         } else {
             return new ArrayList<>();
         }
-    }
-
-    // transform the list into a comma separated string
-    private String additionalFieldsAsString(List<String> additionalFields) {
-        return String.join(",", additionalFields);
     }
 
 }

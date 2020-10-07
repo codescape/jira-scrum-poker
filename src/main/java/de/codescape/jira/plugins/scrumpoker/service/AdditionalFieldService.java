@@ -3,6 +3,7 @@ package de.codescape.jira.plugins.scrumpoker.service;
 import com.atlassian.activeobjects.tx.Transactional;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.fields.CustomField;
+import de.codescape.jira.plugins.scrumpoker.model.AdditionalField;
 import webwork.action.Action;
 
 import java.util.List;
@@ -24,11 +25,12 @@ public interface AdditionalFieldService {
     String renderFieldValue(CustomField customField, Action action, MutableIssue issue);
 
     /**
-     * Returns all custom fields that qualify to be displayed as an additional field.
+     * Returns all custom fields that qualify to be displayed as an additional field and marks those as selected
+     * that are already chosen.
      *
      * @return list of all supported custom fields
      */
-    List<CustomField> supportedCustomFields();
+    List<AdditionalField> supportedCustomFields();
 
     /**
      * Returns all custom fields that are configured to be displayed as an additional field.
@@ -36,19 +38,5 @@ public interface AdditionalFieldService {
      * @return list of all configured custom fields
      */
     List<CustomField> configuredCustomFields();
-
-    /**
-     * Adds the provided custom field to the list of configured additional fields.
-     *
-     * @param customFieldId custom field id
-     */
-    void addConfiguredField(String customFieldId);
-
-    /**
-     * Removes the provided custom field from the list of configured additional fields.
-     *
-     * @param customFieldId custom field id
-     */
-    void removeConfiguredField(String customFieldId);
 
 }

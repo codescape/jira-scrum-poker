@@ -18,6 +18,7 @@ category: Administration
 * feat: ensure correct displaying with no fields configured (#21)
 * test: add unit test coverage for AdditionalFieldService (#21)
 * feat: add internationalization for additional fields configuration (#21)
+* feat: use Atlassian multi select to configure addition fields (#21)
 
 ### [20.08.0] - 2020-08-27
 

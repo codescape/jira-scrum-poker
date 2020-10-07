@@ -55,7 +55,7 @@ public class ScrumPokerProjectConfigurationActionTest {
     @Test
     public void shouldExposeTheProjectKeyWhenCalled() {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
-        when(httpServletRequest.getParameter(ScrumPokerProjectConfigurationAction.Parameters.PROJECT_KEY)).thenReturn("ABC");
+        when(httpServletRequest.getParameterValues(ScrumPokerProjectConfigurationAction.Parameters.PROJECT_KEY)).thenReturn(new String[]{"ABC"});
         scrumPokerProjectConfigurationAction.doExecute();
         assertThat(scrumPokerProjectConfigurationAction.getProjectKey(), is(equalTo("ABC")));
     }
@@ -70,7 +70,7 @@ public class ScrumPokerProjectConfigurationActionTest {
     @Test
     public void shouldReturnProjectSpecificActivateScrumPokerFlag() {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
-        when(httpServletRequest.getParameter(ScrumPokerProjectConfigurationAction.Parameters.PROJECT_KEY)).thenReturn("ABC");
+        when(httpServletRequest.getParameterValues(ScrumPokerProjectConfigurationAction.Parameters.PROJECT_KEY)).thenReturn(new String[]{"ABC"});
 
         scrumPokerProjectConfigurationAction.doExecute();
 

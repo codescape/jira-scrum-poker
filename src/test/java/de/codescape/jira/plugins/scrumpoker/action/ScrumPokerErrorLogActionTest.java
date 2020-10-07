@@ -48,7 +48,7 @@ public class ScrumPokerErrorLogActionTest {
     @Test
     public void shouldEmptyTheErrorLogWhenRequested() {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
-        when(httpServletRequest.getParameter(ScrumPokerErrorLogAction.Parameters.ACTION)).thenReturn("empty");
+        when(httpServletRequest.getParameterValues(ScrumPokerErrorLogAction.Parameters.ACTION)).thenReturn(new String[]{"empty"});
         assertThat(scrumPokerErrorLogAction.doExecute(), is(equalTo(scrumPokerErrorLogAction.SUCCESS)));
         verify(errorLogService, times(1)).emptyErrorLog();
     }

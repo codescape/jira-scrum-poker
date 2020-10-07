@@ -1,6 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.issue.fields.CustomField;
+import de.codescape.jira.plugins.scrumpoker.model.AdditionalField;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
@@ -25,7 +26,6 @@ public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction {
 
         static final String SAVE = "save";
         static final String DEFAULTS = "defaults";
-        static final String ADD_ADDITIONAL_FIELD = "addAdditionalField";
 
     }
 
@@ -43,8 +43,7 @@ public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction {
         static final String CHECK_PERMISSION_TO_SAVE_ESTIMATE = "checkPermissionToSaveEstimate";
         static final String DISPLAY_COMMENTS_FOR_ISSUE = "displayCommentsForIssue";
         static final String CARD_SET = "cardSet";
-        static final String ADD_ADDITIONAL_FIELD = "addAdditionalField";
-        static final String REMOVE_ADDITIONAL_FIELD = "removeAdditionalField";
+        static final String DISPLAY_ADDITIONAL_FIELDS = "displayAdditionalFields";
 
     }
 
@@ -71,15 +70,8 @@ public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction {
     /**
      * List of all custom fields to be displayed as an additional field.
      */
-    public List<CustomField> getAdditionalFields() {
+    public List<AdditionalField> getAdditionalFields() {
         return additionalFieldService.supportedCustomFields();
-    }
-
-    /**
-     * List of all additional fields currently configured.
-     */
-    public List<CustomField> getConfiguredAdditionalFields() {
-        return additionalFieldService.configuredCustomFields();
     }
 
     /**
@@ -94,7 +86,6 @@ public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction {
      */
     @Override
     protected String doExecute() {
-        // standard actions that involve the main form
         String action = getParameter(Parameters.ACTION);
         if (action != null) {
             switch (action) {
@@ -126,21 +117,15 @@ public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction {
                     String cardSet = getParameter(Parameters.CARD_SET);
                     globalSettings.setCardSet(cardSet);
 
+                    String displayAdditionalFields = getParameter(Parameters.DISPLAY_ADDITIONAL_FIELDS);
+                    globalSettings.setAdditionalFields(displayAdditionalFields);
+
                     globalSettingsService.persist(globalSettings);
-                    break;
-                case Actions.ADD_ADDITIONAL_FIELD:
-                    additionalFieldService.addConfiguredField(getParameter(Parameters.ADD_ADDITIONAL_FIELD));
                     break;
                 case Actions.DEFAULTS:
                     globalSettingsService.persist(new GlobalSettings());
                     break;
             }
-        }
-
-        // action that is triggered by the remove buttons on configured additional fields
-        String removeAdditionalField = getParameter(Parameters.REMOVE_ADDITIONAL_FIELD);
-        if (removeAdditionalField != null) {
-            additionalFieldService.removeConfiguredField(removeAdditionalField);
         }
 
         return SUCCESS;

@@ -20,8 +20,8 @@ abstract class AbstractScrumPokerAction extends JiraWebActionSupport {
      * @return value of the parameter
      */
     String getParameter(String parameterName) {
-        String value = getHttpRequest().getParameter(parameterName);
-        return value != null && !value.isEmpty() ? value : null;
+        String[] values = getHttpRequest().getParameterValues(parameterName);
+        return (values != null && values.length > 0) ? String.join(",", values) : null;
     }
 
 }

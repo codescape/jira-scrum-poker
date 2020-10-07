@@ -231,7 +231,7 @@ public class ScrumPokerActionTest {
     }
 
     private void whenRequestedIssueExists() {
-        when(httpServletRequest.getParameter("issueKey")).thenReturn(ISSUE_KEY);
+        when(httpServletRequest.getParameterValues("issueKey")).thenReturn(new String[]{ISSUE_KEY});
         when(issueManager.getIssueObject(ISSUE_KEY)).thenReturn(issue);
     }
 

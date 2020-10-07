@@ -134,41 +134,18 @@
         </fieldset>
         <fieldset class="group">
             <legend><span>$i18n.getText("scrumpoker.config.displayadditionalfields")</span></legend>
-            <select class="select" id="addAdditionalField" name="addAdditionalField">
-                <option value=""></option>
-                #foreach ($additionalField in $additionalFields)
-                    <option value="$additionalField.id">$additionalField.fieldName</option>
+            <select class="multi-select long-field" id="displayAdditionalFields" name="displayAdditionalFields" multiple>
+            #foreach ($additionalField in $additionalFields)
+                #if ($additionalField.selected)
+                    <option value="$additionalField.customField.id" selected>$additionalField.customField.fieldName</option>
+                #else
+                    <option value="$additionalField.customField.id">$additionalField.customField.fieldName</option>
                 #end
+            #end
             </select>
-            <button name="action" value="addAdditionalField" class="aui-button aui-button-subtle" formnovalidate>
-                <span class="aui-icon aui-icon-small aui-iconfont-add-circle"></span>
-                $i18n.getText("scrumpoker.config.displayadditionalfields.add")
-            </button>
+            <script>AJS.$("#displayAdditionalFields").auiSelect2();</script>
             #if($additionalFields.isEmpty())
                 <div class="error"><span class="aui-icon aui-icon-small aui-iconfont-warning"></span> $i18n.getText("scrumpoker.config.displayadditionalfields.missingfields")</div>
-            #end
-            #if(!$configuredAdditionalFields.isEmpty())
-                <table class="aui aui-table-list">
-                    <thead>
-                        <tr>
-                            <th>$i18n.getText("scrumpoker.config.displayadditionalfields.configured")</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    #foreach ($configuredAdditionalField in $configuredAdditionalFields)
-                        <tr>
-                            <td>$configuredAdditionalField.fieldName</td>
-                            <td>
-                                <button name="removeAdditionalField" value="$configuredAdditionalField.id" class="aui-button aui-button-subtle" formnovalidate>
-                                    <span class="aui-icon aui-icon-small aui-iconfont-cross-circle"></span>
-                                    $i18n.getText("scrumpoker.config.displayadditionalfields.remove")
-                                </button>
-                            </td>
-                        </tr>
-                    #end
-                    </tbody>
-                </table>
             #end
             <div class="description">$i18n.getText("scrumpoker.config.displayadditionalfields.description")</div>
         </fieldset>

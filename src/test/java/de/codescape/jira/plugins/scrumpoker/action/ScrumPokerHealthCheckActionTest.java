@@ -127,7 +127,7 @@ public class ScrumPokerHealthCheckActionTest {
 
     private void expectParameterToReturnValue(String parameterName, String parameterValue) {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
-        when(httpServletRequest.getParameter(parameterName)).thenReturn(parameterValue);
+        when(httpServletRequest.getParameterValues(parameterName)).thenReturn(new String[]{parameterValue});
     }
 
     // license
