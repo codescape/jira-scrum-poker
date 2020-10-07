@@ -1,6 +1,10 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.issue.fields.CustomField;
+import com.atlassian.jira.junit.rules.AvailableInContainer;
+import com.atlassian.jira.junit.rules.MockitoContainer;
+import com.atlassian.jira.junit.rules.MockitoMocksInContainer;
+import com.atlassian.jira.web.HttpServletVariables;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
@@ -8,20 +12,23 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
+
+import javax.servlet.http.HttpServletRequest;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ScrumPokerConfigurationActionTest {
 
-    private static final String CUSTOM_FIELD_ID = "CustomFieldId";
-
     @Rule
-    public MockitoRule rule = MockitoJUnit.rule();
+    public MockitoContainer mockitoContainer = MockitoMocksInContainer.rule(this);
+
+    @Mock
+    @AvailableInContainer
+    private HttpServletVariables httpServletVariables;
 
     @Mock
     private EstimateFieldService estimateFieldService;
@@ -33,25 +40,37 @@ public class ScrumPokerConfigurationActionTest {
     private ScrumPokerConfigurationAction scrumPokerConfigurationAction;
 
     @Mock
-    private CustomField firstCustomField;
+    private HttpServletRequest httpServletRequest;
 
-    @Mock
-    private CustomField secondCustomField;
+    /* tests for doExecute() */
 
-    @Mock
-    private GlobalSettings globalSettings;
+    @Test
+    public void doExecuteWithoutAnyActionReturnsSuccess() {
+        when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
+        when(httpServletRequest.getParameterValues("action")).thenReturn(null);
+
+        assertThat(scrumPokerConfigurationAction.doExecute(), is(equalTo("success")));
+    }
+
+    /* tests for getEstimateFields() */
 
     @Test
     public void returnListOfSupportedFieldsProvidedByEstimateFieldService() {
-        when(estimateFieldService.supportedCustomFields()).thenReturn(asList(firstCustomField, secondCustomField));
-        assertThat(scrumPokerConfigurationAction.getEstimateFields(), hasItems(firstCustomField, secondCustomField));
+        CustomField customField1 = mock(CustomField.class);
+        CustomField customField2 = mock(CustomField.class);
+        when(estimateFieldService.supportedCustomFields()).thenReturn(asList(customField1, customField2));
+
+        assertThat(scrumPokerConfigurationAction.getEstimateFields(), hasItems(customField1, customField2));
     }
 
+    /* tests for getGlobalSettings() */
+
     @Test
-    public void returnTheEstimateFieldConfigured() {
+    public void getGlobalSettingsShouldExposeTheGlobalSettings() {
+        GlobalSettings globalSettings = mock(GlobalSettings.class);
         when(scrumPokerSettingsService.load()).thenReturn(globalSettings);
-        when(globalSettings.getEstimateField()).thenReturn(CUSTOM_FIELD_ID);
-        assertThat(scrumPokerConfigurationAction.getGlobalSettings().getEstimateField(), is(equalTo(CUSTOM_FIELD_ID)));
+
+        assertThat(scrumPokerConfigurationAction.getGlobalSettings(), is(equalTo(globalSettings)));
     }
 
 }
