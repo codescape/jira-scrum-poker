@@ -23,7 +23,7 @@
         $('#scrumPokerConfiguration').submit(function() {
             // transfer the selected fields into the hidden field and keep sort order of fields
             if (displayAdditionalFields && displayAdditionalFields.lozengeGroup) {
-                var ids = displayAdditionalFields.lozengeGroup.items.map (item => { return item.value; });
+                var ids = displayAdditionalFields.lozengeGroup.items.map(function(item) { return item.value; });
                 $('#displayAdditionalFieldsIds').val(ids.join(","));
             }
             // continue form submission
