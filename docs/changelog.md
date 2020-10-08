@@ -21,6 +21,7 @@ category: Administration
 * feat: use Atlassian multi select to configure addition fields (#21)
 * test: improve tests for global configuration action (#21)
 * feat: keep order of selected additional fields (#21)
+* feat: add support for Jira 8.13.0
 
 ### [20.08.0] - 2020-08-27
 

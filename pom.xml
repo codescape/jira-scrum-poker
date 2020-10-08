@@ -40,7 +40,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- Jira versions -->
-        <jira.version>8.12.2</jira.version>
+        <jira.version>8.13.0</jira.version>
         <jira.version.latest>${jira.version}</jira.version.latest>
         <jira.version.enterprise>8.5.8</jira.version.enterprise>
         <jira.version.oldest>7.13.17</jira.version.oldest>
