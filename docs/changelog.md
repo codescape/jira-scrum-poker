@@ -11,6 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [20.10.0] - 2020-10-08
+
+**Display additional fields for better estimates**
+
 * feat: add support for Jira 8.12.1 and latest enterprise releases
 * feat: add support for Jira 8.12.2
 * feat: allow to display additional fields on session view (#21)
@@ -163,7 +169,8 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.08.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.10.0...HEAD
+[20.10.0]: https://github.com/codescape/jira-scrum-poker/compare/20.08.0...20.10.0
 [20.08.0]: https://github.com/codescape/jira-scrum-poker/compare/20.07.0...20.08.0
 [20.07.0]: https://github.com/codescape/jira-scrum-poker/compare/20.06.2...20.07.0
 [20.06.2]: https://github.com/codescape/jira-scrum-poker/compare/20.06.1...20.06.2
