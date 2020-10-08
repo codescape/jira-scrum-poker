@@ -20,6 +20,7 @@ category: Administration
 * feat: add internationalization for additional fields configuration (#21)
 * feat: use Atlassian multi select to configure addition fields (#21)
 * test: improve tests for global configuration action (#21)
+* feat: keep order of selected additional fields (#21)
 
 ### [20.08.0] - 2020-08-27
 

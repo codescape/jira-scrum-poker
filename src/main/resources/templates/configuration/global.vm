@@ -1,6 +1,7 @@
 <html>
 <head>
     <title>$i18n.getText("scrumpoker.title") - $i18n.getText("scrumpoker.config.title")</title>
+    $webResourceManager.requireResource("de.codescape.jira.plugins.scrum-poker:scrum-poker-configuration-resources")
 </head>
 <body class="scrum-poker">
 
@@ -8,7 +9,7 @@
 
 <p>$i18n.getText("scrumpoker.config.description")</p>
 
-<form class="aui long-label" action="ScrumPokerConfiguration.jspa" method="post">
+<form id="scrumPokerConfiguration" class="aui long-label" action="ScrumPokerConfiguration.jspa" method="post">
     <div class="form-body">
 
         <h3>$i18n.getText("scrumpoker.config.heading.estimation")</h3>
@@ -134,7 +135,7 @@
         </fieldset>
         <fieldset class="group">
             <legend><span>$i18n.getText("scrumpoker.config.displayadditionalfields")</span></legend>
-            <select class="multi-select long-field" id="displayAdditionalFields" name="displayAdditionalFields" multiple>
+            <select class="multi-select hidden long-field" id="displayAdditionalFields" name="displayAdditionalFields" multiple>
             #foreach ($additionalField in $additionalFields)
                 #if ($additionalField.selected)
                     <option value="$additionalField.customField.id" selected>$additionalField.customField.fieldName</option>
@@ -143,7 +144,8 @@
                 #end
             #end
             </select>
-            <script>AJS.$("#displayAdditionalFields").auiSelect2();</script>
+            <!-- this field is filled with the ordered field ids before submitting the form -->
+            <input type="hidden" id="displayAdditionalFieldsIds" name="displayAdditionalFieldsIds">
             #if($additionalFields.isEmpty())
                 <div class="error"><span class="aui-icon aui-icon-small aui-iconfont-warning"></span> $i18n.getText("scrumpoker.config.displayadditionalfields.missingfields")</div>
             #end

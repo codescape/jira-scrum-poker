@@ -28,7 +28,7 @@
     <!-- i18n message bundle -->
     <resource type="i18n" name="i18n" location="i18n.scrum-poker"/>
 
-    <!-- static web resources -->
+    <!-- static web resources for the session view -->
     <web-resource key="scrum-poker-resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
         <transformation extension="js">
@@ -41,6 +41,15 @@
         <resource type="download" name="qrcode.js" location="/js/qrcode.js"/>
         <resource type="download" name="images/" location="/images"/>
         <context>scrum-poker</context>
+    </web-resource>
+
+    <!-- static web resource for the configuration view -->
+    <web-resource key="scrum-poker-configuration-resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <resource type="download" name="scrum-poker-configuration.js" location="/js/scrum-poker-configuration.js"/>
     </web-resource>
 
     <!-- font awesome resources -->

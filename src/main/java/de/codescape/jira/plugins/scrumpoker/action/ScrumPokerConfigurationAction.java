@@ -43,7 +43,7 @@ public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction {
         static final String CHECK_PERMISSION_TO_SAVE_ESTIMATE = "checkPermissionToSaveEstimate";
         static final String DISPLAY_COMMENTS_FOR_ISSUE = "displayCommentsForIssue";
         static final String CARD_SET = "cardSet";
-        static final String DISPLAY_ADDITIONAL_FIELDS = "displayAdditionalFields";
+        static final String DISPLAY_ADDITIONAL_FIELDS = "displayAdditionalFieldsIds";
 
     }
 
