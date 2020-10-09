@@ -12,6 +12,7 @@ category: Administration
 ### [Unreleased]
 
 * feat: explicitly render Scrum Poker configuration below standard plugins
+* feat: improve structure of active session page and add helping texts
 
 ### [20.10.0] - 2020-10-08
 

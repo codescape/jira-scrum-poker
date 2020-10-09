@@ -93,6 +93,13 @@
     color: #fff;
     cursor: default; }
 
+/* grey bordered panel box around content */
+.scrum-poker-box {
+    border: 1px solid #dfe1e6;
+    border-radius: 3px;
+    padding: 15px;
+    margin: 10px 0; }
+
 /* badges are positioned on the upper right corner of the card */
 .scrum-poker-card aui-badge,
 .scrum-poker-card .aui-badge {
