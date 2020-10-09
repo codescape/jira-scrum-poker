@@ -13,15 +13,27 @@ public class AdditionalField {
     private final CustomField customField;
     private final boolean selected;
 
+    /**
+     * Create an additional field that contains the underlying custom field and whether it is selected or not.
+     *
+     * @param customField underlying custom field
+     * @param selected    selection of this field
+     */
     public AdditionalField(CustomField customField, boolean selected) {
         this.customField = customField;
         this.selected = selected;
     }
 
+    /**
+     * Returns the underlying custom field.
+     */
     public CustomField getCustomField() {
         return customField;
     }
 
+    /**
+     * Returns whether this field is selected or not.
+     */
     public boolean isSelected() {
         return selected;
     }
