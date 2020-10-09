@@ -107,7 +107,7 @@
     </web-item>
 
     <!-- configuration in app administration sidebar -->
-    <web-section key="scrum-poker-configuration" location="admin_plugins_menu">
+    <web-section key="scrum-poker-configuration" location="admin_plugins_menu" weight="110">
         <label key="scrumpoker.title"/>
     </web-section>
     <web-item key="scrum-poker-configuration-item" section="admin_plugins_menu/scrum-poker-configuration" weight="10">

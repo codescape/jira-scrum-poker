@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* feat: explicitly render Scrum Poker configuration below standard plugins
 
 ### [20.10.0] - 2020-10-08
 
