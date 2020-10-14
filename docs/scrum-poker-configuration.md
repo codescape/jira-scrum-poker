@@ -94,6 +94,12 @@ The following options are available:
 * `Show latest comments` allows participants of a Scrum Poker session to see the most recent ten comments they are allowed to see.
 * `Show no comments` removes the section that displays comments on the Scrum Poker session page and thus shows no comments.
 
+#### Show Additional fields
+
+Decide which additional custom fields should be shown to participants during the Scrum Poker session to aid in an estimation.
+
+All custom fields that exist in your Jira instance can be selected and displayed. The order of the fields configured here equals the order when being displayed during the Scrum Poker session.  
+
 #### Show Dropdown on Boards
 
 Decide whether to show the Scrum Poker dropdown on boards or not.
