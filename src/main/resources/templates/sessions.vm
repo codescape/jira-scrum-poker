@@ -33,7 +33,7 @@
 <div class="aui-page-panel" style="margin: 0;">
     <div class="aui-page-panel-inner">
         <section class="aui-page-panel-content">
-            <h4>$i18n.getText("scrumpoker.sessions.active")</h4>
+            <h2>$i18n.getText("scrumpoker.sessions.active")</h2>
             <p>$i18n.getText("scrumpoker.sessions.active.description")</p>
             #if(!$openSessions.isEmpty())
             <div class="scrum-poker-box">
@@ -83,7 +83,7 @@
             #end
 
             #if(!$closedSessions.isEmpty())
-            <h4>$i18n.getText("scrumpoker.sessions.finished")</h4>
+            <h2>$i18n.getText("scrumpoker.sessions.finished")</h2>
             <p>$i18n.getText("scrumpoker.sessions.finished.description")</p>
             <div class="scrum-poker-box">
                 <table width="100%" class="aui" id="issuetable">
