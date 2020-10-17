@@ -6,7 +6,7 @@ category: User Guide
 
 Scrum Poker for Jira enables your agile teams to collaboratively estimate their work items using a clean and interactive user interface that is seamlessly integrated into Jira Software.
 
-No matter which agile framework you use, Scrum Poker for Jira helps Kanban, SAFe, LeSS or Scrum teams estimate their work.
+Scrum Poker for Jira helps Kanban, SAFe, LeSS or Scrum teams estimate their work using the well-known Planning Poker® method.
 
 * Table of Contents
 {:toc}

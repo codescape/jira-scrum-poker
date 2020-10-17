@@ -16,6 +16,7 @@ category: Administration
 * docs: add Java documentation to new classes
 * docs: describe additional fields configuration in online documentation
 * feat: increase font size of headings on active session page
+* docs: update description in feature overview
 
 ### [20.10.0] - 2020-10-08
 
