@@ -3,8 +3,8 @@ package de.codescape.jira.plugins.scrumpoker.rest.entities;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
 
 public class VoteEntityTest {
 

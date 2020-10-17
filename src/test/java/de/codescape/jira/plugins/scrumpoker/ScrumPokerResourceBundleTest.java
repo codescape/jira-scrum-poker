@@ -15,7 +15,7 @@ import java.util.Properties;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ScrumPokerResourceBundleTest {
 

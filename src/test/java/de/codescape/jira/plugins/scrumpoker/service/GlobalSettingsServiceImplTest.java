@@ -18,8 +18,8 @@ import java.util.Arrays;
 
 import static de.codescape.jira.plugins.scrumpoker.model.GlobalSettings.ACTIVATE_SCRUM_POKER_DEFAULT;
 import static de.codescape.jira.plugins.scrumpoker.model.GlobalSettings.SESSION_TIMEOUT_DEFAULT;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
 
 @RunWith(ActiveObjectsJUnitRunner.class)
 @Data(ScrumPokerTestDatabaseUpdater.class)

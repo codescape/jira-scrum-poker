@@ -17,6 +17,7 @@ category: Administration
 * docs: describe additional fields configuration in online documentation
 * feat: increase font size of headings on active session page
 * docs: update description in feature overview
+* refactor: replace Junit assertThat with Hamcrest assertThat
 
 ### [20.10.0] - 2020-10-08
 

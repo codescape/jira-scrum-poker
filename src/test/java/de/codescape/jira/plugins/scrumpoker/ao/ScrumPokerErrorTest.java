@@ -16,8 +16,8 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Date;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
 
 @RunWith(ActiveObjectsJUnitRunner.class)
 @Data(ScrumPokerTestDatabaseUpdater.class)

@@ -3,9 +3,8 @@ package de.codescape.jira.plugins.scrumpoker.model;
 import org.junit.Test;
 
 import static de.codescape.jira.plugins.scrumpoker.model.GlobalSettings.*;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class GlobalSettingsTest {
 
@@ -19,6 +18,13 @@ public class GlobalSettingsTest {
         assertThat(globalSettings.isCheckPermissionToSaveEstimate(), is(equalTo(CHECK_PERMISSION_TO_SAVE_ESTIMATE_DEFAULT)));
         assertThat(globalSettings.getDisplayCommentsForIssue(), is(equalTo(DISPLAY_COMMENTS_FOR_ISSUE_DEFAULT)));
         assertThat(globalSettings.getCardSet(), is(equalTo(CARD_SET_DEFAULT)));
+    }
+
+    @Test
+    public void newGlobalSettingsInstanceHasCorrectNullValues() {
+        GlobalSettings globalSettings = new GlobalSettings();
+        assertThat(globalSettings.getAdditionalFields(), is(nullValue()));
+        assertThat(globalSettings.getEstimateField(), is(nullValue()));
     }
 
 }

@@ -31,8 +31,8 @@ import java.util.Date;
 
 import static de.codescape.jira.plugins.scrumpoker.model.Card.COFFEE_BREAK;
 import static de.codescape.jira.plugins.scrumpoker.model.Card.QUESTION_MARK;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 public class SessionEntityMapperTest {

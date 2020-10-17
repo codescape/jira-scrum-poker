@@ -16,8 +16,8 @@ import org.junit.runner.RunWith;
 
 import java.util.Arrays;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 
 @RunWith(ActiveObjectsJUnitRunner.class)
 @Data(ScrumPokerTestDatabaseUpdater.class)

@@ -5,7 +5,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import static de.codescape.jira.plugins.scrumpoker.MavenProperties.getProperties;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 public abstract class Page {
 

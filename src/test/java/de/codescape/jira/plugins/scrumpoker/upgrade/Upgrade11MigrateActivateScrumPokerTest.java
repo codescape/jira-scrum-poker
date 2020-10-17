@@ -17,8 +17,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static de.codescape.jira.plugins.scrumpoker.upgrade.Upgrade11MigrateActivateScrumPoker.DEFAULT_PROJECT_ACTIVATION;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
 
 @RunWith(ActiveObjectsJUnitRunner.class)
 @Data(ScrumPokerTestDatabaseUpdater.class)
