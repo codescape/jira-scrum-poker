@@ -37,6 +37,7 @@ Read more about how to enable this feature for your workflows in the administrat
 The user interface for Scrum Poker sessions focuses on the presentation of the information that is important for an estimate and motivates the participants to interact and discuss.
 
 The description, comments and subtasks for the issue are clearly presented and help the participants to make an estimate.
+Additional fields can be configured and displayed to aid in better estimates.
 Participants with different estimates are marked and encouraged to discuss with each other.
 
 The user guide explains how to [participate in a Scrum Poker session](/participate-in-scrum-poker-session).

@@ -19,6 +19,7 @@ category: Administration
 * docs: update description in feature overview
 * refactor: replace Junit assertThat with Hamcrest assertThat
 * feat: only show additional fields with a value on session page (#125)
+* docs: include additional fields in feature overview (#128)
 
 ### [20.10.0] - 2020-10-08
 
