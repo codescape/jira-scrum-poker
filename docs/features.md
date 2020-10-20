@@ -17,7 +17,7 @@ Scrum Poker for Jira can easily be installed and configured for your existing Ji
 Complete the setup and start your first Scrum Poker sessions after three easy steps.
 You can get a free trial license in the Atlassian Marketplace to evaluate Scrum Poker for Jira and test all functionality.
 
-The administration section contains two pages that explain how to [install Scrum Poker for Jira](/scrum-poker-installation) and that guide you through the possible settings to [configure Scrum Poker for Jira](/scrum-poker-configuration).
+The administration section contains two pages that explain how to [install Scrum Poker for Jira](/installation) and that guide you through the possible settings to [configure Scrum Poker for Jira](/configuration).
 
 ### Start Scrum Poker sessions with a single click
 
@@ -30,7 +30,7 @@ The user guide explains how to [start a Scrum Poker session](/start-scrum-poker-
 
 If required Scrum Poker sessions can also be automatically started from workflow transitions using the workflow function provided by Scrum Poker for Jira. For example, this allows you to start a Scrum Poker session when an issue transitions from a status like `Refinement` into another status like `Estimation`.
 
-Read more about how to enable this feature for your workflows in the administration guide that explains how to [configure Scrum Poker for Jira](/scrum-poker-configuration).
+Read more about how to enable this feature for your workflows in the administration guide that explains how to [configure Scrum Poker for Jira](/configuration).
 
 ### User interface fostering interaction and discussion
 
@@ -56,7 +56,7 @@ In addition, a coffee cup and a question mark can be used to indicate that you n
 This initial configuration can be easily adjusted according to your wishes.
 T-shirt sizes, working hours or rubber dots are just a few clicks away.
 
-The administration section explains all possible settings including the card set setting on the [Scrum Poker configuration](/scrum-poker-configuration) page.
+The administration section explains all possible settings including the card set setting on the [Scrum Poker configuration](/configuration) page.
 
 ### Use Scrum Poker for Jira in your language
 

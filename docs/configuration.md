@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Scrum Poker configuration
+title: Configuration
 category: Administration
 ---
 
@@ -17,11 +17,11 @@ This configuration is only available to users with the `Jira Administrators` rol
 To locate the global configuration navigate to the `Administration` menu, then select the entry labelled `Manage apps`.
 You will now find a section called `Scrum Poker` in the left sidebar as shown in the screenshot below:
 
-![Locate the global configuration for Scrum Poker](/images/scrum-poker-configuration-locate-page.png)
+![Locate the global configuration for Scrum Poker](/images/configuration-locate-page.png)
 
 On the page `Configuration` you have global configuration options to make Scrum Poker for Jira fit to your needs:
 
-![Global configuration for Scrum Poker](/images/scrum-poker-configuration-page.png)
+![Global configuration for Scrum Poker](/images/configuration-page.png)
 
 #### Confirmed Estimate Field
 
@@ -117,7 +117,7 @@ Inside the `Project settings` you can find a menu option called `Scrum Poker` th
 
 On the page `Project Configuration` you can find the configuration options the make Scrum Poker for Jira fit to the needs of your Jira project:
 
-![Project configuration for Scrum Poker](/images/scrum-poker-configuration-project-page.png)
+![Project configuration for Scrum Poker](/images/configuration-project-page.png)
 
 #### Activate Scrum Poker
 
@@ -137,7 +137,7 @@ Scrum Poker offers the workflow function `Start Scrum Poker session` to start a 
 
 Inside your workflow configuration you can add so called `Post Functions` to a workflow transition (see screenshot below).
 
-![Start Scrum Poker session](/images/scrum-poker-configuration-start-session-workflow-function.png)
+![Start Scrum Poker session](/images/configuration-start-session-workflow-function.png)
 
 After adding this workflow function remember to publish the changed workflow.
 Changes to workflows are only applied to future workflow transitions using this workflow if the workflow configuration is published.

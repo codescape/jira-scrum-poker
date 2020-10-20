@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Scrum Poker installation
+title: Installation
 category: Administration
 ---
 
@@ -25,7 +25,7 @@ The Installation and configuration of Scrum Poker for Jira from the Atlassian Ma
 
 1. Download and install Scrum Poker for Jira from the <a href="{{ site.marketplace_url }}">Atlassian Marketplace</a>.
 1. Obtain a license (evaluation or purchase) for Scrum Poker for Jira from the Atlassian Marketplace and apply it to the installed app.
-1. Configure Scrum Poker for Jira as described in the <a href="/scrum-poker-configuration">Scrum Poker configuration</a>.
+1. Configure Scrum Poker for Jira as described in the [Configuration](/configuration).
 
 Congratulations!
 You are now ready to [Start a Scrum Poker session](/start-scrum-poker-session)!
