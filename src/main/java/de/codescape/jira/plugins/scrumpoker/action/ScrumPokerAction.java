@@ -155,6 +155,16 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
     }
 
     /**
+     * Returns whether the custom field has a value for the current issue.
+     *
+     * @param customField custom field of the current issue
+     * @return <code>true</code> if custom field has a value, otherwise <code>false</code>
+     */
+    public boolean hasFieldValue(CustomField customField) {
+        return getIssue() != null && getIssue().getCustomFieldValue(customField) != null;
+    }
+
+    /**
      * The renderer to display text with wiki markup as in issue description and comments.
      */
     public JiraRendererPlugin getWikiRenderer() {

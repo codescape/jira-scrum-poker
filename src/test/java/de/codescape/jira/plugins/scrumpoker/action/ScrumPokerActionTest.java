@@ -4,6 +4,7 @@ import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.comments.Comment;
 import com.atlassian.jira.issue.comments.CommentManager;
+import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.junit.rules.AvailableInContainer;
 import com.atlassian.jira.junit.rules.MockitoContainer;
 import com.atlassian.jira.junit.rules.MockitoMocksInContainer;
@@ -17,6 +18,7 @@ import com.atlassian.upm.api.license.entity.PluginLicense;
 import com.atlassian.upm.api.util.Option;
 import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
+import de.codescape.jira.plugins.scrumpoker.service.AdditionalFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
 import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
@@ -32,8 +34,8 @@ import java.util.ArrayList;
 import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.Assume.assumeThat;
+import static org.mockito.Mockito.*;
 
 public class ScrumPokerActionTest {
 
@@ -70,6 +72,9 @@ public class ScrumPokerActionTest {
     @Mock
     private ErrorLogService errorLogService;
 
+    @Mock
+    private AdditionalFieldService additionalFieldService;
+
     @InjectMocks
     private ScrumPokerAction scrumPokerAction;
 
@@ -84,6 +89,9 @@ public class ScrumPokerActionTest {
 
     @Mock
     private GlobalSettings globalSettings;
+
+    @Mock
+    private CustomField customField;
 
     @Before
     public void before() {
@@ -173,6 +181,48 @@ public class ScrumPokerActionTest {
         whenDisplayCommentsForIssueSetTo(DisplayCommentsForIssue.LATEST);
 
         assertThat(scrumPokerAction.isDisplayCommentsForIssue(), is(true));
+    }
+
+    /* tests for renderFieldValue() */
+
+    @Test
+    public void shouldDelegateToAdditionalFieldService() {
+        whenLicenseIsValid();
+        whenRequestedIssueExists();
+        scrumPokerAction.doExecute();
+
+        scrumPokerAction.renderFieldValue(customField);
+
+        verify(additionalFieldService, times(1)).renderFieldValue(customField, scrumPokerAction, issue);
+        verifyNoMoreInteractions(additionalFieldService);
+    }
+
+    /* tests for hasFieldValue() */
+
+    @Test
+    public void hasFieldValueShouldReturnFalseIfIssueDoesNotExist() {
+        assumeThat(scrumPokerAction.getIssue(), is(nullValue()));
+        assertThat(scrumPokerAction.hasFieldValue(customField), is(false));
+    }
+
+    @Test
+    public void hasFieldValueShouldReturnTrueIfFieldHasValue() {
+        whenLicenseIsValid();
+        whenRequestedIssueExists();
+        scrumPokerAction.doExecute();
+        when(issue.getCustomFieldValue(eq(customField))).thenReturn("Hello World");
+
+        assertThat(scrumPokerAction.hasFieldValue(customField), is(true));
+    }
+
+    @Test
+    public void hasFieldValueShouldReturnFalseIfFieldHasNoValue() {
+        whenLicenseIsValid();
+        whenRequestedIssueExists();
+        scrumPokerAction.doExecute();
+        when(issue.getCustomFieldValue(eq(customField))).thenReturn(null);
+
+        assertThat(scrumPokerAction.hasFieldValue(customField), is(false));
     }
 
     /* tests for getScrumPokerSessionUrl() */

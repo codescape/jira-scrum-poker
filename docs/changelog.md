@@ -18,6 +18,7 @@ category: Administration
 * feat: increase font size of headings on active session page
 * docs: update description in feature overview
 * refactor: replace Junit assertThat with Hamcrest assertThat
+* feat: only show additional fields with a value on session page (#125)
 
 ### [20.10.0] - 2020-10-08
 
