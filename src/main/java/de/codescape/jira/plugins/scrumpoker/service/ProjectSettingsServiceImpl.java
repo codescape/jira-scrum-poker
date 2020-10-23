@@ -26,31 +26,27 @@ public class ProjectSettingsServiceImpl implements ProjectSettingsService {
     }
 
     @Override
-    public boolean loadActivateScrumPoker(Long projectId) {
-        ScrumPokerProject scrumPokerProject = findById(projectId);
-        return scrumPokerProject != null && scrumPokerProject.isScrumPokerEnabled();
-    }
-
-    @Override
-    public void persistActivateScrumPoker(Long projectId, boolean activateScrumPoker) {
-        ScrumPokerProject scrumPokerProject = findOrCreateByProjectId(projectId);
-        scrumPokerProject.setScrumPokerEnabled(activateScrumPoker);
-        scrumPokerProject.save();
-    }
-
-    @Override
     public List<ScrumPokerProject> loadAll() {
         return Arrays.stream(activeObjects.find(ScrumPokerProject.class)).collect(Collectors.toList());
     }
 
-    private ScrumPokerProject findById(Long projectId) {
-        ScrumPokerProject[] scrumPokerProjects = activeObjects.find(ScrumPokerProject.class,
-            Query.select().where("PROJECT_ID = ?", projectId).limit(1));
-        return (scrumPokerProjects.length == 1) ? scrumPokerProjects[0] : null;
+    @Override
+    public void persistSettings(Long projectId, boolean activateScrumPoker, String estimateField) {
+        ScrumPokerProject scrumPokerProject = findOrCreateByProjectId(projectId);
+        scrumPokerProject.setScrumPokerEnabled(activateScrumPoker);
+        scrumPokerProject.setEstimateField(estimateField);
+        scrumPokerProject.save();
+    }
+
+    @Override
+    public ScrumPokerProject loadSettings(Long projectId) {
+        return findOrCreateByProjectId(projectId);
     }
 
     private ScrumPokerProject findOrCreateByProjectId(Long projectId) {
-        ScrumPokerProject scrumPokerProject = findById(projectId);
+        ScrumPokerProject[] scrumPokerProjects = activeObjects.find(ScrumPokerProject.class,
+            Query.select().where("PROJECT_ID = ?", projectId).limit(1));
+        ScrumPokerProject scrumPokerProject = (scrumPokerProjects.length == 1) ? scrumPokerProjects[0] : null;
         if (scrumPokerProject == null) {
             scrumPokerProject = activeObjects.create(ScrumPokerProject.class,
                 new DBParam("PROJECT_ID", projectId));

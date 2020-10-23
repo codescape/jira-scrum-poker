@@ -8,6 +8,7 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -65,7 +66,7 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
             return false;
         }
         // based on the type of the custom field apply the estimate in the correct data type
-        CustomField estimateField = findEstimateField();
+        CustomField estimateField = estimateFieldForIssue(issue);
         String estimateFieldKey = estimateField.getCustomFieldType().getKey();
         switch (estimateFieldKey) {
             case CUSTOM_FIELD_TYPE_NUMBER:
@@ -98,8 +99,15 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
     }
 
     @Override
-    public CustomField findEstimateField() {
-        return customFieldManager.getCustomFieldObject(globalSettingsService.load().getEstimateField());
+    public CustomField estimateFieldForIssue(Issue issue) {
+        Long projectId = issue.getProjectId();
+        ScrumPokerProject scrumPokerProject = projectSettingsService.loadSettings(projectId);
+        // use the project specific field if configured otherwise use the globally configured estimate field
+        if (scrumPokerProject.getEstimateField() != null) {
+            return customFieldManager.getCustomFieldObject(scrumPokerProject.getEstimateField());
+        } else {
+            return customFieldManager.getCustomFieldObject(globalSettingsService.load().getEstimateField());
+        }
     }
 
     @Override
@@ -108,13 +116,13 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
     }
 
     private boolean hasEstimateField(Issue issue) {
-        CustomField estimateField = findEstimateField();
+        CustomField estimateField = estimateFieldForIssue(issue);
         return estimateField != null && customFieldManager.getCustomFieldObjects(issue).contains(estimateField);
     }
 
     private boolean hasScrumPokerEnabled(Project project) {
         return globalSettingsService.load().isActivateScrumPoker()
-            || projectSettingsService.loadActivateScrumPoker(project.getId());
+            || projectSettingsService.loadSettings(project.getId()).isScrumPokerEnabled();
     }
 
     @Override

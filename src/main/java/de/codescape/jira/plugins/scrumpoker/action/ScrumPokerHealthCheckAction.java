@@ -1,10 +1,14 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
+import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.upm.api.license.PluginLicenseManager;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.Card;
-import de.codescape.jira.plugins.scrumpoker.service.*;
+import de.codescape.jira.plugins.scrumpoker.service.CardSetService;
+import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
+import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -61,8 +65,8 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction {
 
     }
 
+    private final CustomFieldManager customFieldManager;
     private final GlobalSettingsService globalSettingsService;
-    private final EstimateFieldService estimateFieldService;
     private final PluginLicenseManager pluginLicenseManager;
     private final ProjectSettingsService projectSettingsService;
     private final ErrorLogService errorLogService;
@@ -70,14 +74,14 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction {
 
     @Autowired
     public ScrumPokerHealthCheckAction(@ComponentImport PluginLicenseManager pluginLicenseManager,
+                                       @ComponentImport CustomFieldManager customFieldManager,
                                        GlobalSettingsService globalSettingsService,
-                                       EstimateFieldService estimateFieldService,
                                        ProjectSettingsService projectSettingsService,
                                        ErrorLogService errorLogService,
                                        CardSetService cardSetService) {
         this.pluginLicenseManager = pluginLicenseManager;
+        this.customFieldManager = customFieldManager;
         this.globalSettingsService = globalSettingsService;
-        this.estimateFieldService = estimateFieldService;
         this.projectSettingsService = projectSettingsService;
         this.errorLogService = errorLogService;
         this.cardSetService = cardSetService;
@@ -143,7 +147,7 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction {
             results.add(Configuration.ESTIMATE_FIELD_NOT_SET);
         } else {
             // check that the estimate custom field can be found
-            if (estimateFieldService.findEstimateField() == null) {
+            if (customFieldManager.getCustomFieldObject(estimateFieldKey) == null) {
                 results.add(Configuration.ESTIMATE_FIELD_NOT_FOUND);
             }
         }

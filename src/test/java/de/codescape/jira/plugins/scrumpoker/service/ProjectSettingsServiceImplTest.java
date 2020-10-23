@@ -44,14 +44,15 @@ public class ProjectSettingsServiceImplTest {
     }
 
     @Test
-    public void shouldPersistScrumPokerEnabledFlag() {
-        projectSettingsService.persistActivateScrumPoker(1L, true);
+    public void shouldPersistProjectSettings() {
+        projectSettingsService.persistSettings(1L, true, "someField");
         assertThat(scrumPokerProject(1L).isScrumPokerEnabled(), is(true));
+        assertThat(scrumPokerProject(1L).getEstimateField(), is("someField"));
     }
 
     @Test
     public void scrumPokerEnableFlagReturnsFalseIfProjectHasNoConfiguration() {
-        assertThat(projectSettingsService.loadActivateScrumPoker(2L), is(false));
+        assertThat(projectSettingsService.loadSettings(2L).isScrumPokerEnabled(), is(false));
     }
 
     private ScrumPokerProject scrumPokerProject(Long projectId) {

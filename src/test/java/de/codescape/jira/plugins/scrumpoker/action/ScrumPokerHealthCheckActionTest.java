@@ -1,5 +1,6 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
+import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.junit.rules.AvailableInContainer;
 import com.atlassian.jira.junit.rules.MockitoContainer;
@@ -12,7 +13,10 @@ import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerError;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.Card;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
-import de.codescape.jira.plugins.scrumpoker.service.*;
+import de.codescape.jira.plugins.scrumpoker.service.CardSetService;
+import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
+import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
+import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingsService;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -46,7 +50,7 @@ public class ScrumPokerHealthCheckActionTest {
     private GlobalSettingsService globalSettingsService;
 
     @Mock
-    private EstimateFieldService estimateFieldService;
+    private CustomFieldManager customFieldManager;
 
     @Mock
     private ProjectSettingsService projectSettingsService;
@@ -70,7 +74,7 @@ public class ScrumPokerHealthCheckActionTest {
     private GlobalSettings globalSettings;
 
     @Mock
-    private CustomField estimationField;
+    private CustomField estimateField;
 
     @Test
     public void shouldAlwaysDisplayThePage() {
@@ -166,7 +170,7 @@ public class ScrumPokerHealthCheckActionTest {
     public void shouldSignalMissingEstimationFieldIfEstimationFieldIsSetButDoesNotExist() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getEstimateField()).thenReturn("something");
-        when(estimateFieldService.findEstimateField()).thenReturn(null);
+        when(customFieldManager.getCustomFieldObject("something")).thenReturn(null);
         when(globalSettings.isActivateScrumPoker()).thenReturn(true);
         assertThat(scrumPokerHealthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATE_FIELD_NOT_FOUND));
     }
@@ -175,7 +179,7 @@ public class ScrumPokerHealthCheckActionTest {
     public void shouldSignalNoProjectEnabledWhenNeitherGloballyEnabledNorHavingAProjectExplicitlyEnabled() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getEstimateField()).thenReturn("something");
-        when(estimateFieldService.findEstimateField()).thenReturn(null);
+        when(customFieldManager.getCustomFieldObject("something")).thenReturn(null);
         when(globalSettings.isActivateScrumPoker()).thenReturn(false);
         expectNoProjectExplicitlyEnabled();
         assertThat(scrumPokerHealthCheckAction.getConfigurationResults(), hasItem(Configuration.ESTIMATE_FIELD_NOT_FOUND));
@@ -193,7 +197,7 @@ public class ScrumPokerHealthCheckActionTest {
     public void shouldSignalCardSetWithoutOptionsIfCardSetHasOnlyOneOption() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getEstimateField()).thenReturn("something");
-        when(estimateFieldService.findEstimateField()).thenReturn(estimationField);
+        when(customFieldManager.getCustomFieldObject("something")).thenReturn(estimateField);
         when(globalSettings.isActivateScrumPoker()).thenReturn(true);
         when(cardSetService.getCardSet()).thenReturn(Collections.singletonList(new Card("1", true)));
         assertThat(scrumPokerHealthCheckAction.getConfigurationResults(), hasItem(Configuration.CARD_SET_WITHOUT_OPTIONS));
@@ -203,7 +207,7 @@ public class ScrumPokerHealthCheckActionTest {
     public void shouldSignalCardSetWithoutOptionsIfCardSetHasNoOptionAtAll() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getEstimateField()).thenReturn("something");
-        when(estimateFieldService.findEstimateField()).thenReturn(estimationField);
+        when(customFieldManager.getCustomFieldObject("something")).thenReturn(estimateField);
         when(globalSettings.isActivateScrumPoker()).thenReturn(true);
         when(cardSetService.getCardSet()).thenReturn(Collections.emptyList());
         assertThat(scrumPokerHealthCheckAction.getConfigurationResults(), hasItem(Configuration.CARD_SET_WITHOUT_OPTIONS));
@@ -213,7 +217,7 @@ public class ScrumPokerHealthCheckActionTest {
     public void shouldSignalCardSetWithoutOptionsIfCardSetHasOnlyOneOptionApartFromThoseSpecialCards() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getEstimateField()).thenReturn("something");
-        when(estimateFieldService.findEstimateField()).thenReturn(estimationField);
+        when(customFieldManager.getCustomFieldObject("something")).thenReturn(estimateField);
         when(globalSettings.isActivateScrumPoker()).thenReturn(true);
         when(cardSetService.getCardSet()).thenReturn(Arrays.asList(
             Card.COFFEE_BREAK,
@@ -226,7 +230,7 @@ public class ScrumPokerHealthCheckActionTest {
     public void shouldSignalNoConfigurationErrorsIfNoneAreFound() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getEstimateField()).thenReturn("something");
-        when(estimateFieldService.findEstimateField()).thenReturn(estimationField);
+        when(customFieldManager.getCustomFieldObject("something")).thenReturn(estimateField);
         when(globalSettings.isActivateScrumPoker()).thenReturn(true);
         when(cardSetService.getCardSet()).thenReturn(Arrays.asList(
             new Card("1", true),

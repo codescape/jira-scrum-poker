@@ -21,7 +21,7 @@
                     <input class="checkbox" type="checkbox" name="activateScrumPoker" id="activateScrumPoker" value="true" disabled checked>
                     <label for="activateScrumPoker">$i18n.getText("scrumpoker.config.project.activatescrumpoker.checkbox.globallyactivated")</label>
                 #else
-                    #if ($activateScrumPokerForProject == 'true')
+                    #if ($projectSettings.scrumPokerEnabled == 'true')
                         <input class="checkbox" type="checkbox" name="activateScrumPoker" id="activateScrumPoker" value="true" checked>
                     #else
                         <input class="checkbox" type="checkbox" name="activateScrumPoker" id="activateScrumPoker" value="true">
@@ -31,6 +31,24 @@
             </div>
             <div class="description">$i18n.getText("scrumpoker.config.project.activatescrumpoker.description")</div>
         </fieldset>
+
+        <div class="field-group">
+            <label for="estimateField">$i18n.getText("scrumpoker.config.estimate")</label>
+            <select class="select" id="estimateField" name="estimateField">
+                <option value=""></option>
+                #foreach ($estimateField in $estimateFields)
+                    #if ($estimateField.id == $projectSettings.estimateField)
+                        <option value="$estimateField.id" selected="selected">$estimateField.fieldName</option>
+                    #else
+                        <option value="$estimateField.id">$estimateField.fieldName</option>
+                    #end
+                #end
+            </select>
+            #if($estimateFields.isEmpty())
+                <div class="error"><span class="aui-icon aui-icon-small aui-iconfont-warning"></span> $i18n.getText("scrumpoker.config.estimate.missingfields")</div>
+            #end
+            <div class="description">$i18n.getText("scrumpoker.config.project.estimate.description")</div>
+        </div>
     </div>
     <div class="buttons-container form-footer">
         <div class="buttons">

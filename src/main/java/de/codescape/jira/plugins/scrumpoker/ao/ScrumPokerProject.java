@@ -20,10 +20,17 @@ public interface ScrumPokerProject extends ScrumPokerEntity {
     void setProjectId(Long projectId);
 
     /**
-     * Flag whether Scrum Poker is activated for this project or not.
+     * Flag whether Scrum Poker is explicitly activated for this project or not.
      */
     boolean isScrumPokerEnabled();
 
     void setScrumPokerEnabled(boolean scrumPokerEnabled);
+
+    /**
+     * Returns the estimate field for this project or <code>null</code> if derived from the global configuration.
+     */
+    String getEstimateField();
+
+    void setEstimateField(String estimateField);
 
 }

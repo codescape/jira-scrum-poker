@@ -23,11 +23,12 @@ public interface EstimateFieldService {
     boolean save(String issueKey, String estimate);
 
     /**
-     * Return the estimate custom field.
+     * Return the estimate field for the given issue.
      *
-     * @return the estimate custom field
+     * @param issue issue
+     * @return estimate field for the given issue
      */
-    CustomField findEstimateField();
+    CustomField estimateFieldForIssue(Issue issue);
 
     /**
      * Returns whether an issue can be estimated. This means the issue is editable, has the estimate field and Scrum

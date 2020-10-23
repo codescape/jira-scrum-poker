@@ -10,6 +10,7 @@ import com.atlassian.jira.permission.ProjectPermissions;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
+import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import org.junit.Before;
 import org.junit.Rule;
@@ -27,6 +28,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
 
+// TODO add tests for project specific estimate field configured
 public class EstimateFieldServiceImplTest {
 
     private static final String ISSUE_KEY = "ISSUE-0815";
@@ -53,6 +55,9 @@ public class EstimateFieldServiceImplTest {
 
     @Mock
     private ErrorLogService errorLogService;
+
+    @Mock
+    private ProjectSettingsService projectSettingsService;
 
     @InjectMocks
     private EstimateFieldServiceImpl estimateFieldService;
@@ -90,6 +95,7 @@ public class EstimateFieldServiceImplTest {
         expectCustomFieldFound();
         expectCustomFieldTypeSupported();
         expectUpdatingIssueFails();
+        expectNoProjectSpecificField();
         assertThat(estimateFieldService.save(ISSUE_KEY, ESTIMATE), is(false));
     }
 
@@ -101,6 +107,7 @@ public class EstimateFieldServiceImplTest {
         expectCustomFieldFound();
         expectCustomFieldTypeSupported();
         expectUpdatingIssueSuccessful();
+        expectNoProjectSpecificField();
         assertThat(estimateFieldService.save(ISSUE_KEY, ESTIMATE), is(true));
     }
 
@@ -122,6 +129,7 @@ public class EstimateFieldServiceImplTest {
         expectCustomFieldFound();
         expectCustomFieldTypeSupported();
         expectUpdatingIssueSuccessful();
+        expectNoProjectSpecificField();
         assertThat(estimateFieldService.save(ISSUE_KEY, ESTIMATE), is(true));
     }
 
@@ -132,6 +140,7 @@ public class EstimateFieldServiceImplTest {
         expectPermissionCheckDisabled();
         expectCustomFieldFound();
         expectCustomFieldTypeNotSupported();
+        expectNoProjectSpecificField();
         assertThat(estimateFieldService.save(ISSUE_KEY, ESTIMATE), is(false));
     }
 
@@ -142,8 +151,15 @@ public class EstimateFieldServiceImplTest {
         expectPermissionCheckDisabled();
         expectCustomFieldFound();
         expectCustomFieldType(CUSTOM_FIELD_TYPE_NUMBER);
+        expectNoProjectSpecificField();
         assertThat(estimateFieldService.save(ISSUE_KEY, "S"), is(false));
         verify(errorLogService).logError(anyString(), any(NumberFormatException.class));
+    }
+
+    private void expectNoProjectSpecificField() {
+        ScrumPokerProject scrumPokerProject = mock(ScrumPokerProject.class);
+        when(scrumPokerProject.getEstimateField()).thenReturn(null);
+        when(projectSettingsService.loadSettings(anyLong())).thenReturn(scrumPokerProject);
     }
 
     /* tests for isEstimable(..) */
@@ -155,12 +171,14 @@ public class EstimateFieldServiceImplTest {
         when(globalSettings.getEstimateField()).thenReturn(CUSTOM_FIELD_ID);
         when(customFieldManager.getCustomFieldObject(CUSTOM_FIELD_ID)).thenReturn(customField);
         when(customFieldManager.getCustomFieldObjects(issue)).thenReturn(Arrays.asList(customField, anotherField));
+        expectNoProjectSpecificField();
 
         assertThat(estimateFieldService.isEstimable(issue), is(true));
     }
 
     @Test
     public void isEstimableReturnsFalseForIssueWithoutCustomFieldAndScrumPokerActivated() {
+        expectNoProjectSpecificField();
         when(issue.isEditable()).thenReturn(true);
         when(globalSettings.getEstimateField()).thenReturn(CUSTOM_FIELD_ID);
         when(customFieldManager.getCustomFieldObject(CUSTOM_FIELD_ID)).thenReturn(customField);
