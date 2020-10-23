@@ -23,6 +23,7 @@ category: Administration
 * feat: show group icon on issue detail page to start or join session
 * docs: rename and shorten pages for configuration and installation
 * feat: allow the estimate field to be overwritten per project (#103)
+* docs: add documentation for project specific estimate field configuration  
 
 ### [20.10.0] - 2020-10-08
 

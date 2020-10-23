@@ -123,6 +123,10 @@ On the page `Project Configuration` you can find the configuration options the m
 
 If Scrum Poker is not activated for all projects with the `Activate Scrum Poker` setting in the global settings this project specific setting allows you to activate Scrum Poker explicitly for the current project.
 
+#### Confirmed Estimate Field
+
+You can overwrite the globally configured field to persist the confirmed estimate in the project specific settings. Jira Software creates the `Story Points` field for estimates.
+
 ### Workflow configuration
 
 Scrum Poker for Jira provides functions to interact with Scrum Poker from your Jira workflows.
