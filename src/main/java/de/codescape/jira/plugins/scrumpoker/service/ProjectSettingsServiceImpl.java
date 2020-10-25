@@ -44,15 +44,28 @@ public class ProjectSettingsServiceImpl implements ProjectSettingsService {
         return findOrCreateByProjectId(projectId);
     }
 
+    @Override
+    public void removeSettings(Long projectId) {
+        ScrumPokerProject scrumPokerProject = findByProjectId(projectId);
+        if (scrumPokerProject != null) {
+            activeObjects.delete(scrumPokerProject);
+        }
+    }
+
     private ScrumPokerProject findOrCreateByProjectId(Long projectId) {
-        ScrumPokerProject[] scrumPokerProjects = activeObjects.find(ScrumPokerProject.class,
-            Query.select().where("PROJECT_ID = ?", projectId).limit(1));
-        ScrumPokerProject scrumPokerProject = (scrumPokerProjects.length == 1) ? scrumPokerProjects[0] : null;
+        ScrumPokerProject scrumPokerProject = findByProjectId(projectId);
         if (scrumPokerProject == null) {
+            // TODO every Scrum Poker session being started creates an empty record if it does not yet exist
             scrumPokerProject = activeObjects.create(ScrumPokerProject.class,
                 new DBParam("PROJECT_ID", projectId));
         }
         return scrumPokerProject;
+    }
+
+    private ScrumPokerProject findByProjectId(Long projectId) {
+        ScrumPokerProject[] scrumPokerProjects = activeObjects.find(ScrumPokerProject.class,
+            Query.select().where("PROJECT_ID = ?", projectId).limit(1));
+        return (scrumPokerProjects.length == 1) ? scrumPokerProjects[0] : null;
     }
 
 }

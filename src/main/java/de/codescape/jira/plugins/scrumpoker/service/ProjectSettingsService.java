@@ -30,6 +30,14 @@ public interface ProjectSettingsService {
     ScrumPokerProject loadSettings(Long projectId);
 
     /**
+     * Removes the project specific Scrum Poker settings for the given Jira project.
+     *
+     * @param projectId unique ID of the Jira project
+     */
+    // TODO add tests to remove project specific settings
+    void removeSettings(Long projectId);
+
+    /**
      * Returns all project specific Scrum Poker settings.
      *
      * @return project specific settings for all projects

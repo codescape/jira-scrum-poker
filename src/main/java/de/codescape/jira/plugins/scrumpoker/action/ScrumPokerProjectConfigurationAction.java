@@ -39,6 +39,7 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
     static final class Actions {
 
         static final String SAVE = "save";
+        static final String DEFAULTS = "defaults";
 
     }
 
@@ -104,17 +105,24 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
         }
 
         String action = getParameter(Parameters.ACTION);
-        if (action != null && action.equals(Actions.SAVE)) {
-            boolean activateScrumPoker = Boolean.parseBoolean(getParameter(Parameters.ACTIVATE_SCRUM_POKER));
-            String estimateField = getParameter(Parameters.ESTIMATE_FIELD);
-            if (estimateField != null && estimateField.isEmpty()) {
-                estimateField = null;
+        if (action != null) {
+            switch (action) {
+                case Actions.SAVE:
+                    boolean activateScrumPoker = Boolean.parseBoolean(getParameter(Parameters.ACTIVATE_SCRUM_POKER));
+                    String estimateField = getParameter(Parameters.ESTIMATE_FIELD);
+                    if (estimateField != null && estimateField.isEmpty()) {
+                        estimateField = null;
+                    }
+                    String cardSet = getParameter(Parameters.CARD_SET);
+                    if (cardSet != null && cardSet.isEmpty()) {
+                        cardSet = null;
+                    }
+                    projectSettingsService.persistSettings(projectId, activateScrumPoker, estimateField, cardSet);
+                    break;
+                case Actions.DEFAULTS:
+                    projectSettingsService.removeSettings(projectId);
+                    break;
             }
-            String cardSet = getParameter(Parameters.CARD_SET);
-            if (cardSet != null && cardSet.isEmpty()) {
-                cardSet = null;
-            }
-            projectSettingsService.persistSettings(projectId, activateScrumPoker, estimateField, cardSet);
         }
         return SUCCESS;
     }
