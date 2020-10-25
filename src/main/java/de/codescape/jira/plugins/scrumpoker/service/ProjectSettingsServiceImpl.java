@@ -55,7 +55,6 @@ public class ProjectSettingsServiceImpl implements ProjectSettingsService {
     private ScrumPokerProject findOrCreateByProjectId(Long projectId) {
         ScrumPokerProject scrumPokerProject = findByProjectId(projectId);
         if (scrumPokerProject == null) {
-            // TODO every Scrum Poker session being started creates an empty record if it does not yet exist
             scrumPokerProject = activeObjects.create(ScrumPokerProject.class,
                 new DBParam("PROJECT_ID", projectId));
         }
