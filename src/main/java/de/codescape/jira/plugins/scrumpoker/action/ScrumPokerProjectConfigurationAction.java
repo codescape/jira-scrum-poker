@@ -29,6 +29,7 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
         static final String PROJECT_KEY = "projectKey";
         static final String ACTIVATE_SCRUM_POKER = "activateScrumPoker";
         static final String ESTIMATE_FIELD = "estimateField";
+        static final String CARD_SET = "cardSet";
 
     }
 
@@ -106,7 +107,14 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
         if (action != null && action.equals(Actions.SAVE)) {
             boolean activateScrumPoker = Boolean.parseBoolean(getParameter(Parameters.ACTIVATE_SCRUM_POKER));
             String estimateField = getParameter(Parameters.ESTIMATE_FIELD);
-            projectSettingsService.persistSettings(projectId, activateScrumPoker, estimateField);
+            if (estimateField != null && estimateField.isEmpty()) {
+                estimateField = null;
+            }
+            String cardSet = getParameter(Parameters.CARD_SET);
+            if (cardSet != null && cardSet.isEmpty()) {
+                cardSet = null;
+            }
+            projectSettingsService.persistSettings(projectId, activateScrumPoker, estimateField, cardSet);
         }
         return SUCCESS;
     }

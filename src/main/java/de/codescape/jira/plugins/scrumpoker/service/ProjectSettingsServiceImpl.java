@@ -31,10 +31,11 @@ public class ProjectSettingsServiceImpl implements ProjectSettingsService {
     }
 
     @Override
-    public void persistSettings(Long projectId, boolean activateScrumPoker, String estimateField) {
+    public void persistSettings(Long projectId, boolean activateScrumPoker, String estimateField, String cardSet) {
         ScrumPokerProject scrumPokerProject = findOrCreateByProjectId(projectId);
         scrumPokerProject.setScrumPokerEnabled(activateScrumPoker);
         scrumPokerProject.setEstimateField(estimateField);
+        scrumPokerProject.setCardSet(cardSet);
         scrumPokerProject.save();
     }
 

@@ -17,8 +17,9 @@ public interface ProjectSettingsService {
      * @param projectId          unique ID of the Jira project
      * @param activateScrumPoker flag whether Scrum Poker is enabled for the Jira project
      * @param estimateField      estimate field for the Jira project
+     * @param cardSet            card set to be used for this Jira project
      */
-    void persistSettings(Long projectId, boolean activateScrumPoker, String estimateField);
+    void persistSettings(Long projectId, boolean activateScrumPoker, String estimateField, String cardSet);
 
     /**
      * Returns the project specific Scrum Poker settings for the given Jira project.

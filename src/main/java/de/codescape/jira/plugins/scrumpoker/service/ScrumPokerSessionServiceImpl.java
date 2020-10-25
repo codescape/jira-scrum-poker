@@ -4,6 +4,7 @@ import com.atlassian.activeobjects.external.ActiveObjects;
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
 import net.java.ao.DBParam;
@@ -24,6 +25,7 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     private final ActiveObjects activeObjects;
     private final IssueManager issueManager;
     private final GlobalSettingsService globalSettingsService;
+    private final ProjectSettingsService projectSettingsService;
     private final EstimateFieldService estimateFieldService;
     private final ErrorLogService errorLogService;
 
@@ -31,11 +33,13 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     public ScrumPokerSessionServiceImpl(@ComponentImport ActiveObjects activeObjects,
                                         @ComponentImport IssueManager issueManager,
                                         GlobalSettingsService globalSettingsService,
+                                        ProjectSettingsService projectSettingsService,
                                         EstimateFieldService estimateFieldService,
                                         ErrorLogService errorLogService) {
         this.activeObjects = activeObjects;
         this.issueManager = issueManager;
         this.globalSettingsService = globalSettingsService;
+        this.projectSettingsService = projectSettingsService;
         this.estimateFieldService = estimateFieldService;
         this.errorLogService = errorLogService;
     }
@@ -168,7 +172,12 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
         scrumPokerSession.setCreatorUserKey(userKey);
         scrumPokerSession.setVisible(false);
         scrumPokerSession.setConfirmedEstimate(null);
-        scrumPokerSession.setCardSet(globalSettingsService.load().getCardSet());
+        ScrumPokerProject scrumPokerProject = projectSettingsService.loadSettings(issue.getProjectId());
+        if (scrumPokerProject.getCardSet() != null) {
+            scrumPokerSession.setCardSet(scrumPokerProject.getCardSet());
+        } else {
+            scrumPokerSession.setCardSet(globalSettingsService.load().getCardSet());
+        }
         scrumPokerSession.setUpdateDate(new Date());
         scrumPokerSession.save();
         return scrumPokerSession;

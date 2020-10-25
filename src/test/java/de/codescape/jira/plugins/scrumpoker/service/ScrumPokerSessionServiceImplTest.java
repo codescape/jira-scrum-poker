@@ -5,6 +5,7 @@ import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerTestDatabaseUpdater;
+import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import net.java.ao.EntityManager;
@@ -56,13 +57,18 @@ public class ScrumPokerSessionServiceImplTest {
         when(scrumPokerSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getSessionTimeout()).thenReturn(EXPECTED_SESSION_TIMEOUT);
 
+        // TODO add tests with project specific card set configured
+        ScrumPokerProject scrumPokerProject = mock(ScrumPokerProject.class);
+        ProjectSettingsService projectSettingsService = mock(ProjectSettingsService.class);
+        when(projectSettingsService.loadSettings(anyLong())).thenReturn(scrumPokerProject);
+
         estimateFieldService = mock(EstimateFieldService.class);
         when(estimateFieldService.isEstimable(ArgumentMatchers.any(Issue.class))).thenReturn(true);
 
         ErrorLogService errorLogService = mock(ErrorLogService.class);
 
         scrumPokerSessionService = new ScrumPokerSessionServiceImpl(activeObjects, issueManager,
-            scrumPokerSettingsService, estimateFieldService, errorLogService);
+            scrumPokerSettingsService, projectSettingsService, estimateFieldService, errorLogService);
     }
 
     @Test

@@ -127,6 +127,14 @@ If Scrum Poker is not activated for all projects with the `Activate Scrum Poker`
 
 You can overwrite the globally configured field to persist the confirmed estimate in the project specific settings. Jira Software creates the `Story Points` field for estimates.
 
+If no estimate field set is defined the global configuration will be used.
+
+#### Card Set
+
+You can overwrite the card set to be used for Scrum Poker sessions in this project here. Use a comma-separated list of values. Special cards are defined by the keywords `coffee` (the user needs a break) and `question` (the user is not able to estimate).
+
+If no card set is defined the global configuration will be used.
+
 ### Workflow configuration
 
 Scrum Poker for Jira provides functions to interact with Scrum Poker from your Jira workflows.

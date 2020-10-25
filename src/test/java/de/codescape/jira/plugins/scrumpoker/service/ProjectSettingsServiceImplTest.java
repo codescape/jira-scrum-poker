@@ -45,9 +45,10 @@ public class ProjectSettingsServiceImplTest {
 
     @Test
     public void shouldPersistProjectSettings() {
-        projectSettingsService.persistSettings(1L, true, "someField");
+        projectSettingsService.persistSettings(1L, true, "someField", "1,2,3");
         assertThat(scrumPokerProject(1L).isScrumPokerEnabled(), is(true));
         assertThat(scrumPokerProject(1L).getEstimateField(), is("someField"));
+        assertThat(scrumPokerProject(1L).getCardSet(), is("1,2,3"));
     }
 
     @Test

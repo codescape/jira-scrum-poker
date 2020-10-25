@@ -49,6 +49,12 @@
             #end
             <div class="description">$i18n.getText("scrumpoker.config.project.estimate.description")</div>
         </div>
+
+        <div class="field-group">
+            <label for="cardSet">$i18n.getText("scrumpoker.config.cardset")</label>
+            <input type="text" class="text long-field" id="cardSet" name="cardSet" value="$projectSettings.cardSet">
+            <div class="description">$i18n.getText("scrumpoker.config.project.cardset.description")</div>
+        </div>
     </div>
     <div class="buttons-container form-footer">
         <div class="buttons">

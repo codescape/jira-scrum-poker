@@ -33,4 +33,11 @@ public interface ScrumPokerProject extends ScrumPokerEntity {
 
     void setEstimateField(String estimateField);
 
+    /**
+     * Returns the card set for this project or <code>null</code> if derived from the global configuration.
+     */
+    String getCardSet();
+
+    void setCardSet(String cardSet);
+
 }
