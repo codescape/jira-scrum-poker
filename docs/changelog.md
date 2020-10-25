@@ -25,7 +25,7 @@ category: Administration
 * feat: allow the estimate field to be overwritten per project (#103)
 * docs: add documentation for project specific estimate field configuration
 * feat: allow the card set to be overwritten per project (#101)
-* feat: allow to remove project specific configuration and go be to defaults
+* feat: allow to remove project specific configuration and go back to defaults
 
 ### [20.10.0] - 2020-10-08
 
