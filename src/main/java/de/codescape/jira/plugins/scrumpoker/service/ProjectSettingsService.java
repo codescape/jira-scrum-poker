@@ -35,7 +35,6 @@ public interface ProjectSettingsService {
      *
      * @param projectId unique ID of the Jira project
      */
-    // TODO add tests to remove project specific settings
     void removeSettings(Long projectId);
 
     /**

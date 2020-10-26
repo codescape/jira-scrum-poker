@@ -28,6 +28,7 @@ category: Administration
 * feat: allow to remove project specific configuration and go back to defaults
 * refactor: do not create empty project specific settings when not needed
 * test: improve test coverage and code quality for project configuration action
+* test: add test coverage for project configuration service
 
 ### [20.10.0] - 2020-10-08
 
