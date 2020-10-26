@@ -92,39 +92,37 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
         return globalSettingsService.load().isActivateScrumPoker();
     }
 
-    /**
-     * Save the project specific settings if the form is saved and submitted.
-     */
     @Override
     protected String doExecute() {
+        // make sure we have a project to configure specific Scrum Poker settings for
         projectKey = getParameter(Parameters.PROJECT_KEY);
-        Long projectId = getProjectByKey(projectKey).getId();
-        if (projectId == null) {
+        Project project = getProjectByKey(projectKey);
+        if (project == null || project.getId() == null) {
             errorMessage("Unable to find project with key " + projectKey + " for project configuration.");
             return ERROR;
         }
 
+        // action can be null (just show the page), save (persist form data) or defaults (reset settings)
         String action = getParameter(Parameters.ACTION);
         if (action != null) {
             switch (action) {
                 case Actions.SAVE:
                     boolean activateScrumPoker = Boolean.parseBoolean(getParameter(Parameters.ACTIVATE_SCRUM_POKER));
-                    String estimateField = getParameter(Parameters.ESTIMATE_FIELD);
-                    if (estimateField != null && estimateField.isEmpty()) {
-                        estimateField = null;
-                    }
-                    String cardSet = getParameter(Parameters.CARD_SET);
-                    if (cardSet != null && cardSet.isEmpty()) {
-                        cardSet = null;
-                    }
-                    projectSettingsService.persistSettings(projectId, activateScrumPoker, estimateField, cardSet);
+                    String estimateField = nullOrValue(getParameter(Parameters.ESTIMATE_FIELD));
+                    String cardSet = nullOrValue(getParameter(Parameters.CARD_SET));
+                    projectSettingsService.persistSettings(project.getId(), activateScrumPoker, estimateField, cardSet);
                     break;
                 case Actions.DEFAULTS:
-                    projectSettingsService.removeSettings(projectId);
+                    projectSettingsService.removeSettings(project.getId());
                     break;
             }
         }
         return SUCCESS;
+    }
+
+    // Scrum Poker should not save empty strings for unused settings. Those settings are persisted as null.
+    private String nullOrValue(String input) {
+        return (input != null && !input.isEmpty()) ? input : null;
     }
 
     private void errorMessage(String errorMessage) {

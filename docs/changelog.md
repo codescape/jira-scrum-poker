@@ -27,6 +27,7 @@ category: Administration
 * feat: allow the card set to be overwritten per project (#101)
 * feat: allow to remove project specific configuration and go back to defaults
 * refactor: do not create empty project specific settings when not needed
+* test: improve test coverage and code quality for project configuration action
 
 ### [20.10.0] - 2020-10-08
 
