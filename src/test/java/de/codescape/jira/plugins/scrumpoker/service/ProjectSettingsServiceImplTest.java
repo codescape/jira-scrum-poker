@@ -4,7 +4,6 @@ import com.atlassian.activeobjects.test.TestActiveObjects;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerTestDatabaseUpdater;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import net.java.ao.EntityManager;
-import net.java.ao.Query;
 import net.java.ao.test.converters.NameConverters;
 import net.java.ao.test.jdbc.Data;
 import net.java.ao.test.jdbc.Hsql;
@@ -18,6 +17,7 @@ import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 
 @RunWith(ActiveObjectsJUnitRunner.class)
 @Data(ScrumPokerTestDatabaseUpdater.class)
@@ -46,23 +46,16 @@ public class ProjectSettingsServiceImplTest {
     @Test
     public void shouldPersistProjectSettings() {
         projectSettingsService.persistSettings(1L, true, "someField", "1,2,3");
-        assertThat(scrumPokerProject(1L).isScrumPokerEnabled(), is(true));
-        assertThat(scrumPokerProject(1L).getEstimateField(), is("someField"));
-        assertThat(scrumPokerProject(1L).getCardSet(), is("1,2,3"));
+
+        ScrumPokerProject scrumPokerProject = projectSettingsService.loadSettings(1L);
+        assertThat(scrumPokerProject.isScrumPokerEnabled(), is(true));
+        assertThat(scrumPokerProject.getEstimateField(), is("someField"));
+        assertThat(scrumPokerProject.getCardSet(), is("1,2,3"));
     }
 
     @Test
-    public void scrumPokerEnableFlagReturnsFalseIfProjectHasNoConfiguration() {
-        assertThat(projectSettingsService.loadSettings(2L).isScrumPokerEnabled(), is(false));
-    }
-
-    private ScrumPokerProject scrumPokerProject(Long projectId) {
-        ScrumPokerProject[] scrumPokerProjects = activeObjects.find(ScrumPokerProject.class,
-            Query.select().where("PROJECT_ID = ?", 1L).limit(1));
-        if (scrumPokerProjects.length < 1) {
-            throw new RuntimeException("ScrumPokerProject with ID " + projectId + " not found.");
-        }
-        return scrumPokerProjects[0];
+    public void loadSettingsReturnsNullIfNoProjectSpecificSettingsExist() {
+        assertThat(projectSettingsService.loadSettings(2L), is(nullValue()));
     }
 
 }

@@ -18,8 +18,7 @@ import org.mockito.Mock;
 import javax.servlet.http.HttpServletRequest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
@@ -56,6 +55,8 @@ public class ScrumPokerProjectConfigurationActionTest {
     @Mock
     private ScrumPokerProject scrumPokerProject;
 
+    /* tests for getProjectKey() */
+
     @Test
     public void shouldExposeTheProjectKeyWhenCalled() {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
@@ -67,6 +68,8 @@ public class ScrumPokerProjectConfigurationActionTest {
         assertThat(scrumPokerProjectConfigurationAction.getProjectKey(), is(equalTo("ABC")));
     }
 
+    /* tests for isActivateScrumPokerGlobally() */
+
     @Test
     public void shouldReturnGlobalActivateScrumPokerFlag() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
@@ -75,11 +78,12 @@ public class ScrumPokerProjectConfigurationActionTest {
         assertThat(scrumPokerProjectConfigurationAction.isActivateScrumPokerGlobally(), is(true));
     }
 
+    /* tests for getProjectSettings() */
+
     @Test
-    public void shouldReturnProjectSpecificConfiguration() {
-        when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
-        when(httpServletRequest.getParameterValues(ScrumPokerProjectConfigurationAction.Parameters.PROJECT_KEY)).thenReturn(new String[]{"ABC"});
-        when(projectManager.getProjectByCurrentKey(eq("ABC"))).thenReturn(project);
+    public void getProjectSettingsShouldReturnProjectSpecificConfigurationIfExists() {
+        expectHttpParametersToContainProjectKey("ABC");
+        expectProjectManagerToFindAndReturnProject("ABC");
 
         scrumPokerProjectConfigurationAction.doExecute();
 
@@ -87,6 +91,31 @@ public class ScrumPokerProjectConfigurationActionTest {
         when(projectSettingsService.loadSettings(eq(42L))).thenReturn(scrumPokerProject);
 
         assertThat(scrumPokerProjectConfigurationAction.getProjectSettings(), is(equalTo(scrumPokerProject)));
+    }
+
+    @Test
+    public void getProjectSettingsShouldReturnNullIfNoneExists() {
+        expectHttpParametersToContainProjectKey("PROJECT");
+        expectProjectManagerToFindAndReturnProject("PROJECT");
+
+        scrumPokerProjectConfigurationAction.doExecute();
+
+        when(project.getId()).thenReturn(19L);
+        when(projectSettingsService.loadSettings(19L)).thenReturn(null);
+
+        assertThat(scrumPokerProjectConfigurationAction.getProjectSettings(), is(nullValue()));
+    }
+
+    /* supporting methods */
+
+    private void expectHttpParametersToContainProjectKey(String projectKey) {
+        when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
+        when(httpServletRequest.getParameterValues(ScrumPokerProjectConfigurationAction.Parameters.PROJECT_KEY))
+            .thenReturn(new String[]{projectKey});
+    }
+
+    private void expectProjectManagerToFindAndReturnProject(String projectKey) {
+        when(projectManager.getProjectByCurrentKey(eq(projectKey))).thenReturn(project);
     }
 
 }

@@ -103,7 +103,7 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
         Long projectId = issue.getProjectId();
         ScrumPokerProject scrumPokerProject = projectSettingsService.loadSettings(projectId);
         // use the project specific field if configured otherwise use the globally configured estimate field
-        if (scrumPokerProject.getEstimateField() != null) {
+        if (scrumPokerProject != null && scrumPokerProject.getEstimateField() != null) {
             return customFieldManager.getCustomFieldObject(scrumPokerProject.getEstimateField());
         } else {
             return customFieldManager.getCustomFieldObject(globalSettingsService.load().getEstimateField());
@@ -121,8 +121,11 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
     }
 
     private boolean hasScrumPokerEnabled(Project project) {
-        return globalSettingsService.load().isActivateScrumPoker()
-            || projectSettingsService.loadSettings(project.getId()).isScrumPokerEnabled();
+        if (globalSettingsService.load().isActivateScrumPoker()) {
+            return true;
+        }
+        ScrumPokerProject scrumPokerProject = projectSettingsService.loadSettings(project.getId());
+        return scrumPokerProject != null && scrumPokerProject.isScrumPokerEnabled();
     }
 
     @Override

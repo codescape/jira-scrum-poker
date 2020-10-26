@@ -22,10 +22,11 @@ public interface ProjectSettingsService {
     void persistSettings(Long projectId, boolean activateScrumPoker, String estimateField, String cardSet);
 
     /**
-     * Returns the project specific Scrum Poker settings for the given Jira project.
+     * Returns the project specific Scrum Poker settings for the given Jira project or <code>null</code> if no project
+     * specific settings exist.
      *
      * @param projectId unitque ID of the Jira project
-     * @return project specific settings
+     * @return project specific settings or <code>null</code> if no project specific settings exist
      */
     ScrumPokerProject loadSettings(Long projectId);
 

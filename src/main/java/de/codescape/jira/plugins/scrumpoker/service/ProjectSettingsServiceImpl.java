@@ -41,7 +41,7 @@ public class ProjectSettingsServiceImpl implements ProjectSettingsService {
 
     @Override
     public ScrumPokerProject loadSettings(Long projectId) {
-        return findOrCreateByProjectId(projectId);
+        return findByProjectId(projectId);
     }
 
     @Override

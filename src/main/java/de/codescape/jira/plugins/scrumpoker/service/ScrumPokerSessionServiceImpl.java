@@ -173,7 +173,7 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
         scrumPokerSession.setVisible(false);
         scrumPokerSession.setConfirmedEstimate(null);
         ScrumPokerProject scrumPokerProject = projectSettingsService.loadSettings(issue.getProjectId());
-        if (scrumPokerProject.getCardSet() != null) {
+        if (scrumPokerProject != null && scrumPokerProject.getCardSet() != null) {
             scrumPokerSession.setCardSet(scrumPokerProject.getCardSet());
         } else {
             scrumPokerSession.setCardSet(globalSettingsService.load().getCardSet());
