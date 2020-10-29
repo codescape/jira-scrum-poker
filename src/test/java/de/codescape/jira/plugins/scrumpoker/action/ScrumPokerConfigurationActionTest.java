@@ -5,21 +5,32 @@ import com.atlassian.jira.junit.rules.AvailableInContainer;
 import com.atlassian.jira.junit.rules.MockitoContainer;
 import com.atlassian.jira.junit.rules.MockitoMocksInContainer;
 import com.atlassian.jira.web.HttpServletVariables;
+import de.codescape.jira.plugins.scrumpoker.model.AdditionalField;
+import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
+import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
+import de.codescape.jira.plugins.scrumpoker.service.AdditionalFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.ArrayList;
+
+import static de.codescape.jira.plugins.scrumpoker.action.ScrumPokerConfigurationAction.Actions.DEFAULTS;
+import static de.codescape.jira.plugins.scrumpoker.action.ScrumPokerConfigurationAction.Actions.SAVE;
+import static de.codescape.jira.plugins.scrumpoker.action.ScrumPokerConfigurationAction.Parameters.*;
+import static de.codescape.jira.plugins.scrumpoker.action.ScrumPokerProjectConfigurationAction.Parameters.ACTION;
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static webwork.action.Action.SUCCESS;
 
 public class ScrumPokerConfigurationActionTest {
 
@@ -34,7 +45,10 @@ public class ScrumPokerConfigurationActionTest {
     private EstimateFieldService estimateFieldService;
 
     @Mock
-    private GlobalSettingsService scrumPokerSettingsService;
+    private GlobalSettingsService globalSettingsService;
+
+    @Mock
+    private AdditionalFieldService additionalFieldService;
 
     @InjectMocks
     private ScrumPokerConfigurationAction scrumPokerConfigurationAction;
@@ -47,9 +61,64 @@ public class ScrumPokerConfigurationActionTest {
     @Test
     public void doExecuteWithoutAnyActionReturnsSuccess() {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
-        when(httpServletRequest.getParameterValues("action")).thenReturn(null);
+        when(httpServletRequest.getParameterValues(ACTION)).thenReturn(null);
 
-        assertThat(scrumPokerConfigurationAction.doExecute(), is(equalTo("success")));
+        assertThat(scrumPokerConfigurationAction.doExecute(), is(equalTo(SUCCESS)));
+    }
+
+    @Test
+    public void doExecuteWithActionDefaultsResetsScrumPokerConfiguration() {
+        when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
+        when(httpServletRequest.getParameterValues(ACTION)).thenReturn(new String[]{DEFAULTS});
+
+        assertThat(scrumPokerConfigurationAction.doExecute(), is(equalTo(SUCCESS)));
+
+        ArgumentCaptor<GlobalSettings> globalSettings = ArgumentCaptor.forClass(GlobalSettings.class);
+        verify(globalSettingsService).persist(globalSettings.capture());
+        assertThat(globalSettings.getValue().getSessionTimeout(), is(equalTo(GlobalSettings.SESSION_TIMEOUT_DEFAULT)));
+    }
+
+    @Test
+    public void doExecuteWithActionSavePersistsAllParameters() {
+        // when the save method is called
+        when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
+        when(httpServletRequest.getParameterValues(ACTION)).thenReturn(new String[]{SAVE});
+
+        // with the following parameters
+        when(httpServletRequest.getParameterValues(ESTIMATE_FIELD))
+            .thenReturn(new String[]{"estimateField"});
+        when(httpServletRequest.getParameterValues(SESSION_TIMEOUT))
+            .thenReturn(new String[]{"18"});
+        when(httpServletRequest.getParameterValues(ACTIVATE_SCRUM_POKER))
+            .thenReturn(new String[]{"true"});
+        when(httpServletRequest.getParameterValues(ALLOW_REVEAL_DECK))
+            .thenReturn(new String[]{"PARTICIPANTS"});
+        when(httpServletRequest.getParameterValues(DISPLAY_DROPDOWN_ON_BOARDS))
+            .thenReturn(new String[]{"true"});
+        when(httpServletRequest.getParameterValues(CHECK_PERMISSION_TO_SAVE_ESTIMATE))
+            .thenReturn(new String[]{"true"});
+        when(httpServletRequest.getParameterValues(DISPLAY_COMMENTS_FOR_ISSUE))
+            .thenReturn(new String[]{"NONE"});
+        when(httpServletRequest.getParameterValues(CARD_SET))
+            .thenReturn(new String[]{"1,2,3,4,5"});
+        when(httpServletRequest.getParameterValues(DISPLAY_ADDITIONAL_FIELDS))
+            .thenReturn(new String[]{"field1,field2,field3"});
+
+        assertThat(scrumPokerConfigurationAction.doExecute(), is(equalTo(SUCCESS)));
+
+        ArgumentCaptor<GlobalSettings> globalSettingsCaptor = ArgumentCaptor.forClass(GlobalSettings.class);
+        verify(globalSettingsService).persist(globalSettingsCaptor.capture());
+        GlobalSettings globalSettings = globalSettingsCaptor.getValue();
+
+        assertThat(globalSettings.getEstimateField(), is(equalTo("estimateField")));
+        assertThat(globalSettings.getSessionTimeout(), is(equalTo(18)));
+        assertThat(globalSettings.isActivateScrumPoker(), is(equalTo(true)));
+        assertThat(globalSettings.getAllowRevealDeck(), is(equalTo(AllowRevealDeck.PARTICIPANTS)));
+        assertThat(globalSettings.isDisplayDropdownOnBoards(), is(equalTo(true)));
+        assertThat(globalSettings.isCheckPermissionToSaveEstimate(), is(equalTo(true)));
+        assertThat(globalSettings.getDisplayCommentsForIssue(), is(equalTo(DisplayCommentsForIssue.NONE)));
+        assertThat(globalSettings.getCardSet(), is(equalTo("1,2,3,4,5")));
+        assertThat(globalSettings.getAdditionalFields(), is(equalTo("field1,field2,field3")));
     }
 
     /* tests for getEstimateFields() */
@@ -63,12 +132,25 @@ public class ScrumPokerConfigurationActionTest {
         assertThat(scrumPokerConfigurationAction.getEstimateFields(), hasItems(customField1, customField2));
     }
 
+    /* tests for getAdditionalFields() */
+
+    @Test
+    public void getAdditionalFieldsDelegatesToAdditionalFieldsService() {
+        ArrayList<AdditionalField> additionalFields = new ArrayList<>();
+        additionalFields.add(new AdditionalField(null, true));
+        when(additionalFieldService.supportedCustomFields()).thenReturn(additionalFields);
+
+        assertThat(scrumPokerConfigurationAction.getAdditionalFields(),is(equalTo(additionalFields)));
+        verify(additionalFieldService).supportedCustomFields();
+        verifyNoMoreInteractions(additionalFieldService);
+    }
+
     /* tests for getGlobalSettings() */
 
     @Test
     public void getGlobalSettingsShouldExposeTheGlobalSettings() {
         GlobalSettings globalSettings = mock(GlobalSettings.class);
-        when(scrumPokerSettingsService.load()).thenReturn(globalSettings);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
 
         assertThat(scrumPokerConfigurationAction.getGlobalSettings(), is(equalTo(globalSettings)));
     }

@@ -30,6 +30,7 @@ category: Administration
 * test: improve test coverage and code quality for project configuration action
 * test: add test coverage for project configuration service
 * test: verify correct overwriting of project specific configuration
+* test: add test coverage for global configuration action
 
 ### [20.10.0] - 2020-10-08
 

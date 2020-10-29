@@ -91,34 +91,49 @@ public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction {
             switch (action) {
                 case Actions.SAVE:
                     GlobalSettings globalSettings = new GlobalSettings();
-                    globalSettings.setAdditionalFields(globalSettingsService.load().getAdditionalFields());
 
                     String newEstimateField = getParameter(Parameters.ESTIMATE_FIELD);
                     globalSettings.setEstimateField(newEstimateField);
 
                     String newSessionTimeout = getParameter(Parameters.SESSION_TIMEOUT);
-                    globalSettings.setSessionTimeout(Integer.valueOf(newSessionTimeout));
+                    if (newSessionTimeout != null) {
+                        globalSettings.setSessionTimeout(Integer.valueOf(newSessionTimeout));
+                    }
 
                     String newActivateScrumPoker = getParameter(Parameters.ACTIVATE_SCRUM_POKER);
-                    globalSettings.setActivateScrumPoker(Boolean.parseBoolean(newActivateScrumPoker));
+                    if (newActivateScrumPoker != null) {
+                        globalSettings.setActivateScrumPoker(Boolean.parseBoolean(newActivateScrumPoker));
+                    }
 
                     String newAllowRevealDeck = getParameter(Parameters.ALLOW_REVEAL_DECK);
-                    globalSettings.setAllowRevealDeck(AllowRevealDeck.valueOf(newAllowRevealDeck));
+                    if (newAllowRevealDeck != null) {
+                        globalSettings.setAllowRevealDeck(AllowRevealDeck.valueOf(newAllowRevealDeck));
+                    }
 
                     String displayDropdownOnBoards = getParameter(Parameters.DISPLAY_DROPDOWN_ON_BOARDS);
-                    globalSettings.setDisplayDropdownOnBoards(Boolean.parseBoolean(displayDropdownOnBoards));
+                    if (displayDropdownOnBoards != null) {
+                        globalSettings.setDisplayDropdownOnBoards(Boolean.parseBoolean(displayDropdownOnBoards));
+                    }
 
                     String checkPermissionToSaveEstimate = getParameter(Parameters.CHECK_PERMISSION_TO_SAVE_ESTIMATE);
-                    globalSettings.setCheckPermissionToSaveEstimate(Boolean.parseBoolean(checkPermissionToSaveEstimate));
+                    if (checkPermissionToSaveEstimate != null) {
+                        globalSettings.setCheckPermissionToSaveEstimate(Boolean.parseBoolean(checkPermissionToSaveEstimate));
+                    }
 
                     String displayCommentsForIssue = getParameter(Parameters.DISPLAY_COMMENTS_FOR_ISSUE);
-                    globalSettings.setDisplayCommentsForIssue(DisplayCommentsForIssue.valueOf(displayCommentsForIssue));
+                    if (displayCommentsForIssue != null) {
+                        globalSettings.setDisplayCommentsForIssue(DisplayCommentsForIssue.valueOf(displayCommentsForIssue));
+                    }
 
                     String cardSet = getParameter(Parameters.CARD_SET);
-                    globalSettings.setCardSet(cardSet);
+                    if (cardSet != null) {
+                        globalSettings.setCardSet(cardSet);
+                    }
 
                     String displayAdditionalFields = getParameter(Parameters.DISPLAY_ADDITIONAL_FIELDS);
-                    globalSettings.setAdditionalFields(displayAdditionalFields);
+                    if (displayAdditionalFields != null) {
+                        globalSettings.setAdditionalFields(displayAdditionalFields);
+                    }
 
                     globalSettingsService.persist(globalSettings);
                     break;
