@@ -11,6 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [20.10.1] - 2020-10-29
+
+**Project specific configuration options for estimate field and card set**
+
 * feat: explicitly render Scrum Poker configuration below standard plugins
 * feat: improve structure of active session page and add helping texts
 * docs: add Java documentation to new classes
@@ -188,7 +194,8 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.10.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.10.1...HEAD
+[20.10.1]: https://github.com/codescape/jira-scrum-poker/compare/20.10.0...20.10.1
 [20.10.0]: https://github.com/codescape/jira-scrum-poker/compare/20.08.0...20.10.0
 [20.08.0]: https://github.com/codescape/jira-scrum-poker/compare/20.07.0...20.08.0
 [20.07.0]: https://github.com/codescape/jira-scrum-poker/compare/20.06.2...20.07.0
