@@ -1,9 +1,9 @@
 package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.jira.issue.CustomFieldManager;
+import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
-import com.atlassian.jira.issue.UpdateIssueRequest;
 import com.atlassian.jira.issue.customfields.CustomFieldType;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.permission.ProjectPermissions;
@@ -12,7 +12,6 @@ import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -20,20 +19,19 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import static de.codescape.jira.plugins.scrumpoker.service.EstimateFieldServiceImpl.CUSTOM_FIELD_TYPE_NUMBER;
+import static de.codescape.jira.plugins.scrumpoker.service.EstimateFieldServiceImpl.CUSTOM_FIELD_TYPE_TEXT;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
-// TODO add tests for project specific estimate field configured
 public class EstimateFieldServiceImplTest {
-
-    private static final String ISSUE_KEY = "ISSUE-0815";
-    private static final String ESTIMATE = "5";
-    private static final String CUSTOM_FIELD_ID = "11045";
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -62,184 +60,292 @@ public class EstimateFieldServiceImplTest {
     @InjectMocks
     private EstimateFieldServiceImpl estimateFieldService;
 
-    @Mock
-    private ApplicationUser applicationUser;
-
-    @Mock
-    private CustomField customField;
-
-    @Mock
-    private CustomFieldType customFieldType;
-
-    @Mock
-    private CustomField anotherField;
-
-    @Mock
-    private MutableIssue issue;
-
-    @Mock
-    private GlobalSettings globalSettings;
-
-    @Before
-    public void before() {
-        when(globalSettingsService.load()).thenReturn(globalSettings);
-    }
-
     /* tests for save(..) */
 
     @Test
-    public void saveFailsWithoutPermissionCheckAndWithErrorsDuringUpdate() {
-        expectUserLoggedIn();
-        expectIssueWithIssueKeyExists();
-        expectPermissionCheckDisabled();
-        expectCustomFieldFound();
-        expectCustomFieldTypeSupported();
-        expectUpdatingIssueFails();
-        expectNoProjectSpecificField();
-        assertThat(estimateFieldService.save(ISSUE_KEY, ESTIMATE), is(false));
+    public void saveChecksUserPermissionIfRequired() {
+        ApplicationUser applicationUser = expectApplicationUserExists();
+        MutableIssue issue = expectIssueExists("ISSUE");
+
+        GlobalSettings globalSettings = mock(GlobalSettings.class);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
+        when(globalSettings.isCheckPermissionToSaveEstimate()).thenReturn(true);
+
+        when(permissionManager.hasPermission(ProjectPermissions.EDIT_ISSUES, issue, applicationUser)).thenReturn(false);
+
+        assertThat(estimateFieldService.save("ISSUE", "8"), is(false));
+
+        verify(permissionManager).hasPermission(ProjectPermissions.EDIT_ISSUES, issue, applicationUser);
+        verify(errorLogService).logError(anyString());
     }
 
     @Test
-    public void saveSucceedsWithoutPermissionCheckAndSuccessfulUpdate() {
-        expectUserLoggedIn();
-        expectIssueWithIssueKeyExists();
-        expectPermissionCheckDisabled();
-        expectCustomFieldFound();
-        expectCustomFieldTypeSupported();
-        expectUpdatingIssueSuccessful();
-        expectNoProjectSpecificField();
-        assertThat(estimateFieldService.save(ISSUE_KEY, ESTIMATE), is(true));
+    public void saveUpdatesIssueForSupportedEstimateTextField() {
+        ApplicationUser applicationUser = expectApplicationUserExists();
+        MutableIssue issue = expectIssueExists("ISSUE");
+
+        // global settings has estimate field set
+        GlobalSettings globalSettings = mock(GlobalSettings.class);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
+        when(globalSettings.getEstimateField()).thenReturn("VALID_FIELD");
+
+        // estimate field is of supported type
+        CustomField estimateField = expectCustomFieldOfType(CUSTOM_FIELD_TYPE_TEXT);
+        when(customFieldManager.getCustomFieldObject("VALID_FIELD")).thenReturn(estimateField);
+
+        assertThat(estimateFieldService.save("ISSUE", "8"), is(true));
+        verify(issueManager).updateIssue(eq(applicationUser), eq(issue), any());
     }
 
     @Test
-    public void saveFailsWithPermissionCheckEnabledAndNoPermission() {
-        expectUserLoggedIn();
-        expectIssueWithIssueKeyExists();
-        expectPermissionCheckEnabled();
-        expectPermissionCheckFails();
-        assertThat(estimateFieldService.save(ISSUE_KEY, ESTIMATE), is(false));
+    public void saveFailsForNotSupportedEstimateFields() {
+        expectApplicationUserExists();
+        expectIssueExists("ISSUE");
+
+        // global settings has estimate field set
+        GlobalSettings globalSettings = mock(GlobalSettings.class);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
+        when(globalSettings.getEstimateField()).thenReturn("WEIRD_FIELD");
+
+        // estimate field is not of supported type
+        CustomField estimateField = expectCustomFieldOfType("unsupported-field");
+        when(customFieldManager.getCustomFieldObject("WEIRD_FIELD")).thenReturn(estimateField);
+
+        assertThat(estimateFieldService.save("ISSUE", "8"), is(false));
+        verify(errorLogService).logError(anyString());
     }
 
     @Test
-    public void saveSucceedsWithPermissionCheckEnabledAndPermissionExistsAndSuccessfulUpdate() {
-        expectUserLoggedIn();
-        expectIssueWithIssueKeyExists();
-        expectPermissionCheckEnabled();
-        expectPermissionCheckSuccessful();
-        expectCustomFieldFound();
-        expectCustomFieldTypeSupported();
-        expectUpdatingIssueSuccessful();
-        expectNoProjectSpecificField();
-        assertThat(estimateFieldService.save(ISSUE_KEY, ESTIMATE), is(true));
-    }
+    public void saveFailsForNonNumericValueForNumericEstimateField() {
+        expectApplicationUserExists();
+        expectIssueExists("ISSUE");
 
-    @Test
-    public void saveFailsWithCustomFieldNotSupported() {
-        expectUserLoggedIn();
-        expectIssueWithIssueKeyExists();
-        expectPermissionCheckDisabled();
-        expectCustomFieldFound();
-        expectCustomFieldTypeNotSupported();
-        expectNoProjectSpecificField();
-        assertThat(estimateFieldService.save(ISSUE_KEY, ESTIMATE), is(false));
-    }
+        // global settings has estimate field set
+        GlobalSettings globalSettings = mock(GlobalSettings.class);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
+        when(globalSettings.getEstimateField()).thenReturn("VALID_FIELD");
 
-    @Test
-    public void saveFailsWithNumericFieldNotSupportingEstimate() {
-        expectUserLoggedIn();
-        expectIssueWithIssueKeyExists();
-        expectPermissionCheckDisabled();
-        expectCustomFieldFound();
-        expectCustomFieldType(CUSTOM_FIELD_TYPE_NUMBER);
-        expectNoProjectSpecificField();
-        assertThat(estimateFieldService.save(ISSUE_KEY, "S"), is(false));
+        // estimate field is of supported number type
+        CustomField estimateField = expectCustomFieldOfType(CUSTOM_FIELD_TYPE_NUMBER);
+        when(customFieldManager.getCustomFieldObject("VALID_FIELD")).thenReturn(estimateField);
+
+        assertThat(estimateFieldService.save("ISSUE", "ayayay"), is(false));
         verify(errorLogService).logError(anyString(), any(NumberFormatException.class));
     }
 
-    private void expectNoProjectSpecificField() {
-        ScrumPokerProject scrumPokerProject = mock(ScrumPokerProject.class);
-        when(scrumPokerProject.getEstimateField()).thenReturn(null);
-        when(projectSettingsService.loadSettings(anyLong())).thenReturn(scrumPokerProject);
+    @Test
+    public void saveFailsForAnyErrorWhileSaving() {
+        ApplicationUser applicationUser = expectApplicationUserExists();
+        MutableIssue issue = expectIssueExists("ISSUE");
+
+        // global settings has estimate field set
+        GlobalSettings globalSettings = mock(GlobalSettings.class);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
+        when(globalSettings.getEstimateField()).thenReturn("VALID_FIELD");
+
+        // estimate field is of supported type
+        CustomField estimateField = expectCustomFieldOfType(CUSTOM_FIELD_TYPE_NUMBER);
+        when(customFieldManager.getCustomFieldObject("VALID_FIELD")).thenReturn(estimateField);
+
+        // saving should result into an error
+        RuntimeException expectedException = new RuntimeException("oops");
+        when(issueManager.updateIssue(eq(applicationUser), eq(issue), any())).thenThrow(expectedException);
+
+        assertThat(estimateFieldService.save("ISSUE", "8"), is(false));
+        verify(errorLogService).logError(anyString(), eq(expectedException));
     }
 
-    /* tests for isEstimable(..) */
+    /* tests for estimateFieldForIssue() */
 
     @Test
-    public void isEstimableReturnsTrueForEditableIssueWithCustomFieldAndScrumPokerActivated() {
-        when(issue.isEditable()).thenReturn(true);
+    public void estimateFieldForIssuePrefersProjectConfigurationOverGlobalConfiguration() {
+        Issue issue = expectIssue(42L);
+
+        // the project has a custom estimate field configured
+        ScrumPokerProject scrumPokerProject = mock(ScrumPokerProject.class);
+        when(scrumPokerProject.getEstimateField()).thenReturn("PROJECT_FIELD");
+        when(projectSettingsService.loadSettings(42L)).thenReturn(scrumPokerProject);
+
+        // custom field returns
+        CustomField projectField = mock(CustomField.class);
+        when(customFieldManager.getCustomFieldObject(eq("PROJECT_FIELD"))).thenReturn(projectField);
+
+        assertThat(estimateFieldService.estimateFieldForIssue(issue), is(equalTo(projectField)));
+    }
+
+    @Test
+    public void estimateFieldForIssueFallsBackToGlobalConfigurationIfNoProjectConfigurationExists() {
+        Issue issue = expectIssue(42L);
+
+        // no project specific settings confgured
+        when(projectSettingsService.loadSettings(42L)).thenReturn(null);
+
+        // the global configuration returns the field
+        GlobalSettings globalSettings = mock(GlobalSettings.class);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
+        when(globalSettings.getEstimateField()).thenReturn("GLOBAL_FIELD");
+
+        CustomField globalField = mock(CustomField.class);
+        when(customFieldManager.getCustomFieldObject("GLOBAL_FIELD")).thenReturn(globalField);
+
+        assertThat(estimateFieldService.estimateFieldForIssue(issue), is(equalTo(globalField)));
+    }
+
+    /* tests for isEstimable() */
+
+    @Test
+    public void isEstimableReturnsFalseIfIssueIsNotEditable() {
+        // issue is not editable
+        Issue nonEditableIssue = expectIssue(false);
+
+        assertThat(estimateFieldService.isEstimable(nonEditableIssue), is(false));
+    }
+
+    @Test
+    public void isEstimableReturnsFalseIfIssueIsMissingTheEstimateFieldConfiguredForProject() {
+        // issue is editable
+        Issue issueWithoutEstimate = expectIssue(true, 42L);
+
+        // the project has a custom estimate field configured
+        ScrumPokerProject scrumPokerProject = mock(ScrumPokerProject.class);
+        when(scrumPokerProject.getEstimateField()).thenReturn("PROJECT_FIELD");
+        when(projectSettingsService.loadSettings(42L)).thenReturn(scrumPokerProject);
+
+        // the custom field exists but is not associated with the issue
+        CustomField fieldNotOnIssue = mock(CustomField.class);
+        when(customFieldManager.getCustomFieldObject("PROJECT_FIELD")).thenReturn(fieldNotOnIssue);
+        when(customFieldManager.getCustomFieldObjects(issueWithoutEstimate)).thenReturn(new ArrayList<>());
+
+        assertThat(estimateFieldService.isEstimable(issueWithoutEstimate), is(false));
+    }
+
+    @Test
+    public void isEstimableReturnsFalseIfIssueIsMissingTheEstimateFieldConfiguredGlobally() {
+        // issue is editable
+        Issue issueWithoutEstimate = expectIssue(true, 42L);
+
+        // the project has non project specific configuration
+        when(projectSettingsService.loadSettings(42L)).thenReturn(null);
+
+        // the global configuration returns the field
+        GlobalSettings globalSettings = mock(GlobalSettings.class);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
+        when(globalSettings.getEstimateField()).thenReturn("GLOBAL_FIELD");
+
+        // the globally configured field does not exist for the issue
+        CustomField fieldNotOnIssue = mock(CustomField.class);
+        when(customFieldManager.getCustomFieldObject("GLOBAL_FIELD")).thenReturn(fieldNotOnIssue);
+        when(customFieldManager.getCustomFieldObjects(issueWithoutEstimate)).thenReturn(new ArrayList<>());
+
+        assertThat(estimateFieldService.isEstimable(issueWithoutEstimate), is(false));
+    }
+
+    @Test
+    public void isEstimableReturnsTrueForEditableIssueWithScrumPokerEnabledAndExistingEstimateField() {
+        // issue is editable
+        Issue issue = expectIssue(true, 42L);
+
+        // the project has non project specific configuration
+        when(projectSettingsService.loadSettings(42L)).thenReturn(null);
+
+        // the global configuration returns the field
+        GlobalSettings globalSettings = mock(GlobalSettings.class);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
+        when(globalSettings.getEstimateField()).thenReturn("GLOBAL_FIELD");
+
+        // the globally configured field exists for the issue
+        CustomField estimateField = mock(CustomField.class);
+        when(customFieldManager.getCustomFieldObject("GLOBAL_FIELD")).thenReturn(estimateField);
+        when(customFieldManager.getCustomFieldObjects(issue)).thenReturn(Collections.singletonList(estimateField));
+
+        // Scrum Poker is enabled globally
         when(globalSettings.isActivateScrumPoker()).thenReturn(true);
-        when(globalSettings.getEstimateField()).thenReturn(CUSTOM_FIELD_ID);
-        when(customFieldManager.getCustomFieldObject(CUSTOM_FIELD_ID)).thenReturn(customField);
-        when(customFieldManager.getCustomFieldObjects(issue)).thenReturn(Arrays.asList(customField, anotherField));
-        expectNoProjectSpecificField();
 
         assertThat(estimateFieldService.isEstimable(issue), is(true));
     }
 
     @Test
-    public void isEstimableReturnsFalseForIssueWithoutCustomFieldAndScrumPokerActivated() {
-        expectNoProjectSpecificField();
-        when(issue.isEditable()).thenReturn(true);
-        when(globalSettings.getEstimateField()).thenReturn(CUSTOM_FIELD_ID);
-        when(customFieldManager.getCustomFieldObject(CUSTOM_FIELD_ID)).thenReturn(customField);
-        when(customFieldManager.getCustomFieldObjects(issue)).thenReturn(Collections.singletonList(anotherField));
+    public void isEstimableReturnsTrueForEditableIssueWithScrumPokerEnabledOnProjectLevelAndExistingEstimateField() {
+        // issue is editable
+        Issue issue = expectIssue(true, 42L);
 
-        assertThat(estimateFieldService.isEstimable(issue), is(false));
+        // the project has Scrum Poker locally enabled
+        ScrumPokerProject scrumPokerProject = mock(ScrumPokerProject.class);
+        when(scrumPokerProject.isScrumPokerEnabled()).thenReturn(true);
+        when(projectSettingsService.loadSettings(42L)).thenReturn(scrumPokerProject);
+
+        // the global configuration returns the field
+        GlobalSettings globalSettings = mock(GlobalSettings.class);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
+        when(globalSettings.getEstimateField()).thenReturn("GLOBAL_FIELD");
+
+        // the globally configured field exists for the issue
+        CustomField estimateField = mock(CustomField.class);
+        when(customFieldManager.getCustomFieldObject("GLOBAL_FIELD")).thenReturn(estimateField);
+        when(customFieldManager.getCustomFieldObjects(issue)).thenReturn(Collections.singletonList(estimateField));
+
+        // Scrum Poker is not enabled globally
+        when(globalSettings.isActivateScrumPoker()).thenReturn(false);
+
+        assertThat(estimateFieldService.isEstimable(issue), is(true));
+    }
+
+    /* tests for supportedCustomFields() */
+
+    @Test
+    public void supportedCustomFieldsOnlyReturnsFieldsOfSupportedType() {
+        List<CustomField> existingCustomFields = new ArrayList<>();
+        existingCustomFields.add(expectCustomFieldOfType(CUSTOM_FIELD_TYPE_NUMBER));
+        existingCustomFields.add(expectCustomFieldOfType("some.unsupported.type"));
+        when(customFieldManager.getCustomFieldObjects()).thenReturn(existingCustomFields);
+
+        List<CustomField> customFields = estimateFieldService.supportedCustomFields();
+
+        assertThat(customFields.size(), is(equalTo(1)));
+        assertThat(customFields.get(0).getCustomFieldType().getKey(), is(equalTo(CUSTOM_FIELD_TYPE_NUMBER)));
     }
 
     /* supporting methods */
 
-    private void expectCustomFieldTypeNotSupported() {
-        when(customField.getCustomFieldType()).thenReturn(customFieldType);
-        when(customFieldType.getKey()).thenReturn("some.crazy.unknown::customfield");
+    private CustomField expectCustomFieldOfType(String customFieldType) {
+        CustomField supportedCustomField = mock(CustomField.class);
+        CustomFieldType supportedCustomFieldType = mock(CustomFieldType.class);
+
+        when(supportedCustomField.getCustomFieldType()).thenReturn(supportedCustomFieldType);
+        when(supportedCustomFieldType.getKey()).thenReturn(customFieldType);
+
+        return supportedCustomField;
     }
 
-    private void expectCustomFieldTypeSupported() {
-        expectCustomFieldType(CUSTOM_FIELD_TYPE_NUMBER);
+    private Issue expectIssue(boolean editable) {
+        Issue issueWithoutEstimate = mock(Issue.class);
+        when(issueWithoutEstimate.isEditable()).thenReturn(editable);
+        return issueWithoutEstimate;
     }
 
-    private void expectCustomFieldType(String customFieldTypeKey) {
-        when(customField.getCustomFieldType()).thenReturn(customFieldType);
-        when(customFieldType.getKey()).thenReturn(customFieldTypeKey);
+    private Issue expectIssue(long projectId) {
+        Issue issueWithoutEstimate = mock(Issue.class);
+        when(issueWithoutEstimate.getProjectId()).thenReturn(projectId);
+        return issueWithoutEstimate;
     }
 
-    private void expectIssueWithIssueKeyExists() {
-        when(issueManager.getIssueByCurrentKey(ISSUE_KEY)).thenReturn(issue);
+    private Issue expectIssue(boolean editable, long projectId) {
+        Issue issueWithoutEstimate = mock(Issue.class);
+        when(issueWithoutEstimate.isEditable()).thenReturn(editable);
+        when(issueWithoutEstimate.getProjectId()).thenReturn(projectId);
+        return issueWithoutEstimate;
     }
 
-    private void expectUserLoggedIn() {
+    private ApplicationUser expectApplicationUserExists() {
+        ApplicationUser applicationUser = mock(ApplicationUser.class);
         when(jiraAuthenticationContext.getLoggedInUser()).thenReturn(applicationUser);
+        return applicationUser;
     }
 
-    private void expectCustomFieldFound() {
-        when(globalSettings.getEstimateField()).thenReturn(CUSTOM_FIELD_ID);
-        when(customFieldManager.getCustomFieldObject(CUSTOM_FIELD_ID)).thenReturn(customField);
-    }
-
-    private void expectPermissionCheckFails() {
-        when(permissionManager.hasPermission(ProjectPermissions.EDIT_ISSUES, issue, applicationUser)).thenReturn(false);
-    }
-
-    private void expectPermissionCheckSuccessful() {
-        when(permissionManager.hasPermission(ProjectPermissions.EDIT_ISSUES, issue, applicationUser)).thenReturn(true);
-    }
-
-    private void expectUpdatingIssueSuccessful() {
-        when(issueManager.updateIssue(eq(applicationUser), eq(issue), any(UpdateIssueRequest.class)))
-            .thenReturn(issue);
-    }
-
-    private void expectUpdatingIssueFails() {
-        when(issueManager.updateIssue(eq(applicationUser), eq(issue), any(UpdateIssueRequest.class)))
-            .thenThrow(new RuntimeException());
-    }
-
-    private void expectPermissionCheckEnabled() {
-        when(globalSettings.isCheckPermissionToSaveEstimate()).thenReturn(true);
-    }
-
-    private void expectPermissionCheckDisabled() {
-        when(globalSettings.isCheckPermissionToSaveEstimate()).thenReturn(false);
+    private MutableIssue expectIssueExists(String issueKey) {
+        MutableIssue issue = mock(MutableIssue.class);
+        when(issueManager.getIssueByCurrentKey(issueKey)).thenReturn(issue);
+        return issue;
     }
 
 }

@@ -3,7 +3,6 @@ package de.codescape.jira.plugins.scrumpoker.service;
 import com.atlassian.jira.issue.*;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.permission.ProjectPermissions;
-import com.atlassian.jira.project.Project;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
@@ -112,7 +111,7 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
 
     @Override
     public boolean isEstimable(Issue issue) {
-        return issue.isEditable() && hasEstimateField(issue) && hasScrumPokerEnabled(issue.getProjectObject());
+        return issue.isEditable() && hasEstimateField(issue) && hasScrumPokerEnabled(issue.getProjectId());
     }
 
     private boolean hasEstimateField(Issue issue) {
@@ -120,11 +119,11 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
         return estimateField != null && customFieldManager.getCustomFieldObjects(issue).contains(estimateField);
     }
 
-    private boolean hasScrumPokerEnabled(Project project) {
+    private boolean hasScrumPokerEnabled(Long projectId) {
         if (globalSettingsService.load().isActivateScrumPoker()) {
             return true;
         }
-        ScrumPokerProject scrumPokerProject = projectSettingsService.loadSettings(project.getId());
+        ScrumPokerProject scrumPokerProject = projectSettingsService.loadSettings(projectId);
         return scrumPokerProject != null && scrumPokerProject.isScrumPokerEnabled();
     }
 
