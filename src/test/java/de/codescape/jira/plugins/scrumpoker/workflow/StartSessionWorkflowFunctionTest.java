@@ -1,14 +1,12 @@
 package de.codescape.jira.plugins.scrumpoker.workflow;
 
-
 import com.atlassian.jira.issue.MutableIssue;
-import com.atlassian.upm.api.license.PluginLicenseManager;
 import com.atlassian.upm.api.license.entity.LicenseError;
 import com.atlassian.upm.api.license.entity.PluginLicense;
-import com.atlassian.upm.api.util.Option;
 import com.opensymphony.module.propertyset.PropertySet;
 import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
 import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerLicenseService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
 import org.junit.Rule;
 import org.junit.Test;
@@ -41,7 +39,7 @@ public class StartSessionWorkflowFunctionTest {
     private ErrorLogService errorLogService;
 
     @Mock
-    private PluginLicenseManager pluginLicenseManager;
+    private ScrumPokerLicenseService scrumPokerLicenseService;
 
     @InjectMocks
     private StartSessionWorkflowFunction startSessionWorkflowFunction;
@@ -128,17 +126,17 @@ public class StartSessionWorkflowFunctionTest {
     /* supporting methods */
 
     private void expectPluginLicenseIsValid() {
-        when(pluginLicenseManager.getLicense()).thenReturn(Option.option(pluginLicense));
-        when(pluginLicense.getError()).thenReturn(Option.none());
+        when(scrumPokerLicenseService.hasValidLicense()).thenReturn(true);
     }
 
     private void expectPluginLicenseHasErrors() {
-        when(pluginLicenseManager.getLicense()).thenReturn(Option.option(pluginLicense));
-        when(pluginLicense.getError()).thenReturn(Option.option(LicenseError.EXPIRED));
+        when(scrumPokerLicenseService.hasValidLicense()).thenReturn(false);
+        when(scrumPokerLicenseService.getLicenseError()).thenReturn(LicenseError.EXPIRED.toString());
     }
 
     private void expectPluginLicenseIsMissing() {
-        when(pluginLicenseManager.getLicense()).thenReturn(Option.none());
+        when(scrumPokerLicenseService.hasValidLicense()).thenReturn(false);
+        when(scrumPokerLicenseService.getLicenseError()).thenReturn("MISSING");
     }
 
     private void expectUserKeyExists() {

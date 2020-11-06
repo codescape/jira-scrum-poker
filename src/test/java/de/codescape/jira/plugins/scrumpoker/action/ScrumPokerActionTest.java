@@ -12,16 +12,10 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.HttpServletVariables;
-import com.atlassian.upm.api.license.PluginLicenseManager;
 import com.atlassian.upm.api.license.entity.LicenseError;
-import com.atlassian.upm.api.license.entity.PluginLicense;
-import com.atlassian.upm.api.util.Option;
 import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
-import de.codescape.jira.plugins.scrumpoker.service.AdditionalFieldService;
-import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
-import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
-import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
+import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -51,6 +45,9 @@ public class ScrumPokerActionTest {
     private EstimateFieldService estimateFieldService;
 
     @Mock
+    private ScrumPokerLicenseService scrumPokerLicenseService;
+
+    @Mock
     @AvailableInContainer
     private HttpServletVariables httpServletVariables;
 
@@ -59,9 +56,6 @@ public class ScrumPokerActionTest {
 
     @Mock
     private JiraAuthenticationContext jiraAuthenticationContext;
-
-    @Mock
-    private PluginLicenseManager pluginLicenseManager;
 
     @Mock
     private CommentManager commentManager;
@@ -135,7 +129,7 @@ public class ScrumPokerActionTest {
         whenLicenseIsMissing();
 
         assertThat(scrumPokerAction.doExecute(), is(equalTo("error")));
-        assertThat(scrumPokerAction.getErrorMessages(), hasItem("Scrum Poker for Jira is missing a valid license."));
+        assertThat(scrumPokerAction.getErrorMessages(), hasItem("Scrum Poker for Jira has license errors: MISSING"));
     }
 
     @Test
@@ -249,19 +243,17 @@ public class ScrumPokerActionTest {
     }
 
     private void whenLicenseIsInvalid() {
-        PluginLicense pluginLicense = mock(PluginLicense.class);
-        when(pluginLicense.getError()).thenReturn(Option.option(LicenseError.EXPIRED));
-        when(pluginLicenseManager.getLicense()).thenReturn(Option.option(pluginLicense));
+        when(scrumPokerLicenseService.hasValidLicense()).thenReturn(false);
+        when(scrumPokerLicenseService.getLicenseError()).thenReturn(LicenseError.EXPIRED.name());
     }
 
     private void whenLicenseIsMissing() {
-        when(pluginLicenseManager.getLicense()).thenReturn(Option.none());
+        when(scrumPokerLicenseService.hasValidLicense()).thenReturn(false);
+        when(scrumPokerLicenseService.getLicenseError()).thenReturn("MISSING");
     }
 
     private void whenLicenseIsValid() {
-        PluginLicense pluginLicense = mock(PluginLicense.class);
-        when(pluginLicense.getError()).thenReturn(Option.none());
-        when(pluginLicenseManager.getLicense()).thenReturn(Option.option(pluginLicense));
+        when(scrumPokerLicenseService.hasValidLicense()).thenReturn(true);
     }
 
     private void whenIssueIsNotEstimable() {

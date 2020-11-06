@@ -13,13 +13,8 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.util.http.JiraUrl;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import com.atlassian.upm.api.license.PluginLicenseManager;
-import com.atlassian.upm.api.license.entity.PluginLicense;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
-import de.codescape.jira.plugins.scrumpoker.service.AdditionalFieldService;
-import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
-import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
-import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
+import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -52,10 +47,10 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
     private final JiraAuthenticationContext jiraAuthenticationContext;
     private final DateTimeFormatter dateTimeFormatter;
     private final GlobalSettingsService globalSettingsService;
-    private final PluginLicenseManager pluginLicenseManager;
     private final EstimateFieldService estimateFieldService;
     private final ErrorLogService errorLogService;
     private final AdditionalFieldService additionalFieldService;
+    private final ScrumPokerLicenseService scrumPokerLicenseService;
 
     private String issueKey;
 
@@ -65,23 +60,23 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
                             @ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
                             @ComponentImport PermissionManager permissionManager,
                             @ComponentImport CommentManager commentManager,
-                            @ComponentImport PluginLicenseManager pluginLicenseManager,
                             @ComponentImport DateTimeFormatter dateTimeFormatter,
                             GlobalSettingsService globalSettingsService,
                             EstimateFieldService estimateFieldService,
                             ErrorLogService errorLogService,
-                            AdditionalFieldService additionalFieldService) {
+                            AdditionalFieldService additionalFieldService,
+                            ScrumPokerLicenseService scrumPokerLicenseService) {
         this.rendererManager = rendererManager;
         this.issueManager = issueManager;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
         this.permissionManager = permissionManager;
         this.commentManager = commentManager;
-        this.pluginLicenseManager = pluginLicenseManager;
         this.dateTimeFormatter = dateTimeFormatter;
         this.globalSettingsService = globalSettingsService;
         this.estimateFieldService = estimateFieldService;
         this.errorLogService = errorLogService;
         this.additionalFieldService = additionalFieldService;
+        this.scrumPokerLicenseService = scrumPokerLicenseService;
     }
 
     /**
@@ -90,14 +85,8 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
     @Override
     protected String doExecute() {
         // license check
-        if (pluginLicenseManager.getLicense().isDefined()) {
-            PluginLicense license = pluginLicenseManager.getLicense().get();
-            if (license.getError().isDefined()) {
-                errorMessage("Scrum Poker for Jira has license errors: " + license.getError().get().name());
-                return ERROR;
-            }
-        } else {
-            errorMessage("Scrum Poker for Jira is missing a valid license.");
+        if (!scrumPokerLicenseService.hasValidLicense()) {
+            errorMessage("Scrum Poker for Jira has license errors: " + scrumPokerLicenseService.getLicenseError());
             return ERROR;
         }
 

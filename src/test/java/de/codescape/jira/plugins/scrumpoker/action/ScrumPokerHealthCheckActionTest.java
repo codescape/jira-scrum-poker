@@ -6,17 +6,13 @@ import com.atlassian.jira.junit.rules.AvailableInContainer;
 import com.atlassian.jira.junit.rules.MockitoContainer;
 import com.atlassian.jira.junit.rules.MockitoMocksInContainer;
 import com.atlassian.jira.web.HttpServletVariables;
-import com.atlassian.upm.api.license.PluginLicenseManager;
+import com.atlassian.upm.api.license.entity.LicenseError;
 import com.atlassian.upm.api.license.entity.PluginLicense;
-import com.atlassian.upm.api.util.Option;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerError;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.Card;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
-import de.codescape.jira.plugins.scrumpoker.service.CardSetService;
-import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
-import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
-import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingsService;
+import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -29,6 +25,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static de.codescape.jira.plugins.scrumpoker.action.ScrumPokerHealthCheckAction.*;
+import static de.codescape.jira.plugins.scrumpoker.service.ScrumPokerLicenseServiceImpl.MISSING_LICENSE;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.mock;
@@ -44,9 +41,6 @@ public class ScrumPokerHealthCheckActionTest {
     private HttpServletVariables httpServletVariables;
 
     @Mock
-    private PluginLicenseManager pluginLicenseManager;
-
-    @Mock
     private GlobalSettingsService globalSettingsService;
 
     @Mock
@@ -60,6 +54,9 @@ public class ScrumPokerHealthCheckActionTest {
 
     @Mock
     private CardSetService cardSetService;
+
+    @Mock
+    private ScrumPokerLicenseService scrumPokerLicenseService;
 
     @InjectMocks
     private ScrumPokerHealthCheckAction scrumPokerHealthCheckAction;
@@ -138,21 +135,21 @@ public class ScrumPokerHealthCheckActionTest {
 
     @Test
     public void shouldSignalMissingLicenseIfNoLicenseIsFound() {
-        when(pluginLicenseManager.getLicense()).thenReturn(Option.none());
+        when(scrumPokerLicenseService.hasValidLicense()).thenReturn(false);
+        when(scrumPokerLicenseService.getLicenseError()).thenReturn(MISSING_LICENSE);
         assertThat(scrumPokerHealthCheckAction.getLicenseResults(), hasItem(License.NO_LICENSE_FOUND));
     }
 
     @Test
     public void shouldSignalInvalidLicenseIfLicenseIsFoundButHasErrors() {
-        when(pluginLicenseManager.getLicense()).thenReturn(Option.option(pluginLicense));
-        when(pluginLicense.isValid()).thenReturn(false);
+        when(scrumPokerLicenseService.hasValidLicense()).thenReturn(false);
+        when(scrumPokerLicenseService.getLicenseError()).thenReturn(LicenseError.EXPIRED.toString());
         assertThat(scrumPokerHealthCheckAction.getLicenseResults(), hasItem(License.LICENSE_INVALID));
     }
 
     @Test
     public void shouldSignalNoLicenseErrorsForExistingAndValidLicense() {
-        when(pluginLicenseManager.getLicense()).thenReturn(Option.option(pluginLicense));
-        when(pluginLicense.isValid()).thenReturn(true);
+        when(scrumPokerLicenseService.hasValidLicense()).thenReturn(true);
         assertThat(scrumPokerHealthCheckAction.getLicenseResults(), is(empty()));
     }
 

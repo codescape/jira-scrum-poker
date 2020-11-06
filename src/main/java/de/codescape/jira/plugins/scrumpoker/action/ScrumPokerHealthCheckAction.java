@@ -2,18 +2,16 @@ package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import com.atlassian.upm.api.license.PluginLicenseManager;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.Card;
-import de.codescape.jira.plugins.scrumpoker.service.CardSetService;
-import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
-import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
-import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingsService;
+import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static de.codescape.jira.plugins.scrumpoker.service.ScrumPokerLicenseServiceImpl.MISSING_LICENSE;
 
 /**
  * Health Check page for the Scrum Poker app.
@@ -67,24 +65,24 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction {
 
     private final CustomFieldManager customFieldManager;
     private final GlobalSettingsService globalSettingsService;
-    private final PluginLicenseManager pluginLicenseManager;
     private final ProjectSettingsService projectSettingsService;
     private final ErrorLogService errorLogService;
     private final CardSetService cardSetService;
+    private ScrumPokerLicenseService scrumPokerLicenseService;
 
     @Autowired
-    public ScrumPokerHealthCheckAction(@ComponentImport PluginLicenseManager pluginLicenseManager,
-                                       @ComponentImport CustomFieldManager customFieldManager,
+    public ScrumPokerHealthCheckAction(@ComponentImport CustomFieldManager customFieldManager,
                                        GlobalSettingsService globalSettingsService,
                                        ProjectSettingsService projectSettingsService,
                                        ErrorLogService errorLogService,
-                                       CardSetService cardSetService) {
-        this.pluginLicenseManager = pluginLicenseManager;
+                                       CardSetService cardSetService,
+                                       ScrumPokerLicenseService scrumPokerLicenseService) {
         this.customFieldManager = customFieldManager;
         this.globalSettingsService = globalSettingsService;
         this.projectSettingsService = projectSettingsService;
         this.errorLogService = errorLogService;
         this.cardSetService = cardSetService;
+        this.scrumPokerLicenseService = scrumPokerLicenseService;
     }
 
     @Override
@@ -114,12 +112,12 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction {
     public List<String> getLicenseResults() {
         List<String> results = new ArrayList<>();
 
-        // check that a license is defined
-        if (!pluginLicenseManager.getLicense().isDefined()) {
-            results.add(License.NO_LICENSE_FOUND);
-        } else {
-            // check that the license is valid
-            if (!pluginLicenseManager.getLicense().get().isValid()) {
+        if (!scrumPokerLicenseService.hasValidLicense()) {
+            // check that a license is defined
+            if (MISSING_LICENSE.equals(scrumPokerLicenseService.getLicenseError())) {
+                results.add(License.NO_LICENSE_FOUND);
+            } else {
+                // check that the license is valid
                 results.add(License.LICENSE_INVALID);
             }
         }

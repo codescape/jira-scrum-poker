@@ -19,7 +19,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.util.ArrayList;
 
 import static de.codescape.jira.plugins.scrumpoker.action.ScrumPokerConfigurationAction.Actions.DEFAULTS;
@@ -140,7 +139,7 @@ public class ScrumPokerConfigurationActionTest {
         additionalFields.add(new AdditionalField(null, true));
         when(additionalFieldService.supportedCustomFields()).thenReturn(additionalFields);
 
-        assertThat(scrumPokerConfigurationAction.getAdditionalFields(),is(equalTo(additionalFields)));
+        assertThat(scrumPokerConfigurationAction.getAdditionalFields(), is(equalTo(additionalFields)));
         verify(additionalFieldService).supportedCustomFields();
         verifyNoMoreInteractions(additionalFieldService);
     }
