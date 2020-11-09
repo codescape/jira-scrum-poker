@@ -12,6 +12,7 @@ category: Administration
 ### [Unreleased]
 
 * refactor: extract license check into separate reusable service class
+* feat: add support for Jira 8.13.1
 
 ### [20.10.1] - 2020-10-29
 
