@@ -12,7 +12,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScrumPokerLicenseServiceImpl implements ScrumPokerLicenseService {
 
-    public static final String MISSING_LICENSE = "MISSING";
+    static final String ERROR_MESSAGE_PREFIX = "scrumpoker.error.license.reason.";
+    static final String MISSING_LICENSE = ERROR_MESSAGE_PREFIX + "missing";
 
     private final PluginLicenseManager pluginLicenseManager;
 
@@ -35,9 +36,13 @@ public class ScrumPokerLicenseServiceImpl implements ScrumPokerLicenseService {
     public String getLicenseError() {
         if (pluginLicenseManager.getLicense().isDefined()) {
             PluginLicense license = pluginLicenseManager.getLicense().get();
-            return license.getError().isDefined() ? license.getError().get().name() : null;
+            return license.getError().isDefined() ? errorMessageCodeFor(license.getError().get().name()) : null;
         }
         return MISSING_LICENSE;
+    }
+
+    private String errorMessageCodeFor(String errorCode) {
+        return ERROR_MESSAGE_PREFIX + errorCode.toLowerCase();
     }
 
 }

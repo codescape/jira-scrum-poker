@@ -12,6 +12,7 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.HttpServletVariables;
+import com.atlassian.sal.api.message.I18nResolver;
 import com.atlassian.upm.api.license.entity.LicenseError;
 import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
@@ -48,6 +49,9 @@ public class ScrumPokerActionTest {
     private ScrumPokerLicenseService scrumPokerLicenseService;
 
     @Mock
+    private I18nResolver i18nResolver;
+
+    @Mock
     @AvailableInContainer
     private HttpServletVariables httpServletVariables;
 
@@ -70,7 +74,7 @@ public class ScrumPokerActionTest {
     private AdditionalFieldService additionalFieldService;
 
     @InjectMocks
-    private ScrumPokerAction scrumPokerAction;
+    private ScrumPokerAction action;
 
     @Mock
     private HttpServletRequest httpServletRequest;
@@ -102,7 +106,7 @@ public class ScrumPokerActionTest {
         whenUserIsAllowedToSeeIssue();
         whenIssueIsEstimable();
 
-        assertThat(scrumPokerAction.doExecute(), is(equalTo("success")));
+        assertThat(action.doExecute(), is(equalTo("success")));
     }
 
     @Test
@@ -111,7 +115,7 @@ public class ScrumPokerActionTest {
         whenRequestedIssueExists();
         whenUserIsNotAllowedToSeeIssue();
 
-        assertThat(scrumPokerAction.doExecute(), is(equalTo("error")));
+        assertThat(action.doExecute(), is(equalTo("error")));
     }
 
     @Test
@@ -121,23 +125,16 @@ public class ScrumPokerActionTest {
         whenUserIsAllowedToSeeIssue();
         whenIssueIsNotEstimable();
 
-        assertThat(scrumPokerAction.doExecute(), is(equalTo("error")));
-    }
-
-    @Test
-    public void shouldDisplayErrorPageWhenLicenseIsMissing() {
-        whenLicenseIsMissing();
-
-        assertThat(scrumPokerAction.doExecute(), is(equalTo("error")));
-        assertThat(scrumPokerAction.getErrorMessages(), hasItem("Scrum Poker for Jira has license errors: MISSING"));
+        assertThat(action.doExecute(), is(equalTo("error")));
     }
 
     @Test
     public void shouldDisplayErrorPageWhenLicenseIsInvalid() {
         whenLicenseIsInvalid();
+        when(i18nResolver.getText(anyString())).thenReturn("License is invalid.");
 
-        assertThat(scrumPokerAction.doExecute(), is(equalTo("error")));
-        assertThat(scrumPokerAction.getErrorMessages(), hasItem("Scrum Poker for Jira has license errors: EXPIRED"));
+        assertThat(action.doExecute(), is(equalTo("error")));
+        assertThat(action.getErrorMessages(), hasItem("License is invalid."));
     }
 
     /* tests for getComments() */
@@ -151,7 +148,7 @@ public class ScrumPokerActionTest {
         ArrayList<Comment> comments = new ArrayList<>();
         when(commentManager.getCommentsForUser(issue, user)).thenReturn(comments);
 
-        assertThat(scrumPokerAction.getComments(), is(equalTo(comments)));
+        assertThat(action.getComments(), is(equalTo(comments)));
     }
 
     /* tests for isDisplayCommentsForIssue() */
@@ -160,21 +157,21 @@ public class ScrumPokerActionTest {
     public void shouldNotDisplayCommentsIfDisplayCommentsForIssueIsSetToNone() {
         whenDisplayCommentsForIssueSetTo(DisplayCommentsForIssue.NONE);
 
-        assertThat(scrumPokerAction.isDisplayCommentsForIssue(), is(false));
+        assertThat(action.isDisplayCommentsForIssue(), is(false));
     }
 
     @Test
     public void shouldDisplayCommentsIfDisplayCommentsForIssueIsSetToAll() {
         whenDisplayCommentsForIssueSetTo(DisplayCommentsForIssue.ALL);
 
-        assertThat(scrumPokerAction.isDisplayCommentsForIssue(), is(true));
+        assertThat(action.isDisplayCommentsForIssue(), is(true));
     }
 
     @Test
     public void shouldDisplayCommentsIfDisplayCommentsForIssueIsSetToLatest() {
         whenDisplayCommentsForIssueSetTo(DisplayCommentsForIssue.LATEST);
 
-        assertThat(scrumPokerAction.isDisplayCommentsForIssue(), is(true));
+        assertThat(action.isDisplayCommentsForIssue(), is(true));
     }
 
     /* tests for renderFieldValue() */
@@ -183,11 +180,11 @@ public class ScrumPokerActionTest {
     public void shouldDelegateToAdditionalFieldService() {
         whenLicenseIsValid();
         whenRequestedIssueExists();
-        scrumPokerAction.doExecute();
+        action.doExecute();
 
-        scrumPokerAction.renderFieldValue(customField);
+        action.renderFieldValue(customField);
 
-        verify(additionalFieldService, times(1)).renderFieldValue(customField, scrumPokerAction, issue);
+        verify(additionalFieldService, times(1)).renderFieldValue(customField, action, issue);
         verifyNoMoreInteractions(additionalFieldService);
     }
 
@@ -195,28 +192,28 @@ public class ScrumPokerActionTest {
 
     @Test
     public void hasFieldValueShouldReturnFalseIfIssueDoesNotExist() {
-        assumeThat(scrumPokerAction.getIssue(), is(nullValue()));
-        assertThat(scrumPokerAction.hasFieldValue(customField), is(false));
+        assumeThat(action.getIssue(), is(nullValue()));
+        assertThat(action.hasFieldValue(customField), is(false));
     }
 
     @Test
     public void hasFieldValueShouldReturnTrueIfFieldHasValue() {
         whenLicenseIsValid();
         whenRequestedIssueExists();
-        scrumPokerAction.doExecute();
+        action.doExecute();
         when(issue.getCustomFieldValue(eq(customField))).thenReturn("Hello World");
 
-        assertThat(scrumPokerAction.hasFieldValue(customField), is(true));
+        assertThat(action.hasFieldValue(customField), is(true));
     }
 
     @Test
     public void hasFieldValueShouldReturnFalseIfFieldHasNoValue() {
         whenLicenseIsValid();
         whenRequestedIssueExists();
-        scrumPokerAction.doExecute();
+        action.doExecute();
         when(issue.getCustomFieldValue(eq(customField))).thenReturn(null);
 
-        assertThat(scrumPokerAction.hasFieldValue(customField), is(false));
+        assertThat(action.hasFieldValue(customField), is(false));
     }
 
     /* tests for getScrumPokerSessionUrl() */
@@ -232,7 +229,7 @@ public class ScrumPokerActionTest {
         when(httpServletRequest.getContextPath()).thenReturn("/jira");
         when(httpServletRequest.getServerPort()).thenReturn(443);
 
-        assertThat(scrumPokerAction.getScrumPokerSessionUrl(), is(equalTo("https://apps.codescape.de/jira/secure/ScrumPoker.jspa?issueKey=" + ISSUE_KEY)));
+        assertThat(action.getScrumPokerSessionUrl(), is(equalTo("https://apps.codescape.de/jira/secure/ScrumPoker.jspa?issueKey=" + ISSUE_KEY)));
     }
 
     /* supporting methods */

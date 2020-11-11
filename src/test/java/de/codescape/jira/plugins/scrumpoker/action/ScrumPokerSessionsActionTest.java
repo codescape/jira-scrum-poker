@@ -8,6 +8,7 @@ import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionEntityMapper;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerLicenseService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
 import org.junit.Rule;
 import org.junit.Test;
@@ -22,11 +23,11 @@ import java.util.List;
 import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class ScrumPokerSessionsActionTest {
 
+    private static final String LICENSE_ERROR = "license.error";
     private static final String SECRET_ISSUE_KEY = "SECRET-1";
     private static final String PUBLIC_ISSUE_KEY = "PUBLIC-1";
 
@@ -48,8 +49,11 @@ public class ScrumPokerSessionsActionTest {
     @Mock
     private SessionEntityMapper sessionEntityMapper;
 
+    @Mock
+    private ScrumPokerLicenseService scrumPokerLicenseService;
+
     @InjectMocks
-    private ScrumPokerSessionsAction scrumPokerSessionsAction;
+    private ScrumPokerSessionsAction action;
 
     @Mock
     private MutableIssue secretIssue;
@@ -69,17 +73,21 @@ public class ScrumPokerSessionsActionTest {
     @Mock
     private SessionEntity publicSessionEntity;
 
+    /* tests for getOpenSessions() */
+
     @Test
     public void openSessionsShouldOnlyReturnIssuesTheUserIsAllowedToSee() {
         expectOneVisibleAndOneSecretIssue();
         when(publicScrumPokerSession.getConfirmedEstimate()).thenReturn(null);
         when(secretScrumPokerSession.getConfirmedEstimate()).thenReturn(null);
 
-        List<SessionEntity> openSessions = scrumPokerSessionsAction.getOpenSessions();
+        List<SessionEntity> openSessions = action.getOpenSessions();
         assertThat(openSessions, hasSize(1));
         assertThat(openSessions.get(0), is(equalTo(publicSessionEntity)));
         verify(scrumPokerSessionService).recent();
     }
+
+    /* tests for getClosedSessions() */
 
     @Test
     public void closedSessionsShouldOnlyReturnIssuesTheUserIsAllowedToSee() {
@@ -87,16 +95,38 @@ public class ScrumPokerSessionsActionTest {
         when(publicScrumPokerSession.getConfirmedEstimate()).thenReturn("5");
         when(secretScrumPokerSession.getConfirmedEstimate()).thenReturn("8");
 
-        List<SessionEntity> closedSessions = scrumPokerSessionsAction.getClosedSessions();
+        List<SessionEntity> closedSessions = action.getClosedSessions();
         assertThat(closedSessions, hasSize(1));
         assertThat(closedSessions.get(0), is(equalTo(publicSessionEntity)));
         verify(scrumPokerSessionService).recent();
     }
 
+    /* tests for doExecute() */
+
     @Test
     public void shouldAlwaysShowSessionsPage() {
-        assertThat(scrumPokerSessionsAction.doExecute(), is(equalTo("success")));
+        assertThat(action.doExecute(), is(equalTo("success")));
     }
+
+    /* tests for getLicenseError() */
+
+    @Test
+    public void getLicenseErrorExposesLicenseErrorIfExists() {
+        when(scrumPokerLicenseService.getLicenseError()).thenReturn(LICENSE_ERROR);
+        assertThat(action.getLicenseError(), is(equalTo(LICENSE_ERROR)));
+        verify(scrumPokerLicenseService, times(1)).getLicenseError();
+        verifyNoMoreInteractions(scrumPokerLicenseService);
+    }
+
+    @Test
+    public void getLicenseErrorReturnsNullIfNoLicenseErrorExists() {
+        when(scrumPokerLicenseService.getLicenseError()).thenReturn(null);
+        assertThat(action.getLicenseError(), is(nullValue()));
+        verify(scrumPokerLicenseService, times(1)).getLicenseError();
+        verifyNoMoreInteractions(scrumPokerLicenseService);
+    }
+
+    /* supporting methods */
 
     private void expectOneVisibleAndOneSecretIssue() {
         when(secretScrumPokerSession.getIssueKey()).thenReturn(SECRET_ISSUE_KEY);

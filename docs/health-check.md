@@ -27,8 +27,9 @@ Negative results are displayed with a red border.
 The following checks are implemented and performed when started:
 
 * License Check
-  * Check for existence of a license
-  * Check that the license is valid
+  * Check that a license is configured
+  * Check that the license is not expired
+  * Check that the license is valid (size, version, type)
 
 * Configuration Check
   * Check that the estimate field is configured

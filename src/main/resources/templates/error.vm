@@ -37,15 +37,13 @@
                 <form class="aui long-label" method="post">
                     #if($action.hasAnyErrors())
                         <div class="aui-message aui-message-error">
-                            <h4>$i18n.getText("scrumpoker.error.details")</h4>
-                            <ul>
-                                #foreach($error in $action.errorMessages)
-                                    <li>$error</li>
-                                #end
-                                #foreach($error in $action.errors)
-                                    <li>$error</li>
-                                #end
-                            </ul>
+                            <p class="title">$i18n.getText("scrumpoker.error.details")</p>
+                            #foreach($error in $action.errorMessages)
+                                <p>$error</p>
+                            #end
+                            #foreach($error in $action.errors)
+                                <p>$error</p>
+                            #end
                         </div>
                     #end
                     <div class="buttons-container">

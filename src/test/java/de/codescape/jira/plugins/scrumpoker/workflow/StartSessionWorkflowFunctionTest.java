@@ -1,8 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.workflow;
 
 import com.atlassian.jira.issue.MutableIssue;
-import com.atlassian.upm.api.license.entity.LicenseError;
-import com.atlassian.upm.api.license.entity.PluginLicense;
+import com.atlassian.sal.api.message.I18nResolver;
 import com.opensymphony.module.propertyset.PropertySet;
 import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
 import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
@@ -25,6 +24,8 @@ public class StartSessionWorkflowFunctionTest {
 
     private static final String USER_KEY = "codescape";
     private static final String ISSUE_KEY = "ISSUE-1";
+    private static final String LICENSE_ERROR = "some.license.error";
+    private static final String LICENSE_ERROR_TEXT = "Some license error text.";
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -40,6 +41,9 @@ public class StartSessionWorkflowFunctionTest {
 
     @Mock
     private ScrumPokerLicenseService scrumPokerLicenseService;
+
+    @Mock
+    private I18nResolver i18nResolver;
 
     @InjectMocks
     private StartSessionWorkflowFunction startSessionWorkflowFunction;
@@ -58,29 +62,18 @@ public class StartSessionWorkflowFunctionTest {
     @Mock
     private MutableIssue issue;
 
-    @Mock
-    private PluginLicense pluginLicense;
+    /* tests for execute() */
 
     @Test
-    public void shouldNotStartSessionForLicenseErrors() {
-        expectPluginLicenseHasErrors();
+    public void shouldNotStartSessionWithInvalidLicense() {
+        expectPluginLicenseIsInvalid();
+        when(i18nResolver.getText(LICENSE_ERROR)).thenReturn(LICENSE_ERROR_TEXT);
 
         startSessionWorkflowFunction.execute(transientVars, args, propertySet);
 
         verify(scrumPokerSessionService, never()).byIssueKey(anyString(), anyString());
         verifyNoInteractions(scrumPokerSessionService);
-        verify(errorLogService, times(1)).logError(anyString());
-    }
-
-    @Test
-    public void shouldNotStartSessionForMissingLicense() {
-        expectPluginLicenseIsMissing();
-
-        startSessionWorkflowFunction.execute(transientVars, args, propertySet);
-
-        verify(scrumPokerSessionService, never()).byIssueKey(anyString(), anyString());
-        verifyNoInteractions(scrumPokerSessionService);
-        verify(errorLogService, times(1)).logError(anyString());
+        verify(errorLogService, times(1)).logError(LICENSE_ERROR_TEXT);
     }
 
     @Test
@@ -129,14 +122,9 @@ public class StartSessionWorkflowFunctionTest {
         when(scrumPokerLicenseService.hasValidLicense()).thenReturn(true);
     }
 
-    private void expectPluginLicenseHasErrors() {
+    private void expectPluginLicenseIsInvalid() {
         when(scrumPokerLicenseService.hasValidLicense()).thenReturn(false);
-        when(scrumPokerLicenseService.getLicenseError()).thenReturn(LicenseError.EXPIRED.toString());
-    }
-
-    private void expectPluginLicenseIsMissing() {
-        when(scrumPokerLicenseService.hasValidLicense()).thenReturn(false);
-        when(scrumPokerLicenseService.getLicenseError()).thenReturn("MISSING");
+        when(scrumPokerLicenseService.getLicenseError()).thenReturn(LICENSE_ERROR);
     }
 
     private void expectUserKeyExists() {

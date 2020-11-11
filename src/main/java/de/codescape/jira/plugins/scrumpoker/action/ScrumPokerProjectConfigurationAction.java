@@ -5,10 +5,7 @@ import com.atlassian.jira.project.Project;
 import com.atlassian.jira.project.ProjectManager;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
-import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
-import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
-import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
-import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingsService;
+import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -48,6 +45,7 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
     private final ProjectSettingsService projectSettingsService;
     private final GlobalSettingsService globalSettingsService;
     private final ErrorLogService errorLogService;
+    private final ScrumPokerLicenseService scrumPokerLicenseService;
 
     private String projectKey;
 
@@ -56,12 +54,14 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
                                                 EstimateFieldService estimateFieldService,
                                                 ProjectSettingsService projectSettingsService,
                                                 GlobalSettingsService globalSettingsService,
-                                                ErrorLogService errorLogService) {
+                                                ErrorLogService errorLogService,
+                                                ScrumPokerLicenseService scrumPokerLicenseService) {
         this.projectManager = projectManager;
         this.estimateFieldService = estimateFieldService;
         this.projectSettingsService = projectSettingsService;
         this.globalSettingsService = globalSettingsService;
         this.errorLogService = errorLogService;
+        this.scrumPokerLicenseService = scrumPokerLicenseService;
     }
 
     /**
@@ -90,6 +90,13 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
      */
     public boolean isActivateScrumPokerGlobally() {
         return globalSettingsService.load().isActivateScrumPoker();
+    }
+
+    /**
+     * Returns the license error if it exists or <code>null</code> otherwise.
+     */
+    public String getLicenseError() {
+        return scrumPokerLicenseService.getLicenseError();
     }
 
     @Override

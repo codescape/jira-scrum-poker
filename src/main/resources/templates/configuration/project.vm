@@ -12,6 +12,13 @@
 
 <p>$i18n.getText("scrumpoker.config.project.description")</p>
 
+#if ($licenseError)
+<div class="aui-message aui-message-error">
+    <p class="title">$i18n.getText("scrumpoker.error.license")</p>
+    <p>$i18n.getText($licenseError)</p>
+</div>
+#end
+
 <form class="aui long-label" action="ScrumPokerProjectConfiguration.jspa" method="post">
     <div class="form-body">
         <fieldset class="group">

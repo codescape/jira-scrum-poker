@@ -33,95 +33,102 @@
 <div class="aui-page-panel" style="margin: 0;">
     <div class="aui-page-panel-inner">
         <section class="aui-page-panel-content">
-            <h2>$i18n.getText("scrumpoker.sessions.active")</h2>
-            <p>$i18n.getText("scrumpoker.sessions.active.description")</p>
-            #if(!$openSessions.isEmpty())
-            <div class="scrum-poker-box">
-                <table width="100%" class="aui" id="issuetable">
-                    <thead>
-                        <tr>
-                            <th>$i18n.getText("scrumpoker.issue.type")</th>
-                            <th>$i18n.getText("scrumpoker.issue.key")</th>
-                            <th>$i18n.getText("scrumpoker.issue.summary")</th>
-                            <th>$i18n.getText("scrumpoker.session.startdate")</th>
-                            <th>$i18n.getText("scrumpoker.session.startedby")</th>
-                            <th>$i18n.getText("scrumpoker.session.participants")</th>
-                            <th>$i18n.getText("scrumpoker.session.ownestimate")</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    #foreach($scrumPokerSession in $openSessions)
-                        #set($issue = $action.getIssue($scrumPokerSession.issueKey))
-                        #if ($issue)
-                        <tr>
-                            <td class="issuetype"><img src="$issue.issueType.completeIconUrl"></td>
-                            <td class="issuekey"><a href="$req.contextPath/secure/ScrumPoker.jspa?issueKey=$issue.key">$issue.key</a></td>
-                            <td class="summary"><a href="$req.contextPath/secure/ScrumPoker.jspa?issueKey=$issue.key">$issue.summary</a></td>
-                            <td class="created"><time title="$scrumPokerSession.createDate.formattedDate">$scrumPokerSession.createDate.displayValue</time></td>
-                            <td class="assignee">$scrumPokerSession.creator</td>
-                            <td>$scrumPokerSession.votes.size()</td>
-                            <td>
-                            #foreach($card in $scrumPokerSession.cards)
-                                #if ($card.selected)
-                                    <span class="aui-badge ghx-statistic-badge">$card.value</span>
-                                #end
-                            #end
-                            </td>
-                        </tr>
-                        #end
-                    #end
-                    </tbody>
-                </table>
+            #if ($licenseError)
+            <div class="aui-message aui-message-error">
+                <p class="title">$i18n.getText("scrumpoker.error.license")</p>
+                <p>$i18n.getText($licenseError)</p>
             </div>
             #else
-                <div class="aui-message aui-message-info">
-                    <p class="title">
-                        <strong>$i18n.getText("scrumpoker.sessions.notfound")</strong>
-                    </p>
-                    <p>$i18n.getText("scrumpoker.sessions.startnew")</p>
-                </div>
-            #end
-
-            #if(!$closedSessions.isEmpty())
-            <h2>$i18n.getText("scrumpoker.sessions.finished")</h2>
-            <p>$i18n.getText("scrumpoker.sessions.finished.description")</p>
-            <div class="scrum-poker-box">
-                <table width="100%" class="aui" id="issuetable">
-                    <thead>
-                        <tr>
-                            <th>$i18n.getText("scrumpoker.issue.type")</th>
-                            <th>$i18n.getText("scrumpoker.issue.key")</th>
-                            <th>$i18n.getText("scrumpoker.issue.summary")</th>
-                            <th>$i18n.getText("scrumpoker.session.startdate")</th>
-                            <th>$i18n.getText("scrumpoker.session.startedby")</th>
-                            <th>$i18n.getText("scrumpoker.session.participants")</th>
-                            <th>$i18n.getText("scrumpoker.session.result")</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    #foreach($scrumPokerSession in $closedSessions)
-                        #set($issue = $action.getIssue($scrumPokerSession.issueKey))
-                        #if ($issue)
-                        <tr>
-                            <td class="issuetype"><img src="$issue.issueType.completeIconUrl"></td>
-                            <td class="issuekey"><a href="$req.contextPath/browse/$issue.key">$issue.key</a></td>
-                            <td class="summary"><a href="$req.contextPath/browse/$issue.key">$issue.summary</a></td>
-                            <td class="created"><time title="$scrumPokerSession.createDate.formattedDate">$scrumPokerSession.createDate.displayValue</time></td>
-                            <td class="assignee">$scrumPokerSession.creator</td>
-                            <td>$scrumPokerSession.votes.size()</td>
-                            <td>
-                                #if ($scrumPokerSession.cancelled)
-                                    <i>$i18n.getText("scrumpoker.session.cancelled")</i>
-                                #else
-                                    <span class="aui-badge ghx-statistic-badge">$scrumPokerSession.confirmedEstimate</span>
+                <h2>$i18n.getText("scrumpoker.sessions.active")</h2>
+                <p>$i18n.getText("scrumpoker.sessions.active.description")</p>
+                #if(!$openSessions.isEmpty())
+                <div class="scrum-poker-box">
+                    <table width="100%" class="aui" id="issuetable">
+                        <thead>
+                            <tr>
+                                <th>$i18n.getText("scrumpoker.issue.type")</th>
+                                <th>$i18n.getText("scrumpoker.issue.key")</th>
+                                <th>$i18n.getText("scrumpoker.issue.summary")</th>
+                                <th>$i18n.getText("scrumpoker.session.startdate")</th>
+                                <th>$i18n.getText("scrumpoker.session.startedby")</th>
+                                <th>$i18n.getText("scrumpoker.session.participants")</th>
+                                <th>$i18n.getText("scrumpoker.session.ownestimate")</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        #foreach($scrumPokerSession in $openSessions)
+                            #set($issue = $action.getIssue($scrumPokerSession.issueKey))
+                            #if ($issue)
+                            <tr>
+                                <td class="issuetype"><img src="$issue.issueType.completeIconUrl"></td>
+                                <td class="issuekey"><a href="$req.contextPath/secure/ScrumPoker.jspa?issueKey=$issue.key">$issue.key</a></td>
+                                <td class="summary"><a href="$req.contextPath/secure/ScrumPoker.jspa?issueKey=$issue.key">$issue.summary</a></td>
+                                <td class="created"><time title="$scrumPokerSession.createDate.formattedDate">$scrumPokerSession.createDate.displayValue</time></td>
+                                <td class="assignee">$scrumPokerSession.creator</td>
+                                <td>$scrumPokerSession.votes.size()</td>
+                                <td>
+                                #foreach($card in $scrumPokerSession.cards)
+                                    #if ($card.selected)
+                                        <span class="aui-badge ghx-statistic-badge">$card.value</span>
+                                    #end
                                 #end
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                            #end
                         #end
-                    #end
-                    </tbody>
-                </table>
-            </div>
+                        </tbody>
+                    </table>
+                </div>
+                #else
+                    <div class="aui-message aui-message-info">
+                        <p class="title">
+                            <strong>$i18n.getText("scrumpoker.sessions.notfound")</strong>
+                        </p>
+                        <p>$i18n.getText("scrumpoker.sessions.startnew")</p>
+                    </div>
+                #end
+
+                #if(!$closedSessions.isEmpty())
+                <h2>$i18n.getText("scrumpoker.sessions.finished")</h2>
+                <p>$i18n.getText("scrumpoker.sessions.finished.description")</p>
+                <div class="scrum-poker-box">
+                    <table width="100%" class="aui" id="issuetable">
+                        <thead>
+                            <tr>
+                                <th>$i18n.getText("scrumpoker.issue.type")</th>
+                                <th>$i18n.getText("scrumpoker.issue.key")</th>
+                                <th>$i18n.getText("scrumpoker.issue.summary")</th>
+                                <th>$i18n.getText("scrumpoker.session.startdate")</th>
+                                <th>$i18n.getText("scrumpoker.session.startedby")</th>
+                                <th>$i18n.getText("scrumpoker.session.participants")</th>
+                                <th>$i18n.getText("scrumpoker.session.result")</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        #foreach($scrumPokerSession in $closedSessions)
+                            #set($issue = $action.getIssue($scrumPokerSession.issueKey))
+                            #if ($issue)
+                            <tr>
+                                <td class="issuetype"><img src="$issue.issueType.completeIconUrl"></td>
+                                <td class="issuekey"><a href="$req.contextPath/browse/$issue.key">$issue.key</a></td>
+                                <td class="summary"><a href="$req.contextPath/browse/$issue.key">$issue.summary</a></td>
+                                <td class="created"><time title="$scrumPokerSession.createDate.formattedDate">$scrumPokerSession.createDate.displayValue</time></td>
+                                <td class="assignee">$scrumPokerSession.creator</td>
+                                <td>$scrumPokerSession.votes.size()</td>
+                                <td>
+                                    #if ($scrumPokerSession.cancelled)
+                                        <i>$i18n.getText("scrumpoker.session.cancelled")</i>
+                                    #else
+                                        <span class="aui-badge ghx-statistic-badge">$scrumPokerSession.confirmedEstimate</span>
+                                    #end
+                                </td>
+                            </tr>
+                            #end
+                        #end
+                        </tbody>
+                    </table>
+                </div>
+                #end
             #end
         </section>
     </div>

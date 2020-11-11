@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import static de.codescape.jira.plugins.scrumpoker.service.ScrumPokerLicenseServiceImpl.ERROR_MESSAGE_PREFIX;
 import static de.codescape.jira.plugins.scrumpoker.service.ScrumPokerLicenseServiceImpl.MISSING_LICENSE;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
@@ -62,10 +63,12 @@ public class ScrumPokerLicenseServiceImplTest {
 
     @Test
     public void getLicenseErrorReturnsErrorForLicenseWithError() {
+        LicenseError expectedLicenseError = LicenseError.EXPIRED;
         PluginLicense pluginLicense = mock(PluginLicense.class);
-        when(pluginLicense.getError()).thenReturn(Option.option(LicenseError.EXPIRED));
+        when(pluginLicense.getError()).thenReturn(Option.option(expectedLicenseError));
         when(pluginLicenseManager.getLicense()).thenReturn(Option.option(pluginLicense));
-        assertThat(scrumPokerLicenseService.getLicenseError(), is(equalTo(LicenseError.EXPIRED.name())));
+        assertThat(scrumPokerLicenseService.getLicenseError(),
+            is(equalTo(ERROR_MESSAGE_PREFIX + expectedLicenseError.name().toLowerCase())));
     }
 
     @Test

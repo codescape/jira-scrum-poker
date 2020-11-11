@@ -33,7 +33,7 @@ public class ScrumPokerErrorLogActionTest {
     private ErrorLogService errorLogService;
 
     @InjectMocks
-    private ScrumPokerErrorLogAction scrumPokerErrorLogAction;
+    private ScrumPokerErrorLogAction action;
 
     @Mock
     private HttpServletRequest httpServletRequest;
@@ -42,14 +42,14 @@ public class ScrumPokerErrorLogActionTest {
     public void shouldExposeTheErrorList() {
         List<ScrumPokerError> scrumPokerErrors = new ArrayList<>();
         when(errorLogService.listAll()).thenReturn(scrumPokerErrors);
-        assertThat(scrumPokerErrorLogAction.getErrorList(), is(equalTo(scrumPokerErrors)));
+        assertThat(action.getErrorList(), is(equalTo(scrumPokerErrors)));
     }
 
     @Test
     public void shouldEmptyTheErrorLogWhenRequested() {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
         when(httpServletRequest.getParameterValues(ScrumPokerErrorLogAction.Parameters.ACTION)).thenReturn(new String[]{"empty"});
-        assertThat(scrumPokerErrorLogAction.doExecute(), is(equalTo(scrumPokerErrorLogAction.SUCCESS)));
+        assertThat(action.doExecute(), is(equalTo(action.SUCCESS)));
         verify(errorLogService, times(1)).emptyErrorLog();
     }
 
@@ -57,7 +57,7 @@ public class ScrumPokerErrorLogActionTest {
     public void shouldNotEmptyTheErrorWhenNotRequested() {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
         when(httpServletRequest.getParameter(ScrumPokerErrorLogAction.Parameters.ACTION)).thenReturn(null);
-        assertThat(scrumPokerErrorLogAction.doExecute(), is(equalTo(scrumPokerErrorLogAction.SUCCESS)));
+        assertThat(action.doExecute(), is(equalTo(action.SUCCESS)));
         verify(errorLogService, never()).emptyErrorLog();
     }
 

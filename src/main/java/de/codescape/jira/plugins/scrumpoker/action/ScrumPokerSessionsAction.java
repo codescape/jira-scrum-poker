@@ -8,6 +8,7 @@ import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionEntityMapper;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerLicenseService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,18 +29,28 @@ public class ScrumPokerSessionsAction extends AbstractScrumPokerAction {
     private final JiraAuthenticationContext jiraAuthenticationContext;
     private final ScrumPokerSessionService scrumPokerSessionService;
     private final SessionEntityMapper sessionEntityMapper;
+    private final ScrumPokerLicenseService scrumPokerLicenseService;
 
     @Autowired
     public ScrumPokerSessionsAction(@ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
                                     @ComponentImport PermissionManager permissionManager,
                                     @ComponentImport IssueManager issueManager,
                                     ScrumPokerSessionService scrumPokerSessionService,
-                                    SessionEntityMapper sessionEntityMapper) {
+                                    SessionEntityMapper sessionEntityMapper,
+                                    ScrumPokerLicenseService scrumPokerLicenseService) {
         this.jiraAuthenticationContext = jiraAuthenticationContext;
         this.permissionManager = permissionManager;
         this.issueManager = issueManager;
         this.scrumPokerSessionService = scrumPokerSessionService;
         this.sessionEntityMapper = sessionEntityMapper;
+        this.scrumPokerLicenseService = scrumPokerLicenseService;
+    }
+
+    /**
+     * Returns the license error if it exists or <code>null</code> otherwise.
+     */
+    public String getLicenseError() {
+        return scrumPokerLicenseService.getLicenseError();
     }
 
     /**

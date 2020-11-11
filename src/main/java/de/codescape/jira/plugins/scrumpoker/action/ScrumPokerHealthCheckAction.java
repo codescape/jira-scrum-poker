@@ -11,24 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static de.codescape.jira.plugins.scrumpoker.service.ScrumPokerLicenseServiceImpl.MISSING_LICENSE;
-
 /**
  * Health Check page for the Scrum Poker app.
  */
 public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
-
-    /**
-     * Potential license error codes.
-     */
-    static final class License {
-
-        static final String LICENSE_INVALID = "scrumpoker.healthcheck.results.errors.licenseinvalid";
-        static final String NO_LICENSE_FOUND = "scrumpoker.healthcheck.results.errors.nolicensefound";
-
-    }
 
     /**
      * Potential configuration error codes.
@@ -112,14 +100,9 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction {
     public List<String> getLicenseResults() {
         List<String> results = new ArrayList<>();
 
+        // check that a license is defined and valid
         if (!scrumPokerLicenseService.hasValidLicense()) {
-            // check that a license is defined
-            if (MISSING_LICENSE.equals(scrumPokerLicenseService.getLicenseError())) {
-                results.add(License.NO_LICENSE_FOUND);
-            } else {
-                // check that the license is valid
-                results.add(License.LICENSE_INVALID);
-            }
+            results.add(scrumPokerLicenseService.getLicenseError());
         }
 
         return results;

@@ -13,6 +13,7 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.util.http.JiraUrl;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import com.atlassian.sal.api.message.I18nResolver;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
 import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
     private final ErrorLogService errorLogService;
     private final AdditionalFieldService additionalFieldService;
     private final ScrumPokerLicenseService scrumPokerLicenseService;
+    private final I18nResolver i18nResolver;
 
     private String issueKey;
 
@@ -61,6 +63,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
                             @ComponentImport PermissionManager permissionManager,
                             @ComponentImport CommentManager commentManager,
                             @ComponentImport DateTimeFormatter dateTimeFormatter,
+                            @ComponentImport I18nResolver i18nResolver,
                             GlobalSettingsService globalSettingsService,
                             EstimateFieldService estimateFieldService,
                             ErrorLogService errorLogService,
@@ -77,6 +80,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
         this.errorLogService = errorLogService;
         this.additionalFieldService = additionalFieldService;
         this.scrumPokerLicenseService = scrumPokerLicenseService;
+        this.i18nResolver = i18nResolver;
     }
 
     /**
@@ -86,7 +90,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
     protected String doExecute() {
         // license check
         if (!scrumPokerLicenseService.hasValidLicense()) {
-            errorMessage("Scrum Poker for Jira has license errors: " + scrumPokerLicenseService.getLicenseError());
+            errorMessage(i18nResolver.getText(scrumPokerLicenseService.getLicenseError()));
             return ERROR;
         }
 

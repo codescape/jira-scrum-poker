@@ -8,6 +8,7 @@ import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.AdditionalFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerLicenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -50,14 +51,17 @@ public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction {
     private final EstimateFieldService estimateFieldService;
     private final GlobalSettingsService globalSettingsService;
     private final AdditionalFieldService additionalFieldService;
+    private final ScrumPokerLicenseService scrumPokerLicenseService;
 
     @Autowired
     public ScrumPokerConfigurationAction(EstimateFieldService estimateFieldService,
                                          GlobalSettingsService globalSettingsService,
-                                         AdditionalFieldService additionalFieldService) {
+                                         AdditionalFieldService additionalFieldService,
+                                         ScrumPokerLicenseService scrumPokerLicenseService) {
         this.estimateFieldService = estimateFieldService;
         this.globalSettingsService = globalSettingsService;
         this.additionalFieldService = additionalFieldService;
+        this.scrumPokerLicenseService = scrumPokerLicenseService;
     }
 
     /**
@@ -79,6 +83,13 @@ public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction {
      */
     public GlobalSettings getGlobalSettings() {
         return globalSettingsService.load();
+    }
+
+    /**
+     * Returns the license error if it exists or <code>null</code> otherwise.
+     */
+    public String getLicenseError() {
+        return scrumPokerLicenseService.getLicenseError();
     }
 
     /**

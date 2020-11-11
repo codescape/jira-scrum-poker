@@ -9,10 +9,7 @@ import com.atlassian.jira.project.ProjectManager;
 import com.atlassian.jira.web.HttpServletVariables;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
-import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
-import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
-import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
-import de.codescape.jira.plugins.scrumpoker.service.ProjectSettingsService;
+import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -28,6 +25,8 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 public class ScrumPokerProjectConfigurationActionTest {
+
+    private static final String LICENSE_ERROR = "license.error";
 
     @Rule
     public MockitoContainer mockitoContainer = MockitoMocksInContainer.rule(this);
@@ -46,6 +45,9 @@ public class ScrumPokerProjectConfigurationActionTest {
 
     @Mock
     private ErrorLogService errorLogService;
+
+    @Mock
+    private ScrumPokerLicenseService scrumPokerLicenseService;
 
     @Mock
     @AvailableInContainer
@@ -115,6 +117,24 @@ public class ScrumPokerProjectConfigurationActionTest {
         when(projectSettingsService.loadSettings(19L)).thenReturn(null);
 
         assertThat(action.getProjectSettings(), is(nullValue()));
+    }
+
+    /* tests for getLicenseError() */
+
+    @Test
+    public void getLicenseErrorExposesLicenseErrorIfExists() {
+        when(scrumPokerLicenseService.getLicenseError()).thenReturn(LICENSE_ERROR);
+        assertThat(action.getLicenseError(), is(equalTo(LICENSE_ERROR)));
+        verify(scrumPokerLicenseService, times(1)).getLicenseError();
+        verifyNoMoreInteractions(scrumPokerLicenseService);
+    }
+
+    @Test
+    public void getLicenseErrorReturnsNullIfNoLicenseErrorExists() {
+        when(scrumPokerLicenseService.getLicenseError()).thenReturn(null);
+        assertThat(action.getLicenseError(), is(nullValue()));
+        verify(scrumPokerLicenseService, times(1)).getLicenseError();
+        verifyNoMoreInteractions(scrumPokerLicenseService);
     }
 
     /* tests for doExecute() */

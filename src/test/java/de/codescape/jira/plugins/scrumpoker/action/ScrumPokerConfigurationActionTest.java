@@ -12,6 +12,7 @@ import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.AdditionalFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
+import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerLicenseService;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -33,6 +34,8 @@ import static webwork.action.Action.SUCCESS;
 
 public class ScrumPokerConfigurationActionTest {
 
+    private static final String LICENSE_ERROR = "license.error";
+
     @Rule
     public MockitoContainer mockitoContainer = MockitoMocksInContainer.rule(this);
 
@@ -49,8 +52,11 @@ public class ScrumPokerConfigurationActionTest {
     @Mock
     private AdditionalFieldService additionalFieldService;
 
+    @Mock
+    private ScrumPokerLicenseService scrumPokerLicenseService;
+
     @InjectMocks
-    private ScrumPokerConfigurationAction scrumPokerConfigurationAction;
+    private ScrumPokerConfigurationAction action;
 
     @Mock
     private HttpServletRequest httpServletRequest;
@@ -62,7 +68,7 @@ public class ScrumPokerConfigurationActionTest {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
         when(httpServletRequest.getParameterValues(ACTION)).thenReturn(null);
 
-        assertThat(scrumPokerConfigurationAction.doExecute(), is(equalTo(SUCCESS)));
+        assertThat(action.doExecute(), is(equalTo(SUCCESS)));
     }
 
     @Test
@@ -70,7 +76,7 @@ public class ScrumPokerConfigurationActionTest {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
         when(httpServletRequest.getParameterValues(ACTION)).thenReturn(new String[]{DEFAULTS});
 
-        assertThat(scrumPokerConfigurationAction.doExecute(), is(equalTo(SUCCESS)));
+        assertThat(action.doExecute(), is(equalTo(SUCCESS)));
 
         ArgumentCaptor<GlobalSettings> globalSettings = ArgumentCaptor.forClass(GlobalSettings.class);
         verify(globalSettingsService).persist(globalSettings.capture());
@@ -103,7 +109,7 @@ public class ScrumPokerConfigurationActionTest {
         when(httpServletRequest.getParameterValues(DISPLAY_ADDITIONAL_FIELDS))
             .thenReturn(new String[]{"field1,field2,field3"});
 
-        assertThat(scrumPokerConfigurationAction.doExecute(), is(equalTo(SUCCESS)));
+        assertThat(action.doExecute(), is(equalTo(SUCCESS)));
 
         ArgumentCaptor<GlobalSettings> globalSettingsCaptor = ArgumentCaptor.forClass(GlobalSettings.class);
         verify(globalSettingsService).persist(globalSettingsCaptor.capture());
@@ -128,7 +134,25 @@ public class ScrumPokerConfigurationActionTest {
         CustomField customField2 = mock(CustomField.class);
         when(estimateFieldService.supportedCustomFields()).thenReturn(asList(customField1, customField2));
 
-        assertThat(scrumPokerConfigurationAction.getEstimateFields(), hasItems(customField1, customField2));
+        assertThat(action.getEstimateFields(), hasItems(customField1, customField2));
+    }
+
+    /* tests for getLicenseError() */
+
+    @Test
+    public void getLicenseErrorExposesLicenseErrorIfExists() {
+        when(scrumPokerLicenseService.getLicenseError()).thenReturn(LICENSE_ERROR);
+        assertThat(action.getLicenseError(), is(equalTo(LICENSE_ERROR)));
+        verify(scrumPokerLicenseService, times(1)).getLicenseError();
+        verifyNoMoreInteractions(scrumPokerLicenseService);
+    }
+
+    @Test
+    public void getLicenseErrorReturnsNullIfNoLicenseErrorExists() {
+        when(scrumPokerLicenseService.getLicenseError()).thenReturn(null);
+        assertThat(action.getLicenseError(), is(nullValue()));
+        verify(scrumPokerLicenseService, times(1)).getLicenseError();
+        verifyNoMoreInteractions(scrumPokerLicenseService);
     }
 
     /* tests for getAdditionalFields() */
@@ -139,7 +163,7 @@ public class ScrumPokerConfigurationActionTest {
         additionalFields.add(new AdditionalField(null, true));
         when(additionalFieldService.supportedCustomFields()).thenReturn(additionalFields);
 
-        assertThat(scrumPokerConfigurationAction.getAdditionalFields(), is(equalTo(additionalFields)));
+        assertThat(action.getAdditionalFields(), is(equalTo(additionalFields)));
         verify(additionalFieldService).supportedCustomFields();
         verifyNoMoreInteractions(additionalFieldService);
     }
@@ -151,7 +175,7 @@ public class ScrumPokerConfigurationActionTest {
         GlobalSettings globalSettings = mock(GlobalSettings.class);
         when(globalSettingsService.load()).thenReturn(globalSettings);
 
-        assertThat(scrumPokerConfigurationAction.getGlobalSettings(), is(equalTo(globalSettings)));
+        assertThat(action.getGlobalSettings(), is(equalTo(globalSettings)));
     }
 
 }
