@@ -27,7 +27,7 @@ public class ScrumPokerResourceBundleTest {
     private static final String LOWER_CASE_LETTERS = "abcdefghijklmnopqrstuvwxyz";
     private static final String UPPER_CASE_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String NUMBERS = "0123456789";
-    private static final String SPECIAL_CHARACTERS = ".,!?= \\'{}:-+\"()";
+    private static final String SPECIAL_CHARACTERS = ".,!?= \\'{}:-+\"()_";
     private static final String ALLOWED_CHARACTERS = LOWER_CASE_LETTERS + UPPER_CASE_LETTERS + NUMBERS + SPECIAL_CHARACTERS;
 
     @Test
