@@ -15,6 +15,7 @@ category: Administration
 * feat: add support for Jira 8.13.1
 * test: allow underscores in message bundle for internationalization
 * feat: improve license check across all actions and functions (#86 and #88)
+* docs: link to company website in documentation footer
 
 ### [20.10.1] - 2020-10-29
 
