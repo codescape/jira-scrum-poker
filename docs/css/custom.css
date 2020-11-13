@@ -127,6 +127,27 @@ img {
   display: block;
   width: 100%; }
 
+.configurable {
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 5px 10px;
+  margin-bottom: 2rem; }
+
+.configurable ul {
+  list-style: none;
+  display: inline;
+  margin: 0; }
+
+.configurable ul li {
+  display: inline-block;
+  padding: 0 0 0 5px;
+  margin: 0; }
+
+.configurable ul li:before {
+  content: '✓';
+  padding: 0 5px 0 0;
+  color: #009900; }
+
 /* Larger than phone */
 
 @media (min-width: 550px) {

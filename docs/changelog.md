@@ -16,6 +16,7 @@ category: Administration
 * test: allow underscores in message bundle for internationalization
 * feat: improve license check across all actions and functions (#86 and #88)
 * docs: link to company website in documentation footer
+* docs: restructure configuration documentation (#132)
 
 ### [20.10.1] - 2020-10-29
 
@@ -88,7 +89,7 @@ category: Administration
 * docs: reduce table of contents for more than 20 entries
 * docs: explain feature and configuration of workflow function (#104)
 * feat: check for valid license in workflow function (#104)
-* refactor: remove obsolete method call and method 
+* refactor: remove obsolete method call and method
 
 ### [20.06.1] - 2020-06-19
 

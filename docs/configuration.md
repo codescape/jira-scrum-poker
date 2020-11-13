@@ -9,7 +9,11 @@ This page describes how to configure Scrum Poker for Jira to work in your Jira a
 * Table of Contents
 {:toc}
 
-### Global configuration
+### General information
+
+Scrum Poker for Jira can be configured globally and allows to overwrite some settings in the project specific configuration.
+
+#### Global configuration
 
 Scrum Poker for Jira has some global configuration parameters that can be configured from the administration section of your Jira application.
 This configuration is only available to users with the `Jira Administrators` role assigned.
@@ -22,6 +26,21 @@ You will now find a section called `Scrum Poker` in the left sidebar as shown in
 On the page `Configuration` you have global configuration options to make Scrum Poker for Jira fit to your needs:
 
 ![Global configuration for Scrum Poker](/images/configuration-page.png)
+
+#### Project configuration
+
+Scrum Poker for Jira also provides project specific configuration.
+
+The locate the project specific configuration navigate to the project and find the `Project settings` link in the bottom of the left menu.
+Inside the `Project settings` you can find a menu option called `Scrum Poker` that leads to the configuration.
+
+On the page `Project Configuration` you can find the configuration options the make Scrum Poker for Jira fit to the needs of your Jira project:
+
+![Project configuration for Scrum Poker](/images/configuration-project-page.png)
+
+### Configuration options
+
+This chapter describes the configuration options that are available to customize behavior and appearance of Scrum Poker for Jira. Every configuration option contains a block about whether this options can be configured globally and/or per project.
 
 #### Confirmed Estimate Field
 
@@ -41,12 +60,27 @@ Scrum Poker for Jira currently supports the following field types to be chosen i
 
 Please [let us know](/support) if you require other field types to be supported.
 
+<div class="configurable">
+  <span>This setting can be configured on:</span>
+  <ul>
+    <li>global configuration</li>
+    <li>project configuration</li>
+  </ul>
+</div>
+
 #### Estimate Permission Check
 
 Decide whether every participant of a Scrum Poker session is allowed to save the estimate or permission to edit the issue shall be required for the current user.
 
 * If disabled all participants of the Scrum Poker session regardless of their permissions on the current issue can confirm the estimate and end the Scrum Poker session.
 * If enabled only users with edit permission on the current issue the Scrum Poker session is started for can confirm the estimate and end the Scrum Poker session.
+
+<div class="configurable">
+  <span>This setting can be configured on:</span>
+  <ul>
+    <li>global configuration</li>
+  </ul>
+</div>
 
 #### Card Set
 
@@ -60,6 +94,14 @@ The default card set that is preconfigured is the simplified Fibonacci sequence:
 
 When you define your own card sets always keep in mind that only numeric values can be confirmed and assigned to the `Story Points` field created by Jira Software.
 
+<div class="configurable">
+  <span>This setting can be configured on:</span>
+  <ul>
+    <li>global configuration</li>
+    <li>project configuration</li>
+  </ul>
+</div>
+
 #### Session Timeout
 
 Adjust the session timeout of Scrum Poker sessions in hours.
@@ -67,13 +109,29 @@ Sessions older than this timeout will not be shown on the `Active Sessions` page
 
 The default value is set to `12 hours` which implies that sessions of the last half day are shown on the `Active Sessions` page.
 
+<div class="configurable">
+  <span>This setting can be configured on:</span>
+  <ul>
+    <li>global configuration</li>
+  </ul>
+</div>
+
 #### Activate Scrum Poker
 
 Decide whether Scrum Poker is activated globally for all projects.
-If not activated globally this global setting can be overridden per project in the project settings.
+
+If Scrum Poker is not activated for all projects with the `Activate Scrum Poker` setting in the global settings the project specific setting allows you to activate Scrum Poker explicitly for specific projects.
 
 * If activated Scrum Poker sessions can be started for all issues in all Jira projects that have the `Confirmed Estimate Field` configured.
 * If not activated Scrum Poker sessions can only be started for issues in those projects that have Scrum Poker explicitly activated in the `Project Configuration` and have the `Confirmed Estimate Field` configured.
+
+<div class="configurable">
+  <span>This setting can be configured on:</span>
+  <ul>
+    <li>global configuration</li>
+    <li>project configuration</li>
+  </ul>
+</div>
 
 #### Allow Reveal Deck
 
@@ -82,6 +140,13 @@ Decide who is allowed to reveal the votes and make them visible during a Scrum P
 * `EVERYONE` - Everyone is allowed to reveal the deck.
 * `PARTICIPANTS` - Only participants who have provided a vote are allowed to reveal the deck.
 * `CREATOR` - Only the creator of the session is allowed to reveal the deck.
+
+<div class="configurable">
+  <span>This setting can be configured on:</span>
+  <ul>
+    <li>global configuration</li>
+  </ul>
+</div>
 
 #### Show Comments
 
@@ -94,11 +159,25 @@ The following options are available:
 * `Show latest comments` allows participants of a Scrum Poker session to see the most recent ten comments they are allowed to see.
 * `Show no comments` removes the section that displays comments on the Scrum Poker session page and thus shows no comments.
 
+<div class="configurable">
+  <span>This setting can be configured on:</span>
+  <ul>
+    <li>global configuration</li>
+  </ul>
+</div>
+
 #### Show Additional fields
 
 Decide which additional custom fields should be shown to participants during the Scrum Poker session to aid in an estimation.
 
 All custom fields that exist in your Jira instance can be selected and displayed. The order of the fields configured here equals the order when being displayed during the Scrum Poker session.  
+
+<div class="configurable">
+  <span>This setting can be configured on:</span>
+  <ul>
+    <li>global configuration</li>
+  </ul>
+</div>
 
 #### Show Dropdown on Boards
 
@@ -108,32 +187,12 @@ Today the Scrum Poker menu elements in the Jira top menu `Boards` are preferred.
 
 By default this option is disabled as this feature is just a convenience feature for users of older Scrum Poker versions who want to use this way to open the `Active Sessions` page.
 
-### Project configuration
-
-Scrum Poker for Jira also provides project specific configuration.
-
-The locate the project specific configuration navigate to the project and find the `Project settings` link in the bottom of the left menu.
-Inside the `Project settings` you can find a menu option called `Scrum Poker` that leads to the configuration.
-
-On the page `Project Configuration` you can find the configuration options the make Scrum Poker for Jira fit to the needs of your Jira project:
-
-![Project configuration for Scrum Poker](/images/configuration-project-page.png)
-
-#### Activate Scrum Poker
-
-If Scrum Poker is not activated for all projects with the `Activate Scrum Poker` setting in the global settings this project specific setting allows you to activate Scrum Poker explicitly for the current project.
-
-#### Confirmed Estimate Field
-
-You can overwrite the globally configured field to persist the confirmed estimate in the project specific settings. Jira Software creates the `Story Points` field for estimates.
-
-If no estimate field set is defined the global configuration will be used.
-
-#### Card Set
-
-You can overwrite the card set to be used for Scrum Poker sessions in this project here. Use a comma-separated list of values. Special cards are defined by the keywords `coffee` (the user needs a break) and `question` (the user is not able to estimate).
-
-If no card set is defined the global configuration will be used.
+<div class="configurable">
+  <span>This setting can be configured on:</span>
+  <ul>
+    <li>global configuration</li>
+  </ul>
+</div>
 
 ### Workflow configuration
 
