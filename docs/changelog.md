@@ -23,7 +23,7 @@ category: Administration
 * feat: improve license check across all actions and functions (#86 and #88)
 * docs: link to company website in documentation footer
 * docs: restructure configuration documentation (#132)
-* docs: simplify compatibility matrix
+* docs: simplify compatibility matrix in online documentation
 
 ### [20.10.1] - 2020-10-29
 
