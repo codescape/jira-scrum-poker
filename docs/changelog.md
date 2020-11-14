@@ -11,12 +11,19 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [20.11.0] - 2020-11-14
+
+**Fine grained error messages in case of license problems**
+
 * refactor: extract license check into separate reusable service class
 * feat: add support for Jira 8.13.1
 * test: allow underscores in message bundle for internationalization
 * feat: improve license check across all actions and functions (#86 and #88)
 * docs: link to company website in documentation footer
 * docs: restructure configuration documentation (#132)
+* docs: simplify compatibility matrix
 
 ### [20.10.1] - 2020-10-29
 
@@ -199,7 +206,8 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.10.1...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.11.0...HEAD
+[20.11.0]: https://github.com/codescape/jira-scrum-poker/compare/20.10.1...20.11.0
 [20.10.1]: https://github.com/codescape/jira-scrum-poker/compare/20.10.0...20.10.1
 [20.10.0]: https://github.com/codescape/jira-scrum-poker/compare/20.08.0...20.10.0
 [20.08.0]: https://github.com/codescape/jira-scrum-poker/compare/20.07.0...20.08.0
