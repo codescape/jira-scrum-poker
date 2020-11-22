@@ -1,0 +1,9 @@
+# maven
+/target/
+
+# intellij
+/.idea/
+/*.iml
+
+# hsqldb
+/addon-db*

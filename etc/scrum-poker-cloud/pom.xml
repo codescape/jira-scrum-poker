@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.0</version>
+    </parent>
+
+    <groupId>de.codescape.jira.plugins</groupId>
+    <artifactId>scrum-poker</artifactId>
+    <version>20.12.0-cloud</version>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <atlassian-connect-spring-boot.version>2.1.2</atlassian-connect-spring-boot.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.connect</groupId>
+            <artifactId>atlassian-connect-spring-boot-starter</artifactId>
+            <version>${atlassian-connect-spring-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.connect</groupId>
+            <artifactId>atlassian-connect-spring-boot-jpa-starter</artifactId>
+            <version>${atlassian-connect-spring-boot.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <defaultGoal>spring-boot:run</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>display-spring-boot-dependency-updates</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>display-parent-updates</goal>
+                            <goal>display-property-updates</goal>
+                        </goals>
+                        <configuration>
+                            <includeProperties>atlassian-connect-spring-boot.version</includeProperties>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <property>
+                    <name>!spring.profiles.active</name>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.hsqldb</groupId>
+                    <artifactId>hsqldb</artifactId>
+                    <scope>runtime</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-devtools</artifactId>
+                    <optional>true</optional>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+</project>
