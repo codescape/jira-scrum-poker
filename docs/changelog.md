@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* feat: add support for Jira 8.14.0
 
 ### [20.11.0] - 2020-11-14
 
