@@ -71,6 +71,8 @@ public class ScrumPokerSessionServiceImplTest {
             scrumPokerSettingsService, projectSettingsService, estimateFieldService, errorLogService);
     }
 
+    /* tests for byIssueKey() */
+
     @Test
     public void shouldCreateSessionIfNotExists() {
         scrumPokerSessionService.byIssueKey("ISSUE-1", "USER-1");
@@ -103,6 +105,22 @@ public class ScrumPokerSessionServiceImplTest {
         assertThat(scrumPokerSession.getCreateDate(), is(equalTo(newScrumPokerSession.getCreateDate())));
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void shouldNotCreateSessionForIssueKeyWhichDoesNotExist() {
+        scrumPokerSessionService.byIssueKey("UNKNOWN", "USER-1");
+        fail();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void shouldNotCreateSessionForIssueWhichCannotBeEstimated() {
+        reset(estimateFieldService);
+        when(estimateFieldService.isEstimable(ArgumentMatchers.any(Issue.class))).thenReturn(false);
+        scrumPokerSessionService.byIssueKey("ISSUE-21", "USER-1");
+        fail();
+    }
+
+    /* tests for addVote() */
+
     @Test
     public void shouldAddVoteToSession() {
         scrumPokerSessionService.addVote("ISSUE-1", "USER-1", "5");
@@ -126,6 +144,8 @@ public class ScrumPokerSessionServiceImplTest {
         assertThat(scrumPokerSession.isVisible(), is(false));
     }
 
+    /* tests for reset() */
+
     @Test
     public void shouldRemoveAllVotesOnReset() {
         scrumPokerSessionService.addVote("ISSUE-1", "USER-1", "5");
@@ -133,6 +153,8 @@ public class ScrumPokerSessionServiceImplTest {
         ScrumPokerSession scrumPokerSession = scrumPokerSessionService.reset("ISSUE-1", "USER-3");
         assertThat(scrumPokerSession.getVotes().length, equalTo(0));
     }
+
+    /* tests for confirm() */
 
     @Test
     public void shouldAddUserAndDateWhenVoteIsConfirmed() {
@@ -142,6 +164,8 @@ public class ScrumPokerSessionServiceImplTest {
         assertThat(scrumPokerSession.getConfirmedUserKey(), is(equalTo("USER-2")));
         assertThat(scrumPokerSession.getConfirmedDate(), is(notNullValue()));
     }
+
+    /* tests for recent() */
 
     @Test
     public void shouldIncludeNewSessionInRecentSessions() {
@@ -170,13 +194,7 @@ public class ScrumPokerSessionServiceImplTest {
         assertThat(recent.get(0).getIssueKey(), is(equalTo("ISSUE-2")));
     }
 
-    private Date beforeTimeout() {
-        return new Date(System.currentTimeMillis() - 1000 * 3600 * (EXPECTED_SESSION_TIMEOUT + 1));
-    }
-
-    private Date afterTimeout() {
-        return new Date(System.currentTimeMillis() - 1000 * 3600 * (EXPECTED_SESSION_TIMEOUT - 1));
-    }
+    /* tests for cancel() */
 
     @Test
     public void shouldCancelASessionIfCurrentUserIsTheCreatorOfTheSession() {
@@ -192,8 +210,10 @@ public class ScrumPokerSessionServiceImplTest {
         assertThat(cancelledSession.isCancelled(), is(false));
     }
 
+    /* tests for references() */
+
     @Test
-    public void shouldReturnReferencesWithTheSameUserAndEstimation() {
+    public void referencesShouldReturnReferencesWithTheVotingUserAndEstimation() {
         scrumPokerSessionService.addVote("ISSUE-1", "USER-1", "3");
         scrumPokerSessionService.confirm("ISSUE-1", "USER-1", "8");
 
@@ -216,7 +236,7 @@ public class ScrumPokerSessionServiceImplTest {
     }
 
     @Test
-    public void shouldReturnAnEmptyListWhenNoReferencesExistWithTheSameEstimationForTheSameUser() {
+    public void referencesShouldReturnAnEmptyListWhenNoReferencesExistWithTheSameEstimationForTheSameUser() {
         scrumPokerSessionService.addVote("ISSUE-1", "USER-1", "3");
         scrumPokerSessionService.confirm("ISSUE-1", "USER-2", "5");
 
@@ -227,18 +247,36 @@ public class ScrumPokerSessionServiceImplTest {
         assertThat(references.isEmpty(), is(true));
     }
 
-    @Test(expected = IllegalStateException.class)
-    public void shouldNotCreateSessionForIssueKeyWhichDoesNotExist() {
-        scrumPokerSessionService.byIssueKey("UNKNOWN", "USER-1");
-        fail();
+    @Test
+    public void referencesShouldIncludeSessionsWhereTheCurrentUserIsOnlyTheCreatorOfTheSession() {
+        scrumPokerSessionService.byIssueKey("ISSUE-1", "STARTER-KEY");
+        scrumPokerSessionService.addVote("ISSUE-1", "USER-KEY", "3");
+        scrumPokerSessionService.confirm("ISSUE-1", "CONFIRMED-KEY", "3");
+
+        List<ScrumPokerSession> references = scrumPokerSessionService.references("STARTER-KEY", "3");
+        assertThat(references.stream().map(ScrumPokerSession::getIssueKey).collect(Collectors.toList()),
+            hasItem("ISSUE-1"));
     }
 
-    @Test(expected = IllegalStateException.class)
-    public void shouldNotCreateSessionForIssueWhichCannotBeEstimated() {
-        reset(estimateFieldService);
-        when(estimateFieldService.isEstimable(ArgumentMatchers.any(Issue.class))).thenReturn(false);
-        scrumPokerSessionService.byIssueKey("ISSUE-21", "USER-1");
-        fail();
+    @Test
+    public void referencesShouldIncludeSessionsWhereTheCurrentUserIsOnlyTheConfirmingUserOfTheSession() {
+        scrumPokerSessionService.byIssueKey("ISSUE-1", "STARTER-KEY");
+        scrumPokerSessionService.addVote("ISSUE-1", "USER-KEY", "3");
+        scrumPokerSessionService.confirm("ISSUE-1", "CONFIRMED-KEY", "3");
+
+        List<ScrumPokerSession> references = scrumPokerSessionService.references("CONFIRMED-KEY", "3");
+        assertThat(references.stream().map(ScrumPokerSession::getIssueKey).collect(Collectors.toList()),
+            hasItem("ISSUE-1"));
+    }
+
+    /* supporting methods */
+
+    private Date beforeTimeout() {
+        return new Date(System.currentTimeMillis() - 1000 * 3600 * (EXPECTED_SESSION_TIMEOUT + 1));
+    }
+
+    private Date afterTimeout() {
+        return new Date(System.currentTimeMillis() - 1000 * 3600 * (EXPECTED_SESSION_TIMEOUT - 1));
     }
 
 }

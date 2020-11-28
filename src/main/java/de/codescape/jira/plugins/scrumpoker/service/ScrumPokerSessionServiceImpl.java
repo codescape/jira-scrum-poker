@@ -129,7 +129,8 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
             .alias(ScrumPokerSession.class, "SPS")
             .alias(ScrumPokerVote.class, "SPV")
             .join(ScrumPokerVote.class, "SPV.SESSION_ID = SPS.ISSUE_KEY")
-            .where("SPV.USER_KEY = ? and SPS.CONFIRMED_ESTIMATE = ?", userKey, estimate)
+            .where("(SPV.USER_KEY = ? or SPS.CREATOR_USER_KEY = ? or SPS.CONFIRMED_USER_KEY = ?) and SPS.CONFIRMED_ESTIMATE = ?",
+                userKey, userKey, userKey, estimate)
             .order("SPS.CONFIRMED_DATE DESC")
             .limit(3)));
     }

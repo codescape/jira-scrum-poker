@@ -14,6 +14,7 @@ category: Administration
 * feat: add support for Jira 8.14.0
 * docs: reference new service desk portal for support requests
 * docs: synchronize imprint with company website imprint
+* feat: include started and confirmed sessions in references (#133)
 
 ### [20.11.0] - 2020-11-14
 
