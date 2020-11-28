@@ -12,6 +12,7 @@ category: Administration
 ### [Unreleased]
 
 * feat: add support for Jira 8.14.0
+* docs: reference new service desk portal for support requests
 
 ### [20.11.0] - 2020-11-14
 

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Support
+title: Get Support
 ---
 
 There are many reasons to get in contact and we are always happy to hear from you.
@@ -10,14 +10,11 @@ Please choose your preferred channel to get in contact:
 * Table of Contents
 {:toc}
 
-### Issue Tracker
+### Service Desk
 
-The issue tracker is the best way to submit feature requests or bug reports.
-You can find the issue tracker and create new tickets or comment on existing tickets here:
-[https://github.com/codescape/jira-scrum-poker/issues](https://github.com/codescape/jira-scrum-poker/issues)
-
-A [GitHub](https://www.github.com) account is required to create new tickets or comment on existing tickets.
-If you do not have an account or do not want to create an account please feel free to send us a mail.
+Our service desk is the best way to submit feature requests or bug reports.
+You can find the service desk and create new tickets or comment on existing tickets here:
+<a href="{{ site.servicedesk_url }}">{{ site.servicedesk_url }}</a>
 
 ### Mail
 

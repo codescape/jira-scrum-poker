@@ -10,9 +10,9 @@ title: Scrum Poker for Jira
 # url configuration
 # -----------------
 github_url: https://github.com/codescape/jira-scrum-poker
-issue_tracker_url: https://github.com/codescape/jira-scrum-poker/issues
 marketplace_url: https://marketplace.atlassian.com/apps/1218884/scrum-poker?hosting=server&tab=overview
+servicedesk_url: https://codescape.atlassian.net/servicedesk
 
 # contact data
 # ------------
-contact_mail: stefan.glase@googlemail.com
+contact_mail: support@codescape.atlassian.net
