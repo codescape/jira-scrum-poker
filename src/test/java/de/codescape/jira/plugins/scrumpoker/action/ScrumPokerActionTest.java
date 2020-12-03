@@ -2,9 +2,11 @@ package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
+import com.atlassian.jira.issue.RendererManager;
 import com.atlassian.jira.issue.comments.Comment;
 import com.atlassian.jira.issue.comments.CommentManager;
 import com.atlassian.jira.issue.fields.CustomField;
+import com.atlassian.jira.issue.fields.renderer.JiraRendererPlugin;
 import com.atlassian.jira.junit.rules.AvailableInContainer;
 import com.atlassian.jira.junit.rules.MockitoContainer;
 import com.atlassian.jira.junit.rules.MockitoMocksInContainer;
@@ -50,6 +52,9 @@ public class ScrumPokerActionTest {
 
     @Mock
     private I18nResolver i18nResolver;
+
+    @Mock
+    private RendererManager rendererManager;
 
     @Mock
     @AvailableInContainer
@@ -229,7 +234,22 @@ public class ScrumPokerActionTest {
         when(httpServletRequest.getContextPath()).thenReturn("/jira");
         when(httpServletRequest.getServerPort()).thenReturn(443);
 
-        assertThat(action.getScrumPokerSessionUrl(), is(equalTo("https://apps.codescape.de/jira/secure/ScrumPoker.jspa?issueKey=" + ISSUE_KEY)));
+        assertThat(action.getScrumPokerSessionUrl(),
+            is(equalTo("https://apps.codescape.de/jira/secure/ScrumPoker.jspa?issueKey=" + ISSUE_KEY)));
+    }
+
+    /* tests for getWikiRenderer() */
+
+    @Test
+    public void getWikiRendererShouldDelegate() {
+        JiraRendererPlugin jiraRendererPlugin = mock(JiraRendererPlugin.class);
+        when(rendererManager.getRendererForType(eq("atlassian-wiki-renderer"))).thenReturn(jiraRendererPlugin);
+
+        JiraRendererPlugin wikiRenderer = action.getWikiRenderer();
+
+        assertThat(wikiRenderer, is(equalTo(jiraRendererPlugin)));
+        verify(rendererManager, times(1)).getRendererForType("atlassian-wiki-renderer");
+        verifyNoMoreInteractions(rendererManager);
     }
 
     /* supporting methods */
@@ -242,11 +262,6 @@ public class ScrumPokerActionTest {
     private void whenLicenseIsInvalid() {
         when(scrumPokerLicenseService.hasValidLicense()).thenReturn(false);
         when(scrumPokerLicenseService.getLicenseError()).thenReturn(LicenseError.EXPIRED.name());
-    }
-
-    private void whenLicenseIsMissing() {
-        when(scrumPokerLicenseService.hasValidLicense()).thenReturn(false);
-        when(scrumPokerLicenseService.getLicenseError()).thenReturn("MISSING");
     }
 
     private void whenLicenseIsValid() {
