@@ -17,6 +17,7 @@ category: Administration
 * feat: include started and confirmed sessions in references (#133)
 * chore: rename Git master branch to main
 * feat: support latest enterprise patch releases for Jira 7.13, 8.5 and 8.13
+* refactor: cleanup code for health check action
 
 ### [20.11.0] - 2020-11-14
 

@@ -56,7 +56,7 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction {
     private final ProjectSettingsService projectSettingsService;
     private final ErrorLogService errorLogService;
     private final CardSetService cardSetService;
-    private ScrumPokerLicenseService scrumPokerLicenseService;
+    private final ScrumPokerLicenseService scrumPokerLicenseService;
 
     @Autowired
     public ScrumPokerHealthCheckAction(@ComponentImport CustomFieldManager customFieldManager,
