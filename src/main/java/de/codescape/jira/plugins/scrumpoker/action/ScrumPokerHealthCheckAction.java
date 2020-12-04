@@ -2,6 +2,7 @@ package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.issue.CustomFieldManager;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.Card;
 import de.codescape.jira.plugins.scrumpoker.service.*;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 /**
  * Health Check page for the Scrum Poker app.
  */
-public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction {
+public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction implements ProvidesDocumentationLink {
 
     private static final long serialVersionUID = 1L;
 
@@ -76,6 +77,11 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction {
     @Override
     protected String doExecute() {
         return SUCCESS;
+    }
+
+    @Override
+    public String getDocumentationUrl() {
+        return ScrumPokerConstants.HEALTH_CHECK_DOCUMENTATION;
     }
 
     /**

@@ -1,5 +1,6 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
+import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerError;
 import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * Error Log page to display and empty the error log.
  */
-public class ScrumPokerErrorLogAction extends AbstractScrumPokerAction {
+public class ScrumPokerErrorLogAction extends AbstractScrumPokerAction implements ProvidesDocumentationLink {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,6 +38,11 @@ public class ScrumPokerErrorLogAction extends AbstractScrumPokerAction {
         }
 
         return SUCCESS;
+    }
+
+    @Override
+    public String getDocumentationUrl() {
+        return ScrumPokerConstants.ERROR_LOG_DOCUMENTATION;
     }
 
     /**

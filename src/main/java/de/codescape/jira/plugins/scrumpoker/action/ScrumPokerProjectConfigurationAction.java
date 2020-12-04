@@ -4,6 +4,7 @@ import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.project.Project;
 import com.atlassian.jira.project.ProjectManager;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * Configuration of a Jira project for Scrum Poker specific settings.
  */
-public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerAction {
+public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerAction implements ProvidesDocumentationLink {
 
     private static final long serialVersionUID = 1L;
 
@@ -125,6 +126,11 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
             }
         }
         return SUCCESS;
+    }
+
+    @Override
+    public String getDocumentationUrl() {
+        return ScrumPokerConstants.CONFIGURATION_DOCUMENTATION;
     }
 
     // Scrum Poker should not save empty strings for unused settings. Those settings are persisted as null.

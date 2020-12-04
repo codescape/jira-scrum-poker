@@ -1,6 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.issue.fields.CustomField;
+import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.model.AdditionalField;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
@@ -16,7 +17,7 @@ import java.util.List;
 /**
  * Global configuration of the Scrum Poker plugin.
  */
-public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction {
+public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction implements ProvidesDocumentationLink {
 
     private static final long serialVersionUID = 1L;
 
@@ -155,6 +156,11 @@ public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction {
         }
 
         return SUCCESS;
+    }
+
+    @Override
+    public String getDocumentationUrl() {
+        return ScrumPokerConstants.CONFIGURATION_DOCUMENTATION;
     }
 
 }

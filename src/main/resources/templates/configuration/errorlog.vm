@@ -6,7 +6,28 @@
 </head>
 <body class="scrum-poker">
 
-<h2>$i18n.getText("scrumpoker.title") &raquo; $i18n.getText("scrumpoker.errorlog.title")</h2>
+<header class="aui-page-header">
+    <div class="aui-page-header-inner">
+        <div class="aui-page-header-image">
+            <span class="aui-avatar aui-avatar-large aui-avatar-project">
+                <span class="aui-avatar-inner">
+                    <img alt="Scrum Poker Logo" src="$req.contextPath/download/resources/de.codescape.jira.plugins.scrum-poker:scrum-poker-resources/images/scrum-poker-logo-144.png">
+                </span>
+            </span>
+        </div>
+        <div class="aui-page-header-main">
+            <ol class="aui-nav aui-nav-breadcrumbs">
+                <li>$i18n.getText("scrumpoker.title")</li>
+            </ol>
+            <h1>$i18n.getText("scrumpoker.errorlog.title")</h1>
+        </div>
+        <div class="aui-page-header-actions">
+            <div class="aui-buttons">
+                <a href="$action.documentationUrl" target="_blank" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-question-filled"></span> $i18n.getText("scrumpoker.documentation")</a>
+            </div>
+        </div>
+    </div>
+</header>
 
 <p>$i18n.getText("scrumpoker.errorlog.description")</p>
 
