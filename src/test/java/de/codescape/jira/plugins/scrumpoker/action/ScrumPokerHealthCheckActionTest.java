@@ -6,6 +6,7 @@ import com.atlassian.jira.junit.rules.AvailableInContainer;
 import com.atlassian.jira.junit.rules.MockitoContainer;
 import com.atlassian.jira.junit.rules.MockitoMocksInContainer;
 import com.atlassian.jira.web.HttpServletVariables;
+import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerError;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.Card;
@@ -67,10 +68,14 @@ public class ScrumPokerHealthCheckActionTest {
     @Mock
     private CustomField estimateField;
 
+    /* tests for doExecute() */
+
     @Test
     public void shouldAlwaysDisplayThePage() {
         assertThat(action.doExecute(), is(equalTo("success")));
     }
+
+    /* tests for showResults() */
 
     @Test
     public void shouldShowResultsIfButtonForResultsIsClicked() {
@@ -84,6 +89,8 @@ public class ScrumPokerHealthCheckActionTest {
         assertThat(action.showResults(), is(equalTo(false)));
     }
 
+    /* tests for showLicense() */
+
     @Test
     public void shouldShowLicenseChecksWhenSelected() {
         expectParameterToReturnValue(Parameters.SCAN_LICENSE, "true");
@@ -95,6 +102,8 @@ public class ScrumPokerHealthCheckActionTest {
         expectParameterToReturnValue(Parameters.SCAN_LICENSE, null);
         assertThat(action.showLicense(), is(equalTo(false)));
     }
+
+    /* tests for showConfiguration() */
 
     @Test
     public void shouldShowConfigurationChecksWhenSelected() {
@@ -108,6 +117,8 @@ public class ScrumPokerHealthCheckActionTest {
         assertThat(action.showConfiguration(), is(equalTo(false)));
     }
 
+    /* tests for showErrors() */
+
     @Test
     public void shouldShowErrorLogChecksWhenSelected() {
         expectParameterToReturnValue(Parameters.SCAN_ERRORS, "true");
@@ -120,12 +131,7 @@ public class ScrumPokerHealthCheckActionTest {
         assertThat(action.showErrors(), is(equalTo(false)));
     }
 
-    private void expectParameterToReturnValue(String parameterName, String parameterValue) {
-        when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
-        when(httpServletRequest.getParameterValues(parameterName)).thenReturn(new String[]{parameterValue});
-    }
-
-    // license
+    /* tests for getLicenseResults() */
 
     @Test
     public void shouldSignalLicenseErrorsIfLicenseIsNotValid() {
@@ -140,7 +146,7 @@ public class ScrumPokerHealthCheckActionTest {
         assertThat(action.getLicenseResults(), is(empty()));
     }
 
-    // configuration
+    /* tests for getConfigurationResults() */
 
     @Test
     public void shouldSignalUnsetEstimationFieldIfEstimationFieldIsNotSet() {
@@ -167,14 +173,6 @@ public class ScrumPokerHealthCheckActionTest {
         when(globalSettings.isActivateScrumPoker()).thenReturn(false);
         expectNoProjectExplicitlyEnabled();
         assertThat(action.getConfigurationResults(), hasItem(Configuration.ESTIMATE_FIELD_NOT_FOUND));
-    }
-
-    private void expectNoProjectExplicitlyEnabled() {
-        List<ScrumPokerProject> scrumPokerProjects = new ArrayList<>();
-        ScrumPokerProject scrumPokerProject = mock(ScrumPokerProject.class);
-        when(scrumPokerProject.isScrumPokerEnabled()).thenReturn(false);
-        scrumPokerProjects.add(scrumPokerProject);
-        when(projectSettingsService.loadAll()).thenReturn(scrumPokerProjects);
     }
 
     @Test
@@ -224,7 +222,7 @@ public class ScrumPokerHealthCheckActionTest {
         assertThat(action.getConfigurationResults(), is(empty()));
     }
 
-    // error log
+    /* tests for getErrorsResults() */
 
     @Test
     public void shouldSignalNoErrorsIfErrorLogIsEmpty() {
@@ -236,6 +234,28 @@ public class ScrumPokerHealthCheckActionTest {
         ScrumPokerError[] errors = {mock(ScrumPokerError.class)};
         when(errorLogService.listAll()).thenReturn(Arrays.asList(errors));
         assertThat(action.getErrorsResults(), hasItem(ErrorLog.ERROR_LOG_NOT_EMPTY));
+    }
+
+    /* tests for getDocumentationUrl() */
+
+    @Test
+    public void getDocumentationUrlShouldExposeLink() {
+        assertThat(action.getDocumentationUrl(), is(equalTo(ScrumPokerConstants.HEALTH_CHECK_DOCUMENTATION)));
+    }
+
+    /* supporting methods */
+
+    private void expectParameterToReturnValue(String parameterName, String parameterValue) {
+        when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
+        when(httpServletRequest.getParameterValues(parameterName)).thenReturn(new String[]{parameterValue});
+    }
+
+    private void expectNoProjectExplicitlyEnabled() {
+        List<ScrumPokerProject> scrumPokerProjects = new ArrayList<>();
+        ScrumPokerProject scrumPokerProject = mock(ScrumPokerProject.class);
+        when(scrumPokerProject.isScrumPokerEnabled()).thenReturn(false);
+        scrumPokerProjects.add(scrumPokerProject);
+        when(projectSettingsService.loadAll()).thenReturn(scrumPokerProjects);
     }
 
 }

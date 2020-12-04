@@ -7,6 +7,7 @@ import com.atlassian.jira.junit.rules.MockitoMocksInContainer;
 import com.atlassian.jira.project.Project;
 import com.atlassian.jira.project.ProjectManager;
 import com.atlassian.jira.web.HttpServletVariables;
+import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.*;
@@ -208,6 +209,13 @@ public class ScrumPokerProjectConfigurationActionTest {
         assertThat(action.getEstimateFields(), is(equalTo(expectedCustomFields)));
         verify(estimateFieldService, times(1)).supportedCustomFields();
         verifyNoMoreInteractions(estimateFieldService);
+    }
+
+    /* tests for getDocumentationUrl() */
+
+    @Test
+    public void getDocumentationUrlShouldExposeLink() {
+        assertThat(action.getDocumentationUrl(), is(equalTo(ScrumPokerConstants.CONFIGURATION_DOCUMENTATION)));
     }
 
     /* supporting methods */

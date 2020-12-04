@@ -4,6 +4,7 @@ import com.atlassian.jira.junit.rules.AvailableInContainer;
 import com.atlassian.jira.junit.rules.MockitoContainer;
 import com.atlassian.jira.junit.rules.MockitoMocksInContainer;
 import com.atlassian.jira.web.HttpServletVariables;
+import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerError;
 import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
 import org.junit.Rule;
@@ -38,12 +39,16 @@ public class ScrumPokerErrorLogActionTest {
     @Mock
     private HttpServletRequest httpServletRequest;
 
+    /* tests for getErrorList() */
+
     @Test
     public void shouldExposeTheErrorList() {
         List<ScrumPokerError> scrumPokerErrors = new ArrayList<>();
         when(errorLogService.listAll()).thenReturn(scrumPokerErrors);
         assertThat(action.getErrorList(), is(equalTo(scrumPokerErrors)));
     }
+
+    /* tests for doExecute() */
 
     @Test
     public void shouldEmptyTheErrorLogWhenRequested() {
@@ -59,6 +64,13 @@ public class ScrumPokerErrorLogActionTest {
         when(httpServletRequest.getParameter(ScrumPokerErrorLogAction.Parameters.ACTION)).thenReturn(null);
         assertThat(action.doExecute(), is(equalTo(action.SUCCESS)));
         verify(errorLogService, never()).emptyErrorLog();
+    }
+
+    /* tests for getDocumentationUrl() */
+
+    @Test
+    public void getDocumentationUrlShouldExposeLink() {
+        assertThat(action.getDocumentationUrl(), is(equalTo(ScrumPokerConstants.ERROR_LOG_DOCUMENTATION)));
     }
 
 }

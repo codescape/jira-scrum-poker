@@ -5,6 +5,7 @@ import com.atlassian.jira.junit.rules.AvailableInContainer;
 import com.atlassian.jira.junit.rules.MockitoContainer;
 import com.atlassian.jira.junit.rules.MockitoMocksInContainer;
 import com.atlassian.jira.web.HttpServletVariables;
+import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.model.AdditionalField;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
@@ -124,6 +125,13 @@ public class ScrumPokerConfigurationActionTest {
         assertThat(globalSettings.getDisplayCommentsForIssue(), is(equalTo(DisplayCommentsForIssue.NONE)));
         assertThat(globalSettings.getCardSet(), is(equalTo("1,2,3,4,5")));
         assertThat(globalSettings.getAdditionalFields(), is(equalTo("field1,field2,field3")));
+    }
+
+    /* tests for getDocumentationUrl() */
+
+    @Test
+    public void getDocumentationUrlShouldExposeLink() {
+        assertThat(action.getDocumentationUrl(), is(equalTo(ScrumPokerConstants.CONFIGURATION_DOCUMENTATION)));
     }
 
     /* tests for getEstimateFields() */

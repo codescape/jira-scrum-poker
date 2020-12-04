@@ -20,6 +20,7 @@ category: Administration
 * refactor: cleanup code for health check action
 * test: add tests for Scrum Poker session action
 * feat: improve configuration headers with reference to online documentation
+* test: add tests for correct documentation url
 
 ### [20.11.0] - 2020-11-14
 
