@@ -11,6 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+  
+### [20.12.0] - 2020-12-05
+
+**Better estimates for everyone with improved reference stories**
+
 * feat: add support for Jira 8.14.0
 * docs: reference new service desk portal for support requests
 * docs: synchronize imprint with company website imprint
@@ -215,7 +221,8 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.11.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/20.12.0...HEAD
+[20.12.0]: https://github.com/codescape/jira-scrum-poker/compare/20.11.0...20.12.0
 [20.11.0]: https://github.com/codescape/jira-scrum-poker/compare/20.10.1...20.11.0
 [20.10.1]: https://github.com/codescape/jira-scrum-poker/compare/20.10.0...20.10.1
 [20.10.0]: https://github.com/codescape/jira-scrum-poker/compare/20.08.0...20.10.0
