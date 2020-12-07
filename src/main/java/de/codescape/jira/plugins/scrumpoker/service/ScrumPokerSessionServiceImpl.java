@@ -126,6 +126,7 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     @Override
     public List<ScrumPokerSession> references(String userKey, String estimate) {
         return Arrays.asList(activeObjects.find(ScrumPokerSession.class, Query.select()
+            .distinct()
             .alias(ScrumPokerSession.class, "SPS")
             .alias(ScrumPokerVote.class, "SPV")
             .join(ScrumPokerVote.class, "SPV.SESSION_ID = SPS.ISSUE_KEY")

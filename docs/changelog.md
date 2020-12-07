@@ -11,8 +11,8 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
-  
+* fix: avoid duplicate sessions in references
+
 ### [20.12.0] - 2020-12-05
 
 **Better estimates for everyone with improved reference stories**

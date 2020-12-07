@@ -269,6 +269,20 @@ public class ScrumPokerSessionServiceImplTest {
             hasItem("ISSUE-1"));
     }
 
+    @Test
+    public void referencesShouldNotIncludeSessionsMoreThanOneTime() {
+        scrumPokerSessionService.byIssueKey("ISSUE-1", "USER-KEY");
+        scrumPokerSessionService.addVote("ISSUE-1", "USER-KEY", "3");
+        scrumPokerSessionService.addVote("ISSUE-1", "ANOTHER-KEY", "3");
+        scrumPokerSessionService.addVote("ISSUE-1", "YET-ANOTHER-KEY", "3");
+        scrumPokerSessionService.confirm("ISSUE-1", "USER-KEY", "3");
+
+        List<ScrumPokerSession> references = scrumPokerSessionService.references("USER-KEY", "3");
+        assertThat(references.size(), is(equalTo(1)));
+        assertThat(references.stream().map(ScrumPokerSession::getIssueKey).collect(Collectors.toList()),
+            hasItem("ISSUE-1"));
+    }
+
     /* supporting methods */
 
     private Date beforeTimeout() {
