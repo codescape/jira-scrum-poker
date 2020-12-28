@@ -12,7 +12,13 @@ Your question is not answered here? Please [get in contact](/support) with us.
 * Table of Contents
 {:toc}
 
-### Why is there no support for the standard Original Estimate field?
+### Why is the standard Original Estimate field not supported by Scrum Poker for Jira?
 
 Scrum Poker for Jira advocates collaborative estimations using Story Points or any other measure that comes to your mind.
 Those estimates represent the ideas of complexity and amount of work but should not be converted into some time duration unit as displayed in the Original Estimate field.
+
+### Will there be a Jira Cloud version of Scrum Poker for Jira?
+
+At the moment only Jira Server and Jira Data Center compatible versions of Scrum Poker for Jira are available.
+We have already started to develop a Jira Cloud version of Scrum Poker for Jira.
+A first release will be announced as soon as it is available.
