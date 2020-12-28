@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* docs: add frequently asked questions to online documentation
 
 ### [20.12.1] - 2020-12-07
 
