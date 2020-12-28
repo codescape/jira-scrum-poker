@@ -1,6 +1,9 @@
 package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.jira.issue.*;
+import com.atlassian.jira.issue.customfields.manager.OptionsManager;
+import com.atlassian.jira.issue.customfields.option.Option;
+import com.atlassian.jira.issue.customfields.option.Options;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.permission.ProjectPermissions;
 import com.atlassian.jira.security.JiraAuthenticationContext;
@@ -24,11 +27,19 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
     static final String CUSTOM_FIELD_TYPE_NUMBER = "com.atlassian.jira.plugin.system.customfieldtypes:float";
     static final String CUSTOM_FIELD_TYPE_TEXT = "com.atlassian.jira.plugin.system.customfieldtypes:textfield";
     static final String CUSTOM_FIELD_TYPE_TEXTAREA = "com.atlassian.jira.plugin.system.customfieldtypes:textarea";
+    static final String CUSTOM_FIELD_TYPE_RADIO = "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons";
+    static final String CUSTOM_FIELD_TYPE_SELECT = "com.atlassian.jira.plugin.system.customfieldtypes:select";
 
     static final List<String> SUPPORTED_FIELD_TYPES = Arrays.asList(
-        CUSTOM_FIELD_TYPE_NUMBER, CUSTOM_FIELD_TYPE_TEXT, CUSTOM_FIELD_TYPE_TEXTAREA);
+        CUSTOM_FIELD_TYPE_NUMBER,
+        CUSTOM_FIELD_TYPE_TEXT,
+        CUSTOM_FIELD_TYPE_TEXTAREA,
+        CUSTOM_FIELD_TYPE_RADIO,
+        CUSTOM_FIELD_TYPE_SELECT
+    );
 
     private final GlobalSettingsService globalSettingsService;
+    private final OptionsManager optionsManager;
     private final ProjectSettingsService projectSettingsService;
     private final CustomFieldManager customFieldManager;
     private final JiraAuthenticationContext jiraAuthenticationContext;
@@ -41,9 +52,11 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
                                     @ComponentImport IssueManager issueManager,
                                     @ComponentImport CustomFieldManager customFieldManager,
                                     @ComponentImport PermissionManager permissionManager,
+                                    @ComponentImport OptionsManager optionsManager,
                                     GlobalSettingsService globalSettingsService,
                                     ProjectSettingsService projectSettingsService,
                                     ErrorLogService errorLogService) {
+        this.optionsManager = optionsManager;
         this.projectSettingsService = projectSettingsService;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
         this.issueManager = issueManager;
@@ -61,7 +74,7 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
         if (globalSettingsService.load().isCheckPermissionToSaveEstimate() &&
             !permissionManager.hasPermission(ProjectPermissions.EDIT_ISSUES, issue, applicationUser)) {
             errorLogService.logError("User " + applicationUser.getUsername() +
-                " is missing permissions to save estimation for issue " + issueKey + ".");
+                " is missing permissions to save estimate of " + estimate + " for issue " + issueKey + ".");
             return false;
         }
         // based on the type of the custom field apply the estimate in the correct data type
@@ -81,9 +94,20 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
             case CUSTOM_FIELD_TYPE_TEXTAREA:
                 issue.setCustomFieldValue(estimateField, estimate);
                 break;
+            case CUSTOM_FIELD_TYPE_SELECT:
+            case CUSTOM_FIELD_TYPE_RADIO:
+                Options options = optionsManager.getOptions(estimateField.getRelevantConfig(issue));
+                Option optionForEstimate = options.getOptionForValue(estimate, null);
+                if (optionForEstimate == null) {
+                    errorLogService.logError("Unable to save estimate of " + estimate + " because field "
+                        + estimateField.getFieldName() + " does not have a valid option for this value.");
+                    return false;
+                }
+                issue.setCustomFieldValue(estimateField, optionForEstimate);
+                break;
             default:
-                errorLogService.logError("Unable to save estimate because field type "
-                    + estimateFieldKey + " is not supported.");
+                errorLogService.logError("Unable to save estimate of " + estimate + " because field "
+                    + estimateField.getFieldName() + " of type " + estimateFieldKey + " is not supported.");
                 return false;
         }
         // finally update the issue

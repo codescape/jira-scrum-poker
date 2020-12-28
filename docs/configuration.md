@@ -54,9 +54,13 @@ It is preferred to choose this field because estimates that are saved into this 
 
 Scrum Poker for Jira currently supports the following field types to be chosen in the configuration and be filled with the confirmed estimate:
 
-* Number Field
-* Text Field (multi-line)
-* Text Field (single line)
+| Field type                  | Restrictions                    |
+| --------------------------- | ------------------------------- |
+| Number Field                | accepts only numeric values     |
+| Text Field (multi-line)     | accepts all values              |
+| Text Field (single line)    | accepts all values              |
+| Radio Buttons               | accepts only configured options |
+| Select List (single choice) | accepts only configured options |
 
 Please [let us know](/support) if you require other field types to be supported.
 

@@ -5,7 +5,11 @@ import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.customfields.CustomFieldType;
+import com.atlassian.jira.issue.customfields.manager.OptionsManager;
+import com.atlassian.jira.issue.customfields.option.Option;
+import com.atlassian.jira.issue.customfields.option.Options;
 import com.atlassian.jira.issue.fields.CustomField;
+import com.atlassian.jira.issue.fields.config.FieldConfig;
 import com.atlassian.jira.permission.ProjectPermissions;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
@@ -23,8 +27,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static de.codescape.jira.plugins.scrumpoker.service.EstimateFieldServiceImpl.CUSTOM_FIELD_TYPE_NUMBER;
-import static de.codescape.jira.plugins.scrumpoker.service.EstimateFieldServiceImpl.CUSTOM_FIELD_TYPE_TEXT;
+import static de.codescape.jira.plugins.scrumpoker.service.EstimateFieldServiceImpl.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -56,6 +59,9 @@ public class EstimateFieldServiceImplTest {
 
     @Mock
     private ProjectSettingsService projectSettingsService;
+
+    @Mock
+    private OptionsManager optionsManager;
 
     @InjectMocks
     private EstimateFieldServiceImpl estimateFieldService;
@@ -95,6 +101,59 @@ public class EstimateFieldServiceImplTest {
 
         assertThat(estimateFieldService.save("ISSUE", "8"), is(true));
         verify(issueManager).updateIssue(eq(applicationUser), eq(issue), any());
+    }
+
+    @Test
+    public void saveUpdatesIssueForSupportedEstimateRadioButtonsWithValidOption() {
+        ApplicationUser applicationUser = expectApplicationUserExists();
+        MutableIssue issue = expectIssueExists("ISSUE");
+
+        // global settings has estimate field set
+        GlobalSettings globalSettings = mock(GlobalSettings.class);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
+        when(globalSettings.getEstimateField()).thenReturn("VALID_FIELD");
+
+        // estimate field is of supported type
+        CustomField estimateField = expectCustomFieldOfType(CUSTOM_FIELD_TYPE_RADIO);
+        when(customFieldManager.getCustomFieldObject("VALID_FIELD")).thenReturn(estimateField);
+
+        FieldConfig fieldConfig = mock(FieldConfig.class);
+        when(estimateField.getRelevantConfig(issue)).thenReturn(fieldConfig);
+
+        // option exists for issue
+        Options options = mock(Options.class);
+        when(optionsManager.getOptions(fieldConfig)).thenReturn(options);
+        Option option = mock(Option.class);
+        when(options.getOptionForValue("8", null)).thenReturn(option);
+
+        assertThat(estimateFieldService.save("ISSUE", "8"), is(true));
+        verify(issueManager).updateIssue(eq(applicationUser), eq(issue), any());
+    }
+
+    @Test
+    public void saveFailsForSupportedEstimateRadioButtonsWithoutValidOption() {
+        ApplicationUser applicationUser = expectApplicationUserExists();
+        MutableIssue issue = expectIssueExists("ISSUE");
+
+        // global settings has estimate field set
+        GlobalSettings globalSettings = mock(GlobalSettings.class);
+        when(globalSettingsService.load()).thenReturn(globalSettings);
+        when(globalSettings.getEstimateField()).thenReturn("VALID_FIELD");
+
+        // estimate field is of supported type
+        CustomField estimateField = expectCustomFieldOfType(CUSTOM_FIELD_TYPE_RADIO);
+        when(customFieldManager.getCustomFieldObject("VALID_FIELD")).thenReturn(estimateField);
+
+        FieldConfig fieldConfig = mock(FieldConfig.class);
+        when(estimateField.getRelevantConfig(issue)).thenReturn(fieldConfig);
+
+        // option does not exist for issue
+        Options options = mock(Options.class);
+        when(optionsManager.getOptions(fieldConfig)).thenReturn(options);
+        when(options.getOptionForValue("8", null)).thenReturn(null);
+
+        assertThat(estimateFieldService.save("ISSUE", "8"), is(false));
+        verify(issueManager, never()).updateIssue(eq(applicationUser), eq(issue), any());
     }
 
     @Test
