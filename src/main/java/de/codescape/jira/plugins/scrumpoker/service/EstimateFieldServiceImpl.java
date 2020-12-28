@@ -78,6 +78,21 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
             return false;
         }
         // based on the type of the custom field apply the estimate in the correct data type
+        if (!saveForSupportedFieldTypes(issue, estimate)) {
+            return false;
+        }
+        // finally update the issue
+        try {
+            issueManager.updateIssue(applicationUser, issue, UpdateIssueRequest.builder().build());
+            return true;
+        } catch (RuntimeException e) {
+            errorLogService.logError("Unable to save estimate " + estimate + " for issue "
+                + issueKey + ". See stacktrace for further details.", e);
+            return false;
+        }
+    }
+
+    private boolean saveForSupportedFieldTypes(MutableIssue issue, String estimate) {
         CustomField estimateField = estimateFieldForIssue(issue);
         String estimateFieldKey = estimateField.getCustomFieldType().getKey();
         switch (estimateFieldKey) {
@@ -110,15 +125,7 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
                     + estimateField.getFieldName() + " of type " + estimateFieldKey + " is not supported.");
                 return false;
         }
-        // finally update the issue
-        try {
-            issueManager.updateIssue(applicationUser, issue, UpdateIssueRequest.builder().build());
-            return true;
-        } catch (RuntimeException e) {
-            errorLogService.logError("Unable to save estimate " + estimate + " for issue "
-                + issueKey + ". See stacktrace for further details.", e);
-            return false;
-        }
+        return true;
     }
 
     @Override
