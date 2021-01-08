@@ -102,60 +102,69 @@ public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction impl
         if (action != null) {
             switch (action) {
                 case Actions.SAVE:
-                    GlobalSettings globalSettings = new GlobalSettings();
-
-                    String newEstimateField = getParameter(Parameters.ESTIMATE_FIELD);
-                    globalSettings.setEstimateField(newEstimateField);
-
-                    String newSessionTimeout = getParameter(Parameters.SESSION_TIMEOUT);
-                    if (newSessionTimeout != null) {
-                        globalSettings.setSessionTimeout(Integer.valueOf(newSessionTimeout));
-                    }
-
-                    String newActivateScrumPoker = getParameter(Parameters.ACTIVATE_SCRUM_POKER);
-                    if (newActivateScrumPoker != null) {
-                        globalSettings.setActivateScrumPoker(Boolean.parseBoolean(newActivateScrumPoker));
-                    }
-
-                    String newAllowRevealDeck = getParameter(Parameters.ALLOW_REVEAL_DECK);
-                    if (newAllowRevealDeck != null) {
-                        globalSettings.setAllowRevealDeck(AllowRevealDeck.valueOf(newAllowRevealDeck));
-                    }
-
-                    String displayDropdownOnBoards = getParameter(Parameters.DISPLAY_DROPDOWN_ON_BOARDS);
-                    if (displayDropdownOnBoards != null) {
-                        globalSettings.setDisplayDropdownOnBoards(Boolean.parseBoolean(displayDropdownOnBoards));
-                    }
-
-                    String checkPermissionToSaveEstimate = getParameter(Parameters.CHECK_PERMISSION_TO_SAVE_ESTIMATE);
-                    if (checkPermissionToSaveEstimate != null) {
-                        globalSettings.setCheckPermissionToSaveEstimate(Boolean.parseBoolean(checkPermissionToSaveEstimate));
-                    }
-
-                    String displayCommentsForIssue = getParameter(Parameters.DISPLAY_COMMENTS_FOR_ISSUE);
-                    if (displayCommentsForIssue != null) {
-                        globalSettings.setDisplayCommentsForIssue(DisplayCommentsForIssue.valueOf(displayCommentsForIssue));
-                    }
-
-                    String cardSet = getParameter(Parameters.CARD_SET);
-                    if (cardSet != null) {
-                        globalSettings.setCardSet(cardSet);
-                    }
-
-                    String displayAdditionalFields = getParameter(Parameters.DISPLAY_ADDITIONAL_FIELDS);
-                    if (displayAdditionalFields != null) {
-                        globalSettings.setAdditionalFields(displayAdditionalFields);
-                    }
-
-                    globalSettingsService.persist(globalSettings);
+                    saveGlobalSettings();
                     break;
                 case Actions.DEFAULTS:
-                    globalSettingsService.persist(new GlobalSettings());
+                    saveDefaultSettings();
                     break;
             }
         }
-
         return SUCCESS;
+    }
+
+    private void saveGlobalSettings() {
+        GlobalSettings globalSettings = new GlobalSettings();
+
+        // estimate field (required - always provided)
+        String estimateField = getParameter(Parameters.ESTIMATE_FIELD);
+        globalSettings.setEstimateField(estimateField);
+
+        // session timeout (override only if value provided)
+        String sessionTimeout = getParameter(Parameters.SESSION_TIMEOUT);
+        if (sessionTimeout != null) {
+            globalSettings.setSessionTimeout(Integer.valueOf(sessionTimeout));
+        }
+
+        // activate Scrum Poker (always override default)
+        String activateScrumPoker = getParameter(Parameters.ACTIVATE_SCRUM_POKER);
+        globalSettings.setActivateScrumPoker(Boolean.parseBoolean(activateScrumPoker));
+
+        // allow reveal deck (override only if value provided)
+        String allowRevealDeck = getParameter(Parameters.ALLOW_REVEAL_DECK);
+        if (allowRevealDeck != null) {
+            globalSettings.setAllowRevealDeck(AllowRevealDeck.valueOf(allowRevealDeck));
+        }
+
+        // display dropdown on boards (always override default)
+        String displayDropdownOnBoards = getParameter(Parameters.DISPLAY_DROPDOWN_ON_BOARDS);
+        globalSettings.setDisplayDropdownOnBoards(Boolean.parseBoolean(displayDropdownOnBoards));
+
+        // check permission to save estimate (always override default)
+        String checkPermissionToSaveEstimate = getParameter(Parameters.CHECK_PERMISSION_TO_SAVE_ESTIMATE);
+        globalSettings.setCheckPermissionToSaveEstimate(Boolean.parseBoolean(checkPermissionToSaveEstimate));
+
+        // display comments for issue (override only if value provided)
+        String displayCommentsForIssue = getParameter(Parameters.DISPLAY_COMMENTS_FOR_ISSUE);
+        if (displayCommentsForIssue != null) {
+            globalSettings.setDisplayCommentsForIssue(DisplayCommentsForIssue.valueOf(displayCommentsForIssue));
+        }
+
+        // card set (required - always provided)
+        String cardSet = getParameter(Parameters.CARD_SET);
+        globalSettings.setCardSet(cardSet);
+
+        // display additional fields (persist null instead of empty string)
+        String displayAdditionalFields = getParameter(Parameters.DISPLAY_ADDITIONAL_FIELDS);
+        if (displayAdditionalFields != null && displayAdditionalFields.isEmpty()) {
+            displayAdditionalFields = null;
+        }
+        globalSettings.setAdditionalFields(displayAdditionalFields);
+
+        globalSettingsService.persist(globalSettings);
+    }
+
+    private void saveDefaultSettings() {
+        globalSettingsService.persist(new GlobalSettings());
     }
 
     @Override

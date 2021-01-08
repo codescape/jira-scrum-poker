@@ -13,7 +13,8 @@ category: Administration
 
 * docs: add frequently asked questions to online documentation
 * feat: support estimate fields that are select lists or radio buttons (#120)
-* refactor: improve code to persist estimate depending on field type 
+* refactor: improve code to persist estimate depending on field type
+* fix: persist unchecked value of activate Scrum Poker in global configuration
 
 ### [20.12.1] - 2020-12-07
 

@@ -112,10 +112,7 @@ public class ScrumPokerConfigurationActionTest {
 
         assertThat(action.doExecute(), is(equalTo(SUCCESS)));
 
-        ArgumentCaptor<GlobalSettings> globalSettingsCaptor = ArgumentCaptor.forClass(GlobalSettings.class);
-        verify(globalSettingsService).persist(globalSettingsCaptor.capture());
-        GlobalSettings globalSettings = globalSettingsCaptor.getValue();
-
+        GlobalSettings globalSettings = getPersistedGlobalSettings();
         assertThat(globalSettings.getEstimateField(), is(equalTo("estimateField")));
         assertThat(globalSettings.getSessionTimeout(), is(equalTo(18)));
         assertThat(globalSettings.isActivateScrumPoker(), is(equalTo(true)));
@@ -125,6 +122,22 @@ public class ScrumPokerConfigurationActionTest {
         assertThat(globalSettings.getDisplayCommentsForIssue(), is(equalTo(DisplayCommentsForIssue.NONE)));
         assertThat(globalSettings.getCardSet(), is(equalTo("1,2,3,4,5")));
         assertThat(globalSettings.getAdditionalFields(), is(equalTo("field1,field2,field3")));
+    }
+
+    @Test
+    public void doExecuteWithActionSavePersistsFalseForActivateScrumPokerIfUnchecked() {
+        // when the save method is called
+        when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
+        when(httpServletRequest.getParameterValues(ACTION)).thenReturn(new String[]{SAVE});
+
+        // with the following parameters
+        when(httpServletRequest.getParameterValues(ACTIVATE_SCRUM_POKER))
+            .thenReturn(null);
+
+        assertThat(action.doExecute(), is(equalTo(SUCCESS)));
+
+        GlobalSettings globalSettings = getPersistedGlobalSettings();
+        assertThat(globalSettings.isActivateScrumPoker(), is(equalTo(false)));
     }
 
     /* tests for getDocumentationUrl() */
@@ -184,6 +197,14 @@ public class ScrumPokerConfigurationActionTest {
         when(globalSettingsService.load()).thenReturn(globalSettings);
 
         assertThat(action.getGlobalSettings(), is(equalTo(globalSettings)));
+    }
+
+    /* supporting methods */
+
+    private GlobalSettings getPersistedGlobalSettings() {
+        ArgumentCaptor<GlobalSettings> globalSettingsCaptor = ArgumentCaptor.forClass(GlobalSettings.class);
+        verify(globalSettingsService).persist(globalSettingsCaptor.capture());
+        return globalSettingsCaptor.getValue();
     }
 
 }
