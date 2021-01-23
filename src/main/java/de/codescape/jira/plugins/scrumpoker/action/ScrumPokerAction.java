@@ -49,7 +49,6 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
     private final DateTimeFormatter dateTimeFormatter;
     private final GlobalSettingsService globalSettingsService;
     private final EstimateFieldService estimateFieldService;
-    private final ErrorLogService errorLogService;
     private final AdditionalFieldService additionalFieldService;
     private final ScrumPokerLicenseService scrumPokerLicenseService;
     private final I18nResolver i18nResolver;
@@ -69,6 +68,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
                             ErrorLogService errorLogService,
                             AdditionalFieldService additionalFieldService,
                             ScrumPokerLicenseService scrumPokerLicenseService) {
+        super(errorLogService);
         this.rendererManager = rendererManager;
         this.issueManager = issueManager;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
@@ -77,7 +77,6 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
         this.dateTimeFormatter = dateTimeFormatter;
         this.globalSettingsService = globalSettingsService;
         this.estimateFieldService = estimateFieldService;
-        this.errorLogService = errorLogService;
         this.additionalFieldService = additionalFieldService;
         this.scrumPokerLicenseService = scrumPokerLicenseService;
         this.i18nResolver = i18nResolver;
@@ -87,7 +86,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
      * Display the page if the current user is allowed to see the issue and a Scrum Poker session can be started.
      */
     @Override
-    protected String doExecute() {
+    protected String doExecuteInternal() {
         // license check
         if (!scrumPokerLicenseService.hasValidLicense()) {
             errorMessage(i18nResolver.getText(scrumPokerLicenseService.getLicenseError()));
@@ -191,11 +190,6 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
 
     private boolean currentUserIsNotAllowedToSeeIssue(MutableIssue issue) {
         return !permissionManager.hasPermission(BROWSE_PROJECTS, issue, jiraAuthenticationContext.getLoggedInUser());
-    }
-
-    private void errorMessage(String errorMessage) {
-        errorLogService.logError(errorMessage);
-        addErrorMessage(errorMessage);
     }
 
 }

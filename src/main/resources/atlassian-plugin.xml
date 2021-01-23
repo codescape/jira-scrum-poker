@@ -14,8 +14,8 @@
 
         <!-- configuration -->
         <param name="configure.url">/secure/admin/ScrumPokerConfiguration.jspa</param>
-        <param name="post.install.url">/secure/admin/ScrumPokerConfiguration.jspa</param>
-        <param name="post.update.url">/secure/admin/ScrumPokerConfiguration.jspa</param>
+        <param name="post.install.url">/secure/admin/ScrumPokerGettingStarted.jspa</param>
+        <param name="post.update.url">/secure/admin/ScrumPokerGettingStarted.jspa</param>
 
         <!-- licensing -->
         <param name="atlassian-licensing-enabled">${atlassian.licensing.enabled}</param>
@@ -49,6 +49,7 @@
         <transformation extension="js">
             <transformer key="jsI18n"/>
         </transformation>
+        <resource type="download" name="scrum-poker-configuration.css" location="/css/scrum-poker-configuration.css"/>
         <resource type="download" name="scrum-poker-configuration.js" location="/js/scrum-poker-configuration.js"/>
     </web-resource>
 
@@ -112,15 +113,19 @@
     <web-section key="scrum-poker-configuration" location="admin_plugins_menu" weight="110">
         <label key="scrumpoker.title"/>
     </web-section>
-    <web-item key="scrum-poker-configuration-item" section="admin_plugins_menu/scrum-poker-configuration" weight="10">
+    <web-item key="scrum-poker-configuration-item1" section="admin_plugins_menu/scrum-poker-configuration" weight="10">
+        <label key="scrumpoker.gettingstarted.title"/>
+        <link>/secure/admin/ScrumPokerGettingStarted.jspa</link>
+    </web-item>
+    <web-item key="scrum-poker-configuration-item2" section="admin_plugins_menu/scrum-poker-configuration" weight="20">
         <label key="scrumpoker.config.title"/>
         <link>/secure/admin/ScrumPokerConfiguration.jspa</link>
     </web-item>
-    <web-item key="scrum-poker-configuration-item2" section="admin_plugins_menu/scrum-poker-configuration" weight="20">
+    <web-item key="scrum-poker-configuration-item3" section="admin_plugins_menu/scrum-poker-configuration" weight="30">
         <label key="scrumpoker.healthcheck.title"/>
         <link>/secure/admin/ScrumPokerHealthCheck.jspa</link>
     </web-item>
-    <web-item key="scrum-poker-configuration-item3" section="admin_plugins_menu/scrum-poker-configuration" weight="30">
+    <web-item key="scrum-poker-configuration-item4" section="admin_plugins_menu/scrum-poker-configuration" weight="40">
         <label key="scrumpoker.errorlog.title"/>
         <link>/secure/admin/ScrumPokerErrorLog.jspa</link>
     </web-item>
@@ -136,20 +141,29 @@
     <!-- webworks -->
     <webwork1 key="scrum-poker-webwork">
         <actions>
+            <action name="de.codescape.jira.plugins.scrumpoker.action.ScrumPokerGettingStartedAction"
+                    alias="ScrumPokerGettingStarted"
+                    roles-required="admin">
+                <view name="success">/templates/configuration/gettingstarted.vm</view>
+                <view name="error">/templates/error.vm</view>
+            </action>
             <action name="de.codescape.jira.plugins.scrumpoker.action.ScrumPokerConfigurationAction"
                     alias="ScrumPokerConfiguration"
                     roles-required="admin">
                 <view name="success">/templates/configuration/global.vm</view>
+                <view name="error">/templates/error.vm</view>
             </action>
             <action name="de.codescape.jira.plugins.scrumpoker.action.ScrumPokerHealthCheckAction"
                     alias="ScrumPokerHealthCheck"
                     roles-required="admin">
                 <view name="success">/templates/configuration/healthcheck.vm</view>
+                <view name="error">/templates/error.vm</view>
             </action>
             <action name="de.codescape.jira.plugins.scrumpoker.action.ScrumPokerErrorLogAction"
                     alias="ScrumPokerErrorLog"
                     roles-required="admin">
                 <view name="success">/templates/configuration/errorlog.vm</view>
+                <view name="error">/templates/error.vm</view>
             </action>
             <action name="de.codescape.jira.plugins.scrumpoker.action.ScrumPokerProjectConfigurationAction"
                     alias="ScrumPokerProjectConfiguration"
@@ -161,6 +175,7 @@
                     alias="ScrumPokerSessions"
                     roles-required="use">
                 <view name="success">/templates/sessions.vm</view>
+                <view name="error">/templates/error.vm</view>
             </action>
             <action name="de.codescape.jira.plugins.scrumpoker.action.ScrumPokerAction"
                     alias="ScrumPoker"

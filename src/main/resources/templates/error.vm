@@ -20,13 +20,6 @@
             </ol>
             <h1>$i18n.getText("scrumpoker.error.title")</h1>
         </div>
-        <div class="aui-page-header-actions">
-            <div class="aui-buttons">
-                <a href="$req.contextPath/secure/ScrumPokerSessions.jspa">
-                    <button class="aui-button aui-button-light"><span class="aui-icon aui-icon-small aui-iconfont-list"></span> $i18n.getText("scrumpoker.sessions.list")</button>
-                </a>
-            </div>
-        </div>
     </div>
 </header>
 

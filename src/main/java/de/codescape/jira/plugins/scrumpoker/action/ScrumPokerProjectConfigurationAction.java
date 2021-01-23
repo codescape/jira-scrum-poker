@@ -45,7 +45,6 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
     private final EstimateFieldService estimateFieldService;
     private final ProjectSettingsService projectSettingsService;
     private final GlobalSettingsService globalSettingsService;
-    private final ErrorLogService errorLogService;
     private final ScrumPokerLicenseService scrumPokerLicenseService;
 
     private String projectKey;
@@ -57,11 +56,11 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
                                                 GlobalSettingsService globalSettingsService,
                                                 ErrorLogService errorLogService,
                                                 ScrumPokerLicenseService scrumPokerLicenseService) {
+        super(errorLogService);
         this.projectManager = projectManager;
         this.estimateFieldService = estimateFieldService;
         this.projectSettingsService = projectSettingsService;
         this.globalSettingsService = globalSettingsService;
-        this.errorLogService = errorLogService;
         this.scrumPokerLicenseService = scrumPokerLicenseService;
     }
 
@@ -101,7 +100,7 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
     }
 
     @Override
-    protected String doExecute() {
+    protected String doExecuteInternal() {
         // make sure we have a project to configure specific Scrum Poker settings for
         projectKey = getParameter(Parameters.PROJECT_KEY);
         Project project = getProjectByKey(projectKey);
@@ -136,11 +135,6 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
     // Scrum Poker should not save empty strings for unused settings. Those settings are persisted as null.
     private String nullOrValue(String input) {
         return (input != null && !input.isEmpty()) ? input : null;
-    }
-
-    private void errorMessage(String errorMessage) {
-        errorLogService.logError(errorMessage);
-        addErrorMessage(errorMessage);
     }
 
     private Project getProjectByKey(String projectKey) {

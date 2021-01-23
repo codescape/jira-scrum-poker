@@ -6,10 +6,7 @@ import de.codescape.jira.plugins.scrumpoker.model.AdditionalField;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
-import de.codescape.jira.plugins.scrumpoker.service.AdditionalFieldService;
-import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
-import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
-import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerLicenseService;
+import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -58,7 +55,9 @@ public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction impl
     public ScrumPokerConfigurationAction(EstimateFieldService estimateFieldService,
                                          GlobalSettingsService globalSettingsService,
                                          AdditionalFieldService additionalFieldService,
-                                         ScrumPokerLicenseService scrumPokerLicenseService) {
+                                         ScrumPokerLicenseService scrumPokerLicenseService,
+                                         ErrorLogService errorLogService) {
+        super(errorLogService);
         this.estimateFieldService = estimateFieldService;
         this.globalSettingsService = globalSettingsService;
         this.additionalFieldService = additionalFieldService;
@@ -97,7 +96,7 @@ public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction impl
      * Save the global settings if the form is saved and submitted.
      */
     @Override
-    protected String doExecute() {
+    protected String doExecuteInternal() {
         String action = getParameter(Parameters.ACTION);
         if (action != null) {
             switch (action) {

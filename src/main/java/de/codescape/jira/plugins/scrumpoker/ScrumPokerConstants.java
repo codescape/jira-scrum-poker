@@ -25,6 +25,11 @@ public final class ScrumPokerConstants {
      */
     public static final String CONFIGURATION_DOCUMENTATION = "https://jira-scrum-poker.codescape.de/configuration";
 
+    /**
+     * URL to documentation of Getting Started page.
+     */
+    public static final String GETTING_STARTED_DOCUMENTATION = "https://jira-scrum-poker.codescape.de";
+
     // Prevent utility class from being instantiated
     private ScrumPokerConstants() {
         throw new AssertionError("ScrumPokerConstants must not be instantiated.");

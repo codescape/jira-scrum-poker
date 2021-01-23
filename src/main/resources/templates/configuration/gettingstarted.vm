@@ -1,0 +1,54 @@
+<html>
+<head>
+    <title>$i18n.getText("scrumpoker.title") - $i18n.getText("scrumpoker.gettingstarted.title")</title>
+    $webResourceManager.requireResource("de.codescape.jira.plugins.scrum-poker:scrum-poker-configuration-resources")
+</head>
+<body class="scrum-poker">
+
+<header class="aui-page-header">
+    <div class="aui-page-header-inner">
+        <div class="aui-page-header-image">
+            <span class="aui-avatar aui-avatar-large aui-avatar-project">
+                <span class="aui-avatar-inner">
+                    <img alt="Scrum Poker Logo" src="$req.contextPath/download/resources/de.codescape.jira.plugins.scrum-poker:scrum-poker-resources/images/scrum-poker-logo-144.png">
+                </span>
+            </span>
+        </div>
+        <div class="aui-page-header-main">
+            <ol class="aui-nav aui-nav-breadcrumbs">
+                <li>$i18n.getText("scrumpoker.title")</li>
+            </ol>
+            <h1>$i18n.getText("scrumpoker.gettingstarted.title")</h1>
+        </div>
+        <div class="aui-page-header-actions">
+            <div class="aui-buttons">
+                <a href="$action.documentationUrl" target="_blank" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-question-filled"></span> $i18n.getText("scrumpoker.documentation")</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<p>$i18n.getText("scrumpoker.description")</p>
+
+<div class="aui-group scrum-poker-teaser">
+    <div class="aui-item scrum-poker-teaser-box">
+        <h2>$i18n.getText("scrumpoker.config.title")</h2>
+        <p>$i18n.getText("scrumpoker.config.description")</p>
+        <p><a href="$req.contextPath/secure/admin/ScrumPokerConfiguration.jspa" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-settings"></span> $i18n.getText("scrumpoker.config.title")</a></p>
+    </div>
+
+    <div class="aui-item scrum-poker-teaser-box">
+        <h2>$i18n.getText("scrumpoker.healthcheck.title")</h2>
+        <p>$i18n.getText("scrumpoker.healthcheck.description")</p>
+        <p><a href="$req.contextPath/secure/admin/ScrumPokerHealthCheck.jspa" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-search"></span> $i18n.getText("scrumpoker.healthcheck.title")</a></p>
+    </div>
+
+    <div class="aui-item scrum-poker-teaser-box">
+        <h2>$i18n.getText("scrumpoker.errorlog.title")</h2>
+        <p>$i18n.getText("scrumpoker.errorlog.description")</p>
+        <p><a href="$req.contextPath/secure/admin/ScrumPokerErrorLog.jspa" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-error"></span> $i18n.getText("scrumpoker.errorlog.title")</a></p>
+    </div>
+</div>
+
+</body>
+</html>

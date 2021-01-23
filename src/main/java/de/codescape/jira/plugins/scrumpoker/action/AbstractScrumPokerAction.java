@@ -1,6 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.web.action.JiraWebActionSupport;
+import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
 
 /**
  * Base class to be used when normally extending {@link JiraWebActionSupport}.
@@ -13,6 +14,12 @@ import com.atlassian.jira.web.action.JiraWebActionSupport;
  */
 abstract class AbstractScrumPokerAction extends JiraWebActionSupport {
 
+    protected final ErrorLogService errorLogService;
+
+    protected AbstractScrumPokerAction(ErrorLogService errorLogService) {
+        this.errorLogService = errorLogService;
+    }
+
     /**
      * Short form for resolving a parameter from the HTTP request. If the parameter is empty return null instead.
      *
@@ -22,6 +29,28 @@ abstract class AbstractScrumPokerAction extends JiraWebActionSupport {
     String getParameter(String parameterName) {
         String[] values = getHttpRequest().getParameterValues(parameterName);
         return (values != null && values.length > 0) ? String.join(",", values) : null;
+    }
+
+    protected abstract String doExecuteInternal() throws Exception;
+
+    @Override
+    protected final String doExecute() {
+        try {
+            return doExecuteInternal();
+        } catch (Exception e) {
+            errorMessage("An unexpected error occurred. Please ask your Jira administrator to report this error and help to improve Scrum Poker for Jira.", e);
+            return ERROR;
+        }
+    }
+
+    protected void errorMessage(String errorMessage) {
+        errorLogService.logError(errorMessage);
+        addErrorMessage(errorMessage);
+    }
+
+    protected void errorMessage(String errorMessage, Throwable throwable) {
+        errorLogService.logError(errorMessage, throwable);
+        addErrorMessage(errorMessage);
     }
 
 }

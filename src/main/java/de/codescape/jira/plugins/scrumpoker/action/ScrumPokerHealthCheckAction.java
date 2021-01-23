@@ -55,7 +55,6 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction implem
     private final CustomFieldManager customFieldManager;
     private final GlobalSettingsService globalSettingsService;
     private final ProjectSettingsService projectSettingsService;
-    private final ErrorLogService errorLogService;
     private final CardSetService cardSetService;
     private final ScrumPokerLicenseService scrumPokerLicenseService;
 
@@ -66,16 +65,16 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction implem
                                        ErrorLogService errorLogService,
                                        CardSetService cardSetService,
                                        ScrumPokerLicenseService scrumPokerLicenseService) {
+        super(errorLogService);
         this.customFieldManager = customFieldManager;
         this.globalSettingsService = globalSettingsService;
         this.projectSettingsService = projectSettingsService;
-        this.errorLogService = errorLogService;
         this.cardSetService = cardSetService;
         this.scrumPokerLicenseService = scrumPokerLicenseService;
     }
 
     @Override
-    protected String doExecute() {
+    protected String doExecuteInternal() {
         return SUCCESS;
     }
 

@@ -8,6 +8,7 @@ import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionEntityMapper;
+import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerLicenseService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,9 @@ public class ScrumPokerSessionsAction extends AbstractScrumPokerAction {
                                     @ComponentImport IssueManager issueManager,
                                     ScrumPokerSessionService scrumPokerSessionService,
                                     SessionEntityMapper sessionEntityMapper,
-                                    ScrumPokerLicenseService scrumPokerLicenseService) {
+                                    ScrumPokerLicenseService scrumPokerLicenseService,
+                                    ErrorLogService errorLogService) {
+        super(errorLogService);
         this.jiraAuthenticationContext = jiraAuthenticationContext;
         this.permissionManager = permissionManager;
         this.issueManager = issueManager;
@@ -57,7 +60,7 @@ public class ScrumPokerSessionsAction extends AbstractScrumPokerAction {
      * Just show the page.
      */
     @Override
-    protected String doExecute() {
+    protected String doExecuteInternal() {
         return SUCCESS;
     }
 

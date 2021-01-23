@@ -23,15 +23,13 @@ public class ScrumPokerErrorLogAction extends AbstractScrumPokerAction implement
 
     }
 
-    private final ErrorLogService errorLogService;
-
     @Autowired
     public ScrumPokerErrorLogAction(ErrorLogService errorLogService) {
-        this.errorLogService = errorLogService;
+        super(errorLogService);
     }
 
     @Override
-    protected String doExecute() {
+    protected String doExecuteInternal() {
         String action = getParameter(Parameters.ACTION);
         if (action != null && action.equals("empty")) {
             errorLogService.emptyErrorLog();
