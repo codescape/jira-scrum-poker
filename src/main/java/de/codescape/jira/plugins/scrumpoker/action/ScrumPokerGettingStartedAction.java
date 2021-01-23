@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Getting Started page for the Scrum Poker app.
  */
-// TODO add tests
 public class ScrumPokerGettingStartedAction extends AbstractScrumPokerAction implements ProvidesDocumentationLink {
 
     @Autowired
