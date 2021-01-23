@@ -12,7 +12,7 @@ category: Administration
 ### [Unreleased]
 
 * feat: add support for Jira 8.14.1 and latest enterprise patch releases
-* feat: fist version of the getting started page and better exception handling
+* feat: first version of the getting started page and better exception handling
 * test: add tests for getting started page
 
 ### [21.01.0] - 2021-01-08
