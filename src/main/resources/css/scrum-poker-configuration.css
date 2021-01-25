@@ -6,7 +6,7 @@
 /* teaser box to highlight features (use inside teaser container) */
 .scrum-poker-teaser-box {
     border-radius: 3px;
-    border: 1px solid var(--aui-border);
+    border: 1px solid var(--aui-border, #dfe1e6);
     padding: 0 20px 20px 20px; }
 .scrum-poker-teaser-box:hover {
-    background-color: var(--aui-body-background); }
+    background-color: var(--aui-body-background, #f4f5f7); }

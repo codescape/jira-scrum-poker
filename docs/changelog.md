@@ -14,6 +14,7 @@ category: Administration
 * feat: add support for Jira 8.14.1 and latest enterprise patch releases
 * feat: first version of the getting started page and better exception handling
 * test: add tests for getting started page
+* feat: add fallback colors for getting started page
 
 ### [21.01.0] - 2021-01-08
 
@@ -21,7 +22,7 @@ category: Administration
 
 * docs: add frequently asked questions to online documentation
 * feat: support estimate fields that are select lists or radio buttons (#120)
-* refactor: improve code to persist estimate depending on field type
+* refactor: improve code to persist estimates depending on field type
 * fix: persist unchecked value of activate Scrum Poker in global configuration
 
 ### Older versions
