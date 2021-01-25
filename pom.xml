@@ -12,10 +12,11 @@
     <description>Scrum Poker for Jira enables your agile teams to collaboratively estimate their work items using a
         clean and interactive user interface that is seamlessly integrated into Jira Software.
     </description>
+    <url>https://jira-scrum-poker.codescape.de</url>
 
     <organization>
         <name>codescape</name>
-        <url>http://www.codescape.de/</url>
+        <url>http://www.codescape.de</url>
     </organization>
 
     <developers>
