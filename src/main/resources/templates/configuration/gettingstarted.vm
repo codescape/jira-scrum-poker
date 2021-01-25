@@ -50,5 +50,13 @@
     </div>
 </div>
 
+<h2>$i18n.getText("scrumpoker.gettingstarted.support.title")</h2>
+
+<p>$i18n.getText("scrumpoker.gettingstarted.support.description")</p>
+<ul>
+    <li><a href="$action.documentationUrl" target="_blank">$i18n.getText("scrumpoker.gettingstarted.support.link.documentation")</a></li>
+    <li><a href="$action.serviceDeskUrl" target="_blank">$i18n.getText("scrumpoker.gettingstarted.support.link.servicedesk")</a></li>
+</ul>
+
 </body>
 </html>

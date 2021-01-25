@@ -24,4 +24,11 @@ public class ScrumPokerGettingStartedAction extends AbstractScrumPokerAction imp
         return ScrumPokerConstants.GETTING_STARTED_DOCUMENTATION;
     }
 
+    /**
+     * Returns the URL to the Service Desk for Scrum Poker for Jira.
+     */
+    public String getServiceDeskUrl() {
+        return ScrumPokerConstants.SERVICE_DESK_URL;
+    }
+
 }

@@ -34,4 +34,11 @@ public class ScrumPokerGettingStartedActionTest {
         assertThat(action.getDocumentationUrl(), is(equalTo(ScrumPokerConstants.GETTING_STARTED_DOCUMENTATION)));
     }
 
+    /* tests for getServiceDeskUrl() */
+
+    @Test
+    public void getServiceDeskUrlShouldExposeLink() {
+        assertThat(action.getServiceDeskUrl(), is(equalTo(ScrumPokerConstants.SERVICE_DESK_URL)));
+    }
+
 }
