@@ -35,6 +35,11 @@ public final class ScrumPokerConstants {
      */
     public static final String SERVICE_DESK_URL = "https://codescape.atlassian.net/servicedesk";
 
+    /**
+     * URL to the Marketplace entry for Scrum Poker for Jira.
+     */
+    public static final String MARKETPLACE_URL = "https://marketplace.atlassian.com/apps/1218884/scrum-poker-for-jira";
+
     // Prevent utility class from being instantiated
     private ScrumPokerConstants() {
         throw new AssertionError("ScrumPokerConstants must not be instantiated.");

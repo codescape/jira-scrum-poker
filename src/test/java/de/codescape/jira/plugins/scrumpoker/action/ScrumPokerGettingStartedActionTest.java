@@ -41,4 +41,11 @@ public class ScrumPokerGettingStartedActionTest {
         assertThat(action.getServiceDeskUrl(), is(equalTo(ScrumPokerConstants.SERVICE_DESK_URL)));
     }
 
+    /* tests for getMarketplaceUrl() */
+
+    @Test
+    public void getMarketplaceUrlShouldExposeLink() {
+        assertThat(action.getMarketplaceUrl(), is(equalTo(ScrumPokerConstants.MARKETPLACE_URL)));
+    }
+
 }

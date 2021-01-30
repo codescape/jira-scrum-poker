@@ -17,6 +17,7 @@ category: Administration
 * feat: add fallback colors for getting started page (#123)
 * feat: include references to documentation and service desk (#123)
 * docs: add documentation url to Maven POM
+* feat: add link to review app or request features to getting started page (#137)
 
 ### [21.01.0] - 2021-01-08
 

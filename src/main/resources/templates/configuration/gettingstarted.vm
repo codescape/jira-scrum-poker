@@ -53,10 +53,23 @@
 <h2>$i18n.getText("scrumpoker.gettingstarted.support.title")</h2>
 
 <p>$i18n.getText("scrumpoker.gettingstarted.support.description")</p>
-<ul>
-    <li><a href="$action.documentationUrl" target="_blank">$i18n.getText("scrumpoker.gettingstarted.support.link.documentation")</a></li>
-    <li><a href="$action.serviceDeskUrl" target="_blank">$i18n.getText("scrumpoker.gettingstarted.support.link.servicedesk")</a></li>
-</ul>
+
+<div class="aui-group scrum-poker-teaser">
+    <div class="aui-item scrum-poker-teaser-box">
+        <h2>$i18n.getText("scrumpoker.gettingstarted.support.documentation.title")</h2>
+        <p>$i18n.getText("scrumpoker.gettingstarted.support.documentation.description")</p>
+        <p><a href="$action.documentationUrl" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-question-filled"></span> $i18n.getText("scrumpoker.gettingstarted.support.documentation.link")</a></p>
+    </div>
+
+    <div class="aui-item scrum-poker-teaser-box">
+        <h2>$i18n.getText("scrumpoker.gettingstarted.support.help.title")</h2>
+        <p>$i18n.getText("scrumpoker.gettingstarted.support.help.description")</p>
+        <p class="aui-buttons">
+            <a href="$action.serviceDeskUrl" class="aui-button" target="_blank"><span class="aui-icon aui-icon-small aui-iconfont-people"></span> $i18n.getText("scrumpoker.gettingstarted.support.help.servicedesk")</a>
+            <a href="$action.marketplaceUrl" class="aui-button" target="_blank"><span class="aui-icon aui-icon-small aui-iconfont-star-filled"></span> $i18n.getText("scrumpoker.gettingstarted.support.help.marketplace")</a>
+        </p>
+    </div>
+</div>
 
 </body>
 </html>

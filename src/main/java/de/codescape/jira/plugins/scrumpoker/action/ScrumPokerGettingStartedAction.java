@@ -31,4 +31,11 @@ public class ScrumPokerGettingStartedAction extends AbstractScrumPokerAction imp
         return ScrumPokerConstants.SERVICE_DESK_URL;
     }
 
+    /**
+     * Returns the URL to the Marketplace entry for Scrum Poker for Jira.
+     */
+    public String getMarketplaceUrl() {
+        return ScrumPokerConstants.MARKETPLACE_URL;
+    }
+
 }

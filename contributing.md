@@ -99,3 +99,23 @@ To keep track of all changes we do the following:
     git push origin <version>
     ```
 1. upload and promote the new version at [Atlassian Marketplace](https://marketplace.atlassian.com/manage/plugins/de.codescape.jira.plugins.scrum-poker/versions)
+
+### Translations
+
+There are special characters that must be escaped in the message bundles that are used for the translations.
+See the following list for required replacements:
+
+| Character | Replacement |
+|-----------|-------------|
+| ä         | \u00E4      |
+| ö         | \u00F6      |
+| ü         | \u00FC      |
+| ß         | \u00DF      |
+| '         | ''          |
+| &         | \u0026      |
+| à         | \u00E0      |
+| é         | \u00E9      |
+| É         | \u00C9      |
+| Ê         | \u00CA      |
+
+This list is being updated when new characters are used but not yet documented.
