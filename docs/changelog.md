@@ -18,6 +18,7 @@ category: Administration
 * feat: include references to documentation and service desk (#123)
 * docs: add documentation url to Maven POM
 * feat: add link to review app or request features to getting started page (#137)
+* feat: use Scrum Poker for Jira specific colors on getting started page
 
 ### [21.01.0] - 2021-01-08
 
