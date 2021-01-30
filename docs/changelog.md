@@ -11,6 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [21.01.1] - 2021-01-30
+
+**Introduce Getting Started page to assist with the first steps**
+
 * feat: add support for Jira 8.14.1 and latest enterprise patch releases
 * feat: first version of the getting started page and better exception handling (#123)
 * test: add tests for getting started page (#123)
@@ -39,5 +45,6 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/21.01.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/21.01.1...HEAD
+[21.01.1]: https://github.com/codescape/jira-scrum-poker/compare/21.01.0...21.01.1
 [21.01.0]: https://github.com/codescape/jira-scrum-poker/compare/20.12.1...21.01.0
