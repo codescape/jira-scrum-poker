@@ -12,15 +12,6 @@
 .scrum-poker-teaser-box:hover {
     background-color: var(--aui-body-background, #f4f5f7); }
 
-/* colorize buttons in teaser boxes */
-.scrum-poker-teaser-box .aui-button {
-    background-color: #ff5630;
-    color: #ffffff; }
-.scrum-poker-teaser-box .aui-button:hover,
-.scrum-poker-teaser-box .aui-button:focus {
-    background-color: #1eaedb;
-    color: #ffffff; }
-
 /* colorize headings in teaser boxes */
 .scrum-poker-teaser-box h1,
 .scrum-poker-teaser-box h2,
