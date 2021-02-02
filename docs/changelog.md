@@ -12,6 +12,7 @@ category: Administration
 ### [Unreleased]
 
 * feat: reduce usage of colors on getting started page
+* feat: add support for Jira 8.15.0
 
 ### [21.01.1] - 2021-01-30
 
