@@ -24,6 +24,7 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction implem
      */
     static final class Configuration {
 
+        static final String ESTIMATE_FIELD_NOT_SUPPORTED = "scrumpoker.healthcheck.results.errors.estimatefieldnotsupported";
         static final String ESTIMATE_FIELD_NOT_FOUND = "scrumpoker.healthcheck.results.errors.estimatefieldnotfound";
         static final String ESTIMATE_FIELD_NOT_SET = "scrumpoker.healthcheck.results.errors.estimatefieldnotset";
         static final String ENABLED_FOR_NO_PROJECT = "scrumpoker.healthcheck.results.errors.enabledfornoproject";
@@ -56,6 +57,7 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction implem
     private final GlobalSettingsService globalSettingsService;
     private final ProjectSettingsService projectSettingsService;
     private final CardSetService cardSetService;
+    private final EstimateFieldService estimateFieldService;
     private final ScrumPokerLicenseService scrumPokerLicenseService;
 
     @Autowired
@@ -64,12 +66,14 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction implem
                                        ProjectSettingsService projectSettingsService,
                                        ErrorLogService errorLogService,
                                        CardSetService cardSetService,
+                                       EstimateFieldService estimateFieldService,
                                        ScrumPokerLicenseService scrumPokerLicenseService) {
         super(errorLogService);
         this.customFieldManager = customFieldManager;
         this.globalSettingsService = globalSettingsService;
         this.projectSettingsService = projectSettingsService;
         this.cardSetService = cardSetService;
+        this.estimateFieldService = estimateFieldService;
         this.scrumPokerLicenseService = scrumPokerLicenseService;
     }
 
@@ -135,6 +139,12 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction implem
             // check that the estimate custom field can be found
             if (customFieldManager.getCustomFieldObject(estimateFieldKey) == null) {
                 results.add(Configuration.ESTIMATE_FIELD_NOT_FOUND);
+            } else {
+                // check that the estimate custom field is supported
+                if (estimateFieldService.supportedCustomFields().stream()
+                    .noneMatch(customField -> customField.getId().equals(estimateFieldKey))) {
+                    results.add(Configuration.ESTIMATE_FIELD_NOT_SUPPORTED);
+                }
             }
         }
 

@@ -54,6 +54,9 @@ public class ScrumPokerHealthCheckActionTest {
     private CardSetService cardSetService;
 
     @Mock
+    EstimateFieldService estimateFieldService;
+
+    @Mock
     private ScrumPokerLicenseService scrumPokerLicenseService;
 
     @InjectMocks
@@ -149,7 +152,7 @@ public class ScrumPokerHealthCheckActionTest {
     /* tests for getConfigurationResults() */
 
     @Test
-    public void shouldSignalUnsetEstimationFieldIfEstimationFieldIsNotSet() {
+    public void shouldSignalUnsetEstimateFieldIfEstimateFieldIsNotSet() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getEstimateField()).thenReturn(null);
         when(globalSettings.isActivateScrumPoker()).thenReturn(true);
@@ -157,12 +160,23 @@ public class ScrumPokerHealthCheckActionTest {
     }
 
     @Test
-    public void shouldSignalMissingEstimationFieldIfEstimationFieldIsSetButDoesNotExist() {
+    public void shouldSignalMissingEstimateFieldIfEstimateFieldIsSetButDoesNotExist() {
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getEstimateField()).thenReturn("something");
         when(customFieldManager.getCustomFieldObject("something")).thenReturn(null);
         when(globalSettings.isActivateScrumPoker()).thenReturn(true);
         assertThat(action.getConfigurationResults(), hasItem(Configuration.ESTIMATE_FIELD_NOT_FOUND));
+    }
+
+    @Test
+    public void shouldSignalEstimateFieldNotSupportedIfEstimateFieldIsSetToNotSupportedField() {
+        when(globalSettingsService.load()).thenReturn(globalSettings);
+        when(globalSettings.getEstimateField()).thenReturn("unsupported");
+        when(customFieldManager.getCustomFieldObject("unsupported")).thenReturn(estimateField);
+        CustomField supportedField = mock(CustomField.class);
+        when(supportedField.getId()).thenReturn("supported");
+        when(estimateFieldService.supportedCustomFields()).thenReturn(Collections.singletonList(supportedField));
+        assertThat(action.getConfigurationResults(), hasItem(Configuration.ESTIMATE_FIELD_NOT_SUPPORTED));
     }
 
     @Test
@@ -219,6 +233,8 @@ public class ScrumPokerHealthCheckActionTest {
             new Card("2", true),
             new Card("3", true),
             new Card("5", true)));
+        when(estimateFieldService.supportedCustomFields()).thenReturn(Collections.singletonList(estimateField));
+        when(estimateField.getId()).thenReturn("something");
         assertThat(action.getConfigurationResults(), is(empty()));
     }
 
