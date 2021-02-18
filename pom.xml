@@ -43,8 +43,8 @@
         <!-- Jira versions -->
         <jira.version>8.15.0</jira.version>
         <jira.version.latest>${jira.version}</jira.version.latest>
-        <jira.version.enterprise.latest>8.13.3</jira.version.enterprise.latest>
-        <jira.version.enterprise.mid>8.5.11</jira.version.enterprise.mid>
+        <jira.version.enterprise.latest>8.13.4</jira.version.enterprise.latest>
+        <jira.version.enterprise.mid>8.5.12</jira.version.enterprise.mid>
         <jira.version.enterprise.oldest>7.13.18</jira.version.enterprise.oldest>
 
         <!-- Dependency versions -->

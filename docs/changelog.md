@@ -14,6 +14,7 @@ category: Administration
 * feat: reduce usage of colors on getting started page
 * feat: add support for Jira 8.15.0
 * feat: add health check for supported estimate field type (#112)
+* feat: add support for latest enterprise patch releases
 
 ### [21.01.1] - 2021-01-30
 
