@@ -15,6 +15,7 @@ category: Administration
 * feat: add support for Jira 8.15.0
 * feat: add health check for supported estimate field type (#112)
 * feat: add support for latest enterprise patch releases
+* test: improve tests for correctness of message bundles
 
 ### [21.01.1] - 2021-01-30
 
