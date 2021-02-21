@@ -11,6 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [21.02.0] - 2021-02-21
+
+**Improve Health Check and Getting Started page**
+
 * feat: reduce usage of colors on getting started page
 * feat: add support for Jira 8.15.0
 * feat: add health check for supported estimate field type (#112)
@@ -49,6 +55,7 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/21.01.1...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/21.02.0...HEAD
+[21.02.0]: https://github.com/codescape/jira-scrum-poker/compare/21.01.1...21.02.0
 [21.01.1]: https://github.com/codescape/jira-scrum-poker/compare/21.01.0...21.01.1
 [21.01.0]: https://github.com/codescape/jira-scrum-poker/compare/20.12.1...21.01.0
