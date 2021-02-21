@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* feat: open documentation in new browser window
 
 ### [21.02.0] - 2021-02-21
 
