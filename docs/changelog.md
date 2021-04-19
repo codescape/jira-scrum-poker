@@ -11,6 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [21.04.0] - 2021-04-19
+
+**Update compatibility and improve Getting Started page**
+
 * feat: open documentation in new browser window
 * feat: add support for Jira 8.16.0 and latest enterprise patch releases
 
@@ -56,7 +62,8 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/21.02.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/21.04.0...HEAD
+[21.04.0]: https://github.com/codescape/jira-scrum-poker/compare/21.02.0...21.04.0
 [21.02.0]: https://github.com/codescape/jira-scrum-poker/compare/21.01.1...21.02.0
 [21.01.1]: https://github.com/codescape/jira-scrum-poker/compare/21.01.0...21.01.1
 [21.01.0]: https://github.com/codescape/jira-scrum-poker/compare/20.12.1...21.01.0
