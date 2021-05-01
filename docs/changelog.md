@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* chore: annual review for Data Center approval
 
 ### [21.04.0] - 2021-04-19
 
