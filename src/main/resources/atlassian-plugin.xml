@@ -127,7 +127,7 @@
     </web-item>
     <web-item key="scrum-poker-configuration-item4" section="admin_plugins_menu/scrum-poker-configuration" weight="40">
         <label key="scrumpoker.errorlog.title"/>
-        <link>/secure/admin/ScrumPokerErrorLog.jspa</link>
+        <link linkId="scrum-poker-configuration-link4">/secure/admin/ScrumPokerErrorLog!default.jspa</link>
     </web-item>
 
     <!-- project specific configuration in project configuration sidebar -->

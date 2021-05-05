@@ -13,6 +13,7 @@ category: Administration
 
 * chore: annual review for Data Center approval
 * feat: introduce XSRF protection for health check
+* feat: introduce XSRF protection for error log
 
 ### [21.04.0] - 2021-04-19
 

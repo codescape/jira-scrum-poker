@@ -1,5 +1,6 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
+import com.atlassian.jira.security.xsrf.RequiresXsrfCheck;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerError;
 import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
@@ -29,12 +30,17 @@ public class ScrumPokerErrorLogAction extends AbstractScrumPokerAction implement
     }
 
     @Override
+    public String doDefault() {
+        return SUCCESS;
+    }
+
+    @Override
+    @RequiresXsrfCheck
     protected String doExecute() {
         String action = getParameter(Parameters.ACTION);
         if (action != null && action.equals("empty")) {
             errorLogService.emptyErrorLog();
         }
-
         return SUCCESS;
     }
 

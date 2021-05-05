@@ -1,6 +1,9 @@
 <html>
 <head>
     <title>$i18n.getText("scrumpoker.title") - $i18n.getText("scrumpoker.errorlog.title")</title>
+    <meta name="decorator" content="admin" />
+    <meta name="admin.active.section" content="admin_plugins_menu/scrum-poker-configuration" />
+    <meta name="admin.active.tab" content="scrum-poker-configuration-link4" />
     $webResourceManager.requireResource("de.codescape.jira.plugins.scrum-poker:scrum-poker-resources")
     $webResourceManager.requireResource("com.atlassian.auiplugin:aui-expander")
 </head>
@@ -72,6 +75,7 @@
         </tbody>
     </table>
     <form class="aui long-label" action="ScrumPokerErrorLog.jspa" method="post">
+        <input type="hidden" name="atl_token" value="$atl_token">
         <div class="buttons-container">
             <div class="buttons scrum-poker-buttons-right">
                 <button name="action" value="empty" type="submit" id="empty-errorlog" class="aui-button" onfocus="javascript:blur();">

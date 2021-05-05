@@ -46,7 +46,7 @@
     <div class="aui-item scrum-poker-teaser-box">
         <h2>$i18n.getText("scrumpoker.errorlog.title")</h2>
         <p>$i18n.getText("scrumpoker.errorlog.description")</p>
-        <p><a href="$req.contextPath/secure/admin/ScrumPokerErrorLog.jspa" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-error"></span> $i18n.getText("scrumpoker.errorlog.title")</a></p>
+        <p><a href="$req.contextPath/secure/admin/ScrumPokerErrorLog!default.jspa" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-error"></span> $i18n.getText("scrumpoker.errorlog.title")</a></p>
     </div>
 </div>
 
