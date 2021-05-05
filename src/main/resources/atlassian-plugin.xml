@@ -13,7 +13,7 @@
         <param name="plugin-logo">images/scrum-poker-logo-144.png</param>
 
         <!-- configuration -->
-        <param name="configure.url">/secure/admin/ScrumPokerConfiguration.jspa</param>
+        <param name="configure.url">/secure/admin/ScrumPokerConfiguration!default.jspa</param>
         <param name="post.install.url">/secure/admin/ScrumPokerGettingStarted.jspa</param>
         <param name="post.update.url">/secure/admin/ScrumPokerGettingStarted.jspa</param>
 
@@ -119,7 +119,7 @@
     </web-item>
     <web-item key="scrum-poker-configuration-item2" section="admin_plugins_menu/scrum-poker-configuration" weight="20">
         <label key="scrumpoker.config.title"/>
-        <link>/secure/admin/ScrumPokerConfiguration.jspa</link>
+        <link linkId="scrum-poker-configuration-link2">/secure/admin/ScrumPokerConfiguration!default.jspa</link>
     </web-item>
     <web-item key="scrum-poker-configuration-item3" section="admin_plugins_menu/scrum-poker-configuration" weight="30">
         <label key="scrumpoker.healthcheck.title"/>

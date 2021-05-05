@@ -1,6 +1,9 @@
 <html>
 <head>
     <title>$i18n.getText("scrumpoker.title") - $i18n.getText("scrumpoker.config.title")</title>
+    <meta name="decorator" content="admin" />
+    <meta name="admin.active.section" content="admin_plugins_menu/scrum-poker-configuration" />
+    <meta name="admin.active.tab" content="scrum-poker-configuration-link2" />
     $webResourceManager.requireResource("de.codescape.jira.plugins.scrum-poker:scrum-poker-configuration-resources")
 </head>
 <body class="scrum-poker">
@@ -38,6 +41,7 @@
 #end
 
 <form id="scrumPokerConfiguration" class="aui long-label" action="ScrumPokerConfiguration.jspa" method="post">
+    <input type="hidden" name="atl_token" value="$atl_token">
     <div class="form-body">
 
         <h3>$i18n.getText("scrumpoker.config.heading.estimation")</h3>

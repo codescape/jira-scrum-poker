@@ -1,6 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.issue.fields.CustomField;
+import com.atlassian.jira.security.xsrf.RequiresXsrfCheck;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.model.AdditionalField;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
@@ -93,9 +94,18 @@ public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction impl
     }
 
     /**
+     * Show the configuration page.
+     */
+    @Override
+    public String doDefault() {
+        return SUCCESS;
+    }
+
+    /**
      * Save the global settings if the form is saved and submitted.
      */
     @Override
+    @RequiresXsrfCheck
     protected String doExecute() {
         String action = getParameter(Parameters.ACTION);
         if (action != null) {

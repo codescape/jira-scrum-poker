@@ -34,7 +34,7 @@
     <div class="aui-item scrum-poker-teaser-box">
         <h2>$i18n.getText("scrumpoker.config.title")</h2>
         <p>$i18n.getText("scrumpoker.config.description")</p>
-        <p><a href="$req.contextPath/secure/admin/ScrumPokerConfiguration.jspa" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-settings"></span> $i18n.getText("scrumpoker.config.title")</a></p>
+        <p><a href="$req.contextPath/secure/admin/ScrumPokerConfiguration!default.jspa" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-settings"></span> $i18n.getText("scrumpoker.config.title")</a></p>
     </div>
 
     <div class="aui-item scrum-poker-teaser-box">
