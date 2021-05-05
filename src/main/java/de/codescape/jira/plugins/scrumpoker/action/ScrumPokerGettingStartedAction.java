@@ -15,7 +15,7 @@ public class ScrumPokerGettingStartedAction extends AbstractScrumPokerAction imp
     }
 
     @Override
-    protected String doExecuteInternal() {
+    protected String doExecute() {
         return SUCCESS;
     }
 

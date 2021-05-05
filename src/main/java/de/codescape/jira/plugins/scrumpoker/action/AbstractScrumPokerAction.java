@@ -31,25 +31,13 @@ abstract class AbstractScrumPokerAction extends JiraWebActionSupport {
         return (values != null && values.length > 0) ? String.join(",", values) : null;
     }
 
-    protected abstract String doExecuteInternal() throws Exception;
-
-    @Override
-    protected final String doExecute() {
-        try {
-            return doExecuteInternal();
-        } catch (Exception e) {
-            errorMessage("An unexpected error occurred. Please ask your Jira administrator to report this error and help to improve Scrum Poker for Jira.", e);
-            return ERROR;
-        }
-    }
-
+    /**
+     * Create an error message to be displayed and persisted into the error log.
+     *
+     * @param errorMessage error message
+     */
     protected void errorMessage(String errorMessage) {
         errorLogService.logError(errorMessage);
-        addErrorMessage(errorMessage);
-    }
-
-    protected void errorMessage(String errorMessage, Throwable throwable) {
-        errorLogService.logError(errorMessage, throwable);
         addErrorMessage(errorMessage);
     }
 

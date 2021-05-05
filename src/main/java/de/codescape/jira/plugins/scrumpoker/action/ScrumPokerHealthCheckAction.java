@@ -1,6 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.issue.CustomFieldManager;
+import com.atlassian.jira.security.xsrf.RequiresXsrfCheck;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
@@ -78,7 +79,13 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction implem
     }
 
     @Override
-    protected String doExecuteInternal() {
+    public String doDefault() {
+        return SUCCESS;
+    }
+
+    @Override
+    @RequiresXsrfCheck
+    protected String doExecute() {
         return SUCCESS;
     }
 

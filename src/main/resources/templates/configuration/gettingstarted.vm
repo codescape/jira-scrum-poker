@@ -40,7 +40,7 @@
     <div class="aui-item scrum-poker-teaser-box">
         <h2>$i18n.getText("scrumpoker.healthcheck.title")</h2>
         <p>$i18n.getText("scrumpoker.healthcheck.description")</p>
-        <p><a href="$req.contextPath/secure/admin/ScrumPokerHealthCheck.jspa" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-search"></span> $i18n.getText("scrumpoker.healthcheck.title")</a></p>
+        <p><a href="$req.contextPath/secure/admin/ScrumPokerHealthCheck!default.jspa" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-search"></span> $i18n.getText("scrumpoker.healthcheck.title")</a></p>
     </div>
 
     <div class="aui-item scrum-poker-teaser-box">

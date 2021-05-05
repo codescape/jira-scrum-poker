@@ -100,7 +100,7 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
     }
 
     @Override
-    protected String doExecuteInternal() {
+    protected String doExecute() {
         // make sure we have a project to configure specific Scrum Poker settings for
         projectKey = getParameter(Parameters.PROJECT_KEY);
         Project project = getProjectByKey(projectKey);

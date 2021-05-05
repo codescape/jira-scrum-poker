@@ -29,7 +29,7 @@ public class ScrumPokerErrorLogAction extends AbstractScrumPokerAction implement
     }
 
     @Override
-    protected String doExecuteInternal() {
+    protected String doExecute() {
         String action = getParameter(Parameters.ACTION);
         if (action != null && action.equals("empty")) {
             errorLogService.emptyErrorLog();

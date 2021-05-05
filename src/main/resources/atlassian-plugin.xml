@@ -123,7 +123,7 @@
     </web-item>
     <web-item key="scrum-poker-configuration-item3" section="admin_plugins_menu/scrum-poker-configuration" weight="30">
         <label key="scrumpoker.healthcheck.title"/>
-        <link>/secure/admin/ScrumPokerHealthCheck.jspa</link>
+        <link linkId="scrum-poker-configuration-link3">/secure/admin/ScrumPokerHealthCheck!default.jspa</link>
     </web-item>
     <web-item key="scrum-poker-configuration-item4" section="admin_plugins_menu/scrum-poker-configuration" weight="40">
         <label key="scrumpoker.errorlog.title"/>

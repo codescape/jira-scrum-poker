@@ -86,7 +86,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
      * Display the page if the current user is allowed to see the issue and a Scrum Poker session can be started.
      */
     @Override
-    protected String doExecuteInternal() {
+    protected String doExecute() {
         // license check
         if (!scrumPokerLicenseService.hasValidLicense()) {
             errorMessage(i18nResolver.getText(scrumPokerLicenseService.getLicenseError()));

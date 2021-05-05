@@ -1,6 +1,9 @@
 <html>
 <head>
     <title>$i18n.getText("scrumpoker.title") - $i18n.getText("scrumpoker.healthcheck.title")</title>
+    <meta name="decorator" content="admin" />
+    <meta name="admin.active.section" content="admin_plugins_menu/scrum-poker-configuration" />
+    <meta name="admin.active.tab" content="scrum-poker-configuration-link3" />
 </head>
 <body class="scrum-poker">
 
@@ -30,6 +33,7 @@
 <p>$i18n.getText("scrumpoker.healthcheck.description")</p>
 
 <form class="aui long-label" action="ScrumPokerHealthCheck.jspa" method="post">
+    <input type="hidden" name="atl_token" value="$atl_token">
     <div class="form-body">
         <fieldset class="group">
             <legend><span>$i18n.getText("scrumpoker.healthcheck.checks")</span></legend>
@@ -39,11 +43,11 @@
             </div>
             <div class="checkbox">
                 <input class="checkbox" type="checkbox" name="scanConfiguration" id="scanConfiguration" value="true" checked>
-                <label for="scanLicense">$i18n.getText("scrumpoker.healthcheck.checks.scanConfiguration")</label>
+                <label for="scanConfiguration">$i18n.getText("scrumpoker.healthcheck.checks.scanConfiguration")</label>
             </div>
             <div class="checkbox">
                 <input class="checkbox" type="checkbox" name="scanErrors" id="scanErrors" value="true" checked>
-                <label for="scanLicense">$i18n.getText("scrumpoker.healthcheck.checks.scanErrors")</label>
+                <label for="scanErrors">$i18n.getText("scrumpoker.healthcheck.checks.scanErrors")</label>
             </div>
             <div class="description">$i18n.getText("scrumpoker.healthcheck.checks.description")</div>
         </fieldset>

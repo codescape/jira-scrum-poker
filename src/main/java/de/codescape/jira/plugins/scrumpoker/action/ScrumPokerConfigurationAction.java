@@ -96,7 +96,7 @@ public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction impl
      * Save the global settings if the form is saved and submitted.
      */
     @Override
-    protected String doExecuteInternal() {
+    protected String doExecute() {
         String action = getParameter(Parameters.ACTION);
         if (action != null) {
             switch (action) {

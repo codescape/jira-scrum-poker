@@ -60,7 +60,7 @@ public class ScrumPokerSessionsAction extends AbstractScrumPokerAction {
      * Just show the page.
      */
     @Override
-    protected String doExecuteInternal() {
+    protected String doExecute() {
         return SUCCESS;
     }
 
