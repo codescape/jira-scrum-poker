@@ -3,6 +3,7 @@ package de.codescape.jira.plugins.scrumpoker.action;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.project.Project;
 import com.atlassian.jira.project.ProjectManager;
+import com.atlassian.jira.security.xsrf.RequiresXsrfCheck;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
@@ -100,6 +101,20 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
     }
 
     @Override
+    public String doDefault() {
+        // make sure we have a project to configure specific Scrum Poker settings for
+        projectKey = getParameter(Parameters.PROJECT_KEY);
+        Project project = getProjectByKey(projectKey);
+        if (project == null || project.getId() == null) {
+            errorMessage("Unable to find project with key " + projectKey + " for project configuration.");
+            return ERROR;
+        }
+
+        return SUCCESS;
+    }
+
+    @Override
+    @RequiresXsrfCheck
     protected String doExecute() {
         // make sure we have a project to configure specific Scrum Poker settings for
         projectKey = getParameter(Parameters.PROJECT_KEY);

@@ -115,7 +115,7 @@
     </web-section>
     <web-item key="scrum-poker-configuration-item1" section="admin_plugins_menu/scrum-poker-configuration" weight="10">
         <label key="scrumpoker.gettingstarted.title"/>
-        <link>/secure/admin/ScrumPokerGettingStarted.jspa</link>
+        <link linkId="scrum-poker-configuration-link1">/secure/admin/ScrumPokerGettingStarted.jspa</link>
     </web-item>
     <web-item key="scrum-poker-configuration-item2" section="admin_plugins_menu/scrum-poker-configuration" weight="20">
         <label key="scrumpoker.config.title"/>
@@ -134,7 +134,7 @@
     <web-item key="scrum-poker-project-configuration-item" section="atl.jira.proj.config/projectgroup4" weight="200">
         <label key="scrumpoker.title"/>
         <link linkId="scrum-poker-project-configuration-item-link">
-            /secure/ScrumPokerProjectConfiguration.jspa?projectKey=$projectKeyEncoded
+            /secure/ScrumPokerProjectConfiguration!default.jspa?projectKey=$projectKeyEncoded
         </link>
     </web-item>
 

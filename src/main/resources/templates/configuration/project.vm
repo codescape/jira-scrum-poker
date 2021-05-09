@@ -41,6 +41,8 @@
 #end
 
 <form class="aui long-label" action="ScrumPokerProjectConfiguration.jspa" method="post">
+    <input type="hidden" name="atl_token" value="$atl_token">
+    <input type="hidden" name="projectKey" value="$projectKey">
     <div class="form-body">
         <fieldset class="group">
             <legend><span>$i18n.getText("scrumpoker.config.project.activatescrumpoker")</span></legend>
@@ -86,7 +88,6 @@
     </div>
     <div class="buttons-container form-footer">
         <div class="buttons">
-            <input type="hidden" name="projectKey" value="$projectKey">
             <button name="action" value="save" type="submit" id="save-button" class="aui-button aui-button-primary">
                 <span class="aui-icon aui-icon-small aui-iconfont-check-circle"></span> $i18n.getText("scrumpoker.config.save")
             </button>
