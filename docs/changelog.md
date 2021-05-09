@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* docs: improve release guidelines
 
 ### [21.05.0] - 2021-05-09
 

@@ -99,6 +99,7 @@ To keep track of all changes we do the following:
     git push origin <version>
     ```
 1. upload and promote the new version at [Atlassian Marketplace](https://marketplace.atlassian.com/manage/plugins/de.codescape.jira.plugins.scrum-poker/versions)
+1. add new version number to [Service Desk versions](https://codescape.atlassian.net/plugins/servlet/project-config/SPSUP/administer-versions)
 
 ### Translations
 
