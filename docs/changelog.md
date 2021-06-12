@@ -12,6 +12,7 @@ category: Administration
 ### [Unreleased]
 
 * feat: add support for Jira 8.17.0 and latest enterprise patch releases
+* chore: update library versions to versions defined in Jira project
 
 ### [21.05.0] - 2021-05-09
 
