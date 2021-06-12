@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* feat: add support for Jira 8.17.0 and latest enterprise patch releases
 
 ### [21.05.0] - 2021-05-09
 
