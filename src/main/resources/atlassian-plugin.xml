@@ -210,4 +210,11 @@
         <resource type="velocity" name="view" location="templates/workflow-function/start-session-view.vm"/>
     </workflow-function>
 
+    <!-- jql function to query for active sessions -->
+    <jql-function key="scrum-poker-jql-active-scrum-poker-sessions"
+                  class="de.codescape.jira.plugins.scrumpoker.jql.ActiveScrumPokerSessionsJqlFunction">
+        <fname>activeScrumPokerSessions</fname>
+        <list>true</list>
+    </jql-function>
+
 </atlassian-plugin>
