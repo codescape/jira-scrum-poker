@@ -16,6 +16,7 @@ category: Administration
 * chore: update library versions to versions defined in Jira project
 * feat: introduce JQL function to query for active Scrum Poker sessions
 * docs: fix headings in documentation for joining Scrum Poker sessions
+* docs: fix display of long code statements for mobile devices
 
 ### [21.05.0] - 2021-05-09
 

@@ -30,6 +30,9 @@ h5 {
 h6 {
     font-size: 1.0rem; }
 
+code {
+    white-space: pre-wrap; }
+
 .logo {
     max-height: 8rem;
     margin: 1rem; }
