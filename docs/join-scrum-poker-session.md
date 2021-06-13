@@ -42,7 +42,7 @@ If your team is in the same room and wants to use mobile devices to join a Scrum
 
 ![Join a Scrum Poker session scanning the provided QR code](/images/join-scrum-poker-session-qr-code.png)
 
-### Search for active Scrum Poker sessions using JQL
+#### Search for active Scrum Poker sessions using JQL
 
 If you are familiar with JQL (the Jira Query Language) you can use a JQL function provided by Scrum Poker for Jira to search for active Scrum Poker sessions.
 Scrum Poker for Jira provides you with the JQL function `issue in activeScrumPokerSessions()` that can be combined with all your typical queries.
