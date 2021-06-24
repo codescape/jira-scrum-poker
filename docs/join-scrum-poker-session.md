@@ -44,7 +44,8 @@ If your team is in the same room and wants to use mobile devices to join a Scrum
 
 #### Find active Scrum Poker sessions using JQL
 
-If you are familiar with JQL (the Jira Query Language) you can use a JQL function provided by Scrum Poker for Jira to search for active Scrum Poker sessions.
-Scrum Poker for Jira comes with the JQL function `issue in activeScrumPokerSessions()` that can be combined with all your queries and restricts the results to issues with active Scrum Poker sessions.
+You can use a JQL (Jira Query Language) function provided by Scrum Poker for Jira to search for active Scrum Poker sessions.
+Scrum Poker for Jira comes with the JQL function `issue in activeScrumPokerSessions()`.
+This function can be combined with all your queries to filter the results by issues with active Scrum Poker sessions.
 
 Example: Let us assume you want to list all active Scrum Poker sessions in a project with the project key `DEMO`. The query would be `project = DEMO and issue in activeScrumPokerSessions()` and it would return all issues with an active Scrum Poker session in the project called DEMO.
