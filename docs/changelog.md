@@ -14,6 +14,7 @@ category: Administration
 * feat: add support for Jira 8.17.0 and latest enterprise patch releases
 * chore: update library versions to versions defined in Jira project
 * feat: introduce JQL function to query for active Scrum Poker sessions
+* feat: add support for Jira 8.18.0 and latest enterprise patch releases
 
 ### [21.05.0] - 2021-05-09
 
