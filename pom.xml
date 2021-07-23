@@ -41,11 +41,10 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- Jira versions -->
-        <jira.version>8.18.0</jira.version>
+        <jira.version>8.18.1</jira.version>
         <jira.version.latest>${jira.version}</jira.version.latest>
-        <jira.version.enterprise.latest>8.13.8</jira.version.enterprise.latest>
-        <jira.version.enterprise.mid>8.5.16</jira.version.enterprise.mid>
-        <jira.version.enterprise.oldest>7.13.18</jira.version.enterprise.oldest>
+        <jira.version.enterprise.latest>8.13.9</jira.version.enterprise.latest>
+        <jira.version.enterprise.oldest>8.5.17</jira.version.enterprise.oldest>
 
         <!-- Dependency versions -->
         <!-- see com.atlassian.jira:jira-project:${jira.version} for correct versions -->
@@ -309,18 +308,6 @@
                         </product>
                         <product>
                             <id>jira</id>
-                            <instanceId>jira-enterprise-mid</instanceId>
-                            <version>${jira.version.enterprise.mid}</version>
-                            <productDataVersion>${jira.version.enterprise.mid}</productDataVersion>
-                            <applications>
-                                <application>
-                                    <applicationKey>jira-software</applicationKey>
-                                    <version>${jira.version.enterprise.mid}</version>
-                                </application>
-                            </applications>
-                        </product>
-                        <product>
-                            <id>jira</id>
                             <instanceId>jira-enterprise-oldest</instanceId>
                             <version>${jira.version.enterprise.oldest}</version>
                             <productDataVersion>${jira.version.enterprise.oldest}</productDataVersion>
@@ -346,12 +333,6 @@
                             <id>jira-enterprise-latest</id>
                             <productIds>
                                 <productId>jira-enterprise-latest</productId>
-                            </productIds>
-                        </testGroup>
-                        <testGroup>
-                            <id>jira-enterprise-mid</id>
-                            <productIds>
-                                <productId>jira-enterprise-mid</productId>
                             </productIds>
                         </testGroup>
                         <testGroup>

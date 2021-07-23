@@ -20,6 +20,7 @@ category: Administration
 * docs: improve documentation for JQL function
 * feat: add support for Jira 8.18.0 and latest enterprise patch releases
 * refactor: cleanup code for millisecond calculation
+* chore: drop support for Jira Software versions older than 8.5.x
 
 ### [21.05.0] - 2021-05-09
 
