@@ -19,6 +19,7 @@ category: Administration
 * docs: fix display of long code statements for mobile devices
 * docs: improve documentation for JQL function
 * feat: add support for Jira 8.18.0 and latest enterprise patch releases
+* refactor: cleanup code for millisecond calculation
 
 ### [21.05.0] - 2021-05-09
 

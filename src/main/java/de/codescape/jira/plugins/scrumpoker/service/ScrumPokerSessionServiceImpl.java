@@ -153,7 +153,7 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     }
 
     private static long hoursToMillis(Integer hours) {
-        return 3600 * 1000 * hours;
+        return hours * 3600 * 1000;
     }
 
     private ScrumPokerSession createScrumPokerSession(String issueKey, String userKey) {
