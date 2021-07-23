@@ -11,9 +11,15 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [21.07.0] - 2021-07-23
+
+**Find active Scrum Poker sessions with standard JQL**
+
 * docs: improve release guidelines
 * feat: add support for Jira 8.17.0 and latest enterprise patch releases
-* chore: update library versions to versions defined in Jira project
+* chore: update library versions to version defined in Jira project
 * feat: introduce JQL function to query for active Scrum Poker sessions
 * docs: fix headings in documentation for joining Scrum Poker sessions
 * docs: fix display of long code statements for mobile devices
@@ -81,7 +87,8 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/21.05.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/21.07.0...HEAD
+[21.07.0]: https://github.com/codescape/jira-scrum-poker/compare/21.05.0...21.07.0
 [21.05.0]: https://github.com/codescape/jira-scrum-poker/compare/21.04.0...21.05.0
 [21.04.0]: https://github.com/codescape/jira-scrum-poker/compare/21.02.0...21.04.0
 [21.02.0]: https://github.com/codescape/jira-scrum-poker/compare/21.01.1...21.02.0
