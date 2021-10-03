@@ -136,6 +136,7 @@
         <link linkId="scrum-poker-project-configuration-item-link">
             /secure/ScrumPokerProjectConfiguration!default.jspa?projectKey=$projectKeyEncoded
         </link>
+        <condition class="de.codescape.jira.plugins.scrumpoker.condition.ProjectAdministrationCondition"/>
     </web-item>
 
     <!-- webworks -->
@@ -167,7 +168,7 @@
             </action>
             <action name="de.codescape.jira.plugins.scrumpoker.action.ScrumPokerProjectConfigurationAction"
                     alias="ScrumPokerProjectConfiguration"
-                    roles-required="admin">
+                    roles-required="use">
                 <view name="success">/templates/configuration/project.vm</view>
                 <view name="error">/templates/error.vm</view>
             </action>

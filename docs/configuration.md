@@ -16,7 +16,7 @@ Scrum Poker for Jira can be configured globally and allows to overwrite some set
 #### Global configuration
 
 Scrum Poker for Jira has some global configuration parameters that can be configured from the administration section of your Jira application.
-This configuration is only available to users with the `Jira Administrators` role assigned.
+This configuration is only available to users with the global roles `Jira Administrators` or `Jira System Administrators` assigned.
 
 To locate the global configuration navigate to the `Administration` menu, then select the entry labelled `Manage apps`.
 You will now find a section called `Scrum Poker` in the left sidebar as shown in the screenshot below:
@@ -30,8 +30,9 @@ On the page `Configuration` you have global configuration options to make Scrum 
 #### Project configuration
 
 Scrum Poker for Jira also provides project specific configuration.
+This configuration is available to users having the global roles `Jira Administrators` or `Jira System Administrators` and for all users having the `Project Administrator` role for the given project.
 
-The locate the project specific configuration navigate to the project and find the `Project settings` link in the bottom of the left menu.
+To locate the project specific configuration navigate to the project and find the `Project settings` link in the bottom of the left menu.
 Inside the `Project settings` you can find a menu option called `Scrum Poker` that leads to the configuration.
 
 On the page `Project Configuration` you can find the configuration options the make Scrum Poker for Jira fit to the needs of your Jira project:

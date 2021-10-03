@@ -6,9 +6,12 @@ import com.atlassian.jira.junit.rules.MockitoContainer;
 import com.atlassian.jira.junit.rules.MockitoMocksInContainer;
 import com.atlassian.jira.project.Project;
 import com.atlassian.jira.project.ProjectManager;
+import com.atlassian.jira.security.JiraAuthenticationContext;
+import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.HttpServletVariables;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
+import de.codescape.jira.plugins.scrumpoker.condition.ProjectAdministrationCondition;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.junit.Rule;
@@ -51,6 +54,12 @@ public class ScrumPokerProjectConfigurationActionTest {
     private ScrumPokerLicenseService scrumPokerLicenseService;
 
     @Mock
+    private JiraAuthenticationContext jiraAuthenticationContext;
+
+    @Mock
+    private ProjectAdministrationCondition projectAdministrationCondition;
+
+    @Mock
     @AvailableInContainer
     private HttpServletVariables httpServletVariables;
 
@@ -69,6 +78,9 @@ public class ScrumPokerProjectConfigurationActionTest {
     @Mock
     private ScrumPokerProject scrumPokerProject;
 
+    @Mock
+    private ApplicationUser applicationUser;
+
     /* tests for getProjectKey() */
 
     @Test
@@ -76,6 +88,7 @@ public class ScrumPokerProjectConfigurationActionTest {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
         when(httpServletRequest.getParameterValues(Parameters.PROJECT_KEY)).thenReturn(new String[]{"ABC"});
         when(projectManager.getProjectByCurrentKey(eq("ABC"))).thenReturn(project);
+        expectCurrentUserToBeAllowedToAdministrateTheProject(true);
 
         action.doExecute();
 
@@ -98,6 +111,7 @@ public class ScrumPokerProjectConfigurationActionTest {
     public void getProjectSettingsShouldReturnProjectSpecificConfigurationIfExists() {
         expectHttpParametersToContainProjectKey("ABC");
         expectProjectManagerToFindAndReturnProject("ABC");
+        expectCurrentUserToBeAllowedToAdministrateTheProject(true);
 
         action.doExecute();
 
@@ -111,6 +125,7 @@ public class ScrumPokerProjectConfigurationActionTest {
     public void getProjectSettingsShouldReturnNullIfNoneExists() {
         expectHttpParametersToContainProjectKey("PROJECT");
         expectProjectManagerToFindAndReturnProject("PROJECT");
+        expectCurrentUserToBeAllowedToAdministrateTheProject(true);
 
         action.doExecute();
 
@@ -138,6 +153,29 @@ public class ScrumPokerProjectConfigurationActionTest {
         verifyNoMoreInteractions(scrumPokerLicenseService);
     }
 
+    /* tests for doDefault() */
+
+    @Test
+    public void doDefaultShouldReturnErrorIfProjectIsMissing() {
+        expectHttpParametersToContainProjectKey("PRJ");
+        expectProjectManagerToNotFindTheProject("PRJ");
+
+        assertThat(action.doDefault(), is(equalTo(ERROR)));
+        verify(errorLogService, times(1)).logError(anyString());
+        verifyNoMoreInteractions(errorLogService);
+    }
+
+    @Test
+    public void doDefaultShouldReturnErrorIfUserIsMissingProjectAdministrationPermission() {
+        expectHttpParametersToContainProjectKey("YAY");
+        expectProjectManagerToFindAndReturnProject("YAY");
+        expectCurrentUserToBeAllowedToAdministrateTheProject(false);
+
+        assertThat(action.doDefault(), is(equalTo(ERROR)));
+        verify(errorLogService, times(1)).logError(anyString());
+        verifyNoMoreInteractions(errorLogService);
+    }
+
     /* tests for doExecute() */
 
     @Test
@@ -151,10 +189,22 @@ public class ScrumPokerProjectConfigurationActionTest {
     }
 
     @Test
+    public void doExecuteShouldReturnErrorIfUserIsMissingProjectAdministrationPermission() {
+        expectHttpParametersToContainProjectKey("YAY");
+        expectProjectManagerToFindAndReturnProject("YAY");
+        expectCurrentUserToBeAllowedToAdministrateTheProject(false);
+
+        assertThat(action.doExecute(), is(equalTo(ERROR)));
+        verify(errorLogService, times(1)).logError(anyString());
+        verifyNoMoreInteractions(errorLogService);
+    }
+
+    @Test
     public void doExecuteShouldReturnSuccessIfProjectExistsAndNoActionIsGiven() {
         expectHttpParametersToContainProjectKey("PRJ");
         expectProjectManagerToFindAndReturnProject("PRJ");
         expectProjectToHaveProjectId(18L);
+        expectCurrentUserToBeAllowedToAdministrateTheProject(true);
 
         assertThat(action.doExecute(), is(equalTo(SUCCESS)));
     }
@@ -165,6 +215,7 @@ public class ScrumPokerProjectConfigurationActionTest {
         expectProjectManagerToFindAndReturnProject("PRJ");
         expectHttpParametersToContainAction(Actions.DEFAULTS);
         expectProjectToHaveProjectId(18L);
+        expectCurrentUserToBeAllowedToAdministrateTheProject(true);
 
         assertThat(action.doExecute(), is(equalTo(SUCCESS)));
         verify(projectSettingsService, times(1)).removeSettings(18L);
@@ -178,10 +229,10 @@ public class ScrumPokerProjectConfigurationActionTest {
         expectProjectToHaveProjectId(18L);
         expectHttpParametersToContainAction(Actions.SAVE);
         expectConfigurationParametersToBeSubmitted(false, "POINTS", "5,8,13");
+        expectCurrentUserToBeAllowedToAdministrateTheProject(true);
 
         assertThat(action.doExecute(), is(equalTo(SUCCESS)));
-        verify(projectSettingsService, times(1))
-            .persistSettings(18L, false, "POINTS", "5,8,13");
+        verify(projectSettingsService, times(1)).persistSettings(18L, false, "POINTS", "5,8,13");
         verifyNoMoreInteractions(projectSettingsService);
     }
 
@@ -192,10 +243,10 @@ public class ScrumPokerProjectConfigurationActionTest {
         expectProjectToHaveProjectId(18L);
         expectHttpParametersToContainAction(Actions.SAVE);
         expectConfigurationParametersToBeSubmitted(true, "", "");
+        expectCurrentUserToBeAllowedToAdministrateTheProject(true);
 
         assertThat(action.doExecute(), is(equalTo(SUCCESS)));
-        verify(projectSettingsService, times(1))
-            .persistSettings(18L, true, null, null);
+        verify(projectSettingsService, times(1)).persistSettings(18L, true, null, null);
         verifyNoMoreInteractions(projectSettingsService);
     }
 
@@ -222,25 +273,19 @@ public class ScrumPokerProjectConfigurationActionTest {
 
     private void expectHttpParametersToContainProjectKey(String projectKey) {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
-        when(httpServletRequest.getParameterValues(Parameters.PROJECT_KEY))
-            .thenReturn(new String[]{projectKey});
+        when(httpServletRequest.getParameterValues(Parameters.PROJECT_KEY)).thenReturn(new String[]{projectKey});
     }
 
     private void expectHttpParametersToContainAction(String action) {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
-        when(httpServletRequest.getParameterValues(Parameters.ACTION))
-            .thenReturn(new String[]{action});
+        when(httpServletRequest.getParameterValues(Parameters.ACTION)).thenReturn(new String[]{action});
     }
 
-    private void expectConfigurationParametersToBeSubmitted(boolean scrumPokerActivated, String estimateField,
-                                                            String cardSet) {
+    private void expectConfigurationParametersToBeSubmitted(boolean scrumPokerActivated, String estimateField, String cardSet) {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
-        when(httpServletRequest.getParameterValues(Parameters.ACTIVATE_SCRUM_POKER))
-            .thenReturn(new String[]{Boolean.toString(scrumPokerActivated)});
-        when(httpServletRequest.getParameterValues(Parameters.ESTIMATE_FIELD))
-            .thenReturn(new String[]{estimateField});
-        when(httpServletRequest.getParameterValues(Parameters.CARD_SET))
-            .thenReturn(new String[]{cardSet});
+        when(httpServletRequest.getParameterValues(Parameters.ACTIVATE_SCRUM_POKER)).thenReturn(new String[]{Boolean.toString(scrumPokerActivated)});
+        when(httpServletRequest.getParameterValues(Parameters.ESTIMATE_FIELD)).thenReturn(new String[]{estimateField});
+        when(httpServletRequest.getParameterValues(Parameters.CARD_SET)).thenReturn(new String[]{cardSet});
     }
 
     private void expectProjectManagerToFindAndReturnProject(String projectKey) {
@@ -253,6 +298,11 @@ public class ScrumPokerProjectConfigurationActionTest {
 
     private void expectProjectToHaveProjectId(long projectId) {
         when(project.getId()).thenReturn(projectId);
+    }
+
+    private void expectCurrentUserToBeAllowedToAdministrateTheProject(boolean allowedToAdministrate) {
+        when(jiraAuthenticationContext.getLoggedInUser()).thenReturn(applicationUser);
+        when(projectAdministrationCondition.userIsAllowedToAdministrateProject(applicationUser, project)).thenReturn(allowedToAdministrate);
     }
 
 }

@@ -3,10 +3,13 @@ package de.codescape.jira.plugins.scrumpoker.action;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.project.Project;
 import com.atlassian.jira.project.ProjectManager;
+import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.xsrf.RequiresXsrfCheck;
+import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
+import de.codescape.jira.plugins.scrumpoker.condition.ProjectAdministrationCondition;
 import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -43,26 +46,32 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
     }
 
     private final ProjectManager projectManager;
+    private final JiraAuthenticationContext jiraAuthenticationContext;
     private final EstimateFieldService estimateFieldService;
     private final ProjectSettingsService projectSettingsService;
     private final GlobalSettingsService globalSettingsService;
     private final ScrumPokerLicenseService scrumPokerLicenseService;
+    private final ProjectAdministrationCondition projectAdministrationCondition;
 
     private String projectKey;
 
     @Autowired
     public ScrumPokerProjectConfigurationAction(@ComponentImport ProjectManager projectManager,
+                                                @ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
                                                 EstimateFieldService estimateFieldService,
                                                 ProjectSettingsService projectSettingsService,
                                                 GlobalSettingsService globalSettingsService,
                                                 ErrorLogService errorLogService,
-                                                ScrumPokerLicenseService scrumPokerLicenseService) {
+                                                ScrumPokerLicenseService scrumPokerLicenseService,
+                                                ProjectAdministrationCondition projectAdministrationCondition) {
         super(errorLogService);
         this.projectManager = projectManager;
+        this.jiraAuthenticationContext = jiraAuthenticationContext;
         this.estimateFieldService = estimateFieldService;
         this.projectSettingsService = projectSettingsService;
         this.globalSettingsService = globalSettingsService;
         this.scrumPokerLicenseService = scrumPokerLicenseService;
+        this.projectAdministrationCondition = projectAdministrationCondition;
     }
 
     /**
@@ -110,23 +119,27 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
             return ERROR;
         }
 
+        ApplicationUser user = jiraAuthenticationContext.getLoggedInUser();
+        if (!projectAdministrationCondition.userIsAllowedToAdministrateProject(user, project)) {
+            errorMessage("User " + user.getUsername() + " is missing privileges to administrate project " + project.getKey() + ".");
+            return ERROR;
+        }
+
         return SUCCESS;
     }
 
     @Override
     @RequiresXsrfCheck
     protected String doExecute() {
-        // make sure we have a project to configure specific Scrum Poker settings for
-        projectKey = getParameter(Parameters.PROJECT_KEY);
-        Project project = getProjectByKey(projectKey);
-        if (project == null || project.getId() == null) {
-            errorMessage("Unable to find project with key " + projectKey + " for project configuration.");
+        // use validation of doDefault() method
+        if (doDefault().equals(ERROR)) {
             return ERROR;
         }
 
         // action can be null (just show the page), save (persist form data) or defaults (reset settings)
         String action = getParameter(Parameters.ACTION);
         if (action != null) {
+            Project project = getProjectByKey(projectKey);
             switch (action) {
                 case Actions.SAVE:
                     boolean activateScrumPoker = Boolean.parseBoolean(getParameter(Parameters.ACTIVATE_SCRUM_POKER));
