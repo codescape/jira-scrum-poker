@@ -13,6 +13,7 @@ category: Administration
 
 * feat: verify support for Jira 8.19.0 and latest enterprise patch releases
 * feat: project administrators can configure Scrum Poker for the given project
+* feat: verify support for Jira 8.19.1 and latest enterprise patch releases
 
 ### [21.07.0] - 2021-07-23
 
