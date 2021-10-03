@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import static de.codescape.jira.plugins.scrumpoker.action.ScrumPokerProjectConfigurationAction.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 public class ScrumPokerProjectConfigurationActionTest {
