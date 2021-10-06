@@ -11,6 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [21.10.0] - 2021-10-06
+
+**Manage Scrum Poker for your projects as a project administrator**
+
 * feat: verify support for Jira 8.19.0 and latest enterprise patch releases
 * feat: project administrators can configure Scrum Poker for the given project
 * feat: verify support for Jira 8.19.1 and latest enterprise patch releases
@@ -90,7 +96,8 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/21.07.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/21.10.0...HEAD
+[21.10.0]: https://github.com/codescape/jira-scrum-poker/compare/21.07.0...21.10.0
 [21.07.0]: https://github.com/codescape/jira-scrum-poker/compare/21.05.0...21.07.0
 [21.05.0]: https://github.com/codescape/jira-scrum-poker/compare/21.04.0...21.05.0
 [21.04.0]: https://github.com/codescape/jira-scrum-poker/compare/21.02.0...21.04.0
