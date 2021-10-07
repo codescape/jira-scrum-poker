@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* docs: improve developer documentation for common tasks
 
 ### [21.10.0] - 2021-10-06
 

@@ -4,21 +4,39 @@ Contributing
 Your contribution is always welcome!
 Please read this document to help you with this.
 
-### Creating new issues
+### Raise an issue for bugs and feature requests
 
-Please feel invited to [create issues](https://github.com/codescape/jira-scrum-poker/issues/new/choose) to let us know about your ideas and wishes or any bugs that you have found.
-Have a look at the current list of [open issues](https://github.com/codescape/jira-scrum-poker/issues) to avoid duplicates.
+Please feel invited to [raise issues](https://github.com/codescape/jira-scrum-poker/issues/new/choose) to let us know about your ideas and wishes or any bugs that you have found.
+When doing so please have a look at the current list of [open issues](https://github.com/codescape/jira-scrum-poker/issues) to avoid duplicates.
 
-### Improving or adding translations
+### Improve or add new translations
 
 Want Scrum Poker for Jira to be translated into your language?
-Please help us translating our app.
+Please help us to translate our app! There is nearly no development experience required to do so.
 For further details see [Supported Languages](docs/supported-languages.md).
 
-### Running app in development mode
+There are special characters that must be escaped in the message bundles that are used for the translations.
+See the following list for required replacements:
 
-Development of Atlassian Jira plugins is closely bound to the Atlassian Plugin SDK.
-Setting up your development environment is documented here: 
+| Character | Replacement |
+|-----------|-------------|
+| ä         | \u00E4      |
+| ö         | \u00F6      |
+| ü         | \u00FC      |
+| ß         | \u00DF      |
+| '         | ''          |
+| &         | \u0026      |
+| à         | \u00E0      |
+| é         | \u00E9      |
+| É         | \u00C9      |
+| Ê         | \u00CA      |
+
+This list will be updated when new characters are used but not yet documented.
+
+### Run app in development mode
+
+Development of Atlassian Jira plugins requires the use of the Atlassian Plugin SDK.
+To set up your development environment have a look at the official documentation: 
 [Set up the Atlassian SDK and build a project](https://developer.atlassian.com/docs/getting-started/set-up-the-atlassian-plugin-sdk-and-build-a-project) 
 
 During development you will find the following commands useful:
@@ -29,7 +47,7 @@ During development you will find the following commands useful:
 
 To fasten up development start a first terminal with a running instance of Jira with the command `atlas-run` and trigger deployments of updated versions by the command `atlas-package`.
 
-### Committing changes
+### Commit changes to Git
 
 Changes to the source code of Scrum Poker for Jira shall be informative and help to understand what has changed and why.
 Commit messages should always be written in this format:
@@ -84,7 +102,7 @@ A more complex sample would look like this:
     
     Closes #17
 
-### Releasing new versions
+### Release a new version
 
 Releasing a new version helps to bring out new features and improvements to our customers.
 To keep track of all changes we do the following:
@@ -100,23 +118,3 @@ To keep track of all changes we do the following:
     ```
 1. upload and promote the new version at [Atlassian Marketplace](https://marketplace.atlassian.com/manage/plugins/de.codescape.jira.plugins.scrum-poker/versions)
 1. add new version number to [Service Desk versions](https://codescape.atlassian.net/plugins/servlet/project-config/SPSUP/administer-versions)
-
-### Translations
-
-There are special characters that must be escaped in the message bundles that are used for the translations.
-See the following list for required replacements:
-
-| Character | Replacement |
-|-----------|-------------|
-| ä         | \u00E4      |
-| ö         | \u00F6      |
-| ü         | \u00FC      |
-| ß         | \u00DF      |
-| '         | ''          |
-| &         | \u0026      |
-| à         | \u00E0      |
-| é         | \u00E9      |
-| É         | \u00C9      |
-| Ê         | \u00CA      |
-
-This list is being updated when new characters are used but not yet documented.
