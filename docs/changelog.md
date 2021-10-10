@@ -12,6 +12,7 @@ category: Administration
 ### [Unreleased]
 
 * docs: improve developer documentation for common tasks
+* chore: remove configuration for Travis CI (#140)
 
 ### [21.10.0] - 2021-10-06
 
