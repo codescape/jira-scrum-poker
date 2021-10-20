@@ -13,6 +13,7 @@ category: Administration
 
 * docs: improve developer documentation for common tasks
 * chore: remove configuration for Travis CI (#140)
+* feat: verify support for Jira 8.20.0 and latest enterprise patch releases
 
 ### [21.10.0] - 2021-10-06
 
