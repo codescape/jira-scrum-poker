@@ -15,6 +15,7 @@ category: Administration
 * chore: remove configuration for Travis CI (#140)
 * feat: verify support for Jira 8.20.0 and latest enterprise patch releases
 * feat: verify support for Jira 8.20.1 and latest enterprise patch releases
+* test: improve test setup for displayed reference issues
 
 ### [21.10.0] - 2021-10-06
 

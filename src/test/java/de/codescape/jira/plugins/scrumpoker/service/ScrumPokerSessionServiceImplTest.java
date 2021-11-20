@@ -213,18 +213,22 @@ public class ScrumPokerSessionServiceImplTest {
     /* tests for references() */
 
     @Test
-    public void referencesShouldReturnReferencesWithTheVotingUserAndEstimation() {
+    public void referencesShouldReturnReferencesWithTheVotingUserAndEstimation() throws Exception {
         scrumPokerSessionService.addVote("ISSUE-1", "USER-1", "3");
         scrumPokerSessionService.confirm("ISSUE-1", "USER-1", "8");
+        Thread.sleep(1);
 
         scrumPokerSessionService.addVote("ISSUE-2", "USER-1", "8");
         scrumPokerSessionService.confirm("ISSUE-2", "USER-1", "8");
+        Thread.sleep(1);
 
         scrumPokerSessionService.addVote("ISSUE-5", "USER-1", "5");
         scrumPokerSessionService.confirm("ISSUE-5", "USER-1", "8");
+        Thread.sleep(1);
 
         scrumPokerSessionService.addVote("ISSUE-8", "USER-1", "8");
         scrumPokerSessionService.confirm("ISSUE-8", "USER-1", "8");
+        Thread.sleep(1);
 
         scrumPokerSessionService.addVote("ISSUE-3", "USER-2", "8");
         scrumPokerSessionService.confirm("ISSUE-3", "USER-2", "8");
