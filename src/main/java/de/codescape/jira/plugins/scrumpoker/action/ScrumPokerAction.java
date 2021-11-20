@@ -2,12 +2,15 @@ package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.datetime.DateTimeFormatter;
 import com.atlassian.jira.datetime.DateTimeStyle;
+import com.atlassian.jira.issue.IssueFieldConstants;
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.RendererManager;
 import com.atlassian.jira.issue.comments.Comment;
 import com.atlassian.jira.issue.comments.CommentManager;
 import com.atlassian.jira.issue.fields.CustomField;
+import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
+import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
 import com.atlassian.jira.issue.fields.renderer.JiraRendererPlugin;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
@@ -41,6 +44,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
 
     }
 
+    private final FieldLayoutManager fieldLayoutManager;
     private final IssueManager issueManager;
     private final RendererManager rendererManager;
     private final PermissionManager permissionManager;
@@ -57,6 +61,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
 
     @Autowired
     public ScrumPokerAction(@ComponentImport RendererManager rendererManager,
+                            @ComponentImport FieldLayoutManager fieldLayoutManager,
                             @ComponentImport IssueManager issueManager,
                             @ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
                             @ComponentImport PermissionManager permissionManager,
@@ -70,6 +75,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
                             ScrumPokerLicenseService scrumPokerLicenseService) {
         super(errorLogService);
         this.rendererManager = rendererManager;
+        this.fieldLayoutManager = fieldLayoutManager;
         this.issueManager = issueManager;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
         this.permissionManager = permissionManager;
@@ -161,6 +167,17 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
      */
     public JiraRendererPlugin getWikiRenderer() {
         return rendererManager.getRendererForType("atlassian-wiki-renderer");
+    }
+
+    /**
+     * Returns the issue description using the configured renderer.
+     */
+    @HtmlSafe
+    public String getIssueDescription() {
+        MutableIssue issue = getIssue();
+        FieldLayoutItem fieldLayoutItem = fieldLayoutManager.getFieldLayout(issue).getFieldLayoutItem(IssueFieldConstants.DESCRIPTION);
+        String rendererType = (fieldLayoutItem != null) ? fieldLayoutItem.getRendererType() : null;
+        return rendererManager.getRenderedContent(rendererType, issue.getDescription(), issue.getIssueRenderContext());
     }
 
     /**

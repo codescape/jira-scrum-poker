@@ -1,11 +1,13 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
-import com.atlassian.jira.issue.IssueManager;
-import com.atlassian.jira.issue.MutableIssue;
-import com.atlassian.jira.issue.RendererManager;
+import com.atlassian.jira.issue.*;
 import com.atlassian.jira.issue.comments.Comment;
 import com.atlassian.jira.issue.comments.CommentManager;
 import com.atlassian.jira.issue.fields.CustomField;
+import com.atlassian.jira.issue.fields.layout.field.FieldLayout;
+import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
+import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
+import com.atlassian.jira.issue.fields.renderer.IssueRenderContext;
 import com.atlassian.jira.issue.fields.renderer.JiraRendererPlugin;
 import com.atlassian.jira.junit.rules.AvailableInContainer;
 import com.atlassian.jira.junit.rules.MockitoContainer;
@@ -22,6 +24,7 @@ import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
@@ -55,6 +58,9 @@ public class ScrumPokerActionTest {
 
     @Mock
     private RendererManager rendererManager;
+
+    @Mock
+    private FieldLayoutManager fieldLayoutManager;
 
     @Mock
     @AvailableInContainer
@@ -250,6 +256,31 @@ public class ScrumPokerActionTest {
         assertThat(wikiRenderer, is(equalTo(jiraRendererPlugin)));
         verify(rendererManager, times(1)).getRendererForType("atlassian-wiki-renderer");
         verifyNoMoreInteractions(rendererManager);
+    }
+
+    /* test for getIssueDescription */
+
+    @Test
+    public void getIssueDescription() {
+        whenLicenseIsValid();
+        whenRequestedIssueExists();
+        action.doExecute();
+
+        FieldLayout fieldLayout = mock(FieldLayout.class);
+        when(fieldLayoutManager.getFieldLayout(issue)).thenReturn(fieldLayout);
+
+        FieldLayoutItem fieldLayoutItem = mock(FieldLayoutItem.class);
+        when(fieldLayout.getFieldLayoutItem(IssueFieldConstants.DESCRIPTION)).thenReturn(fieldLayoutItem);
+
+        when(fieldLayoutItem.getRendererType()).thenReturn("atlassian-wiki-renderer");
+
+        IssueRenderContext issueRenderContext = mock(IssueRenderContext.class);
+
+        when(issue.getIssueRenderContext()).thenReturn(issueRenderContext);
+        when(issue.getDescription()).thenReturn("it works!");
+        when(rendererManager.getRenderedContent(anyString(), anyString(), eq(issueRenderContext))).thenReturn("<p>it works!</p>");
+
+        assertThat(action.getIssueDescription(), is(equalTo("<p>it works!</p>")));
     }
 
     /* supporting methods */

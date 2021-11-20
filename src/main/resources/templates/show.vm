@@ -67,7 +67,7 @@
             #if($issue.description)
                 <div class="scrum-poker-text-container">
                     <div class="scrum-poker-text-holder">
-                        $wikiRenderer.render($issue.description, $issue.issueRenderContext)
+                        $action.getIssueDescription()
                     </div>
                 </div>
             #else
