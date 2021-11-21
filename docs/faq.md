@@ -22,3 +22,8 @@ Those estimates represent the ideas of complexity and amount of work but should 
 At the moment only Jira Server and Jira Data Center compatible versions of Scrum Poker for Jira are available.
 We have already started to develop a Jira Cloud version of Scrum Poker for Jira.
 A first release will be announced as soon as it is available.
+
+### Do Scrum Poker sessions automatically end?
+
+Yes, sessions older than the configured `Session Timeout` are automatically cancelled.
+A new session can be started again when needed.
