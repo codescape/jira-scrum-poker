@@ -18,6 +18,7 @@ category: Administration
 * test: improve test setup for displayed reference issues
 * feat: render issue description with the configured renderer
 * docs: add content to frequently asked questions in documentation
+* feat: verify support for Jira 8.20.2 and latest enterprise patch releases
 
 ### [21.10.0] - 2021-10-06
 
