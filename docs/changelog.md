@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* docs: add developer documentation to workflow function
 
 ### [21.11.0] - 2021-11-21
 
