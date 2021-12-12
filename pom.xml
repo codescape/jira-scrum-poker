@@ -41,10 +41,11 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- Jira versions -->
-        <jira.version>8.20.2</jira.version>
+        <jira.version>8.21.0</jira.version>
         <jira.version.latest>${jira.version}</jira.version.latest>
-        <jira.version.enterprise.latest>8.13.14</jira.version.enterprise.latest>
-        <jira.version.enterprise.oldest>8.5.19</jira.version.enterprise.oldest>
+        <jira.version.lts.latest>8.20.2</jira.version.lts.latest>
+        <jira.version.lts.mid>8.13.14</jira.version.lts.mid>
+        <jira.version.lts.oldest>8.5.19</jira.version.lts.oldest>
 
         <!-- Dependency versions -->
         <!-- see com.atlassian.jira:jira-project:${jira.version} for correct versions -->
@@ -296,25 +297,37 @@
                         </product>
                         <product>
                             <id>jira</id>
-                            <instanceId>jira-enterprise-latest</instanceId>
-                            <version>${jira.version.enterprise.latest}</version>
-                            <productDataVersion>${jira.version.enterprise.latest}</productDataVersion>
+                            <instanceId>jira-lts-latest</instanceId>
+                            <version>${jira.version.lts.latest}</version>
+                            <productDataVersion>${jira.version.lts.latest}</productDataVersion>
                             <applications>
                                 <application>
                                     <applicationKey>jira-software</applicationKey>
-                                    <version>${jira.version.enterprise.latest}</version>
+                                    <version>${jira.version.lts.latest}</version>
                                 </application>
                             </applications>
                         </product>
                         <product>
                             <id>jira</id>
-                            <instanceId>jira-enterprise-oldest</instanceId>
-                            <version>${jira.version.enterprise.oldest}</version>
-                            <productDataVersion>${jira.version.enterprise.oldest}</productDataVersion>
+                            <instanceId>jira-lts-mid</instanceId>
+                            <version>${jira.version.lts.mid}</version>
+                            <productDataVersion>${jira.version.lts.mid}</productDataVersion>
                             <applications>
                                 <application>
                                     <applicationKey>jira-software</applicationKey>
-                                    <version>${jira.version.enterprise.oldest}</version>
+                                    <version>${jira.version.lts.mid}</version>
+                                </application>
+                            </applications>
+                        </product>
+                        <product>
+                            <id>jira</id>
+                            <instanceId>jira-lts-oldest</instanceId>
+                            <version>${jira.version.lts.oldest}</version>
+                            <productDataVersion>${jira.version.lts.oldest}</productDataVersion>
+                            <applications>
+                                <application>
+                                    <applicationKey>jira-software</applicationKey>
+                                    <version>${jira.version.lts.oldest}</version>
                                 </application>
                             </applications>
                         </product>
@@ -330,15 +343,21 @@
                             </productIds>
                         </testGroup>
                         <testGroup>
-                            <id>jira-enterprise-latest</id>
+                            <id>jira-lts-latest</id>
                             <productIds>
-                                <productId>jira-enterprise-latest</productId>
+                                <productId>jira-lts-latest</productId>
                             </productIds>
                         </testGroup>
                         <testGroup>
-                            <id>jira-enterprise-oldest</id>
+                            <id>jira-lts-mid</id>
                             <productIds>
-                                <productId>jira-enterprise-oldest</productId>
+                                <productId>jira-lts-mid</productId>
+                            </productIds>
+                        </testGroup>
+                        <testGroup>
+                            <id>jira-lts-oldest</id>
+                            <productIds>
+                                <productId>jira-lts-oldest</productId>
                             </productIds>
                         </testGroup>
                     </testGroups>

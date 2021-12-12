@@ -14,11 +14,12 @@ It is our core interest and we are working hard to provide you with stable itera
 
 Tip: Always install the latest version of Scrum Poker for Jira and keep it up to date.
 
-### Enterprise Release support
+### Long Term Support
 
 Scrum Poker for Jira is always developed against the latest version of Jira Server and Jira Data Center to ensure compatibility with all upcoming changes.
-To ensure compatibility with older versions of Jira Server and Jira Data Center the app Scrum Poker for Jira is also tested against the following enterprise releases:
+To ensure compatibility with older versions of Jira Server and Jira Data Center the app Scrum Poker for Jira is also tested against the following long-term-support releases:
 
+* Jira Server and Jira Data Center 8.20.x
 * Jira Server and Jira Data Center 8.13.x
 * Jira Server and Jira Data Center 8.5.x
 
