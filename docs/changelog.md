@@ -13,6 +13,7 @@ category: Administration
 
 * docs: add developer documentation to workflow function
 * feat: verify support for Jira 8.21.0 and long-term-support releases
+* feat: verify support for latest patch releases
 
 ### [21.11.0] - 2021-11-21
 
