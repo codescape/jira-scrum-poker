@@ -11,6 +11,7 @@ import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerError;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.Card;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
+import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.junit.Rule;
 import org.junit.Test;
@@ -269,7 +270,7 @@ public class ScrumPokerHealthCheckActionTest {
     private void expectNoProjectExplicitlyEnabled() {
         List<ScrumPokerProject> scrumPokerProjects = new ArrayList<>();
         ScrumPokerProject scrumPokerProject = mock(ScrumPokerProject.class);
-        when(scrumPokerProject.isScrumPokerEnabled()).thenReturn(false);
+        when(scrumPokerProject.getActivateScrumPoker()).thenReturn(ProjectActivation.INHERIT);
         scrumPokerProjects.add(scrumPokerProject);
         when(projectSettingsService.loadAll()).thenReturn(scrumPokerProjects);
     }

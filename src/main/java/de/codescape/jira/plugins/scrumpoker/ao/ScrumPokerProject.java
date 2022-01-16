@@ -1,5 +1,6 @@
 package de.codescape.jira.plugins.scrumpoker.ao;
 
+import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 import net.java.ao.Preload;
 import net.java.ao.schema.Indexed;
 import net.java.ao.schema.NotNull;
@@ -20,11 +21,23 @@ public interface ScrumPokerProject extends ScrumPokerEntity {
     void setProjectId(Long projectId);
 
     /**
-     * Flag whether Scrum Poker is explicitly activated for this project or not.
+     * @deprecated replaced by {@link #getActivateScrumPoker()} since version 22.01.0
      */
+    @Deprecated
     boolean isScrumPokerEnabled();
 
+    /**
+     * @deprecated replaced by {@link #setActivateScrumPoker(ProjectActivation)} since version 22.01.0
+     */
+    @Deprecated
     void setScrumPokerEnabled(boolean scrumPokerEnabled);
+
+    /**
+     * Scrum Poker can be explicitly activated and disabled or inherited from the global configuration.
+     */
+    ProjectActivation getActivateScrumPoker();
+
+    void setActivateScrumPoker(ProjectActivation projectActivation);
 
     /**
      * Returns the estimate field for this project or <code>null</code> if derived from the global configuration.

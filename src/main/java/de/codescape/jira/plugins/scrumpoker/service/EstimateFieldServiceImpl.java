@@ -11,6 +11,7 @@ import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
+import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -151,11 +152,14 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
     }
 
     private boolean hasScrumPokerEnabled(Long projectId) {
-        if (globalSettingsService.load().isActivateScrumPoker()) {
-            return true;
-        }
+        boolean globallyActivated = globalSettingsService.load().isActivateScrumPoker();
+
         ScrumPokerProject scrumPokerProject = projectSettingsService.loadSettings(projectId);
-        return scrumPokerProject != null && scrumPokerProject.isScrumPokerEnabled();
+        ProjectActivation projectActivation = scrumPokerProject != null ?
+            scrumPokerProject.getActivateScrumPoker() : ProjectActivation.INHERIT;
+
+        return ((globallyActivated && !projectActivation.equals(ProjectActivation.DISABLE) ||
+            (!globallyActivated) && projectActivation.equals(ProjectActivation.ACTIVATE)));
     }
 
     @Override

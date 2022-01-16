@@ -123,12 +123,18 @@ The default value is set to `12 hours` which implies that sessions of the last h
 
 #### Activate Scrum Poker
 
-Decide whether Scrum Poker is activated globally for all projects.
+Decide whether Scrum Poker is activated.
 
-If Scrum Poker is not activated for all projects with the `Activate Scrum Poker` setting in the global settings the project specific setting allows you to activate Scrum Poker explicitly for specific projects.
+Scrum Poker can be activated or disabled for all projects with the `Activate Scrum Poker` setting in the global settings.
+This setting can be overwritten on project specific settings to activate or disable Scrum Poker explicitly for specific projects.
 
-* If activated Scrum Poker sessions can be started for all issues in all Jira projects that have the `Confirmed Estimate Field` configured.
-* If not activated Scrum Poker sessions can only be started for issues in those projects that have Scrum Poker explicitly activated in the `Project Configuration` and have the `Confirmed Estimate Field` configured.
+You can choose from the following options on the project settings:
+
+* `INHERIT` - Inherit Scrum Poker activation from the global configuration.
+* `ACTIVATE` - Activate Scrum Poker for this project regardless of the global configuration.
+* `DISABLE` - Disable Scrum Poker for this project regardless of the global configuration. 
+
+Even if Scrum Poker is activated for a given project Scrum Poker sessions can only be started for issues that do have the `Confirmed Estimate Field` configured.
 
 <div class="configurable">
   <span>This setting can be configured on:</span>

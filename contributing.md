@@ -27,6 +27,7 @@ See the following list for required replacements:
 | '         | ''          |
 | &         | \u0026      |
 | à         | \u00E0      |
+| è         | \u00E8      |
 | é         | \u00E9      |
 | É         | \u00C9      |
 | Ê         | \u00CA      |

@@ -14,6 +14,10 @@ category: Administration
 * docs: add developer documentation to workflow function
 * feat: verify support for Jira 8.21.0 and long-term-support releases
 * feat: verify support for latest patch releases
+* feat: add option to explicitly disable Scrum Poker on project-level
+* feat: add upgrade task to migrate from old setting to new setting
+* docs: update documentation to explain configuration options
+* feat: i18n for new configuration options on project configuration
 
 ### [21.11.0] - 2021-11-21
 

@@ -6,6 +6,7 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.Card;
+import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -157,7 +158,8 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction implem
 
         // check that Scrum Poker is either globally enabled or has projects explicitly enabled
         if (!globalSettingsService.load().isActivateScrumPoker() &&
-            projectSettingsService.loadAll().stream().noneMatch(ScrumPokerProject::isScrumPokerEnabled)) {
+            projectSettingsService.loadAll().stream().noneMatch(scrumPokerProject ->
+                scrumPokerProject.getActivateScrumPoker().equals(ProjectActivation.ACTIVATE))) {
             results.add(Configuration.ENABLED_FOR_NO_PROJECT);
         }
 

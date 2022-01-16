@@ -3,6 +3,7 @@ package de.codescape.jira.plugins.scrumpoker.service;
 import com.atlassian.activeobjects.external.ActiveObjects;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
+import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 import net.java.ao.DBParam;
 import net.java.ao.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +32,9 @@ public class ProjectSettingsServiceImpl implements ProjectSettingsService {
     }
 
     @Override
-    public void persistSettings(Long projectId, boolean activateScrumPoker, String estimateField, String cardSet) {
+    public void persistSettings(Long projectId, ProjectActivation projectActivation, String estimateField, String cardSet) {
         ScrumPokerProject scrumPokerProject = findOrCreateByProjectId(projectId);
-        scrumPokerProject.setScrumPokerEnabled(activateScrumPoker);
+        scrumPokerProject.setActivateScrumPoker(projectActivation);
         scrumPokerProject.setEstimateField(estimateField);
         scrumPokerProject.setCardSet(cardSet);
         scrumPokerProject.save();

@@ -3,6 +3,7 @@ package de.codescape.jira.plugins.scrumpoker.service;
 import com.atlassian.activeobjects.test.TestActiveObjects;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerTestDatabaseUpdater;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
+import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 import net.java.ao.EntityManager;
 import net.java.ao.test.converters.NameConverters;
 import net.java.ao.test.jdbc.Data;
@@ -48,11 +49,11 @@ public class ProjectSettingsServiceImplTest {
 
     @Test
     public void persistSettingsOverwritesExistingSettingsForProject() {
-        projectSettingsService.persistSettings(1L, true, "someField", "1,2,3");
-        projectSettingsService.persistSettings(1L, false, "anotherField", "1,2,3,5");
+        projectSettingsService.persistSettings(1L, ProjectActivation.DISABLE, "someField", "1,2,3");
+        projectSettingsService.persistSettings(1L, ProjectActivation.INHERIT, "anotherField", "1,2,3,5");
 
         ScrumPokerProject scrumPokerProject = projectSettingsService.loadSettings(1L);
-        assertThat(scrumPokerProject.isScrumPokerEnabled(), is(false));
+        assertThat(scrumPokerProject.getActivateScrumPoker(), is(ProjectActivation.INHERIT));
         assertThat(scrumPokerProject.getEstimateField(), is("anotherField"));
         assertThat(scrumPokerProject.getCardSet(), is("1,2,3,5"));
     }
@@ -61,10 +62,10 @@ public class ProjectSettingsServiceImplTest {
 
     @Test
     public void shouldLoadPersistedSettingsForProject() {
-        projectSettingsService.persistSettings(1L, true, "someField", "1,2,3");
+        projectSettingsService.persistSettings(1L, ProjectActivation.ACTIVATE, "someField", "1,2,3");
 
         ScrumPokerProject scrumPokerProject = projectSettingsService.loadSettings(1L);
-        assertThat(scrumPokerProject.isScrumPokerEnabled(), is(true));
+        assertThat(scrumPokerProject.getActivateScrumPoker(), is(ProjectActivation.ACTIVATE));
         assertThat(scrumPokerProject.getEstimateField(), is("someField"));
         assertThat(scrumPokerProject.getCardSet(), is("1,2,3"));
     }
@@ -78,7 +79,7 @@ public class ProjectSettingsServiceImplTest {
 
     @Test
     public void removeSettingsResultsInProjectSpecificSettingsToBeDeleted() {
-        projectSettingsService.persistSettings(1L, true, "someField", "1,2,3");
+        projectSettingsService.persistSettings(1L, ProjectActivation.DISABLE, "someField", "1,2,3");
         assumeThat(projectSettingsService.loadSettings(1L), is(notNullValue()));
 
         projectSettingsService.removeSettings(1L);
@@ -90,9 +91,9 @@ public class ProjectSettingsServiceImplTest {
 
     @Test
     public void loadAllReturnsAllProjectSpecificConfigurations() {
-        projectSettingsService.persistSettings(1L, true, "A", "B");
-        projectSettingsService.persistSettings(57L, true, "A", "B");
-        projectSettingsService.persistSettings(191L, true, "A", "B");
+        projectSettingsService.persistSettings(1L, ProjectActivation.INHERIT, "A", "B");
+        projectSettingsService.persistSettings(57L, ProjectActivation.ACTIVATE, "A", "B");
+        projectSettingsService.persistSettings(191L, ProjectActivation.DISABLE, "A", "B");
 
         List<ScrumPokerProject> scrumPokerProjects = projectSettingsService.loadAll();
 

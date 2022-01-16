@@ -16,6 +16,7 @@ A Scrum Poker session can be started by every logged in user for any estimable i
 * the user may see the issue
 * the issue is in an editable state
 * the issue has the field that holds the estimation
+* the project has Scrum Poker activated
 
 ### Choose your preferred way
 

@@ -20,7 +20,6 @@ import static de.codescape.jira.plugins.scrumpoker.model.GlobalSettings.*;
 public class GlobalSettingsServiceImpl implements GlobalSettingsService {
 
     public static final String ACTIVATE_SCRUM_POKER = "activateScrumPoker";
-
     private static final String ESTIMATE_FIELD = "storyPointField";
     private static final String SESSION_TIMEOUT = "sessionTimeout";
     private static final String ALLOW_REVEAL_DECK = "allowRevealDeck";

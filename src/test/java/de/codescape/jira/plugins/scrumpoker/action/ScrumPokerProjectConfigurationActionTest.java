@@ -13,6 +13,7 @@ import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.condition.ProjectAdministrationCondition;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
+import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.junit.Rule;
 import org.junit.Test;
@@ -227,11 +228,11 @@ public class ScrumPokerProjectConfigurationActionTest {
         expectProjectManagerToFindAndReturnProject("YAY");
         expectProjectToHaveProjectId(18L);
         expectHttpParametersToContainAction(Actions.SAVE);
-        expectConfigurationParametersToBeSubmitted(false, "POINTS", "5,8,13");
+        expectConfigurationParametersToBeSubmitted(ProjectActivation.DISABLE.name(), "POINTS", "5,8,13");
         expectCurrentUserToBeAllowedToAdministrateTheProject(true);
 
         assertThat(action.doExecute(), is(equalTo(SUCCESS)));
-        verify(projectSettingsService, times(1)).persistSettings(18L, false, "POINTS", "5,8,13");
+        verify(projectSettingsService, times(1)).persistSettings(18L, ProjectActivation.DISABLE, "POINTS", "5,8,13");
         verifyNoMoreInteractions(projectSettingsService);
     }
 
@@ -241,11 +242,11 @@ public class ScrumPokerProjectConfigurationActionTest {
         expectProjectManagerToFindAndReturnProject("YAY");
         expectProjectToHaveProjectId(18L);
         expectHttpParametersToContainAction(Actions.SAVE);
-        expectConfigurationParametersToBeSubmitted(true, "", "");
+        expectConfigurationParametersToBeSubmitted(ProjectActivation.INHERIT.name(), "", "");
         expectCurrentUserToBeAllowedToAdministrateTheProject(true);
 
         assertThat(action.doExecute(), is(equalTo(SUCCESS)));
-        verify(projectSettingsService, times(1)).persistSettings(18L, true, null, null);
+        verify(projectSettingsService, times(1)).persistSettings(18L, ProjectActivation.INHERIT, null, null);
         verifyNoMoreInteractions(projectSettingsService);
     }
 
@@ -280,9 +281,9 @@ public class ScrumPokerProjectConfigurationActionTest {
         when(httpServletRequest.getParameterValues(Parameters.ACTION)).thenReturn(new String[]{action});
     }
 
-    private void expectConfigurationParametersToBeSubmitted(boolean scrumPokerActivated, String estimateField, String cardSet) {
+    private void expectConfigurationParametersToBeSubmitted(String scrumPokerActivated, String estimateField, String cardSet) {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
-        when(httpServletRequest.getParameterValues(Parameters.ACTIVATE_SCRUM_POKER)).thenReturn(new String[]{Boolean.toString(scrumPokerActivated)});
+        when(httpServletRequest.getParameterValues(Parameters.ACTIVATE_SCRUM_POKER)).thenReturn(new String[]{scrumPokerActivated});
         when(httpServletRequest.getParameterValues(Parameters.ESTIMATE_FIELD)).thenReturn(new String[]{estimateField});
         when(httpServletRequest.getParameterValues(Parameters.CARD_SET)).thenReturn(new String[]{cardSet});
     }

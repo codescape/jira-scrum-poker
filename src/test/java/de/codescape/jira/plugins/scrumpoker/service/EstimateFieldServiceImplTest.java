@@ -16,6 +16,7 @@ import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
+import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -250,6 +251,7 @@ public class EstimateFieldServiceImplTest {
     }
 
     /* tests for isEstimable() */
+    // TODO improve tests for combinations of global & project specific settings for activation and estimate field
 
     @Test
     public void isEstimableReturnsFalseIfIssueIsNotEditable() {
@@ -329,7 +331,7 @@ public class EstimateFieldServiceImplTest {
 
         // the project has Scrum Poker locally enabled
         ScrumPokerProject scrumPokerProject = mock(ScrumPokerProject.class);
-        when(scrumPokerProject.isScrumPokerEnabled()).thenReturn(true);
+        when(scrumPokerProject.getActivateScrumPoker()).thenReturn(ProjectActivation.ACTIVATE);
         when(projectSettingsService.loadSettings(42L)).thenReturn(scrumPokerProject);
 
         // the global configuration returns the field

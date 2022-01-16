@@ -10,6 +10,7 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.condition.ProjectAdministrationCondition;
+import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -142,10 +143,10 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
             Project project = getProjectByKey(projectKey);
             switch (action) {
                 case Actions.SAVE:
-                    boolean activateScrumPoker = Boolean.parseBoolean(getParameter(Parameters.ACTIVATE_SCRUM_POKER));
+                    ProjectActivation projectActivation = ProjectActivation.valueOf(getParameter(Parameters.ACTIVATE_SCRUM_POKER));
                     String estimateField = nullOrValue(getParameter(Parameters.ESTIMATE_FIELD));
                     String cardSet = nullOrValue(getParameter(Parameters.CARD_SET));
-                    projectSettingsService.persistSettings(project.getId(), activateScrumPoker, estimateField, cardSet);
+                    projectSettingsService.persistSettings(project.getId(), projectActivation, estimateField, cardSet);
                     break;
                 case Actions.DEFAULTS:
                     projectSettingsService.removeSettings(project.getId());

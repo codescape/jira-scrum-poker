@@ -46,18 +46,36 @@
     <div class="form-body">
         <fieldset class="group">
             <legend><span>$i18n.getText("scrumpoker.config.project.activatescrumpoker")</span></legend>
-            <div class="checkbox">
-                #if ($activateScrumPokerGlobally == 'true')
-                    <input class="checkbox" type="checkbox" name="activateScrumPoker" id="activateScrumPoker" value="true" disabled checked>
-                    <label for="activateScrumPoker">$i18n.getText("scrumpoker.config.project.activatescrumpoker.checkbox.globallyactivated")</label>
+            <div class="radio">
+                #if ($projectSettings.activateScrumPoker == 'INHERIT')
+                    <input class="radio" type="radio" name="activateScrumPoker" id="activateScrumPokerInherit" value="INHERIT" checked>
                 #else
-                    #if ($projectSettings.scrumPokerEnabled == 'true')
-                        <input class="checkbox" type="checkbox" name="activateScrumPoker" id="activateScrumPoker" value="true" checked>
-                    #else
-                        <input class="checkbox" type="checkbox" name="activateScrumPoker" id="activateScrumPoker" value="true">
-                    #end
-                    <label for="activateScrumPoker">$i18n.getText("scrumpoker.config.project.activatescrumpoker.checkbox")</label>
+                    <input class="radio" type="radio" name="activateScrumPoker" id="activateScrumPokerInherit" value="INHERIT">
                 #end
+                    <label for="activateScrumPokerInherit">
+                        $i18n.getText("scrumpoker.config.project.activatescrumpoker.inherit")
+                        #if ($activateScrumPokerGlobally == 'true')
+                            ($i18n.getText("scrumpoker.config.project.activatescrumpoker.inherit.globallyactivated"))
+                        #else
+                            ($i18n.getText("scrumpoker.config.project.activatescrumpoker.inherit.globallydisabled"))
+                        #end
+                    </label>
+            </div>
+            <div class="radio">
+                #if ($projectSettings.activateScrumPoker == 'ACTIVATE')
+                    <input class="radio" type="radio" name="activateScrumPoker" id="activateScrumPokerActivate" value="ACTIVATE" checked>
+                #else
+                    <input class="radio" type="radio" name="activateScrumPoker" id="activateScrumPokerActivate" value="ACTIVATE">
+                #end
+                    <label for="activateScrumPokerActivate">$i18n.getText("scrumpoker.config.project.activatescrumpoker.activate")</label>
+            </div>
+            <div class="radio">
+                #if ($projectSettings.activateScrumPoker == 'DISABLE')
+                    <input class="radio" type="radio" name="activateScrumPoker" id="activateScrumPokerDisable" value="DISABLE" checked>
+                #else
+                    <input class="radio" type="radio" name="activateScrumPoker" id="activateScrumPokerDisable" value="DISABLE">
+                #end
+                    <label for="activateScrumPokerDisable">$i18n.getText("scrumpoker.config.project.activatescrumpoker.disable")</label>
             </div>
             <div class="description">$i18n.getText("scrumpoker.config.project.activatescrumpoker.description")</div>
         </fieldset>

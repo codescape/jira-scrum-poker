@@ -2,6 +2,7 @@ package de.codescape.jira.plugins.scrumpoker.service;
 
 import com.atlassian.activeobjects.tx.Transactional;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
+import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 
 import java.util.List;
 
@@ -14,12 +15,12 @@ public interface ProjectSettingsService {
     /**
      * Saves the new Scrum Poker settings for a specific Jira project.
      *
-     * @param projectId          unique ID of the Jira project
-     * @param activateScrumPoker flag whether Scrum Poker is enabled for the Jira project
-     * @param estimateField      estimate field for the Jira project
-     * @param cardSet            card set to be used for this Jira project
+     * @param projectId         unique ID of the Jira project
+     * @param projectActivation flag whether Scrum Poker is enabled for the Jira project
+     * @param estimateField     estimate field for the Jira project
+     * @param cardSet           card set to be used for this Jira project
      */
-    void persistSettings(Long projectId, boolean activateScrumPoker, String estimateField, String cardSet);
+    void persistSettings(Long projectId, ProjectActivation projectActivation, String estimateField, String cardSet);
 
     /**
      * Returns the project specific Scrum Poker settings for the given Jira project or <code>null</code> if no project
