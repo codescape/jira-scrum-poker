@@ -7,7 +7,7 @@ category: Administration
 {% include changelog-preface.md %}
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 ### [21.11.0] - 2021-11-21
 

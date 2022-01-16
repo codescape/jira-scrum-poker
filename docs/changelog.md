@@ -19,6 +19,7 @@ category: Administration
 * docs: update documentation to explain configuration options
 * feat: i18n for new configuration options on project configuration
 * docs: create archive for all 21.x releases
+* docs: fix table of contents for 21.x releases
 
 ### Older versions
 
