@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* feat: verify support for latest patch releases
 
 ### [22.01.0] - 2022-01-16
 
