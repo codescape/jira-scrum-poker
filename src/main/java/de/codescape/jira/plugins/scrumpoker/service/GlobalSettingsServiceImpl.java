@@ -39,6 +39,7 @@ public class GlobalSettingsServiceImpl implements GlobalSettingsService {
     @Override
     public GlobalSettings load() {
         GlobalSettings globalSettings = new GlobalSettings();
+        // TODO performance improvement: load all settings with a single query and map into GlobalSettings object
         globalSettings.setEstimateField(loadString(ESTIMATE_FIELD, null));
         globalSettings.setSessionTimeout(loadInteger(SESSION_TIMEOUT, SESSION_TIMEOUT_DEFAULT));
         globalSettings.setAllowRevealDeck(
