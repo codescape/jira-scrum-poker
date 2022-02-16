@@ -12,6 +12,7 @@ category: Administration
 ### [Unreleased]
 
 * feat: verify support for latest patch releases
+* feat: verify support for Jira 8.22.0 and long-term-support releases
 
 ### [22.01.0] - 2022-01-16
 
