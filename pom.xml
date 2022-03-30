@@ -41,10 +41,10 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- Jira versions -->
-        <jira.version>8.22.0</jira.version>
+        <jira.version>8.22.1</jira.version>
         <jira.version.latest>${jira.version}</jira.version.latest>
-        <jira.version.lts.latest>8.20.6</jira.version.lts.latest>
-        <jira.version.lts.mid>8.13.18</jira.version.lts.mid>
+        <jira.version.lts.latest>8.20.7</jira.version.lts.latest>
+        <jira.version.lts.mid>8.13.19</jira.version.lts.mid>
         <jira.version.lts.oldest>8.5.19</jira.version.lts.oldest>
 
         <!-- Dependency versions -->
