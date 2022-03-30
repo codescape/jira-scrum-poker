@@ -15,6 +15,7 @@ category: Administration
 * feat: verify support for Jira 8.22.0 and long-term-support releases
 * feat: improve configuration loading performance
 * feat: verify support for latest Jira patch releases 8.22.1, 8.20.7, 8.13.19
+* feat: prevent illegal configuration for session timeout
 
 ### [22.01.0] - 2022-01-16
 

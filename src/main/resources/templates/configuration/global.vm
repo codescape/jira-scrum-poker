@@ -91,7 +91,7 @@
         <div class="field-group">
             <label for="sessionTimeout">$i18n.getText("scrumpoker.config.sessiontimeout")
                 <span class="aui-icon icon-required">(required)</span></label>
-            <input type="number" class="text short-field" step="1" min="0" id="sessionTimeout" name="sessionTimeout" value="$globalSettings.sessionTimeout" required>
+            <input type="number" class="text short-field" step="1" min="1" id="sessionTimeout" name="sessionTimeout" value="$globalSettings.sessionTimeout" required>
             #if (!$globalSettings.sessionTimeout)
                 <div class="error"><span class="aui-icon aui-icon-small aui-iconfont-warning"></span> $i18n.getText("scrumpoker.config.field.required")</div>
             #end
