@@ -13,6 +13,7 @@ category: Administration
 
 * feat: verify support for latest patch releases
 * feat: verify support for Jira 8.22.0 and long-term-support releases
+* feat: improve configuration loading performance
 
 ### [22.01.0] - 2022-01-16
 

@@ -11,6 +11,8 @@ import net.java.ao.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 import static de.codescape.jira.plugins.scrumpoker.model.GlobalSettings.*;
 
 /**
@@ -39,20 +41,35 @@ public class GlobalSettingsServiceImpl implements GlobalSettingsService {
     @Override
     public GlobalSettings load() {
         GlobalSettings globalSettings = new GlobalSettings();
-        // TODO performance improvement: load all settings with a single query and map into GlobalSettings object
-        globalSettings.setEstimateField(loadString(ESTIMATE_FIELD, null));
-        globalSettings.setSessionTimeout(loadInteger(SESSION_TIMEOUT, SESSION_TIMEOUT_DEFAULT));
-        globalSettings.setAllowRevealDeck(
-            AllowRevealDeck.valueOf(loadString(ALLOW_REVEAL_DECK, ALLOW_REVEAL_DECK_DEFAULT.name())));
-        globalSettings.setActivateScrumPoker(loadBoolean(ACTIVATE_SCRUM_POKER, ACTIVATE_SCRUM_POKER_DEFAULT));
-        globalSettings.setDisplayDropdownOnBoards(
-            loadBoolean(DISPLAY_DROPDOWN_ON_BOARDS, DISPLAY_DROPDOWN_ON_BOARDS_DEFAULT));
-        globalSettings.setCheckPermissionToSaveEstimate(
-            loadBoolean(CHECK_PERMISSION_TO_SAVE_ESTIMATE, CHECK_PERMISSION_TO_SAVE_ESTIMATE_DEFAULT));
-        globalSettings.setDisplayCommentsForIssue(DisplayCommentsForIssue.valueOf(
-            loadString(DISPLAY_COMMENTS_FOR_ISSUE, DISPLAY_COMMENTS_FOR_ISSUE_DEFAULT.name())));
-        globalSettings.setCardSet(loadString(CARD_SET, CARD_SET_DEFAULT));
-        globalSettings.setAdditionalFields(loadString(ADDITIONAL_FIELDS, null));
+        Arrays.stream(activeObjects.find(ScrumPokerSetting.class)).forEach(scrumPokerSetting -> {
+            if (ACTIVATE_SCRUM_POKER.equals(scrumPokerSetting.getKey())) {
+                globalSettings.setActivateScrumPoker(Boolean.parseBoolean(scrumPokerSetting.getValue()));
+            }
+            if (ESTIMATE_FIELD.equals(scrumPokerSetting.getKey())) {
+                globalSettings.setEstimateField(scrumPokerSetting.getValue());
+            }
+            if (SESSION_TIMEOUT.equals(scrumPokerSetting.getKey())) {
+                globalSettings.setSessionTimeout(Integer.valueOf(scrumPokerSetting.getValue()));
+            }
+            if (ALLOW_REVEAL_DECK.equals(scrumPokerSetting.getKey())) {
+                globalSettings.setAllowRevealDeck(AllowRevealDeck.valueOf(scrumPokerSetting.getValue()));
+            }
+            if (DISPLAY_DROPDOWN_ON_BOARDS.equals(scrumPokerSetting.getKey())) {
+                globalSettings.setDisplayDropdownOnBoards(Boolean.parseBoolean(scrumPokerSetting.getValue()));
+            }
+            if (CHECK_PERMISSION_TO_SAVE_ESTIMATE.equals(scrumPokerSetting.getKey())) {
+                globalSettings.setCheckPermissionToSaveEstimate(Boolean.parseBoolean(scrumPokerSetting.getValue()));
+            }
+            if (DISPLAY_COMMENTS_FOR_ISSUE.equals(scrumPokerSetting.getKey())) {
+                globalSettings.setDisplayCommentsForIssue(DisplayCommentsForIssue.valueOf(scrumPokerSetting.getValue()));
+            }
+            if (CARD_SET.equals(scrumPokerSetting.getKey())) {
+                globalSettings.setCardSet(scrumPokerSetting.getValue());
+            }
+            if (ADDITIONAL_FIELDS.equals(scrumPokerSetting.getKey())) {
+                globalSettings.setAdditionalFields(scrumPokerSetting.getValue());
+            }
+        });
         return globalSettings;
     }
 
@@ -69,28 +86,6 @@ public class GlobalSettingsServiceImpl implements GlobalSettingsService {
         persist(ADDITIONAL_FIELDS, globalSettings.getAdditionalFields());
     }
 
-    private String loadString(String key, String defaultValue) {
-        ScrumPokerSetting scrumPokerSetting = findByKey(key);
-        return (scrumPokerSetting != null) ? scrumPokerSetting.getValue() : defaultValue;
-    }
-
-    @SuppressWarnings("SameParameterValue")
-    private Integer loadInteger(String key, Integer defaultValue) {
-        ScrumPokerSetting scrumPokerSetting = findByKey(key);
-        return (scrumPokerSetting != null) ? Integer.valueOf(scrumPokerSetting.getValue()) : defaultValue;
-    }
-
-    private boolean loadBoolean(String key, boolean defaultValue) {
-        ScrumPokerSetting scrumPokerSetting = findByKey(key);
-        return (scrumPokerSetting != null) ? Boolean.parseBoolean(scrumPokerSetting.getValue()) : defaultValue;
-    }
-
-    private ScrumPokerSetting findByKey(String key) {
-        ScrumPokerSetting[] scrumPokerSettings = activeObjects.find(ScrumPokerSetting.class,
-            Query.select().where("KEY = ?", key).limit(1));
-        return (scrumPokerSettings.length == 1) ? scrumPokerSettings[0] : null;
-    }
-
     private void persist(String key, String value) {
         ScrumPokerSetting scrumPokerSetting = findByKey(key);
         if (scrumPokerSetting == null) {
@@ -98,6 +93,12 @@ public class GlobalSettingsServiceImpl implements GlobalSettingsService {
         }
         scrumPokerSetting.setValue(value);
         scrumPokerSetting.save();
+    }
+
+    private ScrumPokerSetting findByKey(String key) {
+        ScrumPokerSetting[] scrumPokerSettings = activeObjects.find(ScrumPokerSetting.class,
+            Query.select().where("KEY = ?", key).limit(1));
+        return (scrumPokerSettings.length == 1) ? scrumPokerSettings[0] : null;
     }
 
 }

@@ -22,14 +22,26 @@ public class GlobalSettings {
     // settings
 
     private String estimateField;
-    private Integer sessionTimeout = SESSION_TIMEOUT_DEFAULT;
-    private AllowRevealDeck allowRevealDeck = ALLOW_REVEAL_DECK_DEFAULT;
-    private boolean activateScrumPoker = ACTIVATE_SCRUM_POKER_DEFAULT;
-    private boolean displayDropdownOnBoards = DISPLAY_DROPDOWN_ON_BOARDS_DEFAULT;
-    private boolean checkPermissionToSaveEstimate = CHECK_PERMISSION_TO_SAVE_ESTIMATE_DEFAULT;
-    private DisplayCommentsForIssue displayCommentsForIssue = DISPLAY_COMMENTS_FOR_ISSUE_DEFAULT;
-    private String cardSet = CARD_SET_DEFAULT;
+    private Integer sessionTimeout;
+    private AllowRevealDeck allowRevealDeck;
+    private boolean activateScrumPoker;
+    private boolean displayDropdownOnBoards;
+    private boolean checkPermissionToSaveEstimate;
+    private DisplayCommentsForIssue displayCommentsForIssue;
+    private String cardSet;
     private String additionalFields;
+
+    // constructors
+
+    public GlobalSettings() {
+        this.sessionTimeout = SESSION_TIMEOUT_DEFAULT;
+        this.allowRevealDeck = ALLOW_REVEAL_DECK_DEFAULT;
+        this.activateScrumPoker = ACTIVATE_SCRUM_POKER_DEFAULT;
+        this.displayCommentsForIssue = DISPLAY_COMMENTS_FOR_ISSUE_DEFAULT;
+        this.displayDropdownOnBoards = DISPLAY_DROPDOWN_ON_BOARDS_DEFAULT;
+        this.checkPermissionToSaveEstimate = CHECK_PERMISSION_TO_SAVE_ESTIMATE_DEFAULT;
+        this.cardSet = CARD_SET_DEFAULT;
+    }
 
     /**
      * Set the estimate field.
