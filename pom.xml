@@ -65,7 +65,7 @@
         <sal.version>4.2.1</sal.version>
         <servlet-api.version>3.0.1</servlet-api.version>
         <slf4j.version>1.7.30</slf4j.version>
-        <spring.version>5.1.18.RELEASE</spring.version>
+        <spring.version>5.3.18</spring.version>
         <upm.version>4.3.4</upm.version>
 
         <!-- Source encoding -->
