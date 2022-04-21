@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* feat: verify support for latest Jira patch releases 8.22.2, 8.20.8, 8.13.20
 
 ### [22.03.0] - 2022-03-30
 
