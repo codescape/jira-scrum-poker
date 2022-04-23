@@ -49,24 +49,24 @@
 
         <!-- Dependency versions -->
         <!-- see com.atlassian.jira:jira-project:${jira.version} for correct versions -->
-        <activeobjects.version>3.2.11</activeobjects.version>
+        <activeobjects.version>3.5.1</activeobjects.version>
         <amps.version>8.1.0</amps.version>
-        <atlassian-spring-scanner.version>2.1.13</atlassian-spring-scanner.version>
-        <commons-lang3.version>3.8</commons-lang3.version>
+        <atlassian-spring-scanner.version>2.1.16</atlassian-spring-scanner.version>
+        <commons-lang3.version>3.9</commons-lang3.version>
         <hamcrest.version>2.2</hamcrest.version>
         <hsqldb.version>2.5.0</hsqldb.version>
-        <jackson.version>1.9.13-atlassian-4</jackson.version>
+        <jackson.version>1.9.13-atlassian-6</jackson.version>
         <jersey.version>1.19.4</jersey.version>
         <jsr311.version>1.1.1</jsr311.version>
         <junit.version>4.13.1</junit.version>
         <lucene.version>7.3.1</lucene.version>
         <mockito.version>3.1.0</mockito.version>
         <quickreload.version>3.0.0</quickreload.version>
-        <sal.version>4.2.1</sal.version>
-        <servlet-api.version>3.0.1</servlet-api.version>
+        <sal.version>4.6.0</sal.version>
+        <servlet-api.version>3.1.0</servlet-api.version>
         <slf4j.version>1.7.30</slf4j.version>
-        <spring.version>5.1.18.RELEASE</spring.version>
-        <upm.version>4.3.4</upm.version>
+        <spring.version>5.3.10</spring.version>
+        <upm.version>5.1.2</upm.version>
 
         <!-- Source encoding -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

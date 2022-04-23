@@ -12,6 +12,7 @@ category: Administration
 ### [Unreleased]
 
 * feat: verify support for latest Jira patch releases 8.22.2, 8.20.8, 8.13.20
+* chore: update library versions to version defined in Jira project 8.22.2
 
 ### [22.03.0] - 2022-03-30
 
