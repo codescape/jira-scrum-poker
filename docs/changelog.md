@@ -11,6 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [22.04.0] - 2022-04-23
+
+**Security release for CVE-2022-22965**
+
 * feat: verify support for latest Jira patch releases 8.22.2, 8.20.8, 8.13.20
 * chore: update library versions to version defined in Jira project 8.22.2
 * chore: update Spring library to version 5.3.18 (CVE-2022-22965)
@@ -50,6 +56,7 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/22.03.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/22.04.0...HEAD
+[22.04.0]: https://github.com/codescape/jira-scrum-poker/compare/22.03.0...22.04.0
 [22.03.0]: https://github.com/codescape/jira-scrum-poker/compare/22.01.0...22.03.0
 [22.01.0]: https://github.com/codescape/jira-scrum-poker/compare/21.11.0...22.01.0
