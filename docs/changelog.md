@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* test: add Maven profile with maven-dependency-check for Data Center review
 
 ### [22.04.0] - 2022-04-23
 
