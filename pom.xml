@@ -456,6 +456,8 @@
                 <downloadJavadocs>true</downloadJavadocs>
             </properties>
         </profile>
+
+        <!-- Profile to be used for the required annual Data Center performance and security review -->
         <profile>
             <id>data-center-annual-review</id>
             <activation>
@@ -464,14 +466,15 @@
             <build>
                 <plugins>
                     <!-- OWASP Dependency Check for vulnerabilities in dependencies -->
-                    <!-- Configuration: https://jeremylong.github.io/DependencyCheck/dependency-check-maven/ -->
-                    <!-- Background: https://developer.atlassian.com/platform/marketplace/dc-apps-security-scanner/ -->
+                    <!-- see https://developer.atlassian.com/platform/marketplace/dc-apps-security-scanner/ -->
                     <plugin>
                         <groupId>org.owasp</groupId>
                         <artifactId>dependency-check-maven</artifactId>
                         <version>7.1.0</version>
                         <configuration>
+                            <!-- ignore all dependencies provided by the host system -->
                             <skipProvidedScope>true</skipProvidedScope>
+                            <!-- ignore typical known false positives -->
                             <suppressionFile>
                                 https://dcapt-downloads.s3.amazonaws.com/atlassian-security-scanner-dc-apps-suppressions.xml
                             </suppressionFile>
