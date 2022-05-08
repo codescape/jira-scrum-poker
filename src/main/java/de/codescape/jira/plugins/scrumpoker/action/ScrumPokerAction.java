@@ -15,6 +15,7 @@ import com.atlassian.jira.issue.fields.renderer.JiraRendererPlugin;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.util.http.JiraUrl;
+import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.message.I18nResolver;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
@@ -105,6 +106,13 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
         if (issue == null || currentUserIsNotAllowedToSeeIssue(issue) || issueIsNotEstimable(issue)) {
             errorMessage("Issue Key " + issueKey + " not found.");
             return ERROR;
+        }
+
+        // construct fallback return url
+        String returnUrl = getParameter(JiraWebActionSupport.RETURN_URL_PARAMETER);
+        if (returnUrl == null) {
+            returnUrl = "/browse/" + issueKey;
+            setReturnUrl(returnUrl);
         }
 
         return SUCCESS;

@@ -16,6 +16,7 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.HttpServletVariables;
+import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.sal.api.message.I18nResolver;
 import com.atlassian.upm.api.license.entity.LicenseError;
 import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
@@ -106,6 +107,7 @@ public class ScrumPokerActionTest {
     public void before() {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
         when(jiraAuthenticationContext.getLoggedInUser()).thenReturn(user);
+        when(httpServletRequest.getParameterValues("returnUrl")).thenReturn(new String[]{"/browse/" + ISSUE_KEY});
     }
 
     /* tests for doExecute() */

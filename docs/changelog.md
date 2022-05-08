@@ -14,6 +14,7 @@ category: Administration
 * test: add Maven profile with maven-dependency-check for Data Center review
 * docs: document Maven profile for Data Center review
 * chore: reorganize results for annual Data Center reviews
+* feat: allow jumping back to where you started Scrum Poker from (#53)
 
 ### [22.04.0] - 2022-04-23
 

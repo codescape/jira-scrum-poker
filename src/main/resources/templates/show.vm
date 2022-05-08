@@ -305,8 +305,7 @@
 
     <div class="scrum-poker-buttons">
         <div class="aui-buttons">
-            <a href="$req.contextPath/secure/ScrumPokerSessions.jspa" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-list"></span> $i18n.getText("scrumpoker.sessions.list")</a>
-            <a href="$req.contextPath/browse/{{issueKey}}" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-issue"></span> $i18n.getText("scrumpoker.issue.navigateback")</a>
+            <a href="$req.contextPath$returnUrl" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-cross"></span> $i18n.getText("scrumpoker.issue.navigateback")</a>
             <button onclick="ScrumPoker.resetSession('{{issueKey}}');" class="aui-button"><span class="aui-icon aui-icon-small aui-iconfont-undo"></span> $i18n.getText("scrumpoker.session.reset")</button>
         </div>
     </div>
