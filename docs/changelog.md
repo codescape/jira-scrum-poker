@@ -11,6 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [22.05.0] - 2022-05-08
+
+**Navigation improvements and Data Center review**
+
 * test: add Maven profile with maven-dependency-check for Data Center review
 * docs: document Maven profile for Data Center review
 * chore: reorganize results for annual Data Center reviews
@@ -60,7 +66,8 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/22.04.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/22.05.0...HEAD
+[22.05.0]: https://github.com/codescape/jira-scrum-poker/compare/22.04.0...22.05.0
 [22.04.0]: https://github.com/codescape/jira-scrum-poker/compare/22.03.0...22.04.0
 [22.03.0]: https://github.com/codescape/jira-scrum-poker/compare/22.01.0...22.03.0
 [22.01.0]: https://github.com/codescape/jira-scrum-poker/compare/21.11.0...22.01.0
