@@ -105,7 +105,7 @@
                         <td class="status"><span class="aui-lozenge aui-lozenge-subtle jira-issue-status-lozenge-$subTask.status.statusCategory.colorName">$subTask.status.nameTranslation</span></td>
                         <td class="assignee">
                             #if($subTask.assignee)
-                                <a href="$baseurl/secure/ViewProfile.jspa?name=$subTask.assignee.key">$subTask.assignee.displayName</a>
+                                <a href="$baseurl/secure/ViewProfile.jspa?name=$subTask.assignee.name">$subTask.assignee.displayName</a>
                             #else
                                 <i>$i18n.getText("scrumpoker.issue.assignee.empty")</i>
                             #end
