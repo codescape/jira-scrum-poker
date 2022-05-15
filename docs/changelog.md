@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* fix: use correct link on sub-tasks list for current assignee
 
 ### [22.05.0] - 2022-05-08
 
@@ -21,7 +21,6 @@ category: Administration
 * docs: document Maven profile for Data Center review
 * chore: reorganize results for annual Data Center reviews
 * feat: allow jumping back to where you started Scrum Poker from (#53)
-* fix: use correct link on sub-tasks list for current assignee
 
 ### [22.04.0] - 2022-04-23
 
