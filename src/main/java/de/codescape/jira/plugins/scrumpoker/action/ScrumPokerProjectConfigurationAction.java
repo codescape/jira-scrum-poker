@@ -13,6 +13,7 @@ import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.condition.ProjectAdministrationCondition;
 import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
+import de.codescape.jira.plugins.scrumpoker.model.ProjectSettings;
 import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -94,8 +95,9 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
     /**
      * Returns the settings for the given project.
      */
-    public ScrumPokerProject getProjectSettings() {
-        return projectSettingsService.loadSettings(getProjectByKey(projectKey).getId());
+    public ProjectSettings getProjectSettings() {
+        ScrumPokerProject scrumPokerProject = projectSettingsService.loadSettings(getProjectByKey(projectKey).getId());
+        return scrumPokerProject != null ? new ProjectSettings(scrumPokerProject) : null;
     }
 
     /**

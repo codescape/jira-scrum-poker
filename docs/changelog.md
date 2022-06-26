@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* fix: use data transfer object instead of active object for project settings
 
 ### [22.06.0] - 2022-06-26
 
