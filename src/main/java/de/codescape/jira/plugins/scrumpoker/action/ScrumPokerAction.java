@@ -14,6 +14,8 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
 import com.atlassian.jira.issue.fields.renderer.JiraRendererPlugin;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
+import com.atlassian.jira.security.request.RequestMethod;
+import com.atlassian.jira.security.request.SupportedMethods;
 import com.atlassian.jira.util.http.JiraUrl;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
@@ -93,6 +95,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
      * Display the page if the current user is allowed to see the issue and a Scrum Poker session can be started.
      */
     @Override
+    @SupportedMethods({RequestMethod.GET})
     protected String doExecute() {
         // license check
         if (!scrumPokerLicenseService.hasValidLicense()) {

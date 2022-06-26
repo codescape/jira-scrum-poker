@@ -1,10 +1,11 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.issue.CustomFieldManager;
+import com.atlassian.jira.security.request.RequestMethod;
+import com.atlassian.jira.security.request.SupportedMethods;
 import com.atlassian.jira.security.xsrf.RequiresXsrfCheck;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
-import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.Card;
 import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 import de.codescape.jira.plugins.scrumpoker.service.*;
@@ -80,12 +81,14 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction implem
     }
 
     @Override
+    @SupportedMethods({RequestMethod.GET})
     public String doDefault() {
         return SUCCESS;
     }
 
     @Override
     @RequiresXsrfCheck
+    @SupportedMethods({RequestMethod.POST})
     protected String doExecute() {
         return SUCCESS;
     }

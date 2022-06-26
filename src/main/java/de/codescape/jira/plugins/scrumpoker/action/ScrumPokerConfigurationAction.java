@@ -1,6 +1,8 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
 import com.atlassian.jira.issue.fields.CustomField;
+import com.atlassian.jira.security.request.RequestMethod;
+import com.atlassian.jira.security.request.SupportedMethods;
 import com.atlassian.jira.security.xsrf.RequiresXsrfCheck;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.model.AdditionalField;
@@ -97,6 +99,7 @@ public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction impl
      * Show the configuration page.
      */
     @Override
+    @SupportedMethods({RequestMethod.GET})
     public String doDefault() {
         return SUCCESS;
     }
@@ -106,6 +109,7 @@ public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction impl
      */
     @Override
     @RequiresXsrfCheck
+    @SupportedMethods({RequestMethod.POST})
     protected String doExecute() {
         String action = getParameter(Parameters.ACTION);
         if (action != null) {

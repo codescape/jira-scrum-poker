@@ -14,8 +14,8 @@
 
         <!-- configuration -->
         <param name="configure.url">/secure/admin/ScrumPokerConfiguration!default.jspa</param>
-        <param name="post.install.url">/secure/admin/ScrumPokerGettingStarted.jspa</param>
-        <param name="post.update.url">/secure/admin/ScrumPokerGettingStarted.jspa</param>
+        <param name="post.install.url">/secure/admin/ScrumPokerGettingStarted!default.jspa</param>
+        <param name="post.update.url">/secure/admin/ScrumPokerGettingStarted!default.jspa</param>
 
         <!-- licensing -->
         <param name="atlassian-licensing-enabled">${atlassian.licensing.enabled}</param>
@@ -115,7 +115,7 @@
     </web-section>
     <web-item key="scrum-poker-configuration-item1" section="admin_plugins_menu/scrum-poker-configuration" weight="10">
         <label key="scrumpoker.gettingstarted.title"/>
-        <link linkId="scrum-poker-configuration-link1">/secure/admin/ScrumPokerGettingStarted.jspa</link>
+        <link linkId="scrum-poker-configuration-link1">/secure/admin/ScrumPokerGettingStarted!default.jspa</link>
     </web-item>
     <web-item key="scrum-poker-configuration-item2" section="admin_plugins_menu/scrum-poker-configuration" weight="20">
         <label key="scrumpoker.config.title"/>

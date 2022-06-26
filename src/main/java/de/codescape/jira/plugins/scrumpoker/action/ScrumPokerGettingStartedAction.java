@@ -1,5 +1,7 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
+import com.atlassian.jira.security.request.RequestMethod;
+import com.atlassian.jira.security.request.SupportedMethods;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,8 @@ public class ScrumPokerGettingStartedAction extends AbstractScrumPokerAction imp
     }
 
     @Override
-    protected String doExecute() {
+    @SupportedMethods({RequestMethod.GET})
+    public String doDefault() {
         return SUCCESS;
     }
 

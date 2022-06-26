@@ -12,6 +12,7 @@ category: Administration
 ### [Unreleased]
 
 * fix: use correct link on sub-tasks list for current assignee
+* feat: ensure support for latest Jira releases 9.0.0, 8.20.9, 8.13.1
 
 ### [22.05.0] - 2022-05-08
 

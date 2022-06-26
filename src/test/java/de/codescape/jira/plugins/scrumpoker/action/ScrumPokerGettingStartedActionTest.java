@@ -24,7 +24,7 @@ public class ScrumPokerGettingStartedActionTest {
 
     @Test
     public void doExecuteShouldReturnSuccess() {
-        assertThat(action.doExecute(), is(equalTo(SUCCESS)));
+        assertThat(action.doDefault(), is(equalTo(SUCCESS)));
     }
 
     /* tests for getDocumentationUrl() */

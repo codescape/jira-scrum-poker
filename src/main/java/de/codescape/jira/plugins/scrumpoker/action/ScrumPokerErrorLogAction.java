@@ -1,12 +1,15 @@
 package de.codescape.jira.plugins.scrumpoker.action;
 
+import com.atlassian.jira.security.request.RequestMethod;
+import com.atlassian.jira.security.request.SupportedMethods;
 import com.atlassian.jira.security.xsrf.RequiresXsrfCheck;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
-import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerError;
+import de.codescape.jira.plugins.scrumpoker.model.Error;
 import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Error Log page to display and empty the error log.
@@ -30,12 +33,14 @@ public class ScrumPokerErrorLogAction extends AbstractScrumPokerAction implement
     }
 
     @Override
+    @SupportedMethods({RequestMethod.GET})
     public String doDefault() {
         return SUCCESS;
     }
 
     @Override
     @RequiresXsrfCheck
+    @SupportedMethods({RequestMethod.POST})
     protected String doExecute() {
         String action = getParameter(Parameters.ACTION);
         if (action != null && action.equals("empty")) {
@@ -52,8 +57,10 @@ public class ScrumPokerErrorLogAction extends AbstractScrumPokerAction implement
     /**
      * Returns the list of all logged errors.
      */
-    public List<ScrumPokerError> getErrorList() {
-        return errorLogService.listAll();
+    public List<Error> getErrorList() {
+        return errorLogService.listAll().stream()
+            .map(Error::new)
+            .collect(Collectors.toList());
     }
 
 }

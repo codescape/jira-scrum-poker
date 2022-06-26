@@ -4,6 +4,8 @@ import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.project.Project;
 import com.atlassian.jira.project.ProjectManager;
 import com.atlassian.jira.security.JiraAuthenticationContext;
+import com.atlassian.jira.security.request.RequestMethod;
+import com.atlassian.jira.security.request.SupportedMethods;
 import com.atlassian.jira.security.xsrf.RequiresXsrfCheck;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
@@ -111,6 +113,7 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
     }
 
     @Override
+    @SupportedMethods({RequestMethod.GET})
     public String doDefault() {
         // make sure we have a project to configure specific Scrum Poker settings for
         projectKey = getParameter(Parameters.PROJECT_KEY);
@@ -131,6 +134,7 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
 
     @Override
     @RequiresXsrfCheck
+    @SupportedMethods({RequestMethod.POST})
     protected String doExecute() {
         // use validation of doDefault() method
         if (doDefault().equals(ERROR)) {

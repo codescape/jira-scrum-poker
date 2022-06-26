@@ -13,8 +13,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
-import static de.codescape.jira.plugins.scrumpoker.model.GlobalSettings.*;
-
 /**
  * Implementation of {@link GlobalSettingsService} using Active Objects as persistence model.
  */

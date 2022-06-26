@@ -4,6 +4,8 @@ import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
+import com.atlassian.jira.security.request.RequestMethod;
+import com.atlassian.jira.security.request.SupportedMethods;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
@@ -21,6 +23,7 @@ import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
 /**
  * Show a list of all running and recently finished Scrum Poker sessions.
  */
+@SupportedMethods({RequestMethod.GET})
 public class ScrumPokerSessionsAction extends AbstractScrumPokerAction {
 
     private static final long serialVersionUID = 1L;
