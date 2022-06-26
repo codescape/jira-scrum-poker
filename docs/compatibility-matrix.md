@@ -37,9 +37,10 @@ See the following references for potential problems reported by our customers:
 
 Scrum Poker for Jira has a very broad range of supported versions of Jira Server and Jira Data Center:
 
-| Jira Server & Data Center | Scrum Poker for Jira |
-| ------------------------- | -------------------- |
-| 8.5.0 and newer           | use latest version   |
-| 7.13.0 - 8.4.x            | use version 21.5.0   |
-| 7.6.0 - 7.12.x            | use version 4.8.2    |
-| 7.5.x and older           | not supported        |
+| Jira Server & Data Center | Scrum Poker for Jira         |
+| ------------------------- | ---------------------------- |
+| 9.0.0 and newer           | use version 22.06.1 or later |
+| 8.5.0 - 8.22.x            | use latest version           |
+| 7.13.0 - 8.4.x            | use version 21.5.0           |
+| 7.6.0 - 7.12.x            | use version 4.8.2            |
+| 7.5.x and older           | not supported                |

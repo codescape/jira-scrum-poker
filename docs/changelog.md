@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* docs: update compatibility matrix
 
 ### [22.06.1] - 2022-06-26
 
