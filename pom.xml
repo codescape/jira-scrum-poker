@@ -43,9 +43,8 @@
         <!-- Jira versions -->
         <jira.version>9.0.0</jira.version>
         <jira.version.latest>${jira.version}</jira.version.latest>
-        <jira.version.lts.latest>8.20.9</jira.version.lts.latest>
-        <jira.version.lts.mid>8.13.21</jira.version.lts.mid>
-        <jira.version.lts.oldest>8.5.19</jira.version.lts.oldest>
+        <jira.version.lts.current>8.20.10</jira.version.lts.current>
+        <jira.version.lts.previous>8.13.21</jira.version.lts.previous>
 
         <!-- Dependency versions -->
         <!-- see com.atlassian.jira:jira-project:${jira.version} for correct versions -->
@@ -300,37 +299,25 @@
                         </product>
                         <product>
                             <id>jira</id>
-                            <instanceId>jira-lts-latest</instanceId>
-                            <version>${jira.version.lts.latest}</version>
-                            <productDataVersion>${jira.version.lts.latest}</productDataVersion>
+                            <instanceId>jira-lts-current</instanceId>
+                            <version>${jira.version.lts.current}</version>
+                            <productDataVersion>${jira.version.lts.current}</productDataVersion>
                             <applications>
                                 <application>
                                     <applicationKey>jira-software</applicationKey>
-                                    <version>${jira.version.lts.latest}</version>
+                                    <version>${jira.version.lts.current}</version>
                                 </application>
                             </applications>
                         </product>
                         <product>
                             <id>jira</id>
-                            <instanceId>jira-lts-mid</instanceId>
-                            <version>${jira.version.lts.mid}</version>
-                            <productDataVersion>${jira.version.lts.mid}</productDataVersion>
+                            <instanceId>jira-lts-previous</instanceId>
+                            <version>${jira.version.lts.previous}</version>
+                            <productDataVersion>${jira.version.lts.previous}</productDataVersion>
                             <applications>
                                 <application>
                                     <applicationKey>jira-software</applicationKey>
-                                    <version>${jira.version.lts.mid}</version>
-                                </application>
-                            </applications>
-                        </product>
-                        <product>
-                            <id>jira</id>
-                            <instanceId>jira-lts-oldest</instanceId>
-                            <version>${jira.version.lts.oldest}</version>
-                            <productDataVersion>${jira.version.lts.oldest}</productDataVersion>
-                            <applications>
-                                <application>
-                                    <applicationKey>jira-software</applicationKey>
-                                    <version>${jira.version.lts.oldest}</version>
+                                    <version>${jira.version.lts.previous}</version>
                                 </application>
                             </applications>
                         </product>
@@ -346,21 +333,15 @@
                             </productIds>
                         </testGroup>
                         <testGroup>
-                            <id>jira-lts-latest</id>
+                            <id>jira-lts-current</id>
                             <productIds>
-                                <productId>jira-lts-latest</productId>
+                                <productId>jira-lts-current</productId>
                             </productIds>
                         </testGroup>
                         <testGroup>
-                            <id>jira-lts-mid</id>
+                            <id>jira-lts-previous</id>
                             <productIds>
-                                <productId>jira-lts-mid</productId>
-                            </productIds>
-                        </testGroup>
-                        <testGroup>
-                            <id>jira-lts-oldest</id>
-                            <productIds>
-                                <productId>jira-lts-oldest</productId>
+                                <productId>jira-lts-previous</productId>
                             </productIds>
                         </testGroup>
                     </testGroups>
