@@ -9,11 +9,11 @@ category: Legal
 
 The protection of your privacy while using Scrum Poker as well as the security of all business data collected, processed and used by Scrum Poker is an important concern to us.
 
-In this document we provide details on how we secure your data. If you find something missing or you have any security related questions please feel free to contact us at stefan.glase@googlemail.com.
+In this document we provide details on how we secure your data. If you find something missing, or you have any security related questions please feel free to contact us at stefan.glase@googlemail.com.
 
 ### Collection, processing and usage of personal data
 
-We only store the minimal amount of data required to provide our service. We do not store issue details, task descriptions, comments nor other sensitive information. We never store users full names nor e-mails but we use user keys provided by Jira which can contain them.
+We only store the minimal amount of data required to provide our service. We do not store issue details, task descriptions, comments nor other sensitive information. We never store users full names nor e-mails, but we use user keys provided by Jira which can contain them.
 
 The following data is collected and persisted into the Jira database during a Scrum Poker session:
 

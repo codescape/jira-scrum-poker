@@ -10,5 +10,5 @@ Scrum Poker for Jira comes with translations for the following languages. If the
 * German
 * French
 
-None of this languages works for your users?
+None of these languages works for your users?
 Feel free to [get in contact](/support) with us in order to find a solution!

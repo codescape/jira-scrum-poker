@@ -196,7 +196,7 @@ Decide whether to show the Scrum Poker dropdown on boards or not.
 In older versions of Scrum Poker this dropdown was the only way to access the list of active Scrum Poker sessions.
 Today the Scrum Poker menu elements in the Jira top menu `Boards` are preferred.
 
-By default this option is disabled as this feature is just a convenience feature for users of older Scrum Poker versions who want to use this way to open the `Active Sessions` page.
+By default, this option is disabled as this feature is just a convenience feature for users of older Scrum Poker versions who want to use this way to open the `Active Sessions` page.
 
 <div class="configurable">
   <span>This setting can be configured on:</span>

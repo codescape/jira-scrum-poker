@@ -10,7 +10,7 @@ category: Administration
 ### General advise
 
 Only the latest version of Scrum Poker for Jira brings you the latest and greatest set of features and potential bugfixes.
-It is our core interest and we are working hard to provide you with stable iterations from version to version of this app.
+It is our core interest, and we are working hard to provide you with stable iterations from version to version of this app.
 
 Tip: Always install the latest version of Scrum Poker for Jira and keep it up to date.
 
@@ -24,7 +24,7 @@ To ensure compatibility with older versions of Jira Server and Jira Data Center 
 
 ### Database support
 
-Scrum Poker for Jira is tested with many different database vendors while we always focus on MySQL DB and Oracle DB as the most used database vendors to run your Jira instance.
+Scrum Poker for Jira is tested with many database vendors while we always focus on MySQL DB and Oracle DB as the most used database vendors to run your Jira instance.
 
 Please make sure that your database configuration matches the configuration required by Jira.
 Many problems with Scrum Poker for Jira are caused by a wrong database configuration.

@@ -11,7 +11,7 @@ This page describes how to start a new Scrum Poker session.
 
 ### Preconditions
 
-A Scrum Poker session can be started by every logged in user for any estimable issue from the issue detail page if the following requirements are met:
+A Scrum Poker session can be started by every logged-in user for any estimable issue from the issue detail page if the following requirements are met:
 
 * the user may see the issue
 * the issue is in an editable state

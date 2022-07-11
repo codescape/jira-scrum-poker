@@ -40,7 +40,7 @@ Development of Atlassian Jira plugins requires the use of the Atlassian Plugin S
 To set up your development environment have a look at the official documentation: 
 [Set up the Atlassian SDK and build a project](https://developer.atlassian.com/docs/getting-started/set-up-the-atlassian-plugin-sdk-and-build-a-project) 
 
-During development you will find the following commands useful:
+During development, you will find the following commands useful:
 
 * `atlas-run` installs this plugin into Jira and starts an instance on localhost
 * `atlas-package` generate a Jar file of the plugin and installs it into the currently running instance (see `atlas-run`)
@@ -66,7 +66,7 @@ The first line put together from the `type` and the `subject` should not be long
 * feat (new feature)
 * fix (bug fix)
 * docs (changes to documentation)
-* style (formatting, missing semi colons, etc; no code change)
+* style (formatting, missing semicolons, etc., no code change)
 * refactor (refactoring production code)
 * test (adding missing tests, refactoring tests; no production code change)
 * chore (updating dependencies etc; no production code change)

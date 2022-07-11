@@ -49,7 +49,7 @@ The following steps were used to set up the environment and perform the required
 ![without app installed](2020-06-07-reindex-without-app-installed.png?raw=true)
 ![without app installed](2020-06-07-index-without-app-installed.png?raw=true)
 
-* Install latest version of Scrum Poker for Jira
+* Install the latest version of Scrum Poker for Jira
 
 * Re-Index with Scrum Poker for Jira installed
 

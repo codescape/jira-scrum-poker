@@ -26,7 +26,7 @@ This page can also be accessed from the `Scrum Poker` dropdown that is visible o
 
 ![Navigate to the active sessions page](/images/start-scrum-poker-session-open-active-sessions.png)
 
-The `Active Session` page displays all currently running and recently finished sessions related to issues that are visible to you.
+The `Active Session` page displays all currently running and recently finished sessions for issues that are visible to you.
 It allows you to directly jump into all running sessions.
 
 ![Join a Scrum Poker session from the active sessions page](/images/join-scrum-poker-session-active-sessions.png)

@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* docs: improve documentation and remove typos
 
 ### [22.07.0] - 2022-07-11
 
