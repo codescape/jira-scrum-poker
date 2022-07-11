@@ -11,6 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [22.07.0] - 2022-07-11
+
+**Universal App with compatibility for Jira 8 and Jira 9**
+
 * docs: update compatibility matrix
 * feat: ensure compatibility with Jira 9.0.0, Jira 8.13.x and Jira 8.20.x
 * chore: drop support for Jira 8.5.x
@@ -80,7 +86,8 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/22.06.1...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/22.07.0...HEAD
+[22.07.0]: https://github.com/codescape/jira-scrum-poker/compare/22.06.1...22.07.0
 [22.06.1]: https://github.com/codescape/jira-scrum-poker/compare/22.06.0...22.06.1
 [22.06.0]: https://github.com/codescape/jira-scrum-poker/compare/22.05.0...22.06.0
 [22.05.0]: https://github.com/codescape/jira-scrum-poker/compare/22.04.0...22.05.0
