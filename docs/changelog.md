@@ -12,6 +12,7 @@ category: Administration
 ### [Unreleased]
 
 * docs: update compatibility matrix
+* feat: ensure compatibility with Jira 9.0.0, Jira 8.13.x and Jira 8.20.x
 
 ### [22.06.1] - 2022-06-26
 

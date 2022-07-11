@@ -275,8 +275,8 @@
                             com.atlassian.plugin.web,
                             com.atlassian.plugin.web.baseconditions,
                             com.atlassian.jira.plugin.webfragment.conditions,
-                            com.atlassian.jira.security.request,
-                            com.atlassian.jira.security.xsrf,
+                            com.atlassian.jira.security.request;resolution:=optional,
+                            com.atlassian.jira.security.xsrf;resolution:=optional,
 
                             *;resolution:=optional
                         </Import-Package>
