@@ -15,6 +15,6 @@ public enum ProjectActivation {
     /**
      * Scrum Poker is explicitly disabled for the current project regardless of the global settings.
      */
-    DISABLE;
+    DISABLE
 
 }

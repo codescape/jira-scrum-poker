@@ -12,6 +12,7 @@ category: Administration
 ### [Unreleased]
 
 * docs: improve documentation and remove typos
+* chore: optimize imports and code style
 
 ### [22.07.0] - 2022-07-11
 
