@@ -1,0 +1,16 @@
+# Continuous Integration with GitHub
+
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Install Atlassian SDK
+        uses: rodrigo-nogues/github-action-install-atlassian-sdk@v1
+      - name: Build Project
+        run:  atlas-mvn package
