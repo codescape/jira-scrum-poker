@@ -13,7 +13,7 @@ category: Administration
 
 * docs: improve documentation and remove typos
 * chore: optimize imports and code style
-* test: use GutHub actions for continuous integration
+* test: use GitHub actions for continuous integration
 
 ### [22.07.0] - 2022-07-11
 
