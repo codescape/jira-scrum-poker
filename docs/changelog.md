@@ -14,8 +14,9 @@ category: Administration
 * docs: improve documentation and remove typos
 * chore: optimize imports and code style
 * test: use GitHub actions for continuous integration
-* feat: ensure support for latest Jira releases 9.1.0, 8.20.11
+* feat: ensure compatibility with Jira 9.1.0 and 8.20.11
 * fix: project settings cannot be saved without any settings
+* feat: ensure compatibility with Jira 9.2.0, 8.20.12 and 8.13.25
 
 ### [22.07.0] - 2022-07-11
 
