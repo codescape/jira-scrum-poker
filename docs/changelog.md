@@ -11,6 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [22.08.0] - 2022-08-28
+
+**Bugfix for saving empty project specific settings**
+
 * docs: improve documentation and remove typos
 * chore: optimize imports and code style
 * test: use GitHub actions for continuous integration
@@ -91,7 +97,8 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/22.07.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/22.08.0...HEAD
+[22.08.0]: https://github.com/codescape/jira-scrum-poker/compare/22.07.0...22.08.0
 [22.07.0]: https://github.com/codescape/jira-scrum-poker/compare/22.06.1...22.07.0
 [22.06.1]: https://github.com/codescape/jira-scrum-poker/compare/22.06.0...22.06.1
 [22.06.0]: https://github.com/codescape/jira-scrum-poker/compare/22.05.0...22.06.0
