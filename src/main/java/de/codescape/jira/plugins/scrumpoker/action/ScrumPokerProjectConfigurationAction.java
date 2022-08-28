@@ -97,7 +97,7 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
      */
     public ProjectSettings getProjectSettings() {
         ScrumPokerProject scrumPokerProject = projectSettingsService.loadSettings(getProjectByKey(projectKey).getId());
-        return scrumPokerProject != null ? new ProjectSettings(scrumPokerProject) : null;
+        return scrumPokerProject != null ? new ProjectSettings(scrumPokerProject) : new ProjectSettings();
     }
 
     /**

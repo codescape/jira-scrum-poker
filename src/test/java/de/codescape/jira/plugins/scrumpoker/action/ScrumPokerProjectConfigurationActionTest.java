@@ -14,6 +14,7 @@ import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.condition.ProjectAdministrationCondition;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
+import de.codescape.jira.plugins.scrumpoker.model.ProjectSettings;
 import de.codescape.jira.plugins.scrumpoker.service.*;
 import org.junit.Rule;
 import org.junit.Test;
@@ -122,7 +123,7 @@ public class ScrumPokerProjectConfigurationActionTest {
     }
 
     @Test
-    public void getProjectSettingsShouldReturnNullIfNoneExists() {
+    public void getProjectSettingsShouldReturnDefaultSettingsIfNoneExists() {
         expectHttpParametersToContainProjectKey("PROJECT");
         expectProjectManagerToFindAndReturnProject("PROJECT");
         expectCurrentUserToBeAllowedToAdministrateTheProject(true);
@@ -132,7 +133,7 @@ public class ScrumPokerProjectConfigurationActionTest {
         when(project.getId()).thenReturn(19L);
         when(projectSettingsService.loadSettings(19L)).thenReturn(null);
 
-        assertThat(action.getProjectSettings(), is(nullValue()));
+        assertThat(action.getProjectSettings(), is(equalTo(new ProjectSettings())));
     }
 
     /* tests for getLicenseError() */
