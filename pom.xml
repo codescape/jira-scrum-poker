@@ -53,7 +53,7 @@
         <atlassian-spring-scanner.version>2.1.16</atlassian-spring-scanner.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <hamcrest.version>2.2</hamcrest.version>
-        <hsqldb.version>2.5.0</hsqldb.version>
+        <hsqldb.version>2.7.1</hsqldb.version>
         <jackson.version>1.9.13-atlassian-6</jackson.version>
         <jersey.version>1.19.4</jersey.version>
         <jsr311.version>1.1.1</jsr311.version>
