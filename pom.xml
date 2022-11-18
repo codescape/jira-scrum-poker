@@ -48,9 +48,9 @@
 
         <!-- Dependency versions -->
         <!-- see com.atlassian.jira:jira-project:${jira.version} for correct versions -->
-        <activeobjects.version>3.5.1</activeobjects.version>
+        <activeobjects.version>4.0.3</activeobjects.version>
         <amps.version>8.1.0</amps.version>
-        <atlassian-spring-scanner.version>2.1.16</atlassian-spring-scanner.version>
+        <atlassian-spring-scanner.version>3.0.1</atlassian-spring-scanner.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <hamcrest.version>2.2</hamcrest.version>
         <hsqldb.version>2.5.0</hsqldb.version>
@@ -60,12 +60,13 @@
         <junit.version>4.13.1</junit.version>
         <lucene.version>7.3.1</lucene.version>
         <mockito.version>3.1.0</mockito.version>
-        <quickreload.version>3.0.0</quickreload.version>
-        <sal.version>4.6.0</sal.version>
-        <servlet-api.version>3.1.0</servlet-api.version>
+        <profiling.version>4.8.1</profiling.version>
+        <quickreload.version>3.2.0</quickreload.version>
+        <sal.version>5.0.0</sal.version>
+        <servlet-api.version>4.0.1</servlet-api.version>
         <slf4j.version>1.7.30</slf4j.version>
-        <spring.version>5.3.18</spring.version>
-        <upm.version>5.1.2</upm.version>
+        <spring.version>5.3.19</spring.version>
+        <upm.version>6.0.6</upm.version>
 
         <!-- Source encoding -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -218,6 +219,12 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.profiling</groupId>
+            <artifactId>atlassian-profiling-api</artifactId>
+            <version>${profiling.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -453,7 +460,7 @@
                     <plugin>
                         <groupId>org.owasp</groupId>
                         <artifactId>dependency-check-maven</artifactId>
-                        <version>7.1.0</version>
+                        <version>7.3.1</version>
                         <configuration>
                             <!-- ignore all dependencies provided by the host system -->
                             <skipProvidedScope>true</skipProvidedScope>
