@@ -11,13 +11,19 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [23.03.0] - 2023-03-29
+
+**Compatibility updates for Jira 9.7**
+
 * docs: fix table of content for 22x releases
 * feat: ensure compatibility with Jira 9.7.0, 9.4.4 and 8.20.20
 * docs: link to data center version by default (#145)
 
 ### [23.02.0] - 2023-02-19
 
-**Compatibility updates for latest Jira versions**
+**Compatibility updates for Jira 9.5 and 9.6**
 
 * feat: ensure compatibility with Jira 9.5.0
 * feat: ensure compatibility with Jira 9.6.0, 9.4.2 and 8.20.17
@@ -34,5 +40,6 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/23.02.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/23.03.0...HEAD
+[23.03.0]: https://github.com/codescape/jira-scrum-poker/compare/23.02.0...23.03.0
 [23.02.0]: https://github.com/codescape/jira-scrum-poker/compare/22.11.0...23.02.0
