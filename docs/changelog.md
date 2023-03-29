@@ -12,6 +12,7 @@ category: Administration
 ### [Unreleased]
 
 * docs: fix table of content for 22x releases
+* feat: ensure compatibility with Jira 9.7.0, 9.4.4 and 8.20.20
 
 ### [23.02.0] - 2023-02-19
 
