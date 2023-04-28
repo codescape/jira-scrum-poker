@@ -447,7 +447,7 @@
                     <plugin>
                         <groupId>org.owasp</groupId>
                         <artifactId>dependency-check-maven</artifactId>
-                        <version>7.3.1</version>
+                        <version>8.2.1</version>
                         <configuration>
                             <!-- ignore all dependencies provided by the host system -->
                             <skipProvidedScope>true</skipProvidedScope>
