@@ -41,10 +41,10 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- Jira versions -->
-        <jira.version>9.10.0</jira.version>
+        <jira.version>9.11.0</jira.version>
         <jira.version.latest>${jira.version}</jira.version.latest>
-        <jira.version.lts.current>9.4.8</jira.version.lts.current>
-        <jira.version.lts.previous>8.20.24</jira.version.lts.previous>
+        <jira.version.lts.current>9.4.9</jira.version.lts.current>
+        <jira.version.lts.previous>8.20.25</jira.version.lts.previous>
 
         <!-- Dependency versions -->
         <!-- see com.atlassian.jira:jira-project:${jira.version} for correct versions -->
