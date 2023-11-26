@@ -5,7 +5,7 @@
 
     <groupId>de.codescape.jira.plugins</groupId>
     <artifactId>scrum-poker</artifactId>
-    <version>23.03.0</version>
+    <version>23.11.0</version>
     <packaging>atlassian-plugin</packaging>
 
     <name>Scrum Poker for Jira</name>
