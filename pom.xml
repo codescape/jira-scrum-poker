@@ -41,7 +41,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- Jira versions -->
-        <jira.version>9.11.3</jira.version>
+        <jira.version>9.12.0</jira.version>
         <jira.version.latest>${jira.version}</jira.version.latest>
         <jira.version.lts.current>9.4.12</jira.version.lts.current>
         <jira.version.lts.previous>8.20.28</jira.version.lts.previous>
