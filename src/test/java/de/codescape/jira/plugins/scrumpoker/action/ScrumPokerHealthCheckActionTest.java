@@ -72,11 +72,18 @@ public class ScrumPokerHealthCheckActionTest {
     @Mock
     private CustomField estimateField;
 
+    /**/
+
+    @Test
+    public void shouldAlwaysDisplayThePageOnDoDefault() {
+        assertThat(action.doDefault(), is(equalTo(action.SUCCESS)));
+    }
+
     /* tests for doExecute() */
 
     @Test
-    public void shouldAlwaysDisplayThePage() {
-        assertThat(action.doExecute(), is(equalTo("success")));
+    public void shouldAlwaysDisplayThePageOnDoExecute() {
+        assertThat(action.doExecute(), is(equalTo(action.SUCCESS)));
     }
 
     /* tests for showResults() */
