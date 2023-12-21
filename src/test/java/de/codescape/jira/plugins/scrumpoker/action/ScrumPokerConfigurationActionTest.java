@@ -62,6 +62,13 @@ public class ScrumPokerConfigurationActionTest {
     @Mock
     private HttpServletRequest httpServletRequest;
 
+    /* tests for doDefault() */
+
+    @Test
+    public void doDefaultAlwaysReturnsSuccess() {
+        assertThat(action.doDefault(), is(equalTo(SUCCESS)));
+    }
+
     /* tests for doExecute() */
 
     @Test
