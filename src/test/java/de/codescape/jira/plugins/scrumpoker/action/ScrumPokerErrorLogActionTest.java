@@ -48,6 +48,13 @@ public class ScrumPokerErrorLogActionTest {
         assertThat(action.getErrorList(), is(equalTo(scrumPokerErrors)));
     }
 
+    /* tests for doDefault() */
+
+    @Test
+    public void shouldAlwaysReturnThePageForViewing() {
+        assertThat(action.doDefault(), is(equalTo(action.SUCCESS)));
+    }
+
     /* tests for doExecute() */
 
     @Test

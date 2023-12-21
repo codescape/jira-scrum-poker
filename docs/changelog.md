@@ -13,6 +13,7 @@ category: Administration
 
 * feat: ensure compatibility with Jira 9.12.0
 * feat: ensure compatibility with Jira 9.12.1 and 9.4.14
+* test: add test coverage for error log action
 
 ### [23.11.0] - 2023-11-26
 
