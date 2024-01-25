@@ -46,26 +46,9 @@
         <jira.version.lts.current>9.4.14</jira.version.lts.current>
         <jira.version.lts.previous>8.20.28</jira.version.lts.previous>
 
-        <!-- Dependency versions -->
-        <!-- see com.atlassian.jira:jira-project:${jira.version} for correct versions -->
-        <activeobjects.version>4.0.3</activeobjects.version>
-        <amps.version>8.1.0</amps.version>
-        <atlassian-spring-scanner.version>3.0.1</atlassian-spring-scanner.version>
-        <commons-lang3.version>3.9</commons-lang3.version>
-        <hamcrest.version>2.2</hamcrest.version>
-        <hsqldb.version>2.5.0</hsqldb.version>
-        <jackson.version>1.9.13-atlassian-6</jackson.version>
-        <jersey.version>1.19.4</jersey.version>
-        <jsr311.version>1.1.1</jsr311.version>
-        <junit.version>4.13.1</junit.version>
-        <lucene.version>7.3.1</lucene.version>
-        <mockito.version>3.1.0</mockito.version>
-        <profiling.version>4.8.1</profiling.version>
-        <quickreload.version>3.2.0</quickreload.version>
-        <sal.version>5.0.0</sal.version>
-        <servlet-api.version>4.0.1</servlet-api.version>
-        <spring.version>5.3.19</spring.version>
-        <upm.version>6.0.6</upm.version>
+        <!-- Plugin versions (keep in sync with jira-project) -->
+        <amps.version>8.2.3</amps.version>
+        <platform.spring-scanner.version>3.0.3</platform.spring-scanner.version>
 
         <!-- Source encoding -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -78,140 +61,124 @@
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <!-- import all library and plugin versions from jira-project -->
+            <dependency>
+                <groupId>com.atlassian.jira</groupId>
+                <artifactId>jira-project</artifactId>
+                <version>${jira.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <!-- Addon dependencies -->
         <dependency>
             <groupId>com.atlassian.jira</groupId>
             <artifactId>jira-api</artifactId>
-            <version>${jira.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.atlassian.sal</groupId>
             <artifactId>sal-api</artifactId>
-            <version>${sal.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.atlassian.upm</groupId>
             <artifactId>licensing-api</artifactId>
-            <version>${upm.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.atlassian.upm</groupId>
             <artifactId>upm-api</artifactId>
-            <version>${upm.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.atlassian.activeobjects</groupId>
             <artifactId>activeobjects-plugin</artifactId>
-            <version>${activeobjects.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.atlassian.plugin</groupId>
             <artifactId>atlassian-spring-scanner-annotation</artifactId>
-            <version>${atlassian-spring-scanner.version}</version>
             <scope>provided</scope>
         </dependency>
+        <!-- required for auto wiring Spring components -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <version>${spring.version}</version>
             <scope>provided</scope>
         </dependency>
+        <!-- required for declaration of Spring components -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
             <scope>provided</scope>
         </dependency>
+        <!-- required for REST service annotations -->
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>jsr311-api</artifactId>
-            <version>${jsr311.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commons-lang3.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-core-asl</artifactId>
-            <version>${jackson.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
-            <version>${jackson.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>${servlet-api.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest</artifactId>
-            <version>${hamcrest.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-library</artifactId>
-            <version>${hamcrest.version}</version>
+            <artifactId>hamcrest-core</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.atlassian.jira</groupId>
             <artifactId>jira-tests</artifactId>
-            <version>${jira.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>net.java.dev.activeobjects</groupId>
             <artifactId>activeobjects-test</artifactId>
-            <version>${activeobjects.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.atlassian.activeobjects</groupId>
             <artifactId>activeobjects-test</artifactId>
-            <version>${activeobjects.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.hsqldb</groupId>
+            <groupId>hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
-            <version>${hsqldb.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.atlassian.profiling</groupId>
             <artifactId>atlassian-profiling-api</artifactId>
-            <version>${profiling.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -219,13 +186,11 @@
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-core</artifactId>
-            <version>${lucene.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-client</artifactId>
-            <version>${jersey.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -253,7 +218,6 @@
                         <pluginArtifact>
                             <groupId>com.atlassian.labs.plugins</groupId>
                             <artifactId>quickreload</artifactId>
-                            <version>${quickreload.version}</version>
                         </pluginArtifact>
                     </pluginArtifacts>
 
@@ -343,7 +307,7 @@
             <plugin>
                 <groupId>com.atlassian.plugin</groupId>
                 <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>
-                <version>${atlassian-spring-scanner.version}</version>
+                <version>${platform.spring-scanner.version}</version>
                 <executions>
                     <execution>
                         <goals>

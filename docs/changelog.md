@@ -17,6 +17,7 @@ category: Administration
 * test: add test coverage for health check action
 * test: add test coverage for configuration action
 * docs: move changelog for 23.x releases into archive
+* chore: use jira-project to define all library versions
 
 ### Older versions
 

@@ -70,7 +70,6 @@ public class StartSessionWorkflowFunctionTest {
         startSessionWorkflowFunction.execute(transientVars, args, propertySet);
 
         verify(scrumPokerSessionService, never()).byIssueKey(anyString(), anyString());
-        verifyNoInteractions(scrumPokerSessionService);
         verify(errorLogService, times(1)).logError(LICENSE_ERROR_TEXT);
     }
 
@@ -83,7 +82,6 @@ public class StartSessionWorkflowFunctionTest {
         startSessionWorkflowFunction.execute(transientVars, args, propertySet);
 
         verify(scrumPokerSessionService, never()).byIssueKey(anyString(), anyString());
-        verifyNoInteractions(scrumPokerSessionService);
     }
 
     @Test
