@@ -18,6 +18,7 @@ category: Administration
 * test: add test coverage for configuration action
 * docs: move changelog for 23.x releases into archive
 * chore: use jira-project to define all library versions
+* feat: ensure compatibility with Jira 9.13.0, 9.12.2 and 9.4.15
 
 ### Older versions
 
