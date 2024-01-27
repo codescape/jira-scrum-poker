@@ -11,6 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [24.01.0] - 2024-01-27
+
+**Compatibility updates for Jira 9.13**
+
 * feat: ensure compatibility with Jira 9.12.0
 * feat: ensure compatibility with Jira 9.12.1 and 9.4.14
 * test: add test coverage for error log action
@@ -33,4 +39,5 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/23.11.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/24.01.0...HEAD
+[24.01.0]: https://github.com/codescape/jira-scrum-poker/compare/23.11.0...24.01.0
