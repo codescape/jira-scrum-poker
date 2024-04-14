@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* chore: add results for Data Center approval
 
 ### [24.01.0] - 2024-01-27
 
