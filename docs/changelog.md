@@ -15,6 +15,7 @@ category: Administration
 * chore: add results for Data Center re-approval
 * feat: ensure compatibility with Jira 9.15.0
 * feat: ensure compatibility with Jira 9.16.0, 9.12.9, 9.4.22
+* feat: ensure compatibility with Jira 9.17.0, 9.4.24
 
 ### [24.01.0] - 2024-01-27
 
