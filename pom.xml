@@ -41,9 +41,9 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- Jira versions -->
-        <jira.version>9.17.0</jira.version>
+        <jira.version>9.17.1</jira.version>
         <jira.version.latest>${jira.version}</jira.version.latest>
-        <jira.version.lts.current>9.12.9</jira.version.lts.current>
+        <jira.version.lts.current>9.12.11</jira.version.lts.current>
         <jira.version.lts.previous>9.4.24</jira.version.lts.previous>
 
         <!-- Plugin versions (keep in sync with jira-project) -->

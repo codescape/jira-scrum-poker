@@ -16,6 +16,7 @@ category: Administration
 * feat: ensure compatibility with Jira 9.15.0
 * feat: ensure compatibility with Jira 9.16.0, 9.12.9, 9.4.22
 * feat: ensure compatibility with Jira 9.17.0, 9.4.24
+* feat: ensure compatibility with Jira 9.17.1, 9.12.11
 
 ### [24.01.0] - 2024-01-27
 
