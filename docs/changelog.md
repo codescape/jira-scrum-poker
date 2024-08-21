@@ -11,6 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [24.08.0] - 2024-08-21
+
+**Compatibility updates for Jira 9.14 - 9.17**
+
 * feat: ensure compatibility with Jira 9.14.0, 9.12.5, 9.4.18
 * chore: add results for Data Center re-approval
 * feat: ensure compatibility with Jira 9.15.0
@@ -44,5 +50,6 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/24.01.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/24.08.0...HEAD
+[24.08.0]: https://github.com/codescape/jira-scrum-poker/compare/24.01.0...24.08.0
 [24.01.0]: https://github.com/codescape/jira-scrum-poker/compare/23.11.0...24.01.0
