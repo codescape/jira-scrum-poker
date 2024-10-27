@@ -13,3 +13,6 @@
 # jekyll
 /docs/_site/
 /docs/.jekyll-cache/
+
+# docker
+/.docker/scrum-poker.jar
