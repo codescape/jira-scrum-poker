@@ -8,9 +8,9 @@ import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import net.java.ao.DBParam;
 import net.java.ao.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.util.Arrays;
 
 /**
@@ -31,7 +31,7 @@ public class GlobalSettingsServiceImpl implements GlobalSettingsService {
 
     private final ActiveObjects activeObjects;
 
-    @Autowired
+    @Inject
     public GlobalSettingsServiceImpl(@ComponentImport ActiveObjects activeObjects) {
         this.activeObjects = activeObjects;
     }

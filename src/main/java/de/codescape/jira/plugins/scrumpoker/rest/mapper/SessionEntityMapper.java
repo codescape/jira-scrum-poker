@@ -15,9 +15,9 @@ import de.codescape.jira.plugins.scrumpoker.model.Card;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.*;
 import de.codescape.jira.plugins.scrumpoker.service.CardSetService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +41,7 @@ public class SessionEntityMapper {
     private final IssueManager issueManager;
     private final CardSetService cardSetService;
 
-    @Autowired
+    @Inject
     public SessionEntityMapper(@ComponentImport UserManager userManager,
                                @ComponentImport DateTimeFormatter dateTimeFormatter,
                                @ComponentImport PermissionManager permissionManager,

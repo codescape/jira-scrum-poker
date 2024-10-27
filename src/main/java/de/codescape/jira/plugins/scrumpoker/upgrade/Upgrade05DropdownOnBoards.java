@@ -4,8 +4,9 @@ import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.sal.api.upgrade.PluginUpgradeTask;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.inject.Inject;
 
 /**
  * Set the default setting for configuration option Display Dropdown on Boards and hide it by default.
@@ -18,7 +19,7 @@ public class Upgrade05DropdownOnBoards extends AbstractUpgradeTask {
 
     private final GlobalSettingsService globalSettingsService;
 
-    @Autowired
+    @Inject
     public Upgrade05DropdownOnBoards(GlobalSettingsService globalSettingsService) {
         this.globalSettingsService = globalSettingsService;
     }

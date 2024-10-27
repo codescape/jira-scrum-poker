@@ -7,8 +7,9 @@ import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 import com.atlassian.sal.api.upgrade.PluginUpgradeTask;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.inject.Inject;
 
 import static de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants.SCRUM_POKER_PLUGIN_KEY;
 
@@ -27,7 +28,7 @@ public class Upgrade01RemovePluginSettings extends AbstractUpgradeTask {
     private final PluginSettingsFactory pluginSettingsFactory;
     private final GlobalSettingsService globalSettingsService;
 
-    @Autowired
+    @Inject
     public Upgrade01RemovePluginSettings(@ComponentImport PluginSettingsFactory pluginSettingsFactory,
                                          GlobalSettingsService globalSettingsService) {
         this.pluginSettingsFactory = pluginSettingsFactory;

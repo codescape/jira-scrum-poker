@@ -22,8 +22,8 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.message.I18nResolver;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
 import de.codescape.jira.plugins.scrumpoker.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import java.util.List;
 
 import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
@@ -62,7 +62,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
 
     private String issueKey;
 
-    @Autowired
+    @Inject
     public ScrumPokerAction(@ComponentImport RendererManager rendererManager,
                             @ComponentImport FieldLayoutManager fieldLayoutManager,
                             @ComponentImport IssueManager issueManager,

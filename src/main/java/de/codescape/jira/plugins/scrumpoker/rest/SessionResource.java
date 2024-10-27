@@ -8,8 +8,8 @@ import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionEntityMapper;
 import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionReferenceMapper;
 import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -28,7 +28,7 @@ public class SessionResource {
     private final SessionEntityMapper sessionEntityMapper;
     private final SessionReferenceMapper sessionReferenceMapper;
 
-    @Autowired
+    @Inject
     public SessionResource(@ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
                            EstimateFieldService estimateFieldService,
                            ScrumPokerSessionService scrumPokerSessionService,

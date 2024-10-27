@@ -13,8 +13,8 @@ import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionEntityMapper;
 import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerLicenseService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +35,7 @@ public class ScrumPokerSessionsAction extends AbstractScrumPokerAction {
     private final SessionEntityMapper sessionEntityMapper;
     private final ScrumPokerLicenseService scrumPokerLicenseService;
 
-    @Autowired
+    @Inject
     public ScrumPokerSessionsAction(@ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
                                     @ComponentImport PermissionManager permissionManager,
                                     @ComponentImport IssueManager issueManager,

@@ -187,6 +187,11 @@
         </actions>
     </webwork1>
 
+    <!-- rest migration -->
+    <rest-migration key="scrum-poker-rest-migration">
+        <rest-v2/>
+    </rest-migration>
+
     <!-- rest endpoint -->
     <rest key="scrum-poker-rest" path="/scrumpoker" version="1.0"/>
 
@@ -217,5 +222,39 @@
         <fname>activeScrumPokerSessions</fname>
         <list>true</list>
     </jql-function>
+
+    <!-- velocity allow-list (alphabetically sorted) -->
+    <velocity-allowlist key="scrum-poker-velocity-allowlist">
+        <method>com.atlassian.jira.issue.fields.ImmutableCustomField#getFieldName()</method>
+        <method>com.atlassian.jira.issue.fields.renderer.wiki.AtlassianWikiRenderer#render(java.lang.String com.atlassian.jira.issue.fields.renderer.IssueRenderContext)</method>
+        <method>com.atlassian.jira.issue.IssueConstantImpl#getCompleteIconUrl()</method>
+        <method>com.atlassian.jira.issue.IssueImpl#getIssueRenderContext()</method>
+        <method>com.atlassian.jira.issue.IssueImpl#getIssueType()</method>
+        <method>com.atlassian.jira.issue.IssueImpl#getStatus()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.action.ScrumPokerAction#hasFieldValue(com.atlassian.jira.issue.fields.CustomField)</method>
+        <method>de.codescape.jira.plugins.scrumpoker.action.ScrumPokerSessionsAction#getIssue(java.lang.String)</method>
+        <method>de.codescape.jira.plugins.scrumpoker.model.AdditionalField#getCustomField()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.model.AdditionalField#isSelected()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.model.Error#getErrorMessage()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.model.Error#getErrorTimestamp()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.model.Error#getJiraVersion()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.model.Error#getScrumPokerVersion()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.model.Error#getStacktrace()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.model.GlobalSettings#getAllowRevealDeck()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.model.GlobalSettings#getCardSet()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.model.GlobalSettings#getDisplayCommentsForIssue()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.model.GlobalSettings#getEstimateField()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.model.GlobalSettings#getSessionTimeout()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.model.GlobalSettings#isActivateScrumPoker()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.model.GlobalSettings#isCheckPermissionToSaveEstimate()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.model.GlobalSettings#isDisplayDropdownOnBoards()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.rest.entities.DateEntity#getDisplayValue()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.rest.entities.DateEntity#getFormattedDate()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity#getCreateDate()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity#getCreator()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity#getIssueKey()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity#getVotes()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity#isCancelled()</method>
+    </velocity-allowlist>
 
 </atlassian-plugin>

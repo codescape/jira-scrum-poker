@@ -5,8 +5,9 @@ import com.atlassian.sal.api.upgrade.PluginUpgradeTask;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.inject.Inject;
 
 /**
  * Set the default setting for configuration option Allow Reveal Deck and allow everyone to reveal a deck.
@@ -19,7 +20,7 @@ public class Upgrade03AllowRevealDeck extends AbstractUpgradeTask {
 
     private final GlobalSettingsService globalSettingsService;
 
-    @Autowired
+    @Inject
     public Upgrade03AllowRevealDeck(GlobalSettingsService globalSettingsService) {
         this.globalSettingsService = globalSettingsService;
     }

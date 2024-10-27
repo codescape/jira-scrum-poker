@@ -7,9 +7,9 @@ import com.atlassian.sal.api.upgrade.PluginUpgradeTask;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
 import net.java.ao.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -24,7 +24,7 @@ public class Upgrade08FillUpdateDate extends AbstractUpgradeTask {
 
     private final ActiveObjects activeObjects;
 
-    @Autowired
+    @Inject
     public Upgrade08FillUpdateDate(@ComponentImport ActiveObjects activeObjects) {
         this.activeObjects = activeObjects;
     }

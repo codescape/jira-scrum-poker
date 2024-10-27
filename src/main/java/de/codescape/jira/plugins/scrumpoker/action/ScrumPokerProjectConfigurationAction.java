@@ -15,8 +15,8 @@ import de.codescape.jira.plugins.scrumpoker.condition.ProjectAdministrationCondi
 import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 import de.codescape.jira.plugins.scrumpoker.model.ProjectSettings;
 import de.codescape.jira.plugins.scrumpoker.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -59,7 +59,7 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
 
     private String projectKey;
 
-    @Autowired
+    @Inject
     public ScrumPokerProjectConfigurationAction(@ComponentImport ProjectManager projectManager,
                                                 @ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
                                                 EstimateFieldService estimateFieldService,

@@ -7,8 +7,9 @@ import com.atlassian.sal.api.upgrade.PluginUpgradeTask;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSetting;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsServiceImpl;
 import net.java.ao.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.inject.Inject;
 
 /**
  * Migration task to rename the setting on the persistence layer and have a more expressive name for the settings
@@ -25,7 +26,7 @@ public class Upgrade11MigrateActivateScrumPoker extends AbstractUpgradeTask {
 
     private final ActiveObjects activeObjects;
 
-    @Autowired
+    @Inject
     public Upgrade11MigrateActivateScrumPoker(@ComponentImport ActiveObjects activeObjects) {
         this.activeObjects = activeObjects;
     }

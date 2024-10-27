@@ -6,9 +6,9 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.upgrade.PluginUpgradeTask;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
 import net.java.ao.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.util.Arrays;
 
 import static de.codescape.jira.plugins.scrumpoker.model.Card.QUESTION_MARK;
@@ -26,7 +26,7 @@ public class Upgrade04QuestionMarkVotes extends AbstractUpgradeTask {
 
     private final ActiveObjects activeObjects;
 
-    @Autowired
+    @Inject
     public Upgrade04QuestionMarkVotes(@ComponentImport ActiveObjects activeObjects) {
         this.activeObjects = activeObjects;
     }

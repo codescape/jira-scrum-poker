@@ -10,8 +10,8 @@ import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -54,7 +54,7 @@ public class ScrumPokerConfigurationAction extends AbstractScrumPokerAction impl
     private final AdditionalFieldService additionalFieldService;
     private final ScrumPokerLicenseService scrumPokerLicenseService;
 
-    @Autowired
+    @Inject
     public ScrumPokerConfigurationAction(EstimateFieldService estimateFieldService,
                                          GlobalSettingsService globalSettingsService,
                                          AdditionalFieldService additionalFieldService,

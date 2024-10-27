@@ -6,9 +6,9 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.upgrade.PluginUpgradeTask;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import net.java.ao.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.util.Arrays;
 
 /**
@@ -23,7 +23,7 @@ public class Upgrade10MigrateConfirmedEstimate extends AbstractUpgradeTask {
 
     private final ActiveObjects activeObjects;
 
-    @Autowired
+    @Inject
     public Upgrade10MigrateConfirmedEstimate(@ComponentImport ActiveObjects activeObjects) {
         this.activeObjects = activeObjects;
     }

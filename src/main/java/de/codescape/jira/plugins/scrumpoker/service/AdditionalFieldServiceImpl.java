@@ -8,10 +8,10 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.model.AdditionalField;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import webwork.action.Action;
 
+import javax.inject.Inject;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -25,7 +25,7 @@ public class AdditionalFieldServiceImpl implements AdditionalFieldService {
     private final CustomFieldManager customFieldManager;
     private final GlobalSettingsService globalSettingsService;
 
-    @Autowired
+    @Inject
     public AdditionalFieldServiceImpl(@ComponentImport FieldLayoutManager fieldLayoutManager,
                                       @ComponentImport CustomFieldManager customFieldManager,
                                       GlobalSettingsService globalSettingsService) {

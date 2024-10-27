@@ -12,7 +12,16 @@ category: Administration
 ### [Unreleased]
 
 * feat: ensure compatibility with Jira 9.17.2, 9.12.12, 9.4.25
-* chore: add docker configuration for Jira 10 
+* chore: add docker configuration for Jira 10
+* chore: prepare for Jira 10
+  * chore: move from @Autowired to @Inject for all dependency injections
+  * chore: move to new Jackson dependencies for REST services and mapping
+  * chore: migrate to REST 2 for all REST endpoints
+  * chore: remove @Component from all Condition classes and cleanup OSGi imports
+  * chore: depend on Jira platform BOMs for versioning
+  * chore: remove parallel configuration for different Jira versions
+  * chore: add workaround for not working QuickReload in docker run
+  * chore: add allow-list for methods called from velocity templates
 
 ### [24.08.0] - 2024-08-21
 

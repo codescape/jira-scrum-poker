@@ -9,8 +9,8 @@ import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.model.Card;
 import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 import de.codescape.jira.plugins.scrumpoker.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -63,7 +63,7 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction implem
     private final EstimateFieldService estimateFieldService;
     private final ScrumPokerLicenseService scrumPokerLicenseService;
 
-    @Autowired
+    @Inject
     public ScrumPokerHealthCheckAction(@ComponentImport CustomFieldManager customFieldManager,
                                        GlobalSettingsService globalSettingsService,
                                        ProjectSettingsService projectSettingsService,

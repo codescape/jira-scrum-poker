@@ -12,9 +12,9 @@ import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,7 +48,7 @@ public class EstimateFieldServiceImpl implements EstimateFieldService {
     private final IssueManager issueManager;
     private final ErrorLogService errorLogService;
 
-    @Autowired
+    @Inject
     public EstimateFieldServiceImpl(@ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
                                     @ComponentImport IssueManager issueManager,
                                     @ComponentImport CustomFieldManager customFieldManager,

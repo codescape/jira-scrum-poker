@@ -2,9 +2,9 @@ package de.codescape.jira.plugins.scrumpoker.service;
 
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.model.Card;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +17,7 @@ public class CardSetServiceImpl implements CardSetService {
 
     private final GlobalSettingsService globalSettingsService;
 
-    @Autowired
+    @Inject
     public CardSetServiceImpl(GlobalSettingsService globalSettingsService) {
         this.globalSettingsService = globalSettingsService;
     }

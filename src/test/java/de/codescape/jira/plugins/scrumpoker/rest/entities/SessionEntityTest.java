@@ -1,6 +1,6 @@
 package de.codescape.jira.plugins.scrumpoker.rest.entities;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 
 import java.util.List;

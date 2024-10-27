@@ -7,9 +7,9 @@ import com.atlassian.sal.api.upgrade.PluginUpgradeTask;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
 import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 import net.java.ao.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.util.Arrays;
 
 /**
@@ -30,7 +30,7 @@ public class Upgrade12MigrateScrumPokerEnabled extends AbstractUpgradeTask {
 
     private final ActiveObjects activeObjects;
 
-    @Autowired
+    @Inject
     public Upgrade12MigrateScrumPokerEnabled(@ComponentImport ActiveObjects activeObjects) {
         this.activeObjects = activeObjects;
     }

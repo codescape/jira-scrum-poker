@@ -1,6 +1,6 @@
 package de.codescape.jira.plugins.scrumpoker.rest.entities;
 
-import org.codehaus.jackson.annotate.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 /**
  * REST representation of a date to be displayed during a Scrum Poker session.

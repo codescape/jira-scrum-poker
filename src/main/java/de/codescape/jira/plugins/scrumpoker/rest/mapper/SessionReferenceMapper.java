@@ -6,9 +6,9 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.ReferenceEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.ReferenceListEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -23,7 +23,7 @@ public class SessionReferenceMapper {
 
     private final IssueManager issueManager;
 
-    @Autowired
+    @Inject
     public SessionReferenceMapper(@ComponentImport IssueManager issueManager) {
         this.issueManager = issueManager;
     }

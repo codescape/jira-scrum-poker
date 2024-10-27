@@ -11,8 +11,8 @@ import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerLicenseService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import java.util.Map;
 
 /**
@@ -28,7 +28,7 @@ public class StartSessionWorkflowFunction extends AbstractJiraFunctionProvider {
     private final ErrorLogService errorLogService;
     private final I18nResolver i18nResolver;
 
-    @Autowired
+    @Inject
     public StartSessionWorkflowFunction(@ComponentImport I18nResolver i18nResolver,
                                         ScrumPokerSessionService scrumPokerSessionService,
                                         ScrumPokerLicenseService scrumPokerLicenseService,

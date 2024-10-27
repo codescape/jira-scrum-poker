@@ -9,9 +9,9 @@ import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerVote;
 import net.java.ao.DBParam;
 import net.java.ao.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +29,7 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
     private final EstimateFieldService estimateFieldService;
     private final ErrorLogService errorLogService;
 
-    @Autowired
+    @Inject
     public ScrumPokerSessionServiceImpl(@ComponentImport ActiveObjects activeObjects,
                                         @ComponentImport IssueManager issueManager,
                                         GlobalSettingsService globalSettingsService,

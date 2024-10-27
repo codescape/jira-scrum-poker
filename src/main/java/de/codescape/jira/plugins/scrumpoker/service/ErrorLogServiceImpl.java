@@ -8,9 +8,9 @@ import com.atlassian.plugin.PluginInformation;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerError;
 import net.java.ao.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
@@ -29,7 +29,7 @@ public class ErrorLogServiceImpl implements ErrorLogService {
     private final BuildUtilsInfo buildUtilsInfo;
     private final PluginAccessor pluginAccessor;
 
-    @Autowired
+    @Inject
     public ErrorLogServiceImpl(@ComponentImport ActiveObjects activeObjects,
                                @ComponentImport BuildUtilsInfo buildUtilsInfo,
                                @ComponentImport PluginAccessor pluginAccessor) {

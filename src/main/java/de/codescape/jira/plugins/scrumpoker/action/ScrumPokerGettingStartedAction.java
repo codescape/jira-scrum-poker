@@ -4,14 +4,15 @@ import com.atlassian.jira.security.request.RequestMethod;
 import com.atlassian.jira.security.request.SupportedMethods;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.inject.Inject;
 
 /**
  * Getting Started page for the Scrum Poker app.
  */
 public class ScrumPokerGettingStartedAction extends AbstractScrumPokerAction implements ProvidesDocumentationLink {
 
-    @Autowired
+    @Inject
     public ScrumPokerGettingStartedAction(ErrorLogService errorLogService) {
         super(errorLogService);
     }
