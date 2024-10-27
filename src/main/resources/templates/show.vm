@@ -132,7 +132,7 @@
                                     <p><a href="$baseurl/secure/ViewProfile.jspa?name=$comment.authorApplicationUser.key">$comment.authorApplicationUser.displayName</a> $i18n.getText("scrumpoker.issue.comments.description") - $dateTimeFormatter.format($comment.created)</p>
                                 </div>
                                 <div class="scrum-poker-text-holder">
-                                    $wikiRenderer.render($comment.body, $issue.issueRenderContext)
+                                    $action.renderComment($comment.body)
                                 </div>
                             </td>
                         </tr>

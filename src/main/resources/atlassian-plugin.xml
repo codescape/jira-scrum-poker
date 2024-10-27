@@ -226,12 +226,12 @@
     <!-- velocity allow-list (alphabetically sorted) -->
     <velocity-allowlist key="scrum-poker-velocity-allowlist">
         <method>com.atlassian.jira.issue.fields.ImmutableCustomField#getFieldName()</method>
-        <method>com.atlassian.jira.issue.fields.renderer.wiki.AtlassianWikiRenderer#render(java.lang.String com.atlassian.jira.issue.fields.renderer.IssueRenderContext)</method>
         <method>com.atlassian.jira.issue.IssueConstantImpl#getCompleteIconUrl()</method>
-        <method>com.atlassian.jira.issue.IssueImpl#getIssueRenderContext()</method>
         <method>com.atlassian.jira.issue.IssueImpl#getIssueType()</method>
         <method>com.atlassian.jira.issue.IssueImpl#getStatus()</method>
         <method>de.codescape.jira.plugins.scrumpoker.action.ScrumPokerAction#hasFieldValue(com.atlassian.jira.issue.fields.CustomField)</method>
+        <method>de.codescape.jira.plugins.scrumpoker.action.ScrumPokerAction#renderComment(java.lang.String)</method>
+        <method>de.codescape.jira.plugins.scrumpoker.action.ScrumPokerAction#renderFieldValue(com.atlassian.jira.issue.fields.CustomField)</method>
         <method>de.codescape.jira.plugins.scrumpoker.action.ScrumPokerSessionsAction#getIssue(java.lang.String)</method>
         <method>de.codescape.jira.plugins.scrumpoker.model.AdditionalField#getCustomField()</method>
         <method>de.codescape.jira.plugins.scrumpoker.model.AdditionalField#isSelected()</method>
@@ -248,8 +248,12 @@
         <method>de.codescape.jira.plugins.scrumpoker.model.GlobalSettings#isActivateScrumPoker()</method>
         <method>de.codescape.jira.plugins.scrumpoker.model.GlobalSettings#isCheckPermissionToSaveEstimate()</method>
         <method>de.codescape.jira.plugins.scrumpoker.model.GlobalSettings#isDisplayDropdownOnBoards()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.rest.entities.CardEntity#isAssignable()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.rest.entities.CardEntity#isSelected()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.rest.entities.CardEntity#getValue()</method>
         <method>de.codescape.jira.plugins.scrumpoker.rest.entities.DateEntity#getDisplayValue()</method>
         <method>de.codescape.jira.plugins.scrumpoker.rest.entities.DateEntity#getFormattedDate()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity#getConfirmedEstimate()</method>
         <method>de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity#getCreateDate()</method>
         <method>de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity#getCreator()</method>
         <method>de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity#getIssueKey()</method>

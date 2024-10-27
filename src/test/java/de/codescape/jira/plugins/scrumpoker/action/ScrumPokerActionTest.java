@@ -11,7 +11,6 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayout;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
 import com.atlassian.jira.issue.fields.renderer.IssueRenderContext;
-import com.atlassian.jira.issue.fields.renderer.JiraRendererPlugin;
 import com.atlassian.jira.junit.rules.AvailableInContainer;
 import com.atlassian.jira.junit.rules.MockitoContainer;
 import com.atlassian.jira.junit.rules.MockitoMocksInContainer;
@@ -245,20 +244,6 @@ public class ScrumPokerActionTest {
 
         assertThat(action.getScrumPokerSessionUrl(),
             is(equalTo("https://apps.codescape.de/jira/secure/ScrumPoker.jspa?issueKey=" + ISSUE_KEY)));
-    }
-
-    /* tests for getWikiRenderer() */
-
-    @Test
-    public void getWikiRendererShouldDelegate() {
-        JiraRendererPlugin jiraRendererPlugin = mock(JiraRendererPlugin.class);
-        when(rendererManager.getRendererForType(eq("atlassian-wiki-renderer"))).thenReturn(jiraRendererPlugin);
-
-        JiraRendererPlugin wikiRenderer = action.getWikiRenderer();
-
-        assertThat(wikiRenderer, is(equalTo(jiraRendererPlugin)));
-        verify(rendererManager, times(1)).getRendererForType("atlassian-wiki-renderer");
-        verifyNoMoreInteractions(rendererManager);
     }
 
     /* test for getIssueDescription */

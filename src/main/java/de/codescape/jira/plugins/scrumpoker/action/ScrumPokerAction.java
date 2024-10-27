@@ -174,10 +174,12 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
     }
 
     /**
-     * The renderer to display text with wiki markup as in issue description and comments.
+     * Renders the comment with the wiki renderer.
      */
-    public JiraRendererPlugin getWikiRenderer() {
-        return rendererManager.getRendererForType("atlassian-wiki-renderer");
+    @HtmlSafe
+    public String renderComment(String comment) {
+        JiraRendererPlugin rendererForType = rendererManager.getRendererForType("atlassian-wiki-renderer");
+        return rendererForType != null ? rendererForType.render(comment, getIssue().getIssueRenderContext()) : comment;
     }
 
     /**
