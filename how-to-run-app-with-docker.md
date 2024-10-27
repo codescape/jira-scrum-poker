@@ -29,3 +29,9 @@ In addition, you can check the Atlassian Jira application log by running
 ```
 docker-compose exec jira tail -f -n 5000 /var/atlassian/application-data/jira/log/atlassian-jira.log
 ```
+
+Copy the whole log file from the container:
+
+```
+docker-compose cp jira:/var/atlassian/application-data/jira/log/atlassian-jira.log ./atlassian-jira.log
+```
