@@ -12,6 +12,7 @@ category: Administration
 ### [Unreleased]
 
 * feat: ensure compatibility with Jira 9.17.2, 9.12.12, 9.4.25
+* chore: add docker configuration for Jira 10 
 
 ### [24.08.0] - 2024-08-21
 
