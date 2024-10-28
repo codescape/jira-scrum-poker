@@ -28,6 +28,7 @@ category: Administration
 * fix: improve Velocity template allow-list and implementation for project settings
 * chore: compile against Java 17 since this is recommended for Jira 10
 * fix: improve Velocity template allow-list for active session list
+* feat: add support for Jira 10 dark mode and light mode
 
 ### [24.08.0] - 2024-08-21
 

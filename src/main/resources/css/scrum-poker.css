@@ -63,8 +63,8 @@
     margin: 5px 9px 5px 0;
     padding: 2px;
     border-radius: 5px;
-    color: #344563;
-    background-color: rgba(9,30,66,.08); }
+    background-color: var(--aui-button-default-bg-color);
+    color: var(--aui-button-default-text-color); }
 
 /* cards can be smaller */
 .scrum-poker-card-small {
@@ -72,30 +72,31 @@
 
 /* selected card has a different background color */
 .scrum-poker-card-active {
-    background-color: #0052cc;
-    color: #fff; }
+    background-color: var(--aui-button-primary-active-bg-color);
+    color: var(--aui-button-primary-active-text-color); }
 
 /* clickable cards show this by their pointer */
 .scrum-poker-card-clickable:hover,
 .scrum-poker-card-clickable:focus {
-    background-color: #f4f5f7;
+    background-color: var(--aui-button-default-hover-bg-color);
+    color: var(--aui-button-default-text-color);
     text-decoration: none;
     cursor: pointer; }
 
 /* hover over select cards */
 .scrum-poker-card-active:hover {
-    background-color: #0065FF;
-    color: #fff; }
+    background-color: var(--aui-button-primary-hover-bg-color);
+    color: var(--aui-button-primary-active-text-color); }
 
 /* cards show their backside when not revealed */
 .scrum-poker-card-backside {
-    background-color: #0052cc;
-    color: #fff;
+    background-color: var(--aui-button-default-bg-color);
+    color: var(--aui-button-default-text-color);
     cursor: default; }
 
 /* grey bordered panel box around content */
 .scrum-poker-box {
-    border: 1px solid #dfe1e6;
+    border: 1px solid var(--aui-border);
     border-radius: 3px;
     padding: 15px;
     margin: 10px 0; }
@@ -104,9 +105,16 @@
 .scrum-poker-card aui-badge,
 .scrum-poker-card .aui-badge {
     position: absolute;
-    background-color: #ebedf0;
+    background-color: var(--aui-badge-bg-color);
+    color: var(--aui-badge-text-color);
     margin-top: -0.95em;
     margin-left: -0.25em; }
+
+/* hack for transparency in colors of the theme: second badge with transparent text and background of the page */
+.scrum-poker-card aui-badge.scrum-poker-invisible-badge,
+.scrum-poker-card .aui-badge.scrum-poker-invisible-badge {
+    background-color: var(--aui-body-background);
+    color: rgba(0, 0, 0, 0); }
 
 /* icons on buttons display aligned to the text */
 .scrum-poker .aui-button .aui-icon {

@@ -210,16 +210,16 @@
                 {{#allowConfirm}}
                     {{#boundedVotes}}
                         {{#assignable}}
-                            <li><a onclick="ScrumPoker.confirmSession('{{issueKey}}','{{value}}');" class="scrum-poker-card scrum-poker-card-active scrum-poker-card-small scrum-poker-card-clickable"><i class="scrum-poker-card-value scrum-poker-card-value-{{value}}">{{value}}</i>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</a></li>
+                            <li><a onclick="ScrumPoker.confirmSession('{{issueKey}}','{{value}}');" class="scrum-poker-card scrum-poker-card-active scrum-poker-card-small scrum-poker-card-clickable"><i class="scrum-poker-card-value scrum-poker-card-value-{{value}}">{{value}}</i>{{#count}}<aui-badge class="scrum-poker-invisible-badge">{{.}}</aui-badge>{{/count}}{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</a></li>
                         {{/assignable}}
                         {{^assignable}}
-                            <li><span class="scrum-poker-card scrum-poker-card-small"><i class="scrum-poker-card-value scrum-poker-card-value-{{value}}">{{value}}</i>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</span></li>
+                            <li><span class="scrum-poker-card scrum-poker-card-small"><i class="scrum-poker-card-value scrum-poker-card-value-{{value}}">{{value}}</i>{{#count}}<aui-badge class="scrum-poker-invisible-badge">{{.}}</aui-badge>{{/count}}{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</span></li>
                         {{/assignable}}
                     {{/boundedVotes}}
                 {{/allowConfirm}}
                 {{^allowConfirm}}
                     {{#boundedVotes}}
-                        <li><span class="scrum-poker-card scrum-poker-card-small"><i class="scrum-poker-card-value scrum-poker-card-value-{{value}}">{{value}}</i>{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</span></li>
+                        <li><span class="scrum-poker-card scrum-poker-card-small"><i class="scrum-poker-card-value scrum-poker-card-value-{{value}}">{{value}}</i>{{#count}}<aui-badge class="scrum-poker-invisible-badge">{{.}}</aui-badge>{{/count}}{{#count}}<aui-badge>{{.}}</aui-badge>{{/count}}</span></li>
                     {{/boundedVotes}}
                 {{/allowConfirm}}
             </ul>
