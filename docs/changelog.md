@@ -25,6 +25,7 @@ category: Administration
 * chore: update .gitignore for Docker
 * docs: improve documentation for Docker usage
 * fix: improve Velocity template allow-list for comments
+* fix: improve Velocity template allow-list and implementation for project settings
 
 ### [24.08.0] - 2024-08-21
 

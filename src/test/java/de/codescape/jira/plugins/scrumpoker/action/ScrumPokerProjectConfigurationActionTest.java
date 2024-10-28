@@ -11,7 +11,7 @@ import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.HttpServletVariables;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
-import de.codescape.jira.plugins.scrumpoker.condition.ProjectAdministrationCondition;
+import de.codescape.jira.plugins.scrumpoker.condition.helper.UserHasProjectAdministrationPermission;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 import de.codescape.jira.plugins.scrumpoker.model.ProjectSettings;
@@ -58,7 +58,7 @@ public class ScrumPokerProjectConfigurationActionTest {
     private JiraAuthenticationContext jiraAuthenticationContext;
 
     @Mock
-    private ProjectAdministrationCondition projectAdministrationCondition;
+    private UserHasProjectAdministrationPermission userHasProjectAdministrationPermission;
 
     @Mock
     @AvailableInContainer
@@ -303,7 +303,7 @@ public class ScrumPokerProjectConfigurationActionTest {
 
     private void expectCurrentUserToBeAllowedToAdministrateTheProject(boolean allowedToAdministrate) {
         when(jiraAuthenticationContext.getLoggedInUser()).thenReturn(applicationUser);
-        when(projectAdministrationCondition.userIsAllowedToAdministrateProject(applicationUser, project)).thenReturn(allowedToAdministrate);
+        when(userHasProjectAdministrationPermission.verify(applicationUser, project)).thenReturn(allowedToAdministrate);
     }
 
 }

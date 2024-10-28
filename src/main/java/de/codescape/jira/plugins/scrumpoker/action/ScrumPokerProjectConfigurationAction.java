@@ -11,7 +11,7 @@ import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
-import de.codescape.jira.plugins.scrumpoker.condition.ProjectAdministrationCondition;
+import de.codescape.jira.plugins.scrumpoker.condition.helper.UserHasProjectAdministrationPermission;
 import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 import de.codescape.jira.plugins.scrumpoker.model.ProjectSettings;
 import de.codescape.jira.plugins.scrumpoker.service.*;
@@ -55,7 +55,7 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
     private final ProjectSettingsService projectSettingsService;
     private final GlobalSettingsService globalSettingsService;
     private final ScrumPokerLicenseService scrumPokerLicenseService;
-    private final ProjectAdministrationCondition projectAdministrationCondition;
+    private final UserHasProjectAdministrationPermission userHasProjectAdministrationPermission;
 
     private String projectKey;
 
@@ -67,7 +67,7 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
                                                 GlobalSettingsService globalSettingsService,
                                                 ErrorLogService errorLogService,
                                                 ScrumPokerLicenseService scrumPokerLicenseService,
-                                                ProjectAdministrationCondition projectAdministrationCondition) {
+                                                UserHasProjectAdministrationPermission userHasProjectAdministrationPermission) {
         super(errorLogService);
         this.projectManager = projectManager;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
@@ -75,7 +75,7 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
         this.projectSettingsService = projectSettingsService;
         this.globalSettingsService = globalSettingsService;
         this.scrumPokerLicenseService = scrumPokerLicenseService;
-        this.projectAdministrationCondition = projectAdministrationCondition;
+        this.userHasProjectAdministrationPermission = userHasProjectAdministrationPermission;
     }
 
     /**
@@ -126,7 +126,7 @@ public class ScrumPokerProjectConfigurationAction extends AbstractScrumPokerActi
         }
 
         ApplicationUser user = jiraAuthenticationContext.getLoggedInUser();
-        if (!projectAdministrationCondition.userIsAllowedToAdministrateProject(user, project)) {
+        if (!userHasProjectAdministrationPermission.verify(user, project)) {
             errorMessage("User " + user.getUsername() + " is missing privileges to administrate project " + project.getKey() + ".");
             return ERROR;
         }

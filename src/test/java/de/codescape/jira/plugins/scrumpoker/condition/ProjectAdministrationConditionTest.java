@@ -1,12 +1,9 @@
 package de.codescape.jira.plugins.scrumpoker.condition;
 
-import com.atlassian.jira.permission.GlobalPermissionKey;
-import com.atlassian.jira.permission.ProjectPermissions;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.project.Project;
-import com.atlassian.jira.security.GlobalPermissionManager;
-import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
+import de.codescape.jira.plugins.scrumpoker.condition.helper.UserHasProjectAdministrationPermission;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -25,10 +22,7 @@ public class ProjectAdministrationConditionTest {
     public MockitoRule rule = MockitoJUnit.rule();
 
     @Mock
-    private GlobalPermissionManager globalPermissionManager;
-
-    @Mock
-    private PermissionManager permissionManager;
+    private UserHasProjectAdministrationPermission userHasProjectAdministrationPermission;
 
     @InjectMocks
     private ProjectAdministrationCondition condition;
@@ -48,37 +42,15 @@ public class ProjectAdministrationConditionTest {
     }
 
     @Test
-    public void shouldRefuseAccessForUserWithoutAnyAdministratorRole() {
-        expectPermissions(false, false, false);
+    public void shouldRefuseAccessForUserWithMissingPermissions() {
+        when(userHasProjectAdministrationPermission.verify(applicationUser, project)).thenReturn(false);
         assertThat(condition.shouldDisplay(applicationUser, jiraHelper), is(false));
     }
 
     @Test
-    public void shouldGrantAccessForProjectAdministrator() {
-        expectPermissions(false, false, true);
+    public void shouldGrantAccessForUserWithPermissions() {
+        when(userHasProjectAdministrationPermission.verify(applicationUser, project)).thenReturn(true);
         assertThat(condition.shouldDisplay(applicationUser, jiraHelper), is(true));
-    }
-
-    @Test
-    public void shouldGrantAccessForGlobalAdministrator() {
-        expectPermissions(true, false, false);
-        assertThat(condition.shouldDisplay(applicationUser, jiraHelper), is(true));
-    }
-
-    @Test
-    public void shouldGrantAccessForSystemAdministrator() {
-        expectPermissions(false, true, false);
-        assertThat(condition.shouldDisplay(applicationUser, jiraHelper), is(true));
-    }
-
-    private void expectPermissions(boolean globalAdministrator, boolean systemAdministrator, boolean projectAdministrator) {
-        when(globalPermissionManager.hasPermission(GlobalPermissionKey.SYSTEM_ADMIN, applicationUser)).thenReturn(systemAdministrator);
-        if (!systemAdministrator) {
-            when(globalPermissionManager.hasPermission(GlobalPermissionKey.ADMINISTER, applicationUser)).thenReturn(globalAdministrator);
-            if (!globalAdministrator) {
-                when(permissionManager.hasPermission(ProjectPermissions.ADMINISTER_PROJECTS, project, applicationUser)).thenReturn(projectAdministrator);
-            }
-        }
     }
 
 }

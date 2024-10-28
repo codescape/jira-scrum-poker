@@ -248,6 +248,9 @@
         <method>de.codescape.jira.plugins.scrumpoker.model.GlobalSettings#isActivateScrumPoker()</method>
         <method>de.codescape.jira.plugins.scrumpoker.model.GlobalSettings#isCheckPermissionToSaveEstimate()</method>
         <method>de.codescape.jira.plugins.scrumpoker.model.GlobalSettings#isDisplayDropdownOnBoards()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.model.ProjectSettings#getActivateScrumPoker()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.model.ProjectSettings#getCardSet()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.model.ProjectSettings#getEstimateField()</method>
         <method>de.codescape.jira.plugins.scrumpoker.rest.entities.CardEntity#isAssignable()</method>
         <method>de.codescape.jira.plugins.scrumpoker.rest.entities.CardEntity#isSelected()</method>
         <method>de.codescape.jira.plugins.scrumpoker.rest.entities.CardEntity#getValue()</method>
