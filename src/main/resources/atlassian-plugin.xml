@@ -256,6 +256,7 @@
         <method>de.codescape.jira.plugins.scrumpoker.rest.entities.CardEntity#getValue()</method>
         <method>de.codescape.jira.plugins.scrumpoker.rest.entities.DateEntity#getDisplayValue()</method>
         <method>de.codescape.jira.plugins.scrumpoker.rest.entities.DateEntity#getFormattedDate()</method>
+        <method>de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity#getCards()</method>
         <method>de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity#getConfirmedEstimate()</method>
         <method>de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity#getCreateDate()</method>
         <method>de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity#getCreator()</method>
