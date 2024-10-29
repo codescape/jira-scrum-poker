@@ -5,7 +5,7 @@
 
     <groupId>de.codescape.jira.plugins</groupId>
     <artifactId>scrum-poker</artifactId>
-    <version>24.08.0</version>
+    <version>24.10.0</version>
     <packaging>atlassian-plugin</packaging>
 
     <name>Scrum Poker for Jira</name>
@@ -44,7 +44,7 @@
         <jira.version>10.1.1</jira.version>
 
         <!-- Plugin versions (keep in sync with jira-project) -->
-        <amps.version>8.2.3</amps.version>
+        <amps.version>9.1.1</amps.version>
         <platform.spring-scanner.version>3.0.3</platform.spring-scanner.version>
         <platform7.version>7.0.14</platform7.version>
 

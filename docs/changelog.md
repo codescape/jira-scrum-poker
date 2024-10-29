@@ -11,6 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [24.10.0] - 2024-10-29
+
+**Scrum Poker supports Jira 10**
+
 * feat: ensure compatibility with Jira 9.17.2, 9.12.12, 9.4.25
 * chore: add Docker configuration for Jira 10
 * chore: prepare for Jira 10
@@ -29,6 +35,7 @@ category: Administration
 * chore: compile against Java 17 since this is recommended for Jira 10
 * fix: improve Velocity template allow-list for active session list
 * feat: add support for Jira 10 dark mode and light mode
+* docs: update compatibility matrix for Jira 10
 
 ### [24.08.0] - 2024-08-21
 
@@ -67,6 +74,7 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/24.08.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/24.10.0...HEAD
+[24.10.0]: https://github.com/codescape/jira-scrum-poker/compare/24.08.0...24.10.0
 [24.08.0]: https://github.com/codescape/jira-scrum-poker/compare/24.01.0...24.08.0
 [24.01.0]: https://github.com/codescape/jira-scrum-poker/compare/23.11.0...24.01.0
