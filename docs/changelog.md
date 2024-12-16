@@ -12,6 +12,7 @@ category: Administration
 ### [Unreleased]
 
 * chore: simplify Docker configuration for testing
+* feat: ensure compatibility with Jira 10.3.0
 
 ### [24.10.0] - 2024-10-29
 
