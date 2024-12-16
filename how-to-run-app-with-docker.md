@@ -7,7 +7,7 @@ The file `docker-compose.yml` and the `.docker` folder are required to run the p
 To start the Jira instance and the database:
 
 ```
-docker-compose up -d
+docker-compose up -d --build
 ```
 
 Wait 1-2 minute(s) and open http://localhost:8080.
