@@ -46,6 +46,13 @@ The user guide explains how to [participate in a Scrum Poker session](/participa
 
 When participants hover over the possible cards they can choose from during a Scrum Poker sessions they see a list of references to previous sessions they participated in with the same estimate agreed on.
 
+Reference estimates are calculated by the following formula:
+
+* the reference estimate has the hovered estimate as the agreed estimate 
+* the current user has either started the session, confirmed the estimate or participated on the session with a vote
+
+The reference estimates are sorted by age and the youngest sessions are presented first.
+
 See this feature in action in the user guide on the page that shows how to [participate in a Scrum Poker session](/participate-in-scrum-poker-session).
 
 ### Define your own card sets

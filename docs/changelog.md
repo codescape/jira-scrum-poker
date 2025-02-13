@@ -14,6 +14,7 @@ category: Administration
 * chore: simplify Docker configuration for testing
 * feat: ensure compatibility with Jira 10.3.0
 * feat: ensure compatibility with Jira 10.4.0
+* docs: improve documentation of the reference estimates
 
 ### [24.10.0] - 2024-10-29
 
