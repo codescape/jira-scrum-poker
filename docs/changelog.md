@@ -15,6 +15,7 @@ category: Administration
 * feat: ensure compatibility with Jira 10.3.0
 * feat: ensure compatibility with Jira 10.4.0
 * docs: improve documentation of the reference estimates
+* docs: add FAQ entry for database persistence
 
 ### [24.10.0] - 2024-10-29
 

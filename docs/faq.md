@@ -27,3 +27,14 @@ A first release will be announced as soon as it is available.
 
 Yes, sessions older than the configured `Session Timeout` are automatically cancelled.
 A new session can be started again when needed.
+
+### Where does Scrum Poker for Jira persist data?
+
+Scrum Poker for Jira does not persist any data outside your instance.
+All data persisted by Scrum Poker for Jira can be found in the following database tables:
+
+* AO_1FA2A8_SCRUM_POKER_ERROR
+* AO_1FA2A8_SCRUM_POKER_PROJECT
+* AO_1FA2A8_SCRUM_POKER_SESSION
+* AO_1FA2A8_SCRUM_POKER_SETTING
+* AO_1FA2A8_SCRUM_POKER_VOTE
