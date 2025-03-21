@@ -16,6 +16,7 @@ category: Administration
 * feat: ensure compatibility with Jira 10.4.0
 * docs: improve documentation of the reference estimates
 * docs: add FAQ entry for database persistence
+* chore: data center review 2025 results
 
 ### [24.10.0] - 2024-10-29
 
