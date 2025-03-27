@@ -17,6 +17,7 @@ category: Administration
 * docs: improve documentation of the reference estimates
 * docs: add FAQ entry for database persistence
 * chore: data center review 2025 results
+* docs: improve readability of code examples
 
 ### [24.10.0] - 2024-10-29
 
