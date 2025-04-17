@@ -33,8 +33,8 @@ A new session can be started again when needed.
 Scrum Poker for Jira does not persist any data outside your instance.
 All data persisted by Scrum Poker for Jira can be found in the following database tables:
 
-* AO_1FA2A8_SCRUM_POKER_ERROR
-* AO_1FA2A8_SCRUM_POKER_PROJECT
-* AO_1FA2A8_SCRUM_POKER_SESSION
-* AO_1FA2A8_SCRUM_POKER_SETTING
-* AO_1FA2A8_SCRUM_POKER_VOTE
+* `AO_1FA2A8_SCRUM_POKER_ERROR`
+* `AO_1FA2A8_SCRUM_POKER_PROJECT`
+* `AO_1FA2A8_SCRUM_POKER_SESSION`
+* `AO_1FA2A8_SCRUM_POKER_SETTING`
+* `AO_1FA2A8_SCRUM_POKER_VOTE`

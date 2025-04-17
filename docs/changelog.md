@@ -19,6 +19,7 @@ category: Administration
 * chore: data center review 2025 results
 * docs: improve readability of code examples
 * feat: ensure compatibility with Jira 10.5.1
+* docs: improve formatting in FAQ
 
 ### [24.10.0] - 2024-10-29
 
