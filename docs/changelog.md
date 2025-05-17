@@ -20,6 +20,7 @@ category: Administration
 * docs: improve readability of code examples
 * feat: ensure compatibility with Jira 10.5.1
 * docs: improve formatting in FAQ
+* feat: ensure compatibility with Jira 10.6.0
 
 ### [24.10.0] - 2024-10-29
 
