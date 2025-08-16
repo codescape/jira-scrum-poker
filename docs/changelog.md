@@ -13,6 +13,7 @@ category: Administration
 
 * feat: ensure compatibility with Jira 10.7.1
 * feat: ensure compatibility with Jira 10.7.2
+* feat: ensure compatibility with Jira 10.7.4
 
 ### [25.05.0] - 2025-05-17
 
