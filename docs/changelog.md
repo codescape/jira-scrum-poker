@@ -11,6 +11,10 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [25.10.0] - 2025-10-03
+
 **Scrum Poker supports Jira 11**
 
 * feat: ensure compatibility with Jira 10.7.1
@@ -47,5 +51,6 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/25.05.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/25.10.0...HEAD
+[25.10.0]: https://github.com/codescape/jira-scrum-poker/compare/25.10.0...25.05.0
 [25.05.0]: https://github.com/codescape/jira-scrum-poker/compare/24.10.0...25.05.0
