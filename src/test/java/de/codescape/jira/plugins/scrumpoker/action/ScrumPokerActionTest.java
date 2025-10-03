@@ -23,13 +23,13 @@ import com.atlassian.upm.api.license.entity.LicenseError;
 import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.*;
+import jakarta.servlet.http.HttpServletRequest;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;

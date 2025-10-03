@@ -36,16 +36,16 @@
 
     <properties>
         <!-- Java version -->
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
 
         <!-- Jira versions -->
-        <jira.version>10.7.4</jira.version>
+        <jira.version>11.1.0</jira.version>
 
         <!-- Plugin versions (keep in sync with jira-project) -->
         <amps.version>9.1.1</amps.version>
-        <platform.spring-scanner.version>3.0.3</platform.spring-scanner.version>
-        <platform7.version>7.0.14</platform7.version>
+        <platform.spring-scanner.version>6.0.0</platform.spring-scanner.version>
+        <platform.version>8.2.1</platform.version>
 
         <!-- Source encoding -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -85,7 +85,7 @@
             <dependency>
                 <groupId>com.atlassian.platform.dependencies</groupId>
                 <artifactId>platform-test-resources</artifactId>
-                <version>${platform7.version}</version>
+                <version>${platform.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -138,8 +138,8 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>

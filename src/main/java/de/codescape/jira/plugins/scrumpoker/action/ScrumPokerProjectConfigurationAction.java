@@ -15,8 +15,8 @@ import de.codescape.jira.plugins.scrumpoker.condition.helper.UserHasProjectAdmin
 import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 import de.codescape.jira.plugins.scrumpoker.model.ProjectSettings;
 import de.codescape.jira.plugins.scrumpoker.service.*;
+import jakarta.inject.Inject;
 
-import javax.inject.Inject;
 import java.util.List;
 
 /**

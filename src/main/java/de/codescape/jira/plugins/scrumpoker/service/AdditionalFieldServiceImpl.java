@@ -8,10 +8,10 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.codescape.jira.plugins.scrumpoker.model.AdditionalField;
+import jakarta.inject.Inject;
 import org.springframework.stereotype.Component;
 import webwork.action.Action;
 
-import javax.inject.Inject;
 import java.util.*;
 import java.util.stream.Collectors;
 

@@ -11,9 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+**Scrum Poker supports Jira 11**
+
 * feat: ensure compatibility with Jira 10.7.1
 * feat: ensure compatibility with Jira 10.7.2
 * feat: ensure compatibility with Jira 10.7.4
+* feat: ensure compatibility with Jira 11.1.0
 
 ### [25.05.0] - 2025-05-17
 

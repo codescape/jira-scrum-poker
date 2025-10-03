@@ -3,9 +3,8 @@ package de.codescape.jira.plugins.scrumpoker.service;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.upm.api.license.PluginLicenseManager;
 import com.atlassian.upm.api.license.entity.PluginLicense;
+import jakarta.inject.Inject;
 import org.springframework.stereotype.Component;
-
-import javax.inject.Inject;
 
 /**
  * Implementation of {@link ScrumPokerLicenseService}.

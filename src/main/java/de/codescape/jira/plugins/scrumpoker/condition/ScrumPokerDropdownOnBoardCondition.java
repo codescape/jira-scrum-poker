@@ -4,8 +4,7 @@ import com.atlassian.jira.plugin.webfragment.conditions.AbstractWebCondition;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
-
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 /**
  * This condition is used to decide whether the Scrum Poker dropdown shall be shown on the boards view that is

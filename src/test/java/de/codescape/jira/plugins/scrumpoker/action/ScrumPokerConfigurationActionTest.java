@@ -14,13 +14,13 @@ import de.codescape.jira.plugins.scrumpoker.service.AdditionalFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerLicenseService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 import static de.codescape.jira.plugins.scrumpoker.action.ScrumPokerConfigurationAction.Actions.DEFAULTS;

@@ -16,12 +16,12 @@ import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 import de.codescape.jira.plugins.scrumpoker.model.ProjectSettings;
 import de.codescape.jira.plugins.scrumpoker.service.*;
+import jakarta.servlet.http.HttpServletRequest;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 import static de.codescape.jira.plugins.scrumpoker.action.ScrumPokerProjectConfigurationAction.*;

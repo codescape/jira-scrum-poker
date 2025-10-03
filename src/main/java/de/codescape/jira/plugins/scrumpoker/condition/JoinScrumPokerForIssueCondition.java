@@ -5,8 +5,7 @@ import com.atlassian.jira.plugin.webfragment.conditions.AbstractIssueWebConditio
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
-
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 /**
  * This condition is used to decide whether a button to join an active Scrum Poker session should be displayed or not

@@ -5,8 +5,7 @@ import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.project.Project;
 import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.condition.helper.UserHasProjectAdministrationPermission;
-
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 /**
  * This condition ensures that the current user has either global administration or system administration rights or

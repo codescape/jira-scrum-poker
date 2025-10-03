@@ -5,9 +5,8 @@ import com.atlassian.sal.api.upgrade.PluginUpgradeTask;
 import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
+import jakarta.inject.Inject;
 import org.springframework.stereotype.Component;
-
-import javax.inject.Inject;
 
 /**
  * Set the default setting for configuration option Allow Reveal Deck and allow everyone to reveal a deck.

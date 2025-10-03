@@ -6,8 +6,8 @@ import com.atlassian.jira.security.xsrf.RequiresXsrfCheck;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.model.Error;
 import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
+import jakarta.inject.Inject;
 
-import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 

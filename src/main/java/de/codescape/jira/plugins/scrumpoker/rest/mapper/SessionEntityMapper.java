@@ -15,9 +15,9 @@ import de.codescape.jira.plugins.scrumpoker.model.Card;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.*;
 import de.codescape.jira.plugins.scrumpoker.service.CardSetService;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsService;
+import jakarta.inject.Inject;
 import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;

@@ -6,10 +6,9 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.upgrade.PluginUpgradeTask;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSetting;
 import de.codescape.jira.plugins.scrumpoker.service.GlobalSettingsServiceImpl;
+import jakarta.inject.Inject;
 import net.java.ao.Query;
 import org.springframework.stereotype.Component;
-
-import javax.inject.Inject;
 
 /**
  * Migration task to rename the setting on the persistence layer and have a more expressive name for the settings

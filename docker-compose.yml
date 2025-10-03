@@ -3,7 +3,7 @@ services:
     jira:
         build: ./.docker
         environment:
-            - JVM_SUPPORT_RECOMMENDED_ARGS=-Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dquickreload.dirs=/opt/app -Dupm.plugin.upload.enabled=true
+            - JVM_SUPPORT_RECOMMENDED_ARGS=-Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dquickreload.dirs=/opt/app -Dupm.plugin.upload.enabled=true -Datlassian.upm.signature.check.upload.disabled=true -Datlassian.upm.signature.check.disabled=true
         ports:
             - 5005:5005
             - 8080:8080

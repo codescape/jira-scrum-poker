@@ -6,8 +6,7 @@ import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.service.EstimateFieldService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
-
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 /**
  * This condition is used to decide whether a button to start a Scrum Poker session should be displayed or not for the

@@ -7,9 +7,8 @@ import com.atlassian.jira.security.GlobalPermissionManager;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import jakarta.inject.Inject;
 import org.springframework.stereotype.Component;
-
-import javax.inject.Inject;
 
 /**
  * This component allows to check for enough permissions to administrate a project. The current user has either global

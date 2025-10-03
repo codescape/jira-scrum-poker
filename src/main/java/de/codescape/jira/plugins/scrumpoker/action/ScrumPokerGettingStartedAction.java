@@ -4,8 +4,7 @@ import com.atlassian.jira.security.request.RequestMethod;
 import com.atlassian.jira.security.request.SupportedMethods;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
-
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 /**
  * Getting Started page for the Scrum Poker app.

@@ -13,8 +13,8 @@ import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionEntityMapper;
 import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerLicenseService;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerSessionService;
+import jakarta.inject.Inject;
 
-import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 

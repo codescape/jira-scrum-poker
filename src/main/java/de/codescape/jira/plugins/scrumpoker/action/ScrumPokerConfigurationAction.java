@@ -10,8 +10,8 @@ import de.codescape.jira.plugins.scrumpoker.model.AllowRevealDeck;
 import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.*;
+import jakarta.inject.Inject;
 
-import javax.inject.Inject;
 import java.util.List;
 
 /**
