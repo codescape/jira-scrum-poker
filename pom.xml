@@ -405,6 +405,22 @@
             </properties>
         </profile>
 
+        <!-- further external repositories required to resolve dependencies -->
+        <!-- see https://developer.atlassian.com/server/framework/atlassian-sdk/maven-package-mirrors/ -->
+        <profile>
+            <id>external-repositories</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>jenkins-releases</id>
+                    <name>Jenkins</name>
+                    <url>https://repo.jenkins-ci.org/releases/</url>
+                </repository>
+            </repositories>
+        </profile>
+
         <!-- Profile to be used for the required annual Data Center performance and security review -->
         <profile>
             <id>data-center-annual-review</id>
