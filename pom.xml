@@ -40,7 +40,7 @@
         <maven.compiler.release>${java.version}</maven.compiler.release>
 
         <!-- Jira versions -->
-        <jira.version>11.1.0</jira.version>
+        <jira.version>11.2.0</jira.version>
 
         <!-- Plugin versions (keep in sync with jira-project) -->
         <amps.version>9.1.1</amps.version>

@@ -14,6 +14,7 @@ category: Administration
 * chore: include Jenkins repository for external libraries
 * chore: improve Github action for continuous integration
 * chore: update code of conduct to version 3
+* feat: ensure compatibility with Jira 11.2.0
 
 ### [25.10.0] - 2025-10-03
 
