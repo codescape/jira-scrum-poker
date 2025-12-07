@@ -13,7 +13,6 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutManager;
 import com.atlassian.jira.issue.fields.renderer.JiraRendererPlugin;
 import com.atlassian.jira.security.JiraAuthenticationContext;
-import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.security.request.RequestMethod;
 import com.atlassian.jira.security.request.SupportedMethods;
 import com.atlassian.jira.util.http.JiraUrl;
@@ -21,12 +20,11 @@ import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.message.I18nResolver;
 import com.atlassian.velocity.htmlsafe.HtmlSafe;
+import de.codescape.jira.plugins.scrumpoker.helper.ScrumPokerPermissions;
 import de.codescape.jira.plugins.scrumpoker.service.*;
 import jakarta.inject.Inject;
 
 import java.util.List;
-
-import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
 
 /**
  * Show the Scrum Poker session page for a given issue.
@@ -50,7 +48,6 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
     private final FieldLayoutManager fieldLayoutManager;
     private final IssueManager issueManager;
     private final RendererManager rendererManager;
-    private final PermissionManager permissionManager;
     private final CommentManager commentManager;
     private final JiraAuthenticationContext jiraAuthenticationContext;
     private final DateTimeFormatter dateTimeFormatter;
@@ -59,6 +56,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
     private final AdditionalFieldService additionalFieldService;
     private final ScrumPokerLicenseService scrumPokerLicenseService;
     private final I18nResolver i18nResolver;
+    private final ScrumPokerPermissions scrumPokerPermissions;
 
     private String issueKey;
 
@@ -67,7 +65,6 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
                             @ComponentImport FieldLayoutManager fieldLayoutManager,
                             @ComponentImport IssueManager issueManager,
                             @ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
-                            @ComponentImport PermissionManager permissionManager,
                             @ComponentImport CommentManager commentManager,
                             @ComponentImport DateTimeFormatter dateTimeFormatter,
                             @ComponentImport I18nResolver i18nResolver,
@@ -75,13 +72,13 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
                             EstimateFieldService estimateFieldService,
                             ErrorLogService errorLogService,
                             AdditionalFieldService additionalFieldService,
-                            ScrumPokerLicenseService scrumPokerLicenseService) {
+                            ScrumPokerLicenseService scrumPokerLicenseService,
+                            ScrumPokerPermissions scrumPokerPermissions) {
         super(errorLogService);
         this.rendererManager = rendererManager;
         this.fieldLayoutManager = fieldLayoutManager;
         this.issueManager = issueManager;
         this.jiraAuthenticationContext = jiraAuthenticationContext;
-        this.permissionManager = permissionManager;
         this.commentManager = commentManager;
         this.dateTimeFormatter = dateTimeFormatter;
         this.globalSettingsService = globalSettingsService;
@@ -89,6 +86,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
         this.additionalFieldService = additionalFieldService;
         this.scrumPokerLicenseService = scrumPokerLicenseService;
         this.i18nResolver = i18nResolver;
+        this.scrumPokerPermissions = scrumPokerPermissions;
     }
 
     /**
@@ -106,7 +104,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
         // issue check
         issueKey = getParameter(Parameters.ISSUE_KEY);
         MutableIssue issue = issueManager.getIssueObject(issueKey);
-        if (issue == null || currentUserIsNotAllowedToSeeIssue(issue) || issueIsNotEstimable(issue)) {
+        if (issue == null || !scrumPokerPermissions.currentUserIsAllowedToSeeIssue(issueKey) || issueIsNotEstimable(issue)) {
             errorMessage("Issue Key " + issueKey + " not found.");
             return ERROR;
         }
@@ -216,10 +214,6 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
 
     private boolean issueIsNotEstimable(MutableIssue issue) {
         return !estimateFieldService.isEstimable(issue);
-    }
-
-    private boolean currentUserIsNotAllowedToSeeIssue(MutableIssue issue) {
-        return !permissionManager.hasPermission(BROWSE_PROJECTS, issue, jiraAuthenticationContext.getLoggedInUser());
     }
 
 }

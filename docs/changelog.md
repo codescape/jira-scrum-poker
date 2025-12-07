@@ -17,6 +17,7 @@ category: Administration
 * feat: ensure compatibility with Jira 11.2.0
 * refactor: use Java 21 features for session mapper
 * refactor: move helpers to main package structure
+* feat: introduce access control for REST service methods
 
 ### [25.10.0] - 2025-10-03
 

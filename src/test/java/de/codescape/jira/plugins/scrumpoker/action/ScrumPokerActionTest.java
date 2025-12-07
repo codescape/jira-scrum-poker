@@ -15,11 +15,11 @@ import com.atlassian.jira.junit.rules.AvailableInContainer;
 import com.atlassian.jira.junit.rules.MockitoContainer;
 import com.atlassian.jira.junit.rules.MockitoMocksInContainer;
 import com.atlassian.jira.security.JiraAuthenticationContext;
-import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.HttpServletVariables;
 import com.atlassian.sal.api.message.I18nResolver;
 import com.atlassian.upm.api.license.entity.LicenseError;
+import de.codescape.jira.plugins.scrumpoker.helper.ScrumPokerPermissions;
 import de.codescape.jira.plugins.scrumpoker.model.DisplayCommentsForIssue;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.service.*;
@@ -32,7 +32,6 @@ import org.mockito.Mock;
 
 import java.util.ArrayList;
 
-import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assume.assumeThat;
@@ -68,7 +67,7 @@ public class ScrumPokerActionTest {
     private HttpServletVariables httpServletVariables;
 
     @Mock
-    private PermissionManager permissionManager;
+    private ScrumPokerPermissions scrumPokerPermissions;
 
     @Mock
     private JiraAuthenticationContext jiraAuthenticationContext;
@@ -296,11 +295,11 @@ public class ScrumPokerActionTest {
     }
 
     private void whenUserIsAllowedToSeeIssue() {
-        when(permissionManager.hasPermission(BROWSE_PROJECTS, issue, user)).thenReturn(true);
+        when(scrumPokerPermissions.currentUserIsAllowedToSeeIssue(ISSUE_KEY)).thenReturn(true);
     }
 
     private void whenUserIsNotAllowedToSeeIssue() {
-        when(permissionManager.hasPermission(BROWSE_PROJECTS, issue, user)).thenReturn(false);
+        when(scrumPokerPermissions.currentUserIsAllowedToSeeIssue(ISSUE_KEY)).thenReturn(false);
     }
 
     private void whenRequestedIssueExists() {

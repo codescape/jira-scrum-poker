@@ -3,9 +3,9 @@ package de.codescape.jira.plugins.scrumpoker.action;
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.security.JiraAuthenticationContext;
-import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerSession;
+import de.codescape.jira.plugins.scrumpoker.helper.ScrumPokerPermissions;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionEntityMapper;
 import de.codescape.jira.plugins.scrumpoker.service.ScrumPokerLicenseService;
@@ -20,7 +20,6 @@ import org.mockito.junit.MockitoRule;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
@@ -35,7 +34,7 @@ public class ScrumPokerSessionsActionTest {
     public MockitoRule rule = MockitoJUnit.rule();
 
     @Mock
-    private PermissionManager permissionManager;
+    private ScrumPokerPermissions scrumPokerPermissions;
 
     @Mock
     private JiraAuthenticationContext jiraAuthenticationContext;
@@ -83,7 +82,7 @@ public class ScrumPokerSessionsActionTest {
 
         List<SessionEntity> openSessions = action.getOpenSessions();
         assertThat(openSessions, hasSize(1));
-        assertThat(openSessions.get(0), is(equalTo(publicSessionEntity)));
+        assertThat(openSessions.getFirst(), is(equalTo(publicSessionEntity)));
         verify(scrumPokerSessionService).recent();
     }
 
@@ -97,7 +96,7 @@ public class ScrumPokerSessionsActionTest {
 
         List<SessionEntity> closedSessions = action.getClosedSessions();
         assertThat(closedSessions, hasSize(1));
-        assertThat(closedSessions.get(0), is(equalTo(publicSessionEntity)));
+        assertThat(closedSessions.getFirst(), is(equalTo(publicSessionEntity)));
         verify(scrumPokerSessionService).recent();
     }
 
@@ -144,10 +143,10 @@ public class ScrumPokerSessionsActionTest {
         when(sessionEntityMapper.build(publicScrumPokerSession, "USER-1")).thenReturn(publicSessionEntity);
 
         when(issueManager.getIssueObject(SECRET_ISSUE_KEY)).thenReturn(secretIssue);
-        when(permissionManager.hasPermission(BROWSE_PROJECTS, secretIssue, applicationUser)).thenReturn(false);
+        when(scrumPokerPermissions.currentUserIsAllowedToSeeIssue(SECRET_ISSUE_KEY)).thenReturn(false);
 
         when(issueManager.getIssueObject(PUBLIC_ISSUE_KEY)).thenReturn(publicIssue);
-        when(permissionManager.hasPermission(BROWSE_PROJECTS, publicIssue, applicationUser)).thenReturn(true);
+        when(scrumPokerPermissions.currentUserIsAllowedToSeeIssue(PUBLIC_ISSUE_KEY)).thenReturn(true);
     }
 
 }

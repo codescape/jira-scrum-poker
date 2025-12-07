@@ -3,11 +3,11 @@ package de.codescape.jira.plugins.scrumpoker.action;
 import com.atlassian.jira.issue.IssueManager;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.security.JiraAuthenticationContext;
-import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.security.request.RequestMethod;
 import com.atlassian.jira.security.request.SupportedMethods;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import de.codescape.jira.plugins.scrumpoker.helper.ScrumPokerPermissions;
 import de.codescape.jira.plugins.scrumpoker.rest.entities.SessionEntity;
 import de.codescape.jira.plugins.scrumpoker.rest.mapper.SessionEntityMapper;
 import de.codescape.jira.plugins.scrumpoker.service.ErrorLogService;
@@ -18,8 +18,6 @@ import jakarta.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.atlassian.jira.permission.ProjectPermissions.BROWSE_PROJECTS;
-
 /**
  * Show a list of all running and recently finished Scrum Poker sessions.
  */
@@ -29,23 +27,23 @@ public class ScrumPokerSessionsAction extends AbstractScrumPokerAction {
     private static final long serialVersionUID = 1L;
 
     private final IssueManager issueManager;
-    private final PermissionManager permissionManager;
     private final JiraAuthenticationContext jiraAuthenticationContext;
+    private final ScrumPokerPermissions scrumPokerPermissions;
     private final ScrumPokerSessionService scrumPokerSessionService;
     private final SessionEntityMapper sessionEntityMapper;
     private final ScrumPokerLicenseService scrumPokerLicenseService;
 
     @Inject
     public ScrumPokerSessionsAction(@ComponentImport JiraAuthenticationContext jiraAuthenticationContext,
-                                    @ComponentImport PermissionManager permissionManager,
                                     @ComponentImport IssueManager issueManager,
                                     ScrumPokerSessionService scrumPokerSessionService,
                                     SessionEntityMapper sessionEntityMapper,
                                     ScrumPokerLicenseService scrumPokerLicenseService,
-                                    ErrorLogService errorLogService) {
+                                    ErrorLogService errorLogService,
+                                    ScrumPokerPermissions scrumPokerPermissions) {
         super(errorLogService);
         this.jiraAuthenticationContext = jiraAuthenticationContext;
-        this.permissionManager = permissionManager;
+        this.scrumPokerPermissions = scrumPokerPermissions;
         this.issueManager = issueManager;
         this.scrumPokerSessionService = scrumPokerSessionService;
         this.sessionEntityMapper = sessionEntityMapper;
@@ -75,7 +73,7 @@ public class ScrumPokerSessionsAction extends AbstractScrumPokerAction {
             .filter(session -> session.getConfirmedEstimate() == null)
             .filter(session -> !session.isCancelled())
             .filter(session -> getIssue(session.getIssueKey()) != null)
-            .filter(session -> currentUserIsAllowedToSeeIssue(getIssue(session.getIssueKey())))
+            .filter(session -> currentUserIsAllowedToSeeIssue(session.getIssueKey()))
             .map(session -> sessionEntityMapper.build(session, currentUser().getKey()))
             .collect(Collectors.toList());
     }
@@ -87,7 +85,7 @@ public class ScrumPokerSessionsAction extends AbstractScrumPokerAction {
         return scrumPokerSessionService.recent().stream()
             .filter(session -> session.getConfirmedEstimate() != null || session.isCancelled())
             .filter(session -> getIssue(session.getIssueKey()) != null)
-            .filter(session -> currentUserIsAllowedToSeeIssue(getIssue(session.getIssueKey())))
+            .filter(session -> currentUserIsAllowedToSeeIssue(session.getIssueKey()))
             .map(session -> sessionEntityMapper.build(session, currentUser().getKey()))
             .collect(Collectors.toList());
     }
@@ -102,8 +100,8 @@ public class ScrumPokerSessionsAction extends AbstractScrumPokerAction {
         return issueManager.getIssueObject(issueKey);
     }
 
-    private boolean currentUserIsAllowedToSeeIssue(MutableIssue issue) {
-        return permissionManager.hasPermission(BROWSE_PROJECTS, issue, currentUser());
+    private boolean currentUserIsAllowedToSeeIssue(String issueKey) {
+        return scrumPokerPermissions.currentUserIsAllowedToSeeIssue(issueKey);
     }
 
     private ApplicationUser currentUser() {
