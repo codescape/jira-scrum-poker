@@ -3,7 +3,7 @@ package de.codescape.jira.plugins.scrumpoker.condition;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.project.Project;
 import com.atlassian.jira.user.ApplicationUser;
-import de.codescape.jira.plugins.scrumpoker.condition.helper.UserHasProjectAdministrationPermission;
+import de.codescape.jira.plugins.scrumpoker.helper.UserHasProjectAdministrationPermission;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

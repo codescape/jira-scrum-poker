@@ -11,7 +11,7 @@ import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.HttpServletVariables;
 import de.codescape.jira.plugins.scrumpoker.ScrumPokerConstants;
 import de.codescape.jira.plugins.scrumpoker.ao.ScrumPokerProject;
-import de.codescape.jira.plugins.scrumpoker.condition.helper.UserHasProjectAdministrationPermission;
+import de.codescape.jira.plugins.scrumpoker.helper.UserHasProjectAdministrationPermission;
 import de.codescape.jira.plugins.scrumpoker.model.GlobalSettings;
 import de.codescape.jira.plugins.scrumpoker.model.ProjectActivation;
 import de.codescape.jira.plugins.scrumpoker.model.ProjectSettings;
@@ -181,8 +181,8 @@ public class ScrumPokerProjectConfigurationActionTest {
 
     @Test
     public void doExecuteShouldReturnErrorIfProjectIsMissing() {
-        expectHttpParametersToContainProjectKey("PRJ");
-        expectProjectManagerToNotFindTheProject("PRJ");
+        expectHttpParametersToContainProjectKey("UKN");
+        expectProjectManagerToNotFindTheProject("UKN");
 
         assertThat(action.doExecute(), is(equalTo(ERROR)));
         verify(errorLogService, times(1)).logError(anyString());
@@ -241,13 +241,13 @@ public class ScrumPokerProjectConfigurationActionTest {
     public void doExecuteShouldNotSaveEmptyStringsForOptionalSettings() {
         expectHttpParametersToContainProjectKey("YAY");
         expectProjectManagerToFindAndReturnProject("YAY");
-        expectProjectToHaveProjectId(18L);
+        expectProjectToHaveProjectId(42L);
         expectHttpParametersToContainAction(Actions.SAVE);
         expectConfigurationParametersToBeSubmitted(ProjectActivation.INHERIT.name(), "", "");
         expectCurrentUserToBeAllowedToAdministrateTheProject(true);
 
         assertThat(action.doExecute(), is(equalTo(SUCCESS)));
-        verify(projectSettingsService, times(1)).persistSettings(18L, ProjectActivation.INHERIT, null, null);
+        verify(projectSettingsService, times(1)).persistSettings(42L, ProjectActivation.INHERIT, null, null);
         verifyNoMoreInteractions(projectSettingsService);
     }
 

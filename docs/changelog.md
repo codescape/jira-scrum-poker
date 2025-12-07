@@ -16,6 +16,7 @@ category: Administration
 * chore: update code of conduct to version 3
 * feat: ensure compatibility with Jira 11.2.0
 * refactor: use Java 21 features for session mapper
+* refactor: move helpers to main package structure
 
 ### [25.10.0] - 2025-10-03
 

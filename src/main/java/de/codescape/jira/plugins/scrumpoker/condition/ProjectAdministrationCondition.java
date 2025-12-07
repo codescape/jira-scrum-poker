@@ -4,7 +4,7 @@ import com.atlassian.jira.plugin.webfragment.conditions.AbstractWebCondition;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.jira.project.Project;
 import com.atlassian.jira.user.ApplicationUser;
-import de.codescape.jira.plugins.scrumpoker.condition.helper.UserHasProjectAdministrationPermission;
+import de.codescape.jira.plugins.scrumpoker.helper.UserHasProjectAdministrationPermission;
 import jakarta.inject.Inject;
 
 /**

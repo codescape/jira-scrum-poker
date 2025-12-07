@@ -1,4 +1,4 @@
-package de.codescape.jira.plugins.scrumpoker.condition.helper;
+package de.codescape.jira.plugins.scrumpoker.helper;
 
 import com.atlassian.jira.permission.GlobalPermissionKey;
 import com.atlassian.jira.permission.ProjectPermissions;
