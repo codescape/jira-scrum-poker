@@ -147,7 +147,7 @@ public class SessionEntityMapper {
 
     /**
      * Returns that an agreement is reached when more than one vote is given, the votes are visible, there is only one
-     * kind of a vote and this is not a special value.
+     * kind of vote and this is not a special value.
      */
     private boolean agreementReached(ScrumPokerSession scrumPokerSession) {
         ScrumPokerVote[] votes = scrumPokerSession.getVotes();
@@ -231,10 +231,10 @@ public class SessionEntityMapper {
         List<String> assignableVotes = boundedVotes.stream()
             .filter(BoundedVoteEntity::isAssignable)
             .map(BoundedVoteEntity::getValue)
-            .collect(Collectors.toList());
+            .toList();
         if (assignableVotes.isEmpty())
             return false;
-        return vote.equals(assignableVotes.get(0)) || vote.equals(assignableVotes.get(assignableVotes.size() - 1));
+        return vote.equals(assignableVotes.getFirst()) || vote.equals(assignableVotes.getLast());
     }
 
     /**
@@ -260,7 +260,7 @@ public class SessionEntityMapper {
         if (boundedVote.getCount() > 0) {
             return true;
         } else {
-            // ...or should have a non special card before and after inside the list with minimum one vote
+            // ...or should have a non-special card before and after inside the list with minimum one vote
             int position = boundedVotes.indexOf(boundedVote);
             boolean hasVoteBefore = false;
             boolean hasVoteAfter = false;
