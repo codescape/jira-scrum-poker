@@ -26,6 +26,7 @@ category: Administration
 * feat: introduce access control for REST service methods
 * test: verify access control checks
 * chore: fix Dockerfile and make start script executable
+* feat: ensure compatibility with Jira 11.3.0
 
 ### [25.10.0] - 2025-10-03
 
