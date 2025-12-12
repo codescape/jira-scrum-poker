@@ -11,11 +11,17 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [25.12.1] - 2025-12-12
+
+**Fine-grained access control for REST services (revised)**
+
 * fix: allow to reset cancelled sessions
 
 ### [25.12.0] - 2025-12-12
 
-**Fine grained access control for all REST services**
+**Fine-grained access control for REST services**
 
 * chore: include Jenkins repository for external libraries
 * chore: improve Github action for continuous integration
@@ -66,6 +72,8 @@ Older versions have been moved into separate changelog documents grouped by thei
 * [Scrum Poker for Jira 2.x](/changelog-2x)
 * [Scrum Poker for Jira 1.x](/changelog-1x)
 
-[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/25.10.0...HEAD
+[Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/25.12.1...HEAD
+[25.12.1]: https://github.com/codescape/jira-scrum-poker/compare/25.12.0...25.12.1
+[25.12.0]: https://github.com/codescape/jira-scrum-poker/compare/25.10.0...25.12.0
 [25.10.0]: https://github.com/codescape/jira-scrum-poker/compare/25.10.0...25.05.0
 [25.05.0]: https://github.com/codescape/jira-scrum-poker/compare/24.10.0...25.05.0
