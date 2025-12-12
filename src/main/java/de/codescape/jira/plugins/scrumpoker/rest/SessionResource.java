@@ -93,7 +93,7 @@ public class SessionResource {
             return Response.status(Response.Status.FORBIDDEN).build();
         }
 
-        // return not-found for missing session
+        // return not-found for missing active session
         if (!scrumPokerSessionService.hasActiveSession(issueKey)) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -127,7 +127,7 @@ public class SessionResource {
             return Response.status(Response.Status.FORBIDDEN).build();
         }
 
-        // return not-found for missing session
+        // return not-found for missing active session
         if (!scrumPokerSessionService.hasActiveSession(issueKey)) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -168,7 +168,7 @@ public class SessionResource {
             return Response.status(Response.Status.FORBIDDEN).build();
         }
 
-        // return not-found for missing session
+        // return not-found for missing active session
         if (!scrumPokerSessionService.hasActiveSession(issueKey)) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -188,8 +188,8 @@ public class SessionResource {
      * Reset the Scrum Poker session.
      * <ul>
      *  <li>user is not allowed to see the issue -> FORBIDDEN</li>
-     *  <li>no active session exists -> NOT FOUND</li>
-     *  <li>session is not visible or has no votes -> FORBIDDEN</li>
+     *  <li>no session exists -> NOT FOUND</li>
+     *  <li>session is neither cancelled nor visible and has votes -> FORBIDDEN</li>
      * </ul>
      */
     @POST
@@ -201,13 +201,13 @@ public class SessionResource {
         }
 
         // return not-found for missing session
-        if (!scrumPokerSessionService.hasActiveSession(issueKey)) {
+        if (!scrumPokerSessionService.hasSession(issueKey)) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
         // return forbidden if session reset is not allowed
         ScrumPokerSession scrumPokerSession = scrumPokerSessionService.byIssueKey(issueKey, currentUser());
-        if (!(scrumPokerSession.isVisible() && scrumPokerSession.getVotes().length > 0)) {
+        if (!(scrumPokerSession.isCancelled() || scrumPokerSession.isVisible() && scrumPokerSession.getVotes().length > 0)) {
             return Response.status(Response.Status.FORBIDDEN).build();
         }
 
@@ -238,7 +238,7 @@ public class SessionResource {
             return Response.status(Response.Status.FORBIDDEN).build();
         }
 
-        // return not-found for missing session
+        // return not-found for missing active session
         if (!scrumPokerSessionService.hasActiveSession(issueKey)) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }

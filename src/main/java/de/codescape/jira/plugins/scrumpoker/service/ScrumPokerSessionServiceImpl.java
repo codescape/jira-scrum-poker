@@ -147,6 +147,11 @@ public class ScrumPokerSessionServiceImpl implements ScrumPokerSessionService {
             && !(scrumPokerSession.getUpdateDate().before(sessionTimeout()));
     }
 
+    @Override
+    public boolean hasSession(String issueKey) {
+        return findScrumPokerSession(issueKey) != null;
+    }
+
     private Date sessionTimeout() {
         long sessionTimeoutMillis = hoursToMillis(globalSettingsService.load().getSessionTimeout());
         return new Date(System.currentTimeMillis() - sessionTimeoutMillis);

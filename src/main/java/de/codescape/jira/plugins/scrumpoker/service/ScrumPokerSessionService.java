@@ -85,8 +85,16 @@ public interface ScrumPokerSessionService {
      * Returns whether an active Scrum Poker session for this issue exists.
      *
      * @param issueKey key of the issue
-     * @return <code>true</code> if session exists, otherwise <code>false</code>
+     * @return <code>true</code> if active session exists, otherwise <code>false</code>
      */
     boolean hasActiveSession(String issueKey);
+
+    /**
+     * Returns whether a Scrum Poker sessions for this issue exists.
+     *
+     * @param issueKey key of the issue
+     * @return <code>true</code> if session exists, otherwise <code>false</code>
+     */
+    boolean hasSession(String issueKey);
 
 }

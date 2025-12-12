@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* fix: allow to reset cancelled sessions
 
 ### [25.12.0] - 2025-12-12
 

@@ -152,7 +152,7 @@ public class SessionResourceTest {
         givenCurrentUserCanSeeIssue(ISSUE_KEY, true);
         givenCurrentSessionCreatedByUser(ISSUE_KEY, USER_KEY);
         givenCurrentSessionIsVisible(false);
-        when(scrumPokerSession.getVotes()).thenReturn(new ScrumPokerVote[]{Mockito.mock(ScrumPokerVote.class)});
+        givenCurrentSessionHasVote();
         when(globalSettingsService.load()).thenReturn(globalSettings);
         when(globalSettings.getAllowRevealDeck()).thenReturn(AllowRevealDeck.EVERYONE);
 
@@ -169,13 +169,12 @@ public class SessionResourceTest {
         givenCurrentUserCanSeeIssue(ISSUE_KEY, true);
         givenCurrentSessionCreatedByUser(ISSUE_KEY, USER_KEY);
         givenCurrentSessionIsVisible(true);
-        when(scrumPokerSession.getVotes()).thenReturn(new ScrumPokerVote[]{Mockito.mock(ScrumPokerVote.class)});
+        givenCurrentSessionHasVote();
 
         sessionResource.resetSession(ISSUE_KEY);
 
         verify(scrumPokerSessionService, times(1)).reset(ISSUE_KEY, USER_KEY);
     }
-
 
     /* tests for cancelSession */
 
@@ -246,6 +245,7 @@ public class SessionResourceTest {
         when(sessionEntity.getIssueKey()).thenReturn(issueKey);
         when(scrumPokerSession.getCreatorUserKey()).thenReturn(userKey);
         when(scrumPokerSessionService.hasActiveSession(issueKey)).thenReturn(true);
+        when(scrumPokerSessionService.hasSession(issueKey)).thenReturn(true);
     }
 
     private void givenCurrentSessionIsVisible(boolean visible) {
@@ -259,6 +259,10 @@ public class SessionResourceTest {
     private void givenCardsInCardSet(String... cardValues) {
         when(cardSetService.getCardSet(scrumPokerSession)).thenReturn(
             Arrays.stream(cardValues).map(val -> new Card(val, true)).toList());
+    }
+
+    private void givenCurrentSessionHasVote() {
+        when(scrumPokerSession.getVotes()).thenReturn(new ScrumPokerVote[]{Mockito.mock(ScrumPokerVote.class)});
     }
 
 }
