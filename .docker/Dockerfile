@@ -6,4 +6,6 @@ COPY ./dbconfig.xml ./quickreload-5.0.6.jar ./quickreload.properties /opt/
 
 COPY ./start.sh /opt/start.sh
 
+RUN chmod +x /opt/start.sh
+
 CMD /opt/start.sh
