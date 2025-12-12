@@ -11,6 +11,12 @@ category: Administration
 
 ### [Unreleased]
 
+* ...
+
+### [25.12.0] - 2025-12-12
+
+**Fine grained access control for all REST services**
+
 * chore: include Jenkins repository for external libraries
 * chore: improve Github action for continuous integration
 * chore: update code of conduct to version 3
