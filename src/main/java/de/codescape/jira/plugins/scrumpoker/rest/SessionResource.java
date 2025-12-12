@@ -93,7 +93,7 @@ public class SessionResource {
             return Response.status(Response.Status.FORBIDDEN).build();
         }
 
-        // return not-found for no missing session
+        // return not-found for missing session
         if (!scrumPokerSessionService.hasActiveSession(issueKey)) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -127,7 +127,7 @@ public class SessionResource {
             return Response.status(Response.Status.FORBIDDEN).build();
         }
 
-        // return not-found for no missing session
+        // return not-found for missing session
         if (!scrumPokerSessionService.hasActiveSession(issueKey)) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
