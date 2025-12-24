@@ -11,7 +11,7 @@ category: Administration
 
 ### [Unreleased]
 
-* ...
+* feat: ensure compatibility with Jira 11.3.1
 
 ### [25.12.1] - 2025-12-12
 
