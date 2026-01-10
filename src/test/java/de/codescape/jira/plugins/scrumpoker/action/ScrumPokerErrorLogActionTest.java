@@ -52,7 +52,7 @@ public class ScrumPokerErrorLogActionTest {
 
     @Test
     public void shouldAlwaysReturnThePageForViewing() {
-        assertThat(action.doDefault(), is(equalTo(action.SUCCESS)));
+        assertThat(action.doDefault(), is(equalTo(ScrumPokerErrorLogAction.SUCCESS)));
     }
 
     /* tests for doExecute() */
@@ -61,7 +61,7 @@ public class ScrumPokerErrorLogActionTest {
     public void shouldEmptyTheErrorLogWhenRequested() {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
         when(httpServletRequest.getParameterValues(ScrumPokerErrorLogAction.Parameters.ACTION)).thenReturn(new String[]{"empty"});
-        assertThat(action.doExecute(), is(equalTo(action.SUCCESS)));
+        assertThat(action.doExecute(), is(equalTo(ScrumPokerErrorLogAction.SUCCESS)));
         verify(errorLogService, times(1)).emptyErrorLog();
     }
 
@@ -69,7 +69,7 @@ public class ScrumPokerErrorLogActionTest {
     public void shouldNotEmptyTheErrorWhenNotRequested() {
         when(httpServletVariables.getHttpRequest()).thenReturn(httpServletRequest);
         when(httpServletRequest.getParameter(ScrumPokerErrorLogAction.Parameters.ACTION)).thenReturn(null);
-        assertThat(action.doExecute(), is(equalTo(action.SUCCESS)));
+        assertThat(action.doExecute(), is(equalTo(ScrumPokerErrorLogAction.SUCCESS)));
         verify(errorLogService, never()).emptyErrorLog();
     }
 

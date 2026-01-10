@@ -12,6 +12,7 @@ category: Administration
 ### [Unreleased]
 
 * feat: ensure compatibility with Jira 11.3.1
+* test: access static member directly
 
 ### [25.12.1] - 2025-12-12
 
