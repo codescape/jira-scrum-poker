@@ -76,14 +76,14 @@ public class ScrumPokerHealthCheckActionTest {
 
     @Test
     public void shouldAlwaysDisplayThePageOnDoDefault() {
-        assertThat(action.doDefault(), is(equalTo(action.SUCCESS)));
+        assertThat(action.doDefault(), is(equalTo(ScrumPokerHealthCheckAction.SUCCESS)));
     }
 
     /* tests for doExecute() */
 
     @Test
     public void shouldAlwaysDisplayThePageOnDoExecute() {
-        assertThat(action.doExecute(), is(equalTo(action.SUCCESS)));
+        assertThat(action.doExecute(), is(equalTo(ScrumPokerHealthCheckAction.SUCCESS)));
     }
 
     /* tests for showResults() */
