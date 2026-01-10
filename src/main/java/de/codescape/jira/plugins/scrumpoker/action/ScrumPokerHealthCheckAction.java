@@ -169,7 +169,7 @@ public class ScrumPokerHealthCheckAction extends AbstractScrumPokerAction implem
         // check that a card set is defined that can be parsed into different cards
         List<Card> cardSet = cardSetService.getCardSet().stream()
             .filter(Card::isAssignable)
-            .collect(Collectors.toList());
+            .toList();
         if (cardSet.isEmpty() || cardSet.size() == 1) {
             results.add(Configuration.CARD_SET_WITHOUT_OPTIONS);
         }
