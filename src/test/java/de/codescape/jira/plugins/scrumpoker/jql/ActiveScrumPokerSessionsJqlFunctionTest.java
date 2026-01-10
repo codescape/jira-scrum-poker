@@ -100,7 +100,7 @@ public class ActiveScrumPokerSessionsJqlFunctionTest {
             new FunctionOperand(ActiveScrumPokerSessionsJqlFunction.FUNCTION_NAME),
             mock(TerminalClause.class));
         assertThat(activeScrumPokerSessions.size(), is(1));
-        assertThat(activeScrumPokerSessions.get(0).getLongValue(), is(equalTo(42L)));
+        assertThat(activeScrumPokerSessions.getFirst().getLongValue(), is(equalTo(42L)));
     }
 
     /* tests for getMinimumNumberOfExpectedArguments() */

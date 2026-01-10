@@ -362,7 +362,7 @@ public class EstimateFieldServiceImplTest {
         List<CustomField> customFields = estimateFieldService.supportedCustomFields();
 
         assertThat(customFields.size(), is(equalTo(1)));
-        assertThat(customFields.get(0).getCustomFieldType().getKey(), is(equalTo(CUSTOM_FIELD_TYPE_NUMBER)));
+        assertThat(customFields.getFirst().getCustomFieldType().getKey(), is(equalTo(CUSTOM_FIELD_TYPE_NUMBER)));
     }
 
     /* supporting methods */

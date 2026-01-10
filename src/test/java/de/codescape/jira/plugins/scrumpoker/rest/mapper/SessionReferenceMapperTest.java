@@ -54,7 +54,7 @@ public class SessionReferenceMapperTest {
         ReferenceListEntity referenceListEntity = sessionReferenceMapper.build(scrumPokerSessions, "5");
         assertThat(referenceListEntity.isResults(), is(true));
         assertThat(referenceListEntity.getReferences().size(), is(1));
-        assertThat(referenceListEntity.getReferences().get(0).getIssueKey(), equalTo("ISSUE-5"));
+        assertThat(referenceListEntity.getReferences().getFirst().getIssueKey(), equalTo("ISSUE-5"));
     }
 
     private List<ScrumPokerSession> scrumPokerSessionsWithKeys(String... keys) {

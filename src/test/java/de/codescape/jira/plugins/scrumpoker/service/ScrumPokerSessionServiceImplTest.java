@@ -175,7 +175,7 @@ public class ScrumPokerSessionServiceImplTest {
         List<ScrumPokerSession> recent = scrumPokerSessionService.recent();
         // then it should be included
         assertThat(recent.size(), equalTo(1));
-        assertThat(recent.get(0).getIssueKey(), is(equalTo("ISSUE-1")));
+        assertThat(recent.getFirst().getIssueKey(), is(equalTo("ISSUE-1")));
     }
 
     @Test
@@ -191,7 +191,7 @@ public class ScrumPokerSessionServiceImplTest {
         List<ScrumPokerSession> recent = scrumPokerSessionService.recent();
         // then only the new one should be included
         assertThat(recent.size(), is(equalTo(1)));
-        assertThat(recent.get(0).getIssueKey(), is(equalTo("ISSUE-2")));
+        assertThat(recent.getFirst().getIssueKey(), is(equalTo("ISSUE-2")));
     }
 
     /* tests for cancel() */
