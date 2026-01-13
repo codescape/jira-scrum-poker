@@ -13,7 +13,7 @@ category: Administration
 
 * feat: ensure compatibility with Jira 11.3.1
 * test: access static member directly
-* test: improve expressiveness with sequences access to results
+* test: improve code with sequenced access to results
 * chore: simplify code in health check
 
 ### [25.12.1] - 2025-12-12
