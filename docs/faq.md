@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Frequenty Asked Questions
+title: Frequently Asked Questions
 category: User Guide
 ---
 

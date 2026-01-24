@@ -15,6 +15,7 @@ category: Administration
 * test: access static member directly
 * test: improve code with sequenced access to results
 * chore: simplify code in health check
+* docs: fix typo in FAQ documentation
 
 ### [25.12.1] - 2025-12-12
 
