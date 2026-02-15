@@ -127,7 +127,7 @@ public class ScrumPokerAction extends AbstractScrumPokerAction {
     }
 
     /**
-     * All comments for that issue the currently logged in user may see.
+     * All comments for that issue the currently logged-in user may see.
      */
     public List<Comment> getComments() {
         List<Comment> comments = commentManager.getCommentsForUser(getIssue(), jiraAuthenticationContext.getLoggedInUser());
