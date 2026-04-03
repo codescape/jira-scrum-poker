@@ -18,6 +18,7 @@ category: Administration
 * docs: fix typo in FAQ documentation
 * docs: prepare changelog for 2026 development
 * chore: fix typo in javadoc
+* chore: data center review 2026 results
 
 [Unreleased]: https://github.com/codescape/jira-scrum-poker/compare/25.12.1...HEAD
 
